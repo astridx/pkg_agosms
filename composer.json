@@ -1,0 +1,12 @@
+{
+    "name": "astrid/plg_fields_agosmmapwithmarker",
+    "require": {
+        "joomla-projects/jorobo": "^0.7.0"
+    },
+    "authors": [
+        {
+            "name": "astridx",
+            "email": "info@astrid-guenther.de"
+        }
+    ]
+}

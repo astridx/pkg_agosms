@@ -1,0 +1,23 @@
+agosm Changelog
+-----------------
+
+v1.00
+ - Leaflet updated to v1.0.2
+ - Cumtom markers in subform
+v1.0.4
+ - leaflet 1.3.1 (18.01.2018) http://leafletjs.com/download.html
+ - esri leaflet geocoder v2.2.8 (https://github.com/Esri/esri-leaflet-geocoder/releases)
+ - esri leaflet v2.1.2 (https://github.com/Esri/esri-leaflet/releases)
+ - leaflet routing machine 3.2.7 https://github.com/perliedman/leaflet-routing-machine/releases
+ - leaflet control geocoder 1.5.8 https://github.com/perliedman/leaflet-control-geocoder/releases
+v1.0.9
+  - Koordinates picker - changed zoom
+v1.0.10
+  - https if possible
+Todo
+deletet or change component
+javascript schöner laden und minify all
+sprachdateien deutsch anlegen
+componente weiter machen, um mehrer marker anzuzeigen
+bild als karte laden - krebshilfe
+J4
