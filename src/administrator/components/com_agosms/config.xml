@@ -445,20 +445,6 @@
 	</fieldset>
 
 	<fieldset
-		name="credentials"
-		description="COM_AGOSM_ACCESS_UPDATE_DESC"
-		label="COM_AGOSM_ACCESS_UPDATE_LABEL"
-	>
-		<field
-			name="update_credentials_access"
-			type="text"
-			default=""
-			label="COM_AGOSM_ACCESS_UPDATE_LABEL"
-			description="COM_AGOSM_ACCESS_UPDATE_DESC"
-		/>
-	</fieldset>
-
-	<fieldset
 		name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"
 		label="JCONFIG_PERMISSIONS_LABEL"

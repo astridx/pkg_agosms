@@ -11,13 +11,8 @@ v1.0.4
  - leaflet routing machine 3.2.7 https://github.com/perliedman/leaflet-routing-machine/releases
  - leaflet control geocoder 1.5.8 https://github.com/perliedman/leaflet-control-geocoder/releases
 v1.0.9
-  - Koordinates picker - changed zoom
+ - Koordinates picker - changed zoom
 v1.0.10
-  - https if possible
-Todo
-deletet or change component
-javascript schöner laden und minify all
-sprachdateien deutsch anlegen
-componente weiter machen, um mehrer marker anzuzeigen
-bild als karte laden - krebshilfe
-J4
+ - https if possible
+v1.0.27
+ - 

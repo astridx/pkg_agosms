@@ -23,7 +23,7 @@ JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'Agos
  * @since       1.0.4
  */
 class ModagosmHelper
-	{
+{
 
 	/**
 	 * Show online member names
@@ -139,17 +139,6 @@ class ModagosmHelper
 
 		// Set the filters based on the module params
 		$model->setState('list.start', 0);
-		//$model->setState('list.limit', (int) $params->get('count', 5));
-
-		/* if ($params->get('test', 1))
-		  {
-		  $model->setState('filter.begin_ende', 0);
-		  }
-		  else
-		  {
-		  $model->setState('filter.begin_ende', 1);
-		  } */
-
 		$model->setState('filter.state', 1);
 		$model->setState('filter.publish_date', true);
 
@@ -170,52 +159,10 @@ class ModagosmHelper
 		// Create query object
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-/*
-		$case_when1 = ' CASE WHEN ';
-		$case_when1 .= $query->charLength('a.alias', '!=', '0');
-		$case_when1 .= ' THEN ';
-		$a_id = $query->castAsChar('a.id');
-		$case_when1 .= $query->concatenate(array($a_id, 'a.alias'), ':');
-		$case_when1 .= ' ELSE ';
-		$case_when1 .= $a_id . ' END as slug';
-
-		$case_when2 = ' CASE WHEN ';
-		$case_when2 .= $query->charLength('c.alias', '!=', '0');
-		$case_when2 .= ' THEN ';
-		$c_id = $query->castAsChar('c.id');
-		$case_when2 .= $query->concatenate(array($c_id, 'c.alias'), ':');
-		$case_when2 .= ' ELSE ';
-		$case_when2 .= $c_id . ' END as catslug';
-
-		$model->setState(
-				'list.select', 'a.*, c.published AS c_published,' . $case_when1 . ',' . $case_when2 . ',' . 'DATE_FORMAT(a.created, "%Y-%m-%d") AS created'
-		);
-
-		$model->setState('filter.c.published', 1);
-
-		// Filter by language
-		$model->setState('filter.language', $app->getLanguageFilter());
-*/
 		$items = $model->getItems();
 
 		if ($items)
 		{
-/*			foreach ($items as $item)
-			{
-				if ($item->params->get('count_clicks', $params->get('count_clicks')) == 1)
-				{
-					$item->link = JRoute::_('index.php?option=com_agosms&task=agosm.go&view=agosm&id=' . $item->slug);
-					$item->link_notactive = JRoute::_('index.php?option=com_agosms&view=agosm_no&id=' . $item->slug);
-					$item->link_popup = JRoute::_('index.php?tmpl=component&option=com_agosms&task=agosm.go&view=agosm&id=' . $item->slug);
-					$item->link_notactive_popup = JRoute::_('index.php?tmpl=component&option=com_agosms&view=agosm_no&id=' . $item->slug);
-				} else
-				{
-					$item->link = JRoute::_('index.php?option=com_agosms&view=agosm&id=' . $item->slug);
-					$item->link_notactive = JRoute::_('index.php?option=com_agosms&view=agosm_no&id=' . $item->slug);
-					$item->link_popup = JRoute::_('index.php?option=com_agosms&tmpl=component&view=agosm&id=' . $item->slug);
-					$item->link_notactive_popup = JRoute::_('index.php?option=com_agosms&tmpl=component&view=agosm_no&id=' . $item->slug);
-				}
-			}*/
 
 			return $items;
 		}

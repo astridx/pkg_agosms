@@ -65,15 +65,12 @@ if ($params->get('showpin', '1') === "1" || $params->get('showcustompin', '1') =
 if ($params->get('baselayer', 'mapnik') == 'google')
 {
 	$document->addScript('https://maps.googleapis.com/maps/api/js?key=' . $params->get('googlekey', ''));
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/GoogleMutant0.6.4.js');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/Leaflet.GoogleMutant.js');
 }
 
 if ($params->get('showcomponentpin', '0') === "1")
 {
 	$list = ModagosmHelper::getList($params);
-
-//$category = ModAgosmsHelper::getCategory($params);
-//print_r($list);
 }
 
 require JModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));

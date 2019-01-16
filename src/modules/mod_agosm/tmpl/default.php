@@ -39,7 +39,9 @@ $defaultArray = [];
 	data-customBaselayerURL="<?php echo $params->get('customBaselayerURL', 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'); ?>"
 <?php endif; ?>
 	data-attr-module="<?php echo $params->get('attrModule', 1); ?>"
+<?php if ($params->get('scale') !== null) : ?>
 	data-scale="<?php echo count($params->get('scale')); ?>"
+<?php endif; ?>	
 	data-scale-metric="<?php echo in_array('metric', $params->get('scale', $defaultArray)); ?>"
 	data-scale-imperial="<?php echo in_array('imperial', $params->get('scale', $defaultArray)); ?>"
 	data-showgeocoder="<?php echo $params->get('showgeocoder', '1'); ?>"
