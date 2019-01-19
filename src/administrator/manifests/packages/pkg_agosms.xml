@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="package" version="1.0" method="upgrade">
 	<name>pkg_agosms</name>
-	<packagename>agosm</packagename>
+	<packagename>agosms</packagename>
 	<creationDate>##DATE##</creationDate>
 	<packager>Astrid Günther</packager>
 	<copyright>(C)  ##YEAR## Astrid Günther. All rights reserved.</copyright>
