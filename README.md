@@ -27,6 +27,23 @@ b3
 
 Voila!
 
+### Routing to address - How to find us 
+
+A popular feature of this extension is 'Routing to address'.  
+
+1. Fill the information in the tabulator 'Routing to address'.
+- If you like to use address suggestions you should use a positon on the top.  
+- Per default [OSRM](http://project-osrm.org/) is used as router. OSRM is sometimes busy. If you like to 
+use mapbox you have to get an access token: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
+
+a1
+
+2. In front end you see a text field
+
+If you enter a address in the text field in the front end and click enter you see
+a route to the address you entered in the back end.
+
+a2
 
 ## Component
 

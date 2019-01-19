@@ -37,7 +37,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		var esrigeocodercollapseAfterResult = (element.getAttribute('data-esrigeocodercollapseAfterResult') === "true");
 		var esrigeocoderexpanded = (element.getAttribute('data-esrigeocoderexpanded') === "true");
 		var esriallowMultipleResults = (element.getAttribute('data-esriallowMultipleResults') === "true");
-		var showrouting = element.getAttribute('data-showrouting');
+		var showrouting_simple = element.getAttribute('data-showrouting-simple');
+		if (showrouting_simple === '1')
+		{
+			var routesimpleposition = element.getAttribute('data-route-simple-position');
+			var routesimpletarget = element.getAttribute('data-route-simple-target');
+			var routesimplerouter = element.getAttribute('data-route-simple-router');
+			var routesimplerouterkey = element.getAttribute('data-route-simple-routerkey');
+		}
+                var showrouting = element.getAttribute('data-showrouting');
 		if (showrouting === '1')
 		{
 			var routingstart = element.getAttribute('data-routingstart').split(",", 3);
@@ -252,7 +260,24 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 
-		// Add Routing
+		// Add Routing Simple
+		if (showrouting_simple === '1')
+		{
+                        L.leafletControlRoutingtoaddress({ 
+                                position: routesimpleposition,
+                                router: routesimplerouter,
+                                token: routesimplerouterkey,
+                                placeholder: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_PLACEHOLDER'),
+                                errormessage: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE'),
+                                distance: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE'),
+                                duration: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION'),
+                                target: routesimpletarget,
+                                addresserror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
+                                requesterror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR')
+			}).addTo(window['mymap' + moduleId]);
+		}
+
+                // Add Routing Mapbox
 		if (showrouting === '1')
 		{
 			L.Routing.control({

@@ -258,7 +258,87 @@
 					description="MOD_AGOSM_LONLAT_DESC"
 				/>
 			</fieldset>
-			<!-- Routing -->
+			<!-- Routing Simple-->
+			<fieldset
+				name="agosmControlRoutingSimple"
+				label="MOD_AGOSM_ROUTING_SIMPLE_CONTROL_FIELDSETLABEL"
+			>
+				<field
+					type="spacer"
+					name="routingSearch"
+					label="MOD_AGOSM_ROUTING_SIMPLE_FIELDSETDESCRIPTION"
+					class="text"
+				/>
+
+				<field
+					type="list"
+					name="showrouting_simple"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="routing_simple_position"
+					default="bottomleft"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_DESC"
+					showon="showrouting_simple:1"
+				>
+					<option value="bottomleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMLEFT</option>
+					<option value="bottomright">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMRIGHT</option>
+					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
+					<option value="topright">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPRIGHT</option>
+				</field>
+
+                                <field
+					type="list"
+					name="showrouting_places"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_PLACES_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_PLACES_DESC"
+					showon="showrouting_simple:1"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+                                <field
+					name="routing_simple_target"
+					type="text"
+					default="Koblenz, Rheinland-Pfalz, Deutschland"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_TARGET_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_TARGET_DESC"
+					size="40"
+					showon="showrouting_simple:1"
+				/>
+				<field
+					type="list"
+					name="routing_simple_router"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_ROUTER_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_ROUTER_DESC"
+					showon="showrouting_simple:1"
+				>
+					<option value="1">mapbox</option>
+					<option value="0">osrm</option>
+				</field>
+
+				<field
+					name="routing_simple_routerkey"
+					type="text"
+					default=""
+					label="MOD_AGOSM_MAPBOXKEY_LABEL"
+					description="MOD_AGOSM_MAPBOXKEY_DESC"
+					size="40"
+					showon="showrouting_simple:1[AND]routing_simple_router:1"
+				/>
+                        </fieldset>
+			<!-- Routing Mapbox-->
 			<fieldset
 				name="agosmControlRouting"
 				label="MOD_AGOSM_ROUTING_CONTROL_FIELDSETLABEL"

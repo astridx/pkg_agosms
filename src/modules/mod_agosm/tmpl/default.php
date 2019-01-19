@@ -62,6 +62,13 @@ $defaultArray = [];
 	data-esrigeocoderexpanded="<?php echo $params->get('esrigeocoderexpanded', true); ?>"
 	data-esriallowMultipleResults="<?php echo $params->get('esriallowMultipleResults', true); ?>"
 <?php endif; ?>
+	data-showrouting-simple="<?php echo $params->get('showrouting_simple', '1'); ?>"
+<?php if ($params->get('showrouting_simple', '1')) : ?>
+	data-route-simple-position="<?php echo $params->get('routing_simple_position', 'topright'); ?>"
+	data-route-simple-router="<?php echo $params->get('routing_simple_router', 'osrm'); ?>"
+	data-route-simple-routerkey="<?php echo $params->get('routing_simple_routerkey', ''); ?>"
+	data-route-simple-target="<?php echo $params->get('routing_simple_target', 'Koblenz, Rheinland-Pfalz, Deutschland'); ?>"
+<?php endif; ?>
 	data-showrouting="<?php echo $params->get('showrouting', '1'); ?>"
 <?php if ($params->get('showrouting', '1')) : ?>
 	data-routingstart="<?php echo $params->get('routingstart', '50.273543, 7.262993'); ?>"
@@ -91,3 +98,8 @@ JText::script('MOD_AGOSM_DEFAULT_TEXT_ERRORMESSAGE');
 JText::script('MOD_AGOSM_DEFAULT_ESRI_GEOCODER_PLACEHOLDER');
 JText::script('MOD_AGOSM_DEFAULT_ESRI_GEOCODER_TITLE');
 
+JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_PLACEHOLDER');
+JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE');
+JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE');
+JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION');
+JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR');

@@ -47,6 +47,17 @@ if ($params->get('useesri', '1') == 1)
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/esri-leaflet-geocoder.js');
 }
 
+if ($params->get('showrouting_simple', '1') == 1)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/LeafletControlRoutingtoaddress.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/LeafletControlRoutingtoaddress.js');
+}
+
+if ($params->get('showrouting_simple', '1') == 1 && $params->get('showrouting_places', '1') == 1)
+{
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/places.js');
+}
+
 if ($params->get('showrouting', '1') == 1)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/leaflet-routing-machine.css');
