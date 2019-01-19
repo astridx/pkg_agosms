@@ -16,7 +16,7 @@
         </tags>
         <maintainer>Astrid Günther</maintainer>
         <maintainerurl>https://astrid-guenther.de</maintainerurl>
-        <targetplatform name="joomla" version="3.[789]"/>
+        <targetplatform name="joomla" version="3.*"/>
     </update>
     <update>
         <name>pkg_agosms</name>
@@ -34,6 +34,6 @@
         </tags>
         <maintainer>Astrid Günther</maintainer>
         <maintainerurl>https://astrid-guenther.de</maintainerurl>
-        <targetplatform name="joomla" version="3.[789]"/>
+        <targetplatform name="joomla" version="3.*"/>
     </update>
 </updates>
