@@ -9,7 +9,7 @@
         <version>1.0.26</version>
         <infourl title="aggpxtrack">https://github.com/astridx/pkg_agosms/blob/v1.0.26/README.md</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v1.0.26/pkg_agosms.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v1.0.26/pkg-agosms.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
@@ -27,7 +27,7 @@
         <version>1.0.27</version>
         <infourl title="aggpxtrack">https://github.com/astridx/pkg_agosms/blob/v1.0.27/README.md</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v1.0.27/pkg_agosms.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v1.0.27/pkg-agosms.zip</downloadurl>
         </downloads>
         <tags>
             <tag>stable</tag>
