@@ -65,8 +65,8 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
                     this._map.removeLayer(this._route_linestring);
                 }
             
-                var json_obj_target = JSON.parse(Get('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + this.options.target));
-                var json_obj_startingpoint = JSON.parse(Get('http://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + input.value));
+                var json_obj_target = JSON.parse(Get('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + this.options.target));
+                var json_obj_startingpoint = JSON.parse(Get('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + input.value));
 
                 if (typeof json_obj_startingpoint[0] === 'undefined' || 
                         json_obj_startingpoint[0] === null || 
