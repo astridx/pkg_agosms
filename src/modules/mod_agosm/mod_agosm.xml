@@ -319,13 +319,13 @@
 				<field
 					type="list"
 					name="routing_simple_router"
-					default="0"
+					default="osrm"
 					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_ROUTER_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_ROUTER_DESC"
 					showon="showrouting_simple:1"
 				>
-					<option value="1">mapbox</option>
-					<option value="0">osrm</option>
+					<option value="mapbox">mapbox</option>
+					<option value="osrm">osrm</option>
 				</field>
 
 				<field

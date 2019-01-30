@@ -85,7 +85,7 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
                     var json_obj_route;
                     if (this.options.router === 'mapbox')
                     {
-                            json_obj_route = JSON.parse(Get('https://api.mapbox.com/directions/v5/mapbox/cycling/' + 
+                            json_obj_route = JSON.parse(Get('https://api.mapbox.com/directions/v5/mapbox/driving/' + 
                                 json_obj_target[0].lon + 
                                 ',' + 
                                 json_obj_target[0].lat + 
@@ -111,10 +111,11 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
                     
                     if (json_obj_route.message === 'Too Many Requests' || json_obj_route.message === 'Not Authorized - Invalid Token')
                     {
-                        this._messagebox.innerHTML = this.options.requesterror + '( ' + this.options.router +' )';
+                        this._messagebox.innerHTML = this.options.requesterror;
                     } 
-                    else if (typeof json_obj_route.routes[0] === 'undefined' ) {
-                        this._messagebox.innerHTML = this.options.errormessage + '( ' + this.options.router +' )';
+                    else if (typeof json_obj_route.routes[0] === 'undefined' )
+                    {
+                        this._messagebox.innerHTML = this.options.errormessage  + '( ' + this.options.router +' )';
                     }
                     else
                     {
@@ -122,7 +123,7 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
                         var distance = (json_obj_route.routes[0].legs[0].distance)/1000;
                         var duration = (json_obj_route.routes[0].legs[0].duration)/60;
                         this._map.fitBounds(this._route_linestring.getBounds());
-                        this._messagebox.innerHTML = this.options.distance + ' ' + distance.toFixed(2) + ' km, ' + this.options.duration + ' ' +  duration.toFixed(2) + ' min. ' + '( ' + this.options.router +' )';
+                        this._messagebox.innerHTML = this.options.distance + ' ' + distance.toFixed(2) + ' km, ' + this.options.duration + ' ' +  (duration/60).toFixed(2) + ' h. ' + '( ' + this.options.router +' )';
                     }
 
                 }
