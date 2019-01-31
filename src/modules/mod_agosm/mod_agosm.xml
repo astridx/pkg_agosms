@@ -335,7 +335,7 @@
 					label="MOD_AGOSM_MAPBOXKEY_LABEL"
 					description="MOD_AGOSM_MAPBOXKEY_DESC"
 					size="40"
-					showon="showrouting_simple:1[AND]routing_simple_router:1"
+					showon="showrouting_simple:1[AND]routing_simple_router:mapbox"
 				/>
                         </fieldset>
 			<!-- Routing Mapbox-->

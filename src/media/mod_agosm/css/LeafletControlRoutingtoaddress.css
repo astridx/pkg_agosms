@@ -7,3 +7,7 @@
 .messagebox {
     background-color: white!important;    
 }
+
+.addressinput {
+    width: 100%;
+}
