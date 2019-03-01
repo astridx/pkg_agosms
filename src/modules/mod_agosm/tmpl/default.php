@@ -71,8 +71,8 @@ $defaultArray = [];
 <?php endif; ?>
 	data-showrouting="<?php echo $params->get('showrouting', '1'); ?>"
 <?php if ($params->get('showrouting', '1')) : ?>
-	data-routingstart="<?php echo $params->get('routingstart', '50.273543, 7.262993'); ?>"
-	data-routingend="<?php echo $params->get('routingend', '50.281168, 7.276211'); ?>"
+	data-routingstart="<?php echo $params->get('routingstart'); ?>"
+	data-routingend="<?php echo $params->get('routingend'); ?>"
 	data-mapboxkey-routing="<?php echo $params->get('mapboxkey_routing', ''); ?>"
 	data-routingprofile="<?php echo $params->get('routingprofile', 'mapbox/driving'); ?>"
 	data-routinglanguage="<?php echo $params->get('routinglanguage', 'de'); ?>"

@@ -374,7 +374,6 @@
 				<field
 					name="routingstart"
 					type="agosm"
-					default="50.273543, 7.262993"
 					label="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"
@@ -383,7 +382,6 @@
 				<field
 					name="routingend"
 					type="agosm"
-					default="50.281168, 7.276211"
 					label="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"

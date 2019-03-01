@@ -286,6 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					L.latLng(routingstart),
 					L.latLng(routingend)
 				],
+                                collapsible: true,
 				router: L.Routing.mapbox(mapboxkeyRouting,
 						{
 							profile: routingprofile,
