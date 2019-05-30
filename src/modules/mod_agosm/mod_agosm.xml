@@ -706,7 +706,24 @@
 				/>
 			</fieldset>
 
-			<!-- Special Marker -->
+			<!-- Show Pins from Custom Field -->
+			<fieldset
+				name="pinConfigFromCustomField"
+				label="MOD_AGOSM_H_PINCF"
+			>
+				<field
+					type="list"
+					name="showcustomfieldpin"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWCUSTOMFIELDPIN_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWSUCTOMFIELDPIN_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+
+			<!-- Show Pins from Component -->
 			<fieldset
 				name="pinConfigFromComponent"
 				label="MOD_AGOSM_H_PINCOM"
