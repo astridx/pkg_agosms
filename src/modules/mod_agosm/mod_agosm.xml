@@ -712,6 +712,13 @@
 				label="MOD_AGOSM_H_PINCF"
 			>
 				<field
+					type="spacer"
+					name="routingSearch"
+					label="MOD_AGOSM_H_PINCF_FIELDSETDESCRIPTION"
+					class="text"
+				/>
+
+				<field
 					type="list"
 					name="showcustomfieldpin"
 					default="0"

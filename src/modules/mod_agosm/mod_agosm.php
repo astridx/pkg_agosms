@@ -73,6 +73,13 @@ if ($params->get('showpin', '1') === "1" || $params->get('showcustompin', '1') =
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/Leaflet.awesome-markers/leaflet.awesome-markers.js');
 }
 
+if ($params->get('showcustomfieldpin', '0') === "1")
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/cluster/MarkerCluster.css');
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/cluster/MarkerCluster.Default.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/cluster/leaflet.markercluster-src.js');
+}
+
 if ($params->get('baselayer', 'mapnik') == 'google')
 {
 	$document->addScript('https://maps.googleapis.com/maps/api/js?key=' . $params->get('googlekey', ''));
@@ -86,7 +93,7 @@ if ($params->get('showcomponentpin', '0') === "1")
 
 if ($params->get('showcustomfieldpin', '0') === "1")
 {
-	$list = ModagosmHelper::getListCustomField($params);
+	$listcf = ModagosmHelper::getListCustomField($params);
 }
 
 require JModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));

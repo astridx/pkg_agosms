@@ -340,7 +340,6 @@ document.addEventListener('DOMContentLoaded', function () {
 								extraClasses: obj.awesomeicon_extraclasses,
 							})
 					tempMarker.setIcon(AwesomeIcon);
-					console.log(obj.awesomeicon_icon);
 				}
 
 
@@ -362,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show Pins from component
 		if (showcomponentpin === '1')
 		{
-			console.log(specialcomponentpins);
+
 			for (var specialcomponentpin in specialcomponentpins) {
 				// skip loop if the property is from prototype
 				if (!specialcomponentpins.hasOwnProperty(specialcomponentpin))
@@ -388,7 +387,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (obj.showdefaultpin === "3")
 				{
-					console.log(obj);
 					var AwesomeIcon = new L.AwesomeMarkers.icon(
 							{
 								icon: obj.awesomeicon_icon,
@@ -399,7 +397,6 @@ document.addEventListener('DOMContentLoaded', function () {
 								extraClasses: obj.awesomeicon_extraclasses,
 							})
 					tempMarker.setIcon(AwesomeIcon);
-					console.log(obj.awesomeicon_icon);
 				}
 
 
@@ -421,60 +418,36 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show Pins from customfield
 		if (showcustomfieldpin === '1')
 		{
-
+			var clustermarkers = L.markerClusterGroup();
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
 				// skip loop if the property is from prototype
 				if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin))
 					continue;
 
-				var obj = specialcustomfieldpins[specialcustomfieldpin];
-				let tempMarker = L.marker(obj.coordinates.split(",", 3));
+				var objcf = specialcustomfieldpins[specialcustomfieldpin];
+				let url = "index.php?options=com_content&view=article&id=" + objcf.id;
+				
+				let tempMarkercf = null;
+				for (var jcfield in objcf.jcfields) {
+					if (objcf.jcfields[jcfield].title === "lat, lon" && objcf.jcfields[jcfield].value.split(",", 3).length > 1)
+					{
+						let coordinates = objcf.jcfields[jcfield].value.split(",", 3);
+						tempMarkercf = L.marker(objcf.jcfields[jcfield].value.split(",", 3));
+						
+						let url = "index.php?options=com_content&view=article&id=" + objcf.id;
+						let title = objcf.title;
+						
+						let popuptext = "<a href=' " + url + " '> " + title + " </a>";
+						tempMarkercf.bindPopup(popuptext);
 
-				if (obj.showdefaultpin === "2" && obj.customPinPath != "")
-				{
-					var LeafIcon = L.Icon.extend({
-						options: {
-							iconUrl: obj.customPinPath,
-							shadowUrl: obj.customPinShadowPath,
-							iconSize: obj.customPinSize.split(",", 3).map(e => parseInt(e)),
-							shadowSize: obj.customPinShadowSize.split(",", 3).map(e => parseInt(e)),
-							iconAnchor: obj.customPinOffset.split(",", 3).map(e => parseInt(e)),
-							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(e => parseInt(e)),
-						}
-					});
-					tempMarker.setIcon(new LeafIcon());
-				}
-
-				if (obj.showdefaultpin === "3")
-				{
-					console.log(obj);
-					var AwesomeIcon = new L.AwesomeMarkers.icon(
-							{
-								icon: obj.awesomeicon_icon,
-								markerColor: obj.awesomeicon_markercolor,
-								iconColor: obj.awesomeicon_iconcolor,
-								prefix: 'fa',
-								spin: (obj.awesomeicon_spin === "true"),
-								extraClasses: obj.awesomeicon_extraclasses,
-							})
-					tempMarker.setIcon(AwesomeIcon);
-					console.log(obj.awesomeicon_icon);
-				}
-
-
-
-				tempMarker.addTo(window['mymap' + moduleId]);
-
-				if (obj.showpopup === "1")
-				{
-					tempMarker.bindPopup(obj.popuptext);
-				}
-
-				if (obj.showpopup === "2")
-				{
-					tempMarker.bindPopup(obj.popuptext).openPopup();
+						//tempMarkercf.addTo(window['mymap' + moduleId]);
+						tempMarkercf.addTo(clustermarkers);
+					}					
 				}
 			}
+			console.log(clustermarkers.getBounds());
+			window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
+			clustermarkers.addTo(window['mymap' + moduleId]);
 		}
 
 	})
