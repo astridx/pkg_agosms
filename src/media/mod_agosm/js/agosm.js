@@ -66,6 +66,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			var specialcomponentpins = JSON.parse(element.getAttribute('data-specialcomponentpins'));
 		}
+		var showcustomfieldpin = element.getAttribute('data-showcustomfieldpin');
+		if (showcustomfieldpin === '1')
+		{
+			var specialcustomfieldpins = JSON.parse(element.getAttribute('data-specialcustomfieldpins'));
+		}
 
 		$worldcopyjump = "worldCopyJump: true";
 		if (noWorldWarp === "1")
@@ -357,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show Pins from component
 		if (showcomponentpin === '1')
 		{
-
+			console.log(specialcomponentpins);
 			for (var specialcomponentpin in specialcomponentpins) {
 				// skip loop if the property is from prototype
 				if (!specialcomponentpins.hasOwnProperty(specialcomponentpin))
@@ -411,10 +416,65 @@ document.addEventListener('DOMContentLoaded', function () {
 					tempMarker.bindPopup(obj.popuptext).openPopup();
 				}
 			}
+		}
+
+		// Show Pins from customfield
+		if (showcustomfieldpin === '1')
+		{
+
+			for (var specialcustomfieldpin in specialcustomfieldpins) {
+				// skip loop if the property is from prototype
+				if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin))
+					continue;
+
+				var obj = specialcustomfieldpins[specialcustomfieldpin];
+				let tempMarker = L.marker(obj.coordinates.split(",", 3));
+
+				if (obj.showdefaultpin === "2" && obj.customPinPath != "")
+				{
+					var LeafIcon = L.Icon.extend({
+						options: {
+							iconUrl: obj.customPinPath,
+							shadowUrl: obj.customPinShadowPath,
+							iconSize: obj.customPinSize.split(",", 3).map(e => parseInt(e)),
+							shadowSize: obj.customPinShadowSize.split(",", 3).map(e => parseInt(e)),
+							iconAnchor: obj.customPinOffset.split(",", 3).map(e => parseInt(e)),
+							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(e => parseInt(e)),
+						}
+					});
+					tempMarker.setIcon(new LeafIcon());
+				}
+
+				if (obj.showdefaultpin === "3")
+				{
+					console.log(obj);
+					var AwesomeIcon = new L.AwesomeMarkers.icon(
+							{
+								icon: obj.awesomeicon_icon,
+								markerColor: obj.awesomeicon_markercolor,
+								iconColor: obj.awesomeicon_iconcolor,
+								prefix: 'fa',
+								spin: (obj.awesomeicon_spin === "true"),
+								extraClasses: obj.awesomeicon_extraclasses,
+							})
+					tempMarker.setIcon(AwesomeIcon);
+					console.log(obj.awesomeicon_icon);
+				}
 
 
 
+				tempMarker.addTo(window['mymap' + moduleId]);
 
+				if (obj.showpopup === "1")
+				{
+					tempMarker.bindPopup(obj.popuptext);
+				}
+
+				if (obj.showpopup === "2")
+				{
+					tempMarker.bindPopup(obj.popuptext).openPopup();
+				}
+			}
 		}
 
 	})
