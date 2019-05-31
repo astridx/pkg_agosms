@@ -84,4 +84,9 @@ if ($params->get('showcomponentpin', '0') === "1")
 	$list = ModagosmHelper::getList($params);
 }
 
+if ($params->get('showcustomfieldpin', '0') === "1")
+{
+	$list = ModagosmHelper::getListCustomField($params);
+}
+
 require JModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));
