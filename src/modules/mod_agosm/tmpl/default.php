@@ -87,6 +87,10 @@ $defaultArray = [];
 	data-specialcomponentpins="<?php echo htmlspecialchars(json_encode($list), ENT_QUOTES, 'UTF-8'); ?>"
 	data-showcomponentpin="<?php echo $params->get('showcomponentpin', '1'); ?>"
 <?php endif; ?>
+<?php if ($params->get('pinConfigFromCustomField', '1')) : ?>
+	data-specialsutomfieldpins="<?php echo htmlspecialchars(json_encode($list), ENT_QUOTES, 'UTF-8'); ?>"
+	data-showcustomfieldpin="<?php echo $params->get('pinConfigFromCustomField', '1'); ?>"
+<?php endif; ?>
 	class="leafletmapMod"
 	id="map<?php echo $module->id; ?>">
 </div>
