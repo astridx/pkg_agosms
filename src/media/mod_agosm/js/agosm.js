@@ -419,33 +419,29 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (showcustomfieldpin === '1')
 		{
 			var clustermarkers = L.markerClusterGroup();
+			console.log(specialcustomfieldpins);
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
 				// skip loop if the property is from prototype
 				if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin))
 					continue;
 
 				var objcf = specialcustomfieldpins[specialcustomfieldpin];
-				let url = "index.php?options=com_content&view=article&id=" + objcf.id;
 				
 				let tempMarkercf = null;
-				for (var jcfield in objcf.jcfields) {
-					if (objcf.jcfields[jcfield].title === "lat, lon" && objcf.jcfields[jcfield].value.split(",", 3).length > 1)
-					{
-						let coordinates = objcf.jcfields[jcfield].value.split(",", 3);
-						tempMarkercf = L.marker(objcf.jcfields[jcfield].value.split(",", 3));
-						
-						let url = "index.php?options=com_content&view=article&id=" + objcf.id;
-						let title = objcf.title;
-						
-						let popuptext = "<a href=' " + url + " '> " + title + " </a>";
-						tempMarkercf.bindPopup(popuptext);
+				if (objcf.cords)
+				{
+					tempMarkercf = L.marker(objcf.cords.split(",", 3));
 
-						//tempMarkercf.addTo(window['mymap' + moduleId]);
-						tempMarkercf.addTo(clustermarkers);
-					}					
-				}
+					let url = "index.php?options=com_content&view=article&id=" + objcf.id;
+					let title = objcf.title;
+
+					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
+					tempMarkercf.bindPopup(popuptext);
+
+					//tempMarkercf.addTo(window['mymap' + moduleId]);
+					tempMarkercf.addTo(clustermarkers);
+				}					
 			}
-			console.log(clustermarkers.getBounds());
 			window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
 			clustermarkers.addTo(window['mymap' + moduleId]);
 		}

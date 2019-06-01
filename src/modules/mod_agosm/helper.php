@@ -211,6 +211,7 @@ class ModagosmHelper
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 		$items = $model->getItems();
+		$itemsfiltered = array();
 
 		if ($items)
 		{
@@ -219,16 +220,25 @@ class ModagosmHelper
 				// (calling plugins events and loading layouts to get their HTML display)
 				$fields = FieldsHelper::getFields('com_content.article', $item, true);
 
+				$itemfiltered = new stdClass;
+				
 				foreach ($fields as $key => $field) {
-					$item->jcfields[$field->id] = $field;
+					if ($field->title == 'lat, lon')
+					{
+						$itemfiltered->cords = $field->value;
+					}
 				}
+				
+				$itemfiltered->title = $item->title;
+				$itemfiltered->id = $item->id;
+				$itemsfiltered[] = $itemfiltered;
 			}
 		}
 
-		if ($items)
+		if ($itemsfiltered)
 		{
 
-			return $items;
+			return $itemsfiltered;
 		}
 
 		return;

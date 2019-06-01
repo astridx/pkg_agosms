@@ -17,7 +17,6 @@ $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 // Include skripts/styles to the header
 $document = JFactory::getDocument();
-$document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosm.js');
 
 $leafletIsLoaded = false;
 foreach ($document->_scripts as $key => $script)
@@ -95,5 +94,5 @@ if ($params->get('showcustomfieldpin', '0') === "1")
 {
 	$listcf = ModagosmHelper::getListCustomField($params);
 }
-
+$document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosm.js');
 require JModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));
