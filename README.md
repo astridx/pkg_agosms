@@ -46,6 +46,25 @@ a route to the address you entered in the back end.
 
 ![a2](https://user-images.githubusercontent.com/9974686/51428133-82b52c80-1c00-11e9-8d4d-afee1c2e4a3a.png)
 
+### Show markers on a map that link to an article - you can enter the coordinate in a Custom Field
+
+The next picture shows what the map might look like. If the markers are too close together, they will be clustered. If the resolution of the card fits, the marker will be displayed. A click on the marker opens a popup. In this popup there is a link to the post - link text is the title of the article.
+
+![Home](https://user-images.githubusercontent.com/9974686/58746148-263e0580-845b-11e9-8b30-374c4256f46e.png)
+
+
+Do you want to display a marker on a map that contains a link to an article? 
+Then create a Custom Field of the type text titled `lat, lon`. 
+Be sure to write the title in the same way - the space after the comma is important. 
+Any article with the custom field filled with a correct coordinate will be displayed on the map. 
+
+![Articles  Fields   test   Administration](https://user-images.githubusercontent.com/9974686/58746149-26d69c00-845b-11e9-920b-f5309b98ff37.png)
+
+The next picture shows where you can activate the option in the module.
+
+![Modules  AGOSM Module   test   Administration](https://user-images.githubusercontent.com/9974686/58746150-276f3280-845b-11e9-9678-7521c89fbe80.png)
+
+
 ## Component
 
 1. Open the component via `Components | Agosms` and click the toolbar button `new`.
