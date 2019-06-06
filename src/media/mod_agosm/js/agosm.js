@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (showcustomfieldpin === '1')
 		{
 			var clustermarkers = L.markerClusterGroup();
-			console.log(specialcustomfieldpins);
+			
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
 				// skip loop if the property is from prototype
 				if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin))
@@ -430,7 +430,23 @@ document.addEventListener('DOMContentLoaded', function () {
 				let tempMarkercf = null;
 				if (objcf.cords)
 				{
-					tempMarkercf = L.marker(objcf.cords.split(",", 3));
+					var values = objcf.cords.split(",");
+					tempMarkercf = L.marker(objcf.cords.split(",").slice(0, 2));
+					if (values.length >4)
+					{
+						var AwesomeIcon = new L.AwesomeMarkers.icon(
+								{
+									icon: values[4],
+									markerColor: values[2],
+									iconColor: values[3],
+									prefix: 'fa',
+									spin: false,
+									extraClasses: "agosmsmarkerextraklasse",
+								})
+						tempMarkercf.setIcon(AwesomeIcon);
+						
+					}
+					
 
 					let url = "index.php?options=com_content&view=article&id=" + objcf.id;
 					let title = objcf.title;

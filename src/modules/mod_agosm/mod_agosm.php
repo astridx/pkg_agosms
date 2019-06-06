@@ -65,7 +65,7 @@ if ($params->get('showrouting', '1') == 1)
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/Control.Geocoder.js');
 }
 
-if ($params->get('showpin', '1') === "1" || $params->get('showcustompin', '1') === "1")
+if ($params->get('showpin', '1') === "1" || $params->get('showcustompin', '1') === "1" || $params->get('showcustomfieldpin', '1') === "1")
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/font-awesome.min.css');
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/Leaflet.awesome-markers/leaflet.awesome-markers.css');

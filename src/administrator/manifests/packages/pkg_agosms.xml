@@ -18,6 +18,8 @@
 		<!-- The id for each extension is the element stored in the DB -->
 		<file type="component" id="com_agosms">com_agosms.zip</file>
 		<file type="module" id="mod_agosm" client="site">mod_agosm.zip</file>
+		<file type="module" id="mod_agosmsfileuploader" client="site">mod_agosmsfileuploader.zip</file>
+		<file type="plugin" id="agosmsmarker" group="fields">plg_fields_agosmsmarker.zip</file>
 	</files>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.pkg_agosms.sys.ini</language>

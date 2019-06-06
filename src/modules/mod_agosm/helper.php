@@ -215,23 +215,41 @@ class ModagosmHelper
 
 		if ($items)
 		{
+			
 			foreach ($items as $key => $item) {
+				if ($item->state !== "1"){
+					continue;
+				}
 				// Get item's fields, also preparing their value property for manual display
 				// (calling plugins events and loading layouts to get their HTML display)
 				$fields = FieldsHelper::getFields('com_content.article', $item, true);
 
-				$itemfiltered = new stdClass;
-				
+				$itemfiltered1 = new stdClass;
+				$itemfiltered2 = new stdClass;
 				foreach ($fields as $key => $field) {
 					if ($field->title == 'lat, lon')
 					{
-						$itemfiltered->cords = $field->value;
+						$itemfiltered1->cords = str_replace(' ', '', $field->value);
+						$test = explode(",", $itemfiltered1->cords );
+						if (is_numeric($test[0]) && is_numeric($test[1]))
+						{						
+							$itemfiltered1->title = $item->title;
+							$itemfiltered1->id = $item->id;
+							$itemsfiltered[] = $itemfiltered1;
+						}
+					}
+					if ($field->type == 'agosmsmarker')
+					{
+						$itemfiltered2->cords = str_replace(' ', '', $field->value);
+						$test = explode(",", $itemfiltered2->cords );
+						if (is_numeric($test[0]) && is_numeric($test[1]))
+						{
+							$itemfiltered2->title = $item->title;
+							$itemfiltered2->id = $item->id;
+							$itemsfiltered[] = $itemfiltered2;
+						}
 					}
 				}
-				
-				$itemfiltered->title = $item->title;
-				$itemfiltered->id = $item->id;
-				$itemsfiltered[] = $itemfiltered;
 			}
 		}
 
