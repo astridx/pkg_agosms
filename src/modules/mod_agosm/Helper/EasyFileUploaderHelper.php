@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-namespace AG\Module\EasyFileUploader\Site\Helper;
+namespace AG\Module\Agosms\Site\Helper;
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="3.9" type="module" client="site" method="upgrade">
-	<name>MOD_AGOSMSFILEUPLOADER</name>
+	<name>MOD_AGFILEUPLOADER</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) ##YEAR## Open Source Matters. All rights reserved.</copyright>
@@ -8,7 +8,7 @@
 	<authorEmail>info@astrid-guenther.de</authorEmail>
 	<authorUrl>www.astrid-guenther.de</authorUrl>
 	<version>##VERSION##</version>
-	<description>MOD_AGOSMSFILEUPLOADER_DESCRIPTION</description>
+	<description>MOD_AGFILEUPLOADER_DESCRIPTION</description>
 	<namespace>AG\Module\EasyFileUploader</namespace>
 	<!-- Front-end files -->
 	<files>
@@ -31,9 +31,9 @@
 				<field name="ag_parent" 
 					type="fixedfolderlist" 
 					default="images" 
-					label="MOD_AGOSMS_PARENT_LABEL" 
+					label="MOD_AG_PARENT_LABEL" 
 					directory="" 
-					description="MOD_AGOSMS_PARENT_DESC" 
+					description="MOD_AG_PARENT_DESC" 
 					hide_none="true" 
 					hide_default="true" 
 					exclude="^[Aa]dministrator$|^[Cc]ache$|^[Cc]omponents$|^[Cc]li$|^[Ii]ncludes$|^[Ll]anguage$|^[Ll]ibraries$|^[Ll]ogs$|^[Mm]odules$|^[Pp]lugins$|^[Tt]emplates$|^[Xx]mlrpc$" 
@@ -41,25 +41,25 @@
 				<field name="ag_folder" 
 					type="text" 
 					default="" 
-					label="MOD_AGOSMS_FOLDER_LABEL" 
-					description="MOD_AGOSMS_FOLDER_DESC" 
+					label="MOD_AG_FOLDER_LABEL" 
+					description="MOD_AG_FOLDER_DESC" 
 				/>
 				<field name="ag_maxsize" 
 					type="text" 
 					default="1000000" 
-					label="MOD_AGOSMS_MAXSIZE_LABEL" 
-					description="MOD_AGOSMS_MAXSIZE_DESC" 
+					label="MOD_AG_MAXSIZE_LABEL" 
+					description="MOD_AG_MAXSIZE_DESC" 
 				/>
 				<!-- Custom Text Fields -->
 				<field name="ag_spacer_custom" 
 					type="spacer" 
-					label="MOD_AGOSMS_CUSTOM_SPACER" 
+					label="MOD_AG_CUSTOM_SPACER" 
 				/>
 				<field name="ag_custom" 
 					type="radio" 
 					default="1" 
-					label="MOD_AGOSMS_CUSTOM_LABEL" 
-					description="MOD_AGOSMS_CUSTOM_DESC"
+					label="MOD_AG_CUSTOM_LABEL" 
+					description="MOD_AG_CUSTOM_DESC"
 					class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
@@ -68,51 +68,51 @@
 				<field name="ag_label" 
 					type="text" 
 					default="Choose a file to upload:" 
-					label="MOD_AGOSMS_LABELTEXT_LABEL" 
-					description="MOD_AGOSMS_LABELTEXT_DESC" 
+					label="MOD_AG_LABELTEXT_LABEL" 
+					description="MOD_AG_LABELTEXT_DESC" 
 				/>
 				<field name="ag_button" 
 					type="text" 
 					default="Upload File" 
-					label="MOD_AGOSMS_BUTTON_LABEL" 
-					description="MOD_AGOSMS_BUTTON_DESC" 
+					label="MOD_AG_BUTTON_LABEL" 
+					description="MOD_AG_BUTTON_DESC" 
 				/>
 				<field name="ag_question" 
 					type="text" 
 					default="Replace existing files with uploaded files?" 
-					label="MOD_AGOSMS_QUESTION_LABEL" 
-					description="MOD_AGOSMS_QUESTION_DESC" 
+					label="MOD_AG_QUESTION_LABEL" 
+					description="MOD_AG_QUESTION_DESC" 
 				/>
 				<field name="ag_yes" 
 					type="text" 
 					default="Yes" 
-					label="MOD_AGOSMS_YESTEXT_LABEL" 
-					description="MOD_AGOSMS_YESTEXT_DESC" 
+					label="MOD_AG_YESTEXT_LABEL" 
+					description="MOD_AG_YESTEXT_DESC" 
 				/>
 				<field name="ag_no" 
 					type="text" 
 					default="No" 
-					label="MOD_AGOSMS_NOTEXT_LABEL" 
-					description="MOD_AGOSMS_NOTEXT_DESC" 
+					label="MOD_AG_NOTEXT_LABEL" 
+					description="MOD_AG_NOTEXT_DESC" 
 				/>
 				<!-- Security -->
 				<field name="ag_spacer_details" 
 					type="spacer" 
-					label="MOD_AGOSMS_DETAILS_SPACER" 
+					label="MOD_AG_DETAILS_SPACER" 
 				/>
 				<field name="ag_filetypes" 
 					type="textarea" 
-					default="image/gif;image/jpeg;image/pjpeg;image/png;application/pdf;application/msword;application/zip;application/x-compressed;application/x-zip-compressed;multipart/x-zip;application/excel;application/vnd.ms-excel;application/x-excel;application/x-msexcel" 
-					label="MOD_AGOSMS_FILETYPES_LABEL" 
-					description="MOD_AGOSMS_FILETYPES_DESC" 
+					default="text/xml;application/gpx+xml;image/gif;image/jpeg;image/pjpeg;image/png;application/pdf;application/msword;application/zip;application/x-compressed;application/x-zip-compressed;multipart/x-zip;application/excel;application/vnd.ms-excel;application/x-excel;application/x-msexcel" 
+					label="MOD_AG_FILETYPES_LABEL" 
+					description="MOD_AG_FILETYPES_DESC" 
 					rows="10" 
 					cols="40" 
 				/>
 				<field name="ag_default_replace" 
 					type="radio" 
 					default="0" 
-					label="MOD_AGOSMS_DEFAULT_REPLACE_LABEL" 
-					description="MOD_AGOSMS_DEFAULT_REPLACE_DESC"
+					label="MOD_AG_DEFAULT_REPLACE_LABEL" 
+					description="MOD_AG_DEFAULT_REPLACE_DESC"
 					class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
@@ -121,8 +121,8 @@
 				<field name="ag_replace" 
 					type="radio" 
 					default="1" 
-					label="MOD_AGOSMS_REPLACE_LABEL" 
-					description="MOD_AGOSMS_REPLACE_DESC"
+					label="MOD_AG_REPLACE_LABEL" 
+					description="MOD_AG_REPLACE_DESC"
 					class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
@@ -131,8 +131,8 @@
 				<field name="ag_scriptsinarchives" 
 					type="radio" 
 					default="0" 
-					label="MOD_AGOSMS_SCRIPTS_IN_ARCHIVE_LABEL" 
-					description="MOD_AGOSMS_SCRIPTS_IN_ARCHIVE_DESC"
+					label="MOD_AG_SCRIPTS_IN_ARCHIVE_LABEL" 
+					description="MOD_AG_SCRIPTS_IN_ARCHIVE_DESC"
 					class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
@@ -141,19 +141,19 @@
 				<!-- Formatting -->
 				<field name="ag_spacer_format" 
 					type="spacer" 
-					label="MOD_AGOSMS_FORMAT_SPACER" 
+					label="MOD_AG_FORMAT_SPACER" 
 				/>
 				<field name="ag_variable" 
 					type="text" 
 					default="fileToUpload" 
-					label="MOD_AGOSMS_VARIABLE_LABEL" 
-					description="MOD_AGOSMS_VARIABLE_DESC" 
+					label="MOD_AG_VARIABLE_LABEL" 
+					description="MOD_AG_VARIABLE_DESC" 
 				/>
 				<field name="ag_multiple" 
 					type="list" 
 					default="1" 
-					label="MOD_AGOSMS_MULTIPLE_LABEL" 
-					description="MOD_AGOSMS_MULTIPLE_DESC"
+					label="MOD_AG_MULTIPLE_LABEL" 
+					description="MOD_AG_MULTIPLE_DESC"
 				>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -169,8 +169,8 @@
 				<field name="ag_shownofile" 
 					type="radio" 
 					default="1" 
-					label="MOD_AGOSMS_SHOW_NO_FILE_UPLOADED_NOTICE_LABEL" 
-					description="MOD_AGOSMS_SHOW_NO_FILE_UPLOADED_NOTICE_DESC"
+					label="MOD_AG_SHOW_NO_FILE_UPLOADED_NOTICE_LABEL" 
+					description="MOD_AG_SHOW_NO_FILE_UPLOADED_NOTICE_DESC"
 					class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
@@ -179,29 +179,24 @@
 				<!-- Advanced Features -->
 				<field name="ag_spacer_advanced" 
 					type="spacer" 
-					label="MOD_AGOSMS_ADVANCED_SPACER" 
+					label="MOD_AG_ADVANCED_SPACER" 
 				/>
 				<field name="ag_user" 
 					type="radio" 
 					default="0" 
-					label="MOD_AGOSMS_USER_LABEL" 
-					description="MOD_AGOSMS_USER_DESC"
+					label="MOD_AG_USER_LABEL" 
+					description="MOD_AG_USER_DESC"
 					class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="ag_mimedetect" 
-					type="easydiagnostic" 
-					label="MOD_AGOSMS_DIAGNOSTIC_LABEL" 
-					description="MOD_AGOSMS_DIAGNOSTIC_DESC"
-				/>
 			</fieldset>
 			<fieldset name="advanced">
 				<!-- Module Class -->
 				<!--<field name="ag_spacer_css" 
 					type="spacer" 
-					label="MOD_AGOSMS_FILTER_SPACER" 
+					label="MOD_AG_FILTER_SPACER" 
 				/>-->
 				<field name="moduleclass_sfx" 
 					type="text" 

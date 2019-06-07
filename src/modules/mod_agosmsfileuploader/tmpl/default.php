@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
+ *
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
+ */
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 use Joomla\CMS\Language\Text;
@@ -26,7 +34,9 @@ $action = Uri::current();
 
 ?>
 <div class="<?php echo $moduleclass_sfx;?>">
-	<?php if (isset($_FILES[$params->get('ag_variable')])) : ?>
+	<?php 
+	if (isset($_FILES[$params->get('ag_variable')])) : 
+		?>
 		<?php for ($j = 0; $j < count($result); $j++) : ?>
 			<?php 
 			$show_class = "";
@@ -49,7 +59,7 @@ $action = Uri::current();
 		<?php 
 		$max = intval($params->get('ag_multiple'));
 		for ($i = 0; $i < $max; $i++): ?>
-		<input type="file" name=<?php echo '"'.$params->get('ag_variable').'[]"'; ?> id=<?php echo '"'.$params->get('ag_variable').'[]"'; ?> style="margin-top:1px; margin-bottom:1px;" /> 
+		<input type="file" name=<?php echo '"'.$params->get('ag_variable').'[]"'; ?> id=<?php echo '"'.$params->get('ag_variable').'[]"'; ?> /> 
 		<br />
 		<?php endfor; ?>
 		<?php if ($params->get('ag_default_replace') == false && $params->get('ag_replace') == true): /* 1 means 'Yes' or true. 0 means 'No' or false. */ ?>

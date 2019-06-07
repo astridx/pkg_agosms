@@ -1,10 +1,11 @@
 <?php
 /**
  * @package     Joomla.Site
- * @subpackage  Layout
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 defined('JPATH_BASE') or die;
