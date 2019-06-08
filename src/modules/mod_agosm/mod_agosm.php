@@ -12,6 +12,8 @@ defined('_JEXEC') or die;
 
 // Include the agosm functions only once
 require_once __DIR__ . '/helper.php';
+require_once __DIR__ . '/Helper/EasyFileUploaderHelper.php';
+
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 

@@ -773,51 +773,6 @@
 					label="MOD_AG_MAXSIZE_LABEL" 
 					description="MOD_AG_MAXSIZE_DESC" 
 				/>
-				<!-- Custom Text Fields -->
-				<field name="ag_spacer_custom" 
-					type="spacer" 
-					label="MOD_AG_CUSTOM_SPACER" 
-				/>
-				<field name="ag_custom" 
-					type="radio" 
-					default="1" 
-					label="MOD_AG_CUSTOM_LABEL" 
-					description="MOD_AG_CUSTOM_DESC"
-					class="btn-group btn-group-yesno"
-				>
-					<option value="1">JYES</option>
-					<option value="0">JNO</option>
-				</field>
-				<field name="ag_label" 
-					type="text" 
-					default="Choose a file to upload:" 
-					label="MOD_AG_LABELTEXT_LABEL" 
-					description="MOD_AG_LABELTEXT_DESC" 
-				/>
-				<field name="ag_button" 
-					type="text" 
-					default="Upload File" 
-					label="MOD_AG_BUTTON_LABEL" 
-					description="MOD_AG_BUTTON_DESC" 
-				/>
-				<field name="ag_question" 
-					type="text" 
-					default="Replace existing files with uploaded files?" 
-					label="MOD_AG_QUESTION_LABEL" 
-					description="MOD_AG_QUESTION_DESC" 
-				/>
-				<field name="ag_yes" 
-					type="text" 
-					default="Yes" 
-					label="MOD_AG_YESTEXT_LABEL" 
-					description="MOD_AG_YESTEXT_DESC" 
-				/>
-				<field name="ag_no" 
-					type="text" 
-					default="No" 
-					label="MOD_AG_NOTEXT_LABEL" 
-					description="MOD_AG_NOTEXT_DESC" 
-				/>
 				<!-- Security -->
 				<field name="ag_spacer_details" 
 					type="spacer" 
@@ -825,7 +780,7 @@
 				/>
 				<field name="ag_filetypes" 
 					type="textarea" 
-					default="text/xml;application/gpx+xml;image/gif;image/jpeg;image/pjpeg;image/png;application/pdf;application/msword;application/zip;application/x-compressed;application/x-zip-compressed;multipart/x-zip;application/excel;application/vnd.ms-excel;application/x-excel;application/x-msexcel" 
+					default="text/xml;application/gpx+xml;" 
 					label="MOD_AG_FILETYPES_LABEL" 
 					description="MOD_AG_FILETYPES_DESC" 
 					rows="10" 

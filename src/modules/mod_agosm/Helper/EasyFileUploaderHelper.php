@@ -42,6 +42,10 @@ class EasyFileUploaderHelper
 		//compile the full absolute path
 		$path = $jpath.DIRECTORY_SEPARATOR.$parent.DIRECTORY_SEPARATOR.$folder;
 		$path = rtrim($path, "/\\ \t\n\r\0\x0B");		
+
+		//compile the full relative path
+		$relativepath = $parent.DIRECTORY_SEPARATOR.$folder;
+		$relativepath = rtrim($relativepath, "/\\ \t\n\r\0\x0B");		
 		
 		if ($params->get('ag_user') == true)
 		{
@@ -50,6 +54,7 @@ class EasyFileUploaderHelper
 			if ($user->guest == false)
 			{
 				$path.= DIRECTORY_SEPARATOR.$user->username;
+				$relativepath.= DIRECTORY_SEPARATOR.$user->username;
 			}
 			else
 			{
@@ -65,6 +70,8 @@ class EasyFileUploaderHelper
 			for ($i = 0; $i < $total; $i++)
 			{
 				$result[$i]['show'] = true;
+				$result[$i]['rpath'] = $relativepath;
+				$result[$i]['path'] = $path;
 				//so, now, check for any other errors
 				if ($_FILES[$params->get('ag_variable')]["error"][$i] > 0)
 				{

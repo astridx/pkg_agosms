@@ -11,6 +11,12 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
+use AG\Module\Agosms\Site\Helper\EasyFileUploaderHelper;
+
+if (isset($_FILES[$params->get('ag_variable')]))
+{
+	$result = EasyFileUploaderHelper::getFileToUpload($params);
+}
 
 $defaultArray = [];
 
@@ -21,6 +27,26 @@ $yesText = Text::_('JYES');
 $noText = Text::_('JNO');
 
 $action = Uri::current();
+
+$document = JFactory::getDocument();
+$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet-gpx/gpx.js');
+$document->addScript(JURI::root(true) . '/media/mod_agosm/js/aggpxtrack.js');
+
+$total = intval($params->get('ag_multiple'));
+
+$gpxfile = "";
+if (isset($_FILES[$params->get('ag_variable')]))
+{
+	for ($i = 0; $i < $total; $i++)
+	{
+		$gpxfile .= $result[$i]['rpath'] . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i] . ';;';
+	}
+}
+$startIconUrl = JURI::base() . 'media/mod_agosm/leaflet-gpx/pin-icon-start.png';
+$endIconUrl = JURI::base() . 'media/mod_agosm/leaflet-gpx/pin-icon-end.png';
+$shadowUrl = JURI::base() . 'media/mod_agosm/leaflet-gpx/pin-shadow.png';
+$wptIconUrls = JURI::base() . 'media/mod_agosm/leaflet-gpx/pin-icon-wpt.png';
+
 ?>
 
 <div class="<?php echo $moduleclass_sfx;?>">
@@ -66,6 +92,13 @@ $action = Uri::current();
 	width:auto;
 	height:<?php echo $params->get('height', '400'); ?>px;"
 	data-module-id="<?php echo $module->id; ?>"
+	
+	data-gpx_file_name="<?php echo $gpxfile; ?>"
+	data-startIconUrl="<?php echo $startIconUrl; ?>"
+	data-endIconUrl="<?php echo $endIconUrl; ?>"
+	data-shadowUrl="<?php echo $shadowUrl; ?>"
+	data-wptIconUrls="<?php echo $wptIconUrls; ?>"
+	
 	data-no-world-warp="<?php echo $params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $params->get('detectRetina', 0); ?>"
 	data-baselayer="<?php echo $params->get('baselayer', 'mapnik'); ?>"
@@ -142,7 +175,7 @@ $action = Uri::current();
 	data-specialcustomfieldpins="<?php echo htmlspecialchars(json_encode($listcf), ENT_QUOTES, 'UTF-8'); ?>"
 	data-showcustomfieldpin="<?php echo $params->get('showcustomfieldpin', '1'); ?>"
 <?php endif; ?>
-	class="leafletmapMod"
+	class="leafletmapMod leafletmapModGpx"
 	id="map<?php echo $module->id; ?>">
 </div>
 
