@@ -48,6 +48,8 @@ a route to the address you entered in the back end.
 
 ### Show markers on a map that link to an article - you can enter the coordinate in a Custom Field
 
+#### Custom Field of the type text
+
 The next picture shows what the map might look like. If the markers are too close together, 
 they will be clustered. If the resolution of the card fits, the marker will be displayed. 
 A click on the marker opens a popup. In this popup there is a link to the post - link text is 
@@ -73,6 +75,12 @@ When you enter `50.150, 7.158, red, green, home` you will see an icon as shown i
 
 ![Custom Marker](https://user-images.githubusercontent.com/9974686/59145384-7250f300-89e3-11e9-96c8-772a0f63ff7e.png)
 
+#### Custom Field agosmsmarker
+
+instead of the text fields, there is now a special custom field where you can choose all options more user friendly. 
+
+
+#### Options common to all custom fields
 
 The next picture shows where you can activate the option in the module.
 
