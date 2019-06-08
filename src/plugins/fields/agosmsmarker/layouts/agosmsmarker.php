@@ -147,8 +147,8 @@ $document->addScriptDeclaration($script);
 ?>
 
 <hr>
-<?php echo JText::_('Lat'); ?><input type="number" id="agosmsmarkerlat" step=".000001">
-<?php echo JText::_('Lon'); ?><input type="number" id="agosmsmarkerlon" step=".000001">
+<?php echo JText::_('Lat'); ?><input type="text" id="agosmsmarkerlat" >
+<?php echo JText::_('Lon'); ?><input type="text" id="agosmsmarkerlon" >
 <br>
 <?php echo JText::_('Markercolor'); ?>	
 <select 
@@ -186,7 +186,7 @@ $document->addScriptDeclaration($script);
 <select 
 id="agosmsmarkericon" 
 name="agosmsmarkericon">
-	<option></option>	
+<option></option>	
 <option value="home">&#xf015;</option>
 <option value="500px">&#xf26e;</option>
 <option value="address-book">&#xf2b9;</option>
