@@ -48,7 +48,10 @@ a route to the address you entered in the back end.
 
 ### Show markers on a map that link to an article - you can enter the coordinate in a Custom Field
 
-The next picture shows what the map might look like. If the markers are too close together, they will be clustered. If the resolution of the card fits, the marker will be displayed. A click on the marker opens a popup. In this popup there is a link to the post - link text is the title of the article.
+The next picture shows what the map might look like. If the markers are too close together, 
+they will be clustered. If the resolution of the card fits, the marker will be displayed. 
+A click on the marker opens a popup. In this popup there is a link to the post - link text is 
+the title of the article.
 
 ![Home](https://user-images.githubusercontent.com/9974686/58746148-263e0580-845b-11e9-8b30-374c4256f46e.png)
 
@@ -60,10 +63,32 @@ Any article with the custom field filled with a correct coordinate will be displ
 
 ![Articles  Fields   test   Administration](https://user-images.githubusercontent.com/9974686/58746149-26d69c00-845b-11e9-920b-f5309b98ff37.png)
 
+If you want to use different colors or icons, you can fill the custom field with the title `lat, lon` as 
+follows: `lat,lon,markercolor,iconcolor,icon`. 
+As color, you can choose red, darkred, orange, green, darkgreen, blue, purple, darkpurple and cardetblue. 
+For the icon you can choose the name of the Font Awesome Icon. 
+For more informations see https://fontawesome.com/icons?d=gallery.
+
+When you enter `50.150, 7.158, red, green, home` you will see an icon as shown in the next picture.
+
+![Custom Marker](https://user-images.githubusercontent.com/9974686/59145384-7250f300-89e3-11e9-96c8-772a0f63ff7e.png)
+
+
 The next picture shows where you can activate the option in the module.
 
 ![Modules  AGOSM Module   test   Administration](https://user-images.githubusercontent.com/9974686/58746150-276f3280-845b-11e9-9678-7521c89fbe80.png)
 
+Maybe you do not want to show the field lat lon in the frontend. 
+Just select the option `Do not automatically display` in the Custom Field options.
+
+![Beiträge  Feld bearbeiten   Administration](https://user-images.githubusercontent.com/9974686/59145428-19358f00-89e4-11e9-8446-6079f655e0d8.png)
+
+## GPX - Fileupload
+
+Please choose the layout `upload` 
+if you want to allow a user to upload a GPX file to the server and view it on the map.
+
+![Module  AGOSM Modul Administration](https://user-images.githubusercontent.com/9974686/59145427-189cf880-89e4-11e9-8900-4a4b7f30e44e.png)
 
 ## Component
 

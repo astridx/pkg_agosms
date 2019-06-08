@@ -197,9 +197,9 @@ class ModagosmHelper
 		$access = !JComponentHelper::getParams('com_agosms')->get('show_noauth');
 		$model->setState('filter.access', $access);
 
-		$ordering = $params->get('ordering', 'ordering');
+/*		$ordering = $params->get('ordering', 'ordering');
 		$model->setState('list.ordering', $ordering == 'order' ? 'ordering' : $ordering);
-		$model->setState('list.direction', $params->get('direction', 'asc'));
+		$model->setState('list.direction', $params->get('direction', 'asc'));*/
 
 		$catid = (int) $params->get('catid', 0);
 		$model->setState('category.id', $catid);
