@@ -12,20 +12,21 @@ document.addEventListener('DOMContentLoaded', function () {
 		var wptIconUrls = element.getAttribute('data-wptIconUrls');
 
 		var gpxfilenames = gpx_file_name.split(';;');
-
+		
 		var group = L.featureGroup([]);
 		window['mymap' + moduleId].fitBounds([[0, 0],[0, 0]]);
 
 		for (var i = 0; i < gpxfilenames.length; i++) {
+			console.log(gpxfilenames[i]);
 			new L.GPX(gpxfilenames[i],
 				{
 					marker_options: {
 						startIconUrl: startIconUrl,
 						endIconUrl: endIconUrl,
-						shadowUrl: shadowIconUrl
-					},
-					wptIconUrls: {
-						'': wptIconUrls
+						shadowUrl: shadowIconUrl,
+						wptIconUrls: {
+							'': wptIconUrls
+						}
 					},
 					async: true
 				}).on('loaded', function (e) {

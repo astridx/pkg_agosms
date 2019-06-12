@@ -39,7 +39,7 @@ if (isset($_FILES[$params->get('ag_variable')]))
 {
 	for ($i = 0; $i < $total; $i++)
 	{
-		$gpxfile .= $result[$i]['rpath'] . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i] . ';;';
+		$gpxfile .= JURI::base() . $result[$i]['rpath'] . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i] . ';;';
 	}
 }
 $startIconUrl = JURI::base() . 'media/mod_agosm/leaflet-gpx/pin-icon-start.png';
