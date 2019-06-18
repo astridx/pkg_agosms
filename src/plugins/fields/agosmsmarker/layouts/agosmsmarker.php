@@ -88,7 +88,7 @@ $document->addStyleDeclaration($style);
 $script = "window.onload = function () {"
 	. ""
 	. "var hiddenfield = document.getElementById('" . $id . "');"
-	. "if (hiddenfield.value.split(',').length == 5) {"
+	. "if (hiddenfield.value.split(',').length == 6) {"
 	. "} else {"
 	. "hiddenfield.value = ',,blue,orange,home';"
 	. "};"
@@ -100,6 +100,9 @@ $script = "window.onload = function () {"
 	. "var lon = document.getElementById('agosmsmarkerlon');"
 	. "lon.value = hf[1];"
 	. ""
+	. "var popuptext = document.getElementById('agosmsmarkerpopuptext');"
+	. "popuptext.value = hf[5];"
+	. ""
 	. "var markercolor = document.getElementById('agosmsmarkercolor');"
 	. "setSelectedIndex(markercolor,hf[2]);"
 	. "markercolor.dispatchEvent(new Event('change'));"
@@ -109,33 +112,36 @@ $script = "window.onload = function () {"
 	. "setSelectedIndex(icon,hf[4]);"
 	. ""
 	. "lat.onkeypress = function() {"
-	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon);"
+	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext);"
 	. "};"
 	. ""
 	. "lon.onkeypress = function() {"
-	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon);"
+	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext);"
 	. "};"
 	. ""
 	. "markercolor.onchange = function() {"
-	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon);"
+	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext);"
 	. "};"
 	. "iconcolor.onchange = function() {"
-	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon);"
+	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext);"
 	. "};"
 	. "icon.onchange = function() {"
-	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon);"
+	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext);"
 	. "};"
 	. ""
-	. "function setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon) {"
-	. "hiddenfield.value = lat.value + ',' + lon.value + ',' + markercolor.options[markercolor.selectedIndex].value + ',' + iconcolor.options[iconcolor.selectedIndex].value + ',' + icon.options[icon.selectedIndex].value;"
+	. "function setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext) {"
+	. "hiddenfield.value = lat.value + ',' + lon.value + ',' + markercolor.options[markercolor.selectedIndex].value + ',' + iconcolor.options[iconcolor.selectedIndex].value + ',' + icon.options[icon.selectedIndex].value + ',' + popuptext.value;"
 	. "};"	
+	. ""
+	. "popuptext.onkeypress = function() {"
+	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext);"
+	. "};"
 	. ""
 	. "function setSelectedIndex(s, v) {"
 	. "for ( var i = 0; i < s.options.length; i++ ) {"
 	. "if ( s.options[i].value == v ) {"
 	. "s.options[i].selected = true;"
 	. "s.options[i].setAttribute('selected', true);"
-	. "console.log(s);"
 	. "return;"
 	. "}"
 	. "}"
@@ -178,6 +184,8 @@ $document->addScriptDeclaration($script);
 	<option value="purple">purple</option>
 	<option value="darkpurple">darkpurple</option>
 	<option value="cadetblue">cadetblue</option>
+	<option value="#FFFFFF">white</option>
+	<option value="#000000">black</option>
 </select>
 
 <br>
@@ -980,6 +988,7 @@ name="agosmsmarkericon">
 <option value="youtube-square">&#xf166;</option></select>
 </div>
 
+<?php echo JText::_('Popuptext'); ?><input type="text" id="agosmsmarkerpopuptext" >
 
 
 <?php echo JText::_('Current Values'); ?>	

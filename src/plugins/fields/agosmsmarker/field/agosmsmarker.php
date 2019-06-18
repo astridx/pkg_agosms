@@ -10,7 +10,7 @@
 
 defined('JPATH_PLATFORM') or die;
 
-jimport('joomla.form.fields.text');
+JFormHelper::loadFieldClass('text');
 
 /**
  * Provides a modal media selector including upload mechanism

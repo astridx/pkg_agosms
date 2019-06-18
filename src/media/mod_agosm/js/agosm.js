@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			$worldcopyjump = "worldCopyJump: false, maxBounds: [ [82, -180], [-82, 180] ]";
 		}
 
-		window['mymap' + moduleId] = L.map('map' + moduleId, {$worldcopyjump}).setView(lonlat, zoom);
+		window['mymap' + moduleId] = new L.Map('map' + moduleId, {$worldcopyjump}).setView(lonlat, zoom);
 
 		// Baselayer
 		var nowarp = "noWrap: false, ";
@@ -98,13 +98,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			astrid = ' ' + Joomla.JText._('MOD_AGOSM_MODULE_BY') + ' <a href="https://www.astrid-guenther.de">Astrid Günther</a>';
 		}
-		var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		var tileLayer = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
 		});
 		if (baselayer === 'mapbox')
 		{
-			tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey, {
+			tileLayer = new L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey, {
 				maxZoom: 18,
 				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
 						'<a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
@@ -114,14 +114,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		if (baselayer === 'mapnikde')
 		{
-			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+			tileLayer = new L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
 				maxZoom: 18,
 				attribution: '&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
 			});
 		}
 		if (baselayer === 'stamen')
 		{
-			tileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/' + stamenmaptype + '/{z}/{x}/{y}.png', {
+			tileLayer = new L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/' + stamenmaptype + '/{z}/{x}/{y}.png', {
 				subdomains: 'abcd', minZoom: 1, maxZoom: 16,
 				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
 						'<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		if (baselayer === 'opentopomap')
 		{
-			tileLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+			tileLayer = new L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 				maxZoom: 16,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
 						'Imagery &copy; <a href=\"http://viewfinderpanoramas.org\">SRTM</a>' + astrid,
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		if (baselayer === 'openmapsurfer')
 		{
-			tileLayer = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+			tileLayer = new L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
 				maxZoom: 20,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
 						'Imagery &copy; <a href=\"http://giscience.uni-hd.de\">GIScience Research Group</a>' + astrid,
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		if (baselayer === 'humanitarian')
 		{
-			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+			tileLayer = new L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 				maxZoom: 20,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
 						'Imagery &copy; <a href=\"https://hotosm.org\">Humanitarian OpenStreetMap Team</a>' + astrid,
@@ -158,18 +158,18 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		if (baselayer === 'custom')
 		{
-			tileLayer = L.tileLayer(customBaselayerURL, {customBaselayer});
+			tileLayer = new L.tileLayer(customBaselayerURL, {customBaselayer});
 		}
 		if (baselayer === 'google')
 		{
-			tileLayer = L.gridLayer.googleMutant({
+			tileLayer = new L.gridLayer.googleMutant({
 				type: googlemapstype,
 				attribution: astrid
 			});
 		}
 		if (baselayer === 'thunderforest')
 		{
-			tileLayer = L.tileLayer('https://{s}.tile.thunderforest.com/' + thunderforestmaptype + '/{z}/{x}/{y}.png?apikey={apikey}', {
+			tileLayer = new L.tileLayer('https://{s}.tile.thunderforest.com/' + thunderforestmaptype + '/{z}/{x}/{y}.png?apikey={apikey}', {
 				maxZoom: 22,
 				apikey: thunderforestkey,
 				attribution: '&copy; <a href=\"http://www.thunderforest.com/\">Thunderforest</a>, &copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>'
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		// SCALE CONTROL
 		if ((scale) !== '0')
 		{
-			let aggpxScale = L.control.scale();
+			var aggpxScale = new L.control.scale();
 
 			if (scaleMetric !== '1')
 			{
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					continue;
 
 				var obj = specialpins[specialpin];
-				let tempMarker = L.marker(obj.latlonpin.split(",", 3));
+				var tempMarker = new L.marker(obj.latlonpin.split(",", 3));
 
 				if (obj.pin === "2" && obj.customPinPath != "")
 				{
@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					continue;
 
 				var obj = specialcomponentpins[specialcomponentpin];
-				let tempMarker = L.marker(obj.coordinates.split(",", 3));
+				var tempMarker = new L.marker(obj.coordinates.split(",", 3));
 
 				if (obj.showdefaultpin === "2" && obj.customPinPath != "")
 				{
@@ -427,12 +427,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				var objcf = specialcustomfieldpins[specialcustomfieldpin];
 				
-				let tempMarkercf = null;
+				var tempMarkercf = null;
 				if (objcf.cords)
 				{
 					var values = objcf.cords.split(",");
-					tempMarkercf = L.marker(objcf.cords.split(",").slice(0, 2));
-					if (values.length >4)
+					tempMarkercf = new L.marker(objcf.cords.split(",").slice(0, 2));
+					if (values.length > 4)
 					{
 						var AwesomeIcon = new L.AwesomeMarkers.icon(
 								{
@@ -444,14 +444,16 @@ document.addEventListener('DOMContentLoaded', function () {
 									extraClasses: "agosmsmarkerextraklasse",
 								})
 						tempMarkercf.setIcon(AwesomeIcon);
-						
 					}
+
+					var url = "index.php?options=com_content&view=article&id=" + objcf.id;
+					var title = objcf.title;
 					
-
-					let url = "index.php?options=com_content&view=article&id=" + objcf.id;
-					let title = objcf.title;
-
-					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
+					if (values.length > 5)
+					{
+						title = values[5];
+					}
+					var popuptext = "<a href=' " + url + " '> " + title + " </a>";
 					tempMarkercf.bindPopup(popuptext);
 
 					//tempMarkercf.addTo(window['mymap' + moduleId]);
