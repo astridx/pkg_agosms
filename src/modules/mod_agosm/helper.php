@@ -197,10 +197,6 @@ class ModagosmHelper
 		$access = !JComponentHelper::getParams('com_agosms')->get('show_noauth');
 		$model->setState('filter.access', $access);
 
-/*		$ordering = $params->get('ordering', 'ordering');
-		$model->setState('list.ordering', $ordering == 'order' ? 'ordering' : $ordering);
-		$model->setState('list.direction', $params->get('direction', 'asc'));*/
-
 		$catid = (int) $params->get('catid', 0);
 		$model->setState('category.id', $catid);
 		$model->setState('category.group', $params->get('groupby', 0));
@@ -229,7 +225,7 @@ class ModagosmHelper
 				foreach ($fields as $key => $field) {
 					if ($field->title == 'lat, lon')
 					{
-						$itemfiltered1->cords = str_replace(' ', '', $field->value);
+						$itemfiltered1->cords = $field->value;
 						$test = explode(",", $itemfiltered1->cords );
 						if (is_numeric($test[0]) && is_numeric($test[1]))
 						{						
@@ -240,7 +236,7 @@ class ModagosmHelper
 					}
 					if ($field->type == 'agosmsmarker')
 					{
-						$itemfiltered2->cords = str_replace(' ', '', $field->value);
+						$itemfiltered2->cords = $field->value;
 						$test = explode(",", $itemfiltered2->cords );
 						if (is_numeric($test[0]) && is_numeric($test[1]))
 						{

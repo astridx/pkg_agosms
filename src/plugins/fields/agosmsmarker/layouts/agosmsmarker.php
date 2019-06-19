@@ -88,9 +88,10 @@ $document->addStyleDeclaration($style);
 $script = "window.onload = function () {"
 	. ""
 	. "var hiddenfield = document.getElementById('" . $id . "');"
+	. ""
 	. "if (hiddenfield.value.split(',').length == 6) {"
 	. "} else {"
-	. "hiddenfield.value = ',,blue,orange,home';"
+	. "hiddenfield.value = ',,blue,orange,circle,@dummy@';"
 	. "};"
 	. ""
 	. "var hf = hiddenfield.value.split(',');"
@@ -101,7 +102,11 @@ $script = "window.onload = function () {"
 	. "lon.value = hf[1];"
 	. ""
 	. "var popuptext = document.getElementById('agosmsmarkerpopuptext');"
+	. "if (hf[5] == '@dummy@') {"
+	. "popuptext.value = '';"
+	. "} else {"
 	. "popuptext.value = hf[5];"
+	. "};"
 	. ""
 	. "var markercolor = document.getElementById('agosmsmarkercolor');"
 	. "setSelectedIndex(markercolor,hf[2]);"
@@ -187,18 +192,17 @@ $document->addScriptDeclaration($script);
 	<option value="#FFFFFF">white</option>
 	<option value="#000000">black</option>
 </select>
-
 <br>
 <div id="agosmsmarkericondiv">
 <?php echo JText::_('Icon'); ?>	
 <select 
-id="agosmsmarkericon" 
-name="agosmsmarkericon">
+id="agosmsmarkericon">
 <option></option>	
-<option value="home">&#xf015;</option>
+<option value="home">home &#xf015;</option>
+<option value="circle">circle &#xf111;</option>
+<option value="star">star &#xf005;</option>
 <option value="500px">&#xf26e;</option>
 <option value="address-book">&#xf2b9;</option>
-<option value="500px">&#xf26e;</option>
 <option value="address-book">&#xf2b9;</option>
 <option value="address-book-o">&#xf2ba;</option>
 <option value="address-card">&#xf2bb;</option>
@@ -988,9 +992,9 @@ name="agosmsmarkericon">
 <option value="youtube-square">&#xf166;</option></select>
 </div>
 
-<?php echo JText::_('Popuptext'); ?><input type="text" id="agosmsmarkerpopuptext" >
+<?php echo JText::_('Popuptext'); ?><input type="text" id="agosmsmarkerpopuptext">
 
-
+<br>
 <?php echo JText::_('Current Values'); ?>	
 <input readonly type="text" name="<?php
 echo $name; ?>" id="<?php
