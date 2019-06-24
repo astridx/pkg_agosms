@@ -153,6 +153,9 @@ I am open to doing paid custom work and support around this Joomla! Extension.
 
 Contact me and we'll sort this out!
 
+[Donate on Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KQMKUVAX5SPVS&source=url)
+
+xx
 
 [<img alt="" border="0" src="https://www.paypal.com/de_DE/i/scr/pixel.gif" width="1" height="1" />](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KQMKUVAX5SPVS&source=url)
 
