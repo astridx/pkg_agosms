@@ -153,7 +153,9 @@ I am open to doing paid custom work and support around this Joomla! Extension.
 
 Contact me and we'll sort this out!
 
-[![](https://www.paypal.com/de_DE/i/scr/pixel.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KQMKUVAX5SPVS&source=url)
+[![](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KQMKUVAX5SPVS&source=url)
+
+
 
 
 
