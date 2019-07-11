@@ -1,10 +1,11 @@
 <?php
 /**
  * @package     Joomla.Site
- * @subpackage  Layout
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 defined('JPATH_BASE') or die;
@@ -47,8 +48,6 @@ extract($displayData);
 // Including fallback code for HTML5 non supported browsers.
 JHtml::_('jquery.framework');
 JHtml::_('script', 'system/html5fallback.js', array('version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9'));
-JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerNominatim.js', array('version' => 'auto', 'relative' => true));
-JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', array('version' => 'auto', 'relative' => true));
 
 $list = '';
 
@@ -77,26 +76,25 @@ $attributes = array(
 	!empty($pattern) ? 'pattern="' . $pattern . '"' : '',
 );
 
-$document = JFactory::getDocument();
-/*$style = '#agosmsaddressmarkerlat {	}';
-$document->addStyleDeclaration($style);*/
 
-$script = "window.onload = function () {"
-	. "alert('werte setzen zu beginn');"
-	. "};"	;
-$document->addScriptDeclaration($script);
+/*
+$document = JFactory::getDocument();
+$style = '#agosmsaddressmarkerlat {	}';
+$document->addStyleDeclaration($style);
+
+$script = "window.onload = function () {};"	;
+$document->addScriptDeclaration($script);*/
+
+
 ?>
 
 <hr>
 <?php echo JText::_('Lat'); ?><input type="text" id="agosmsaddressmarkerlat" >
 <?php echo JText::_('Lon'); ?><input type="text" id="agosmsaddressmarkerlon" >
-<button class="btn btn-success" onclick="calculateCords ()">
-	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
-</button>
-<hr>
 
-<?php // Todo: Make hidden ?>
-<input type="text" name="<?php
+<br>
+<?php echo JText::_('Current Values'); ?>	
+<input readonly type="hidden" name="<?php
 echo $name; ?>" id="<?php
 echo $id; ?>" <?php
 echo $dirname; ?> value="<?php
@@ -107,7 +105,11 @@ echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', 
 			<?php if (!$option->value) : ?>
 			<?php continue; ?>
 			<?php endif; ?>
-			<option value="<?php echo $option->value; ?>"><?php echo $option->text; ?></option>
+			<option value="<?php echo $option->value; ?>"><?php 
+			echo $option->text; 
+			?></option>
 		<?php endforeach; ?>
 	</datalist>
 <?php endif; ?>
+
+<hr>
