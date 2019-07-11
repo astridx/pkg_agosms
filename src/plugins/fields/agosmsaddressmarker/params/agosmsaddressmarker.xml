@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="fieldparams">
+		<fieldset name="fieldparams">
+		</fieldset>
+		<fieldset 
+			name="address" 
+		>
+		<field
+			name="addressfields"
+			type="subform"
+			label="PLG_AGOSMSADDRESSMARKER_ADDRESSFIELDS"
+			description="PLG_AGOSMSADDRESSMARKER_ADDRESSFIELDS_DESC"
+			multiple="true"
+			layout="joomla.form.field.subform.repeatable"
+			formsource="plugins/fields/agosmsaddressmarker/models/forms/address_data.xml"
+		/>
+		</fieldset>
+	</fields>
+</form>
