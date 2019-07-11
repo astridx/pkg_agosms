@@ -198,8 +198,9 @@ $document->addScriptDeclaration($script);
 <select 
 id="agosmsmarkericon">
 <option></option>	
-<option value="home">home &#xf015;</option>
 <option value="circle">circle &#xf111;</option>
+<option value="">noicon</option>
+<option value="home">home &#xf015;</option>
 <option value="star">star &#xf005;</option>
 <option value="500px">&#xf26e;</option>
 <option value="address-book">&#xf2b9;</option>
