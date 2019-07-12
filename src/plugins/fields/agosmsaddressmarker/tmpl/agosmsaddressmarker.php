@@ -16,7 +16,7 @@ $document = JFactory::getDocument();
 
 $document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.css');
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
-$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/agosmsaddressmarker.js');
+$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
 
 // We need this for blog view
 $unique = $field->id . '_' . uniqid();
@@ -28,11 +28,9 @@ if ($value == '')
 
 $values = explode(',', $value);
 
+// ToDo Prüfe ob zweit werte und ob koordinate
 $lat = $values[0];
 $lon = $values[1];
-
-// echo htmlentities($value);
-// Prüfe ob zweit werte und ob koordinate
 ?>
 
 <div

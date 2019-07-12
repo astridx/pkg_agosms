@@ -47,6 +47,7 @@ extract($displayData);
 // Including fallback code for HTML5 non supported browsers.
 JHtml::_('jquery.framework');
 JHtml::_('script', 'system/html5fallback.js', array('version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9'));
+JHtml::_('script', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js', array('version' => 'auto', 'relative' => true));
 JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerNominatim.js', array('version' => 'auto', 'relative' => true));
 JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', array('version' => 'auto', 'relative' => true));
 
@@ -76,27 +77,29 @@ $attributes = array(
 	!empty($inputmode) ? $inputmode : '',
 	!empty($pattern) ? 'pattern="' . $pattern . '"' : '',
 );
-
-$document = JFactory::getDocument();
-/*$style = '#agosmsaddressmarkerlat {	}';
-$document->addStyleDeclaration($style);*/
-
-$script = "window.onload = function () {"
-	. "alert('werte setzen zu beginn');"
-	. "};"	;
-$document->addScriptDeclaration($script);
 ?>
 
+<?php 
+// Build the address string from the selected fields 
+$addressstring = "Sonnenhang, 23, 56751, Kehrig";
+
+?>
+
+
 <hr>
-<?php echo JText::_('Lat'); ?><input type="text" id="agosmsaddressmarkerlat" >
-<?php echo JText::_('Lon'); ?><input type="text" id="agosmsaddressmarkerlon" >
-<button class="btn btn-success" onclick="calculateCords ()">
+<div class="agosmsaddressmarkersurroundingdiv">
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?><input type="text" class="agosmsaddressmarkerlat" >
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
+<button 
+	data-addressstring="<?php echo $addressstring;?>"
+	class="btn btn-success agosmsaddressmarkerbutton" type="button"
+	onclick="calculateCords ()">
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 </button>
 <hr>
 
 <?php // Todo: Make hidden ?>
-<input type="text" name="<?php
+<input class="agosmsaddressmarkerhiddenfield" type="text" name="<?php
 echo $name; ?>" id="<?php
 echo $id; ?>" <?php
 echo $dirname; ?> value="<?php
@@ -111,3 +114,4 @@ echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', 
 		<?php endforeach; ?>
 	</datalist>
 <?php endif; ?>
+</div>
