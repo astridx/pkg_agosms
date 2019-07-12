@@ -92,8 +92,8 @@ $addressstring = "Sonnenhang, 23, 56751, Kehrig";
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
 <button 
 	data-addressstring="<?php echo $addressstring;?>"
-	class="btn btn-success agosmsaddressmarkerbutton" type="button"
-	onclick="calculateCords ()">
+	class="btn btn-success agosmsaddressmarkerbutton" 
+	type="button">
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 </button>
 <hr>
