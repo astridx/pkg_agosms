@@ -49,7 +49,6 @@ JHtml::_('jquery.framework');
 JHtml::_('script', 'system/html5fallback.js', array('version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9'));
 
 $document = JFactory::getDocument();
-//$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.css');
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 JHtml::_('script', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js', array('version' => 'auto', 'relative' => true));
 JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerNominatim.js', array('version' => 'auto', 'relative' => true));
@@ -83,9 +82,31 @@ $attributes = array(
 );
 ?>
 
+
 <?php 
 // Build the address string from the selected fields 
 $addressstring = "Sonnenhang, 23, 56751, Kehrig";
+//JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
+$current_component  = JFactory::getApplication()->input->getCmd('option');
+$current_view  = JFactory::getApplication()->input->getCmd('view');
+$item = new stdClass;
+$item->id = (int)JFactory::getApplication()->input->getCmd('id');
+
+$fields = FieldsHelper::getFields($current_component . '.' . $current_view, $item);
+
+$fieldsData = array();
+
+if (!empty($fields))
+{
+	$fieldsData['com_fields'] = array();
+
+	foreach ($fields as $field)
+	{
+		$fieldsData['com_fields'][$field->name] = $field->rawvalue;
+	}
+}
+
+
 
 ?>
 
