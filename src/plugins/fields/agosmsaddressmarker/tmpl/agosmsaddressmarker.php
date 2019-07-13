@@ -18,7 +18,7 @@ $document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmark
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
 
-// We need this for blog view
+// We need this for list views
 $unique = $field->id . '_' . uniqid();
 
 if ($value == '')

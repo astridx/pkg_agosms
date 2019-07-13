@@ -16,7 +16,7 @@ FormHelper::loadFieldClass('list');
 /**
  * Form Field to load a list of custom fields
  *
- * @since  3.2
+ * @since  __DEPLOY_VERSION__
  */
 class JFormFieldCfield extends JFormFieldList
 {
@@ -24,7 +24,7 @@ class JFormFieldCfield extends JFormFieldList
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  3.2
+	 * @since  __DEPLOY_VERSION__
 	 */
 	public $type = 'cfield';
 
@@ -32,7 +32,7 @@ class JFormFieldCfield extends JFormFieldList
 	 * Cached array of the category items.
 	 *
 	 * @var    array
-	 * @since  3.2
+	 * @since  __DEPLOY_VERSION__
 	 */
 	protected static $options = array();
 
@@ -41,7 +41,7 @@ class JFormFieldCfield extends JFormFieldList
 	 *
 	 * @return  array  The field option objects.
 	 *
-	 * @since   3.2
+	 * @since   __DEPLOY_VERSION__
 	 */
 	protected function getOptions()
 	{
@@ -58,7 +58,7 @@ class JFormFieldCfield extends JFormFieldList
 			$query = $db->getQuery(true)
 				->select('cf.id AS value, cf.name AS text')
 				->from('#__fields AS cf')
-				//todo->join('INNER', '#__content AS c ON c.tag = cf.id')
+				// Todo->join('INNER', '#__content AS c ON c.tag = cf.id')
 				->group('cf.id, cf.name')
 				->order('cf.name');
 

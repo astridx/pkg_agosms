@@ -93,7 +93,8 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 */
 	public function __get($name)
 	{
-		switch ($name) {
+		switch ($name)
+		{
 			case 'mapheight':
 			case 'maptype':
 			case 'geocoder':
@@ -148,7 +149,8 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 */
 	public function __set($name, $value)
 	{
-		switch ($name) {
+		switch ($name)
+		{
 			case 'mapheight':
 				$this->mapheight = (int) $value;
 				break;

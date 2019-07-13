@@ -81,7 +81,7 @@ $current_component  = JFactory::getApplication()->input->getCmd('option');
 $current_view  = JFactory::getApplication()->input->getCmd('view');
 $current_context  = $current_component . '.' . $current_view;
 $item = new stdClass;
-$item->id = (int)JFactory::getApplication()->input->getCmd('id');
+$item->id = (int) JFactory::getApplication()->input->getCmd('id');
 
 $fields = FieldsHelper::getFields($current_context, $item);
 
