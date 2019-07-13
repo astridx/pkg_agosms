@@ -17,7 +17,7 @@
 	</languages>
 
 	<!-- Media files -->
-    <media folder="media/plg_fields_agosmsaddressmarker" destination="plg_fields_agosmsaddressmarker">
+	<media folder="media/plg_fields_agosmsaddressmarker" destination="plg_fields_agosmsaddressmarker">
 		##MEDIA_FILES##
 	</media>
 

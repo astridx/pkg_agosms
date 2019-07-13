@@ -54,22 +54,11 @@ JHtml::_('script', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js'
 JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerNominatim.js', array('version' => 'auto', 'relative' => true));
 JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', array('version' => 'auto', 'relative' => true));
 
-$list = '';
-
-if ($options)
-{
-	$list = 'list="' . $id . '_datalist"';
-}
-
-$autocomplete = !$autocomplete ? ' autocomplete="off"' : ' autocomplete="' . $autocomplete . '"';
-$autocomplete = $autocomplete === ' autocomplete="on"' ? '' : $autocomplete;
-
 $attributes = array(
 	!empty($class) ? 'class="' . $class . '"' : '',
 	!empty($size) ? 'size="' . $size . '"' : '',
 	$disabled ? 'disabled' : '',
 	$readonly ? 'readonly' : '',
-	$list,
 	strlen($hint) ? 'placeholder="' . htmlspecialchars($hint, ENT_COMPAT, 'UTF-8') . '"' : '',
 	$onchange ? ' onchange="' . $onchange . '"' : '',
 	!empty($maxLength) ? $maxLength : '',
@@ -85,27 +74,40 @@ $attributes = array(
 
 <?php 
 // Build the address string from the selected fields 
-$addressstring = "Sonnenhang, 23, 56751, Kehrig";
-//JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED'), 'error');
+$addressstring = "";
+
+// Load the Fields of this item
 $current_component  = JFactory::getApplication()->input->getCmd('option');
 $current_view  = JFactory::getApplication()->input->getCmd('view');
+$current_context  = $current_component . '.' . $current_view;
 $item = new stdClass;
 $item->id = (int)JFactory::getApplication()->input->getCmd('id');
 
-$fields = FieldsHelper::getFields($current_component . '.' . $current_view, $item);
+$fields = FieldsHelper::getFields($current_context, $item);
 
-$fieldsData = array();
-
-if (!empty($fields))
+$optionsvalues = array();
+if (!empty($options))
 {
-	$fieldsData['com_fields'] = array();
-
-	foreach ($fields as $field)
+	foreach ($options as $option)
 	{
-		$fieldsData['com_fields'][$field->name] = $field->rawvalue;
+		$optionsvalues[] = $option->value;
 	}
 }
 
+if (!empty($fields))
+{
+	foreach ($fields as $field)
+	{
+		// Save value to addressstring, if field is in the options of this custom field
+		// todo Error if this field is selected or make it not possible to select this field
+		if (in_array($field->id, $optionsvalues))
+		{
+			$addressstring .= $field->rawvalue . ',';
+		}
+	}
+}
+
+// JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED') . $addressstring, 'warning');
 
 
 ?>
@@ -116,7 +118,7 @@ if (!empty($fields))
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?><input type="text" class="agosmsaddressmarkerlat" >
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
 <button 
-	data-addressstring="<?php echo $addressstring;?>"
+	data-addressstring="<?php echo htmlspecialchars($addressstring, ENT_QUOTES, 'UTF-8'); ?>"
 	class="btn btn-success agosmsaddressmarkerbutton" 
 	type="button">
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
@@ -126,17 +128,6 @@ if (!empty($fields))
 <?php // Todo: Make hidden ?>
 <input class="agosmsaddressmarkerhiddenfield" type="text" name="<?php
 echo $name; ?>" id="<?php
-echo $id; ?>" <?php
-echo $dirname; ?> value="<?php
+echo $id; ?>" value="<?php
 echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> />
-<?php if ($options) : ?>
-	<datalist id="<?php echo $id; ?>_datalist">
-		<?php foreach ($options as $option) : ?>
-			<?php if (!$option->value) : ?>
-			<?php continue; ?>
-			<?php endif; ?>
-			<option value="<?php echo $option->value; ?>"><?php echo $option->text; ?></option>
-		<?php endforeach; ?>
-	</datalist>
-<?php endif; ?>
 </div>

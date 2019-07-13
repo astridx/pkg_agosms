@@ -2,7 +2,6 @@ document.addEventListener('click', function (e) {
 	if (e.target.classList.contains('agosmsaddressmarkerbutton')) {
 		var button = e.target;
 		var addressstring = button.getAttribute('data-addressstring');
-
 		var surroundingDiv = button.parentNode;
 		var inputs = surroundingDiv.getElementsByTagName('input');
 		var lat = inputs[0];
@@ -18,10 +17,9 @@ document.addEventListener('click', function (e) {
 			} else if (results.length > 0) {
 				// Limit is fix set to 1 up to now
 			} else {
-				// Why is there no result?
+				console.log("Why is there noe result?");
 			}
 		}
-
 		var params = {
 			q: addressstring,
 			limit: 1,

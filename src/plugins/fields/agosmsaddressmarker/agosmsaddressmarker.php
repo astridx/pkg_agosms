@@ -13,9 +13,9 @@ defined('_JEXEC') or die;
 JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
 
 /**
- * Fields Text Plugin
+ * Fields Plugin for collecting all the relevant fields for calculating geo cords
  *
- * @since  3.7.0
+ * @since  __DEPLOY_VERSION__
  */
 class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 {
@@ -25,7 +25,7 @@ class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 	 * @param   object  &$subject  The object to observe
 	 * @param   array   $config    An array that holds the plugin configuration
 	 *
-	 * @since   1.5
+	 * @since   __DEPLOY_VERSION__
 	 */
 	public function __construct(& $subject, $config)
 	{

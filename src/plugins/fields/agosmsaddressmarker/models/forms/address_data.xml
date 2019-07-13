@@ -4,7 +4,7 @@
 			addfieldpath="/plugins/fields/agosmsaddressmarker/fields"
 	>
 		<field
-			name="cfield"
+			name="value"
 			type="cfield"
 			label="PLG_AGOSMSADDRESSMARKER_CFIELD"
 			description="PLG_AGOSMSADDRESSMARKER_CFIELD_DESC"
@@ -12,7 +12,7 @@
 			<option value="0">JNONE</option>
 		</field>
 		<field
-			name="cfielddesc"
+			name="name"
 			type="list"
 			label="PLG_AGOSMSADDRESSMARKER_CFIELDLABEL"
 			description="PLG_AGOSMSADDRESSMARKER_CFIELDLABEL_DESC"
