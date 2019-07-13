@@ -5,7 +5,7 @@
 	>
 		<fieldset name="fieldparams">
 			<field
-				name="options"
+				name="addressfields"
 				type="subform"
 				label="PLG_AGOSMSADDRESSMARKER_ADDRESSFIELDS"
 				layout="joomla.form.field.subform.repeatable-table"

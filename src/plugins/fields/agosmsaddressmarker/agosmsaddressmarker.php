@@ -32,4 +32,28 @@ class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 		parent::__construct($subject, $config);
 		JFormHelper::addFieldPath(__DIR__ . '/field');
 	}
+	/**
+	 * Transforms the field into a DOM XML element and appends it as a child on the given parent.
+	 *
+	 * @param   stdClass    $field   The field.
+	 * @param   DOMElement  $parent  The field node parent.
+	 * @param   JForm       $form    The form.
+	 *
+	 * @return  DOMElement
+	 *
+	 * @since   3.7.0
+	 */
+	public function onCustomFieldsPrepareDom($field, DOMElement $parent, JForm $form)
+	{
+		$fieldNode = parent::onCustomFieldsPrepareDom($field, $parent, $form);
+
+		if (!$fieldNode)
+		{
+			return $fieldNode;
+		}
+		$addressfields = json_encode($field->fieldparams->get('addressfields', array()), true);
+		$fieldNode->setAttribute('addressfields', $addressfields);
+
+		return $fieldNode;
+	}
 }

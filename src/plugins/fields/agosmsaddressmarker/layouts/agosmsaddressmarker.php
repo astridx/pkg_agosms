@@ -85,12 +85,13 @@ $item->id = (int)JFactory::getApplication()->input->getCmd('id');
 
 $fields = FieldsHelper::getFields($current_context, $item);
 
-$optionsvalues = array();
-if (!empty($options))
+$addressfieldsvalues = array();
+$addressfieldsArray = json_decode($addressfields);
+if (!empty($addressfieldsArray))
 {
-	foreach ($options as $option)
+	foreach ($addressfieldsArray as $a)
 	{
-		$optionsvalues[] = $option->value;
+		$addressfieldsvalues[] = $a->value;
 	}
 }
 
@@ -100,14 +101,14 @@ if (!empty($fields))
 	{
 		// Save value to addressstring, if field is in the options of this custom field
 		// todo Error if this field is selected or make it not possible to select this field
-		if (in_array($field->id, $optionsvalues))
+		if (in_array($field->id, $addressfieldsvalues))
 		{
 			$addressstring .= $field->rawvalue . ',';
 		}
 	}
 }
 
-// JFactory::getApplication()->enqueueMessage(JText::_('JERROR_AN_ERROR_HAS_OCCURRED') . $addressstring, 'warning');
+//JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESSTRING') . ': ' . $addressstring, 'message');
 
 
 ?>
@@ -123,6 +124,7 @@ if (!empty($fields))
 	type="button">
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 </button>
+<span></span>
 <hr>
 
 <?php // Todo: Make hidden ?>

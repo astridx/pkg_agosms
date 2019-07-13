@@ -37,7 +37,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	/**
 	 * The name of the addressfields field.
 	 *
-	 * @var    string
+	 * @var    int
 	 * @since  __DEPLOY_VERSION__
 	 */
 	protected $mapheight;
@@ -73,6 +73,14 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * @since  __DEPLOY_VERSION__
 	 */
 	protected $mapboxkey;
+	
+	/**
+	 * The name of the addressfields field.
+	 *
+	 * @var    string
+	 * @since  __DEPLOY_VERSION__
+	 */
+	protected $addressfields;
 
 	/**
 	 * Method to get certain otherwise inaccessible properties from the form field object.
@@ -122,6 +130,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$this->geocoder = (string) $this->element['geocoder'];
 			$this->googlekey = (string) $this->element['googlekey'];
 			$this->mapboxkey = (string) $this->element['mpboxkey'];
+			$this->addressfields = (string) $this->element['addressfields'];
 		}
 
 		return $result;
@@ -158,6 +167,10 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 
 			case 'mapboxkey':
 				$this->mapboxkey = (string) $value;
+				break;
+
+			case 'addressfields':
+				$this->addressfields = (string) $value;
 				break;
 
 			default:
@@ -216,6 +229,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			'geocoder' => $this->geocoder,
 			'googlekey' => $this->googlekey,
 			'mapboxkey' => $this->mapboxkey,
+			'addressfields' => $this->addressfields,
 			'options' => $options,
 		);
 
