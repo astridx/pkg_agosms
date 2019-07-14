@@ -26,7 +26,6 @@
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_MAPTYPE"
 				>
-				<option value="">COM_FIELDS_FIELD_USE_GLOBAL</option>
 				<option value="openstreetmap">openstreetmap</option>
 				<option value="mapbox">mapbox</option>
 				<option value="google">google</option>
@@ -37,7 +36,6 @@
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_GEOCODER"
 				>
-				<option value="">COM_FIELDS_FIELD_USE_GLOBAL</option>
 				<option value="openstreetmap">openstreetmap_nominatim</option>
 				<option value="mapbox">mapbox</option>
 				<option value="google">google</option>
@@ -48,6 +46,7 @@
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_GOOGLEKEY"
 				size="30"
+				showon="maptype:google[OR]geocoder:google"
 			/>
 			<field
 				name="mapboxkey"
@@ -55,6 +54,7 @@
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_MAPBOXKEY"
 				size="30"
+				showon="maptype:mapbox[OR]geocoder:mapbox"
 			/>
 		</fieldset>
 	</fields>

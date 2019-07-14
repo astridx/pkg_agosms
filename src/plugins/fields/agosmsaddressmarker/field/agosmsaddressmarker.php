@@ -130,7 +130,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$this->maptype = (string) $this->element['maptype'];
 			$this->geocoder = (string) $this->element['geocoder'];
 			$this->googlekey = (string) $this->element['googlekey'];
-			$this->mapboxkey = (string) $this->element['mpboxkey'];
+			$this->mapboxkey = (string) $this->element['mapboxkey'];
 			$this->addressfields = (string) $this->element['addressfields'];
 		}
 

@@ -133,6 +133,8 @@ if (!empty($fields))
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
 <button 
 	data-addressstring="<?php echo htmlspecialchars($addressstring, ENT_QUOTES, 'UTF-8'); ?>"
+	data-mapboxkey="<?php echo $mapboxkey; ?>"
+	data-googlekey="<?php echo $googlekey; ?>"
 	class="btn btn-success agosmsaddressmarkerbutton" 
 	type="button">
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
@@ -144,11 +146,15 @@ if (!empty($fields))
 <p>
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
 </p>
-<hr>
 
-<?php // Todo: Make hidden ?>
-<input class="agosmsaddressmarkerhiddenfield" type="text" name="<?php
+
+
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CURRENT_VALUE'); ?>
+<input class="agosmsaddressmarkerhiddenfield" 
+type="hidden" 
+readonly name="<?php
 echo $name; ?>" id="<?php
 echo $id; ?>" value="<?php
 echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> />
 </div>
+<hr>

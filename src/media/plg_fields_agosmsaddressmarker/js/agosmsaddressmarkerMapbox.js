@@ -2,33 +2,31 @@ document.addEventListener('click', function (e) {
 	if (e.target.classList.contains('agosmsaddressmarkerbutton')) {
 		var button = e.target;
 		var addressstring = button.getAttribute('data-addressstring');
+		var mapboxkey = button.getAttribute('data-mapboxkey');
 		var surroundingDiv = button.parentNode;
 		var inputs = surroundingDiv.getElementsByTagName('input');
 		var lat = inputs[0];
 		var lon = inputs[1];
 		var hiddenfield = inputs[2];
 
-		var cords = function (results, suggest) {
-			if (!suggest && results.length === 1) {
-				lat.value = results[0].lat;
-				lon.value = results[0].lon;
-				hiddenfield.value = results[0].lat + "," + results[0].lon;
-				tempAlert("MOK: " + addressstring, 2000, "28a745");
-			} else if (results.length > 0) {
+		var cords = function (results) {
+			if (results.features && results.features.length === 1) {
+				var lonlat = results.features[0].center;
+				lat.value = lonlat[1];
+				lon.value = lonlat[0];
+				hiddenfield.value = lonlat[1] + "," + lonlat[0];
+				tempAlert("MapBox OK: " + addressstring, 2000, "28a745");
+			} else if (results.features && results.features.length > 0) {
 				// Limit is fix set to 1 up to now
 			} else {
-				console.log("Why is there noe result?");
-				tempAlert("MError: " + addressstring, 2000, "dc3545");
+				tempAlert("MapBox Error: " + addressstring, 2000, "dc3545");
 			}
 		}
 		var params = {
-			q: addressstring,
-			limit: 1,
-			format: 'json',
-			addressdetails: 1
+	        limit: 1,
+			access_token: mapboxkey
 		};
-
-		getJSON("https://nominatim.openstreetmap.org/", params, cords);
+		getJSON("https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(addressstring) + '.json', params, cords);
 	}
 });
 

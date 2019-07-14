@@ -2,33 +2,32 @@ document.addEventListener('click', function (e) {
 	if (e.target.classList.contains('agosmsaddressmarkerbutton')) {
 		var button = e.target;
 		var addressstring = button.getAttribute('data-addressstring');
+		var googlekey = button.getAttribute('data-googlekey');
 		var surroundingDiv = button.parentNode;
 		var inputs = surroundingDiv.getElementsByTagName('input');
 		var lat = inputs[0];
 		var lon = inputs[1];
 		var hiddenfield = inputs[2];
 
-		var cords = function (results, suggest) {
-			if (!suggest && results.length === 1) {
-				lat.value = results[0].lat;
-				lon.value = results[0].lon;
-				hiddenfield.value = results[0].lat + "," + results[0].lon;
-				tempAlert("GOK: " + addressstring, 2000, "28a745");
-			} else if (results.length > 0) {
-				// Limit is fix set to 1 up to now
+		var cords = function (results) {
+			console.log(results);
+			if (results.status === "OK") {
+				var lonlat = results.results[0].geometry.location;
+				lat.value = lonlat.lat;
+				lon.value = lonlat.lng;
+				hiddenfield.value = lonlat.lat + "," + lonlat.lng;
+				tempAlert("Google OK: " + addressstring, 2000, "28a745");
 			} else {
-				console.log("Why is there noe result?");
-				tempAlert("GError: " + addressstring, 2000, "dc3545");
+				tempAlert("Google Error: " + addressstring, 2000, "dc3545");
 			}
 		}
 		var params = {
-			q: addressstring,
+	        address: addressstring,
 			limit: 1,
-			format: 'json',
-			addressdetails: 1
+			key: googlekey
 		};
 
-		getJSON("https://nominatim.openstreetmap.org/", params, cords);
+		getJSON("https://maps.googleapis.com/maps/api/geocode/json", params, cords);
 	}
 });
 
