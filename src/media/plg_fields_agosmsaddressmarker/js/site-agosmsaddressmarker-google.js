@@ -9,10 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		var lon = element.getAttribute('data-lon');
 
 		map = new L.Map('map' + unique);
-		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-		var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});
-		map.addLayer(osm);	// For all maps [end]
+
+		var googleLayer = L.gridLayer.googleMutant({
+			type: 'roadmap'
+		}).addTo(map);
+		
+
+		// For all maps [end]
 
 		try {
 			map.setView(new L.LatLng(lat, lon), 13);

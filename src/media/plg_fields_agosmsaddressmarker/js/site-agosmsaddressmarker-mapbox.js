@@ -7,11 +7,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		var unique = element.getAttribute('data-unique');
 		var lat = element.getAttribute('data-lat');
 		var lon = element.getAttribute('data-lon');
+		var mapboxkey = element.getAttribute('data-mapboxkey');
+		console.log(mapboxkey);
 
 		map = new L.Map('map' + unique);
-		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
-		var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib});
+		var osmUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey;
+		var osmAttrib = 'Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
+						'<a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
+						'Imagery © <a href=\"http://mapbox.com\">Mapbox</a>';
+		var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib, id: 'mapbox.streets'});
 		map.addLayer(osm);	// For all maps [end]
 
 		try {

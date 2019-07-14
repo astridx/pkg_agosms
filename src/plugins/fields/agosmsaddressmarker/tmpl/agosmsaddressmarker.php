@@ -24,6 +24,8 @@ if ($fieldParams->get('maptype') === "mapbox")
 }
 elseif ($fieldParams->get('maptype') === "google")
 {
+	$document->addScript('https://maps.googleapis.com/maps/api/js?key=' . $fieldParams->get('googlekey', ''));
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleMutant/Leaflet.GoogleMutant.js');
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-google.js');
 }
 else
@@ -41,7 +43,7 @@ if ($value == '')
 
 $values = explode(',', $value);
 
-// ToDo Prüfe ob zweit werte und ob koordinate
+// ToDo Prüfe ob genau zwei werte und ob koordinate
 $lat = $values[0];
 $lon = $values[1];
 ?>
@@ -56,5 +58,6 @@ $lon = $values[1];
 	data-unique='<?php echo $unique ?>'
 	data-lat='<?php echo $lat ?>'
 	data-lon='<?php echo $lon ?>'
+	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
 >
 </div>
