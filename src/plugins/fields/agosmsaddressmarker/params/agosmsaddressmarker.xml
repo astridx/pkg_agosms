@@ -38,7 +38,7 @@
 				label="PLG_AGOSMSADDRESSMARKER_GEOCODER"
 				>
 				<option value="">COM_FIELDS_FIELD_USE_GLOBAL</option>
-				<option value="openstreetmap">openstreetmap</option>
+				<option value="openstreetmap">openstreetmap_nominatim</option>
 				<option value="mapbox">mapbox</option>
 				<option value="google">google</option>
 			</field>

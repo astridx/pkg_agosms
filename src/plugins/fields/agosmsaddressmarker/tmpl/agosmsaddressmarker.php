@@ -18,6 +18,19 @@ $document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmark
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
 
+if ($fieldParams->get('maptype') === "mapbox")
+{
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-mapbox.js');
+}
+elseif ($fieldParams->get('maptype') === "google")
+{
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-google.js');
+}
+else
+{
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-openstreetmap.js');
+}
+
 // We need this for list views
 $unique = $field->id . '_' . uniqid();
 
@@ -34,6 +47,9 @@ $lon = $values[1];
 ?>
 
 <div
+	<?php 
+	if ( $lat == 0 && $lon == 0) echo 'style="display:none"' 
+	?>
 	id="map<?php echo $unique ?>"
 	class = 'agosmsaddressmarkerleafletmap' 
 	style="height: <?php echo $fieldParams->get('map_height', '400') ?>px;"

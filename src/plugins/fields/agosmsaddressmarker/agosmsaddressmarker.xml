@@ -15,12 +15,10 @@
 	<languages folder="administrator/language">
 		##LANGUAGE_FILES##
 	</languages>
-
 	<!-- Media files -->
 	<media folder="media/plg_fields_agosmsaddressmarker" destination="plg_fields_agosmsaddressmarker">
 		##MEDIA_FILES##
 	</media>
-
 	<config>
 		<fields name="params">
 			<fieldset name="basic">

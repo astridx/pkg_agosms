@@ -13,12 +13,12 @@ document.addEventListener('click', function (e) {
 				lat.value = results[0].lat;
 				lon.value = results[0].lon;
 				hiddenfield.value = results[0].lat + "," + results[0].lon;
-				tempAlert("OK: " + addressstring, 2000, "28a745");
+				tempAlert("MOK: " + addressstring, 2000, "28a745");
 			} else if (results.length > 0) {
 				// Limit is fix set to 1 up to now
 			} else {
 				console.log("Why is there noe result?");
-				tempAlert("Error: " + addressstring, 2000, "dc3545");
+				tempAlert("MError: " + addressstring, 2000, "dc3545");
 			}
 		}
 		var params = {
