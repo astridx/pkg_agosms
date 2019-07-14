@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Agosms Component Category Tree.
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class AgosmsCategories extends JCategories
 {
@@ -22,7 +22,7 @@ class AgosmsCategories extends JCategories
 	 *
 	 * @param   array  $options  Array of options
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function __construct($options = array())
 	{

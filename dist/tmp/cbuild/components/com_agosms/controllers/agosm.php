@@ -15,7 +15,7 @@ use Joomla\Utilities\ArrayHelper;
 /**
  * Agosms class.
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsControllerAgosm extends JControllerForm
 {
@@ -23,7 +23,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 * The URL view item variable.
 	 *
 	 * @var    string
-	 * @since  1.6
+	 * @since  1.0.40
 	 */
 	protected $view_item = 'form';
 
@@ -31,7 +31,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 * The URL view list variable.
 	 *
 	 * @var    string
-	 * @since  1.6
+	 * @since  1.0.40
 	 */
 	protected $view_list = 'categories';
 
@@ -39,7 +39,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 * The URL edit variable.
 	 *
 	 * @var    string
-	 * @since  3.2
+	 * @since  1.0.40
 	 */
 	protected $urlVar = 'a.id';
 
@@ -48,7 +48,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean  True if the article can be added, false if not.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function add()
 	{
@@ -66,7 +66,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function allowAdd($data = array())
 	{
@@ -96,7 +96,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function allowEdit($data = array(), $key = 'id')
 	{
@@ -125,7 +125,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean  True if access level checks pass, false otherwise.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function cancel($key = 'w_id')
 	{
@@ -145,7 +145,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean  True if access level check and checkout passes, false otherwise.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function edit($key = null, $urlVar = 'w_id')
 	{
@@ -161,7 +161,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  object  The model.
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 */
 	public function getModel($name = 'form', $prefix = '', $config = array('ignore_request' => true))
 	{
@@ -176,7 +176,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  string  The arguments to append to the redirect URL.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function getRedirectToItemAppend($recordId = null, $urlVar = null)
 	{
@@ -202,7 +202,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  string  The return URL.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function getReturnPage()
 	{
@@ -224,7 +224,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean  True if successful, false otherwise.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function save($key = null, $urlVar = 'w_id')
 	{
@@ -254,7 +254,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function go()
 	{

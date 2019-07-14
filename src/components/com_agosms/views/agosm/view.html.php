@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * HTML Agosm View class for the Agosms component
  *
- * @since  __DEPLOY_VERSION__
+ * @since  1.0.40
  */
 class AgosmsViewAgosm extends JViewLegacy
 {
@@ -30,7 +30,7 @@ class AgosmsViewAgosm extends JViewLegacy
 	 *
 	 * @return  mixed  A string if successful, otherwise an Error object.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function display($tpl = null)
 	{

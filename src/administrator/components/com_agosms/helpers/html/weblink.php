@@ -30,7 +30,7 @@ abstract class JHtmlAgosm
 	 *
 	 * @throws  Exception
 	 *
-	 * @since   ___DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public static function association($agosmid)
 	{

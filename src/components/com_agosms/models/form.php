@@ -15,7 +15,7 @@ require_once JPATH_COMPONENT_ADMINISTRATOR . '/models/agosm.php';
 /**
  * Agosms model.
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class AgosmsModelForm extends AgosmsModelAgosm
 {
@@ -23,7 +23,7 @@ class AgosmsModelForm extends AgosmsModelAgosm
 	 * Model typeAlias string. Used for version history.
 	 *
 	 * @var    string
-	 * @since  3.2
+	 * @since  1.0.40
 	 */
 	public $typeAlias = 'com_agosms.agosm';
 
@@ -32,7 +32,7 @@ class AgosmsModelForm extends AgosmsModelAgosm
 	 *
 	 * @return  string  The return URL.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function getReturnPage()
 	{
@@ -46,7 +46,7 @@ class AgosmsModelForm extends AgosmsModelAgosm
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function populateState()
 	{
@@ -86,7 +86,7 @@ class AgosmsModelForm extends AgosmsModelAgosm
 	 *
 	 * @return  mixed  A JForm object on success, false on failure
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{

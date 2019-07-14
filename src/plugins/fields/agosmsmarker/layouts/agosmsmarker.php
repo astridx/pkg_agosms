@@ -151,7 +151,7 @@ $script = "window.onload = function () {"
 	. "}"
 	. "}"
 	. "}"
-	. "};"	;
+	. "};";
 $document->addScriptDeclaration($script);
 
 

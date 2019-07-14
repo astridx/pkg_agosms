@@ -11,7 +11,7 @@ defined('JPATH_BASE') or die;
 /**
  * Supports a modal agosm picker.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  1.0.40
  */
 class JFormFieldModal_Agosm extends JFormField
 {
@@ -19,7 +19,7 @@ class JFormFieldModal_Agosm extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $type = 'Modal_Agosm';
 
@@ -28,7 +28,7 @@ class JFormFieldModal_Agosm extends JFormField
 	 *
 	 * @return  string  The field input markup.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected function getInput()
 	{
@@ -249,7 +249,7 @@ class JFormFieldModal_Agosm extends JFormField
 	 *
 	 * @return  string  The field label markup.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected function getLabel()
 	{

@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Agosms Main Controller
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsController extends JControllerLegacy
 {
@@ -26,7 +26,7 @@ class AgosmsController extends JControllerLegacy
 	 *
 	 * @return  JControllerLegacy  This object to support chaining.
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 */
 	public function display($cacheable = false, $urlparams = false)
 	{

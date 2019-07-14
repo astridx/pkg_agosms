@@ -13,16 +13,14 @@ defined('_JEXEC') or die;
 /**
  * Installation class to perform additional changes during install/uninstall/update
  *
- * @since  1.0.4
+ * @since  1.0.40
  */
 class Pkg_AgosmsInstallerScript extends JInstallerScript
 {
 	/**
 	 * Extension script constructor.
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0.4
+	 * @since   1.0.40
 	 */
 	public function __construct()
 	{

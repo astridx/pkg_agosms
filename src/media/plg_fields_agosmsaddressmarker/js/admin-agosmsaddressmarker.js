@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var hiddenfield = inputs[2];
 		
 		// Write the value to the fields lat and lon 
-		// Todo Check if number pherhaps on change
+		// Todo Check if number
 		if (hiddenfield.value.split(',').length !== 2) {
 			hiddenfield.value = '0,0';
 		};
@@ -33,3 +33,51 @@ document.addEventListener('DOMContentLoaded', function () {
 	// For all fields [end]
 
 }, false);
+
+function tempAlert(msg, duration, color)
+{
+	var el = document.createElement("div");
+	el.setAttribute("style",
+		"position:absolute;padding:5%;" +
+		"top:40%;left:40%;" +
+		"background-color:white;border-style:solid;border-color:#" + color + ";");
+	el.innerHTML = msg;
+	setTimeout(function () {
+		el.parentNode.removeChild(el);
+	}, duration);
+	document.body.appendChild(el);
+}
+
+function getJSON(url, params, callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState !== 4) {
+			return;
+		}
+		if (xmlHttp.status !== 200 && xmlHttp.status !== 304) {
+			callback('');
+			return;
+		}
+		callback(xmlHttp.response);
+	};
+	xmlHttp.open('GET', url + getParamString(params), true);
+	xmlHttp.responseType = 'json';
+	xmlHttp.setRequestHeader('Accept', 'application/json');
+	xmlHttp.send(null);
+}
+
+function getParamString(obj, existingUrl, uppercase) {
+	var params = [];
+	for (var i in obj) {
+		var key = encodeURIComponent(uppercase ? i.toUpperCase() : i);
+		var value = obj[i];
+		if (!L.Util.isArray(value)) {
+			params.push(key + '=' + encodeURIComponent(value));
+		} else {
+			for (var j = 0; j < value.length; j++) {
+				params.push(key + '=' + encodeURIComponent(value[j]));
+			}
+		}
+	}
+	return (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') + params.join('&');
+}

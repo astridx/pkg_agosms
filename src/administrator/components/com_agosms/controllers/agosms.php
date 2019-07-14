@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Agosms list controller class.
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class AgosmsControllerAgosms extends JControllerAdmin
 {
@@ -26,7 +26,7 @@ class AgosmsControllerAgosms extends JControllerAdmin
 	 *
 	 * @return  object  The model.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function getModel($name = 'Agosm', $prefix = 'AgosmsModel', $config = array('ignore_request' => true))
 	{

@@ -15,7 +15,7 @@ JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRA
 /**
  * Fields Text Plugin
  *
- * @since  3.7.0
+ * @since  1.0.40
  */
 class PlgFieldsAgosmsmarker extends FieldsPlugin
 {
@@ -25,7 +25,7 @@ class PlgFieldsAgosmsmarker extends FieldsPlugin
 	 * @param   object  &$subject  The object to observe
 	 * @param   array   $config    An array that holds the plugin configuration
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 */
 	public function __construct(& $subject, $config)
 	{

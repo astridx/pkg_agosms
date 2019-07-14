@@ -19,7 +19,7 @@ JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'Agos
  *
  * @package     Joomla.Site
  * @subpackage  mod_agosm
- * @since       1.0.4
+ * @since       1.0.40
  */
 class ModagosmHelper
 {
@@ -31,7 +31,7 @@ class ModagosmHelper
 	 *
 	 * @return  mixed   Null if no agosms based on input parameters else an array containing all the agosms.
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 * */
 	public static function getCategory(&$params)
 	{
@@ -106,7 +106,8 @@ class ModagosmHelper
 
 		if ($items)
 		{
-			foreach ($items as $item) {
+			foreach ($items as $item)
+			{
 				$category = $model->getCategory($item->id);
 				break;
 			}
@@ -123,7 +124,7 @@ class ModagosmHelper
 	 *
 	 * @return  mixed   Null if no agosms based on input parameters else an array containing all the agosms.
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 * */
 	public static function getList(&$params)
 	{
@@ -175,12 +176,11 @@ class ModagosmHelper
 	 *
 	 * @return  mixed   Null if no agosms based on input parameters else an array containing all the agosms.
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 * */
 	public static function getListCustomField(&$params)
 	{
 		// Get an instance of the generic articles model
-		//$model = JModelLegacy::getInstance('Category', 'AgosmsModel', array('ignore_request' => true));
 		$model = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 
 		// Set application parameters in model
@@ -212,8 +212,10 @@ class ModagosmHelper
 		if ($items)
 		{
 			
-			foreach ($items as $key => $item) {
-				if ($item->state !== "1"){
+			foreach ($items as $key => $item)
+			{
+				if ($item->state !== "1")
+				{
 					continue;
 				}
 				// Get item's fields, also preparing their value property for manual display
@@ -222,11 +224,12 @@ class ModagosmHelper
 
 				$itemfiltered1 = new stdClass;
 				$itemfiltered2 = new stdClass;
-				foreach ($fields as $key => $field) {
+				foreach ($fields as $key => $field)
+				{
 					if ($field->title == 'lat, lon')
 					{
 						$itemfiltered1->cords = $field->value;
-						$test = explode(",", $itemfiltered1->cords );
+						$test = explode(",", $itemfiltered1->cords);
 						if (is_numeric($test[0]) && is_numeric($test[1]))
 						{						
 							$itemfiltered1->title = $item->title;
@@ -237,7 +240,7 @@ class ModagosmHelper
 					if ($field->type == 'agosmsmarker')
 					{
 						$itemfiltered2->cords = $field->value;
-						$test = explode(",", $itemfiltered2->cords );
+						$test = explode(",", $itemfiltered2->cords);
 						if (is_numeric($test[0]) && is_numeric($test[1]))
 						{
 							$itemfiltered2->title = $item->title;

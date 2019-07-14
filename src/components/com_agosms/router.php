@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Routing class from com_agosms
  *
- * @since  3.3
+ * @since  1.0.40
  */
 class AgosmsRouter extends JComponentRouterBase
 {
@@ -24,7 +24,7 @@ class AgosmsRouter extends JComponentRouterBase
 	 *
 	 * @return  array  The URL arguments to use to assemble the subsequent URL.
 	 *
-	 * @since   3.3
+	 * @since   1.0.40
 	 */
 	public function build(&$query)
 	{
@@ -172,7 +172,7 @@ class AgosmsRouter extends JComponentRouterBase
 	 *
 	 * @return  array  The URL attributes to be used by the application.
 	 *
-	 * @since   3.3
+	 * @since   1.0.40
 	 */
 	public function parse(&$segments)
 	{

@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * View to edit a agosm.
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsViewAgosm extends JViewLegacy
 {
@@ -68,7 +68,7 @@ class AgosmsViewAgosm extends JViewLegacy
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function addToolbar()
 	{

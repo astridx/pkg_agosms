@@ -14,7 +14,7 @@ JFormHelper::loadFieldClass('text');
 /**
  * Provides a mechanism for calculating geographic coordinates
  *
- * @since  __DEPLOY_VERSION__
+ * @since  1.0.40
  */
 class JFormFieldAgosmsaddressmarker extends JFormFieldText
 {
@@ -22,7 +22,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $type = 'Agosmsaddressmarker';
 
@@ -30,7 +30,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * Layout to render
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $layout = 'agosmsaddressmarker';
 
@@ -38,7 +38,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * The name of the addressfields field.
 	 *
 	 * @var    int
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $mapheight;
 
@@ -46,7 +46,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * The name of the addressfields field.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $maptype;
 
@@ -54,7 +54,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * The name of the addressfields field.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $geocoder;
 
@@ -62,7 +62,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * The name of the addressfields field.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $googlekey;
 
@@ -70,7 +70,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * The name of the addressfields field.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $mapboxkey;
 	
@@ -78,7 +78,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * The name of the addressfields field.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $addressfields;
 
@@ -89,7 +89,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 *
 	 * @return  mixed  The property value or null.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function __get($name)
 	{
@@ -118,7 +118,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * @return  boolean  True on success.
 	 *
 	 * @see     JFormField::setup()
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function setup(SimpleXMLElement $element, $value, $group = null)
 	{
@@ -145,7 +145,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function __set($name, $value)
 	{
@@ -185,7 +185,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 *
 	 * @return  array
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected function getLayoutPaths()
 	{
@@ -203,7 +203,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 *
 	 * @return  string  The field input markup.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected function getInput()
 	{
@@ -216,7 +216,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 *
 	 * @return  array
 	 *
-	 * @since __DEPLOY_VERSION__
+	 * @since 1.0.40
 	 */
 	protected function getLayoutData()
 	{
@@ -242,7 +242,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 *
 	 * @return  array  The field option objects.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected function getOptions()
 	{
@@ -380,7 +380,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 *
 	 * @return  JFormFieldList  For chaining.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function addOption($text, $attributes = array())
 	{

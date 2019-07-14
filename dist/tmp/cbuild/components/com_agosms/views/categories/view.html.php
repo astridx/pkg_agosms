@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Content categories view.
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsViewCategories extends JViewCategories
 {
@@ -21,19 +21,19 @@ class AgosmsViewCategories extends JViewCategories
 
 	/**
 	 * @var    string  Default title to use for page title
-	 * @since  3.2
+	 * @since  1.0.40
 	 */
 	protected $defaultPageTitle = 'COM_AGOSMS_DEFAULT_PAGE_TITLE';
 
 	/**
 	 * @var    string  The name of the extension for the category
-	 * @since  3.2
+	 * @since  1.0.40
 	 */
 	protected $extension = 'com_agosms';
 
 	/**
 	 * @var    string  The name of the view to link individual items to
-	 * @since  3.2
+	 * @since  1.0.40
 	 */
 	protected $viewName = 'agosm';
 

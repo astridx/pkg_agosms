@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * This models supports retrieving lists of article categories.
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class AgosmsModelCategories extends JModelList
 {
@@ -46,7 +46,7 @@ class AgosmsModelCategories extends JModelList
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{

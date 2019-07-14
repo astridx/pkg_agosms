@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Agosms Component Route Helper.
  *
- * @since  1.5
+ * @since  1.0.40
  */
 abstract class AgosmsHelperRoute
 {

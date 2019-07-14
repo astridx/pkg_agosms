@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Methods supporting a list of agosm records.
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class AgosmsModelAgosms extends JModelList
 {
@@ -23,7 +23,7 @@ class AgosmsModelAgosms extends JModelList
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
 	 * @see     JControllerLegacy
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function __construct($config = array())
 	{
@@ -74,7 +74,7 @@ class AgosmsModelAgosms extends JModelList
 	 * @return  void
 	 *
 	 * @note    Calling getState in this method will result in recursion.
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function populateState($ordering = 'a.title', $direction = 'asc')
 	{
@@ -128,7 +128,7 @@ class AgosmsModelAgosms extends JModelList
 	 *
 	 * @return  string  A store id.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function getStoreId($id = '')
 	{
@@ -149,7 +149,7 @@ class AgosmsModelAgosms extends JModelList
 	 *
 	 * @return  JDatabaseQuery
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function getListQuery()
 	{

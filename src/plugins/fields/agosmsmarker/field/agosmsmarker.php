@@ -15,7 +15,7 @@ JFormHelper::loadFieldClass('text');
 /**
  * Provides a modal media selector including upload mechanism
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class JFormFieldAgosmsmarker extends JFormFieldText
 {
@@ -23,7 +23,7 @@ class JFormFieldAgosmsmarker extends JFormFieldText
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  1.6
+	 * @since  1.0.40
 	 */
 	protected $type = 'Agosmsmarker';
 
@@ -31,7 +31,7 @@ class JFormFieldAgosmsmarker extends JFormFieldText
 	 * Layout to render
 	 *
 	 * @var    string
-	 * @since  3.5
+	 * @since  1.0.40
 	 */
 	protected $layout = 'agosmsmarker';
 
@@ -40,7 +40,7 @@ class JFormFieldAgosmsmarker extends JFormFieldText
 	 *
 	 * @return  array
 	 *
-	 * @since   3.5
+	 * @since   1.0.40
 	 */
 	protected function getLayoutPaths()
 	{
@@ -65,7 +65,7 @@ class JFormFieldAgosmsmarker extends JFormFieldText
 	 * @return  boolean  True on success.
 	 *
 	 * @see     JFormField::setup()
-	 * @since   3.2
+	 * @since   1.0.40
 	 */
 	public function setup(SimpleXMLElement $element, $value, $group = null)
 	{

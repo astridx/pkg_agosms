@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * HTML View class for the WebLinks component
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsViewCategory extends JViewCategory
 {

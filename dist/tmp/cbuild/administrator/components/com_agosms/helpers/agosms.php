@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Agosms helper.
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class AgosmsHelper extends JHelperContent
 {
@@ -24,7 +24,7 @@ class AgosmsHelper extends JHelperContent
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public static function addSubmenu($vName = 'agosms')
 	{
@@ -63,7 +63,7 @@ class AgosmsHelper extends JHelperContent
 	 *
 	 * @return  stdClass[]  The agosms category objects.
 	 *
-	 * @since   3.6.0
+	 * @since   1.0.40
 	 */
 	public static function countItems(&$items)
 	{
@@ -117,7 +117,7 @@ class AgosmsHelper extends JHelperContent
 	 *
 	 * @return  stdClass[]
 	 *
-	 * @since   3.7.0
+	 * @since   1.0.40
 	 */
 	public static function countTagItems(&$items, $extension)
 	{

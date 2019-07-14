@@ -15,7 +15,7 @@ use Joomla\Utilities\ArrayHelper;
 /**
  * Agosm controller class.
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class AgosmsControllerAgosm extends JControllerForm
 {
@@ -26,7 +26,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function allowAdd($data = array())
 	{
@@ -56,7 +56,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function allowEdit($data = array(), $key = 'id')
 	{
@@ -93,7 +93,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  boolean   True if successful, false otherwise and internal error is set.
 	 *
-	 * @since   1.7
+	 * @since   1.0.40
 	 */
 	public function batch($model = null)
 	{
@@ -116,7 +116,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function postSaveHook(JModelLegacy $model, $validData = array())
 	{

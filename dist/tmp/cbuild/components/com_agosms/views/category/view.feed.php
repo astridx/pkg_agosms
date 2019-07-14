@@ -13,13 +13,13 @@ defined('_JEXEC') or die;
 /**
  * HTML View class for the WebLinks component
  *
- * @since  1.0
+ * @since  1.0.40
  */
 class AgosmsViewCategory extends JViewCategoryfeed
 {
 	/**
 	 * @var    string  The name of the view to link individual items to
-	 * @since  3.2
+	 * @since  1.0.40
 	 */
 	protected $viewName = 'agosm';
 }

@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * View class for a list of agosms.
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsViewAgosms extends JViewLegacy
 {
@@ -83,7 +83,7 @@ class AgosmsViewAgosms extends JViewLegacy
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function addToolbar()
 	{
@@ -153,7 +153,7 @@ class AgosmsViewAgosms extends JViewLegacy
 	 *
 	 * @return  array  Array containing the field name to sort by as the key and display text as value
 	 *
-	 * @since   3.0
+	 * @since   1.0.40
 	 */
 	protected function getSortFields()
 	{

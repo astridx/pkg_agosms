@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * HTML Article View class for the Agosms component
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsViewForm extends JViewLegacy
 {

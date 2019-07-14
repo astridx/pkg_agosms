@@ -14,7 +14,7 @@ jimport('joomla.form.fields.media');
 /**
  * Provides a modal media selector including upload mechanism
  *
- * @since  1.6
+ * @since  1.0.40
  */
 class JFormFieldAgosm extends JFormFieldMedia
 {
@@ -22,7 +22,7 @@ class JFormFieldAgosm extends JFormFieldMedia
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  1.6
+	 * @since  1.0.40
 	 */
 	protected $type = 'agosm';
 
@@ -30,7 +30,7 @@ class JFormFieldAgosm extends JFormFieldMedia
 	 * Layout to render
 	 *
 	 * @var    string
-	 * @since  3.5
+	 * @since  1.0.40
 	 */
 	protected $layout = 'agosm';
 
@@ -39,7 +39,7 @@ class JFormFieldAgosm extends JFormFieldMedia
 	 *
 	 * @return  array
 	 *
-	 * @since   3.5
+	 * @since   1.0.40
 	 */
 	protected function getLayoutPaths()
 	{

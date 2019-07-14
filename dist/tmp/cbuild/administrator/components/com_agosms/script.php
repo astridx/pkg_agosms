@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Installation class to perform additional changes during install/uninstall/update
  *
- * @since  3.4
+ * @since  1.0.40
  */
 class Com_AgosmsInstallerScript
 {
@@ -24,7 +24,7 @@ class Com_AgosmsInstallerScript
 	 *
 	 * @return  void
 	 *
-	 * @since   3.4
+	 * @since   1.0.40
 	 */
 	public function install($parent)
 	{
@@ -83,7 +83,7 @@ class Com_AgosmsInstallerScript
 	 *
 	 * @return  void
 	 *
-	 * @since   3.4.1
+	 * @since   1.0.40
 	 */
 	public function postflight($type, $parent)
 	{
@@ -108,7 +108,7 @@ class Com_AgosmsInstallerScript
 	 *
 	 * @return  void
 	 *
-	 * @since   3.4.1
+	 * @since   1.0.40
 	 */
 	private function insertMissingUcmRecords()
 	{
@@ -223,7 +223,7 @@ class Com_AgosmsInstallerScript
 	 *
 	 * @return  void
 	 *
-	 * @since   3.4.1
+	 * @since   1.0.40
 	 */
 	private function dropColumnsIfNeeded()
 	{
@@ -252,7 +252,7 @@ class Com_AgosmsInstallerScript
 	 *
 	 * @return  void
 	 *
-	 * @since   3.4.1
+	 * @since   1.0.40
 	 */
 	private function addColumnsIfNeeded()
 	{

@@ -17,7 +17,7 @@ JLoader::register('AgosmsHelper', JPATH_ADMINISTRATOR . '/components/com_agosms/
 /**
  * Agosms model.
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsModelAgosm extends JModelAdmin
 {
@@ -25,7 +25,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 * The type alias for this content type.
 	 *
 	 * @var    string
-	 * @since  3.2
+	 * @since  1.0.40
 	 */
 	public $typeAlias = 'com_agosms.agosm';
 
@@ -33,7 +33,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 * The context used for the associations table
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected $associationsContext = 'com_agosms.item';
 
@@ -41,7 +41,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 * The prefix to use with controller messages.
 	 *
 	 * @var    string
-	 * @since  1.6
+	 * @since  1.0.40
 	 */
 	protected $text_prefix = 'COM_AGOSMS';
 
@@ -52,7 +52,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  boolean  True if allowed to delete the record. Defaults to the permission for the component.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function canDelete($record)
 	{
@@ -79,7 +79,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  boolean  True if allowed to change the state of the record. Defaults to the permission for the component.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function canEditState($record)
 	{
@@ -100,7 +100,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  JTable  A JTable object
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function getTable($type = 'Agosm', $prefix = 'AgosmsTable', $config = array())
 	{
@@ -115,7 +115,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  mixed  A JForm object on success, false on failure
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function getForm($data = array(), $loadData = true)
 	{
@@ -164,7 +164,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  array  The default data is an empty array.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function loadFormData()
 	{
@@ -195,7 +195,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  mixed  Object on success, false on failure.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function getItem($pk = null)
 	{
@@ -247,7 +247,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function prepareTable($table)
 	{
@@ -298,7 +298,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  array  An array of conditions to add to ordering queries.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function getReorderConditions($table)
 	{
@@ -315,7 +315,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @since	3.1
+	 * @since	1.0.40
 	 */
 	public function save($data)
 	{
@@ -367,7 +367,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  array  Contains the modified title and alias.
 	 *
-	 * @since   3.1
+	 * @since   1.0.40
 	 */
 	protected function generateNewTitle($category_id, $alias, $name)
 	{
@@ -396,7 +396,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  void
 	 *
-	 * @since    3.6.0
+	 * @since    1.0.40
 	 */
 	protected function preprocessForm(JForm $form, $data, $group = 'content')
 	{
@@ -444,7 +444,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @return  bool
 	 *
-	 * @since   3.6.0
+	 * @since   1.0.40
 	 */
 	private function canCreateCategory()
 	{

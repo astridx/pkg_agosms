@@ -1,10 +1,11 @@
 <?php
 /**
  * @package     Joomla.Site
- * @subpackage  Layout
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 defined('JPATH_BASE') or die;
@@ -73,9 +74,6 @@ $attributes = array(
 
 
 <?php 
-// Build the address string from the selected fields 
-$addressstring = "";
-
 // Load the Fields of this item
 $current_component  = JFactory::getApplication()->input->getCmd('option');
 $current_view  = JFactory::getApplication()->input->getCmd('view');
@@ -95,22 +93,24 @@ if (!empty($addressfieldsArray))
 	}
 }
 
+// Build the address string and a string with the field names from the selected fields 
+$addressstring = "";
+$fieldnames = "";
 if (!empty($fields))
 {
 	foreach ($fields as $field)
 	{
 		// Save value to addressstring, if field is in the options of this custom field
-		// todo Error if this field is selected or make it not possible to select this field
 		if (in_array($field->id, $addressfieldsvalues))
 		{
 			$addressstring .= $field->rawvalue . ',';
+			$fieldnames .= $field->name . ', ';
 		}
 	}
 }
 
-//JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESSTRING') . ': ' . $addressstring, 'message');
-
-
+// Do I need this? Or is tempAlert enough?
+// JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESSTRING') . ': ' . $addressstring, 'message');
 ?>
 
 
@@ -124,7 +124,10 @@ if (!empty($fields))
 	type="button">
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 </button>
-<span></span>
+<span>
+	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>: 
+	<?php echo $fieldnames; ?>
+</span>
 <hr>
 
 <?php // Todo: Make hidden ?>

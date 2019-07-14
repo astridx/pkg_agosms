@@ -13,7 +13,7 @@ defined('_JEXEC') or die('');
 /**
  * Script file for mod_agosm
  *
- * @since  1.0.4
+ * @since  1.0.40
  */
 class Mod_AgosmInstallerScript
 {
@@ -22,7 +22,7 @@ class Mod_AgosmInstallerScript
 	 *
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
 	 *
-	 * @since  1.0.4
+	 * @since  1.0.40
 	 *
 	 * @return  void
 	 */
@@ -36,7 +36,7 @@ class Mod_AgosmInstallerScript
 	 *
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
 	 *
-	 * @since  1.0.4
+	 * @since  1.0.40
 	 *
 	 * @return  void
 	 */
@@ -50,7 +50,7 @@ class Mod_AgosmInstallerScript
 	 *
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
 	 *
-	 * @since  1.0.4
+	 * @since  1.0.40
 	 *
 	 * @return  void
 	 */
@@ -65,7 +65,7 @@ class Mod_AgosmInstallerScript
 	 * @param   string                 $type    The type of change (install, update, discover_install)
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
 	 *
-	 * @since  1.0.4
+	 * @since  1.0.40
 	 *
 	 * @return  void
 	 */
@@ -80,7 +80,7 @@ class Mod_AgosmInstallerScript
 	 * @param   string                 $type    The type of change (install, update, discover_install)
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
 	 *
-	 * @since  1.0.4
+	 * @since  1.0.40
 	 *
 	 * @return  void
 	 */

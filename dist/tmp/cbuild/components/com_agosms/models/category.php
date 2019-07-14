@@ -15,7 +15,7 @@ use Joomla\Registry\Registry;
 /**
  * Agosms Component Agosm Model
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsModelCategory extends JModelList
 {
@@ -40,7 +40,7 @@ class AgosmsModelCategory extends JModelList
 	 * @param   array  $config  An optional associative array of configuration settings.
 	 *
 	 * @see     JControllerLegacy
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function __construct($config = array())
 	{
@@ -104,7 +104,7 @@ class AgosmsModelCategory extends JModelList
 	 *
 	 * @return  JDatabaseQuery   A JDatabaseQuery object to retrieve the data set.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function getListQuery()
 	{
@@ -216,7 +216,7 @@ class AgosmsModelCategory extends JModelList
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function populateState($ordering = null, $direction = null)
 	{
@@ -276,7 +276,7 @@ class AgosmsModelCategory extends JModelList
 	 *
 	 * @return  object
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 */
 	public function getCategory()
 	{
@@ -389,7 +389,7 @@ class AgosmsModelCategory extends JModelList
 	 *
 	 * @return  boolean  True if successful; false otherwise and internal error set.
 	 *
-	 * @since   3.2
+	 * @since   1.0.40
 	 */
 	public function hit($pk = 0)
 	{

@@ -15,7 +15,7 @@ JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRA
 /**
  * Fields Plugin for collecting all the relevant fields for calculating geo cords
  *
- * @since  __DEPLOY_VERSION__
+ * @since  1.0.40
  */
 class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 {
@@ -25,7 +25,7 @@ class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 	 * @param   object  &$subject  The object to observe
 	 * @param   array   $config    An array that holds the plugin configuration
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function __construct(& $subject, $config)
 	{
@@ -41,7 +41,7 @@ class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 	 *
 	 * @return  DOMElement
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function onCustomFieldsPrepareDom($field, DOMElement $parent, JForm $form)
 	{

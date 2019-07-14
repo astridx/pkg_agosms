@@ -1,9 +1,11 @@
 <?php
 /**
- * Joomla! Content Management System
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright  Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 defined('JPATH_PLATFORM') or die;
@@ -16,7 +18,7 @@ FormHelper::loadFieldClass('list');
 /**
  * Form Field to load a list of custom fields
  *
- * @since  __DEPLOY_VERSION__
+ * @since  1.0.40
  */
 class JFormFieldCfield extends JFormFieldList
 {
@@ -24,7 +26,7 @@ class JFormFieldCfield extends JFormFieldList
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	public $type = 'cfield';
 
@@ -32,7 +34,7 @@ class JFormFieldCfield extends JFormFieldList
 	 * Cached array of the category items.
 	 *
 	 * @var    array
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.40
 	 */
 	protected static $options = array();
 
@@ -41,7 +43,7 @@ class JFormFieldCfield extends JFormFieldList
 	 *
 	 * @return  array  The field option objects.
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected function getOptions()
 	{

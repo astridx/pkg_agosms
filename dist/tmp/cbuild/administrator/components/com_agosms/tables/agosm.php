@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 /**
  * Agosm Table class
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsTableAgosm extends JTable
 {
@@ -21,7 +21,7 @@ class AgosmsTableAgosm extends JTable
 	 * Ensure the params and metadata in json encoded in the bind method
 	 *
 	 * @var    array
-	 * @since  3.4
+	 * @since  1.0.40
 	 */
 	protected $_jsonEncode = array('params', 'metadata', 'images');
 
@@ -30,7 +30,7 @@ class AgosmsTableAgosm extends JTable
 	 *
 	 * @param   JDatabaseDriver  &$db  A database connector object
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 */
 	public function __construct(&$db)
 	{
@@ -50,7 +50,7 @@ class AgosmsTableAgosm extends JTable
 	 *
 	 * @return  boolean  True on success, false on failure.
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function store($updateNulls = false)
 	{
@@ -94,7 +94,8 @@ class AgosmsTableAgosm extends JTable
 		// Verify that the alias is unique
 		$table = JTable::getInstance('Agosm', 'AgosmsTable');
 
-		if ($table->load(array('language' => $this->language, 'alias' => $this->alias, 'catid' => $this->catid)) && ($table->id != $this->id || $this->id == 0))
+		if ($table->load(array('language' => $this->language, 'alias' => $this->alias, 'catid' => $this->catid)) 
+			&& ($table->id != $this->id || $this->id == 0))
 		{
 			$this->setError(JText::_('COM_AGOSMS_ERROR_UNIQUE_ALIAS'));
 
@@ -112,7 +113,7 @@ class AgosmsTableAgosm extends JTable
 	 *
 	 * @return  boolean  True on success.
 	 *
-	 * @since   1.5
+	 * @since   1.0.40
 	 */
 	public function check()
 	{

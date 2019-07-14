@@ -18,7 +18,7 @@ JTable::addIncludePath(JPATH_COMPONENT_ADMINISTRATOR . '/tables');
 /**
  * Agosms Component Model for a Agosm record
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class AgosmsModelAgosm extends JModelItem
 {
@@ -36,7 +36,7 @@ class AgosmsModelAgosm extends JModelItem
 	 *
 	 * @return  void
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	protected function populateState()
 	{
@@ -64,7 +64,7 @@ class AgosmsModelAgosm extends JModelItem
 	/**
 	 * Method to get an object.
 	 *
-	 * @param   integer  $id  The id of the object to get.
+	 * @param   integer  $pk  The id of the object to get.
 	 *
 	 * @return  mixed  Object on success, false on failure.
 	 */
@@ -182,7 +182,7 @@ class AgosmsModelAgosm extends JModelItem
 	 *
 	 * @return  JTable  A database object
 	 *
-	 * @since   1.6
+	 * @since   1.0.40
 	 */
 	public function getTable($type = 'Agosm', $prefix = 'AgosmsTable', $config = array())
 	{
@@ -192,7 +192,7 @@ class AgosmsModelAgosm extends JModelItem
 	/**
 	 * Method to increment the hit counter for the agosm
 	 *
-	 * @param   integer  $id  Optional ID of the agosm.
+	 * @param   integer  $pk  Optional ID of the agosm.
 	 *
 	 * @return  boolean  True on success
 	 */

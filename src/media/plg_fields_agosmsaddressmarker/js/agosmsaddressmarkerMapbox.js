@@ -31,3 +31,37 @@ document.addEventListener('click', function (e) {
 		getJSON("https://nominatim.openstreetmap.org/", params, cords);
 	}
 });
+
+function getJSON(url, params, callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState !== 4) {
+			return;
+		}
+		if (xmlHttp.status !== 200 && xmlHttp.status !== 304) {
+			callback('');
+			return;
+		}
+		callback(xmlHttp.response);
+	};
+	xmlHttp.open('GET', url + getParamString(params), true);
+	xmlHttp.responseType = 'json';
+	xmlHttp.setRequestHeader('Accept', 'application/json');
+	xmlHttp.send(null);
+}
+
+function getParamString(obj, existingUrl, uppercase) {
+	var params = [];
+	for (var i in obj) {
+		var key = encodeURIComponent(uppercase ? i.toUpperCase() : i);
+		var value = obj[i];
+		if (!L.Util.isArray(value)) {
+			params.push(key + '=' + encodeURIComponent(value));
+		} else {
+			for (var j = 0; j < value.length; j++) {
+				params.push(key + '=' + encodeURIComponent(value[j]));
+			}
+		}
+	}
+	return (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') + params.join('&');
+}

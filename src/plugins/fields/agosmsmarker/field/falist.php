@@ -14,7 +14,7 @@ defined('JPATH_PLATFORM') or die;
  * Form Field class for the Joomla Platform.
  * Supports a generic list of options.
  *
- * @since  1.0.76
+ * @since  1.0.40
  */
 class JFormFieldFalist extends JFormField
 {
@@ -23,7 +23,7 @@ class JFormFieldFalist extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since  1.0.76
+	 * @since  1.0.40
 	 */
 	protected $type = 'List';
 
@@ -33,7 +33,7 @@ class JFormFieldFalist extends JFormField
 	 *
 	 * @return  string  The field input markup.
 	 *
-	 * @since   1.0.76
+	 * @since   1.0.40
 	 */
 	protected function getInput()
 	{
@@ -105,7 +105,7 @@ class JFormFieldFalist extends JFormField
 	 *
 	 * @return  array  The field option objects.
 	 *
-	 * @since   1.0.76
+	 * @since   1.0.40
 	 */
 	protected function getOptions()
 	{
@@ -929,7 +929,7 @@ class JFormFieldFalist extends JFormField
 	 *
 	 * @return  mixed  The property value or null.
 	 *
-	 * @since   1.0.76
+	 * @since   1.0.40
 	 */
 	public function __get($name)
 	{

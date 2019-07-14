@@ -13,15 +13,15 @@ defined('_JEXEC') or die;
 /**
  * Agosm Component HTML Helper.
  *
- * @since  1.5
+ * @since  1.0.40
  */
 class JHtmlIcon
 {
 	/**
 	 * Create a link to create a new agosm
 	 *
-	 * @param   mixed  $agosm  Unused
-	 * @param   mixed  $params   Unused
+	 * @param   mixed  $agosm   Unused
+	 * @param   mixed  $params  Unused
 	 *
 	 * @return  string
 	 */
@@ -40,7 +40,7 @@ class JHtmlIcon
 	/**
 	 * Create a link to edit an existing agosm
 	 *
-	 * @param   object                     $agosm  Agosm data
+	 * @param   object                     $agosm    Agosm data
 	 * @param   \Joomla\Registry\Registry  $params   Item params
 	 * @param   array                      $attribs  Unused
 	 *

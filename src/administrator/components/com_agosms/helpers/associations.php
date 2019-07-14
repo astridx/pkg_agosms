@@ -17,7 +17,7 @@ JTable::addIncludePath(__DIR__ . '/../tables');
 /**
  * Content associations helper.
  *
- * @since  __DEPLOY_VERSION__
+ * @since  1.0.40
  */
 class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 {
@@ -26,7 +26,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	 *
 	 * @var     array   $extension
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected $extension = 'com_agosms';
 
@@ -35,7 +35,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	 *
 	 * @var     array   $itemTypes
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected $itemTypes = array('agosm', 'category');
 
@@ -44,7 +44,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	 *
 	 * @var     boolean   $associationsSupport
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	protected $associationsSupport = true;
 
@@ -56,7 +56,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	 *
 	 * @return  array
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function getAssociations($typeName, $id)
 	{
@@ -93,7 +93,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	 *
 	 * @return  JTable|null
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function getItem($typeName, $id)
 	{
@@ -132,7 +132,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	 *
 	 * @return  array  Array of item types
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.40
 	 */
 	public function getType($typeName = '')
 	{
