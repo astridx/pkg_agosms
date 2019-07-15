@@ -117,7 +117,7 @@ if (!empty($fields))
 		if (in_array($field->id, $addressfieldsvalues))
 		{
 			$addressstring .= $field->rawvalue . ',';
-			$fieldnames .= $field->name . ', ';
+			$fieldnames .= $field->label . ' ( ' . $field->name . ', ' . $field->id . ')<br>';
 		}
 	}
 }
@@ -128,9 +128,13 @@ if (!empty($fields))
 
 
 <hr>
+<p>
+	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
+</p>
 <div class="agosmsaddressmarkersurroundingdiv">
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?><input type="text" class="agosmsaddressmarkerlat" >
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
+<br>
 <button 
 	data-addressstring="<?php echo htmlspecialchars($addressstring, ENT_QUOTES, 'UTF-8'); ?>"
 	data-mapboxkey="<?php echo $mapboxkey; ?>"
@@ -140,16 +144,12 @@ if (!empty($fields))
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 </button>
 <p>
-	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>: 
+	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
 	<?php echo $fieldnames; ?>
 </p>
-<p>
-	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
-</p>
 
 
 
-<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CURRENT_VALUE'); ?>
 <input class="agosmsaddressmarkerhiddenfield" 
 type="hidden" 
 readonly name="<?php

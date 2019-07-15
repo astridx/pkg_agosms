@@ -60,6 +60,7 @@
 				name="scrollwheelzoom"
 				type="radio"
 				label="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM"
+				description="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM_DESC"
 				class="btn-group btn-group-yesno switcher"
 				default="1"
 			>
