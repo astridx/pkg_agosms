@@ -86,7 +86,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * The name of the addressfields field.
 	 *
 	 * @var    string
-	 * @since  __DEPLOY_VERSION__
+	 * @since  1.0.42
 	 */
 	protected $scrollwheelzoom; 
 

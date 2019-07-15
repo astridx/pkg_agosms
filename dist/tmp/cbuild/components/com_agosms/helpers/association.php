@@ -17,7 +17,7 @@ JLoader::register('CategoryHelperAssociation', JPATH_ADMINISTRATOR . '/component
 /**
  * Agosms Component Association Helper
  *
- * @since  __DEPLOY_VERSION__
+ * @since  1.0.42
  */
 abstract class AgosmsHelperAssociation extends CategoryHelperAssociation
 {
@@ -29,7 +29,7 @@ abstract class AgosmsHelperAssociation extends CategoryHelperAssociation
 	 *
 	 * @return  array   Array of associations for the item
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   1.0.42
 	 */
 	public static function getAssociations($id = 0, $view = null)
 	{

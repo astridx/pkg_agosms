@@ -9,7 +9,6 @@
 			label="PLG_AGOSMSADDRESSMARKER_CFIELD"
 			description="PLG_AGOSMSADDRESSMARKER_CFIELD_DESC"
 			>
-			<option value="0">JNONE</option>
 		</field>
 		<field
 			name="name"
@@ -17,7 +16,6 @@
 			label="PLG_AGOSMSADDRESSMARKER_CFIELDLABEL"
 			description="PLG_AGOSMSADDRESSMARKER_CFIELDLABEL_DESC"
 			>
-			<option value="0">JNONE</option>
 			<option value="country">PLG_AGOSMSADDRESSMARKER_COUNTRY</option>
 			<option value="region">PLG_AGOSMSADDRESSMARKER_REGION</option>
 			<option value="postcode">PLG_AGOSMSADDRESSMARKER_POSTCODE</option>

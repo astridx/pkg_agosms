@@ -60,7 +60,8 @@ class JFormFieldCfield extends JFormFieldList
 			$query = $db->getQuery(true)
 				->select('cf.id AS value, cf.name AS text')
 				->from('#__fields AS cf')
-				// Todo->join('INNER', '#__content AS c ON c.tag = cf.id')
+				->where('cf.state IN (1)')
+				->where('cf.type NOT IN ("agosmsaddressmarker")')
 				->group('cf.id, cf.name')
 				->order('cf.name');
 
