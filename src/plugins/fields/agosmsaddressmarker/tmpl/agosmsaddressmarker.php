@@ -32,6 +32,7 @@ else
 {
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-openstreetmap.js');
 }
+$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
 
 // We need this for list views
 $unique = $field->id . '_' . uniqid();
@@ -59,5 +60,6 @@ $lon = $values[1];
 	data-lat='<?php echo $lat ?>'
 	data-lon='<?php echo $lon ?>'
 	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
+	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '') ?>'
 >
 </div>

@@ -81,6 +81,14 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * @since  1.0.40
 	 */
 	protected $addressfields;
+	
+	/**
+	 * The name of the addressfields field.
+	 *
+	 * @var    string
+	 * @since  __DEPLOY_VERSION__
+	 */
+	protected $scrollwheelzoom; 
 
 	/**
 	 * Method to get certain otherwise inaccessible properties from the form field object.
@@ -132,6 +140,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$this->googlekey = (string) $this->element['googlekey'];
 			$this->mapboxkey = (string) $this->element['mapboxkey'];
 			$this->addressfields = (string) $this->element['addressfields'];
+			$this->scrollwheelzoom = (string) $this->element['scrollwheelzoom'];
 		}
 
 		return $result;
@@ -173,6 +182,10 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 
 			case 'addressfields':
 				$this->addressfields = (string) $value;
+				break;
+
+			case 'scrollwheelzoom':
+				$this->scrollwheelzoom = (string) $value;
 				break;
 
 			default:
@@ -232,6 +245,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			'googlekey' => $this->googlekey,
 			'mapboxkey' => $this->mapboxkey,
 			'addressfields' => $this->addressfields,
+			'scrollwheelzoom' => $this->scrollwheelzoom,
 			'options' => $options,
 		);
 

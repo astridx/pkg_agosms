@@ -92,6 +92,7 @@ if (isset($_FILES[$params->get('ag_variable')])) :
 	 width:auto;
 	 height:<?php echo $params->get('height', '400'); ?>px;"
 	 data-module-id="<?php echo $module->id; ?>"
+	data-scrollwheelzoom='<?php echo $params->get('scrollwheelzoom', '') ?>'
 
 	 data-gpx_file_name="<?php echo $gpxfile; ?>"
 	 data-startIconUrl="<?php echo $startIconUrl; ?>"

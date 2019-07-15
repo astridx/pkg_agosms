@@ -56,6 +56,16 @@
 				size="30"
 				showon="maptype:mapbox[OR]geocoder:mapbox"
 			/>
+			<field
+				name="scrollwheelzoom"
+				type="radio"
+				label="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM"
+				class="btn-group btn-group-yesno switcher"
+				default="1"
+			>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
 		</fieldset>
 	</fields>
 </form>

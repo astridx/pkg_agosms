@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		window['mymap' + moduleId].fitBounds([[0, 0],[0, 0]]);
 
 		for (var i = 0; i < gpxfilenames.length; i++) {
-			console.log(gpxfilenames[i]);
 			new L.GPX(gpxfilenames[i],
 				{
 					marker_options: {

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	[].forEach.call(leafletmapsMod, function (element) {
 
 		// Create map with worldWarp
+		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
 		var noWorldWarp = element.getAttribute('data-no-world-warp');
 		var moduleId = element.getAttribute('data-module-id');
 		var detectRetina = element.getAttribute('data-detect-retina');
@@ -72,12 +73,24 @@ document.addEventListener('DOMContentLoaded', function () {
 			var specialcustomfieldpins = JSON.parse(element.getAttribute('data-specialcustomfieldpins'));
 		}
 
-		if (noWorldWarp === "1")
+		if (noWorldWarp === "1" && scrollwheelzoom === "0")
 		{
+			window['mymap' + moduleId] = new L.Map('map' + moduleId, {worldCopyJump: false, scrollWheelZoom: false, maxBounds: [ [82, -180], [-82, 180] ]}).setView(lonlat, zoom);
+		} else if (noWorldWarp === "1" && scrollwheelzoom === "1") {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {worldCopyJump: false, maxBounds: [ [82, -180], [-82, 180] ]}).setView(lonlat, zoom);
 		} else {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {worldCopyJump: true}).setView(lonlat, zoom);
 		}
+
+		// Add Scrollwheele Listener, so that you can activate it on mouse click
+		window['mymap' + moduleId].on('click', function () {
+			if (window['mymap' + moduleId].scrollWheelZoom.enabled()) {
+				window['mymap' + moduleId].scrollWheelZoom.disable();
+			} else
+			{
+				window['mymap' + moduleId].scrollWheelZoom.enable();
+			}
+		});
 		
 		// Baselayer
 		var nowarp = "noWrap: false, ";

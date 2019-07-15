@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	[].forEach.call(leafletmaps, function (element) {
 
 		var unique = element.getAttribute('data-unique');
+		var lat = element.getAttribute('data-lat');
+		var lon = element.getAttribute('data-lon');
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
 		var mapboxkey = element.getAttribute('data-mapboxkey');
 
@@ -19,13 +21,26 @@ document.addEventListener('DOMContentLoaded', function () {
 				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
 			}
 		}
-
-		var osmUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey;
-		var osmAttrib = 'Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
-			'<a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
-			'Imagery © <a href=\"http://mapbox.com\">Mapbox</a>';
-		var osm = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 12, attribution: osmAttrib, id: 'mapbox.streets'});
-		window['map' + unique].addLayer(osm);
+		
+		// Add Scrollwheele Listener, so that you can activate it on mouse click
+		window['map' + unique].on('click', function () {
+			if (window['map' + unique].scrollWheelZoom.enabled()) {
+				window['map' + unique].scrollWheelZoom.disable();
+			} else
+			{
+				window['map' + unique].scrollWheelZoom.enable();
+			}
+		});
+		
+		// Add Marker if possible - fallback cords 0,0
+		try {
+			window['map' + unique].setView(new L.LatLng(lat, lon), 13);
+			var marker = L.marker([lat, lon]).addTo(window['map' + unique]);
+		} catch (e) {
+			window['map' + unique].setView(new L.LatLng(0, 0), 13);
+			var marker = L.marker([0, 0]).addTo(window['map' + unique]);
+			console.log(e);
+		}
 	});
 	// For all maps [end]
 

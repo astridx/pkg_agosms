@@ -5,26 +5,24 @@ document.addEventListener('DOMContentLoaded', function () {
 	[].forEach.call(leafletmaps, function (element) {
 
 		var unique = element.getAttribute('data-unique');
-		var lat = element.getAttribute('data-lat');
-		var lon = element.getAttribute('data-lon');
+		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
 
-		map = new L.Map('map' + unique);
+		// Initialize the Map if needed
+		var container = L.DomUtil.get('map' + unique);
+		if (!container.children.length > 0) {
+			if (scrollwheelzoom === "0")
+			{
+				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: false});
+			} else
+			{
+				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
+			}
+		}
 
 		var googleLayer = L.gridLayer.googleMutant({
 			type: 'roadmap'
-		}).addTo(map);
-		
-
-		// For all maps [end]
-
-		try {
-			map.setView(new L.LatLng(lat, lon), 13);
-			var marker = L.marker([lat, lon]).addTo(map);
-		} catch (e) {
-			map.setView(new L.LatLng(0, 0), 13);
-			var marker = L.marker([0, 0]).addTo(map);
-			console.log(e);
-		}
+		}).addTo(window['map' + unique]);
 	});
+	// For all maps [end]
 
 }, false);
