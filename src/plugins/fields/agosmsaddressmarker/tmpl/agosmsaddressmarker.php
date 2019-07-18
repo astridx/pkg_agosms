@@ -18,6 +18,12 @@ $document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmark
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
 
+if ($fieldParams->get('scrollwheelzoom') === "2")
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.css');
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.js');
+}
+
 if ($fieldParams->get('maptype') === "mapbox")
 {
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-mapbox.js');
@@ -60,6 +66,6 @@ $lon = $values[1];
 	data-lat='<?php echo $lat ?>'
 	data-lon='<?php echo $lon ?>'
 	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
-	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '') ?>'
+	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '1') ?>'
 >
 </div>

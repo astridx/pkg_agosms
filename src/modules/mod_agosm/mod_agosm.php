@@ -87,6 +87,12 @@ if ($params->get('baselayer', 'mapnik') == 'google')
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/Leaflet.GoogleMutant.js');
 }
 
+if ($params->get('scrollwheelzoom') === "2")
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/GoogleGestureHandling/leaflet-gesture-handling.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/GoogleGestureHandling/leaflet-gesture-handling.js');
+}
+
 if ($params->get('showcomponentpin', '0') === "1")
 {
 	$list = ModagosmHelper::getList($params);

@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		var lat = element.getAttribute('data-lat');
 		var lon = element.getAttribute('data-lon');
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
-		var mapboxkey = element.getAttribute('data-mapboxkey');
 
 		// Initialize the Map if needed
 		var container = L.DomUtil.get('map' + unique);
@@ -16,6 +15,19 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (scrollwheelzoom === "0")
 			{
 				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: false});
+			// Add Google Cooperative Gesture Handling 
+			} else if (scrollwheelzoom === "2")
+			{
+				window['map' + unique] = new L.Map('map' + unique, {
+					gestureHandling: true,
+					gestureHandlingOptions: {
+						text: {
+							touch: "Use two fingers to move the map",
+							scroll: "Use ctrl + scroll to zoom the map",
+							scrollMac: "Use \u2318 + scroll to zoom the map"
+						}
+					}				
+				});
 			} else
 			{
 				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
@@ -23,14 +35,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		
 		// Add Scrollwheele Listener, so that you can activate it on mouse click
-		window['map' + unique].on('click', function () {
-			if (window['map' + unique].scrollWheelZoom.enabled()) {
-				window['map' + unique].scrollWheelZoom.disable();
-			} else
-			{
-				window['map' + unique].scrollWheelZoom.enable();
-			}
-		});
+		if (scrollwheelzoom === "0") {
+			window['map' + unique].on('click', function () {
+				if (window['map' + unique].scrollWheelZoom.enabled()) {
+					window['map' + unique].scrollWheelZoom.disable();
+				} else
+				{
+					window['map' + unique].scrollWheelZoom.enable();
+				}
+			});
+		}
 		
 		// Add Marker if possible - fallback cords 0,0
 		try {

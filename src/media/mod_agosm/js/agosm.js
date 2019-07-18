@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			var routesimplerouter = element.getAttribute('data-route-simple-router');
 			var routesimplerouterkey = element.getAttribute('data-route-simple-routerkey');
 		}
-                var showrouting = element.getAttribute('data-showrouting');
+		var showrouting = element.getAttribute('data-showrouting');
 		if (showrouting === '1')
 		{
 			var routingstart = element.getAttribute('data-routingstart').split(",", 3);
@@ -73,25 +73,67 @@ document.addEventListener('DOMContentLoaded', function () {
 			var specialcustomfieldpins = JSON.parse(element.getAttribute('data-specialcustomfieldpins'));
 		}
 
+		// Default: worldCopyJump: false && scrollWheelZoom: true
 		if (noWorldWarp === "1" && scrollwheelzoom === "0")
 		{
-			window['mymap' + moduleId] = new L.Map('map' + moduleId, {worldCopyJump: false, scrollWheelZoom: false, maxBounds: [ [82, -180], [-82, 180] ]}).setView(lonlat, zoom);
+			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+				scrollWheelZoom: false,
+				worldCopyJump: false,
+				maxBounds: [[82, -180], [-82, 180]]
+			}).setView(lonlat, zoom);
 		} else if (noWorldWarp === "1" && scrollwheelzoom === "1") {
-			window['mymap' + moduleId] = new L.Map('map' + moduleId, {worldCopyJump: false, maxBounds: [ [82, -180], [-82, 180] ]}).setView(lonlat, zoom);
+			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+				worldCopyJump: false,
+				maxBounds: [[82, -180], [-82, 180]]
+			}).setView(lonlat, zoom);
+		} else if (noWorldWarp === "1" && scrollwheelzoom === "2") {
+			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+				worldCopyJump: false,
+				maxBounds: [[82, -180], [-82, 180]],
+				gestureHandling: true,
+				gestureHandlingOptions: {
+					text: {
+						touch: "Use two fingers to move the map",
+						scroll: "Use ctrl + scroll to zoom the map",
+						scrollMac: "Use \u2318 + scroll to zoom the map"
+					}
+				}				
+			}).setView(lonlat, zoom);
+		} else if (noWorldWarp === "0" && scrollwheelzoom === "0") {
+			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+				scrollWheelZoom: false,
+				worldCopyJump: true
+			}).setView(lonlat, zoom);
+		} else if (noWorldWarp === "0" && scrollwheelzoom === "2") {
+			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+				worldCopyJump: true,
+				gestureHandling: true,
+				gestureHandlingOptions: {
+					text: {
+						touch: "Use two fingers to move the map",
+						scroll: "Use ctrl + scroll to zoom the map",
+						scrollMac: "Use \u2318 + scroll to zoom the map"
+					}
+				}				
+			}).setView(lonlat, zoom);
 		} else {
-			window['mymap' + moduleId] = new L.Map('map' + moduleId, {worldCopyJump: true}).setView(lonlat, zoom);
+			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+				worldCopyJump: true
+			}).setView(lonlat, zoom);
 		}
 
 		// Add Scrollwheele Listener, so that you can activate it on mouse click
-		window['mymap' + moduleId].on('click', function () {
-			if (window['mymap' + moduleId].scrollWheelZoom.enabled()) {
-				window['mymap' + moduleId].scrollWheelZoom.disable();
-			} else
-			{
-				window['mymap' + moduleId].scrollWheelZoom.enable();
-			}
-		});
-		
+		if (scrollwheelzoom === "0") {
+			window['mymap' + moduleId].on('click', function () {
+				if (window['mymap' + moduleId].scrollWheelZoom.enabled()) {
+					window['mymap' + moduleId].scrollWheelZoom.disable();
+				} else
+				{
+					window['mymap' + moduleId].scrollWheelZoom.enable();
+				}
+			});
+		}
+
 		// Baselayer
 		var nowarp = "noWrap: false, ";
 		if (noWorldWarp === "1")
@@ -119,8 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey, {
 				maxZoom: 18,
 				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
-						'<a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
-						'Imagery © <a href=\"https://mapbox.com\">Mapbox</a>' + astrid,
+					'<a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
+					'Imagery © <a href=\"https://mapbox.com\">Mapbox</a>' + astrid,
 				id: mapboxmaptype
 			});
 		}
@@ -136,8 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			tileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/' + stamenmaptype + '/{z}/{x}/{y}.png', {
 				subdomains: 'abcd', minZoom: 1, maxZoom: 16,
 				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
-						'<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-						'Imagery &copy; <a href=\"http://stamen.com\">Stamen Design</a>' + astrid,
+					'<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
+					'Imagery &copy; <a href=\"http://stamen.com\">Stamen Design</a>' + astrid,
 				id: ''
 			});
 		}
@@ -146,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			tileLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 				maxZoom: 16,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-						'Imagery &copy; <a href=\"http://viewfinderpanoramas.org\">SRTM</a>' + astrid,
+					'Imagery &copy; <a href=\"http://viewfinderpanoramas.org\">SRTM</a>' + astrid,
 				id: ''
 			});
 		}
@@ -155,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			tileLayer = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
 				maxZoom: 20,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-						'Imagery &copy; <a href=\"http://giscience.uni-hd.de\">GIScience Research Group</a>' + astrid,
+					'Imagery &copy; <a href=\"http://giscience.uni-hd.de\">GIScience Research Group</a>' + astrid,
 				id: ''
 			});
 		}
@@ -164,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 				maxZoom: 20,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-						'Imagery &copy; <a href=\"https://hotosm.org\">Humanitarian OpenStreetMap Team</a>' + astrid,
+					'Imagery &copy; <a href=\"https://hotosm.org\">Humanitarian OpenStreetMap Team</a>' + astrid,
 				id: ''
 			});
 		}
@@ -247,10 +289,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				var r = L.marker();
 				window['mymap' + moduleId].on('click', function (e) {
 					L.esri.Geocoding.reverseGeocode()
-							.latlng(e.latlng)
-							.run(function (error, result, response) {
-								r = L.marker(result.latlng).addTo(window['mymap' + moduleId]).bindPopup(result.address.Match_addr).openPopup();
-							});
+						.latlng(e.latlng)
+						.run(function (error, result, response) {
+							r = L.marker(result.latlng).addTo(window['mymap' + moduleId]).bindPopup(result.address.Match_addr).openPopup();
+						});
 				});
 			}
 
@@ -280,21 +322,21 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Add Routing Simple
 		if (showrouting_simple === '1')
 		{
-                        L.leafletControlRoutingtoaddress({ 
-                                position: routesimpleposition,
-                                router: routesimplerouter,
-                                token: routesimplerouterkey,
-                                placeholder: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_PLACEHOLDER'),
-                                errormessage: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE'),
-                                distance: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE'),
-                                duration: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION'),
-                                target: routesimpletarget,
-                                addresserror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
-                                requesterror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR')
+			L.leafletControlRoutingtoaddress({
+				position: routesimpleposition,
+				router: routesimplerouter,
+				token: routesimplerouterkey,
+				placeholder: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_PLACEHOLDER'),
+				errormessage: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE'),
+				distance: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE'),
+				duration: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION'),
+				target: routesimpletarget,
+				addresserror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
+				requesterror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR')
 			}).addTo(window['mymap' + moduleId]);
 		}
 
-                // Add Routing Mapbox
+		// Add Routing Mapbox
 		if (showrouting === '1')
 		{
 			L.Routing.control({
@@ -303,12 +345,12 @@ document.addEventListener('DOMContentLoaded', function () {
 					L.latLng(routingstart),
 					L.latLng(routingend)
 				],
-                                collapsible: true,
+				collapsible: true,
 				router: L.Routing.mapbox(mapboxkeyRouting,
-						{
-							profile: routingprofile,
-							language: routinglanguage,
-						}),
+					{
+						profile: routingprofile,
+						language: routinglanguage,
+					}),
 				units: routingmetric,
 				routeWhileDragging: routewhiledragging
 			}).addTo(window['mymap' + moduleId]);
@@ -327,33 +369,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (obj.pin === "2" && obj.customPinPath != "")
 				{
-/*					var LeafIcon = L.Icon.extend({
+					/*					var LeafIcon = L.Icon.extend({
+					 options: {
+					 iconUrl: obj.customPinPath,
+					 shadowUrl: obj.customPinShadowPath,
+					 iconSize: obj.customPinSize.split(",", 3).map(e => parseInt(e)),
+					 shadowSize: obj.customPinShadowSize.split(",", 3).map(e => parseInt(e)),
+					 iconAnchor: obj.customPinOffset.split(",", 3).map(e => parseInt(e)),
+					 popupAnchor: obj.customPinPopupOffset.split(",", 3).map(e => parseInt(e)),
+					 }
+					 });*/
+					var LeafIcon = L.Icon.extend({
 						options: {
 							iconUrl: obj.customPinPath,
 							shadowUrl: obj.customPinShadowPath,
-							iconSize: obj.customPinSize.split(",", 3).map(e => parseInt(e)),
-							shadowSize: obj.customPinShadowSize.split(",", 3).map(e => parseInt(e)),
-							iconAnchor: obj.customPinOffset.split(",", 3).map(e => parseInt(e)),
-							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(e => parseInt(e)),
+							iconSize: obj.customPinSize.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							shadowSize: obj.customPinShadowSize.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
+								return parseInt(e);
+							})
 						}
-					});*/
-					var LeafIcon = L.Icon.extend({
-					  options: {
-						iconUrl: obj.customPinPath,
-						shadowUrl: obj.customPinShadowPath,
-						iconSize: obj.customPinSize.split(",", 3).map(function (e) {
-						  return parseInt(e);
-						}),
-						shadowSize: obj.customPinShadowSize.split(",", 3).map(function (e) {
-						  return parseInt(e);
-						}),
-						iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
-						  return parseInt(e);
-						}),
-						popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
-						  return parseInt(e);
-						})
-					  }
 					});
 					tempMarker.setIcon(new LeafIcon());
 				}
@@ -361,14 +403,14 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (obj.pin === "3")
 				{
 					var AwesomeIcon = new L.AwesomeMarkers.icon(
-							{
-								icon: obj.awesomeicon_icon,
-								markerColor: obj.awesomeicon_markercolor,
-								iconColor: obj.awesomeicon_iconcolor,
-								prefix: 'fa',
-								spin: (obj.awesomeicon_spin === "true"),
-								extraClasses: obj.awesomeicon_extraclasses,
-							})
+						{
+							icon: obj.awesomeicon_icon,
+							markerColor: obj.awesomeicon_markercolor,
+							iconColor: obj.awesomeicon_iconcolor,
+							prefix: 'fa',
+							spin: (obj.awesomeicon_spin === "true"),
+							extraClasses: obj.awesomeicon_extraclasses,
+						})
 					tempMarker.setIcon(AwesomeIcon);
 				}
 
@@ -402,33 +444,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (obj.showdefaultpin === "2" && obj.customPinPath != "")
 				{
-/*					var LeafIcon = L.Icon.extend({
+					/*					var LeafIcon = L.Icon.extend({
+					 options: {
+					 iconUrl: obj.customPinPath,
+					 shadowUrl: obj.customPinShadowPath,
+					 iconSize: obj.customPinSize.split(",", 3).map(e => parseInt(e)),
+					 shadowSize: obj.customPinShadowSize.split(",", 3).map(e => parseInt(e)),
+					 iconAnchor: obj.customPinOffset.split(",", 3).map(e => parseInt(e)),
+					 popupAnchor: obj.customPinPopupOffset.split(",", 3).map(e => parseInt(e)),
+					 }
+					 });*/
+					var LeafIcon = L.Icon.extend({
 						options: {
 							iconUrl: obj.customPinPath,
 							shadowUrl: obj.customPinShadowPath,
-							iconSize: obj.customPinSize.split(",", 3).map(e => parseInt(e)),
-							shadowSize: obj.customPinShadowSize.split(",", 3).map(e => parseInt(e)),
-							iconAnchor: obj.customPinOffset.split(",", 3).map(e => parseInt(e)),
-							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(e => parseInt(e)),
+							iconSize: obj.customPinSize.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							shadowSize: obj.customPinShadowSize.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
+								return parseInt(e);
+							})
 						}
-					});*/
-					var LeafIcon = L.Icon.extend({
-					  options: {
-						iconUrl: obj.customPinPath,
-						shadowUrl: obj.customPinShadowPath,
-						iconSize: obj.customPinSize.split(",", 3).map(function (e) {
-						  return parseInt(e);
-						}),
-						shadowSize: obj.customPinShadowSize.split(",", 3).map(function (e) {
-						  return parseInt(e);
-						}),
-						iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
-						  return parseInt(e);
-						}),
-						popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
-						  return parseInt(e);
-						})
-					  }
 					});
 					tempMarker.setIcon(new LeafIcon());
 				}
@@ -436,14 +478,14 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (obj.showdefaultpin === "3")
 				{
 					var AwesomeIcon = new L.AwesomeMarkers.icon(
-							{
-								icon: obj.awesomeicon_icon,
-								markerColor: obj.awesomeicon_markercolor,
-								iconColor: obj.awesomeicon_iconcolor,
-								prefix: 'fa',
-								spin: (obj.awesomeicon_spin === "true"),
-								extraClasses: obj.awesomeicon_extraclasses,
-							})
+						{
+							icon: obj.awesomeicon_icon,
+							markerColor: obj.awesomeicon_markercolor,
+							iconColor: obj.awesomeicon_iconcolor,
+							prefix: 'fa',
+							spin: (obj.awesomeicon_spin === "true"),
+							extraClasses: obj.awesomeicon_extraclasses,
+						})
 					tempMarker.setIcon(AwesomeIcon);
 				}
 
@@ -467,14 +509,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (showcustomfieldpin === '1')
 		{
 			var clustermarkers = L.markerClusterGroup();
-			
+
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
 				// skip loop if the property is from prototype
 				if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin))
 					continue;
 
 				var objcf = specialcustomfieldpins[specialcustomfieldpin];
-				
+
 				let tempMarkercf = null;
 				if (objcf.cords)
 				{
@@ -483,20 +525,20 @@ document.addEventListener('DOMContentLoaded', function () {
 					if (values.length > 4)
 					{
 						var AwesomeIcon = new L.AwesomeMarkers.icon(
-								{
-									icon: values[4],
-									markerColor: values[2],
-									iconColor: values[3],
-									prefix: 'fa',
-									spin: false,
-									extraClasses: "agosmsmarkerextraklasse",
-								})
+							{
+								icon: values[4],
+								markerColor: values[2],
+								iconColor: values[3],
+								prefix: 'fa',
+								spin: false,
+								extraClasses: "agosmsmarkerextraklasse",
+							})
 						tempMarkercf.setIcon(AwesomeIcon);
 					}
 
 					let url = "index.php?options=com_content&view=article&id=" + objcf.id;
 					let title = objcf.title;
-					
+
 					if (values.length > 5 && values[5].trim() != '')
 					{
 						title = values[5];
@@ -504,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
 					tempMarkercf.bindPopup(popuptext);
 					tempMarkercf.addTo(clustermarkers);
-				}					
+				}
 			}
 			window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
 			clustermarkers.addTo(window['mymap' + moduleId]);
