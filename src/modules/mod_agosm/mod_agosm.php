@@ -102,5 +102,11 @@ if ($params->get('showcustomfieldpin', '0') === "1")
 {
 	$listcf = ModagosmHelper::getListCustomField($params);
 }
+
+if ($params->get('showmarkerfromexternaldb', '0') === "1")
+{
+	$listexternaldb = ModagosmHelper::getListExternaldb($params);
+}
+
 $document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosm.js');
 require JModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));

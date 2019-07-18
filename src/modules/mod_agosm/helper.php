@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -106,8 +107,7 @@ class ModagosmHelper
 
 		if ($items)
 		{
-			foreach ($items as $item)
-			{
+			foreach ($items as $item) {
 				$category = $model->getCategory($item->id);
 				break;
 			}
@@ -211,9 +211,8 @@ class ModagosmHelper
 
 		if ($items)
 		{
-			
-			foreach ($items as $key => $item)
-			{
+
+			foreach ($items as $key => $item) {
 				if ($item->state !== "1")
 				{
 					continue;
@@ -225,14 +224,13 @@ class ModagosmHelper
 				$itemfiltered1 = new stdClass;
 				$itemfiltered2 = new stdClass;
 				$itemfiltered3 = new stdClass;
-				foreach ($fields as $key => $field)
-				{
+				foreach ($fields as $key => $field) {
 					if ($field->title == 'lat, lon')
 					{
 						$itemfiltered1->cords = $field->value;
 						$test = explode(",", $itemfiltered1->cords);
 						if (is_numeric($test[0]) && is_numeric($test[1]))
-						{						
+						{
 							$itemfiltered1->title = $item->title;
 							$itemfiltered1->id = $item->id;
 							$itemsfiltered[] = $itemfiltered1;
@@ -271,5 +269,39 @@ class ModagosmHelper
 		}
 
 		return;
+	}
+
+	/**
+	 * Show external database
+	 *
+	 * @param   mixed  &$params  The parameters set in the administrator backend
+	 *
+	 * @return  mixed   Null if no agosms based on input parameters else an array containing all the agosms.
+	 *
+	 * @since   1.0.43
+	 * */
+	public static function getListExternaldb(&$params)
+	{
+		$options = array(
+		'driver' => 'mysqli',
+		'host' => 'localhost',
+		'user' => 'root',
+		'password' => 'Schweden1!',
+		'database' => 'joomla_db'
+		);
+		
+		$externalDb = JDatabaseDriver::getInstance($options);
+		$query = $externalDb->getQuery(true);
+		
+		$query->select($externalDb->quoteName(array('*')));
+		$query->from($externalDb->quoteName('j3_agosms'));
+
+		// Reset the query using our newly populated query object.
+		$externalDb->setQuery($query);
+
+		// Load the results as a list of stdClass objects (see later for more options on retrieving data).
+		$results = $externalDb->loadObjectList();
+		
+		return $results;
 	}
 }

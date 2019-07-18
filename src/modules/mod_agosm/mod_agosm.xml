@@ -307,7 +307,7 @@
 					<option value="topright">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPRIGHT</option>
 				</field>
 
-                                <field
+				<field
 					type="list"
 					name="showrouting_places"
 					default="0"
@@ -319,7 +319,7 @@
 					<option value="0">JNO</option>
 				</field>
 
-                                <field
+				<field
 					name="routing_simple_target"
 					type="text"
 					default="Koblenz, Rheinland-Pfalz, Deutschland"
@@ -349,7 +349,7 @@
 					size="40"
 					showon="showrouting_simple:1[AND]routing_simple_router:mapbox"
 				/>
-                        </fieldset>
+			</fieldset>
 			<!-- Routing Mapbox-->
 			<fieldset
 				name="agosmControlRouting"
@@ -741,7 +741,70 @@
 					<option value="0">JNO</option>
 				</field>
 			</fieldset>
-
+			<!-- Marker from database -->
+			<fieldset
+				name="agosmControlMarkers"
+				label="MOD_AGOSM_DATABASE_FIELDSET"
+			>
+				<field
+					type="spacer"
+					name="spacerMarkers"
+					label="MOD_AGOSM_MARKERS"
+					class="text"
+				/>
+				<field
+					type="list"
+					name="showmarkerfromexternaldb"
+					default="0"
+					label="MOD_AGOSM_SHOWEXTERNALDATABASE_LABEL"
+					description="MOD_AGOSM_SHOWEXTERNALDATABASE_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					type="text"
+					name="host"
+					label="MOD_AGOSM_HOST"
+					default="localhost"
+					showon="showmarkerfromexternaldb:1"
+				/>
+				<field
+					type="text"
+					name="user"
+					label="MOD_AGOSM_USER"
+					default=""
+					showon="showmarkerfromexternaldb:1"
+				/>
+				<field
+					type="password"
+					name="password"
+					label="MOD_AGOSM_PASSWORD"
+					default=""
+					showon="showmarkerfromexternaldb:1"
+				/>
+				<field
+					type="text"
+					name="table"
+					label="MOD_AGOSM_TABLE"
+					default=""
+					showon="showmarkerfromexternaldb:1"
+				/>
+				<field
+					type="text"
+					name="column_coordinates"
+					label="MOD_AGOSM_COLUMN_COORDINATES"
+					default=""
+					showon="showmarkerfromexternaldb:1"
+				/>
+				<field
+					type="text"
+					name="column_popuptext"
+					label="MOD_AGOSM_COLUMN_POPUPTEXT"
+					default=""
+					showon="showmarkerfromexternaldb:1"
+				/>
+			</fieldset>
 			<!-- Show Pins from Component -->
 			<fieldset
 				name="pinConfigFromComponent"
@@ -759,90 +822,93 @@
 				</field>
 			</fieldset>
 
-			<!-- advanced -->
-			<fieldset name="upload">
+			<!-- upload -->
+			<fieldset 
+				name="upload"
+				label="MOD_AGOSM_UPLOAD_FIELDSET"
+			>
 				<!-- Basic Required Fields -->
 				<field name="ag_parent" 
-					type="fixedfolderlist" 
-					default="images" 
-					label="MOD_AG_PARENT_LABEL" 
-					directory="" 
-					description="MOD_AG_PARENT_DESC" 
-					hide_none="true" 
-					hide_default="true" 
-					exclude="^[Aa]dministrator$|^[Cc]ache$|^[Cc]omponents$|^[Cc]li$|^[Ii]ncludes$|^[Ll]anguage$|^[Ll]ibraries$|^[Ll]ogs$|^[Mm]odules$|^[Pp]lugins$|^[Tt]emplates$|^[Xx]mlrpc$" 
+					   type="fixedfolderlist" 
+					   default="images" 
+					   label="MOD_AG_PARENT_LABEL" 
+					   directory="" 
+					   description="MOD_AG_PARENT_DESC" 
+					   hide_none="true" 
+					   hide_default="true" 
+					   exclude="^[Aa]dministrator$|^[Cc]ache$|^[Cc]omponents$|^[Cc]li$|^[Ii]ncludes$|^[Ll]anguage$|^[Ll]ibraries$|^[Ll]ogs$|^[Mm]odules$|^[Pp]lugins$|^[Tt]emplates$|^[Xx]mlrpc$" 
 				/>
 				<field name="ag_folder" 
-					type="text" 
-					default="" 
-					label="MOD_AG_FOLDER_LABEL" 
-					description="MOD_AG_FOLDER_DESC" 
+					   type="text" 
+					   default="" 
+					   label="MOD_AG_FOLDER_LABEL" 
+					   description="MOD_AG_FOLDER_DESC" 
 				/>
 				<field name="ag_maxsize" 
-					type="text" 
-					default="1000000" 
-					label="MOD_AG_MAXSIZE_LABEL" 
-					description="MOD_AG_MAXSIZE_DESC" 
+					   type="text" 
+					   default="1000000" 
+					   label="MOD_AG_MAXSIZE_LABEL" 
+					   description="MOD_AG_MAXSIZE_DESC" 
 				/>
 				<!-- Security -->
 				<field name="ag_spacer_details" 
-					type="spacer" 
-					label="MOD_AG_DETAILS_SPACER" 
+					   type="spacer" 
+					   label="MOD_AG_DETAILS_SPACER" 
 				/>
 				<field name="ag_filetypes" 
-					type="textarea" 
-					default="text/xml;application/gpx+xml;" 
-					label="MOD_AG_FILETYPES_LABEL" 
-					description="MOD_AG_FILETYPES_DESC" 
-					rows="10" 
-					cols="40" 
+					   type="textarea" 
+					   default="text/xml;application/gpx+xml;" 
+					   label="MOD_AG_FILETYPES_LABEL" 
+					   description="MOD_AG_FILETYPES_DESC" 
+					   rows="10" 
+					   cols="40" 
 				/>
 				<field name="ag_default_replace" 
-					type="radio" 
-					default="0" 
-					label="MOD_AG_DEFAULT_REPLACE_LABEL" 
-					description="MOD_AG_DEFAULT_REPLACE_DESC"
-					class="btn-group btn-group-yesno"
+					   type="radio" 
+					   default="0" 
+					   label="MOD_AG_DEFAULT_REPLACE_LABEL" 
+					   description="MOD_AG_DEFAULT_REPLACE_DESC"
+					   class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 				<field name="ag_replace" 
-					type="radio" 
-					default="1" 
-					label="MOD_AG_REPLACE_LABEL" 
-					description="MOD_AG_REPLACE_DESC"
-					class="btn-group btn-group-yesno"
+					   type="radio" 
+					   default="1" 
+					   label="MOD_AG_REPLACE_LABEL" 
+					   description="MOD_AG_REPLACE_DESC"
+					   class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 				<field name="ag_scriptsinarchives" 
-					type="radio" 
-					default="0" 
-					label="MOD_AG_SCRIPTS_IN_ARCHIVE_LABEL" 
-					description="MOD_AG_SCRIPTS_IN_ARCHIVE_DESC"
-					class="btn-group btn-group-yesno"
+					   type="radio" 
+					   default="0" 
+					   label="MOD_AG_SCRIPTS_IN_ARCHIVE_LABEL" 
+					   description="MOD_AG_SCRIPTS_IN_ARCHIVE_DESC"
+					   class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 				<!-- Formatting -->
 				<field name="ag_spacer_format" 
-					type="spacer" 
-					label="MOD_AG_FORMAT_SPACER" 
+					   type="spacer" 
+					   label="MOD_AG_FORMAT_SPACER" 
 				/>
 				<field name="ag_variable" 
-					type="text" 
-					default="fileToUpload" 
-					label="MOD_AG_VARIABLE_LABEL" 
-					description="MOD_AG_VARIABLE_DESC" 
+					   type="text" 
+					   default="fileToUpload" 
+					   label="MOD_AG_VARIABLE_LABEL" 
+					   description="MOD_AG_VARIABLE_DESC" 
 				/>
 				<field name="ag_multiple" 
-					type="list" 
-					default="1" 
-					label="MOD_AG_MULTIPLE_LABEL" 
-					description="MOD_AG_MULTIPLE_DESC"
+					   type="list" 
+					   default="1" 
+					   label="MOD_AG_MULTIPLE_LABEL" 
+					   description="MOD_AG_MULTIPLE_DESC"
 				>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -856,26 +922,26 @@
 					<option value="10">10</option>
 				</field>
 				<field name="ag_shownofile" 
-					type="radio" 
-					default="1" 
-					label="MOD_AG_SHOW_NO_FILE_UPLOADED_NOTICE_LABEL" 
-					description="MOD_AG_SHOW_NO_FILE_UPLOADED_NOTICE_DESC"
-					class="btn-group btn-group-yesno"
+					   type="radio" 
+					   default="1" 
+					   label="MOD_AG_SHOW_NO_FILE_UPLOADED_NOTICE_LABEL" 
+					   description="MOD_AG_SHOW_NO_FILE_UPLOADED_NOTICE_DESC"
+					   class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 				<!-- Advanced Features -->
 				<field name="ag_spacer_advanced" 
-					type="spacer" 
-					label="MOD_AG_ADVANCED_SPACER" 
+					   type="spacer" 
+					   label="MOD_AG_ADVANCED_SPACER" 
 				/>
 				<field name="ag_user" 
-					type="radio" 
-					default="0" 
-					label="MOD_AG_USER_LABEL" 
-					description="MOD_AG_USER_DESC"
-					class="btn-group btn-group-yesno"
+					   type="radio" 
+					   default="0" 
+					   label="MOD_AG_USER_LABEL" 
+					   description="MOD_AG_USER_DESC"
+					   class="btn-group btn-group-yesno"
 				>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
