@@ -5,6 +5,11 @@ L.GestureHander_LanguageContent = {
         "scroll": "Use ctrl + scroll to zoom the map",
         "scrollMac": "Use \u2318 + scroll to zoom the map"
     },
+    "de": {
+        "touch": "Bewege die Karte mit zwei Fingern",
+        "scroll": "Verwende Strg + Scrollen, um die Karte zu zoomen",
+        "scrollMac": "Verwende \u2318 + Scrollen, um die Karte zu zoomen"
+    },
 };
 /*
 * * Leaflet Gesture Handling **
