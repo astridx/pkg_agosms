@@ -89,8 +89,8 @@ if ($params->get('baselayer', 'mapnik') == 'google')
 
 if ($params->get('scrollwheelzoom') === "2")
 {
-	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/GoogleGestureHandling/leaflet-gesture-handling.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/GoogleGestureHandling/leaflet-gesture-handling.js');
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/GoogleGestureHandling/leaflet-gesture-handling.min.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/GoogleGestureHandling/leaflet-gesture-handling.min.js');
 }
 
 if ($params->get('showcomponentpin', '0') === "1")

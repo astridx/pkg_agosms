@@ -230,6 +230,11 @@
 					<option value="0">JNO</option>
 				</field>
 				<field
+					type="spacer"
+					name="spacerPos0y"
+					hr="true"
+				/>
+				<field
 					name="scrollwheelzoom"
 					type="radio"
 					label="MOD_AGOSM_SCROLLWHEELZOOM_LABEL"
@@ -240,6 +245,22 @@
 					<option value="1">JYES</option>
 					<option value="2">Google Gesture Handling</option>
 				</field>
+				<field
+					name="owngooglegesturetext"
+					type="radio"
+					label="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT"
+					description="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT_DESC"
+					default="1"
+					showon="scrollwheelzoom:2"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field
+					type="spacer"
+					name="spacerPos0x"
+					hr="true"
+				/>
 				<field
 					type="list"
 					name="attrModule"

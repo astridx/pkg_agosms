@@ -92,8 +92,6 @@ if (isset($_FILES[$params->get('ag_variable')])) :
 	 width:auto;
 	 height:<?php echo $params->get('height', '400'); ?>px;"
 	 data-module-id="<?php echo $module->id; ?>"
-	data-scrollwheelzoom='<?php echo $params->get('scrollwheelzoom', '') ?>'
-
 	 data-gpx_file_name="<?php echo $gpxfile; ?>"
 	 data-startIconUrl="<?php echo $startIconUrl; ?>"
 	 data-endIconUrl="<?php echo $endIconUrl; ?>"
@@ -176,8 +174,14 @@ if (isset($_FILES[$params->get('ag_variable')])) :
 		 data-specialcustomfieldpins="<?php echo htmlspecialchars(json_encode($listcf), ENT_QUOTES, 'UTF-8'); ?>"
 		 data-showcustomfieldpin="<?php echo $params->get('showcustomfieldpin', '1'); ?>"
 	 <?php endif; ?>
-	 class="leafletmapMod leafletmapModGpx"
-	 id="map<?php echo $module->id; ?>">
+	data-scrollwheelzoom='<?php echo $params->get('scrollwheelzoom', '') ?>'
+	data-owngooglegesturetext='<?php echo $params->get('owngooglegesturetext', '1') ?>'
+	data-scroll='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLL'); ?>'
+	data-touch='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_TOUCH'); ?>'
+	data-scrollmac='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'); ?>'
+
+	class="leafletmapMod leafletmapModGpx"
+	id="map<?php echo $module->id; ?>">
 </div>
 
 <?php

@@ -20,8 +20,8 @@ $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/j
 
 if ($fieldParams->get('scrollwheelzoom') === "2")
 {
-	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.css');
-	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.js');
+	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.min.css');
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.min.js');
 }
 
 if ($fieldParams->get('maptype') === "mapbox")
@@ -67,5 +67,9 @@ $lon = $values[1];
 	data-lon='<?php echo $lon ?>'
 	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
 	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '1') ?>'
+	data-owngooglegesturetext='<?php echo $fieldParams->get('owngooglegesturetext', '1') ?>'
+	data-scroll='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLL'); ?>'
+	data-touch='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_TOUCH'); ?>'
+	data-scrollmac='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'); ?>'
 >
 </div>

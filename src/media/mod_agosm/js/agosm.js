@@ -72,6 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			var specialcustomfieldpins = JSON.parse(element.getAttribute('data-specialcustomfieldpins'));
 		}
+		var touch = element.getAttribute('data-touch');
+		var scroll = element.getAttribute('data-scroll');
+		var scrollmac = element.getAttribute('data-scrollmac');
+		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
 
 		// Default: worldCopyJump: false && scrollWheelZoom: true
 		if (noWorldWarp === "1" && scrollwheelzoom === "0")
@@ -87,35 +91,48 @@ document.addEventListener('DOMContentLoaded', function () {
 				maxBounds: [[82, -180], [-82, 180]]
 			}).setView(lonlat, zoom);
 		} else if (noWorldWarp === "1" && scrollwheelzoom === "2") {
-			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
-				worldCopyJump: false,
-				maxBounds: [[82, -180], [-82, 180]],
-				gestureHandling: true,
-				gestureHandlingOptions: {
-					text: {
-						touch: "Use two fingers to move the map",
-						scroll: "Use ctrl + scroll to zoom the map",
-						scrollMac: "Use \u2318 + scroll to zoom the map"
+			if (owngooglegesturetext === "1") {
+				window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+					worldCopyJump: false,
+					maxBounds: [[82, -180], [-82, 180]],
+					gestureHandling: true,
+					gestureHandlingText: {
+						touch: touch,
+						scroll: scroll,
+						scrollMac: scrollmac
 					}
-				}				
-			}).setView(lonlat, zoom);
+				}).setView(lonlat, zoom);
+			} else
+			{
+				window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+					worldCopyJump: false,
+					maxBounds: [[82, -180], [-82, 180]],
+					gestureHandling: true
+				}).setView(lonlat, zoom);
+			}
 		} else if (noWorldWarp === "0" && scrollwheelzoom === "0") {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 				scrollWheelZoom: false,
 				worldCopyJump: true
 			}).setView(lonlat, zoom);
 		} else if (noWorldWarp === "0" && scrollwheelzoom === "2") {
-			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
-				worldCopyJump: true,
-				gestureHandling: true,
-				gestureHandlingOptions: {
-					text: {
-						touch: "Use two fingers to move the map",
-						scroll: "Use ctrl + scroll to zoom the map",
-						scrollMac: "Use \u2318 + scroll to zoom the map"
+			if (owngooglegesturetext === "1") {
+				window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+					worldCopyJump: true,
+					gestureHandling: true,
+					gestureHandlingText: {
+						touch: touch,
+						scroll: scroll,
+						scrollMac: scrollmac
 					}
-				}				
-			}).setView(lonlat, zoom);
+				}).setView(lonlat, zoom);
+			} else
+			{
+				window['mymap' + moduleId] = new L.Map('map' + moduleId, {
+					worldCopyJump: true,
+					gestureHandling: true
+				}).setView(lonlat, zoom);
+			}
 		} else {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 				worldCopyJump: true
