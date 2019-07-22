@@ -35,7 +35,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected $layout = 'agosmsaddressmarker';
 
 	/**
-	 * The name of the addressfields field.
+	 * The name of the mapheigth field.
 	 *
 	 * @var    int
 	 * @since  1.0.40
@@ -43,7 +43,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected $mapheight;
 
 	/**
-	 * The name of the addressfields field.
+	 * The name of the maptype field.
 	 *
 	 * @var    string
 	 * @since  1.0.40
@@ -51,7 +51,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected $maptype;
 
 	/**
-	 * The name of the addressfields field.
+	 * The name of the geocoder field.
 	 *
 	 * @var    string
 	 * @since  1.0.40
@@ -59,7 +59,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected $geocoder;
 
 	/**
-	 * The name of the addressfields field.
+	 * The name of the googlekey field.
 	 *
 	 * @var    string
 	 * @since  1.0.40
@@ -67,7 +67,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected $googlekey;
 
 	/**
-	 * The name of the addressfields field.
+	 * The name of the mapboxkey field.
 	 *
 	 * @var    string
 	 * @since  1.0.40
@@ -83,12 +83,20 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected $addressfields;
 	
 	/**
-	 * The name of the addressfields field.
+	 * The name of the scrollwheelzoom field.
 	 *
 	 * @var    string
 	 * @since  1.0.42
 	 */
 	protected $scrollwheelzoom; 
+	
+	/**
+	 * The name of the owngooglegesturetext field.
+	 *
+	 * @var    string
+	 * @since  1.0.43
+	 */
+	protected $owngooglegesturetext;
 
 	/**
 	 * Method to get certain otherwise inaccessible properties from the form field object.
@@ -108,6 +116,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			case 'geocoder':
 			case 'googlekey':
 			case 'mapboxkey':
+			case 'owngooglegesturetext':
 				return $this->$name;
 		}
 
@@ -141,6 +150,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$this->mapboxkey = (string) $this->element['mapboxkey'];
 			$this->addressfields = (string) $this->element['addressfields'];
 			$this->scrollwheelzoom = (string) $this->element['scrollwheelzoom'];
+			$this->owngooglegesturetext = (string) $this->element['owngooglegesturetext'];
 		}
 
 		return $result;
@@ -186,6 +196,10 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 
 			case 'scrollwheelzoom':
 				$this->scrollwheelzoom = (string) $value;
+				break;
+			
+			case 'owngooglegesturetext':
+				$this->owngooglegesturetext = (string) $value;
 				break;
 
 			default:
@@ -246,6 +260,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			'mapboxkey' => $this->mapboxkey,
 			'addressfields' => $this->addressfields,
 			'scrollwheelzoom' => $this->scrollwheelzoom,
+			'owngooglegesturetext' => $this->owngooglegesturetext,
 			'options' => $options,
 		);
 
