@@ -878,7 +878,7 @@
 				/>
 				<field name="ag_filetypes" 
 					   type="textarea" 
-					   default="text/xml;application/gpx+xml;" 
+					   default="text/xml;application/gpx+xml;application/octet-stream;" 
 					   label="MOD_AG_FILETYPES_LABEL" 
 					   description="MOD_AG_FILETYPES_DESC" 
 					   rows="10" 
