@@ -306,11 +306,19 @@ class EasyFileUploaderHelper
 	private static function storeUploadedFile($filepath, &$params, &$result, &$i, $replaced = false)
 	{
 		$result_text = '';
+		$success = false;
 
 		// Move the file to the destination folder
-		$success = move_uploaded_file(
-			$_FILES[$params->get('ag_variable')]["tmp_name"][$i], $filepath . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i]
-			);
+		if (file_exists($filepath))
+		{
+			$success = move_uploaded_file(
+				$_FILES[$params->get('ag_variable')]["tmp_name"][$i], $filepath . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i]
+				);
+		}
+		else
+		{
+			$result_text .= Text::_('MOD_AG_FOLDER_NOT_EXISTS') . " ";
+		}
 
 		if ($replaced)
 		{

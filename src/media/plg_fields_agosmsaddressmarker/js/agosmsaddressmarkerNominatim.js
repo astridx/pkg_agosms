@@ -17,7 +17,7 @@ document.addEventListener('click', function (e) {
 			} else if (results.length > 0) {
 				// Limit is fix set to 1 up to now
 			} else {
-				console.log("Why is there noe result?");
+				console.log("Why is there no result?");
 				tempAlert("Error: " + addressstring, 2000, "dc3545");
 			}
 		}

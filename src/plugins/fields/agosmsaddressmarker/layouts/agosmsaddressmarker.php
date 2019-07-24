@@ -7,7 +7,6 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-
 defined('JPATH_BASE') or die;
 
 extract($displayData);
@@ -44,7 +43,6 @@ extract($displayData);
  * @var   array    $inputType       Options available for this field.
  * @var   string   $accept          File types that are accepted.
  */
-
 // Including fallback code for HTML5 non supported browsers.
 JHtml::_('jquery.framework');
 JHtml::_('script', 'system/html5fallback.js', array('version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9'));
@@ -62,7 +60,7 @@ elseif ($geocoder === "google")
 	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerGoogle.js', array('version' => 'auto', 'relative' => true));
 }
 else
-{	
+{
 	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerNominatim.js', array('version' => 'auto', 'relative' => true));
 }
 
@@ -86,13 +84,30 @@ $attributes = array(
 ?>
 
 
-<?php 
+<?php
 // Load the Fields of this item
-$current_component  = JFactory::getApplication()->input->getCmd('option');
-$current_view  = JFactory::getApplication()->input->getCmd('view');
-$current_context  = $current_component . '.' . $current_view;
+$app = JFactory::getApplication();
+$current_component = $app->input->getCmd('option');
+$current_view = $app->input->getCmd('view');
+$current_context = $current_component . '.' . $current_view;
 $item = new stdClass;
-$item->id = (int) JFactory::getApplication()->input->getCmd('id');
+
+if ($app->isClient('administrator'))
+{
+	$item->id = (int) JFactory::getApplication()->input->getCmd('id');
+}
+else if (
+	$app->isClient('site') 
+	&& $current_component === "com_content"
+	&& $app->input->getCmd('a_id') !== null)
+{
+	$item->id = (int) $app->input->getCmd('a_id');
+	$current_context = $current_component . '.article';
+}
+else
+{
+	JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_COMPONENT_NOT_SUPPORTET_FOR_FRONTENDEDITING'), 'message');
+}
 
 $fields = FieldsHelper::getFields($current_context, $item);
 
@@ -129,32 +144,29 @@ if (!empty($fields))
 
 <hr>
 <p>
-	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
 </p>
 <div class="agosmsaddressmarkersurroundingdiv">
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?><input type="text" class="agosmsaddressmarkerlat" >
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
-<br>
-<button 
-	data-addressstring="<?php echo htmlspecialchars($addressstring, ENT_QUOTES, 'UTF-8'); ?>"
-	data-mapboxkey="<?php echo $mapboxkey; ?>"
-	data-googlekey="<?php echo $googlekey; ?>"
-	class="btn btn-success agosmsaddressmarkerbutton" 
-	type="button">
+	<br>
+	<button 
+		data-addressstring="<?php echo htmlspecialchars($addressstring, ENT_QUOTES, 'UTF-8'); ?>"
+		data-mapboxkey="<?php echo $mapboxkey; ?>"
+		data-googlekey="<?php echo $googlekey; ?>"
+		class="btn btn-success agosmsaddressmarkerbutton" 
+		type="button">
 	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
-</button>
-<p>
-	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
-	<?php echo $fieldnames; ?>
-</p>
+	</button>
+	<p>
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
+<?php echo $fieldnames; ?>
+	</p>
 
 
 
-<input class="agosmsaddressmarkerhiddenfield" 
-type="hidden" 
-readonly name="<?php
-echo $name; ?>" id="<?php
-echo $id; ?>" value="<?php
-echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> />
+	<input class="agosmsaddressmarkerhiddenfield" 
+		   type="hidden" 
+		   readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> />
 </div>
 <hr>
