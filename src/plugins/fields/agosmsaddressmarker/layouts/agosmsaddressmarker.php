@@ -136,8 +136,8 @@ if (!empty($fields))
 		// Save value to addressstring, if field is in the options of this custom field
 		if (in_array($field->id, $addressfieldsvalues))
 		{
-			$addressstring .= $field->rawvalue . ',';
-			$fieldnames .= $field->label . ' ( ' . $field->name . ', ' . $field->id . ')<br>';
+			$addressstring .= $field->value . ',';
+			$fieldnames    .= $field->label . ' (' . $field->name . ', ' . $field->id . ')<br>';
 		}
 	}
 }
