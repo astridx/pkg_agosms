@@ -111,10 +111,12 @@ if ($current_component == 'com_content')
 // TODO Check for com_contact
 $current_context = $current_component . '.' . $current_view;
 
-$fields = FieldsHelper::getFields($current_context, $item);
+// Load fields with prepared values
+$fields = FieldsHelper::getFields($current_context, $item, true);
 
 $addressfieldsvalues = array();
-$addressfieldsArray = json_decode($addressfields);
+$addressfieldsArray  = json_decode($addressfields);
+
 if (!empty($addressfieldsArray))
 {
 	foreach ($addressfieldsArray as $a)
@@ -125,7 +127,8 @@ if (!empty($addressfieldsArray))
 
 // Build the address string and a string with the field names from the selected fields 
 $addressstring = "";
-$fieldnames = "";
+$fieldnames    = "";
+
 if (!empty($fields))
 {
 	foreach ($fields as $field)
