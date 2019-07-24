@@ -94,7 +94,11 @@ $current_view      = $app->input->getCmd('view');
 if ($current_component == 'com_users')
 {
 	$current_view = 'user';
-	$item->id = $app->getUser()->getInt('id');
+
+	if ($app->isClient('site'))
+	{
+		$item->id = (int) JFactory::getUser()->get('id');
+	}
 }
 
 // Correct view when editing com_content, because the frontend view uses 'form' instead of 'article'
