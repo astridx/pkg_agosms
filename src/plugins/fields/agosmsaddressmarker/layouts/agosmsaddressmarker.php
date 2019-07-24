@@ -7,6 +7,7 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
+
 defined('JPATH_BASE') or die;
 
 extract($displayData);
@@ -81,33 +82,34 @@ $attributes = array(
 	!empty($inputmode) ? $inputmode : '',
 	!empty($pattern) ? 'pattern="' . $pattern . '"' : '',
 );
-?>
 
-
-<?php
-// Load the Fields of this item
-$app = JFactory::getApplication();
+// Define defaults
+$app               = JFactory::getApplication();
+$item              = new stdClass;
+$item->id          = $app->input->getInt('id');
 $current_component = $app->input->getCmd('option');
-$current_view = $app->input->getCmd('view');
-$current_context = $current_component . '.' . $current_view;
-$item = new stdClass;
+$current_view      = $app->input->getCmd('view');
 
-if ($app->isClient('administrator'))
+// Correct view when editing com_users, because the frontend view uses 'profile' instead of 'user'
+if ($current_component == 'com_users')
 {
-	$item->id = (int) JFactory::getApplication()->input->getCmd('id');
+	$current_view = 'user';
+	$item->id = $app->getUser()->getInt('id');
 }
-else if (
-	$app->isClient('site') 
-	&& $current_component === "com_content"
-	&& $app->input->getCmd('a_id') !== null)
+
+// Correct view when editing com_content, because the frontend view uses 'form' instead of 'article'
+if ($current_component == 'com_content')
 {
-	$item->id = (int) $app->input->getCmd('a_id');
-	$current_context = $current_component . '.article';
+	$current_view = 'article';
+
+	if ($app->isClient('site'))
+	{
+		$item->id = $app->input->getInt('a_id');
+	}
 }
-else
-{
-	JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_COMPONENT_NOT_SUPPORTET_FOR_FRONTENDEDITING'), 'message');
-}
+
+// TODO Check for com_contact
+$current_context = $current_component . '.' . $current_view;
 
 $fields = FieldsHelper::getFields($current_context, $item);
 
