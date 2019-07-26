@@ -183,92 +183,96 @@ class ModagosmHelper
 		// Get an instance of the generic articles model
 		$model = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 
-		// Set application parameters in model
-		$app = JFactory::getApplication();
-		$appParams = $app->getParams();
-		$model->setState('params', $appParams);
-
-		// Set the filters based on the module params
-		$model->setState('list.start', 0);
-		$model->setState('filter.state', 1);
-		$model->setState('filter.publish_date', true);
-
-		// Access filter
-		$access = !JComponentHelper::getParams('com_agosms')->get('show_noauth');
-		$model->setState('filter.access', $access);
-
-		$catid = (int) $params->get('catid', 0);
-		$model->setState('category.id', $catid);
-		$model->setState('category.group', $params->get('groupby', 0));
-		$model->setState('category.ordering', $params->get('groupby_ordering', 'c.lft'));
-		$model->setState('category.direction', $params->get('groupby_direction', 'ASC'));
-
-		// Create query object
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
-		$items = $model->getItems();
-		$itemsfiltered = array();
-
-		if ($items)
+		// Todo check if other compontent than com_content
+		if ($model)
 		{
+			// Set application parameters in model
+			$app = JFactory::getApplication();
+			$appParams = $app->getParams();
+			$model->setState('params', $appParams);
 
-			foreach ($items as $key => $item) {
-				if ($item->state !== "1")
-				{
-					continue;
-				}
-				// Get item's fields, also preparing their value property for manual display
-				// (calling plugins events and loading layouts to get their HTML display)
-				$fields = FieldsHelper::getFields('com_content.article', $item, true);
+			// Set the filters based on the module params
+			$model->setState('list.start', 0);
+			$model->setState('filter.state', 1);
+			$model->setState('filter.publish_date', true);
 
-				$itemfiltered1 = new stdClass;
-				$itemfiltered2 = new stdClass;
-				$itemfiltered3 = new stdClass;
-				foreach ($fields as $key => $field) {
-					if ($field->title == 'lat, lon')
+			// Access filter
+			$access = !JComponentHelper::getParams('com_agosms')->get('show_noauth');
+			$model->setState('filter.access', $access);
+
+			$catid = (int) $params->get('catid', 0);
+			$model->setState('category.id', $catid);
+			$model->setState('category.group', $params->get('groupby', 0));
+			$model->setState('category.ordering', $params->get('groupby_ordering', 'c.lft'));
+			$model->setState('category.direction', $params->get('groupby_direction', 'ASC'));
+
+			// Create query object
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true);
+			$items = $model->getItems();
+			$itemsfiltered = array();
+
+			if ($items)
+			{
+
+				foreach ($items as $key => $item) {
+					if ($item->state !== "1")
 					{
-						$itemfiltered1->cords = $field->value;
-						$test = explode(",", $itemfiltered1->cords);
-						if (is_numeric($test[0]) && is_numeric($test[1]))
-						{
-							$itemfiltered1->title = $item->title;
-							$itemfiltered1->id = $item->id;
-							$itemsfiltered[] = $itemfiltered1;
-						}
+						continue;
 					}
-					if ($field->type == 'agosmsmarker')
-					{
-						$itemfiltered2->cords = $field->value;
-						$test = explode(",", $itemfiltered2->cords);
-						if (is_numeric($test[0]) && is_numeric($test[1]))
+					// Get item's fields, also preparing their value property for manual display
+					// (calling plugins events and loading layouts to get their HTML display)
+					$fields = FieldsHelper::getFields('com_content.article', $item, true);
+
+					$itemfiltered1 = new stdClass;
+					$itemfiltered2 = new stdClass;
+					$itemfiltered3 = new stdClass;
+					foreach ($fields as $key => $field) {
+						if ($field->title == 'lat, lon')
 						{
-							$itemfiltered2->title = $item->title;
-							$itemfiltered2->id = $item->id;
-							$itemsfiltered[] = $itemfiltered2;
+							$itemfiltered1->cords = $field->value;
+							$test = explode(",", $itemfiltered1->cords);
+							if (is_numeric($test[0]) && is_numeric($test[1]))
+							{
+								$itemfiltered1->title = $item->title;
+								$itemfiltered1->id = $item->id;
+								$itemsfiltered[] = $itemfiltered1;
+							}
 						}
-					}
-					if ($field->type == 'agosmsaddressmarker')
-					{
-						$itemfiltered3->cords = $field->rawvalue;
-						$test = explode(",", $itemfiltered3->cords);
-						if (is_numeric($test[0]) && is_numeric($test[1]))
+						if ($field->type == 'agosmsmarker')
 						{
-							$itemfiltered3->title = $item->title;
-							$itemfiltered3->id = $item->id;
-							$itemsfiltered[] = $itemfiltered3;
+							$itemfiltered2->cords = $field->value;
+							$test = explode(",", $itemfiltered2->cords);
+							if (is_numeric($test[0]) && is_numeric($test[1]))
+							{
+								$itemfiltered2->title = $item->title;
+								$itemfiltered2->id = $item->id;
+								$itemsfiltered[] = $itemfiltered2;
+							}
+						}
+						if ($field->type == 'agosmsaddressmarker')
+						{
+							$itemfiltered3->cords = $field->rawvalue;
+							$test = explode(",", $itemfiltered3->cords);
+							if (is_numeric($test[0]) && is_numeric($test[1]))
+							{
+								$itemfiltered3->title = $item->title;
+								$itemfiltered3->id = $item->id;
+								$itemsfiltered[] = $itemfiltered3;
+							}
 						}
 					}
 				}
 			}
+
+			if ($itemsfiltered)
+			{
+
+				return $itemsfiltered;
+			}
 		}
 
-		if ($itemsfiltered)
-		{
-
-			return $itemsfiltered;
-		}
-
-		return;
+		return array();
 	}
 
 	/**
@@ -283,16 +287,16 @@ class ModagosmHelper
 	public static function getListExternaldb(&$params)
 	{
 		$options = array(
-		'driver' => 'mysqli',
-		'host' => 'localhost',
-		'user' => 'root',
-		'password' => 'Schweden1!',
-		'database' => 'joomla_db'
+			'driver' => 'mysqli',
+			'host' => 'localhost',
+			'user' => 'root',
+			'password' => 'Schweden1!',
+			'database' => 'joomla_db'
 		);
-		
+
 		$externalDb = JDatabaseDriver::getInstance($options);
 		$query = $externalDb->getQuery(true);
-		
+
 		$query->select($externalDb->quoteName(array('*')));
 		$query->from($externalDb->quoteName('j3_agosms'));
 
@@ -301,7 +305,8 @@ class ModagosmHelper
 
 		// Load the results as a list of stdClass objects (see later for more options on retrieving data).
 		$results = $externalDb->loadObjectList();
-		
+
 		return $results;
 	}
+
 }
