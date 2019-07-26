@@ -227,7 +227,9 @@ class ModagosmHelper
 					$itemfiltered1 = new stdClass;
 					$itemfiltered2 = new stdClass;
 					$itemfiltered3 = new stdClass;
+					
 					foreach ($fields as $key => $field) {
+						
 						if ($field->title == 'lat, lon')
 						{
 							$itemfiltered1->cords = $field->value;
@@ -239,6 +241,7 @@ class ModagosmHelper
 								$itemsfiltered[] = $itemfiltered1;
 							}
 						}
+						
 						if ($field->type == 'agosmsmarker')
 						{
 							$itemfiltered2->cords = $field->value;
@@ -250,6 +253,7 @@ class ModagosmHelper
 								$itemsfiltered[] = $itemfiltered2;
 							}
 						}
+						
 						if ($field->type == 'agosmsaddressmarker')
 						{
 							$itemfiltered3->cords = $field->rawvalue;
@@ -308,5 +312,4 @@ class ModagosmHelper
 
 		return $results;
 	}
-
 }
