@@ -132,6 +132,8 @@ if (!empty($addressfieldsArray))
 // Build the address string and a string with the field names from the selected fields 
 $addressstring = "";
 $fieldnames    = "";
+$formControl = JForm::getInstance($current_context)->getFormControl();
+$fieldsNameArray = array();
 
 if (!empty($fields))
 {
@@ -140,13 +142,13 @@ if (!empty($fields))
 		// Save value to addressstring, if field is in the options of this custom field
 		if (in_array($field->id, $addressfieldsvalues))
 		{
-			$addressstring .= is_array($field->rawvalue)
-				? implode(',', $field->rawvalue)  . ','
-				: $field->rawvalue . ',';
+			$fieldsNameArray[] = $formControl . '_com_fields_' . str_replace('-', '_', $field->name);
 			$fieldnames    .= $field->label . ' (' . $field->name . ', ' . $field->id . ')<br>';
 		}
 	}
 }
+
+$fieldsNameArray = implode(',', $fieldsNameArray);
 
 // Do I need this? Or is tempAlert enough?
 // JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESSTRING') . ': ' . $addressstring, 'message');
@@ -162,7 +164,7 @@ if (!empty($fields))
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
 	<br>
 	<button 
-		data-addressstring="<?php echo htmlspecialchars($addressstring, ENT_QUOTES, 'UTF-8'); ?>"
+		data-fieldsnamearray="<?php echo $fieldsNameArray; ?>"
 		data-mapboxkey="<?php echo $mapboxkey; ?>"
 		data-googlekey="<?php echo $googlekey; ?>"
 		class="btn btn-success agosmsaddressmarkerbutton" 
