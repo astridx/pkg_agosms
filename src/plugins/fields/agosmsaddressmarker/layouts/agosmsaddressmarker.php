@@ -7,6 +7,7 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
+
 defined('JPATH_BASE') or die;
 
 extract($displayData);
@@ -81,38 +82,45 @@ $attributes = array(
 	!empty($inputmode) ? $inputmode : '',
 	!empty($pattern) ? 'pattern="' . $pattern . '"' : '',
 );
-?>
 
-
-<?php
-// Load the Fields of this item
-$app = JFactory::getApplication();
+// Define defaults
+$app               = JFactory::getApplication();
+$item              = new stdClass;
+$item->id          = $app->input->getInt('id');
 $current_component = $app->input->getCmd('option');
-$current_view = $app->input->getCmd('view');
+$current_view      = $app->input->getCmd('view');
+
+// Correct view when editing com_users, because the frontend view uses 'profile' instead of 'user'
+if ($current_component == 'com_users')
+{
+	$current_view = 'user';
+
+	if ($app->isClient('site'))
+	{
+		$item->id = (int) JFactory::getUser()->get('id');
+	}
+}
+
+// Correct view when editing com_content, because the frontend view uses 'form' instead of 'article'
+if ($current_component == 'com_content')
+{
+	$current_view = 'article';
+
+	if ($app->isClient('site'))
+	{
+		$item->id = $app->input->getInt('a_id');
+	}
+}
+
+// TODO Check for com_contact
 $current_context = $current_component . '.' . $current_view;
-$item = new stdClass;
 
-if ($app->isClient('administrator'))
-{
-	$item->id = (int) JFactory::getApplication()->input->getCmd('id');
-}
-else if (
-	$app->isClient('site') 
-	&& $current_component === "com_content"
-	&& $app->input->getCmd('a_id') !== null)
-{
-	$item->id = (int) $app->input->getCmd('a_id');
-	$current_context = $current_component . '.article';
-}
-else
-{
-	JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_COMPONENT_NOT_SUPPORTET_FOR_FRONTENDEDITING'), 'message');
-}
-
-$fields = FieldsHelper::getFields($current_context, $item);
+// Load fields with prepared values
+$fields = FieldsHelper::getFields($current_context, $item, true);
 
 $addressfieldsvalues = array();
-$addressfieldsArray = json_decode($addressfields);
+$addressfieldsArray  = json_decode($addressfields);
+
 if (!empty($addressfieldsArray))
 {
 	foreach ($addressfieldsArray as $a)
@@ -123,7 +131,10 @@ if (!empty($addressfieldsArray))
 
 // Build the address string and a string with the field names from the selected fields 
 $addressstring = "";
-$fieldnames = "";
+$fieldnames    = "";
+$formControl = JForm::getInstance($current_context)->getFormControl();
+$fieldsNameArray = array();
+
 if (!empty($fields))
 {
 	foreach ($fields as $field)
@@ -131,11 +142,13 @@ if (!empty($fields))
 		// Save value to addressstring, if field is in the options of this custom field
 		if (in_array($field->id, $addressfieldsvalues))
 		{
-			$addressstring .= $field->rawvalue . ',';
-			$fieldnames .= $field->label . ' ( ' . $field->name . ', ' . $field->id . ')<br>';
+			$fieldsNameArray[] = $formControl . '_com_fields_' . str_replace('-', '_', $field->name);
+			$fieldnames    .= $field->label . ' (' . $field->name . ', ' . $field->id . ')<br>';
 		}
 	}
 }
+
+$fieldsNameArray = implode(',', $fieldsNameArray);
 
 // Do I need this? Or is tempAlert enough?
 // JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESSTRING') . ': ' . $addressstring, 'message');
@@ -151,7 +164,7 @@ if (!empty($fields))
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
 	<br>
 	<button 
-		data-addressstring="<?php echo htmlspecialchars($addressstring, ENT_QUOTES, 'UTF-8'); ?>"
+		data-fieldsnamearray="<?php echo $fieldsNameArray; ?>"
 		data-mapboxkey="<?php echo $mapboxkey; ?>"
 		data-googlekey="<?php echo $googlekey; ?>"
 		class="btn btn-success agosmsaddressmarkerbutton" 
