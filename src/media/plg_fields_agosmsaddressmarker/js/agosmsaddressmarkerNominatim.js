@@ -28,6 +28,7 @@ document.addEventListener('click', function (e) {
 				tempAlert("Error: " + addressstring, 2000, "dc3545");
 			}
 		}
+
 		var params = {
 			q: addressstring,
 			limit: 1,

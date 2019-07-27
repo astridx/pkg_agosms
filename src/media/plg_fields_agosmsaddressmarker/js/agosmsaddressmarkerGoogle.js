@@ -1,7 +1,8 @@
 document.addEventListener('click', function (e) {
 	if (e.target.classList.contains('agosmsaddressmarkerbutton')) {
 		var button = e.target;
-		var addressstring = button.getAttribute('data-addressstring');
+		var addressstring = [];
+		var fieldsNameArray =  button.getAttribute('data-fieldsnamearray').split(',');
 		var googlekey = button.getAttribute('data-googlekey');
 		var surroundingDiv = button.parentNode;
 		var inputs = surroundingDiv.getElementsByTagName('input');
@@ -9,8 +10,14 @@ document.addEventListener('click', function (e) {
 		var lon = inputs[1];
 		var hiddenfield = inputs[2];
 
+		[].forEach.call(fieldsNameArray, function(el){
+			var field = document.getElementById(el);
+			addressstring.push(field.value);
+		});
+
+		addressstring = addressstring.join();
+
 		var cords = function (results) {
-			console.log(results);
 			if (results.status === "OK") {
 				var lonlat = results.results[0].geometry.location;
 				lat.value = lonlat.lat;
@@ -62,5 +69,6 @@ function getParamString(obj, existingUrl, uppercase) {
 			}
 		}
 	}
+	
 	return (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') + params.join('&');
 }
