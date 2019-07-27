@@ -64,6 +64,9 @@ if ($geocoder === "mapbox")
 
 JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', array('version' => 'auto', 'relative' => true));
 
+JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR');
+JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE');
+
 $attributes = array(
 	!empty($class) ? 'class="' . $class . '"' : '',
 	!empty($size) ? 'size="' . $size . '"' : '',

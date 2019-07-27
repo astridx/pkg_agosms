@@ -21,11 +21,11 @@ document.addEventListener('click', function (e) {
 				lat.value = results[0].lat;
 				lon.value = results[0].lon;
 				hiddenfield.value = results[0].lat + "," + results[0].lon;
-				tempAlert("OK: " + addressstring, 2000, "28a745");
+				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
 			} else if (results.length > 0) {
 				// Limit is fix set to 1 up to now
 			} else {
-				tempAlert("Error: " + addressstring, 2000, "dc3545");
+				Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR') + addressstring + ' (Nominatim)']});
 			}
 		}
 

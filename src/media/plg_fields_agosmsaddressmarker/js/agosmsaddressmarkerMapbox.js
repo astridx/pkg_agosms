@@ -23,11 +23,11 @@ document.addEventListener('click', function (e) {
 				lat.value = lonlat[1];
 				lon.value = lonlat[0];
 				hiddenfield.value = lonlat[1] + "," + lonlat[0];
-				tempAlert("MapBox OK: " + addressstring, 2000, "28a745");
+				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring) + ' (Mapbox)']});
 			} else if (results.features && results.features.length > 0) {
 				// Limit is fix set to 1 up to now
 			} else {
-				tempAlert("MapBox Error: " + addressstring, 2000, "dc3545");
+				Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR') + addressstring + ' (Mapbox)']});
 			}
 		}
 		var params = {

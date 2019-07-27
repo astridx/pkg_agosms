@@ -23,9 +23,10 @@ document.addEventListener('click', function (e) {
 				lat.value = lonlat.lat;
 				lon.value = lonlat.lng;
 				hiddenfield.value = lonlat.lat + "," + lonlat.lng;
-				tempAlert("Google OK: " + addressstring, 2000, "28a745");
+				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring + ' (Google)')]});
 			} else {
-				tempAlert("Google Error: " + addressstring, 2000, "dc3545");
+				var message = (typeof results.error_message == 'undefined') ? "" : results.error_message;
+				Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR') + addressstring + ' (Google: ' + results.status + ' ' + message + ')']});
 			}
 		}
 		var params = {

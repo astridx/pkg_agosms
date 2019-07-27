@@ -34,20 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 }, false);
 
-function tempAlert(msg, duration, color)
-{
-	var el = document.createElement("div");
-	el.setAttribute("style",
-		"position:absolute;padding:5%;" +
-		"top:40%;left:40%;" +
-		"background-color:white;border-style:solid;border-color:#" + color + ";");
-	el.innerHTML = msg;
-	setTimeout(function () {
-		el.parentNode.removeChild(el);
-	}, duration);
-	document.body.appendChild(el);
-}
-
 function getJSON(url, params, callback) {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.onreadystatechange = function () {
