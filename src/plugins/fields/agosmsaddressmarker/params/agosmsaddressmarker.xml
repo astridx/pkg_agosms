@@ -60,7 +60,6 @@
 				name="scrollwheelzoom"
 				type="radio"
 				label="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM"
-				description="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM_DESC"
 				default="1"
 			>
 				<option value="0">JNO</option>
@@ -71,13 +70,29 @@
 				name="owngooglegesturetext"
 				type="radio"
 				label="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT"
-				description="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT_DESC"
-				default="1"
+				default="0"
 				showon="scrollwheelzoom:2"
 			>
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
 			</field>
+			<field 
+				name="notescrollwheelzoom" 
+				type="note" 
+				label="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM" 
+				description="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM_DESC" 
+				class="alert" 
+				close="true"
+			/>
+			<field 
+				name="noteowngooglegesturetext" 
+				type="note" 
+				label="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT" 
+				description="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT_DESC" 
+				class="alert" 
+				close="true"
+				showon="owngooglegesturetext:1[AND]scrollwheelzoom:2"
+			/>
 		</fieldset>
 	</fields>
 </form>
