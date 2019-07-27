@@ -107,7 +107,8 @@ class ModagosmHelper
 
 		if ($items)
 		{
-			foreach ($items as $item) {
+			foreach ($items as $item)
+			{
 				$category = $model->getCategory($item->id);
 				break;
 			}
@@ -215,7 +216,9 @@ class ModagosmHelper
 			if ($items)
 			{
 
-				foreach ($items as $key => $item) {
+				foreach ($items as $key => $item)
+				{
+					
 					if ($item->state !== "1")
 					{
 						continue;
@@ -228,7 +231,8 @@ class ModagosmHelper
 					$itemfiltered2 = new stdClass;
 					$itemfiltered3 = new stdClass;
 					
-					foreach ($fields as $key => $field) {
+					foreach ($fields as $key => $field)
+					{
 						
 						if ($field->title == 'lat, lon')
 						{

@@ -94,20 +94,20 @@ if ($app->input->getCmd('option') === 'com_categories')
 }
 
 // Com_users
-else if ($app->input->getCmd('option') === 'com_users')
+elseif ($app->input->getCmd('option') === 'com_users')
 {
 	$context = 'com_users.user';
 } 
 
 // Com_contact
-else if ($app->input->getCmd('option') === 'com_contact')
+elseif ($app->input->getCmd('option') === 'com_contact')
 {
 	//JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_SUPPORTET'), 'message');
 	$context = 'com_contact.contact';
 } 
 
 // Third Party
-else if ($app->input->getCmd('option') !== 'com_users' 
+elseif ($app->input->getCmd('option') !== 'com_users' 
 	&& $app->input->getCmd('option') !== 'com_content'
 	&& $app->input->getCmd('option') !== 'com_categories'
 	&& $app->input->getCmd('option') !== 'com_contact')
