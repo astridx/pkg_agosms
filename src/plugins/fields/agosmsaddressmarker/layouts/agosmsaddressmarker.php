@@ -102,7 +102,8 @@ else if ($app->input->getCmd('option') === 'com_users')
 // Com_contact
 else if ($app->input->getCmd('option') === 'com_contact')
 {
-	$context = 'com_users.user';
+	//JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_SUPPORTET'), 'message');
+	$context = 'com_contact.contact';
 } 
 
 // Third Party
