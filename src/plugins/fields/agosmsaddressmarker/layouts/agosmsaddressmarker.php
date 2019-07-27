@@ -106,7 +106,7 @@ else if ($app->input->getCmd('option') === 'com_contact')
 else if ($app->input->getCmd('option') !== 'com_users' 
 	&& $app->input->getCmd('option') !== 'com_content'
 	&& $app->input->getCmd('option') !== 'com_categories'
-	&& $app->input->getCmd('option') !== 'com_content')
+	&& $app->input->getCmd('option') !== 'com_contact')
 {
 	$context = $app->input->getCmd('option') . '.' . $app->input->getCmd('view');
 }	
