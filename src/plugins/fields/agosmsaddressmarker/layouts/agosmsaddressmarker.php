@@ -84,11 +84,11 @@ $attributes = array(
 );
 
 // Define defaults
-$app               = JFactory::getApplication();
-$item              = new stdClass;
-$item->id          = $app->input->getInt('id');
+$app = JFactory::getApplication();
+$item = new stdClass;
+$item->id = $app->input->getInt('id');
 $current_component = $app->input->getCmd('option');
-$current_view      = $app->input->getCmd('view');
+$current_view = $app->input->getCmd('view');
 
 // Correct view when editing com_users, because the frontend view uses 'profile' instead of 'user'
 if ($current_component == 'com_users')
