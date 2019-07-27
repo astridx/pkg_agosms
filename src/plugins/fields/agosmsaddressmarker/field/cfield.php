@@ -49,6 +49,9 @@ class JFormFieldCfield extends JFormFieldList
 	{
 		// Accepted modifiers
 		$hash = md5($this->element);
+		
+		$app = JFactory::getApplication();
+		$context = $app->input->getCmd('context');
 
 		if (!isset(static::$options[$hash]))
 		{
@@ -61,6 +64,7 @@ class JFormFieldCfield extends JFormFieldList
 				->select('cf.id AS value, cf.name AS text')
 				->from('#__fields AS cf')
 				->where('cf.state IN (1)')
+				->where('cf.context IN ("' . $context . '")')
 				->where('cf.type NOT IN ("agosmsaddressmarker")')
 				->group('cf.id, cf.name')
 				->order('cf.name');

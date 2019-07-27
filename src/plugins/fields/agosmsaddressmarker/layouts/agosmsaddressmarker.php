@@ -7,7 +7,6 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-
 defined('JPATH_BASE') or die;
 
 extract($displayData);
@@ -55,12 +54,10 @@ JHtml::_('script', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js'
 if ($geocoder === "mapbox")
 {
 	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerMapbox.js', array('version' => 'auto', 'relative' => true));
-}
-elseif ($geocoder === "google")
+} elseif ($geocoder === "google")
 {
 	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerGoogle.js', array('version' => 'auto', 'relative' => true));
-}
-else
+} else
 {
 	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerNominatim.js', array('version' => 'auto', 'relative' => true));
 }
@@ -85,73 +82,69 @@ $attributes = array(
 
 // Define defaults
 $app = JFactory::getApplication();
-$item = new stdClass;
-$item->id = $app->input->getInt('id');
-$current_component = $app->input->getCmd('option');
-$current_view = $app->input->getCmd('view');
+$context = 'com_content.article';
 
-// Correct view when editing com_users, because the frontend view uses 'profile' instead of 'user'
-if ($current_component == 'com_users')
+// Com_categorie
+if ($app->input->getCmd('option') === 'com_categories')
 {
-	$current_view = 'user';
-
-	if ($app->isClient('site'))
-	{
-		$item->id = (int) JFactory::getUser()->get('id');
-	}
+	$context = $app->input->getCmd('extension') . '.categories';
 }
 
-// Correct view when editing com_content, because the frontend view uses 'form' instead of 'article'
-if ($current_component == 'com_content')
+// Com_users
+else if ($app->input->getCmd('option') === 'com_users')
 {
-	$current_view = 'article';
+	$context = 'com_users.user';
+} 
 
-	if ($app->isClient('site'))
-	{
-		$item->id = $app->input->getInt('a_id');
-	}
-}
+// Com_contact
+else if ($app->input->getCmd('option') === 'com_contact')
+{
+	$context = 'com_users.user';
+} 
 
-// TODO Check for com_contact
-$current_context = $current_component . '.' . $current_view;
+// Third Party
+else if ($app->input->getCmd('option') !== 'com_users' 
+	&& $app->input->getCmd('option') !== 'com_content'
+	&& $app->input->getCmd('option') !== 'com_categories'
+	&& $app->input->getCmd('option') !== 'com_content')
+{
+	$context = $app->input->getCmd('option') . '.' . $app->input->getCmd('view');
+}	
+
 
 // Load fields with prepared values
-$fields = FieldsHelper::getFields($current_context, $item, true);
+$fields = FieldsHelper::getFields($context);
 
 $addressfieldsvalues = array();
-$addressfieldsArray  = json_decode($addressfields);
+$addressfieldsArray = json_decode($addressfields);
 
 if (!empty($addressfieldsArray))
 {
-	foreach ($addressfieldsArray as $a)
-	{
+	foreach ($addressfieldsArray as $a) {
 		$addressfieldsvalues[] = $a->value;
 	}
 }
 
-// Build the address string and a string with the field names from the selected fields 
-$addressstring = "";
-$fieldnames    = "";
-$formControl = JForm::getInstance($current_context)->getFormControl();
+// Build the string with the field names from the selected fields 
+$fieldnames = "";
 $fieldsNameArray = array();
 
 if (!empty($fields))
 {
-	foreach ($fields as $field)
-	{
-		// Save value to addressstring, if field is in the options of this custom field
+	foreach ($fields as $field) {
+		// Save value to fieldnames, if field is in the options of this custom field
 		if (in_array($field->id, $addressfieldsvalues))
 		{
-			$fieldsNameArray[] = $formControl . '_com_fields_' . str_replace('-', '_', $field->name);
-			$fieldnames    .= $field->label . ' (' . $field->name . ', ' . $field->id . ')<br>';
+			$fieldsNameArray[] = 'jform' . '_com_fields_' . str_replace('-', '_', $field->name);
+			$fieldnames .= $field->label . ' (' . $field->name . ', ' . $field->id . ')<br>';
 		}
 	}
 }
 
-$fieldsNameArray = implode(',', $fieldsNameArray);
+$fieldsNameImplode = implode(',', $fieldsNameArray);
 
 // Do I need this? Or is tempAlert enough?
-// JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESSTRING') . ': ' . $addressstring, 'message');
+// JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESSTRING') . ': ' . $fieldsNameImplode, 'message');
 ?>
 
 
@@ -164,12 +157,12 @@ $fieldsNameArray = implode(',', $fieldsNameArray);
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
 	<br>
 	<button 
-		data-fieldsnamearray="<?php echo $fieldsNameArray; ?>"
+		data-fieldsnamearray="<?php echo $fieldsNameImplode; ?>"
 		data-mapboxkey="<?php echo $mapboxkey; ?>"
 		data-googlekey="<?php echo $googlekey; ?>"
 		class="btn btn-success agosmsaddressmarkerbutton" 
 		type="button">
-	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 	</button>
 	<p>
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
