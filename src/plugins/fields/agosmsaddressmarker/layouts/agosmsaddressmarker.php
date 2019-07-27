@@ -153,9 +153,6 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 
 
 <hr>
-<p>
-<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
-</p>
 <div class="agosmsaddressmarkersurroundingdiv">
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?><input type="text" class="agosmsaddressmarkerlat" >
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
@@ -172,7 +169,7 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
 <?php echo $fieldnames; ?>
 	</p>
-
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
 
 
 	<input class="agosmsaddressmarkerhiddenfield" 
