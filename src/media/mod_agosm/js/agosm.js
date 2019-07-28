@@ -535,11 +535,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				var objcf = specialcustomfieldpins[specialcustomfieldpin];
 
 				let tempMarkercf = null;
+				
 				if (objcf.cords)
 				{
 					var values = objcf.cords.split(",");
 					tempMarkercf = L.marker(objcf.cords.split(",").slice(0, 2));
-					if (values.length > 4)
+					
+					if (values.length > 4 && objcf.type !== 'agosmsaddressmarker')
 					{
 						var AwesomeIcon = new L.AwesomeMarkers.icon(
 							{
@@ -549,6 +551,20 @@ document.addEventListener('DOMContentLoaded', function () {
 								prefix: 'fa',
 								spin: false,
 								extraClasses: "agosmsmarkerextraklasse",
+							})
+						tempMarkercf.setIcon(AwesomeIcon);
+					}
+					
+					if (objcf.type === 'agosmsaddressmarker' && objcf.iconcolor && objcf.markercolor && objcf.icon)
+					{
+						var AwesomeIcon = new L.AwesomeMarkers.icon(
+							{
+								icon: objcf.icon,
+								markerColor: objcf.markercolor,
+								iconColor: objcf.iconcolor,
+								prefix: 'fa',
+								spin: false,
+								extraClasses: "agosmsaddressmarkerextraklasse",
 							})
 						tempMarkercf.setIcon(AwesomeIcon);
 					}

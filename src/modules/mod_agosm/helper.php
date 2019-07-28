@@ -233,6 +233,7 @@ class ModagosmHelper
 							{
 								$itemfiltered1->title = $item->title;
 								$itemfiltered1->id = $item->id;
+								$itemfiltered1->type = $field->type;
 								$itemsfiltered[] = $itemfiltered1;
 							}
 						}
@@ -245,6 +246,7 @@ class ModagosmHelper
 							{
 								$itemfiltered2->title = $item->title;
 								$itemfiltered2->id = $item->id;
+								$itemfiltered2->type = $field->type;
 								$itemsfiltered[] = $itemfiltered2;
 							}
 						}
@@ -262,6 +264,7 @@ class ModagosmHelper
 							{
 								$itemfiltered3->title = $item->title;
 								$itemfiltered3->id = $item->id;
+								$itemfiltered3->type = $field->type;
 								$itemfiltered3->lat = $test[0];
 								$itemfiltered3->lon = $test[1];
 								
