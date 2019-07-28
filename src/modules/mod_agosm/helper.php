@@ -251,6 +251,10 @@ class ModagosmHelper
 						
 						if ($field->type == 'agosmsaddressmarker')
 						{
+							// Get plugin parameters
+							$popup = $field->fieldparams->get('popup', '0');
+							$specialicon = $field->fieldparams->get('specialicon', '0');
+
 							$itemfiltered3->cords = $field->rawvalue;
 							$test = explode(",", $itemfiltered3->cords);
 							
@@ -260,10 +264,17 @@ class ModagosmHelper
 								$itemfiltered3->id = $item->id;
 								$itemfiltered3->lat = $test[0];
 								$itemfiltered3->lon = $test[1];
-								$itemfiltered3->iconcolor = $test[2];
-								$itemfiltered3->markercolor = $test[3];
-								$itemfiltered3->icon = $test[4];
-								$itemfiltered3->popuptext = $test[5];
+								
+								if ($specialicon) {
+									$itemfiltered3->iconcolor = $test[2];
+									$itemfiltered3->markercolor = $test[3];
+									$itemfiltered3->icon = $test[4];
+								}
+								
+								if ($popup) {
+									$itemfiltered3->popuptext = $test[5];
+								}
+								
 								$itemsfiltered[] = $itemfiltered3;
 							}
 						}
