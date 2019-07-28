@@ -19,6 +19,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		var markercolor = element.getAttribute('data-markercolor');
 		var icon = element.getAttribute('data-icon');
 		var popuptext = element.getAttribute('data-popuptext');
+		var mapboxkey = element.getAttribute('data-mapboxkey');
+		var routing_simple_position = element.getAttribute('data-routing_simple_position');
+		var routing_simple_router = element.getAttribute('data-routing_simple_router');
 
 		// Initialize the Map if needed
 		var container = L.DomUtil.get('map' + unique);
@@ -65,19 +68,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// If routing control 
 		if (showroutingcontrol === "1") {
-		{
 			L.leafletControlRoutingtoaddress({
-				position: routesimpleposition,
-				router: routesimplerouter,
-				token: routesimplerouterkey,
-				placeholder: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_PLACEHOLDER'),
-				errormessage: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE'),
-				distance: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE'),
-				duration: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION'),
-				target: routesimpletarget,
-				addresserror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
-				requesterror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR')
-			}).addTo(window['mymap' + moduleId]);
+				position: routing_simple_position,
+				router: routing_simple_router,
+				token: mapboxkey,
+				placeholder: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_PLACEHOLDER'),
+				errormessage: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ERRORMESSAGE'),
+				distance: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_DISTANCE'),
+				duration: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_DURATION'),
+				target: [lat, lon],
+				addresserror: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
+				requesterror: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_REQUESTERROR')
+			}).addTo(window['map' + unique]);
 		}
 
 		// Add Marker if possible - fallback cords 0,0

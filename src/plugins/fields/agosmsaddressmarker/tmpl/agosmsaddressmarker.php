@@ -16,11 +16,29 @@ JText::script('PLG_AGOSMSADDRESSMARKER_SCROLL');
 JText::script('PLG_AGOSMSADDRESSMARKER_TOUCH');
 JText::script('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
 
+JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_PLACEHOLDER');
+JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ERRORMESSAGE');
+JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_DISTANCE');
+JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_DURATION');
+JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ADDRESSERROR');
+JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_REQUESTERROR');
+
 $document = JFactory::getDocument();
 
 $document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.css');
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
+
+if ($fieldParams->get('showroutingcontrol', '0') == 1)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/LeafletControlRoutingtoaddress.css');
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/LeafletControlRoutingtoaddress.js');
+}
+
+if ($fieldParams->get('showroutingcontrol', '0') == 1 && $fieldParams->get('showrouting_places', '0') == 1)
+{
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/places.js');
+}
 
 if ($fieldParams->get('specialicon', '0') === "1")
 {
@@ -91,5 +109,8 @@ $popuptext = $values[5];
 	data-specialicon='<?php echo $fieldParams->get('specialicon', '0') ?>'
 	data-popup='<?php echo $fieldParams->get('popup', '0') ?>'
 	data-showroutingcontrol='<?php echo $fieldParams->get('showroutingcontrol', '0') ?>'
+	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
+	data-routing_simple_position='<?php echo $fieldParams->get('routing_simple_position', 'topright') ?>'
+	data-routing_simple_router='<?php echo $fieldParams->get('routing_simple_router', 'osrm') ?>'
 >
 </div>
