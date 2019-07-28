@@ -147,17 +147,26 @@ if (!empty($fields))
 
 $fieldsNameImplode = implode(',', $fieldsNameArray);
 
-// Do I need this? Or is tempAlert enough?
-// JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESSTRING') . ': ' . $fieldsNameImplode, 'message');
 ?>
 
-
 <hr>
-<div class="agosmsaddressmarkersurroundingdiv">
-<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?><input type="text" class="agosmsaddressmarkerlat" >
-<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?><input type="text" class="agosmsaddressmarkerlon" >
-	<br>
-	<button 
+<div class="agosmsaddressmarkersurroundingdiv form-horizontal">
+
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?></label>	
+<div class="controls">
+	<input type="text" class="agosmsaddressmarkerlat" >
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?></label>	
+<div class="controls">	
+<input type="text" class="agosmsaddressmarkerlon" >
+</div>
+</div>
+	
+<button 
 		data-fieldsnamearray="<?php echo $fieldsNameImplode; ?>"
 		data-mapboxkey="<?php echo $mapboxkey; ?>"
 		data-googlekey="<?php echo $googlekey; ?>"
@@ -165,15 +174,93 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 		type="button">
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 	</button>
-	<p>
+<p>
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
 <?php echo $fieldnames; ?>
-	</p>
+</p>
+
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
+<hr>
+<h4><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HEADING_OPTIONAL_VALUES'); ?></h4>
+<div style="<?php echo $showspecialicon; ?>">
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('Markercolor'); ?></label>	
+<div class="controls">
+<select 
+	class="agosmsaddressmarkercolor">
+	<option></option>
+	<option value="red">red</option>
+	<option value="darkred">darkred</option>
+	<option value="orange">orange</option>
+	<option value="green">green</option>
+	<option value="darkgreen">darkgreen</option>
+	<option value="blue">blue</option>
+	<option value="purple">purple</option>
+	<option value="darkpurple">darkpurple</option>
+	<option value="cadetblue">cadetblue</option>
+</select>
+</div>
+</div>
 
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('Iconcolor'); ?></label>	
+<div class="controls">
+<select 
+	class="agosmsaddressmarkericoncolor">
+	<option></option>
+	<option value="red">red</option>
+	<option value="darkred">darkred</option>
+	<option value="orange">orange</option>
+	<option value="green">green</option>
+	<option value="darkgreen">darkgreen</option>
+	<option value="blue">blue</option>
+	<option value="purple">purple</option>
+	<option value="darkpurple">darkpurple</option>
+	<option value="cadetblue">cadetblue</option>
+	<option value="#FFFFFF">white</option>
+	<option value="#000000">black</option>
+</select>
+</div>
+</div>
 
-	<input class="agosmsaddressmarkerhiddenfield" 
-		   type="hidden" 
-		   readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> />
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('Icon'); ?></label>	
+<div class="controls">
+<select 
+class="agosmsmarkericon">
+<option></option>	
+<option value="circle">circle &#xf111;</option>
+<option value="">noicon</option>
+<option value="home">home &#xf015;</option>
+<option value="star">star &#xf005;</option>
+<option value="500px">&#xf26e;</option>
+<option value="address-book">&#xf2b9;</option>
+<option value="address-book">&#xf2b9;</option>
+<option value="address-book-o">&#xf2ba;</option>
+<option value="address-card">&#xf2bb;</option>
+<option value="address-card-o">&#xf2bc;</option>
+<option value="yelp">&#xf1e9;</option>
+<option value="yen">&#xf157;</option>
+<option value="yoast">&#xf2b1;</option>
+<option value="youtube">&#xf167;</option>
+<option value="youtube-play">&#xf16a;</option>
+<option value="youtube-square">&#xf166;</option></select>
+</div>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('Popuptext'); ?></label>	
+<div class="controls">	
+<input type="text" id="agosmsmarkerpopuptext">
+</div>
+</div>
+
+<input 
+	class="agosmsaddressmarkerhiddenfield" 
+	type="text" 
+	readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" 
+	value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> 
+/>
 </div>
 <hr>

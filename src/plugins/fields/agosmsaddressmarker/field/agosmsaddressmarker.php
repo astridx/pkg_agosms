@@ -99,6 +99,30 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected $owngooglegesturetext;
 
 	/**
+	 * The name of the popup field.
+	 *
+	 * @var    string
+	 * @since  1.0.46
+	 */
+	protected $popup;
+
+	/**
+	 * The name of the specialicon field.
+	 *
+	 * @var    string
+	 * @since  1.0.46
+	 */
+	protected $specialicon;
+
+	/**
+	 * The name of the showrouting field.
+	 *
+	 * @var    string
+	 * @since  1.0.46
+	 */
+	protected $showroutingcontrol;
+
+	/**
 	 * Method to get certain otherwise inaccessible properties from the form field object.
 	 *
 	 * @param   string  $name  The property name for which to get the value.
@@ -117,6 +141,9 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			case 'googlekey':
 			case 'mapboxkey':
 			case 'owngooglegesturetext':
+			case 'specialicon':
+			case 'popup':
+			case 'showroutingcontrol':
 				return $this->$name;
 		}
 
@@ -151,6 +178,9 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$this->addressfields = (string) $this->element['addressfields'];
 			$this->scrollwheelzoom = (string) $this->element['scrollwheelzoom'];
 			$this->owngooglegesturetext = (string) $this->element['owngooglegesturetext'];
+			$this->specialicon = (string) $this->element['specialicon'];
+			$this->showpopup = (string) $this->element['showpopup'];
+			$this->showroutingcontrol = (string) $this->element['showroutingcontrol'];
 		}
 
 		return $result;
@@ -200,6 +230,18 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			
 			case 'owngooglegesturetext':
 				$this->owngooglegesturetext = (string) $value;
+				break;
+
+			case 'specialicon':
+				$this->specialicon = (string) $value;
+				break;
+
+			case 'showpopup':
+				$this->showpopup = (string) $value;
+				break;
+			
+			case 'showroutingcontrol':
+				$this->showroutingcontrol = (string) $value;
 				break;
 
 			default:
@@ -261,6 +303,9 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			'addressfields' => $this->addressfields,
 			'scrollwheelzoom' => $this->scrollwheelzoom,
 			'owngooglegesturetext' => $this->owngooglegesturetext,
+			'specialicon' => $this->specialicon,
+			'showpop' => $this->showpopup,
+			'showroutingcontrol' => $this->showroutingcontrol,
 			'options' => $options,
 		);
 
