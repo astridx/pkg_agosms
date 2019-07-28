@@ -12,6 +12,10 @@ defined('_JEXEC') or die;
 
 $value = $field->value;
 
+JText::script('PLG_AGOSMSADDRESSMARKER_SCROLL');
+JText::script('PLG_AGOSMSADDRESSMARKER_TOUCH');
+JText::script('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
+
 $document = JFactory::getDocument();
 
 $document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.css');
@@ -68,8 +72,5 @@ $lon = $values[1];
 	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
 	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '1') ?>'
 	data-owngooglegesturetext='<?php echo $fieldParams->get('owngooglegesturetext', '1') ?>'
-	data-scroll='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLL'); ?>'
-	data-touch='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_TOUCH'); ?>'
-	data-scrollmac='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'); ?>'
 >
 </div>

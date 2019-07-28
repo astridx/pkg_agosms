@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		var lat = element.getAttribute('data-lat');
 		var lon = element.getAttribute('data-lon');
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
-		var touch = element.getAttribute('data-touch');
-		var scroll = element.getAttribute('data-scroll');
-		var scrollmac = element.getAttribute('data-scrollmac');
 		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
+		var touch = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_TOUCH');
+		var scroll = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLL');
+		var scrollmac = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
 
 		// Initialize the Map if needed
 		var container = L.DomUtil.get('map' + unique);
