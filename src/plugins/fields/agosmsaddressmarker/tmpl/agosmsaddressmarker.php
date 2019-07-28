@@ -57,6 +57,11 @@ $values = explode(',', $value);
 // ToDo Prüfe ob genau zwei werte und ob koordinate
 $lat = $values[0];
 $lon = $values[1];
+$iconcolor = $values[2];
+$markercolor = $values[3];
+$icon = $values[4];
+$popuptext = $values[5];
+
 ?>
 
 <div
@@ -69,6 +74,10 @@ $lon = $values[1];
 	data-unique='<?php echo $unique ?>'
 	data-lat='<?php echo $lat ?>'
 	data-lon='<?php echo $lon ?>'
+	data-iconcolor='<?php echo $iconcolor ?>'
+	data-markercolor='<?php echo $markercolor ?>'
+	data-icon='<?php echo $icon ?>'
+	data-popuptext='<?php echo $popuptext ?>'
 	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
 	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '1') ?>'
 	data-owngooglegesturetext='<?php echo $fieldParams->get('owngooglegesturetext', '1') ?>'

@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		var specialicon = element.getAttribute('data-specialicon');
 		var popup = element.getAttribute('data-popup');
 		var showroutingcontrol = element.getAttribute('data-showroutingcontrol');
+		var iconcolor = element.getAttribute('data-iconcolor');
+		var markercolor = element.getAttribute('data-markercolor');
+		var icon = element.getAttribute('data-icon');
+		var popuptext = element.getAttribute('data-popuptext');
 		
 		// Initialize the Map if needed
 		var container = L.DomUtil.get('map' + unique);
@@ -58,13 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 		}
 
-		// If special Icon
-		if (specialicon === "1") {
-		}
-
-		// If popup
-		if (popup === "1") {
-		}
 
 		// If routing control 
 		if (showroutingcontrol === "1") {
@@ -73,7 +70,29 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Add Marker if possible - fallback cords 0,0
 		try {
 			window['map' + unique].setView(new L.LatLng(lat, lon), 13);
-			var marker = L.marker([lat, lon]).addTo(window['map' + unique]);
+			
+			var marker;
+
+			// If special Icon
+			if (specialicon === "1") {
+				marker = L.marker([lat, lon]);
+			} 
+			else
+			{
+				marker = L.marker([lat, lon]);
+			}
+			
+			
+			marker.addTo(window['map' + unique]);
+
+			// If popup
+			if (popup === "1") {
+				marker.bindPopup(popuptext);
+			}
+			if (popup === "2") {
+				marker.bindPopup(popuptext).openPopup();
+			}
+
 		} catch (e) {
 			window['map' + unique].setView(new L.LatLng(0, 0), 13);
 			var marker = L.marker([0, 0]).addTo(window['map' + unique]);
