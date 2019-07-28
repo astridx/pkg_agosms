@@ -25,7 +25,7 @@
 				type="list"
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_MAPTYPE"
-				>
+			>
 				<option value="openstreetmap">openstreetmap</option>
 				<option value="mapbox">mapbox</option>
 				<option value="google">google</option>
@@ -35,7 +35,7 @@
 				type="list"
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_GEOCODER"
-				>
+			>
 				<option value="openstreetmap">openstreetmap_nominatim</option>
 				<option value="mapbox">mapbox</option>
 				<option value="google">google</option>
@@ -54,7 +54,7 @@
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_MAPBOXKEY"
 				size="30"
-				showon="maptype:mapbox[OR]geocoder:mapbox"
+				showon="maptype:mapbox[OR]geocoder:mapbox[OR]routing_simple_router:mapbox"
 			/>
 			<field
 				name="scrollwheelzoom"
@@ -121,6 +121,65 @@
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
 			</field>
+			<field
+				type="list"
+				name="routing_simple_position"
+				default="topright"
+				label="PLG_AGOSMSADDRESSMARKER_POSITION_LABEL"
+				showon="showroutingcontrol:1"
+			>
+				<option value="bottomleft">PLG_AGOSMSADDRESSMARKER_POSITION_BOTTOMLEFT</option>
+				<option value="bottomright">PLG_AGOSMSADDRESSMARKER_POSITION_BOTTOMRIGHT</option>
+				<option value="topleft">PLG_AGOSMSADDRESSMARKER_POSITION_TOPLEFT</option>
+				<option value="topright">PLG_AGOSMSADDRESSMARKER_POSITION_TOPRIGHT</option>
+			</field>
+			<field
+				type="list"
+				name="showrouting_places"
+				default="0"
+				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_PLACES_LABEL"
+				showon="showroutingcontrol:1"
+			>
+				<option value="1">JYES</option>
+				<option value="0">JNO</option>
+			</field>
+			<field
+				type="list"
+				name="routing_simple_router"
+				default="osrm"
+				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_ROUTER_LABEL"
+				showon="showroutingcontrol:1"
+			>
+				<option value="mapbox">mapbox</option>
+				<option value="osrm">osrm</option>
+			</field>
+			<field 
+				name="routing_simple_routertext" 
+				type="note" 
+				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_ROUTER_LABEL" 
+				description="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_ROUTER_DESC" 
+				class="alert" 
+				close="true"
+				showon="showroutingcontrol:1[AND]routing_simple_router:mapbox"
+			/>
+			<field 
+				name="routingplacestext" 
+				type="note" 
+				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_PLACES_LABEL" 
+				description="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_PLACES_DESC" 
+				class="alert" 
+				close="true"
+				showon="showroutingcontrol:1[AND]showrouting_places:1"
+			/>
+			<field 
+				name="showroutingcontroltext" 
+				type="note" 
+				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTINGCONTROL" 
+				description="PLG_AGOSMSADDRESSMARKER_SHOWROUTINGCONTROL_DESC" 
+				class="alert" 
+				close="true"
+				showon="showroutingcontrol:1"
+			/>
 		</fieldset>
 	</fields>
 </form>

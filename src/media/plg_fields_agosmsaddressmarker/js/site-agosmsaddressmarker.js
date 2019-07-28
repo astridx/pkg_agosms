@@ -65,6 +65,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// If routing control 
 		if (showroutingcontrol === "1") {
+		{
+			L.leafletControlRoutingtoaddress({
+				position: routesimpleposition,
+				router: routesimplerouter,
+				token: routesimplerouterkey,
+				placeholder: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_PLACEHOLDER'),
+				errormessage: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE'),
+				distance: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE'),
+				duration: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION'),
+				target: routesimpletarget,
+				addresserror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
+				requesterror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR')
+			}).addTo(window['mymap' + moduleId]);
 		}
 
 		// Add Marker if possible - fallback cords 0,0
