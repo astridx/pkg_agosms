@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var markercolor = element.getAttribute('data-markercolor');
 		var icon = element.getAttribute('data-icon');
 		var popuptext = element.getAttribute('data-popuptext');
-		
+
 		// Initialize the Map if needed
 		var container = L.DomUtil.get('map' + unique);
 		if (!container.children.length > 0) {
@@ -70,19 +70,24 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Add Marker if possible - fallback cords 0,0
 		try {
 			window['map' + unique].setView(new L.LatLng(lat, lon), 13);
-			
-			var marker;
+
+			var marker = L.marker([lat, lon]);
 
 			// If special Icon
 			if (specialicon === "1") {
-				marker = L.marker([lat, lon]);
-			} 
-			else
-			{
-				marker = L.marker([lat, lon]);
+				var AwesomeIcon = new L.AwesomeMarkers.icon(
+					{
+						icon: icon,
+						markerColor: markercolor,
+						iconColor: iconcolor,
+						prefix: 'fa',
+						spin: false,
+						extraClasses: 'agosmsaddressmarkericonclass',
+					})
+				marker.setIcon(AwesomeIcon);
 			}
-			
-			
+
+
 			marker.addTo(window['map' + unique]);
 
 			// If popup

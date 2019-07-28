@@ -22,6 +22,13 @@ $document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmark
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
 
+if ($fieldParams->get('specialicon', '0') === "1")
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/css/font-awesome.min.css');
+	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Leaflet.awesome-markers/leaflet.awesome-markers.css');
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Leaflet.awesome-markers/leaflet.awesome-markers.js');
+}
+
 if ($fieldParams->get('scrollwheelzoom') === "2")
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.min.css');
