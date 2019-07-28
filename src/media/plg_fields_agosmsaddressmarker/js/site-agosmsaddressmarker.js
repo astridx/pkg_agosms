@@ -12,7 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		var touch = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_TOUCH');
 		var scroll = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLL');
 		var scrollmac = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
-
+		var specialicon = element.getAttribute('data-specialicon');
+		var popup = element.getAttribute('data-popup');
+		var showroutingcontrol = element.getAttribute('data-showroutingcontrol');
+		
 		// Initialize the Map if needed
 		var container = L.DomUtil.get('map' + unique);
 		if (!container.children.length > 0) {
@@ -53,6 +56,18 @@ document.addEventListener('DOMContentLoaded', function () {
 					window['map' + unique].scrollWheelZoom.enable();
 				}
 			});
+		}
+
+		// If special Icon
+		if (specialicon === "1") {
+		}
+
+		// If popup
+		if (popup === "1") {
+		}
+
+		// If routing control 
+		if (showroutingcontrol === "1") {
 		}
 
 		// Add Marker if possible - fallback cords 0,0

@@ -72,5 +72,8 @@ $lon = $values[1];
 	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
 	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '1') ?>'
 	data-owngooglegesturetext='<?php echo $fieldParams->get('owngooglegesturetext', '1') ?>'
+	data-specialicon='<?php echo $fieldParams->get('specialicon', '0') ?>'
+	data-popup='<?php echo $fieldParams->get('popup', '0') ?>'
+	data-showroutingcontrol='<?php echo $fieldParams->get('showroutingcontrol', '0') ?>'
 >
 </div>
