@@ -8,7 +8,6 @@ document.addEventListener('click', function (e) {
 		var inputs = surroundingDiv.getElementsByTagName('input');
 		var lat = inputs[0];
 		var lon = inputs[1];
-		var hiddenfield = inputs[2];
 
 		[].forEach.call(fieldsNameArray, function(el){
 			var field = document.getElementById(el);
@@ -22,7 +21,7 @@ document.addEventListener('click', function (e) {
 				var lonlat = results.results[0].geometry.location;
 				lat.value = lonlat.lat;
 				lon.value = lonlat.lng;
-				hiddenfield.value = lonlat.lat + "," + lonlat.lng;
+				lon.onchange();
 				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring + ' (Google)')]});
 			} else {
 				var message = (typeof results.error_message == 'undefined') ? "" : results.error_message;

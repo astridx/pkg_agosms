@@ -47,6 +47,18 @@ extract($displayData);
 JHtml::_('jquery.framework');
 JHtml::_('script', 'system/html5fallback.js', array('version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9'));
 
+$showspecialicon = "display:none";
+if ($specialicon)
+{
+	$showspecialicon = "";
+}
+
+$showpopup = "display:none";
+if ($popup)
+{
+	$showpopup = "";
+}
+
 $document = JFactory::getDocument();
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 JHtml::_('script', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js', array('version' => 'auto', 'relative' => true));
@@ -140,7 +152,7 @@ if (!empty($fields))
 		if (in_array($field->id, $addressfieldsvalues))
 		{
 			$fieldsNameArray[] = 'jform' . '_com_fields_' . str_replace('-', '_', $field->name);
-			$fieldnames .= $field->label . ' (' . $field->name . ', ' . $field->id . ')<br>';
+			$fieldnames .= $field->label . ', ';
 		}
 	}
 }
@@ -174,34 +186,15 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 		type="button">
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 	</button>
-<p>
-<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
-<?php echo $fieldnames; ?>
-</p>
 
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
+<?php echo $fieldnames; ?>
+	
 <hr>
 <h4><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HEADING_OPTIONAL_VALUES'); ?></h4>
-<div style="<?php echo $showspecialicon; ?>">
-<div class="control-group">
-<label class="control-label"><?php echo JText::_('Markercolor'); ?></label>	
-<div class="controls">
-<select 
-	class="agosmsaddressmarkercolor">
-	<option></option>
-	<option value="red">red</option>
-	<option value="darkred">darkred</option>
-	<option value="orange">orange</option>
-	<option value="green">green</option>
-	<option value="darkgreen">darkgreen</option>
-	<option value="blue">blue</option>
-	<option value="purple">purple</option>
-	<option value="darkpurple">darkpurple</option>
-	<option value="cadetblue">cadetblue</option>
-</select>
-</div>
-</div>
 
+<div style="<?php echo $showspecialicon; ?>">
 <div class="control-group">
 <label class="control-label"><?php echo JText::_('Iconcolor'); ?></label>	
 <div class="controls">
@@ -219,6 +212,25 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 	<option value="cadetblue">cadetblue</option>
 	<option value="#FFFFFF">white</option>
 	<option value="#000000">black</option>
+</select>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('Markercolor'); ?></label>	
+<div class="controls">
+<select 
+	class="agosmsaddressmarkercolor">
+	<option></option>
+	<option value="red">red</option>
+	<option value="darkred">darkred</option>
+	<option value="orange">orange</option>
+	<option value="green">green</option>
+	<option value="darkgreen">darkgreen</option>
+	<option value="blue">blue</option>
+	<option value="purple">purple</option>
+	<option value="darkpurple">darkpurple</option>
+	<option value="cadetblue">cadetblue</option>
 </select>
 </div>
 </div>
@@ -249,16 +261,22 @@ class="agosmsmarkericon">
 </div>
 </div>
 
+<div style="<?php echo $showpopup; ?>">
 <div class="control-group">
 <label class="control-label"><?php echo JText::_('Popuptext'); ?></label>	
 <div class="controls">	
 <input type="text" id="agosmsmarkerpopuptext">
 </div>
 </div>
+</div>
+
+<p>
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_OPTIONAL_HINT'); ?>	
+</p>
 
 <input 
 	class="agosmsaddressmarkerhiddenfield" 
-	type="text" 
+	type="hidden" 
 	readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" 
 	value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> 
 />

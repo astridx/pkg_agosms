@@ -8,7 +8,6 @@ document.addEventListener('click', function (e) {
 		var inputs = surroundingDiv.getElementsByTagName('input');
 		var lat = inputs[0];
 		var lon = inputs[1];
-		var hiddenfield = inputs[2];
 
 		[].forEach.call(fieldsNameArray, function(el){
 			var field = document.getElementById(el);
@@ -22,7 +21,7 @@ document.addEventListener('click', function (e) {
 				var lonlat = results.features[0].center;
 				lat.value = lonlat[1];
 				lon.value = lonlat[0];
-				hiddenfield.value = lonlat[1] + "," + lonlat[0];
+				lon.onchange();
 				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring) + ' (Mapbox)']});
 			} else if (results.features && results.features.length > 0) {
 				// Limit is fix set to 1 up to now

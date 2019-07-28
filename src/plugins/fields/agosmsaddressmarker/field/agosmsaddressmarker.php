@@ -179,7 +179,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$this->scrollwheelzoom = (string) $this->element['scrollwheelzoom'];
 			$this->owngooglegesturetext = (string) $this->element['owngooglegesturetext'];
 			$this->specialicon = (string) $this->element['specialicon'];
-			$this->showpopup = (string) $this->element['showpopup'];
+			$this->popup = (string) $this->element['popup'];
 			$this->showroutingcontrol = (string) $this->element['showroutingcontrol'];
 		}
 
@@ -236,8 +236,8 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 				$this->specialicon = (string) $value;
 				break;
 
-			case 'showpopup':
-				$this->showpopup = (string) $value;
+			case 'popup':
+				$this->popup = (string) $value;
 				break;
 			
 			case 'showroutingcontrol':
@@ -304,7 +304,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			'scrollwheelzoom' => $this->scrollwheelzoom,
 			'owngooglegesturetext' => $this->owngooglegesturetext,
 			'specialicon' => $this->specialicon,
-			'showpop' => $this->showpopup,
+			'popup' => $this->popup,
 			'showroutingcontrol' => $this->showroutingcontrol,
 			'options' => $options,
 		);

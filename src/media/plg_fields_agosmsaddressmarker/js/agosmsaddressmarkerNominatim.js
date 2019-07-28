@@ -7,7 +7,6 @@ document.addEventListener('click', function (e) {
 		var inputs = surroundingDiv.getElementsByTagName('input');
 		var lat = inputs[0];
 		var lon = inputs[1];
-		var hiddenfield = inputs[2];
 
 		[].forEach.call(fieldsNameArray, function(el){
 			var field = document.getElementById(el);
@@ -20,7 +19,7 @@ document.addEventListener('click', function (e) {
 			if (!suggest && results.length === 1) {
 				lat.value = results[0].lat;
 				lon.value = results[0].lon;
-				hiddenfield.value = results[0].lat + "," + results[0].lon;
+				lon.onchange();
 				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
 			} else if (results.length > 0) {
 				// Limit is fix set to 1 up to now
