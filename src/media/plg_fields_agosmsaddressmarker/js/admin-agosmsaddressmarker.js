@@ -31,25 +31,33 @@ document.addEventListener('DOMContentLoaded', function () {
 		
 		lon.value = hf[1];
 		
-		iconcolor.value = hf[2];
-		while(iconcolorSpan.firstChild ) {
-			iconcolorSpan.removeChild(iconcolorSpan.firstChild);
-		}		
-		iconcolorSpan.appendChild(document.createTextNode(hf[2]));
+		if ( hf[2] !== '') {		
+			iconcolor.value = hf[2];
+			while(iconcolorSpan.firstChild ) {
+				iconcolorSpan.removeChild(iconcolorSpan.firstChild);
+			}		
+			iconcolorSpan.appendChild(document.createTextNode(hf[2]));
+		}
 		
-		markercolor.value = hf[3];
-		while(markercolorSpan.firstChild ) {
-			markercolorSpan.removeChild(markercolorSpan.firstChild);
-		}		
-		markercolorSpan.appendChild(document.createTextNode(hf[3]));
+		if ( hf[3] !== '') {		
+			markercolor.value = hf[3];
+			while(markercolorSpan.firstChild ) {
+				markercolorSpan.removeChild(markercolorSpan.firstChild);
+			}		
+			markercolorSpan.appendChild(document.createTextNode(hf[3]));
+		}
+		
+		if ( hf[4] !== '') {		
+			icon.value = hf[4];
+			while(iconSpan.firstChild ) {
+				iconSpan.removeChild(iconSpan.firstChild);
+			}		
+			iconSpan.appendChild(document.createTextNode(hf[4]));
+		}
 
-		icon.value = hf[4];
-		while(iconSpan.firstChild ) {
-			iconSpan.removeChild(iconSpan.firstChild);
-		}		
-		iconSpan.appendChild(document.createTextNode(hf[4]));
-		
-		popuptext.value = hf[5];
+		if ( hf[4] !== '') {
+			popuptext.value = hf[5];
+		}
 		
 		
 		// Write the value to the hidden field if lat or lon is changed
@@ -85,10 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				+ ',' + icon.value
 				+ ',' + popuptext.value;
 		}
-	
-	});
-	// For all fields [end]
-
+	}); // For all fields [end]
 }, false);
 
 function getJSON(url, params, callback) {
