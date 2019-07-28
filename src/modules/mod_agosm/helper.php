@@ -48,15 +48,6 @@ class ModagosmHelper
 		$model->setState('list.start', 0);
 		$model->setState('list.limit', (int) $params->get('count', 5));
 
-		/* if ($params->get('test', 1))
-		  {
-		  $model->setState('filter.begin_ende', 0);
-		  }
-		  else
-		  {
-		  $model->setState('filter.begin_ende', 1);
-		  } */
-
 		$model->setState('filter.state', 1);
 		$model->setState('filter.publish_date', true);
 
@@ -262,10 +253,17 @@ class ModagosmHelper
 						{
 							$itemfiltered3->cords = $field->rawvalue;
 							$test = explode(",", $itemfiltered3->cords);
-							if (is_numeric($test[0]) && is_numeric($test[1]))
+							
+							if (sizeof($test) > 5 && is_numeric($test[0]) && is_numeric($test[1]))
 							{
 								$itemfiltered3->title = $item->title;
 								$itemfiltered3->id = $item->id;
+								$itemfiltered3->lat = $test[0];
+								$itemfiltered3->lon = $test[1];
+								$itemfiltered3->iconcolor = $test[2];
+								$itemfiltered3->markercolor = $test[3];
+								$itemfiltered3->icon = $test[4];
+								$itemfiltered3->popuptext = $test[5];
 								$itemsfiltered[] = $itemfiltered3;
 							}
 						}
