@@ -1,0 +1,44 @@
+.GSearchBlock * { box-sizing: border-box; max-width: 100%; }
+.gsearch-cell {	display: inline-block; padding: 0 20px 10px 0; position: relative; vertical-align: top; min-width: 110px; }
+.columns-1 .gsearch-cell { padding-right: 0px !important; }
+.GSearchBlock .inputbox { margin-bottom: 0px; height: auto !important; }
+.GSearchBlock .inputbox:not(.bootstrap-select):not(.form-check-input) { 
+	height: auto !important; 
+	padding: 6px 8px 5px 8px !important;
+	line-height: 17px !important;
+    font-size: 14px !important;
+	border: 1px solid #aaa !important; 
+	margin: 0 !important;
+	border-radius: 3px;
+}
+.GSearchBlock h3 { margin-top: 20px; margin-bottom: 10px; }
+.GSearchBlock input { height: auto !important; }
+.GSearchBlock label input { display: inline !important; }
+.GSearchBlock .keyword input { min-width: 220px; }
+.GSearchBlock .columns-1 .keyword input { min-width: inherit; width: 100%; }
+.GSearchBlock .icon-calendar:before { 
+	content: "\43"; 	
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-right: .25em;
+	line-height: 14px; 
+	font-family: 'IcoMoon';
+	font-style: normal;
+	speak: none;
+}
+ 
+.gsearch-buttons { margin-top: 15px; }
+.gsearch-buttons .btn { width: auto; }
+.GSearchBlock h3 { font-size: 16px; display: block !important; float: none !important; text-align: left; }
+.GSearchBlock label { display: block !important; font-weight: normal !important; }
+.GSearchBlock .amount { text-align: center; }
+.GSearchBlock .acounter { margin-top: 20px; }
+.GSearchBlock .search_history { margin-top: 20px; }
+
+.gsearch-field-calendar .field-calendar { display: inline-block; }
+.gsearch-field-calendar input { width: 100px !important; }
+.gsearch-field-calendar .calendar-container { float: none; min-width: 240px; }
+.gsearch-field-calendar .btn-exit { display: none; }
+.gsearch-field-checkboxes input { margin-top: 0px; }
+.gsearch-field-text-range input { width: 100px; }
