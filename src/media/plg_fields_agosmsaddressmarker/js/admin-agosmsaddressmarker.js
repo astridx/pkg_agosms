@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			iconSpan.appendChild(document.createTextNode(hf[4]));
 		}
 
-		if ( hf[4] !== '') {
+		if ( hf[5] !== '') {
 			popuptext.value = hf[5];
 		}
 		
