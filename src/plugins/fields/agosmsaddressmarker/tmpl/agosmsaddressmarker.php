@@ -31,8 +31,9 @@ $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/j
 
 if ($fieldParams->get('showroutingcontrol', '0') == 1)
 {
-	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/LeafletControlRoutingtoaddress.css');
-	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/LeafletControlRoutingtoaddress.js');
+	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/leaflet-routing-machine/leaflet-routing-machine.css');
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/leaflet-routing-machine/leaflet-routing-machine.js');
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/leaflet-routing-machine/Control.Geocoder.js');
 }
 
 if ($fieldParams->get('showroutingcontrol', '0') == 1 && $fieldParams->get('showrouting_places', '0') == 1)

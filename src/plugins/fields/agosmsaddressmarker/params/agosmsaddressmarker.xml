@@ -135,16 +135,6 @@
 			</field>
 			<field
 				type="list"
-				name="showrouting_places"
-				default="0"
-				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_PLACES_LABEL"
-				showon="showroutingcontrol:1"
-			>
-				<option value="1">JYES</option>
-				<option value="0">JNO</option>
-			</field>
-			<field
-				type="list"
 				name="routing_simple_router"
 				default="osrm"
 				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_ROUTER_LABEL"
@@ -161,15 +151,6 @@
 				class="alert" 
 				close="true"
 				showon="showroutingcontrol:1[AND]routing_simple_router:mapbox"
-			/>
-			<field 
-				name="routingplacestext" 
-				type="note" 
-				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_PLACES_LABEL" 
-				description="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_PLACES_DESC" 
-				class="alert" 
-				close="true"
-				showon="showroutingcontrol:1[AND]showrouting_places:1"
 			/>
 			<field 
 				name="showroutingcontroltext" 

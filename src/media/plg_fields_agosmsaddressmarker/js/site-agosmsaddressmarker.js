@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// If routing control 
 		if (showroutingcontrol === "1") {
-			L.leafletControlRoutingtoaddress({
+/*			L.leafletControlRoutingtoaddress({
 				position: routing_simple_position,
 				router: routing_simple_router,
 				token: mapboxkey,
@@ -79,7 +79,55 @@ document.addEventListener('DOMContentLoaded', function () {
 				target: [lat, lon],
 				addresserror: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
 				requesterror: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_REQUESTERROR')
-			}).addTo(window['map' + unique]);
+			}).addTo(window['map' + unique]);*/
+			var config = {};
+			/*config = {
+			    serviceUrl: 'https://api.mapbox.com/directions/v5',
+			    profile: 'mapbox/driving',
+				token: mapboxkey,
+			};*/
+
+
+/*
+ 
+ 			L.Routing.control({
+				geocoder: L.Control.Geocoder.nominatim({}),
+				waypoints: [
+					L.latLng(routingstart),
+					L.latLng(routingend)
+				],
+				collapsible: true,
+				router: L.Routing.mapbox(mapboxkeyRouting,
+					{
+						profile: routingprofile,
+						language: routinglanguage,
+					}),
+				units: routingmetric,
+				routeWhileDragging: routewhiledragging
+			}).addTo(window['mymap' + moduleId]);
+
+ 
+ */
+			
+			var routingcontrol = L.Routing.control(L.extend(config, {
+				waypoints: [
+					L.latLng(lat, lon),
+					L.latLng(57.6792, 11.949)
+				],
+				geocoder: L.Control.Geocoder.nominatim(),
+				routeWhileDragging: true,
+				reverseWaypoints: true,
+				showAlternatives: true,
+				altLineOptions: {
+					styles: [
+						{color: 'black', opacity: 0.15, weight: 9},
+						{color: 'white', opacity: 0.8, weight: 6},
+						{color: 'blue', opacity: 0.5, weight: 2}
+					]
+				}
+			})).addTo(window['map' + unique]);
+
+			L.Routing.errorControl(routingcontrol).addTo(window['map' + unique]);			
 		}
 
 		// Add Marker if possible - fallback cords 0,0
