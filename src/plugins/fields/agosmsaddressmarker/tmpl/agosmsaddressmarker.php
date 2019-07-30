@@ -16,13 +16,6 @@ JText::script('PLG_AGOSMSADDRESSMARKER_SCROLL');
 JText::script('PLG_AGOSMSADDRESSMARKER_TOUCH');
 JText::script('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
 
-JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_PLACEHOLDER');
-JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ERRORMESSAGE');
-JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_DISTANCE');
-JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_DURATION');
-JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ADDRESSERROR');
-JText::script('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_REQUESTERROR');
-
 $document = JFactory::getDocument();
 
 $document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.css');
@@ -111,7 +104,12 @@ $popuptext = $values[5];
 	data-popup='<?php echo $fieldParams->get('popup', '0') ?>'
 	data-showroutingcontrol='<?php echo $fieldParams->get('showroutingcontrol', '0') ?>'
 	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
-	data-routing_simple_position='<?php echo $fieldParams->get('routing_simple_position', 'topright') ?>'
-	data-routing_simple_router='<?php echo $fieldParams->get('routing_simple_router', 'osrm') ?>'
+	data-routing_position='<?php echo $fieldParams->get('routing_position', 'topright') ?>'
+	data-routing_router='<?php echo $fieldParams->get('routing_router', 'osrm') ?>'
+	data-routingprofile="<?php echo $fieldParams->get('routingprofile', 'mapbox/driving'); ?>"
+	data-routinglanguage="<?php echo $fieldParams->get('routinglanguage', 'de'); ?>"
+	data-routingmetric="<?php echo $fieldParams->get('routingmetric', 'metric'); ?>"
+	data-routewhiledragging="<?php echo $fieldParams->get('routewhiledragging', 'false'); ?>"
+	
 >
 </div>

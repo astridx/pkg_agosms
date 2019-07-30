@@ -15,13 +15,21 @@ document.addEventListener('DOMContentLoaded', function () {
 		var specialicon = element.getAttribute('data-specialicon');
 		var popup = element.getAttribute('data-popup');
 		var showroutingcontrol = element.getAttribute('data-showroutingcontrol');
+		if (showroutingcontrol === '1')
+		{
+			var routingprofile = element.getAttribute('data-routingprofile');
+			var routinglanguage = element.getAttribute('data-routinglanguage');
+			var routingmetric = element.getAttribute('data-routingmetric');
+			var routewhiledragging = element.getAttribute('data-routewhiledragging');
+			var routing_position = element.getAttribute('data-routing_position');
+			var routing_router = element.getAttribute('data-routing_router');
+		}
 		var iconcolor = element.getAttribute('data-iconcolor');
 		var markercolor = element.getAttribute('data-markercolor');
 		var icon = element.getAttribute('data-icon');
 		var popuptext = element.getAttribute('data-popuptext');
 		var mapboxkey = element.getAttribute('data-mapboxkey');
-		var routing_simple_position = element.getAttribute('data-routing_simple_position');
-		var routing_simple_router = element.getAttribute('data-routing_simple_router');
+		
 
 		// Initialize the Map if needed
 		var container = L.DomUtil.get('map' + unique);
@@ -68,64 +76,61 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// If routing control 
 		if (showroutingcontrol === "1") {
-/*			L.leafletControlRoutingtoaddress({
-				position: routing_simple_position,
-				router: routing_simple_router,
-				token: mapboxkey,
-				placeholder: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_PLACEHOLDER'),
-				errormessage: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ERRORMESSAGE'),
-				distance: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_DISTANCE'),
-				duration: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_DURATION'),
-				target: [lat, lon],
-				addresserror: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
-				requesterror: Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ROUTING_SIMPLE_TEXT_REQUESTERROR')
-			}).addTo(window['map' + unique]);*/
-			var config = {};
-			/*config = {
-			    serviceUrl: 'https://api.mapbox.com/directions/v5',
-			    profile: 'mapbox/driving',
-				token: mapboxkey,
-			};*/
-
-
-/*
- 
- 			L.Routing.control({
-				geocoder: L.Control.Geocoder.nominatim({}),
-				waypoints: [
-					L.latLng(routingstart),
-					L.latLng(routingend)
-				],
-				collapsible: true,
-				router: L.Routing.mapbox(mapboxkeyRouting,
-					{
-						profile: routingprofile,
-						language: routinglanguage,
-					}),
-				units: routingmetric,
-				routeWhileDragging: routewhiledragging
-			}).addTo(window['mymap' + moduleId]);
-
- 
- */
 			
-			var routingcontrol = L.Routing.control(L.extend(config, {
-				waypoints: [
-					L.latLng(lat, lon),
-					L.latLng(57.6792, 11.949)
-				],
-				geocoder: L.Control.Geocoder.nominatim(),
-				routeWhileDragging: true,
-				reverseWaypoints: true,
-				showAlternatives: true,
-				altLineOptions: {
-					styles: [
-						{color: 'black', opacity: 0.15, weight: 9},
-						{color: 'white', opacity: 0.8, weight: 6},
-						{color: 'blue', opacity: 0.5, weight: 2}
-					]
-				}
-			})).addTo(window['map' + unique]);
+			var routingcontrol;
+			console.log(routing_router);
+			
+			if (routing_router === 'mapbox')
+			{
+				routingcontrol = L.Routing.control(L.extend({
+					fitSelectedRoutes: true,
+					position: routing_position,
+					units: routingmetric,
+					router: L.Routing.mapbox(mapboxkey,
+						{
+							profile: routingprofile,
+							language: routinglanguage,
+						}),
+					waypoints: [
+						L.latLng(lat, lon),
+					],
+					geocoder: L.Control.Geocoder.nominatim(),
+					routeWhileDragging: routewhiledragging,
+					reverseWaypoints: true,
+					collapsible: true,
+					showAlternatives: true,
+					altLineOptions: {
+						styles: [
+							{color: 'black', opacity: 0.15, weight: 9},
+							{color: 'white', opacity: 0.8, weight: 6},
+							{color: 'blue', opacity: 0.5, weight: 2}
+						]
+					}
+				})).addTo(window['map' + unique]);
+			} else {
+				routingcontrol = L.Routing.control(L.extend({
+					fitSelectedRoutes: true,
+					position: routing_position,
+					units: routingmetric,
+					router: L.Routing.osrmv1(),
+					waypoints: [
+						L.latLng(lat, lon),
+					],
+					geocoder: L.Control.Geocoder.nominatim(),
+					routeWhileDragging: routewhiledragging,
+					reverseWaypoints: true,
+					collapsible: true,
+					showAlternatives: true,
+					altLineOptions: {
+						styles: [
+							{color: 'black', opacity: 0.15, weight: 9},
+							{color: 'white', opacity: 0.8, weight: 6},
+							{color: 'blue', opacity: 0.5, weight: 2}
+						]
+					}
+				})).addTo(window['map' + unique]);
+				
+			}
 
 			L.Routing.errorControl(routingcontrol).addTo(window['map' + unique]);			
 		}
