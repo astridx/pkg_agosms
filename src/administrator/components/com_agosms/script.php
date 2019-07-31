@@ -154,7 +154,8 @@ class Com_AgosmsInstallerScript
 				. $db->quote('com_agosms.agosm') . ', '
 				. $db->quote(
 					'{"special":{"dbtable":"#__agosms","key":"id","type":"Agosm","prefix":"AgosmsTable","config":"array()"},
-					"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}') . ', '
+					"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}'
+				) . ', '
 				. $db->quote('') . ', '
 				. $db->quote(
 					'{"common":{"core_content_item_id":"id","core_title":"title","core_state":"state","core_alias":"alias",
@@ -162,7 +163,8 @@ class Com_AgosmsInstallerScript
 					"core_publish_up":"publish_up","core_publish_down":"publish_down","core_access":"access", "core_params":"params",
 					"core_featured":"featured", "core_metadata":"metadata", "core_language":"language", "core_images":"images", "core_urls":"url",
 					"core_version":"version", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc",
-					"core_catid":"catid", "core_xreference":"xreference", "asset_id":"null"}, "special":{}}') . ', '
+					"core_catid":"catid", "core_xreference":"xreference", "asset_id":"null"}, "special":{}}'
+				) . ', '
 				. $db->quote('AgosmsHelperRoute::getAgosmRoute') . ', '
 				. $db->quote(
 					'{"formFile":"administrator\\/components\\/com_agosms\\/models\\/forms\\/agosm.xml",
@@ -171,7 +173,8 @@ class Com_AgosmsInstallerScript
 					"ordering"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},
 					{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},
 					{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},
-					{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"} ]}')
+					{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"} ]}'
+				)
 			);
 
 			$db->setQuery($query);
@@ -190,7 +193,8 @@ class Com_AgosmsInstallerScript
 				. $db->quote('com_agosms.category') . ', '
 				. $db->quote('
 					{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},
-					"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}') . ', '
+					"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}'
+				) . ', '
 				. $db->quote('') . ', '
 				. $db->quote('
 					{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias",
@@ -199,7 +203,8 @@ class Com_AgosmsInstallerScript
 					"core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language",
 					"core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey",
 					"core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"},
-					"special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}') . ', '
+					"special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}'
+				) . ', '
 				. $db->quote('AgosmsHelperRoute::getCategoryRoute') . ', '
 				. $db->quote('
 					{"formFile":"administrator\\/components\\/com_categories\\/models\\/forms\\/category.xml",
@@ -210,7 +215,8 @@ class Com_AgosmsInstallerScript
 					"displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id",
 					"displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id",
 					"displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id",
-					"displayColumn":"title"}]}')
+					"displayColumn":"title"}]}'
+				)
 			);
 
 			$db->setQuery($query);

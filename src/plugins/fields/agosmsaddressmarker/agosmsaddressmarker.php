@@ -51,6 +51,7 @@ class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 		{
 			return $fieldNode;
 		}
+
 		$addressfields = json_encode($field->fieldparams->get('addressfields', array()), true);
 		$fieldNode->setAttribute('addressfields', $addressfields);
 

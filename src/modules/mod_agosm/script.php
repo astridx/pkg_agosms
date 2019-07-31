@@ -42,7 +42,7 @@ class Mod_AgosmInstallerScript
 	 */
 	public function uninstall($parent)
 	{
-	echo '<p>' . JText::_('MOD_AGOSM_UNINSTALL') . '</p>';
+		echo '<p>' . JText::_('MOD_AGOSM_UNINSTALL') . '</p>';
 	}
 
 	/**

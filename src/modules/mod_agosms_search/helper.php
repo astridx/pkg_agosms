@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * @package     Articles Good Search
@@ -7,331 +7,463 @@
  * @license     GNU General Public License version 2 or later.
  */
 
-// no direct access
+// No direct access
 defined('_JEXEC') or die('Restricted access');
 
-class modArticlesGoodSearchHelper {
-	
+class modArticlesGoodSearchHelper
+{
 	var $params;
-	
-	function __construct($params = null) {
+
+	function __construct($params = null)
+	{
 		$this->params = $params;
 	}
 
-	function getModuleParams($id, $native = false) {
-		if(!$id) return;
+	function getModuleParams($id, $native = false)
+	{
+		if (!$id)
+		{
+			return;
+		}
+
 		$db = JFactory::getDBO();
 		$query = "SELECT * FROM #__modules WHERE id = {$id}";
 		$db->setQuery($query);
 		$result = $db->loadObject();
-		
-		if($native) {
+
+		if ($native)
+		{
 			$moduleParams = new JRegistry($result->params);
 		}
-		else {
+		else
+		{
 			$moduleParams = json_decode($result->params);
 		}
+
 		return $moduleParams;
 	}
-	
-	function getCategories($parent = 0, $params = null) {
+
+	function getCategories($parent = 0, $params = null)
+	{
 		$db = JFactory::getDBO();
 		$categories = Array();
-		if($parent) {
+
+		if ($parent)
+		{
 			$query = "SELECT id, title, level FROM #__categories WHERE extension = 'com_content' AND parent_id = {$parent} AND published = 1 ORDER BY title ASC";
 		}
-		else {
-			if($params) {
-				if($params->get("restrict")) {
+		else
+		{
+			if ($params)
+			{
+				if ($params->get("restrict"))
+				{
 					$categories_restriction = $this->getCategoriesRestriction($params);
 				}
 			}
-			if($params && count($categories_restriction)) {
-				$query = "SELECT id, title, level FROM #__categories WHERE extension = 'com_content' AND id IN (".implode(",", $categories_restriction).") ORDER BY title ASC";				
+
+			if ($params && count($categories_restriction))
+			{
+				$query = "SELECT id, title, level FROM #__categories WHERE extension = 'com_content' AND id IN (" . implode(",", $categories_restriction) . ") ORDER BY title ASC";
 			}
-			else {
+			else
+			{
 				$query = "SELECT id, title, level FROM #__categories WHERE extension = 'com_content' AND level = 1 AND published = 1 ORDER BY title ASC";
 			}
 		}
-		
-		try {
+
+		try
+		{
 			$db->setQuery($query);
 			$results = $db->loadObjectList();
 		}
-		catch (Exception $e) {
+		catch (Exception $e)
+		{
 			echo $e->getMessage();
 			echo "<br /><br />" . $query;
 		}
-		
-		foreach($results as $category) {
+
+		foreach ($results as $category)
+		{
 			$categories[] = $category;
-			if(JFactory::getApplication()->isSite() && $params) {
-				if($params->get("restrict")) {
-					if($params->get("restsub")) {
-						$subs = (array)$this->getCategories($category->id, $params);
-						if(count($subs)) {
+
+			if (JFactory::getApplication()->isSite() && $params)
+			{
+				if ($params->get("restrict"))
+				{
+					if ($params->get("restsub"))
+					{
+						$subs = (array) $this->getCategories($category->id, $params);
+
+						if (count($subs))
+						{
 							$categories = array_merge($categories, $subs);
 						}
 					}
 				}
-				else {
-					$subs = (array)$this->getCategories($category->id, $params);
-					if(count($subs)) {
+				else
+				{
+					$subs = (array) $this->getCategories($category->id, $params);
+
+					if (count($subs))
+					{
 						$categories = array_merge($categories, $subs);
-					}					
+					}
 				}
 			}
-			else {
-				$subs = (array)$this->getCategories($category->id, $params);
-				if(count($subs)) {
+			else
+			{
+				$subs = (array) $this->getCategories($category->id, $params);
+
+				if (count($subs))
+				{
 					$categories = array_merge($categories, $subs);
-				}				
+				}
 			}
 		}
+
 		return $categories;
 	}
-	
-	function getCategoriesRestriction($params, $module_id = null) {
+
+	function getCategoriesRestriction($params, $module_id = null)
+	{
 		$categories = Array();
-		switch($params->get("restmode")) {
-			case 0 : //selected
-				if($params->get("restcat") == "") return array();
-				$categories = explode("\r\n", $params->get("restcat")); 
-			break;
-			
-			case 1 : //auto
-				if(in_array(JRequest::getVar("view"), Array("featured", "category"))) {
+
+		switch ($params->get("restmode"))
+		{
+			case 0 : // Selected
+				if ($params->get("restcat") == "")
+				{
+					return array();
+				}
+
+				$categories = explode("\r\n", $params->get("restcat"));
+					break;
+
+			case 1 : // Auto
+				if (in_array(JRequest::getVar("view"), Array("featured", "category")))
+				{
 					$categories[] = JRequest::getInt("id");
 				}
-				if(!count($categories)) {
+
+				if (!count($categories))
+				{
 					$categories[] = 1;
 				}
-			break;
+					break;
 		}
+
 		return $categories;
 	}
-	
-	function getSubCategories($parent) {
+
+	function getSubCategories($parent)
+	{
 		$db = JFactory::getDBO();
 		$query = "SELECT id FROM #__categories WHERE extension = 'com_content' AND parent_id = {$parent} AND published = 1";
 		$db->setQuery($query);
 		$results = $db->loadColumn();
-		
+
 		$categories = array();
-		foreach($results as $catid) {
+
+		foreach ($results as $catid)
+		{
 			$categories[] = $catid;
-			$subs = (array)$this->getSubCategories($catid);
+			$subs = (array) $this->getSubCategories($catid);
 			$categories = array_merge($categories, $subs);
 		}
-		return $categories;		
+
+		return $categories;
 	}
-	
-	function getTags($params) {
+
+	function getTags($params)
+	{
 		$items = Array();
 		$db = JFactory::getDBO();
 		$query = "SELECT id FROM #__content WHERE state = 1";
-		if($params->get("restrict")) {
+
+		if ($params->get("restrict"))
+		{
 			$categories = $this->getCategories(0, $params);
-			if(count($categories)) {
+
+			if (count($categories))
+			{
 				$ids = Array();
-				foreach($categories as $c) {
+
+				foreach ($categories as $c)
+				{
 					$ids[] = $c->id;
 				}
-				$query .= " AND catid IN (".implode(",", $ids).")";
+
+				$query .= " AND catid IN (" . implode(",", $ids) . ")";
 			}
 		}
 
-		try {
+		try
+		{
 			$db->setQuery($query);
 			$items = $db->loadColumn();
 		}
-		catch (Exception $e) {
+		catch (Exception $e)
+		{
 			echo $e->getMessage();
 			echo "<br /><br />" . $query;
 		}
-		
+
 		$query = "SELECT DISTINCT(t.id), t.title, t.parent_id FROM #__tags as t";
 		$query .= " LEFT JOIN #__contentitem_tag_map AS tm ON t.id = tm.tag_id";
 		$query .= " WHERE published = 1";
-		if(count($items)) {
-			$query .= " AND content_item_id IN (".implode(",", $items).")";
+
+		if (count($items))
+		{
+			$query .= " AND content_item_id IN (" . implode(",", $items) . ")";
 			$query .= " ORDER BY t.title ASC";
 		}
-		else {
-			return array(); // no tags if no items
+		else
+		{
+			return array(); // No tags if no items
 		}
+
 		$db->setQuery($query);
+
 		return $db->loadObjectList();
 	}
-	
-	function getAuthors($params) {
+
+	function getAuthors($params)
+	{
 		$items = Array();
 		$db = JFactory::getDBO();
 		$query = "SELECT created_by FROM #__content WHERE state = 1";
-		if($params->get("restrict")) {
+
+		if ($params->get("restrict"))
+		{
 			$categories = $this->getCategoriesRestriction($params);
-			if(count($categories)) {
-				$query .= " AND catid IN (".implode(",", $categories).")";
+
+			if (count($categories))
+			{
+				$query .= " AND catid IN (" . implode(",", $categories) . ")";
 			}
 		}
+
 		$db->setQuery($query);
 		$items = $db->loadColumn();
-		
+
 		$authors = Array();
-		if(count($items)) {
-			foreach($items as $created_by) {
+
+		if (count($items))
+		{
+			foreach ($items as $created_by)
+			{
 				$authors[$created_by] = $created_by;
 			}
-			$query = "SELECT id, name FROM #__users WHERE id IN (".implode(',', $authors).")";
+
+			$query = "SELECT id, name FROM #__users WHERE id IN (" . implode(',', $authors) . ")";
 		}
-		else {
-			return $authors; // no authors if no items
+		else
+		{
+			return $authors; // No authors if no items
 		}
+
 		$db->setQuery($query);
+
 		return $db->loadObjectList();
 	}
-	
-	function getCustomField($id) {
+
+	function getCustomField($id)
+	{
 		$db = JFactory::getDBO();
 		$query = "SELECT * FROM #__fields WHERE id = {$id}";
 		$db->setQuery($query);
+
 		return $db->loadObject();
 	}
-	
-	function getFieldValuesFromText($field_id, $type = "int", $module_id) {
+
+	function getFieldValuesFromText($field_id, $type = "int", $module_id)
+	{
 		$db = JFactory::getDBO();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__fields_values AS field{$field_id} ON field{$field_id}.item_id = i.id AND field{$field_id}.field_id = {$field_id}";
 		$query .= " WHERE state = 1";
-		
-		//category restriction
+
+		// Category restriction
 		$module_params = $this->getModuleParams($module_id, true);
-		if($module_params->get('restrict')) {
+
+		if ($module_params->get('restrict'))
+		{
 			$category_restriction = $this->getCategoriesRestriction($module_params);
-			if($module_params->get('restsub')) {
+
+			if ($module_params->get('restsub'))
+			{
 				$tmp = array();
-				foreach($category_restriction as $catid) {
+
+				foreach ($category_restriction as $catid)
+				{
 					$cats = $this->getSubCategories($catid);
 					$cats[] = $catid;
 					$tmp = array_merge($tmp, $cats);
 				}
+
 				$category_restriction = $tmp;
 			}
-			if(count($category_restriction)) {
-				$query .= " AND i.catid IN (".implode(",", $category_restriction).")";
+
+			if (count($category_restriction))
+			{
+				$query .= " AND i.catid IN (" . implode(",", $category_restriction) . ")";
 			}
 		}
-		
+
 		$query .= " GROUP BY i.id";
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
 
 		$return = Array();
-		if(count($result)) {
-			foreach($result as $item) {
-				if($item->value) {
+
+		if (count($result))
+		{
+			foreach ($result as $item)
+			{
+				if ($item->value)
+				{
 					$value = explode("|", $item->value);
-					foreach($value as $val) {
-						$return[] = $type == "text" ? $val : (int)$val;
+
+					foreach ($value as $val)
+					{
+						$return[] = $type == "text" ? $val : (int) $val;
 					}
 				}
 			}
-			sort($return);			
+
+			sort($return);
 			$return = array_unique($return);
 			$return = array_values($return);
 		}
+
 		return $return;
 	}
-	
-	function getMultiFieldValuesFromText($field_id, $sub_field, $type = "int", $module_id) {
+
+	function getMultiFieldValuesFromText($field_id, $sub_field, $type = "int", $module_id)
+	{
 		$db = JFactory::getDBO();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__fields_values AS field{$field_id} ON field{$field_id}.item_id = i.id AND field{$field_id}.field_id = {$field_id}";
 		$query .= " WHERE state = 1";
-		
-		//category restriction
+
+		// Category restriction
 		$module_params = $this->getModuleParams($module_id, true);
-		if($module_params->get('restrict')) {
+
+		if ($module_params->get('restrict'))
+		{
 			$category_restriction = $this->getCategoriesRestriction($module_params);
-			if($module_params->get('restsub')) {
+
+			if ($module_params->get('restsub'))
+			{
 				$tmp = array();
-				foreach($category_restriction as $catid) {
+
+				foreach ($category_restriction as $catid)
+				{
 					$cats = $this->getSubCategories($catid);
 					$cats[] = $catid;
 					$tmp = array_merge($tmp, $cats);
 				}
+
 				$category_restriction = $tmp;
 			}
-			if(count($category_restriction)) {
-				$query .= " AND i.catid IN (".implode(",", $category_restriction).")";
+
+			if (count($category_restriction))
+			{
+				$query .= " AND i.catid IN (" . implode(",", $category_restriction) . ")";
 			}
 		}
-		
+
 		$query .= " GROUP BY i.id";
 		$db->setQuery($query);
 		$result = $db->loadObjectList();
 
 		$return = Array();
-		if(count($result)) {
-			foreach($result as $item) {
-				if($item->value) {
+
+		if (count($result))
+		{
+			foreach ($result as $item)
+			{
+				if ($item->value)
+				{
 					$value = explode("|", $item->value);
-					foreach($value as $val) {
+
+					foreach ($value as $val)
+					{
 						$val = json_decode($val);
-						foreach($val as $repeatable) {
-							if($repeatable->{$sub_field}) {
-								$return[] = $type == "text" ? $repeatable->{$sub_field} : (int)$repeatable->{$sub_field};
+
+						foreach ($val as $repeatable)
+						{
+							if ($repeatable->{$sub_field})
+							{
+								$return[] = $type == "text" ? $repeatable->{$sub_field} : (int) $repeatable->{$sub_field};
 							}
 						}
 					}
 				}
 			}
-			sort($return);			
+
+			sort($return);
 			$return = array_unique($return);
 			$return = array_values($return);
 		}
+
 		return $return;
 	}
-	
-	function getItemExtraFields($iId) {
+
+	function getItemExtraFields($iId)
+	{
 		$query = "SELECT field_id as id, GROUP_CONCAT(value SEPARATOR ';;') AS value FROM #__fields_values WHERE item_id = {$iId} GROUP BY field_id";
+
 		return JFactory::getDBO()->setQuery($query)->loadObjectList();
 	}
-	
-	function getItemTags($iId) {
+
+	function getItemTags($iId)
+	{
 		$query = "SELECT m.tag_id as id, t.title as name FROM #__contentitem_tag_map as m 
 					LEFT JOIN #__tags as t ON t.id = m.tag_id 
 					WHERE m.type_alias = 'com_content.article' AND content_item_id = {$iId}
 					";
+
 		return JFactory::getDBO()->setQuery($query)->loadObjectList();
 	}
-	
-	function getItemsTitles($params) {
+
+	function getItemsTitles($params)
+	{
 		$db = JFactory::getDBO();
 		$query = "SELECT i.title";
 		$query .= " FROM #__content as i";
 		$query .= " WHERE state = 1";
-		
-		//category restriction
-		if($params->get('restrict')) {
+
+		// Category restriction
+		if ($params->get('restrict'))
+		{
 			$category_restriction = $this->getCategoriesRestriction($params);
-			if($params->get('restsub')) {
+
+			if ($params->get('restsub'))
+			{
 				$tmp = array();
-				foreach($category_restriction as $catid) {
+
+				foreach ($category_restriction as $catid)
+				{
 					$cats = $this->getSubCategories($catid);
 					$cats[] = $catid;
 					$tmp = array_merge($tmp, $cats);
 				}
+
 				$category_restriction = $tmp;
 			}
-			if(count($category_restriction)) {
-				$query .= " AND i.catid IN (".implode(",", $category_restriction).")";
+
+			if (count($category_restriction))
+			{
+				$query .= " AND i.catid IN (" . implode(",", $category_restriction) . ")";
 			}
 		}
-		
+
 		$db->setQuery($query);
+
 		return $db->loadColumn();
 	}
 }

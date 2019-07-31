@@ -18,7 +18,6 @@ defined('JPATH_PLATFORM') or die;
  */
 class JFormFieldFalist extends JFormField
 {
-
 	/**
 	 * The form field type.
 	 *
@@ -75,7 +74,6 @@ class JFormFieldFalist extends JFormField
 			// E.g. form field type tag sends $this->value as array
 			if ($this->multiple && is_array($this->value))
 			{
-				
 				if (!count($this->value))
 				{
 					$this->value[] = '';

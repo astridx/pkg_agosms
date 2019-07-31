@@ -49,7 +49,7 @@ class JFormFieldCfield extends JFormFieldList
 	{
 		// Accepted modifiers
 		$hash = md5($this->element);
-		
+
 		$app = JFactory::getApplication();
 		$context = $app->input->getCmd('context');
 

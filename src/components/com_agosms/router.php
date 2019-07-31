@@ -66,7 +66,7 @@ class AgosmsRouter extends JComponentRouterBase
 		}
 
 		// Are we dealing with an agosm that is attached to a menu item?
-		if (isset($query['view']) && ($mView == $query['view']) and (isset($query['id'])) and ($mId == (int) $query['id']))
+		if (isset($query['view']) && ($mView == $query['view']) && (isset($query['id'])) && ($mId == (int) $query['id']))
 		{
 			unset($query['view']);
 			unset($query['catid']);
@@ -75,7 +75,7 @@ class AgosmsRouter extends JComponentRouterBase
 			return $segments;
 		}
 
-		if (isset($view) and ($view == 'category' or $view == 'agosm'))
+		if (isset($view) && ($view == 'category' || $view == 'agosm'))
 		{
 			if ($mId != (int) $query['id'] || $mView != $view)
 			{

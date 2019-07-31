@@ -21,14 +21,18 @@ $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 $document = JFactory::getDocument();
 
 $leafletIsLoaded = false;
+
 foreach ($document->_scripts as $key => $script)
 {
 	$leafletPath = "leaflet/leaflet.js";
+
 	if (strpos($key, $leafletPath))
 	{
 		$leafletIsLoaded = true;
 	}
 }
+
+
 if (!$leafletIsLoaded)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.css');

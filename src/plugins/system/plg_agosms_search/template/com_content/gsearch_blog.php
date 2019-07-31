@@ -13,16 +13,21 @@ $document = JFactory::getDocument();
 $lang = JFactory::getLanguage();
 $lang->load("mod_agosms_search");
 
-require_once(JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php");
+require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
 $model = new ArticlesModelGoodSearch;
 
-$model->limit = JRequest::getInt("limit", $model->module_params->items_limit); //set items per page;
+$model->limit = JRequest::getInt("limit", $model->module_params->items_limit); // Set items per page;
 $columns = JRequest::getInt('columned', $model->module_params->template_columns);
-if(!$columns) $columns = 1;
+
+if (!$columns)
+{
+	$columns = 1;
+}
 
 $items = $model->getItems();
 
-if($model->module_params->page_heading != "") {
+if ($model->module_params->page_heading != "")
+{
 	$document->setTitle($model->module_params->page_heading);
 }
 
@@ -40,7 +45,9 @@ $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 	.blog-gsearch .item .item-info li { display: inline-block; position: relative; margin-right: 15px; }
 	.blog-gsearch .item .item-info ul.tags li { margin-right: 3px; padding: 0; }
 	.blog-gsearch .item.unmarged { margin-left: 0px !important; }
-	<?php if($model->module_params->image_width != 'auto') { ?>
+	<?php if ($model->module_params->image_width != 'auto')
+{
+		?>
 		div.gsearch-results-<?php echo $model->module_id; ?> img { 
 			max-width: <?php echo $model->module_params->image_width; ?> !important; 
 			height: auto !important; 
@@ -142,28 +149,40 @@ $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 	}
 </style>
 
-<div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?><?php if($columns > 1) { echo ' columned'; } ?>" itemscope itemtype="https://schema.org/Blog">
+<div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?><?php if ($columns > 1)
+{
+	echo ' columned';
+																   } ?>" itemscope itemtype="https://schema.org/Blog">
 	<div class="page-header" style="display: inline-block;">
 		<h3>
 			<?php
-				if(!$model->module_params->resultf) {
-					$model->module_params->resultf = JText::_("MOD_AGS_RESULT_PHRASE_DEFAULTфыв");
-				}
-				echo (count($items) ? JText::_($model->module_params->resultf) . " ({$model->total_items})" : JText::_($model->module_params->noresult)); 
+			if (!$model->module_params->resultf)
+{
+				$model->module_params->resultf = JText::_("MOD_AGS_RESULT_PHRASE_DEFAULTфыв");
+			}
+
+				echo (count($items) ? JText::_($model->module_params->resultf) . " ({$model->total_items})" : JText::_($model->module_params->noresult));
 			?>
 		</h3>
 	</div>
 	
-	<?php if(count($items)) { ?>
+	<?php if (count($items))
+{
+		?>
 	<div class="gsearch-toolbox" style="float: right; margin-top: 12px;">
-		<?php if($model->module_params->layout_show) { ?>
+		<?php if ($model->module_params->layout_show)
+	{
+			?>
 		<div class="gsearch-layout">
-		<?php require(dirname(__FILE__). '/gsearch_layout.php'); ?>
+			<?php require dirname(__FILE__) . '/gsearch_layout.php'; ?>
 		</div>
 		<?php } ?>
-		<?php if($model->module_params->ordering_show) { ?>
+		<?php
+		if ($model->module_params->ordering_show)
+	{
+			?>
 		<div class="gsearch-sorting">
-		<?php require(dirname(__FILE__). '/gsearch_sorting.php'); ?>
+			<?php require dirname(__FILE__) . '/gsearch_sorting.php'; ?>
 		</div>
 		<?php } ?>
 		<div style="clear: both;"></div>
@@ -172,32 +191,44 @@ $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 	
 	<div style="clear: both;"></div>
 	
-	<div class="itemlist<?php if($columns > 1) { echo ' row-fluid'; } ?>">
-	<?php foreach($items as $items_counter => $item) { 
+	<div class="itemlist<?php if ($columns > 1)
+{
+		echo ' row-fluid';
+						} ?>">
+	<?php
+	foreach ($items as $items_counter => $item)
+{
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
-			if ($item->parent_alias == 'root') {
-				$item->parent_slug = null;
-			}
+
+		if ($item->parent_alias == 'root')
+	{
+			$item->parent_slug = null;
+		}
+
 			$item->catslug = $item->category_alias ? ($item->catid . ':' . $item->category_alias) : $item->catid;
-	?>
+		?>
 		<?php
-			if($model->module_params->results_template == "") {
-				$model->module_params->results_template = "standard";
-			}
-			if($model->module_params->results_template == "standard") {
-				require(dirname(__FILE__). '/gsearch_blog_item.php');
-			}
-			else {
-				require(dirname(__FILE__). "/gsearch_blog_item_{$model->module_params->results_template}.php"); 
-			}
+		if ($model->module_params->results_template == "")
+	{
+			$model->module_params->results_template = "standard";
+		}
+
+		if ($model->module_params->results_template == "standard")
+	{
+			require dirname(__FILE__) . '/gsearch_blog_item.php';
+		}
+		else
+	{
+			require dirname(__FILE__) . "/gsearch_blog_item_{$model->module_params->results_template}.php";
+		}
 		?>
 	<?php } ?>
 	</div>
 	
 	<div style="clear: both;"></div>
 	<div class="pagination">
-		<?php 
+		<?php
 			$pagination = $model->getPagination();
 			$PagesLinks = $pagination->getPagesLinks();
 			$PagesLinks = preg_replace('/&amp;limitstart=0/', '', $PagesLinks);
@@ -207,33 +238,45 @@ $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 			$PagesLinks = preg_replace('/\?limitstart=0/', '', $PagesLinks);
 			$PagesLinks = preg_replace('/\?page-start=.[0-9]*/', '', $PagesLinks);
 			$PagesLinks = preg_replace('/\?start=/', '?page-start=', $PagesLinks);
-			if(strpos($PagesLinks, "?") === false) {
-				$PagesLinks = preg_replace('/&amp;page-start=/', '?page-start=', $PagesLinks);
-			}			
-			if(strpos($PagesLinks, "page-start") === false) { // sh404sef fix
-				$PagesLinks = preg_replace_callback(
-					'/(title="([^"]*)"[^>]*gsearch=1)/smix', 
-					function($matches) use($model) {
-						if((int)$matches[2] != 0) { // is page number
-							return $matches[1] . '&page-start=' . ($matches[2] - 1) * $model->limit;
-						}
-						else if($matches[2] == "Prev") {
-							return $matches[1] . '&page-start=' . ($model->input->get("page-start") - $model->limit);
-						}
-						else if($matches[2] == "Next") {
-							return $matches[1] . '&page-start=' . ($model->input->get("page-start") + $model->limit);
-						}
-						else if($matches[2] == "End") {
-							return $matches[1] . '&page-start=' . ($model->total_items - 1);
-						}
-						else {
-							return $matches[0];
-						}
-					}, 
-					$PagesLinks
-				);
-			}
-			echo $PagesLinks; 
+
+		if (strpos($PagesLinks, "?") === false)
+{
+			$PagesLinks = preg_replace('/&amp;page-start=/', '?page-start=', $PagesLinks);
+		}
+
+		if (strpos($PagesLinks, "page-start") === false)
+{
+			// Sh404sef fix
+			$PagesLinks = preg_replace_callback(
+				'/(title="([^"]*)"[^>]*gsearch=1)/smix',
+				function ($matches) use ($model) {
+					if ((int) $matches[2] != 0)
+			{
+						// Is page number
+						return $matches[1] . '&page-start=' . ($matches[2] - 1) * $model->limit;
+					}
+					elseif ($matches[2] == "Prev")
+			{
+						return $matches[1] . '&page-start=' . ($model->input->get("page-start") - $model->limit);
+					}
+					elseif ($matches[2] == "Next")
+			{
+						return $matches[1] . '&page-start=' . ($model->input->get("page-start") + $model->limit);
+					}
+					elseif ($matches[2] == "End")
+			{
+						return $matches[1] . '&page-start=' . ($model->total_items - 1);
+					}
+					else
+			{
+						return $matches[0];
+					}
+				},
+				$PagesLinks
+			);
+		}
+
+			echo $PagesLinks;
 		?>
 		<div class="clearfix"></div>
 		<?php echo $pagination->getPagesCounter(); ?>

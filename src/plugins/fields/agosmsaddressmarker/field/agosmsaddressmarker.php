@@ -37,7 +37,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	/**
 	 * The name of the mapheigth field.
 	 *
-	 * @var    int
+	 * @var    integer
 	 * @since  1.0.40
 	 */
 	protected $mapheight;
@@ -73,7 +73,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * @since  1.0.40
 	 */
 	protected $mapboxkey;
-	
+
 	/**
 	 * The name of the addressfields field.
 	 *
@@ -81,15 +81,15 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 * @since  1.0.40
 	 */
 	protected $addressfields;
-	
+
 	/**
 	 * The name of the scrollwheelzoom field.
 	 *
 	 * @var    string
 	 * @since  1.0.42
 	 */
-	protected $scrollwheelzoom; 
-	
+	protected $scrollwheelzoom;
+
 	/**
 	 * The name of the owngooglegesturetext field.
 	 *
@@ -227,7 +227,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			case 'scrollwheelzoom':
 				$this->scrollwheelzoom = (string) $value;
 				break;
-			
+
 			case 'owngooglegesturetext':
 				$this->owngooglegesturetext = (string) $value;
 				break;
@@ -239,7 +239,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			case 'popup':
 				$this->popup = (string) $value;
 				break;
-			
+
 			case 'showroutingcontrol':
 				$this->showroutingcontrol = (string) $value;
 				break;
@@ -291,7 +291,8 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	{
 		$data = parent::getLayoutData();
 
-		/* Get the addressfields */
+		// Get the addressfields
+
 		$options = (array) $this->getOptions();
 
 		$extraData = array(
@@ -384,9 +385,10 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 				$tmp['optionattr'] = " data-showon='" .
 					json_encode(
 						JFormHelper::parseShowOnConditions((string) $option['showon'], $this->formControl, $this->group)
-						)
+					)
 					. "'";
 			}
+
 			// Add the option object to the result set.
 			$options[] = (object) $tmp;
 		}

@@ -114,23 +114,23 @@ if ($app->input->getCmd('option') === 'com_categories')
 elseif ($app->input->getCmd('option') === 'com_users')
 {
 	$context = 'com_users.user';
-} 
+}
 
 // Com_contact
 elseif ($app->input->getCmd('option') === 'com_contact')
 {
 	//JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_SUPPORTET'), 'message');
 	$context = 'com_contact.contact';
-} 
+}
 
 // Third Party
-elseif ($app->input->getCmd('option') !== 'com_users' 
+elseif ($app->input->getCmd('option') !== 'com_users'
 	&& $app->input->getCmd('option') !== 'com_content'
 	&& $app->input->getCmd('option') !== 'com_categories'
 	&& $app->input->getCmd('option') !== 'com_contact')
 {
 	$context = $app->input->getCmd('option') . '.' . $app->input->getCmd('view');
-}	
+}
 
 
 // Load fields with prepared values
@@ -146,7 +146,7 @@ if (!empty($addressfieldsArray))
 	}
 }
 
-// Build the string with the field names from the selected fields 
+// Build the string with the field names from the selected fields
 $fieldnames = "";
 $fieldsNameArray = array();
 

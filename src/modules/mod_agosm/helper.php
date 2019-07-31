@@ -103,6 +103,7 @@ class ModagosmHelper
 				$category = $model->getCategory($item->id);
 				break;
 			}
+
 			return $category;
 		}
 
@@ -154,7 +155,6 @@ class ModagosmHelper
 
 		if ($items)
 		{
-
 			return $items;
 		}
 
@@ -206,14 +206,13 @@ class ModagosmHelper
 
 			if ($items)
 			{
-
 				foreach ($items as $key => $item)
 				{
-					
 					if ($item->state !== "1")
 					{
 						continue;
 					}
+
 					// Get item's fields, also preparing their value property for manual display
 					// (calling plugins events and loading layouts to get their HTML display)
 					$fields = FieldsHelper::getFields('com_content.article', $item, true);
@@ -221,14 +220,14 @@ class ModagosmHelper
 					$itemfiltered1 = new stdClass;
 					$itemfiltered2 = new stdClass;
 					$itemfiltered3 = new stdClass;
-					
+
 					foreach ($fields as $key => $field)
 					{
-						
 						if ($field->title == 'lat, lon')
 						{
 							$itemfiltered1->cords = $field->value;
 							$test = explode(",", $itemfiltered1->cords);
+
 							if (is_numeric($test[0]) && is_numeric($test[1]))
 							{
 								$itemfiltered1->title = $item->title;
@@ -237,11 +236,12 @@ class ModagosmHelper
 								$itemsfiltered[] = $itemfiltered1;
 							}
 						}
-						
+
 						if ($field->type == 'agosmsmarker')
 						{
 							$itemfiltered2->cords = $field->value;
 							$test = explode(",", $itemfiltered2->cords);
+
 							if (is_numeric($test[0]) && is_numeric($test[1]))
 							{
 								$itemfiltered2->title = $item->title;
@@ -250,7 +250,7 @@ class ModagosmHelper
 								$itemsfiltered[] = $itemfiltered2;
 							}
 						}
-						
+
 						if ($field->type == 'agosmsaddressmarker')
 						{
 							// Get plugin parameters
@@ -259,7 +259,7 @@ class ModagosmHelper
 
 							$itemfiltered3->cords = $field->rawvalue;
 							$test = explode(",", $itemfiltered3->cords);
-							
+
 							if (sizeof($test) > 5 && is_numeric($test[0]) && is_numeric($test[1]))
 							{
 								$itemfiltered3->title = $item->title;
@@ -267,17 +267,19 @@ class ModagosmHelper
 								$itemfiltered3->type = $field->type;
 								$itemfiltered3->lat = $test[0];
 								$itemfiltered3->lon = $test[1];
-								
-								if ($specialicon) {
+
+								if ($specialicon)
+								{
 									$itemfiltered3->iconcolor = $test[2];
 									$itemfiltered3->markercolor = $test[3];
 									$itemfiltered3->icon = $test[4];
 								}
-								
-								if ($popup) {
+
+								if ($popup)
+								{
 									$itemfiltered3->popuptext = $test[5];
 								}
-								
+
 								$itemsfiltered[] = $itemfiltered3;
 							}
 						}
@@ -287,7 +289,6 @@ class ModagosmHelper
 
 			if ($itemsfiltered)
 			{
-
 				return $itemsfiltered;
 			}
 		}

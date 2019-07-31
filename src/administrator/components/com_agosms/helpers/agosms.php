@@ -147,14 +147,17 @@ class AgosmsHelper extends JHelperContent
 				{
 					$item->count_published = $agosm->count;
 				}
+
 				if ($agosm->state == 0)
 				{
 					$item->count_unpublished = $agosm->count;
 				}
+
 				if ($agosm->state == 2)
 				{
 					$item->count_archived = $agosm->count;
 				}
+
 				if ($agosm->state == -2)
 				{
 					$item->count_trashed = $agosm->count;

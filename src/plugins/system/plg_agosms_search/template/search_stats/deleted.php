@@ -10,20 +10,24 @@
 defined('_JEXEC') or die;
 
 $mainframe = JFactory::getApplication();
-//check for template override
+
+// Check for template override
 $override = JPATH_SITE . "/templates/{$mainframe->getTemplate()}/html/com_content/search_stats/deleted.php";
 $file_path = __FILE__;
-if(JFile::exists($override)
-	&& strpos($file_path, "html") === false //do not trigger in override file
-) {
+
+if (JFile::exists($override)
+	&& strpos($file_path, "html") === false // Do not trigger in override file
+)
+{
 	ob_start();
-		require($override);
+		require $override;
 		$return = ob_get_contents();
 	ob_end_clean();
 	echo $return;
+
 	return;
 }
 
 echo JText::_("Deleted");
 
-?>
+

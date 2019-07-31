@@ -43,7 +43,7 @@ class AgosmsViewAgosm extends JViewLegacy
 
 			return false;
 		}
-		
+
 		// If we are forcing a language in modal (used for associations).
 		if ($this->getLayout() === 'modal' && $forcedLanguage = JFactory::getApplication()->input->get('forcedLanguage', '', 'cmd'))
 		{
@@ -89,15 +89,18 @@ class AgosmsViewAgosm extends JViewLegacy
 			JToolbarHelper::apply('agosm.apply');
 			JToolbarHelper::save('agosm.save');
 		}
+
 		if (!$checkedOut && (count($user->getAuthorisedCategories('com_agosms', 'core.create'))))
 		{
 			JToolbarHelper::save2new('agosm.save2new');
 		}
+
 		// If an existing item, can save to a copy.
 		if (!$isNew && (count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0))
 		{
 			JToolbarHelper::save2copy('agosm.save2copy');
 		}
+
 		if (empty($this->item->id))
 		{
 			JToolbarHelper::cancel('agosm.cancel');

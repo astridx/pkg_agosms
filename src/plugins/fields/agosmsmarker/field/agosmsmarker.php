@@ -100,5 +100,5 @@ class JFormFieldAgosmsmarker extends JFormFieldText
 		}
 
 		return $result;
-	}	
+	}
 }

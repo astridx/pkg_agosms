@@ -9,13 +9,15 @@
 
 defined('_JEXEC') or die;
 
-class ArticlesViewGoodSearch extends JViewCategory {
-	function display($search_type = "com_content") {	
-		require_once(JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php");
+class ArticlesViewGoodSearch extends JViewCategory
+{
+	function display($search_type = "com_content")
+	{
+		require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
 		$model = new ArticlesModelGoodSearch;
 		echo $model->total_items;
 		die;
 	}
 }
 
-?>
+

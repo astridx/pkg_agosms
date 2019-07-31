@@ -9,38 +9,48 @@
 
 defined('_JEXEC') or die('Restricted access');
 
-class JFormFieldCategorySelect extends JFormField {	
+class JFormFieldCategorySelect extends JFormField
+{
 
-	function getInput(){
-		return JFormFieldCategorySelect::fetchElement($this->name, $this->value, $this->element, $this->options['control']);
+	function getInput()
+	{
+		return self::fetchElement($this->name, $this->value, $this->element, $this->options['control']);
 	}
-	
-	function fetchElement($name, $value, &$node, $control_name) {
-	
-	        $document = JFactory::getDocument();
-			$document->addStyleSheet(JURI::root(true).'/modules/mod_agosms_search/assets/filter.css');
-			
+
+	function fetchElement($name, $value, &$node, $control_name)
+	{
+
+			$document = JFactory::getDocument();
+			$document->addStyleSheet(JURI::root(true) . '/modules/mod_agosms_search/assets/filter.css');
+
 			$mitems[] = JHTML::_('select.option', '', '');
-			
-			require_once(JPATH_SITE . "/modules/mod_agosms_search/helper.php");
-			$helper = new modArticlesGoodSearchHelper; 
+
+			require_once JPATH_SITE . "/modules/mod_agosms_search/helper.php";
+			$helper = new modArticlesGoodSearchHelper;
 			$categories = $helper->getCategories();
 
-			foreach($categories as $category) {
-				$indent = "";
-				for($i = 1; $i < $category->level; $i++) { $indent .= " - "; }
-				$mitems[] = JHTML::_('select.option', $category->id, $indent . $category->title);
+		foreach ($categories as $category)
+		{
+			$indent = "";
+
+			for ($i = 1; $i < $category->level;
+			$i++)
+			{
+				$indent .= " - ";
 			}
-			
-			$output = JHTML::_('select.genericlist',  $mitems, '', 'class="ValueSelect inputbox"', 'value', 'text', '0');		
+
+			$mitems[] = JHTML::_('select.option', $category->id, $indent . $category->title);
+		}
+
+			$output = JHTML::_('select.genericlist',  $mitems, '', 'class="ValueSelect inputbox"', 'value', 'text', '0');
 			$output .= "<div class='clear'></div><ul class='sortableFields'></ul>";
 			$output .= "<div class='clear'></div>";
-			$output .= "<textarea style='display: none;' name='".$name."' class='ValueSelectVal'>".$value."</textarea>";
+			$output .= "<textarea style='display: none;' name='" . $name . "' class='ValueSelectVal'>" . $value . "</textarea>";
 			$output .= "
 			
 			<script type='text/javascript'>
 				
-				var FilterPath = '".JURI::root(true)."/modules/mod_agosms_search/assets/';				
+				var FilterPath = '" . JURI::root(true) . "/modules/mod_agosms_search/assets/';				
 				
 				if(typeof jQuery == 'undefined') {
 					var script = document.createElement('script');
@@ -108,12 +118,21 @@ class JFormFieldCategorySelect extends JFormField {
 
 			return $output;
 	}
-	
-	function addOptions(&$mitems, $category) {
-		while($category->subs) {
-			foreach($category->subs as $category) {
+
+	function addOptions(&$mitems, $category)
+	{
+		while ($category->subs)
+		{
+			foreach ($category->subs as $category)
+			{
 				$indent = "";
-				for($i=0; $i < $category->level; $i++) { $indent .= " - "; } 
+
+				for ($i = 0; $i < $category->level;
+				$i++)
+				{
+					$indent .= " - ";
+				}
+
 				$mitems[] = JHTML::_('select.option', $category->id, $indent . $category->title);
 				$this->addOptions($category);
 			}
@@ -121,4 +140,4 @@ class JFormFieldCategorySelect extends JFormField {
 	}
 }
 
-?>
+

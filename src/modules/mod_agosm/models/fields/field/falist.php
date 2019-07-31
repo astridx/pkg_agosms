@@ -18,7 +18,6 @@ defined('JPATH_PLATFORM') or die;
  */
 class JFormFieldFalist extends JFormField
 {
-
 	/**
 	 * The form field type.
 	 *

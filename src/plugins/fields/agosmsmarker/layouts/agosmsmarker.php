@@ -136,7 +136,7 @@ $script = "window.onload = function () {"
 	. ""
 	. "function setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext) {"
 	. "hiddenfield.value = lat.value + ',' + lon.value + ',' + markercolor.options[markercolor.selectedIndex].value + ',' + iconcolor.options[iconcolor.selectedIndex].value + ',' + icon.options[icon.selectedIndex].value + ',' + popuptext.value;"
-	. "};"	
+	. "};"
 	. ""
 	. "popuptext.onchange = function() {"
 	. "setValueHiddenField(hiddenfield, lat, lon, markercolor, iconcolor, icon, popuptext);"
@@ -1008,8 +1008,8 @@ echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', 
 			<?php if (!$option->value) : ?>
 			<?php continue; ?>
 			<?php endif; ?>
-			<option value="<?php echo $option->value; ?>"><?php 
-			echo $option->text; 
+			<option value="<?php echo $option->value; ?>"><?php
+			echo $option->text;
 			?></option>
 		<?php endforeach; ?>
 	</datalist>

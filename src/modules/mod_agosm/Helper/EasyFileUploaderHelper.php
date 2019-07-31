@@ -68,6 +68,7 @@ class EasyFileUploaderHelper
 		{
 			// Get the user data
 			$user = Factory::getUser();
+
 			if ($user->guest == false)
 			{
 				$path .= DIRECTORY_SEPARATOR . $user->username;
@@ -84,12 +85,13 @@ class EasyFileUploaderHelper
 		{
 			// Now, we're going to check each of the uploaded files
 			$total = intval($params->get('ag_multiple'));
+
 			for ($i = 0; $i < $total; $i++)
 			{
 				$result[$i]['show'] = true;
 				$result[$i]['rpath'] = $relativepath;
 				$result[$i]['path'] = $path;
-				
+
 				// So, now, check for any other errors
 				if ($_FILES[$params->get('ag_variable')]["error"][$i] > 0)
 				{
@@ -108,6 +110,7 @@ class EasyFileUploaderHelper
 
 						// Get the value for 'ag_shownofile', the default is 1
 						$shownofile = $params->get('ag_shownofile', 1);
+
 						if ($shownofile == false)
 						{
 							$result[$i]['show'] = false;
@@ -116,7 +119,8 @@ class EasyFileUploaderHelper
 				}
 				else
 				{
-					/* No errors found.
+					/*
+					 No errors found.
 					 Check to see if the file type is correct
 					 But first, we have to store the file types in a variable. I was getting an issue with empty() */
 					if (self::isValidFileType($params, $i))
@@ -148,6 +152,7 @@ class EasyFileUploaderHelper
 							{
 								// Check to see if the file meets the safety standards
 								$is_safe = self::checkFileSafety($params, $result, $i);
+
 								if ($is_safe)
 								{
 									self::storeUploadedFile($path, $params, $result, $i);
@@ -167,12 +172,12 @@ class EasyFileUploaderHelper
 						$fakeMIME = $_FILES[$params->get('ag_variable')]["type"][$i];
 						$trueMIME = self::actualMIME($_FILES[$params->get('ag_variable')]["tmp_name"][$i]);
 						$result[$i]['type'] = 'error';
-						$result[$i]['text'] = Text::_('MOD_AG_INVALID_ERROR') 
-							. "<br />" 
-							. Text::_('MOD_AG_PHP_MIME_ERROR') 
-							. ($trueMIME !== false ? "(" 
-							. $trueMIME . ")" : "") 
-							. "<br />" . Text::_('MOD_AG_BROWSER_MIME_ERROR') 
+						$result[$i]['text'] = Text::_('MOD_AG_INVALID_ERROR')
+							. "<br />"
+							. Text::_('MOD_AG_PHP_MIME_ERROR')
+							. ($trueMIME !== false ? "("
+							. $trueMIME . ")" : "")
+							. "<br />" . Text::_('MOD_AG_BROWSER_MIME_ERROR')
 							. $fakeMIME;
 					}
 				}
@@ -198,9 +203,10 @@ class EasyFileUploaderHelper
 
 		$filetypes = $params->get('ag_filetypes');
 		$actualMIME = self::actualMIME($_FILES[$params->get('ag_variable')]["tmp_name"][$i]);
-		if ($filetypes == "*" 
-			|| (stripos($filetypes, $_FILES[$params->get('ag_variable')]["type"][$i]) !== false 
-			&& $actualMIME !== false 
+
+		if ($filetypes == "*"
+			|| (stripos($filetypes, $_FILES[$params->get('ag_variable')]["type"][$i]) !== false
+			&& $actualMIME !== false
 			&& stripos($filetypes, $actualMIME) !== false))
 		{
 			$valid = true;
@@ -226,27 +232,30 @@ class EasyFileUploaderHelper
 		}
 
 		$mime = false;
-		
+
 		// Try to use recommended functions
-		if (defined('FILEINFO_MIME_TYPE') 
-			&& function_exists('finfo_open') 
-			&& is_callable('finfo_open') 
-			&& function_exists('finfo_file') 
-			&& is_callable('finfo_file') 
-			&& function_exists('finfo_close') 
+		if (defined('FILEINFO_MIME_TYPE')
+			&& function_exists('finfo_open')
+			&& is_callable('finfo_open')
+			&& function_exists('finfo_file')
+			&& is_callable('finfo_file')
+			&& function_exists('finfo_close')
 			&& is_callable('finfo_close'))
 		{
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$mime = finfo_file($finfo, $file);
+
 			if ($mime === '')
 			{
 				$mime = false;
 			}
+
 			finfo_close($finfo);
 		}
 		elseif (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
 		{
 			$f = "'" . $file . "'";
+
 			if (function_exists('escapeshellarg') && is_callable('escapeshellarg'))
 			{
 				// Prefer to use escapeshellarg if it is available
@@ -255,14 +264,15 @@ class EasyFileUploaderHelper
 
 			if (function_exists('exec') && is_callable('exec'))
 			{
-				/* Didn't like how 'system' flushes output to browser. replaced with 'exec'
+				/*
+				 Didn't like how 'system' flushes output to browser. replaced with 'exec'
 				 Note: You can change this to: shell_exec("file -b --mime-type $f"); if you get
 				 "Regular file" as the mime type */
 				$mime = exec("file -bi $f");
-				
+
 				// This removes the charset value if it was returned with the mime type. mime is first.
 				$mime = strtok($mime, '; ');
-				
+
 				// Remove any remaining whitespace
 				$mime = trim($mime);
 			}
@@ -271,13 +281,13 @@ class EasyFileUploaderHelper
 				// Note: You can change this to: shell_exec("file -b --mime-type $f"); if you get
 				// "Regular file" as the mime type
 				$mime = shell_exec("file -bi $f");
-				
-				// This removes the charset value if it was returned with the mime type. 
+
+				// This removes the charset value if it was returned with the mime type.
 				// Mime is first.
 				$mime = strtok($mime, '; ');
-				
+
 				// Remove any remaining whitespace
-				$mime = trim($mime); 
+				$mime = trim($mime);
 			}
 		}
 		elseif (function_exists('mime_content_type') && is_callable('mime_content_type'))
@@ -312,7 +322,7 @@ class EasyFileUploaderHelper
 		{
 			$success = move_uploaded_file(
 				$_FILES[$params->get('ag_variable')]["tmp_name"][$i], $filepath . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i]
-				);
+			);
 		}
 		else
 		{
@@ -382,6 +392,7 @@ class EasyFileUploaderHelper
 				$message = Text::_('MOD_AG_UNKNOWN_ERROR');
 				break;
 		}
+
 		return $message;
 	}
 
@@ -410,14 +421,17 @@ class EasyFileUploaderHelper
 		{
 			$size = round($size / $mb, 2);
 			$text = $size . "MB";
-		} elseif ($size >= $kb)
+		}
+		elseif ($size >= $kb)
 		{
 			$size = round($size / $kb, 2);
 			$text = $size . "KB";
-		} else
+		}
+		else
 		{
 			$text = $size . Text::_('MOD_AG_BYTES');
 		}
+
 		return $text;
 	}
 
@@ -428,14 +442,15 @@ class EasyFileUploaderHelper
 	 * @param   boolean  &$result    If true, the view output will be cached
 	 * @param   boolean  &$i         If true, the view output will be cached
 	 * @param   boolean  $forbidden  If true, the view output will be cached
-	 * 
+	 *
 	 * @return  boolean  True of the file is safe
 	 */
 	public static function checkFileSafety(
-		&$params, 
-		&$result, 
-		&$i, 
-		$forbidden = array('php', 'phps', 'php5', 'php3', 'php4', 'inc', 'pl', 'cgi', 'fcgi', 'java', 'jar', 'py'))
+		&$params,
+		&$result,
+		&$i,
+		$forbidden = array('php', 'phps', 'php5', 'php3', 'php4', 'inc', 'pl', 'cgi', 'fcgi', 'java', 'jar', 'py')
+	)
 	{
 		$safe = true;
 
@@ -443,6 +458,7 @@ class EasyFileUploaderHelper
 		 * 1. Prevent buffer overflow attack by checking for null byte in the file name
 		 */
 		$null_byte = "\x00";
+
 		if (stripos($_FILES[$params->get('ag_variable')]["name"][$i], $null_byte) !== false)
 		{
 			$result[$i]['type'] = 'error';
@@ -478,6 +494,7 @@ class EasyFileUploaderHelper
 		 */
 		$buffer = 1024 * 8;
 		$fp = @fopen($_FILES[$params->get('ag_variable')]["tmp_name"][$i], 'r');
+
 		if ($fp !== false)
 		{
 			$data = '';
@@ -503,6 +520,7 @@ class EasyFileUploaderHelper
 				 */
 				$script_files = array('php', 'phps', 'php3', 'php4', 'php5', 'class', 'inc', 'txt', 'dat', 'tpl', 'tmpl');
 				$is_script = false;
+
 				foreach ($script_files as $script)
 				{
 					// Check to see if uploaded file is a script file
@@ -529,10 +547,12 @@ class EasyFileUploaderHelper
 				 * C. Check for the presence of forbidden script files in archives (if they are not allowed)
 				 */
 				$allow_scripts_in_archive = $params->get('ag_scriptsinarchives');
+
 				if (!$allow_scripts_in_archive)
 				{
 					$archive_exts = array('zip', '7z', 'jar', 'rar', 'tar', 'gz', 'tgz', 'bz2', 'tbz', 'jpa');
 					$is_archive = false;
+
 					foreach ($archive_exts as $archive)
 					{
 						// Check to see if uploaded file is an archive file
@@ -558,9 +578,11 @@ class EasyFileUploaderHelper
 						}
 					}
 				}
-				// Start the next loop with the last 10 bytes just in case the PHP tag was split up 
+
+				// Start the next loop with the last 10 bytes just in case the PHP tag was split up
 				$data = substr($data, -10);
 			}
+
 			// Close the file handle
 			fclose($fp);
 		}
