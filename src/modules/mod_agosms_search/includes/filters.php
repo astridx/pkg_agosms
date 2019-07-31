@@ -1,10 +1,11 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 defined('_JEXEC') or die('Restricted access');
@@ -20,19 +21,17 @@ class JFormFieldFilters extends JFormField
 	function fetchElement($name, $value, &$node, $control_name)
 	{
 			$db = JFactory::getDBO();
-			$document = JFactory::getDocument();
-			$document->addStyleSheet(JURI::root(true) . '/modules/mod_agosms_search/assets/filter.css');
 
 			// Basic filters
 			$mitems[] = JHTML::_('select.option', '', '');
 
-			$mitems[] = JHTML::_('select.option', 'keyword', JText::_('MOD_AGS_FILTER_TYPE_KEYWORD'));
-			$mitems[] = JHTML::_('select.option', 'title_select', JText::_('MOD_AGS_FILTER_TYPE_TITLE_SELECT'));
-			$mitems[] = JHTML::_('select.option', 'tag', JText::_('MOD_AGS_FILTER_TYPE_TAG'));
-			$mitems[] = JHTML::_('select.option', 'tag_cloud', JText::_('MOD_AGS_FILTER_TYPE_TAG_CLOUD'));
-			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGS_FILTER_TYPE_CATEGORY'));
-			$mitems[] = JHTML::_('select.option', 'author', JText::_('MOD_AGS_FILTER_TYPE_AUTHOR'));
-			$mitems[] = JHTML::_('select.option', 'date', JText::_('MOD_AGS_FILTER_TYPE_DATE'));
+			$mitems[] = JHTML::_('select.option', 'keyword', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_KEYWORD'));
+			$mitems[] = JHTML::_('select.option', 'title_select', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TITLE_SELECT'));
+			$mitems[] = JHTML::_('select.option', 'tag', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TAG'));
+			$mitems[] = JHTML::_('select.option', 'tag_cloud', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TAG_CLOUD'));
+			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_CATEGORY'));
+			$mitems[] = JHTML::_('select.option', 'author', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_AUTHOR'));
+			$mitems[] = JHTML::_('select.option', 'date', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_DATE'));
 
 			$mitems[] = JHTML::_('select.option', '', JText::_('-- Custom Fields --'));
 			$query = "SELECT f.*, g.title as group_name FROM #__fields as f 
@@ -134,13 +133,11 @@ class JFormFieldFilters extends JFormField
 
 			$output .= "
 				<script>
-					var MOD_AGS_FILTER_SELECT_FIELD_TYPE = '" . JText::_("MOD_AGS_FILTER_SELECT_FIELD_TYPE") . "';
-					var MOD_AGS_FILTER_TYPE_TEXT_FIELD = \"" . JText::_("MOD_AGS_FIELD") . "\";
+					var MOD_AGOSMSSEARCHFILTER_SELECT_FIELD_TYPE = '" . JText::_("MOD_AGOSMSSEARCHFILTER_SELECT_FIELD_TYPE") . "';
+					var MOD_AGOSMSSEARCHFILTER_TYPE_TEXT_FIELD = \"" . JText::_("MOD_AGOSMSSEARCHFIELD") . "\";
 				</script>
 			";
 
 			return $output;
 	}
 }
-
-

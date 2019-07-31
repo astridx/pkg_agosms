@@ -1,11 +1,13 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 defined('_JEXEC') or die('Restricted access');
 
@@ -20,13 +22,10 @@ class JFormFieldCategorySelect extends JFormField
 	function fetchElement($name, $value, &$node, $control_name)
 	{
 
-			$document = JFactory::getDocument();
-			$document->addStyleSheet(JURI::root(true) . '/modules/mod_agosms_search/assets/filter.css');
-
 			$mitems[] = JHTML::_('select.option', '', '');
 
 			require_once JPATH_SITE . "/modules/mod_agosms_search/helper.php";
-			$helper = new modArticlesGoodSearchHelper;
+			$helper = new modAgosmsSearchHelper;
 			$categories = $helper->getCategories();
 
 		foreach ($categories as $category)
@@ -50,7 +49,7 @@ class JFormFieldCategorySelect extends JFormField
 			
 			<script type='text/javascript'>
 				
-				var FilterPath = '" . JURI::root(true) . "/modules/mod_agosms_search/assets/';				
+				var FilterPath = '" . JURI::root(true) . "/media/mod_agosms_search/';				
 				
 				if(typeof jQuery == 'undefined') {
 					var script = document.createElement('script');
@@ -109,7 +108,7 @@ class JFormFieldCategorySelect extends JFormField
 				function load_base() {			
 					var base_script = document.createElement('script');
 					base_script.type = 'text/javascript';
-					base_script.src = FilterPath+'js/filter.admin.js?v=1.2.1';
+					base_script.src = FilterPath+'js/admin-agosms-filter.js?v=1.2.1';
 					document.getElementsByTagName('head')[0].appendChild(base_script);					
 				}
 			</script>

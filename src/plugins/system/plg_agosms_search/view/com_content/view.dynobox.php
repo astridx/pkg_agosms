@@ -1,11 +1,13 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 defined('_JEXEC') or die;
 
@@ -52,7 +54,7 @@ class ArticlesViewGoodSearch extends JViewCategory
 			}
 
 			require_once JPATH_SITE . '/modules/mod_agosms_search/helper.php';
-			$helper = new modArticlesGoodSearchHelper;
+			$helper = new modAgosmsSearchHelper;
 
 			foreach ($items as $key => $item)
 			{

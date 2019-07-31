@@ -1,9 +1,11 @@
 <?php 
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 defined('_JEXEC') or die;
@@ -13,10 +15,10 @@ defined('_JEXEC') or die;
 
 	jQuery(document).ready(function($) {
 		$("#GSearch<?php echo $module->id; ?> .gsearch-field-calendar").each(function() {
-			$(this).find("input:eq(0)").attr("placeholder", "<?php echo JText::_('MOD_AGS_FILTER_TYPE_DATE_FROM'); ?>");
-			$(this).find("input:eq(1)").attr("placeholder", "<?php echo JText::_('MOD_AGS_FILTER_TYPE_DATE_TO'); ?>");
+			$(this).find("input:eq(0)").attr("placeholder", "<?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_DATE_FROM'); ?>");
+			$(this).find("input:eq(1)").attr("placeholder", "<?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_DATE_TO'); ?>");
 		});
-		$("#GSearch<?php echo $module->id; ?> .gsearch-field-calendar.single input").attr("placeholder", "<?php echo JText::_('MOD_AGS_FILTER_TYPE_DATE'); ?>");
+		$("#GSearch<?php echo $module->id; ?> .gsearch-field-calendar.single input").attr("placeholder", "<?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_DATE'); ?>");
 		$(".gsearch-field-calendar input").addClass("inputbox");
 		
 		$("#GSearch<?php echo $module->id; ?> .gsearch-field-text input[name=keyword]").on("keyup", function(event) {
@@ -43,7 +45,7 @@ defined('_JEXEC') or die;
 			}, 4000);
 		});
 		
-		$("body").append("<div class='filter_loading<?php echo $module->id; ?>'><img src='<?php echo JURI::root(); ?>modules/mod_agosms_search/assets/images/loading.png' /></div>");
+		$("body").append("<div class='filter_loading<?php echo $module->id; ?>'>loading ...</div>");
 	});
 	
 	function submit_form_<?php echo $module->id; ?>() {

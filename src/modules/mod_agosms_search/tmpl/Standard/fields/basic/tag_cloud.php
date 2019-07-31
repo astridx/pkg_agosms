@@ -1,9 +1,11 @@
 <?php
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 // no direct access
@@ -14,7 +16,7 @@ $active = JRequest::getVar("tag");
 
 <div class="gsearch-field-select tags">	
 	<h3>
-		<?php echo JText::_('MOD_AGS_FILTER_TYPE_TAG_CLOUD'); ?>
+		<?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TAG_CLOUD'); ?>
 	</h3>
 	<div class="tag-cloud<?php echo $module->id; ?>" style="max-width: 250px;">
 		<?php foreach($tags as $tag) { ?>

@@ -1,11 +1,13 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
@@ -15,10 +17,10 @@ $active = JRequest::getVar("author");
 
 <div class="gsearch-field-select author">	
 	<h3>
-		<?php echo JText::_('MOD_AGS_FILTER_TYPE_AUTHOR'); ?>
+		<?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_AUTHOR'); ?>
 	</h3>
 	<select class="inputbox" name="author[]" multiple="multiple" style="display: none;">
-		<option value=""><?php echo JText::_('MOD_AGS_FILTER_TYPE_AUTHOR'); ?></option>
+		<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_AUTHOR'); ?></option>
 		<?php foreach($authors as $author) { ?>
 			<option 
 				value="<?php echo $author->id; ?>"

@@ -1,11 +1,13 @@
 <?php 
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 defined('_JEXEC') or die;
 
@@ -31,7 +33,7 @@ defined('_JEXEC') or die;
 					url: url,
 					success: function(response) {
 						$("#GSearch<?php echo $module->id; ?> div.acounter .loader").hide();
-						$("#GSearch<?php echo $module->id; ?> div.acounter .data").html("<p>"+response+" <?php echo JText::_("MOD_AGS_ACOUNTER_TEXT"); ?></p>").show();
+						$("#GSearch<?php echo $module->id; ?> div.acounter .data").html("<p>"+response+" <?php echo JText::_("MOD_AGOSMSSEARCHACOUNTER_TEXT"); ?></p>").show();
 					},
 					error: function() {
 						$("#GSearch<?php echo $module->id; ?> div.acounter .loader").hide();
@@ -51,5 +53,5 @@ defined('_JEXEC') or die;
 		
 		<div class="acounter">
 			<div class="data"></div>
-			<div class="loader" style="display: none;"><img src='<?php echo JURI::root(); ?>modules/mod_agosms_search/assets/images/loading.png' style='width: 30px;' /></div>
+			<div class="loader" style="display: none;">loading ...</div>
 		</div>

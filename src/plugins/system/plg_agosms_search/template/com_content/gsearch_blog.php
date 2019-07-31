@@ -1,11 +1,13 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 defined('_JEXEC') or die;
 
@@ -158,7 +160,7 @@ $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 			<?php
 			if (!$model->module_params->resultf)
 {
-				$model->module_params->resultf = JText::_("MOD_AGS_RESULT_PHRASE_DEFAULTфыв");
+				$model->module_params->resultf = JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULTфыв");
 			}
 
 				echo (count($items) ? JText::_($model->module_params->resultf) . " ({$model->total_items})" : JText::_($model->module_params->noresult));

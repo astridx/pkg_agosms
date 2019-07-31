@@ -1,11 +1,13 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 defined('_JEXEC') or die;
 
@@ -126,7 +128,7 @@ if($product->vendor_id) {
 	
 	<?php if($model->module_params->show_readmore) { ?>
 	<div class="item-readmore">
-		<a class="btn btn-secondary" href="<?php echo $productURL; ?>"><?php echo JText::_('MOD_AGS_ITEM_READMORE'); ?></a>
+		<a class="btn btn-secondary" href="<?php echo $productURL; ?>"><?php echo JText::_('MOD_AGOSMSSEARCHITEM_READMORE'); ?></a>
 	</div>
 	<?php } ?>
 	
@@ -162,7 +164,7 @@ if($product->vendor_id) {
 			<li class="created">
 				<i class="icon icon-clock"></i>
 				<time datetime="<?php echo $item->created; ?>" itemprop="dateCreated">
-					<?php echo JText::_('MOD_AGS_ITEM_CREATED'); ?>
+					<?php echo JText::_('MOD_AGOSMSSEARCHITEM_CREATED'); ?>
 					<?php 
 						setlocale(LC_ALL, JFactory::getLanguage()->getLocale());
 						$date_format = explode("::", $model->module_params_native->get('date_format', '%e %b %Y::d M yyyy'))[0];
@@ -175,7 +177,7 @@ if($product->vendor_id) {
 			<li class="hits">
 					<i class="icon icon-eye"></i>
 					<meta itemprop="interactionCount" content="UserPageVisits:<?php echo $item->hits; ?>">
-					<?php echo JText::_('MOD_AGS_ITEM_HITS'); ?> <?php echo $item->hits; ?>
+					<?php echo JText::_('MOD_AGOSMSSEARCHITEM_HITS'); ?> <?php echo $item->hits; ?>
 			</li>
 		</ul>
 	</div>

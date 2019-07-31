@@ -1,29 +1,29 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-error_reporting(E_ALL & ~E_STRICT & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED);
-
-require_once dirname(__FILE__) . '/helper.php';
-$helper = new modArticlesGoodSearchHelper($params);
+require_once __DIR__ . '/helper.php';
+$helper = new modAgosmsSearchHelper($params);
 
 $filters = $params->get('filters');
 
 if (!JPluginHelper::isEnabled('system', 'plg_agosms_search'))
 {
-	echo "Articles Good Search plugin is not published.<br />";
+	echo JText::_('MOD_AGOSMS_PLUGIN_NOT_PUBLISHED');
 }
 
 if ($filters == "")
 {
+	echo JText::_('MOD_AGOSMS_PLUGIN_NO_FIELDS');
 	echo "Select search fields in Articles Good Search module parameters! <br />";
 
 	return;
@@ -31,7 +31,16 @@ if ($filters == "")
 
 if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"))
 {
-	$skip = array("option", "task", "view", "Itemid", "search_mode", "dynobox", "field_id", "field_type");
+	$skip = array(
+		"option", 
+		"task", 
+		"view", 
+		"Itemid", 
+		"search_mode", 
+		"dynobox", 
+		"field_id", 
+		"field_type"
+		);
 
 	foreach (JFactory::getSession()->get("SaveSearchValues") as $key => $value)
 	{
@@ -81,5 +90,3 @@ foreach ($filters_tmp as $k => $filter)
 }
 
 require JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/template');
-
-

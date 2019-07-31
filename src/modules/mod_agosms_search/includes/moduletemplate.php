@@ -1,11 +1,13 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 // No direct access
 defined('_JEXEC') or die('Restricted access');
@@ -61,7 +63,7 @@ class JFormFieldModuletemplate extends JFormField
 			$options[] = JHTML::_('select.option', $folder, $folder);
 		}
 
-		array_unshift($options, JHTML::_('select.option', 'Default', '-- ' . JText::_('MOD_AGS_MODULE_TEMPLATE_DEFAULT') . ' --'));
+		array_unshift($options, JHTML::_('select.option', 'Default', '-- ' . JText::_('MOD_AGOSMSSEARCHMODULE_TEMPLATE_DEFAULT') . ' --'));
 		$fieldName = $name;
 
 		return JHTML::_('select.genericlist', $options, $fieldName, 'class="inputbox"', 'value', 'text', $value, $control_name . $name);

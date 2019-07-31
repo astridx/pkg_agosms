@@ -1,3 +1,11 @@
+/**
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
+ *
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
+ */
 		<script type="text/javascript">
 			var checker = 0;
 			var initbox = '';
@@ -56,7 +64,7 @@
 				$("#GSearch<?php echo $module->id; ?> .gsearch-cell").each(function() {
 					var select = $(this).find("select");
 					if(select.length > 0) {
-						$(this).prepend("<div class='dynoloader' style='display: none; width: 20px; float: right; margin-top: 10px;'><img src='<?php echo JURI::root(); ?>modules/mod_agosms_search/assets/images/loading.png' /></div>");
+						$(this).prepend("<div class='dynoloader' style='display: none; width: 20px; float: right; margin-top: 10px;'>loading ...</div>");
 					}
 				});
 			}); 

@@ -8,68 +8,173 @@
 	<authorEmail>info@astrid-guenther.de</authorEmail>
 	<authorUrl>www.astrid-guenther.de</authorUrl>
 	<version>##VERSION##</version>
-	<description>MOD_AGOSMSEARCH_XML_DESCRIPTION</description>
+	<description>MOD_AGOSMSSEARCH_XML_DESCRIPTION</description>
 	<namespace>AG\Module\Agosmssearch</namespace>
+	<scriptfile>script.php</scriptfile>
 	
+	<!-- Front-end files -->
 	<files>
-		<filename module="mod_agosms_search">mod_agosms_search.php</filename>
-		<filename>helper.php</filename>
-		<folder>includes</folder>
-		<folder>tmpl</folder>
-		<folder>assets</folder>
+		<file module="mod_agosms_search">mod_agosm.php</file>
+		##MODULE_FILES##
 	</files>
-    
-	<languages>
-		<language tag="en-GB">language/en-GB.mod_agosms_search.ini</language>
+	<languages folder="language">
+		##LANGUAGE_FILES##
 	</languages>
+	<!-- Media files -->
+	<media folder="media/mod_agosm" destination="mod_agosm">
+		##MEDIA_FILES##
+	</media>
 
-  	<config>
+	<config>
 		<fields name="params">
-			<fieldset name="basic" addfieldpath="/modules/mod_agosms_search/includes/">
-				<field name="" type="header" default="MOD_AGS_MAIN_PARAMS_HEADER" label="" description=""/>
+			<fieldset 
+				name="basic" 
+				addfieldpath="/modules/mod_agosms_search/includes/"
+			>
+				<field 
+					name="note1" 
+					type="note" 
+					label="MOD_AGOSMSSEARCHMAIN_PARAMS_HEADER" 
+					description="MOD_AGOSMSSEARCHMAIN_PARAMS_HEADER_DESC" 
+					class="alert" 
+					close="true"
+				/>
 				
-				<field name="moduleclass_sfx" type="text" default="" label="MOD_AGS_MODULE_CLASS_SUFFIX" description="MOD_AGS_PARAMMODULECLASSSUFFIX" />
+				<field 
+					name="moduleclass_sfx" 
+					type="text" default="" 
+					label="MOD_AGOSMSSEARCHMODULE_CLASS_SUFFIX" 
+					description="MOD_AGOSMSSEARCHPARAMMODULECLASSSUFFIX" 
+				/>
 				
-				<field name="module_template" type="moduletemplate" modulename="mod_agosms_search" default="Default" label="MOD_AGS_MODULE_TEMPLATE" />
+				<field 
+					name="module_template" 
+					type="moduletemplate" 
+					modulename="mod_agosms_search" 
+					default="Default" 
+					label="MOD_AGOSMSSEARCHMODULE_TEMPLATE" 
+				/>
 				
-				<field name="descr" type="textarea" default="" label="MOD_AGS_FORM_DESC" description="MOD_AGS_FORM_DESC_DESC" rows="5" cols="27" filter="raw" />
+				<field 
+					name="descr" type="textarea" default="" 
+					label="MOD_AGOSMSSEARCHFORM_DESC" 
+					description="MOD_AGOSMSSEARCHFORM_DESC_DESC" rows="5" 
+					cols="27" 
+					filter="raw" 
+				/>
 				
-				<field name="clear_btn_show" type="radio" class="btn-group" default="1" label="MOD_AGS_CLEAR_BTN_SHOW">
-					<option value="0">MOD_AGS_NO</option>
-					<option value="1">MOD_AGS_YES</option>
+				<field 
+					name="clear_btn_show" type="radio" class="btn-group" 
+					default="1" label="MOD_AGOSMSSEARCHCLEAR_BTN_SHOW">
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
 				</field>
 				
-				<field name="page_heading" type="text" default="" label="MOD_AGS_PAGE_TITLE" description="MOD_AGS_PARAMPAGETITLE" filter="raw" />
+				<field 
+					name="page_heading" 
+					type="text" 
+					default="" 
+					label="MOD_AGOSMSSEARCHPAGE_TITLE" 
+					description="MOD_AGOSMSSEARCHPARAMPAGETITLE" filter="raw" 
+				/>
 				
-				<field name="resultf" type="text" default="Search results" label="MOD_AGS_RESULT_PHRASE" description="MOD_AGS_RESULT_PHRASE_DESC" filter="raw" />
+				<field 
+					name="resultf" 
+					type="text" default="Search results" 
+					label="MOD_AGOSMSSEARCHRESULT_PHRASE" 
+					description="MOD_AGOSMSSEARCHRESULT_PHRASE_DESC" 
+					filter="raw" 
+				/>
 				
-				<field name="noresult" type="text" default="No results found" label="MOD_AGS_PHRASE_NO_RESULT" description="MOD_AGS_PHRASE_NO_RESULT_DESC" filter="raw" />
+				<field 
+					name="noresult" 
+					type="text" default="No results found" 
+					label="MOD_AGOSMSSEARCHPHRASE_NO_RESULT" 
+					description="MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DESC" 
+					filter="raw" 
+				/>
 				
-				<field name="Itemid" type="menuitem" default="" label="MOD_AGS_SEARCH_RESULTS_ITEMID" description="MOD_AGS_SEARCH_RESULTS_ITEMID_DESC"><option	value="">JDEFAULT</option></field>
+				<field 
+					name="Itemid" 
+					type="menuitem" 
+					default="" 
+					label="MOD_AGOSMSSEARCHSEARCH_RESULTS_ITEMID" 
+					description="MOD_AGOSMSSEARCHSEARCH_RESULTS_ITEMID_DESC"
+				>
+					<option	value="">JDEFAULT</option>
+				</field>
 
-				<field name="" type="header" default="MOD_AGS_CATEGORY_REST_HEADER" label="" description=""/>
+				<field 
+					name="note2" 
+					type="note" 
+					label="MOD_AGOSMSSEARCHCATEGORY_REST_HEADER" 
+					description="MOD_AGOSMSSEARCHCATEGORY_REST_HEADER_DESC" 
+					class="alert" 
+					close="true"
+				/>
 				
-				<field name="restrict" type="radio" class="btn-group" default="0" label="MOD_AGS_RESTRICT_CAT" description="MOD_AGS_RESTRICT_CAT_DESC">
-					<option value="0">MOD_AGS_NO</option>
-					<option value="1">MOD_AGS_YES</option>
+				<field 
+					name="restrict" 
+					type="radio" 
+					class="btn-group" 
+					default="0" label="MOD_AGOSMSSEARCHRESTRICT_CAT" 
+					description="MOD_AGOSMSSEARCHRESTRICT_CAT_DESC"
+				>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
 				</field>
 				
-				<field name="restmode" type="radio" class="btn-group" default="0" label="MOD_AGS_RESTRICTION_MODE" description="MOD_AGS_RESTRICTION_MODE_DESC">
-					<option value="0">MOD_AGS_RESTRICTION_MODE_CATID</option>
-					<option value="1">MOD_AGS_RESTRICTION_MODE_AUTO</option>
+				<field 
+					name="restmode" 
+					type="radio" 
+					class="btn-group" 
+					default="0" label="MOD_AGOSMSSEARCHRESTRICTION_MODE" 
+					description="MOD_AGOSMSSEARCHRESTRICTION_MODE_DESC"
+				>
+					<option value="0">MOD_AGOSMSSEARCHRESTRICTION_MODE_CATID</option>
+					<option value="1">MOD_AGOSMSSEARCHRESTRICTION_MODE_AUTO</option>
 				</field>
 				
-				<field name="restcat" type="categoryselect" default="" label="MOD_AGS_RESTRICTION_CAT_ID" />
+				<field 
+					name="restcat" 
+					type="categoryselect" 
+					default="" 
+					label="MOD_AGOSMSSEARCHRESTRICTION_CAT_ID" 
+				/>
 				
-				<field name="restsub" type="radio" class="btn-group" default="1" label="MOD_AGS_RESTRICTION_CAT_SUB" description="MOD_AGS_RESTRICTION_CAT_SUB_DESC">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="restsub" 
+					type="radio" 
+					class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHRESTRICTION_CAT_SUB" 
+					description="MOD_AGOSMSSEARCHRESTRICTION_CAT_SUB_DESC"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
 				
-				<field name="" type="header" default="MOD_AGS_FILTER_PARAMS_HEADER" label="" description=""/>
+				<field 
+					name="note3" 
+					type="note" 
+					label="MOD_AGOSMSSEARCHFILTER_PARAMS_HEADER" 
+					description="MOD_AGOSMSSEARCHFILTER_PARAMS_HEADER_DESC" 
+					class="alert" 
+					close="true"
+				/>
 				
-				<field name="filters" type="filters" label="MOD_AGS_SELECT_FIELDS" description="MOD_AGS_SELECT_FIELDS_DESC" default="" />
-				<field name="filters_cols" type="list" class="btn-group" label="MOD_AGS_SELECT_FIELDS_COLUMNS" description="MOD_AGS_SELECT_FIELDS_COLUMNS_DESC">
+				<field 
+					name="filters" 
+					type="filters" 
+					label="MOD_AGOSMSSEARCHSELECT_FIELDS" 
+					description="MOD_AGOSMSSEARCHSELECT_FIELDS_DESC" 
+					default="" 
+				/>
+				<field 
+					name="filters_cols" type="list" class="btn-group" 
+					label="MOD_AGOSMSSEARCHSELECT_FIELDS_COLUMNS" 
+					description="MOD_AGOSMSSEARCHSELECT_FIELDS_COLUMNS_DESC"
+				>
 					<option value="">Auto</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -77,12 +182,23 @@
 					<option value="4">4</option>
 					<option value="5">5</option>
 				</field>
-				<field name="search_type" type="radio" class="btn-group" default="ajax" label="MOD_AGS_SEARCH_TYPE">
-					<option value="standard">MOD_AGS_SEARCH_TYPE_STANDARD</option>
-					<option value="ajax">MOD_AGS_SEARCH_TYPE_AJAX</option>
+				<field 
+					name="search_type" type="radio" class="btn-group" 
+					default="ajax" 
+					label="MOD_AGOSMSSEARCHSEARCH_TYPE"
+				>
+					<option value="standard">MOD_AGOSMSSEARCHSEARCH_TYPE_STANDARD</option>
+					<option value="ajax">MOD_AGOSMSSEARCHSEARCH_TYPE_AJAX</option>
 				</field>
-				<field name="ajax_container" type="text" default="div.ajax_container" label="MOD_AGS_AJAX_CONTAINER" />
-				<field name="date_format" type="list" default="%e %b %Y::d M yyyy" label="MOD_AGS_DATE_FORMAT" description="MOD_AGS_DATE_FORMAT_DESC">
+				<field 
+					name="ajax_container" type="text" default="div.ajax_container" 
+					label="MOD_AGOSMSSEARCHAJAX_CONTAINER" 
+				/>
+				<field 
+					name="date_format" type="list" default="%e %b %Y::d M yyyy" 
+					label="MOD_AGOSMSSEARCHDATE_FORMAT" 
+					description="MOD_AGOSMSSEARCHDATE_FORMAT_DESC"
+				>
 					<option value="">Default</option>
 					<option value="%e %b %Y::d M yyyy">1 Jan 2012</option>
 					<option value="%e %B %Y::d MM yyyy">1 January 2012</option>
@@ -90,86 +206,219 @@
 					<option value="%B %e %Y::MM d yyyy">January 1 2012</option>
 				</field>
 				
-				<field name="" type="header" default="MOD_AGS_FEATURES_HEADER" label="" description=""/>
-				<field name="autosubmit" type="radio" class="btn-group" default="0" label="MOD_AGS_AUTOSUBMIT">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="note4" 
+					type="note" 
+					label="MOD_AGOSMSSEARCHFEATURES_HEADER" 
+					description="MOD_AGOSMSSEARCHFEATURES_HEADER_DESC" 
+					class="alert" 
+					close="true"
+				/>
+				<field 
+					name="autosubmit" 
+					type="radio" 
+					class="btn-group" 
+					default="0" 
+					label="MOD_AGOSMSSEARCHAUTOSUBMIT"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
-				<field name="acounter" type="radio" class="btn-group" default="1" label="MOD_AGS_ACOUNTER">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="acounter" 
+					type="radio" 
+					class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHACOUNTER"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
-				<field name="dynobox" type="radio" class="btn-group" default="0" label="MOD_AGS_DYNOBOX">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="dynobox" 
+					type="radio" 
+					class="btn-group" 
+					default="0" 
+					label="MOD_AGOSMSSEARCHDYNOBOX"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
-				<field name="savesearch" type="radio" class="btn-group" default="0" label="MOD_AGS_SAVE_VALUES_SESSION">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="savesearch" type="radio" class="btn-group" 
+					default="0" 
+					label="MOD_AGOSMSSEARCHSAVE_VALUES_SESSION"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
-				<field name="search_history" type="radio" class="btn-group" default="0" label="MOD_AGS_SEARCH_HISTORY">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="search_history" type="radio" class="btn-group" 
+					default="0" 
+					label="MOD_AGOSMSSEARCHSEARCH_HISTORY"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
-				<field name="search_stats" type="radio" class="btn-group" default="0" label="MOD_AGS_SEARCH_STATS" description="MOD_AGS_SEARCH_STATS_DESC">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="search_stats" type="radio" class="btn-group" 
+					default="0" 
+					label="MOD_AGOSMSSEARCHSEARCH_STATS" 
+					description="MOD_AGOSMSSEARCHSEARCH_STATS_DESC"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
-				<field name="" type="statslink" label="" />
+				<field 
+					name="" type="statslink" label="" />
 				
-				<field name="" type="header" default="MOD_AGS_FIELD_CONNECTION_HEADER" label="" description=""/>
-				<field name="field_connection" type="textarea" default="FieldLabel->FieldLabel2->FieldLabel3" label="MOD_AGS_FIELD_CONNECTION" description="MOD_AGS_FIELD_CONNECTION_DESC" rows="5" cols="35" />
+				<field 
+					name="note5" 
+					type="note" 
+					label="MOD_AGOSMSSEARCHFIELD_CONNECTION_HEADER" 
+					description="MOD_AGOSMSSEARCHFIELD_CONNECTION_HEADER_DESC" 
+					class="alert" 
+					close="true"
+				/>
+				<field 
+					name="field_connection" 
+					type="textarea" 
+					default="FieldLabel->FieldLabel2->FieldLabel3" 
+					label="MOD_AGOSMSSEARCHFIELD_CONNECTION" 
+					description="MOD_AGOSMSSEARCHFIELD_CONNECTION_DESC" 
+					rows="5" 
+					cols="35" 
+				/>
 				
-				<field name="" type="header" default="MOD_AGS_FILTER_RESULTS_TEMPLATE_HEADER" label="" description=""/>
+				<field 
+					name="note6" 
+					type="note" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_HEADER" 
+					description="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_HEADER_DESC" 
+					class="alert" 
+					close="true"
+				/>
 				
-				<field name="results_template" type="list" class="btn-group" default="standard" label="MOD_AGS_RESULTS_TEMPLATE">
+				<field 
+					name="results_template" 
+					type="list" 
+					class="btn-group" 
+					default="standard" 
+					label="MOD_AGOSMSSEARCHRESULTS_TEMPLATE"
+				>
 					<option value="standard">Standard</option>
 					<option value="clean">Clean</option>
 					<option value="j2store">J2Store</option>
 				</field>
-				<field name="include_featured" type="radio" class="btn-group" default="Yes" label="MOD_AGS_RESULTS_FEATURED">
-					<option value="Yes">MOD_AGS_YES</option>
-					<option value="First">MOD_AGS_RESULTS_FEATURED_FIRST</option>
-					<option value="Only">MOD_AGS_RESULTS_FEATURED_ONLY</option>
-					<option value="No">MOD_AGS_NO</option>
+				<field 
+					name="include_featured" type="radio" class="btn-group" 
+					default="Yes" 
+					label="MOD_AGOSMSSEARCHRESULTS_FEATURED"
+				>
+					<option value="Yes">MOD_AGOSMSSEARCHYES</option>
+					<option value="First">MOD_AGOSMSSEARCHRESULTS_FEATURED_FIRST</option>
+					<option value="Only">MOD_AGOSMSSEARCHRESULTS_FEATURED_ONLY</option>
+					<option value="No">MOD_AGOSMSSEARCHNO</option>
 				</field>
-				<field name="ordering_show" type="radio" class="btn-group" default="1" label="MOD_AGS_FILTER_RESULTS_ORDERING_SHOW">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="ordering_show" type="radio" class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_SHOW"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
-				<field name="ordering_default" type="orderingselect" default="created" label="MOD_AGS_FILTER_RESULTS_ORDERING_DEFAULT" />
-				<field name="ordering_default_dir" type="radio" class="btn-group" default="desc" label="MOD_AGS_FILTER_RESULTS_ORDERING_DEFAULT_DIRECTION">
-					<option value="asc">MOD_AGS_SORTING_ASC</option>
-					<option value="desc">MOD_AGS_SORTING_DESC</option>
+				<field 
+					name="ordering_default" type="orderingselect" 
+					default="created" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_DEFAULT" 
+				/>
+				<field 
+					name="ordering_default_dir" type="radio" class="btn-group" 
+					default="desc" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_DEFAULT_DIRECTION"
+				>
+					<option value="asc">MOD_AGOSMSSEARCHSORTING_ASC</option>
+					<option value="desc">MOD_AGOSMSSEARCHSORTING_DESC</option>
 				</field>
-				<field name="ordering_fields" type="fieldselect" default="" label="MOD_AGS_FILTER_RESULTS_ORDERING_FIELDS" />
-				<field name="layout_show" type="radio" class="btn-group" default="1" label="MOD_AGS_FILTER_RESULTS_TEMPLATE_SELECTOR_SHOW">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="ordering_fields" type="fieldselect" default="" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_FIELDS" 
+				/>
+				<field 
+					name="layout_show" type="radio" class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_SELECTOR_SHOW"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
-				<field name="show_introtext" type="radio" class="btn-group" default="1" label="MOD_AGS_FILTER_RESULTS_SHOW_INTROTEXT">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="show_introtext" type="radio" class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_INTROTEXT"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
-				<field name="show_info" type="radio" class="btn-group" default="1" label="MOD_AGS_FILTER_RESULTS_SHOW_INFO">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="show_info" type="radio" class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_INFO"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
-				<field name="show_readmore" type="radio" class="btn-group" default="1" label="MOD_AGS_FILTER_RESULTS_SHOW_READMORE">
-					<option value="1">MOD_AGS_YES</option>
-					<option value="0">MOD_AGS_NO</option>
+				<field 
+					name="show_readmore" type="radio" class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_READMORE"
+				>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
-				<field name="items_limit" type="text" default="10" label="MOD_AGS_FILTER_RESULTS_ITEMS_LIMIT" />
-				<field name="template_columns" type="text" default="1" label="MOD_AGS_FILTER_RESULTS_TEMPLATE_COLUMNS" />
-				<field name="text_limit" type="text" default="200" label="MOD_AGS_FILTER_RESULTS_TEMPLATE_TEXT_LIMIT" />
-				<field name="image_width" type="text" default="auto" label="MOD_AGS_FILTER_RESULTS_TEMPLATE_IMAGE_WIDTH" />
-				<field name="image_type" type="radio" class="btn-group" default="" label="MOD_AGS_FILTER_RESULTS_IMAGE_TYPE">
-					<option value="">MOD_AGS_FILTER_RESULTS_IMAGE_TYPE_DEFAULT</option>
-					<option value="intro">MOD_AGS_FILTER_RESULTS_IMAGE_TYPE_INTRO</option>
-					<option value="text">MOD_AGS_FILTER_RESULTS_IMAGE_TYPE_TEXT</option>
+				<field 
+					name="items_limit" 
+					type="text" 
+					default="10" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ITEMS_LIMIT" 
+				/>
+				<field 
+					name="template_columns" 
+					type="text" default="1" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_COLUMNS" 
+				/>
+				<field 
+					name="text_limit" 
+					type="text" default="200" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_TEXT_LIMIT" 
+				/>
+				<field 
+					name="image_width" 
+					type="text" default="auto" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_IMAGE_WIDTH" 
+				/>
+				<field 
+					name="image_type" 
+					type="radio" 
+					class="btn-group" 
+					default="" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE"
+				>
+					<option value="">MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE_DEFAULT</option>
+					<option value="intro">MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE_INTRO</option>
+					<option value="text">MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE_TEXT</option>
 				</field>
-				<field name="image_empty" type="imagelist" directory="images" default="-1" label="MOD_AGS_FILTER_RESULTS_IMAGE_EMPTY" />
-				<field name="styles" type="textarea" filter="raw" cols="10"
+				<field 
+					name="image_empty" 
+					type="imagelist" 
+					directory="images" 
+					default="-1" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_EMPTY" 
+				/>
+				<field 
+					name="styles" 
+					type="textarea" filter="raw" cols="10"
 					default="/* styles for columned view */&#13;&#10;div.blog-gsearch.columned .item {&#13;&#10;
 								padding: 10px 20px;&#13;&#10;
 								border: 1px solid #aaa;&#13;&#10;
@@ -177,15 +426,24 @@
 								background: #f8f8ff;&#13;&#10;
 								box-shadow: 1px 0px 3px #ccc;&#13;&#10;}&#13;&#10;/* general styles */&#13;&#10;div.blog-gsearch img { float: left; margin: 0 20px 10px 0; }&#13;&#10;
 							" 
-					label="MOD_AGS_FILTER_RESULTS_TEMPLATE_STYLES" />
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_STYLES" />
 
 			</fieldset>
-			<fieldset name="advanced">
-				<field name="cache" type="list" default="1" label="MOD_AGS_CACHING">
-					<option value="1">MOD_AGS_USE_GLOBAL</option>
-					<option value="0">MOD_AGS_NOCACHING</option>
+			<fieldset 
+				name="advanced">
+				<field 
+					name="cache" 
+					type="list" default="1" 
+					label="MOD_AGOSMSSEARCHCACHING"
+				>
+					<option value="1">MOD_AGOSMSSEARCHUSE_GLOBAL</option>
+					<option value="0">MOD_AGOSMSSEARCHNOCACHING</option>
 				</field>
-				<field name="cache_time" type="text" default="900" label="MOD_AGS_CACHE_TIME_LABEL" />
+				<field 
+					name="cache_time" 
+					type="text" default="900" 
+					label="MOD_AGOSMSSEARCHCACHE_TIME_LABEL" 
+				/>
 			</fieldset>
 		</fields>
 	</config>	  

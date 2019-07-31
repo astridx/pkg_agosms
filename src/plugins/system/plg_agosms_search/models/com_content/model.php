@@ -1,9 +1,11 @@
 <?php
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 // No direct access
@@ -34,7 +36,7 @@ class ArticlesModelGoodSearch extends JModelList
 		$this->input = JFactory::getApplication()->input;
 		require_once JPATH_SITE . "/modules/mod_agosms_search/helper.php";
 		$this->module_id = $this->input->get("moduleId", "", "int");
-		$this->module_helper = new modArticlesGoodSearchHelper;
+		$this->module_helper = new modAgosmsSearchHelper;
 		$this->module_params = $this->module_helper->getModuleParams($this->module_id);
 		$this->module_params_native = $this->module_helper->getModuleParams($this->module_id, true);
 
@@ -378,7 +380,7 @@ class ArticlesModelGoodSearch extends JModelList
 
 		// Fields search
 		require_once JPATH_SITE . '/modules/mod_agosms_search/helper.php';
-		$module_helper = new modArticlesGoodSearchHelper;
+		$module_helper = new modAgosmsSearchHelper;
 
 		foreach ($_GET as $param => $value)
 		{

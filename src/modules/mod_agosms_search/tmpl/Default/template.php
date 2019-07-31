@@ -1,9 +1,11 @@
 <?php 
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 // no direct access
@@ -13,19 +15,6 @@ require_once(JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/
 
 JHtml::_('bootstrap.framework');
 $document = JFactory::getDocument();
-
-$path = JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', $params->get('module_template', 'Default') . '') . '/template');
-if(strpos($path, "modules/") !== false) {
-	$path = explode("modules/", $path);
-	$path = explode("/template.php", $path[1]);
-	$path = JURI::root(true) . '/modules/' . $path[0] . '/assets/filter.css';
-}
-if(strpos($path, "templates/") !== false) {
-	$path = explode("templates/", $path);
-	$path = explode("/template.php", $path[1]);
-	$path = JURI::root(true) . '/templates/' . $path[0] . '/assets/filter.css';
-}
-$document->addStylesheet($path);
 $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 
 $cols = $params->get('filters_cols');
@@ -251,7 +240,7 @@ setlocale(LC_ALL, $curr_locale);
 		?>
 		
 			<div class="gsearch-buttons">
-				<input type="submit" value="<?php echo JText::_('MOD_AGS_BUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
+				<input type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
 				<?php
 				if($params->get("clear_btn_show", 1)) {
 					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/clear_btn')); 

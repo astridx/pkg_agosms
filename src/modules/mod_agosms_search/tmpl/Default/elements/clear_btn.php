@@ -1,11 +1,13 @@
 <?php 
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 defined('_JEXEC') or die;
 
@@ -61,4 +63,4 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 			}
 		</script>	
 
-		<input type="button" value="<?php echo JText::_('MOD_AGS_BUTTON_CLEAR'); ?>" class="btn btn-warning button reset <?php echo $moduleclass_sfx; ?>" onClick="clearSearch_<?php echo $module->id; ?>()" />
+		<input type="button" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_CLEAR'); ?>" class="btn btn-warning button reset <?php echo $moduleclass_sfx; ?>" onClick="clearSearch_<?php echo $module->id; ?>()" />

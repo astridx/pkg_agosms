@@ -1,11 +1,13 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 defined('_JEXEC') or die;
 
@@ -55,15 +57,15 @@ foreach($customSorting as $field) {
 </style>
 
 <select class="inputbox select ordering">
-	<option value=""><?php echo JText::_('MOD_AGS_SORTING_SELECT'); ?></div>
-	<option value="title"><?php echo JText::_('MOD_AGS_SORTING_TITLE'); ?></div>
-	<option value="alias"><?php echo JText::_('MOD_AGS_SORTING_ALIAS'); ?></div>
-	<option value="created"><?php echo JText::_('MOD_AGS_SORTING_DATE'); ?></div>
-	<option value="publish_up"><?php echo JText::_('MOD_AGS_SORTING_DATE_PUBLISHING'); ?></div>
-	<option value="category"><?php echo JText::_('MOD_AGS_SORTING_CATEGORY'); ?></div>
-	<option value="hits"><?php echo JText::_('MOD_AGS_SORTING_POPULAR'); ?></div>
-	<option value="featured"><?php echo JText::_('MOD_AGS_SORTING_FEATURED'); ?></div>
-	<option value="rand"><?php echo JText::_('MOD_AGS_SORTING_RANDOM'); ?></div>
+	<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_SELECT'); ?></div>
+	<option value="title"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'); ?></div>
+	<option value="alias"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_ALIAS'); ?></div>
+	<option value="created"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE'); ?></div>
+	<option value="publish_up"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE_PUBLISHING'); ?></div>
+	<option value="category"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_CATEGORY'); ?></div>
+	<option value="hits"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_POPULAR'); ?></div>
+	<option value="featured"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'); ?></div>
+	<option value="rand"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'); ?></div>
 	<?php if(count($sortingFields)) { ?>
 		<?php foreach($sortingFields as $field) { ?>
 		<option value="field<?php echo $field->id; ?>"><?php echo JText::_($field->name); ?></option>

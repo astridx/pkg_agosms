@@ -1,11 +1,13 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
@@ -30,7 +32,7 @@ if($active_to) {
 
 <div class="gsearch-field-calendar date">	
 	<h3>
-		<?php echo JText::_('MOD_AGS_FILTER_TYPE_DATE'); ?>
+		<?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_DATE'); ?>
 	</h3>
 
 	<div class="gsearch-field-calendar-wrapper">

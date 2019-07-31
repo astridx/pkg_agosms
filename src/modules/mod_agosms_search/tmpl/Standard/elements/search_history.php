@@ -1,11 +1,13 @@
 <?php 
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2019 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
+
 
 defined('_JEXEC') or die;
 
@@ -20,7 +22,7 @@ if($history) {
 	}
 	echo "
 			</ul>
-			<a href='#' id='search-history-clear{$module->id}' class='search-history-clear'>".JText::_('MOD_AGS_BUTTON_HISTORY_CLEAR')."</a>
+			<a href='#' id='search-history-clear{$module->id}' class='search-history-clear'>".JText::_('MOD_AGOSMSSEARCHBUTTON_HISTORY_CLEAR')."</a>
 		</div>";
 }
 

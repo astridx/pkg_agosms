@@ -1,10 +1,11 @@
 <?php
-
 /**
- * @package     Articles Good Search
+ * @package     Joomla.Site
+ * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2017 Joomcar extensions. All rights reserved.
- * @license     GNU General Public License version 2 or later.
+ * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 defined('_JEXEC') or die('Restricted access');
@@ -19,14 +20,14 @@ class JFormFieldOrderingSelect extends JFormField
 
 	function fetchElement($name, $value, &$node, $control_name)
 	{
-			$mitems[] = JHTML::_('select.option', 'title', JText::_('MOD_AGS_SORTING_TITLE'));
-			$mitems[] = JHTML::_('select.option', 'alias', JText::_('MOD_AGS_SORTING_ALIAS'));
-			$mitems[] = JHTML::_('select.option', 'created', JText::_('MOD_AGS_SORTING_DATE'));
-			$mitems[] = JHTML::_('select.option', 'publish_up', JText::_('MOD_AGS_SORTING_DATE_PUBLISHING'));
-			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGS_SORTING_CATEGORY'));
-			$mitems[] = JHTML::_('select.option', 'hits', JText::_('MOD_AGS_SORTING_POPULAR'));
-			$mitems[] = JHTML::_('select.option', 'featured', JText::_('MOD_AGS_SORTING_FEATURED'));
-			$mitems[] = JHTML::_('select.option', 'rand', JText::_('MOD_AGS_SORTING_RANDOM'));
+			$mitems[] = JHTML::_('select.option', 'title', JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'));
+			$mitems[] = JHTML::_('select.option', 'alias', JText::_('MOD_AGOSMSSEARCHSORTING_ALIAS'));
+			$mitems[] = JHTML::_('select.option', 'created', JText::_('MOD_AGOSMSSEARCHSORTING_DATE'));
+			$mitems[] = JHTML::_('select.option', 'publish_up', JText::_('MOD_AGOSMSSEARCHSORTING_DATE_PUBLISHING'));
+			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGOSMSSEARCHSORTING_CATEGORY'));
+			$mitems[] = JHTML::_('select.option', 'hits', JText::_('MOD_AGOSMSSEARCHSORTING_POPULAR'));
+			$mitems[] = JHTML::_('select.option', 'featured', JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'));
+			$mitems[] = JHTML::_('select.option', 'rand', JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'));
 
 			$mitems[] = JHTML::_('select.option', '', JText::_('-- Custom Fields --'));
 
