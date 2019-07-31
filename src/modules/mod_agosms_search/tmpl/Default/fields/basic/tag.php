@@ -11,7 +11,11 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-$active = JRequest::getVar("tag");
+
+$active =  array();
+if (JFactory::getApplication()->input->post->get('tag')) {
+	$active = JFactory::getApplication()->input->post->get('tag');
+}
 
 ?>
 

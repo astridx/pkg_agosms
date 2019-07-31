@@ -25,6 +25,7 @@ $lang = JFactory::getLanguage()->getTag();
 $lang = explode("-", $lang)[0];
 $curr_locale = JFactory::getLanguage()->getLocale();
 setlocale(LC_ALL, $curr_locale);
+$moduleclass_sfx = $params->get('moduleclass_sfx', '');
 
 ?>
 
