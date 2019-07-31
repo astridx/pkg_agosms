@@ -16,6 +16,13 @@ defined('_JEXEC') or die('Restricted access');
 	<h3>
 		<?php echo JText::_("{$field->instance->label}"); ?>
 	</h3>
-	<input class="inputbox" name="field<?php echo $field->id; ?>" placeholder="<?php echo JText::_("{$field->instance->label}"); ?>" value="<?php echo JRequest::getVar("field".$field->id); ?>" />
+	<?php
+		$fieldid =  '';
+		if (JFactory::getApplication()->input->post->get("field" . $field->id)) {
+			$fieldid = JFactory::getApplication()->input->post->get("field" . $field->id);
+		}		
+	
+	?>
+	<input class="inputbox" name="field<?php echo $field->id; ?>" placeholder="<?php echo JText::_("{$field->instance->label}"); ?>" value="<?php echo $fieldid; ?>" />
 </div>
 

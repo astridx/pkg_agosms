@@ -8,10 +8,13 @@
  * @link        astrid-guenther.de
  */
 
-
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-$active = JRequest::getVar("field".$field->id);
+$fieldid =  '';
+if (JFactory::getApplication()->input->post->get("field" . $field->id)) {
+	$fieldid = JFactory::getApplication()->input->post->get("field" . $field->id);
+}		
+$active = $fieldid;
 $field_params = json_decode($field->instance->fieldparams);
 $values = $field_params->options;
 if($field->instance->type == "integer") {
@@ -39,8 +42,12 @@ if(!$values) {
 require_once(JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php");
 JRequest::setVar("moduleId", $module->id);
 
-//reset selected value
-$tmp = JRequest::getVar("field".$field->id);
+// Reset selected value
+$fieldid =  '';
+if (JFactory::getApplication()->input->post->get("field" . $field->id)) {
+	$fieldid = JFactory::getApplication()->input->post->get("field" . $field->id);
+}		
+$tmp = $fieldid;
 JRequest::setVar("field".$field->id, "");
 
 $counters = Array();

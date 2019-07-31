@@ -239,8 +239,18 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 		<input type="hidden" name="Itemid" value="<?php echo $params->get("Itemid"); ?>" />
 		<?php } ?>
 		
-		<input type="hidden" name="orderby" value="<?php echo JRequest::getVar("orderby"); ?>" />
-		<input type="hidden" name="orderto" value="<?php echo JRequest::getVar("orderto"); ?>" />
+		<?php
+		$orderby =  '';
+		if (JFactory::getApplication()->input->post->get('orderby')) {
+			$orderby = JFactory::getApplication()->input->post->get('orderby');
+		}		
+		$orderto =  '';
+		if (JFactory::getApplication()->input->post->get('orderto')) {
+			$orderto = JFactory::getApplication()->input->post->get('orderto');
+		}		
+		?>
+		<input type="hidden" name="orderby" value="<?php echo $orderby; ?>" />
+		<input type="hidden" name="orderto" value="<?php echo $orderto; ?>" />
 		
 		<div style="clear:both;"></div>
 	</form>

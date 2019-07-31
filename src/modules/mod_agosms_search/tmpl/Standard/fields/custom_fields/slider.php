@@ -23,8 +23,17 @@ else {
 	$max = $values[count($values) - 1];
 	$step = 1;
 }
-$active_min = JRequest::getVar("field{$field->id}-from", $min);
-$active_max = JRequest::getVar("field{$field->id}-to", $max);
+$from =  $min;
+if (JFactory::getApplication()->input->post->get("field{$field->id}-from")) {
+	$from = JFactory::getApplication()->input->post->get("field{$field->id}-from");
+}		
+$to =  $max;
+if (JFactory::getApplication()->input->post->get("field{$field->id}-to")) {
+	$to = JFactory::getApplication()->input->post->get("field{$field->id}-to");
+}		
+
+$active_min = $from;
+$active_max = $to;
 
 $doc = JFactory::getDocument();
 $doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js');
@@ -79,7 +88,17 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8
 				});
 			});
 		</script>
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo JRequest::getVar("field{$field->id}-from", ""); ?>" />
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php echo JRequest::getVar("field{$field->id}-to", ""); ?>" />
+		<?php
+		$from =  '';
+		if (JFactory::getApplication()->input->post->get("field{$field->id}-from")) {
+			$from = JFactory::getApplication()->input->post->get("field{$field->id}-from");
+		}		
+		$to =  '';
+		if (JFactory::getApplication()->input->post->get("field{$field->id}-to")) {
+			$to = JFactory::getApplication()->input->post->get("field{$field->id}-to");
+		}		
+		?>
+		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo $from; ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php echo $to; ?>" />
 	</div>
 </div>

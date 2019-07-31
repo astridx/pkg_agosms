@@ -321,7 +321,9 @@
 					<option value="No">MOD_AGOSMSSEARCHNO</option>
 				</field>
 				<field 
-					name="ordering_show" type="radio" class="btn-group" 
+					name="ordering_show" 
+					type="radio" 
+					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_SHOW"
 				>
@@ -329,7 +331,8 @@
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
 				<field 
-					name="ordering_default" type="orderingselect" 
+					name="ordering_default" 
+					type="orderingselect" 
 					default="created" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_DEFAULT" 
 				/>

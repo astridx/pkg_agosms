@@ -12,8 +12,11 @@
 defined('_JEXEC') or die('Restricted access');
 
 $field_params = json_decode($field->instance->fieldparams);
-
-$active = JRequest::getVar("field{$field->id}");
+$fieldid =  '';
+if (JFactory::getApplication()->input->post->get("field" . $field->id)) {
+	$fieldid = JFactory::getApplication()->input->post->get("field" . $field->id);
+}		
+$active = $fieldid;
 $active_text = '';
 
 if($active) {
