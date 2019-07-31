@@ -23,6 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			var routewhiledragging = element.getAttribute('data-routewhiledragging');
 			var routing_position = element.getAttribute('data-routing_position');
 			var routing_router = element.getAttribute('data-routing_router');
+			var fitSelectedRoutes = element.getAttribute('data-fitSelectedRoutes');
+			var reverseWaypoints = (element.getAttribute('data-reverseWaypoints') === "true");
+			var collapsible = element.getAttribute('data-collapsible');
+			var showAlternatives = element.getAttribute('data-showAlternatives');
 		}
 		var iconcolor = element.getAttribute('data-iconcolor');
 		var markercolor = element.getAttribute('data-markercolor');
@@ -78,12 +82,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (showroutingcontrol === "1") {
 			
 			var routingcontrol;
-			console.log(routing_router);
 			
 			if (routing_router === 'mapbox')
 			{
 				routingcontrol = L.Routing.control(L.extend({
-					fitSelectedRoutes: true,
+					fitSelectedRoutes: fitSelectedRoutes,
 					position: routing_position,
 					units: routingmetric,
 					router: L.Routing.mapbox(mapboxkey,
@@ -96,9 +99,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					],
 					geocoder: L.Control.Geocoder.nominatim(),
 					routeWhileDragging: routewhiledragging,
-					reverseWaypoints: true,
-					collapsible: true,
-					showAlternatives: true,
+					reverseWaypoints: reverseWaypoints,
+					collapsible: collapsible,
+					showAlternatives: showAlternatives,
 					altLineOptions: {
 						styles: [
 							{color: 'black', opacity: 0.15, weight: 9},
@@ -109,18 +112,18 @@ document.addEventListener('DOMContentLoaded', function () {
 				})).addTo(window['map' + unique]);
 			} else {
 				routingcontrol = L.Routing.control(L.extend({
-					fitSelectedRoutes: true,
+					fitSelectedRoutes: fitSelectedRoutes,
 					position: routing_position,
 					units: routingmetric,
-					router: L.Routing.osrmv1(),
+					router: L.Routing.osrmv1({language:routinglanguage}),
 					waypoints: [
 						L.latLng(lat, lon),
 					],
 					geocoder: L.Control.Geocoder.nominatim(),
 					routeWhileDragging: routewhiledragging,
-					reverseWaypoints: true,
-					collapsible: true,
-					showAlternatives: true,
+					reverseWaypoints: reverseWaypoints,
+					collapsible: collapsible,
+					showAlternatives: showAlternatives,
 					altLineOptions: {
 						styles: [
 							{color: 'black', opacity: 0.15, weight: 9},

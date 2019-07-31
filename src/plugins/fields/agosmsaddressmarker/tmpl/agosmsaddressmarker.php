@@ -29,11 +29,6 @@ if ($fieldParams->get('showroutingcontrol', '0') == 1)
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/leaflet-routing-machine/Control.Geocoder.js');
 }
 
-if ($fieldParams->get('showroutingcontrol', '0') == 1 && $fieldParams->get('showrouting_places', '0') == 1)
-{
-	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/places.js');
-}
-
 if ($fieldParams->get('specialicon', '0') === "1")
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/css/font-awesome.min.css');
@@ -109,6 +104,10 @@ $popuptext = $values[5];
 	data-routingprofile="<?php echo $fieldParams->get('routingprofile', 'mapbox/driving'); ?>"
 	data-routinglanguage="<?php echo $fieldParams->get('routinglanguage', 'de'); ?>"
 	data-routingmetric="<?php echo $fieldParams->get('routingmetric', 'metric'); ?>"
+	data-fitSelectedRoutes="<?php echo $fieldParams->get('fitSelectedRoutes', 'true'); ?>"
+	data-reverseWaypoints="<?php echo $fieldParams->get('reverseWaypoints', 'false'); ?>"
+	data-collapsible="<?php echo $fieldParams->get('collapsible', 'false'); ?>"
+	data-showAlternatives="<?php echo $fieldParams->get('showAlternatives', 'false'); ?>"
 	data-routewhiledragging="<?php echo $fieldParams->get('routewhiledragging', 'false'); ?>"
 	
 >

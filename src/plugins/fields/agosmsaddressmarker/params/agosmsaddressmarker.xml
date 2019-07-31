@@ -12,6 +12,7 @@
 				multiple="true"
 				formsource="plugins/fields/agosmsaddressmarker/models/forms/address_data.xml"
 			/>
+			<field type="spacer" name="myspacer1" hr="true" />
 			<field
 				name="mapheight"
 				type="number"
@@ -30,6 +31,7 @@
 				<option value="mapbox">mapbox</option>
 				<option value="google">google</option>
 			</field>
+			<field type="spacer" name="myspacer2" hr="true" />
 			<field
 				name="geocoder"
 				type="list"
@@ -56,6 +58,7 @@
 				size="30"
 				showon="maptype:mapbox[OR]geocoder:mapbox[OR]routing_router:mapbox"
 			/>
+			<field type="spacer" name="myspacer3" hr="true" />
 			<field
 				name="scrollwheelzoom"
 				type="radio"
@@ -93,6 +96,7 @@
 				close="true"
 				showon="owngooglegesturetext:1[AND]scrollwheelzoom:2"
 			/>
+			<field type="spacer" name="myspacer4" hr="true" />
 			<field
 				name="popup"
 				type="radio"
@@ -103,6 +107,7 @@
 				<option value="1">JYES (closed)</option>
 				<option value="2">JYES (open)</option>
 			</field>
+			<field type="spacer" name="myspacer5" hr="true" />
 			<field
 				name="specialicon"
 				type="radio"
@@ -112,6 +117,7 @@
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
 			</field>
+			<field type="spacer" name="myspacer6" hr="true" />
 			<field
 				name="showroutingcontrol"
 				type="radio"
@@ -120,6 +126,56 @@
 			>
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
+			</field>
+			<field
+				name="routewhiledragging"
+				type="list"
+				default="false"
+				label="PLG_AGOSMSADDRESSMARKER_ROUTEWHILEDRAGGING_LABEL"
+				showon="showroutingcontrol:1"
+			>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+			</field>
+			<field
+				name="reverseWaypoints"
+				type="list"
+				label="PLG_AGOSMSADDRESSMARKER_REVERSEWAYPOINTS"
+				default="false"
+				showon="showroutingcontrol:1"
+			>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+			</field>
+			<field
+				name="collapsible"
+				type="list"
+				label="PLG_AGOSMSADDRESSMARKER_COLLAPSIBLE"
+				default="false"
+				showon="showroutingcontrol:1"
+			>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+			</field>
+			<field
+				name="showAlternatives"
+				type="list"
+				label="PLG_AGOSMSADDRESSMARKER_SHOWALTERNATIVES"
+				default="false"
+				showon="showroutingcontrol:1"
+			>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+			</field>
+			<field
+				name="fitSelectedRoutes"
+				type="list"
+				label="PLG_AGOSMSADDRESSMARKER_FITSELECTEDROUTES"
+				default="true"
+				showon="showroutingcontrol:1"
+			>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
 			</field>
 			<field
 				type="list"
@@ -148,8 +204,7 @@
 				name="routinglanguage"
 				default="de"
 				label="PLG_AGOSMSADDRESSMARKER_LANGUAGEROUTING_LABEL"
-				description="PLG_AGOSMSADDRESSMARKER_LANGUAGEROUTING_DESC"
-				showon="showroutingcontrol:1[AND]routing_router:mapbox"
+				showon="showroutingcontrol:1"
 			>
 				<option value="de">de</option>
 				<option value="fr">fr</option>
@@ -174,18 +229,6 @@
 			>
 				<option value="mapbox/driving">mapbox/driving</option>
 			</field>
-
-			<field
-				type="list"
-				name="routewhiledragging"
-				default="false"
-				label="PLG_AGOSMSADDRESSMARKER_ROUTEWHILEDRAGGING_LABEL"
-				showon="showroutingcontrol:1[AND]routing_router:mapbox"
-			>
-				<option value="true">JYES</option>
-				<option value="false">JNO</option>
-			</field>
-
 			<field
 				type="list"
 				name="routingmetric"
@@ -214,6 +257,7 @@
 				close="true"
 				showon="showroutingcontrol:1"
 			/>
+			<field type="spacer" name="myspacer7" hr="true" />
 		</fieldset>
 	</fields>
 </form>
