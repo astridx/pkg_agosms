@@ -11,7 +11,12 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-$active = JRequest::getVar("field".$field->id, array($field->instance->default_value));
+$active =  array($field->instance->default_value);
+if (JFactory::getApplication()->input->post->get("field" . $field->id)) {
+	$active = JFactory::getApplication()->input->post->get("field" . $field->id);
+}
+$active_text_init = '';
+
 $field_params = json_decode($field->instance->fieldparams);
 $values = $field_params->options;
 if($field->instance->type == "integer") {

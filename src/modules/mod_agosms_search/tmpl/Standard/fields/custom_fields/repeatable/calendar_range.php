@@ -30,23 +30,30 @@ $field->instance->label = $sub_field->fieldname;
 $name_from = "repeatable{$field->id}-{$sub_field_selected_number}-from";
 $name_to = "repeatable{$field->id}-{$sub_field_selected_number}-to";
 
-$active_from = JRequest::getVar($name_from);
-$active_to = JRequest::getVar($name_to);
-$active_from_text = '';
-$active_to_text = '';
+$active_from =  false;
+if (JFactory::getApplication()->input->post->get($name_from)) {
+	$active_from = JFactory::getApplication()->input->post->get($name_from);
+}
+
+$active_to =  false;
+if (JFactory::getApplication()->input->post->get($name_to)) {
+	$active_to = JFactory::getApplication()->input->post->get($name_to);
+}
+
+$active_from_text_init = '';
+$active_to_text_init = '';
 
 if($active_from) {
-	$active_from_text = DateTime::createFromFormat("Y-m-d", $active_from)->getTimestamp();
-	$active_from_text = trim(strftime($date_format, $active_from_text));
-	$active_from_text = mb_convert_case($active_from_text, MB_CASE_TITLE, 'UTF-8');
+	$active_from_text_init = DateTime::createFromFormat("Y-m-d", $active_from)->getTimestamp();
+	$active_from_text_format = trim(strftime($date_format_init, $active_from_text));
+	$active_from_text = mb_convert_case($active_from_text_format, MB_CASE_TITLE, 'UTF-8');
 }
 
 if($active_to) {
-	$active_to_text = DateTime::createFromFormat("Y-m-d", $active_to)->getTimestamp();
-	$active_to_text = trim(strftime($date_format, $active_to_text));
-	$active_to_text = mb_convert_case($active_to_text, MB_CASE_TITLE, 'UTF-8');
+	$active_to_text_init = DateTime::createFromFormat("Y-m-d", $active_to)->getTimestamp();
+	$active_to_text_format = trim(strftime($date_format_init, $active_to_text));
+	$active_to_text = mb_convert_case($active_to_text_format, MB_CASE_TITLE, 'UTF-8');
 }
-
 ?>
 
 <div class="gsearch-field-calendar range custom-field">	

@@ -29,8 +29,25 @@ if($max > 1000000) {
 	$step = 1000;
 }
 
-$active_min = JRequest::getVar("field{$field->id}-from", $min);
-$active_max = JRequest::getVar("field{$field->id}-to", $max);
+$active_min =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-from", $min)) {
+	$active_min = JFactory::getApplication()->input->post->get("field{$field->id}-from", $min);
+}
+
+$active_max =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-to", $max)) {
+	$active_max = JFactory::getApplication()->input->post->get("field{$field->id}-to", $max);
+}
+
+$active_min_default =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-from", '')) {
+	$active_min = JFactory::getApplication()->input->post->get("field{$field->id}-from", '');
+}
+
+$active_max_default =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-to", '')) {
+	$active_max = JFactory::getApplication()->input->post->get("field{$field->id}-to", '');
+}
 
 $doc = JFactory::getDocument();
 $doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js');
@@ -132,8 +149,8 @@ $active_max_amount = number_format($active_max, 0, '', $delimiter);
 				return x1 + x2;
 			}
 		</script>
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo JRequest::getVar("field{$field->id}-from", ""); ?>" />
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php echo JRequest::getVar("field{$field->id}-to", ""); ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo $active_min_default; ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php echo $active_max_default; ?>" />
 	</div>
 </div>
 

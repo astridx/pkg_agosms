@@ -29,12 +29,16 @@ foreach($field_params->fields as $tmp) {
 $field->instance->label = $sub_field->fieldname;
 $name = "repeatable{$field->id}-{$sub_field_selected_number}";
 
+$name_from_request =  '';
+if (JFactory::getApplication()->input->post->get($name)) {
+	$name_from_request = JFactory::getApplication()->input->post->get($name);
+}
 ?>
 
 <div class="gsearch-field-text custom-field">	
 	<h3>
 		<?php echo JText::_("{$field->instance->label}"); ?>
 	</h3>
-	<input class="inputbox" name="<?php echo $name; ?>" placeholder="<?php echo JText::_("{$field->instance->label}"); ?>" value="<?php echo JRequest::getVar($name); ?>" />
+	<input class="inputbox" name="<?php echo $name; ?>" placeholder="<?php echo JText::_("{$field->instance->label}"); ?>" value="<?php echo $name_from_request; ?>" />
 </div>
 

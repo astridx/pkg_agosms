@@ -14,7 +14,11 @@ defined('_JEXEC') or die('Restricted access');
 $field_id_from = 16; // Need to set fields Id
 $field_id_to   = 17;
 
-$active = JRequest::getVar('field-date-custom'.$field_id_from);
+$active =  array();
+if (JFactory::getApplication()->input->post->get('field-date-custom'.$field_id_from)) {
+	$active = JFactory::getApplication()->input->post->get('field-date-custom'.$field_id_from);
+}
+
 $parts = explode(":", $active);
 list($active_from, $active_to) = explode(",", $parts[1]);
 if($active_from) {

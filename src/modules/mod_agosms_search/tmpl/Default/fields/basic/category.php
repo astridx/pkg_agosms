@@ -11,8 +11,10 @@
 
 // no direct access
 defined('_JEXEC') or die('Restricted access');
-$active = JRequest::getVar("category");
-
+$active =  array();
+if (JFactory::getApplication()->input->post->get('category')) {
+	$active = JFactory::getApplication()->input->post->get('category');
+}
 ?>
 
 <div class="gsearch-field-select category">	
@@ -30,7 +32,12 @@ $active = JRequest::getVar("category");
 			>
 				<?php 
 					$indent = "";
-					for($i = 1; $i < $category->level; $i++) { $indent .= " - "; }
+					
+					for($i = 1; $i < $category->level; $i++) 
+					{ 
+						$indent .= " - "; 
+					}
+					
 					echo $indent . $category->title; 
 				?>
 			</option>

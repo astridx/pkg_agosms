@@ -17,7 +17,11 @@ $field_id_to   = 17;
 $curr_locale = JFactory::getLanguage()->getLocale();
 setlocale(LC_ALL, $curr_locale);
 
-$active = JRequest::getVar('field-date-custom'.$field_id_from);
+$active =  array();
+if (JFactory::getApplication()->input->post->get('field-date-custom'.$field_id_from)) {
+	$active = JFactory::getApplication()->input->post->get('field-date-custom'.$field_id_from);
+}
+
 $parts = explode(":", $active);
 list($active_from, $active_to) = explode(",", $parts[1]);
 if($active_from) {

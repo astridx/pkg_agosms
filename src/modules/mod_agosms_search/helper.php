@@ -143,9 +143,18 @@ class modAgosmsSearchHelper
 					break;
 
 			case 1 : // Auto
-				if (in_array(JRequest::getVar("view"), Array("featured", "category")))
+				$view =  '';
+				if (JFactory::getApplication()->input->post->get('view')) {
+					$active = JFactory::getApplication()->input->post->get('view');
+				}
+				$requestid = 0;
+				if (JFactory::getApplication()->input->post->get('id')) {
+					$active = JFactory::getApplication()->input->post->get('id');
+				}
+
+				if (in_array($view, Array("featured", "category")))
 				{
-					$categories[] = JRequest::getInt("id");
+					$categories[] = $requestid;
 				}
 
 				if (!count($categories))

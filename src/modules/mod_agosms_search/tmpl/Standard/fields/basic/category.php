@@ -11,7 +11,10 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-$active = JRequest::getVar("category");
+$active =  array();
+if (JFactory::getApplication()->input->post->get('category')) {
+	$active = JFactory::getApplication()->input->post->get('category');
+}
 ?>
 
 <div class="gsearch-field-select category">	

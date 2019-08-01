@@ -12,12 +12,16 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+$name_from_request =  '';
+if (JFactory::getApplication()->input->post->get("field".$field->id)) {
+	$name_from_request = JFactory::getApplication()->input->post->get("field".$field->id);
+}
 ?>
 
 <div class="gsearch-field-text custom-field">	
 	<h3>
 		<?php echo JText::_("{$field->instance->label}"); ?>
 	</h3>
-	<input class="inputbox" name="field<?php echo $field->id; ?>" placeholder="<?php echo JText::_("{$field->instance->label}"); ?>" value="<?php echo JRequest::getVar("field".$field->id); ?>" />
+	<input class="inputbox" name="field<?php echo $field->id; ?>" placeholder="<?php echo JText::_("{$field->instance->label}"); ?>" value="<?php echo $name_from_request; ?>" />
 </div>
 

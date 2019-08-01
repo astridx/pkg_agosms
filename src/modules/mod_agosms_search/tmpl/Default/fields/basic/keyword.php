@@ -11,6 +11,10 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+$active =  '';
+if (JFactory::getApplication()->input->post->get('keyword')) {
+	$active = JFactory::getApplication()->input->post->get('keyword');
+}
 ?>
 
 <div class="gsearch-field-text keyword">	
@@ -21,7 +25,7 @@ defined('_JEXEC') or die('Restricted access');
 			class="inputbox" 
 			name="keyword" 
 			type="text" 
-			value="<?php echo JRequest::getVar('keyword'); ?>"
+			value="<?php $active; ?>"
 	/>
 </div>
 

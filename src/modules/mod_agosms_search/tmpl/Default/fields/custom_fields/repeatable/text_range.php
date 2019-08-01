@@ -31,13 +31,22 @@ $field->instance->label = $sub_field->fieldname;
 $name_from = "repeatable{$field->id}-{$sub_field_selected_number}-from";
 $name_to = "repeatable{$field->id}-{$sub_field_selected_number}-to";
 
+$name_from_request =  '';
+if (JFactory::getApplication()->input->post->get($name_from)) {
+	$name_from_request = JFactory::getApplication()->input->post->get($name_from);
+}
+
+$name_to_request =  '';
+if (JFactory::getApplication()->input->post->get($name_to)) {
+	$name_from_request = JFactory::getApplication()->input->post->get($name_to);
+}
 ?>
 
 <div class="gsearch-field-text-range custom-field">	
 	<h3>
 		<?php echo JText::_("{$field->instance->label}"); ?>
 	</h3>
-	<input class="inputbox" name="<?php echo $name_from; ?>" placeholder="<?php echo JText::_("From"); ?>" value="<?php echo JRequest::getVar($name_from); ?>" />
-	<input class="inputbox" name="<?php echo $name_to; ?>" placeholder="<?php echo JText::_("To"); ?>" value="<?php echo JRequest::getVar($name_to); ?>" />
+	<input class="inputbox" name="<?php echo $name_from; ?>" placeholder="<?php echo JText::_("From"); ?>" value="<?php echo $name_from_request; ?>" />
+	<input class="inputbox" name="<?php echo $name_to; ?>" placeholder="<?php echo JText::_("To"); ?>" value="<?php echo $name_to_request; ?>" />
 </div>
 

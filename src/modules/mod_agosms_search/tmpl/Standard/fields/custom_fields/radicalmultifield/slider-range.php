@@ -33,8 +33,25 @@ $min = $values[0];
 $max = $values[count($values) - 1];
 $step = 1;
 
-$active_min = JRequest::getVar($name_from, $min);
-$active_max = JRequest::getVar($name_to, $max);
+$active_min =  '';
+if (JFactory::getApplication()->input->post->get($name_from, $min)) {
+	$active_min = JFactory::getApplication()->input->post->get($name_from, $min);
+}
+
+$active_max =  '';
+if (JFactory::getApplication()->input->post->get($name_to, $max)) {
+	$active_max = JFactory::getApplication()->input->post->get($name_to, $max);
+}
+
+$name_from_request =  '';
+if (JFactory::getApplication()->input->post->get($name_from)) {
+	$name_from_request = JFactory::getApplication()->input->post->get($name_from);
+}
+
+$name_to_request =  '';
+if (JFactory::getApplication()->input->post->get($name_to)) {
+	$name_from_request = JFactory::getApplication()->input->post->get($name_to);
+}
 
 $doc = JFactory::getDocument();
 $doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js');
@@ -90,8 +107,8 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8
 				});
 			});
 		</script>
-		<input class="inputbox" type="hidden" name="<?php echo $name_from; ?>" value="<?php echo JRequest::getVar($name_from, ""); ?>" />
-		<input class="inputbox" type="hidden" name="<?php echo $name_to; ?>" value="<?php echo JRequest::getVar($name_to, ""); ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo $name_from; ?>" value="<?php echo $name_from_request; ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo $name_to; ?>" value="<?php echo $name_to_request; ?>" />
 	</div>
 </div>
 

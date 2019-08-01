@@ -12,13 +12,22 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+$name_from_request =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-from")) {
+	$name_from_request = JFactory::getApplication()->input->post->get("field{$field->id}-from");
+}
+
+$name_to_request =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-to")) {
+	$name_from_request = JFactory::getApplication()->input->post->get("field{$field->id}-to");
+}
 ?>
 
 <div class="gsearch-field-text-range custom-field">	
 	<h3>
 		<?php echo JText::_("{$field->instance->label}"); ?>
 	</h3>
-	<input class="inputbox" name="field<?php echo $field->id; ?>-from" placeholder="<?php echo JText::_("From"); ?>" value="<?php echo JRequest::getVar("field{$field->id}-from"); ?>" />
-	<input class="inputbox" name="field<?php echo $field->id; ?>-to" placeholder="<?php echo JText::_("To"); ?>" value="<?php echo JRequest::getVar("field{$field->id}-to"); ?>" />
+	<input class="inputbox" name="field<?php echo $field->id; ?>-from" placeholder="<?php echo JText::_("From"); ?>" value="<?php echo $name_from_request; ?>" />
+	<input class="inputbox" name="field<?php echo $field->id; ?>-to" placeholder="<?php echo JText::_("To"); ?>" value="<?php echo $name_to_request; ?>" />
 </div>
 

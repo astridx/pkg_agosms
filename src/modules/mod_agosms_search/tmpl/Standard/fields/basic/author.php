@@ -11,7 +11,10 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-$active = JRequest::getVar("author");
+$active =  array();
+if (JFactory::getApplication()->input->post->get('author')) {
+	$active = JFactory::getApplication()->input->post->get('author');
+}
 ?>
 
 <div class="gsearch-field-select author">	

@@ -28,15 +28,17 @@ foreach($field_params->fields as $tmp) {
 $field->instance->label = $sub_field->fieldname;
 $name = "repeatable{$field->id}-{$sub_field_selected_number}";
 
-$active = JRequest::getVar($name);
-$active_text = '';
+$active =  false;
+if (JFactory::getApplication()->input->post->get($name)) {
+	$active = JFactory::getApplication()->input->post->get($name);
+}
+$active_text_init = '';
 
 if($active) {
-	$active_text = DateTime::createFromFormat("Y-m-d", $active)->getTimestamp();
-	$active_text = trim(strftime($date_format, $active_text));
-	$active_text = mb_convert_case($active_text, MB_CASE_TITLE, 'UTF-8');
+	$active_text_init = DateTime::createFromFormat("Y-m-d", $active)->getTimestamp();
+	$active_text_format = trim(strftime($date_format, $active_text_init));
+	$active_text = mb_convert_case($active_text_format, MB_CASE_TITLE, 'UTF-8');
 }
-
 ?>
 
 <div class="gsearch-field-calendar single custom-field">	

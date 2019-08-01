@@ -257,23 +257,7 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 		<?php if($params->get("Itemid")) { ?>
 		<input type="hidden" name="Itemid" value="<?php echo $params->get("Itemid"); ?>" />
 		<?php } ?>		
-		
-		<input type="hidden" name="orderby" value="<?php echo JRequest::getVar("orderby"); ?>" />
-		<input type="hidden" name="orderto" value="<?php echo JRequest::getVar("orderto"); ?>" />
-
-		<?php if((JRequest::getVar("option") == "com_j2store"
-					&& JRequest::getVar("view") == "producttags"
-					&& JRequest::getVar("tag") != "")
-					|| JRequest::getVar("j2store_tag")
-			) {
-			//j2store automatically restriction by tag
-			$tagId = JFactory::getDBO()->setQuery("SELECT id FROM #__tags WHERE alias = '". JRequest::getVar("tag") ."'")->loadResult();
-		?>
-		<input type="hidden" name="j2store_tag" value="<?php echo JRequest::getVar("j2store_tag", $tagId); ?>" /> 
-		<?php
-			}
-		?>
-		
+	
 		<div style="clear:both;"></div>
 	</form>
 	

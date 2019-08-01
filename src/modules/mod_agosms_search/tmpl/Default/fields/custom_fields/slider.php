@@ -24,8 +24,26 @@ else {
 	$max = $values[count($values) - 1];
 	$step = 1;
 }
-$active_min = JRequest::getVar("field{$field->id}-from", $min);
-$active_max = JRequest::getVar("field{$field->id}-to", $max);
+
+$active_min =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-from", $min)) {
+	$active_min = JFactory::getApplication()->input->post->get("field{$field->id}-from", $min);
+}
+
+$active_max =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-to", $max)) {
+	$active_max = JFactory::getApplication()->input->post->get("field{$field->id}-to", $max);
+}
+
+$active_min_default =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-from", '')) {
+	$active_min = JFactory::getApplication()->input->post->get("field{$field->id}-from", '');
+}
+
+$active_max_default =  '';
+if (JFactory::getApplication()->input->post->get("field{$field->id}-to", '')) {
+	$active_max = JFactory::getApplication()->input->post->get("field{$field->id}-to", '');
+}
 
 $doc = JFactory::getDocument();
 $doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js');
@@ -83,8 +101,8 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 				});
 			});
 		</script>
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo JRequest::getVar("field{$field->id}-from", ""); ?>" />
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php echo JRequest::getVar("field{$field->id}-to", ""); ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo $active_min_default; ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php $active_max_default; ?>" />
 	</div>
 </div>
 
