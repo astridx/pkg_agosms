@@ -110,9 +110,6 @@ class plgSystemPlg_agosms_search extends JPlugin
 
 			JRequest::setVar("option", "com_content");
 			JRequest::setVar("view", "featured");
-
-			// Can be enabled for increase a speed
-			// JRequest::setVar("option", "com_contact"); //false code for disable standard component output
 		}
 	}
 

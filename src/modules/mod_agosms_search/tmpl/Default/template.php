@@ -174,6 +174,10 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/radio'));
 				break;
 				
+				case 'agosmsaddressmarker' :
+					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/agosmsaddressmarkerslider'));
+				break;
+
 				case 'integer' :
 				case 'slider-range' :
 					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/slider'));

@@ -62,7 +62,7 @@ $model->execPlugins($item);
 
 ?>
 
-<div class="item<?php echo $item->featured ? ' featured' : ''; ?> <?php if($columns > 1 && ($items_counter % $columns == 0)) { echo 'unmarged'; } ?> <?php if($columns > 1) { echo 'span' . 12 / $columns; } ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<div class="item<?php echo $item->featured ? ' featured' : ''; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
 	<h3 itemprop="name" class="item-title">
 		<?php if (property_exists($item, "slug")) { ?>
 			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>" itemprop="url">
@@ -160,6 +160,3 @@ $model->execPlugins($item);
 	<?php echo $item->event->afterDisplayContent; ?>
 	<div style="clear: both;"></div>
 </div>
-<?php if(($items_counter + 1) % $columns == 0) { ?>
-<div style="clear: both;"></div>
-<?php } ?>
