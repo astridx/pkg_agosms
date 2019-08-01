@@ -27,35 +27,6 @@ foreach($customSorting as $field) {
 
 ?>
 
-<style>
-	.gsearch-sorting { position: relative; }
-	.gsearch-sorting select { width: auto !important; min-width: 120px; display: inline-block !important; border: 1px solid #ccc; background-color: #fff; }
-	.gsearch-sorting .chzn-container { width: auto !important; min-width: 120px; display: inline-block !important; }
-	.gsearch-sorting .chzn-container a { height: auto !important; }
-	.ordering.direction.asc { transform: rotate(180deg); margin-top: 5px; }
-	.ordering.direction {
-		float: right;
-		margin: 8px 0 0 6px;
-		width: 0px;
-		height: 0px;
-		display: block;
-		border-left: 7px solid transparent;
-		border-right: 7px solid transparent;
-		border-top: 14px solid #999;
-		cursor: pointer;
-	}
-	.ordering.direction:after {
-		content: " ";
-		width: 0px;
-		height: 0px;
-		margin: -13px 0 0 -5px;
-		display: block;
-		border-left: 5px solid transparent;
-		border-right: 5px solid transparent;
-		border-top: 12px solid #ccc;
-	}
-</style>
-
 <select class="inputbox select ordering">
 	<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_SELECT'); ?></div>
 	<option value="title"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'); ?></div>

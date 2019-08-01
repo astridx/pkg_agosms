@@ -98,6 +98,7 @@ $model->execPlugins($item);
 		<div class="introtext">
 			<?php echo $item->introtext; ?>
 		</div>
+		<div style="clear: both;"></div>
 	</div>
 	<?php } ?>
 
@@ -131,6 +132,7 @@ $model->execPlugins($item);
 			?>
 			<li class="tags hasTooltip" title="" data-original-title="Tags">
 				<i class="icon icon-tags"></i>
+				<div style="display: inline-block;">
 				<?php echo JLayoutHelper::render('joomla.content.tags', $item->tags->itemTags); ?>
 				</div>
 			</li>
