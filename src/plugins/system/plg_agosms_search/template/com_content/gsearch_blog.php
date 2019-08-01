@@ -19,7 +19,8 @@ $lang->load("mod_agosms_search");
 require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
 $model = new ArticlesModelGoodSearch;
 
-$model->limit = $model->module_params->items_limit;
+$model->limit = JRequest::getInt("limit", $model->module_params->items_limit); // Set items per page;
+
 
 $items = $model->getItems();
 
