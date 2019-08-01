@@ -19,13 +19,7 @@ $lang->load("mod_agosms_search");
 require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
 $model = new ArticlesModelGoodSearch;
 
-$model->limit = JRequest::getInt("limit", $model->module_params->items_limit); // Set items per page;
-$columns = JRequest::getInt('columned', $model->module_params->template_columns);
-
-if (!$columns)
-{
-	$columns = 1;
-}
+$model->limit = $model->module_params->items_limit;
 
 $items = $model->getItems();
 
@@ -35,8 +29,7 @@ if ($model->module_params->page_heading != "")
 }
 ?>
 
-<div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>
-<?php if ($columns > 1) { echo ' columned'; } ?>" 
+<div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
 	 itemscope itemtype="https://schema.org/Blog">
 	<div class="page-header">
 		<h3>
@@ -52,32 +45,26 @@ if ($model->module_params->page_heading != "")
 	</div>
 	
 	<?php if (count($items))
-{
-		?>
+	{
+	?>
 	<div class="gsearch-toolbox" >
-		<?php if (false) //if ($model->module_params->layout_show)
-	{
-			?>
-		<div class="gsearch-layout">
-			<?php require dirname(__FILE__) . '/gsearch_layout.php'; ?>
-		</div>
-		<?php } ?>
 		<?php
-		if (false) //$model->module_params->ordering_show)
-	{
-			?>
-		<div class="gsearch-sorting">
-			<?php require dirname(__FILE__) . '/gsearch_sorting.php'; ?>
-		</div>
-		<?php } ?>
+		if ($model->module_params->ordering_show)
+		{
+		?>
+			<div class="gsearch-sorting">
+				<?php require dirname(__FILE__) . '/gsearch_sorting.php'; ?>
+			</div>
+		<?php 
+		} 
+		?>
 	</div>
-	<?php } ?>
+	<?php 
+	} 
+	?>
 	
 	
-	<div class="itemlist<?php if ($columns > 1)
-{
-		echo ' row-fluid';
-						} ?>">
+	<div class="itemlist">
 	<?php
 	foreach ($items as $items_counter => $item)
 {

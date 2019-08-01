@@ -16,7 +16,8 @@ $sortingFields = array();
 foreach($customSorting as $field) {
 	$tmp = new stdClass;
 	$aField = explode(":", $field);
-	$tmp->id = $aField[1];
+	if(array_key_exists('id', $aField))
+		$tmp->id = $aField[1];
 	$flt = explode('{', $field, 2);
 	if(!empty($flt[1]) && $flt[1] != '') {
 		$extra_params = json_decode('{' . $flt[1]);
@@ -28,15 +29,15 @@ foreach($customSorting as $field) {
 ?>
 
 <select class="inputbox select ordering">
-	<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_SELECT'); ?></div>
-	<option value="title"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'); ?></div>
-	<option value="alias"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_ALIAS'); ?></div>
-	<option value="created"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE'); ?></div>
-	<option value="publish_up"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE_PUBLISHING'); ?></div>
-	<option value="category"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_CATEGORY'); ?></div>
-	<option value="hits"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_POPULAR'); ?></div>
-	<option value="featured"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'); ?></div>
-	<option value="rand"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'); ?></div>
+	<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_SELECT'); ?></option>
+	<option value="title"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'); ?></option>
+	<option value="alias"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_ALIAS'); ?></option>
+	<option value="created"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE'); ?></option>
+	<option value="publish_up"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE_PUBLISHING'); ?></option>
+	<option value="category"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_CATEGORY'); ?></option>
+	<option value="hits"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_POPULAR'); ?></option>
+	<option value="featured"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'); ?></option>
+	<option value="rand"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'); ?></option>
 	<?php if(count($sortingFields)) { ?>
 		<?php foreach($sortingFields as $field) { ?>
 			<?php if(property_exists($item, "name")) { ?>
@@ -45,7 +46,13 @@ foreach($customSorting as $field) {
 		<?php } ?>
 	<?php } ?>
 </select>
-<div class="ordering direction <?php echo (JRequest::getVar("orderto") ? JRequest::getVar("orderto") : $model->module_params->ordering_default_dir); ?>"></div>
+<div class="ordering direction 
+<?php 
+$orderto =  false;
+if (JFactory::getApplication()->input->post->get('orderto')) {
+	$orderto = JFactory::getApplication()->input->post->get('orderto');
+}
+echo ($orderto ? $orderto : $model->module_params->ordering_default_dir); ?>"></div>
 
 <script>
 	jQuery(document).ready(function($) {

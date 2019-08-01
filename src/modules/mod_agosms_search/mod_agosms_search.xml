@@ -56,7 +56,9 @@
 				/>
 				
 				<field 
-					name="descr" type="textarea" default="" 
+					name="descr" 
+					type="textarea" 
+					default="" 
 					label="MOD_AGOSMSSEARCHFORM_DESC" 
 					description="MOD_AGOSMSSEARCHFORM_DESC_DESC" rows="5" 
 					cols="27" 
@@ -64,8 +66,11 @@
 				/>
 				
 				<field 
-					name="clear_btn_show" type="radio" class="btn-group" 
-					default="1" label="MOD_AGOSMSSEARCHCLEAR_BTN_SHOW">
+					name="clear_btn_show" 
+					type="radio" 
+					class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHCLEAR_BTN_SHOW">
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 				</field>
@@ -80,7 +85,8 @@
 				
 				<field 
 					name="resultf" 
-					type="text" default="Search results" 
+					type="text" 
+					default="Search results" 
 					label="MOD_AGOSMSSEARCHRESULT_PHRASE" 
 					description="MOD_AGOSMSSEARCHRESULT_PHRASE_DESC" 
 					filter="raw" 
@@ -130,6 +136,7 @@
 					class="btn-group" 
 					default="0" label="MOD_AGOSMSSEARCHRESTRICTION_MODE" 
 					description="MOD_AGOSMSSEARCHRESTRICTION_MODE_DESC"
+					showon="restrict:1"
 				>
 					<option value="0">MOD_AGOSMSSEARCHRESTRICTION_MODE_CATID</option>
 					<option value="1">MOD_AGOSMSSEARCHRESTRICTION_MODE_AUTO</option>
@@ -140,6 +147,7 @@
 					type="categoryselect" 
 					default="" 
 					label="MOD_AGOSMSSEARCHRESTRICTION_CAT_ID" 
+					showon="restrict:1"
 				/>
 				
 				<field 
@@ -149,6 +157,7 @@
 					default="1" 
 					label="MOD_AGOSMSSEARCHRESTRICTION_CAT_SUB" 
 					description="MOD_AGOSMSSEARCHRESTRICTION_CAT_SUB_DESC"
+					showon="restrict:1"
 				>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
@@ -337,7 +346,9 @@
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_DEFAULT" 
 				/>
 				<field 
-					name="ordering_default_dir" type="radio" class="btn-group" 
+					name="ordering_default_dir" 
+					type="radio" 
+					class="btn-group" 
 					default="desc" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_DEFAULT_DIRECTION"
 				>
@@ -345,19 +356,15 @@
 					<option value="desc">MOD_AGOSMSSEARCHSORTING_DESC</option>
 				</field>
 				<field 
-					name="ordering_fields" type="fieldselect" default="" 
+					name="ordering_fields" 
+					type="fieldselect" 
+					default="" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_FIELDS" 
 				/>
 				<field 
-					name="layout_show" type="radio" class="btn-group" 
-					default="1" 
-					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_SELECTOR_SHOW"
-				>
-					<option value="1">MOD_AGOSMSSEARCHYES</option>
-					<option value="0">MOD_AGOSMSSEARCHNO</option>
-				</field>
-				<field 
-					name="show_introtext" type="radio" class="btn-group" 
+					name="show_introtext" 
+					type="radio" 
+					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_INTROTEXT"
 				>
@@ -387,13 +394,9 @@
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ITEMS_LIMIT" 
 				/>
 				<field 
-					name="template_columns" 
-					type="text" default="1" 
-					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_COLUMNS" 
-				/>
-				<field 
 					name="text_limit" 
-					type="text" default="200" 
+					type="text" 
+					default="200" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_TEXT_LIMIT" 
 				/>
 				<field 

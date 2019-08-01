@@ -30,21 +30,6 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 
 ?>
 
-<style>
-	.filter_loading<?php echo $module->id; ?> {
-		display: none;
-		z-index: 10000;
-		position: fixed;
-		top: 0px;
-		left: 0px;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		padding-top: 18%;
-	}
-	.filter_loading<?php echo $module->id; ?> img { max-width: 130px; margin: 0 auto; }
-</style>
-
 <script type="text/javascript">
 	<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/basic_scripts')); ?>
 </script>
