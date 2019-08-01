@@ -385,7 +385,11 @@ class ArticlesModelGoodSearch extends JModelList
 		foreach ($_GET as $param => $value)
 		{
 			preg_match('/^field([0-9]+)$/', $param, $matches);
-			$field_id = $matches[1];
+			$field_id = 0;
+			if (!empty($matches))
+			{
+				$field_id = $matches[1];
+			}
 			$query_params = JRequest::getVar("field{$field_id}");
 			$sub_query = "SELECT DISTINCT item_id FROM #__fields_values WHERE 1";
 
@@ -440,7 +444,12 @@ class ArticlesModelGoodSearch extends JModelList
 
 			// Text range / date range
 			preg_match('/^field([0-9]+)-from$/', $param, $matches);
-			$field_id = $matches[1];
+			
+			$field_id = 0;
+			if (!empty($matches))
+			{
+				$field_id = $matches[1];
+			}
 
 			if (JRequest::getVar("field{$field_id}-from") != "")
 			{
@@ -471,7 +480,11 @@ class ArticlesModelGoodSearch extends JModelList
 			}
 
 			preg_match('/^field([0-9]+)-to$/', $param, $matches);
-			$field_id = $matches[1];
+			$field_id = 0;
+			if (!empty($matches))
+			{
+				$field_id = $matches[1];
+			}
 
 			if (JRequest::getVar("field{$field_id}-to") != "")
 			{
@@ -521,9 +534,16 @@ class ArticlesModelGoodSearch extends JModelList
 		foreach ($_GET as $param => $value)
 		{
 			preg_match('/^multifield([0-9]+)-([^-]*)(.*)/i', $param, $matches);
-			$field_id = $matches[1];
-			$sub_field = $matches[2];
-			$isRange = $matches[3] != '' ? true : false;
+
+			$field_id = 0;
+			$sub_field = null;
+			$isRange = false;
+			if (!empty($matches))
+			{
+				$field_id = $matches[1];
+				$sub_field = $matches[2];
+				$isRange = $matches[3] != '' ? true : false;
+			}
 
 			if (!$field_id || !$sub_field)
 			{
@@ -641,10 +661,17 @@ class ArticlesModelGoodSearch extends JModelList
 		foreach ($_GET as $param => $value)
 		{
 			preg_match('/^repeatable([0-9]+)-([^-]*)(.*)/i', $param, $matches);
-			$field_id = $matches[1];
-			$sub_field_number = $matches[2];
-			$isRange = $matches[3] != '' ? true : false;
 
+			$field_id = 0;
+			$sub_field = null;
+			$isRange = false;
+			if (!empty($matches))
+			{
+				$field_id = $matches[1];
+				$sub_field = $matches[2];
+				$isRange = $matches[3] != '' ? true : false;
+			}
+			
 			if (!$field_id || $sub_field_number === null)
 			{
 				continue;

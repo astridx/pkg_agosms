@@ -27,6 +27,7 @@ $images = json_decode($item->images);
 $ImageIntro = strlen($images->image_intro) > 1 ? 1 : 0;
 preg_match('/(<img[^>]+>)/i', $item->introtext, $matches);
 $ImageInText = count($matches);
+$ImagesTab = 0;
 
 if (JPluginHelper::isEnabled('system', 'imagestab')) {
 	$db = JFactory::getDBO();
@@ -63,9 +64,13 @@ $model->execPlugins($item);
 
 <div class="item<?php echo $item->featured ? ' featured' : ''; ?> <?php if($columns > 1 && ($items_counter % $columns == 0)) { echo 'unmarged'; } ?> <?php if($columns > 1) { echo 'span' . 12 / $columns; } ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
 	<h3 itemprop="name" class="item-title">
-		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>" itemprop="url">
-			<?php echo $item->title; ?>
-		</a>
+		<?php if (property_exists($item, "slug")) { ?>
+			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>" itemprop="url">
+				<?php echo $item->title; ?>
+			</a>
+		<?php } else { ?>
+				<?php echo $item->title; ?>
+		<?php }  ?>
 	</h3>
 	<?php echo $item->event->afterDisplayTitle; ?>
 	<?php echo $item->event->beforeDisplayContent; ?>
@@ -96,8 +101,8 @@ $model->execPlugins($item);
 		<div style="clear: both;"></div>
 	</div>
 	<?php } ?>
-	
-	<?php if($model->module_params->show_readmore) { ?>
+
+	<?php if($model->module_params->show_readmore && property_exists($item, "slug")) { ?>
 	<div class="item-readmore">
 		<a class="btn btn-secondary" href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>"><?php echo JText::_('MOD_AGOSMSSEARCHITEM_READMORE'); ?></a>
 	</div>

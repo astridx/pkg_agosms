@@ -68,7 +68,9 @@ foreach($customSorting as $field) {
 	<option value="rand"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'); ?></div>
 	<?php if(count($sortingFields)) { ?>
 		<?php foreach($sortingFields as $field) { ?>
-		<option value="field<?php echo $field->id; ?>"><?php echo JText::_($field->name); ?></option>
+			<?php if(property_exists($item, "name")) { ?>
+				<option value="field<?php echo $field->id; ?>"><?php echo JText::_($field->name); ?></option>
+			<?php } ?>
 		<?php } ?>
 	<?php } ?>
 </select>

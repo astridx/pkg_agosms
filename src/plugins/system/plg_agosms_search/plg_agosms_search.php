@@ -10,24 +10,17 @@
 
 
 // No direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die('');
 
 class plgSystemPlg_agosms_search extends JPlugin
 {
 
 	function onAfterDispatch()
 	{
-		if (isset($_REQUEST['K2ContentBuilder']))
-		{
-			return;
-		}
-
 		$init_parameter = JRequest::getVar('gsearch');
 
 		if ($init_parameter)
 		{
-			error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED & ~E_STRICT);
-
 			$doc = JFactory::getDocument();
 
 			$search_type = JRequest::getVar("search_type", "com_content");
@@ -91,7 +84,7 @@ class plgSystemPlg_agosms_search extends JPlugin
 					break;
 			}
 
-			if ($_GET['raw'])
+			if (JFactory::getApplication()->input->get->get('raw', false))
 			{
 				echo $template;
 				exit;

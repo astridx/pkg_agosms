@@ -200,15 +200,28 @@ $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 	<?php
 	foreach ($items as $items_counter => $item)
 {
+		if (property_exists($item, "parent_alias"))
+		{
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
 
-		if ($item->parent_alias == 'root')
-	{
+			if ($item->parent_alias == 'root')
+			{
+				$item->parent_slug = null;
+			}
+		}
+		else
+		{
 			$item->parent_slug = null;
 		}
-
+		if (property_exists($item, "catslug"))
+		{
 			$item->catslug = $item->category_alias ? ($item->catid . ':' . $item->category_alias) : $item->catid;
+		}
+		else 
+		{
+			$item->catslug = null;
+		}
 		?>
 		<?php
 		if ($model->module_params->results_template == "")
