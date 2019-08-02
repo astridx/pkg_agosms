@@ -10,7 +10,7 @@
 
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 $active_from = JRequest::getVar("date-from");
 $active_to = JRequest::getVar("date-to");

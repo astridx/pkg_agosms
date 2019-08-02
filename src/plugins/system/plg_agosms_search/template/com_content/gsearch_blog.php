@@ -19,15 +19,9 @@ $lang->load("mod_agosms_search");
 require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
 $model = new ArticlesModelGoodSearch;
 
-$model->limit = JRequest::getInt("limit", $model->module_params->items_limit); // Set items per page;
-
+$model->limit = JRequest::getInt("limit", $model->module_params->items_limit);
 
 $items = $model->getItems();
-
-if ($model->module_params->page_heading != "")
-{
-	$document->setTitle($model->module_params->page_heading);
-}
 ?>
 
 <div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
@@ -35,12 +29,7 @@ if ($model->module_params->page_heading != "")
 	<div class="page-header">
 		<h3>
 			<?php
-			if (!$model->module_params->resultf)
-{
-				$model->module_params->resultf = JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULTфыв");
-			}
-
-				echo (count($items) ? JText::_($model->module_params->resultf) . " ({$model->total_items})" : JText::_($model->module_params->noresult));
+				echo (count($items) ? JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_(MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT));
 			?>
 		</h3>
 	</div>

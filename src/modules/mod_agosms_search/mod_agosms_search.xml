@@ -76,41 +76,6 @@
 				</field>
 				
 				<field 
-					name="page_heading" 
-					type="text" 
-					default="" 
-					label="MOD_AGOSMSSEARCHPAGE_TITLE" 
-					description="MOD_AGOSMSSEARCHPARAMPAGETITLE" filter="raw" 
-				/>
-				
-				<field 
-					name="resultf" 
-					type="text" 
-					default="Search results" 
-					label="MOD_AGOSMSSEARCHRESULT_PHRASE" 
-					description="MOD_AGOSMSSEARCHRESULT_PHRASE_DESC" 
-					filter="raw" 
-				/>
-				
-				<field 
-					name="noresult" 
-					type="text" default="No results found" 
-					label="MOD_AGOSMSSEARCHPHRASE_NO_RESULT" 
-					description="MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DESC" 
-					filter="raw" 
-				/>
-				
-				<field 
-					name="Itemid" 
-					type="menuitem" 
-					default="" 
-					label="MOD_AGOSMSSEARCHSEARCH_RESULTS_ITEMID" 
-					description="MOD_AGOSMSSEARCHSEARCH_RESULTS_ITEMID_DESC"
-				>
-					<option	value="">JDEFAULT</option>
-				</field>
-
-				<field 
 					name="note2" 
 					type="note" 
 					label="MOD_AGOSMSSEARCHCATEGORY_REST_HEADER" 
@@ -147,7 +112,7 @@
 					type="categoryselect" 
 					default="" 
 					label="MOD_AGOSMSSEARCHRESTRICTION_CAT_ID" 
-					showon="restrict:1"
+					showon="restrict:1[AND]restmode:0"
 				/>
 				
 				<field 
@@ -179,32 +144,30 @@
 					description="MOD_AGOSMSSEARCHSELECT_FIELDS_DESC" 
 					default="" 
 				/>
+
 				<field 
-					name="filters_cols" type="list" class="btn-group" 
-					label="MOD_AGOSMSSEARCHSELECT_FIELDS_COLUMNS" 
-					description="MOD_AGOSMSSEARCHSELECT_FIELDS_COLUMNS_DESC"
-				>
-					<option value="">Auto</option>
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-				</field>
-				<field 
-					name="search_type" type="radio" class="btn-group" 
+					name="search_type" 
+					type="radio" 
+					class="btn-group" 
 					default="ajax" 
 					label="MOD_AGOSMSSEARCHSEARCH_TYPE"
 				>
 					<option value="standard">MOD_AGOSMSSEARCHSEARCH_TYPE_STANDARD</option>
 					<option value="ajax">MOD_AGOSMSSEARCHSEARCH_TYPE_AJAX</option>
 				</field>
+				
 				<field 
-					name="ajax_container" type="text" default="div.ajax_container" 
-					label="MOD_AGOSMSSEARCHAJAX_CONTAINER" 
+					name="ajax_container" 
+					type="text" 
+					default="div.ajax_container" 
+					label="MOD_AGOSMSSEARCHAJAX_CONTAINER"
+					showon="search_type:ajax"
 				/>
+				
 				<field 
-					name="date_format" type="list" default="%e %b %Y::d M yyyy" 
+					name="date_format" 
+					type="list" 
+					default="%e %b %Y::d M yyyy" 
 					label="MOD_AGOSMSSEARCHDATE_FORMAT" 
 					description="MOD_AGOSMSSEARCHDATE_FORMAT_DESC"
 				>

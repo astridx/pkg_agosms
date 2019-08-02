@@ -9,16 +9,13 @@
  */
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 require_once(JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php");
 
 JHtml::_('bootstrap.framework');
 $document = JFactory::getDocument();
 $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
-
-$cols = $params->get('filters_cols');
-if($cols == 'auto') unset($cols); //responsive view
 
 $date_format = explode("::", $params->get("date_format", "%e %b %Y::d M yyyy"))[0];
 $date_format_text = explode("::", $params->get("date_format"))[1];
@@ -104,12 +101,12 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 	<?php endif; ?>
 	
 	<form action="#gsearch-results" name="GSearch<?php echo $module->id; ?>" method="get">		
-	  <div class="gsearch-table<?php if($cols) echo " columns-{$cols}"; ?>">
+	  <div class="gsearch-table">
 
 <?php for($filters_counter = 0; $filters_counter < count($filters); $filters_counter++) { 
 		$field = $filters[$filters_counter];
 ?>
-		<div class="gsearch-cell gsearch-cell<?php echo $filters_counter; ?>"<?php if($cols) echo ' style="width: '. (100/$cols - 2) .'%;"'?>>
+		<div class="gsearch-cell gsearch-cell<?php echo $filters_counter; ?>">
 		
 		<?php	
 			switch($field->type) {				
@@ -222,13 +219,6 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 			}
 		?>
 		</div>
-		<?php
-		if($cols && ($filters_counter + 1) % $cols == 0 && ($filters_counter + 1) != count($filters)) {
-			echo '<div class="clear" style="clear: both;"></div>';
-		}
-	}
-		?>
-		
 			<div class="gsearch-buttons">
 				<input type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
 				<?php

@@ -10,7 +10,7 @@
 
 
 // No direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 class modAgosmsSearchHelper
 {
@@ -28,9 +28,14 @@ class modAgosmsSearchHelper
 			return;
 		}
 
-		$db = JFactory::getDBO();
-		$query = "SELECT * FROM #__modules WHERE id = {$id}";
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select($db->quoteName('*'))
+			->from('#__modules')
+			->where('id = ' . $id);
+		
 		$db->setQuery($query);
+		
 		$result = $db->loadObject();
 
 		if ($native)
@@ -47,7 +52,7 @@ class modAgosmsSearchHelper
 
 	function getCategories($parent = 0, $params = null)
 	{
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$categories = Array();
 
 		if ($parent)
@@ -169,7 +174,7 @@ class modAgosmsSearchHelper
 
 	function getSubCategories($parent)
 	{
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$query = "SELECT id FROM #__categories WHERE extension = 'com_content' AND parent_id = {$parent} AND published = 1";
 		$db->setQuery($query);
 		$results = $db->loadColumn();
@@ -189,7 +194,7 @@ class modAgosmsSearchHelper
 	function getTags($params)
 	{
 		$items = Array();
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$query = "SELECT id FROM #__content WHERE state = 1";
 
 		if ($params->get("restrict"))
@@ -242,7 +247,7 @@ class modAgosmsSearchHelper
 	function getAuthors($params)
 	{
 		$items = Array();
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$query = "SELECT created_by FROM #__content WHERE state = 1";
 
 		if ($params->get("restrict"))
@@ -281,7 +286,7 @@ class modAgosmsSearchHelper
 
 	function getCustomField($id)
 	{
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$query = "SELECT * FROM #__fields WHERE id = {$id}";
 		$db->setQuery($query);
 
@@ -290,7 +295,7 @@ class modAgosmsSearchHelper
 
 	function getFieldValuesFromText($field_id, $type = "int", $module_id)
 	{
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__fields_values AS field{$field_id} ON field{$field_id}.item_id = i.id AND field{$field_id}.field_id = {$field_id}";
@@ -354,7 +359,7 @@ class modAgosmsSearchHelper
 
 	function getMultiFieldValuesFromText($field_id, $sub_field, $type = "int", $module_id)
 	{
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__fields_values AS field{$field_id} ON field{$field_id}.item_id = i.id AND field{$field_id}.field_id = {$field_id}";
@@ -443,7 +448,7 @@ class modAgosmsSearchHelper
 
 	function getItemsTitles($params)
 	{
-		$db = JFactory::getDBO();
+		$db = JFactory::getDbo();
 		$query = "SELECT i.title";
 		$query .= " FROM #__content as i";
 		$query .= " WHERE state = 1";

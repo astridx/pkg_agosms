@@ -10,7 +10,7 @@
 
 
 // No direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 jimport('joomla.form.formfield');
 

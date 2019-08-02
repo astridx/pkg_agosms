@@ -8,7 +8,7 @@
  * @link        astrid-guenther.de
  */
 
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 class JFormFieldOrderingSelect extends JFormField
 {

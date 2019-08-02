@@ -9,7 +9,7 @@
  */
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 $field_id_from = 16; // Need to set fields Id
 $field_id_to   = 17;

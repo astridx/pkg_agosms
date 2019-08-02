@@ -23,11 +23,6 @@ $columns = $model->module_params->template_columns;
 
 $items = $model->getItems();
 
-if ($model->module_params->page_heading != "")
-{
-	$document->setTitle($model->module_params->page_heading);
-}
-
 JHtml::_('bootstrap.framework');
 JHtml::_('formbehavior.chosen', '.gsearch-results-' . $model->module_id . ' select', false, Array());
 $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
@@ -171,7 +166,7 @@ $document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 	echo ' columned';
 											  } ?>" itemscope itemtype="https://schema.org/Blog">
 	<div class="page-header" style="display: inline-block;">
-		<h3><?php echo (count($items) ? $model->module_params->resultf . " ({$model->total_items})" : $model->module_params->noresult); ?></h3>
+		<h3><?php echo (count($items) ? JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_(MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT)); ?></h3>
 	</div>
 	
 	<?php if (count($items))

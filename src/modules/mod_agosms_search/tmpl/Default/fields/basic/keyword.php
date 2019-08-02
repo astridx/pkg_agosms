@@ -9,7 +9,7 @@
  */
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 $active =  '';
 if (JFactory::getApplication()->input->post->get('keyword')) {

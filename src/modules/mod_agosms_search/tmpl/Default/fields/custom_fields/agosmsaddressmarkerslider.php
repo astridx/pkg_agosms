@@ -10,7 +10,7 @@
 
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 $field_params = json_decode($field->instance->fieldparams);
 if($field->instance->type == "integer") {

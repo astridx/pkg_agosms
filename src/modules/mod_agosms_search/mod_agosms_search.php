@@ -9,7 +9,7 @@
  */
 
 // No direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 require_once __DIR__ . '/helper.php';
 $helper = new modAgosmsSearchHelper($params);

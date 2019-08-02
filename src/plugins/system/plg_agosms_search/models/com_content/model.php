@@ -9,7 +9,7 @@
  */
 
 // No direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 class ArticlesModelGoodSearch extends JModelList
 {

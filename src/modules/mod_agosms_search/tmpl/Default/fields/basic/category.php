@@ -10,7 +10,7 @@
 
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 $active =  array();
 if (JFactory::getApplication()->input->post->get('category')) {
 	$active = JFactory::getApplication()->input->post->get('category');

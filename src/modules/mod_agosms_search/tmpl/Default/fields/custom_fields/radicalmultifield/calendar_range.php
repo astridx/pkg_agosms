@@ -9,7 +9,7 @@
  */
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 $extra_params = json_decode($field->extra_params);
 $sub_field_selected = $extra_params->selected;

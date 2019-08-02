@@ -9,7 +9,7 @@
  */
 
 
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 class JFormFieldFieldSelect extends JFormField
 {
