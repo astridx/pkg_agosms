@@ -30,7 +30,7 @@ class plgSystemPlg_agosms_search extends JPlugin
 			{
 				case "com_content" :
 					require_once dirname(__FILE__) . "/view/com_content/view.{$format}.php";
-					$view = new ArticlesViewGoodSearch;
+					$view = new ArticlesViewAgSearch;
 					$template = $view->display($search_type);
 					break;
 				case "search_stats" :
@@ -38,7 +38,7 @@ class plgSystemPlg_agosms_search extends JPlugin
 					{
 						case "save" :
 							require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
-							$model = new ArticlesModelGoodSearch;
+							$model = new ArticlesModelAgSearch;
 							$model->saveSearchStats();
 							exit;
 						break;

@@ -1,3 +1,4 @@
+TEMPLATE_ANFANG
 <?php 
 /**
  * @package     Joomla.Site
@@ -219,6 +220,10 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 			}
 		?>
 		</div>
+<?php
+}
+?>
+
 			<div class="gsearch-buttons">
 				<input type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
 				<?php
@@ -265,3 +270,4 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/ajax_search')); ?>
 	<?php } ?>
 </div><!--//gsearch-box-->
+TEMPLATE_ENDE

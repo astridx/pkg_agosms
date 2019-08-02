@@ -11,7 +11,7 @@
 
 defined('_JEXEC') or die;
 
-class ArticlesViewGoodSearch extends JViewCategory
+class ArticlesViewAgSearch extends JViewCategory
 {
 	function display($search_type = "com_content")
 	{

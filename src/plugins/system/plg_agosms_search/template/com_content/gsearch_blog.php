@@ -1,5 +1,5 @@
-GSEARCH_ANFANG
-	<?php
+GSEARCHBLOG_ANFANG
+<?php
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -17,7 +17,7 @@ $lang = JFactory::getLanguage();
 $lang->load("mod_agosms_search");
 
 require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
-$model = new ArticlesModelGoodSearch;
+$model = new ArticlesModelAgSearch;
 
 $model->limit = JRequest::getInt("limit", $model->module_params->items_limit);
 
@@ -160,3 +160,4 @@ $items = $model->getItems();
 		<?php echo $pagination->getPagesCounter(); ?>
 	</div>
 </div>
+GSEARCHBLOG_ENDE

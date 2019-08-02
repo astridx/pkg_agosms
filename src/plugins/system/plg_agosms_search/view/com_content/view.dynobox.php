@@ -11,13 +11,13 @@
 
 defined('_JEXEC') or die;
 
-class ArticlesViewGoodSearch extends JViewCategory
+class ArticlesViewAgSearch extends JViewCategory
 {
 
 	function display()
 	{
 		require_once JPATH_SITE . '/plugins/system/plg_agosms_search/models/com_content/model.php';
-		$model = new ArticlesModelGoodSearch;
+		$model = new ArticlesModelAgSearch;
 
 		// Set limit for model
 		$model->limitstart = 0;

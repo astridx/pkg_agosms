@@ -28,7 +28,7 @@ if(JFile::exists($override)
 
 //get model
 require_once(JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php");
-$model = new ArticlesModelGoodSearch;
+$model = new ArticlesModelAgSearch;
 
 $items = $model->getStatsKeywordList();
 

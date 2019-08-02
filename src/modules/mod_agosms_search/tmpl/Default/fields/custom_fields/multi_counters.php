@@ -53,7 +53,7 @@ JRequest::setVar("field".$field->id, "");
 $counters = Array();
 foreach($values as $vk=>$val) {
 	JRequest::setVar("field".$field->id, $val->value);
-	$model = new ArticlesModelGoodSearch;
+	$model = new ArticlesModelAgSearch;
 	$total = $model->total_items;	
 	$counters[] = $total;
 }

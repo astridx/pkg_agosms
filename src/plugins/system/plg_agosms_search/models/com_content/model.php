@@ -11,7 +11,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-class ArticlesModelGoodSearch extends JModelList
+class ArticlesModelAgSearch extends JModelList
 {
 	var $input;
 
