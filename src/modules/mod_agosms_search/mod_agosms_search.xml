@@ -129,6 +129,34 @@
 				</field>
 				
 				<field 
+					name="note25" 
+					type="note" 
+					label="MOD_AGOSMSSEARCHCATEGORY_GEOREST_HEADER" 
+					description="MOD_AGOSMSSEARCHCATEGORY_GEOREST_HEADER_DESC" 
+					class="alert" 
+					close="true"
+				/>
+				<field 
+					name="georestrict" 
+					type="radio" 
+					class="btn-group" 
+					default="0" label="MOD_AGOSMSSEARCHGEORESTRICT_CAT" 
+					description="MOD_AGOSMSSEARCHGEORESTRICT_CAT_DESC"
+				>
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+				</field>
+				<field 
+					name="georestricttext" 
+					type="note" 
+					label="PLG_AGOSMSSEAR_USESEARCHINFO" 
+					description="PLG_AGOSMSSEAR_USESEARCHINFO_DESC" 
+					class="alert" 
+					close="true"
+					showon="georestrict:1"
+				/>
+
+				<field 
 					name="note3" 
 					type="note" 
 					label="MOD_AGOSMSSEARCHFILTER_PARAMS_HEADER" 
@@ -233,7 +261,9 @@
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
-					name="search_stats" type="radio" class="btn-group" 
+					name="search_stats" 
+					type="radio" 
+					class="btn-group" 
 					default="0" 
 					label="MOD_AGOSMSSEARCHSEARCH_STATS" 
 					description="MOD_AGOSMSSEARCHSEARCH_STATS_DESC"
@@ -280,10 +310,11 @@
 				>
 					<option value="standard">Standard</option>
 					<option value="clean">Clean</option>
-					<option value="j2store">J2Store</option>
 				</field>
 				<field 
-					name="include_featured" type="radio" class="btn-group" 
+					name="include_featured" 
+					type="radio" 
+					class="btn-group" 
 					default="Yes" 
 					label="MOD_AGOSMSSEARCHRESULTS_FEATURED"
 				>

@@ -116,11 +116,6 @@ class ArticlesModelAgSearch extends JModelList
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__categories AS cat ON cat.id = i.catid";
 
-		// Added for compatibility with cv multicategories plugin
-		if (JPluginHelper::isEnabled('system', 'cwmulticats'))
-		{
-			$query .= " LEFT JOIN #__content_multicats as multicats ON multicats.content_id = i.id";
-		}
 
 		if (JRequest::getVar("keyword"))
 		{
@@ -354,11 +349,6 @@ class ArticlesModelAgSearch extends JModelList
 		if (JRequest::getInt("tag"))
 		{
 			$query .= " AND tm.tag_id IN (" . implode(",", JRequest::getInt("tag")) . ")";
-		}
-
-		if (JRequest::getInt("j2store_tag"))
-		{
-			$query .= " AND tm.tag_id = " . JRequest::getInt("j2store_tag");
 		}
 
 		// Author

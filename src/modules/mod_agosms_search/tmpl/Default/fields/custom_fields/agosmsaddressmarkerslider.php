@@ -102,3 +102,111 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 	</div>
 </div>
 
+<div class="agosmsaddressmarkersurroundingdiv form-horizontal">
+
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?></label>	
+<div class="controls">
+	<input type="text" class="agosmsaddressmarkerlat" >
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?></label>	
+<div class="controls">	
+<input type="text" class="agosmsaddressmarkerlon" >
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESS'); ?></label>	
+<div class="controls">	
+<input type="text" class="agosmsaddressmarkeraddress" >
+</div>
+</div>
+	
+<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-lat"; ?>" value="<?php echo $active_min; ?>" />
+<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-lon"; ?>" value="<?php $active_max; ?>" />
+<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-address"; ?>" value="<?php echo $active_min; ?>" />
+	
+<button 
+		data-fieldsnamearray="<?php //echo $fieldsNameImplode; ?>"
+		data-mapboxkey="<?php //echo $mapboxkey; ?>"
+		data-googlekey="<?php //echo $googlekey; ?>"
+		class="btn btn-success agosmsaddressmarkerbutton" 
+		type="button">
+<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
+	</button>
+</div>
+
+<script>
+document.addEventListener('click', function (e) {
+	if (e.target.classList.contains('agosmsaddressmarkerbutton')) {
+		var button = e.target;
+		var surroundingDiv = button.parentNode;
+		var inputs = surroundingDiv.getElementsByTagName('input');
+		var lat = inputs[0];
+		var lon = inputs[1];
+		var address = inputs[2];
+
+		addressstring = address.value;
+
+		var cords = function (results, suggest) {
+			if (!suggest && results.length === 1) {
+				lat.value = results[0].lat;
+				lon.value = results[0].lon;
+				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
+			} else if (results.length > 0) {
+				// Limit is fix set to 1 up to now
+			} else {
+				Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR') + addressstring + ' (Nominatim)']});
+			}
+		}
+
+		var params = {
+			q: addressstring,
+			limit: 1,
+			format: 'json',
+			addressdetails: 1
+		};
+
+		getJSON("https://nominatim.openstreetmap.org/", params, cords);
+	}
+});
+
+function getJSON(url, params, callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState !== 4) {
+			return;
+		}
+		if (xmlHttp.status !== 200 && xmlHttp.status !== 304) {
+			callback('');
+			return;
+		}
+		callback(xmlHttp.response);
+	};
+	xmlHttp.open('GET', url + getParamString(params), true);
+	xmlHttp.responseType = 'json';
+	xmlHttp.setRequestHeader('Accept', 'application/json');
+	xmlHttp.send(null);
+}
+
+function getParamString(obj, existingUrl, uppercase) {
+	var params = [];
+	for (var i in obj) {
+		var key = encodeURIComponent(uppercase ? i.toUpperCase() : i);
+		var value = obj[i];
+		if (!L.Util.isArray(value)) {
+			params.push(key + '=' + encodeURIComponent(value));
+		} else {
+			for (var j = 0; j < value.length; j++) {
+				params.push(key + '=' + encodeURIComponent(value[j]));
+			}
+		}
+	}
+	return (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') + params.join('&');
+}
+
+
+</script>
