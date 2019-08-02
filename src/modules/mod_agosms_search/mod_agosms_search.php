@@ -37,7 +37,6 @@ if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"
 		"view", 
 		"Itemid", 
 		"search_mode", 
-		"dynobox", 
 		"field_id", 
 		"field_type"
 		);

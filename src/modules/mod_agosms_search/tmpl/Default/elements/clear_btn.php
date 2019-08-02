@@ -49,13 +49,6 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 				//acounter clean
 				$("#GSearch<?php echo $module->id; ?> div.acounter .data").hide();
 				
-				//dynobox
-				<?php if($params->get("dynobox")) { ?>
-				initbox = $("#GSearch<?php echo $module->id; ?>").find("select:eq(0)")[0];
-				init_selected_count = 1;
-				dynobox<?php echo $module->id; ?>(initbox);
-				<?php } ?>
-				
 				//autosubmit
 				<?php if($params->get("autosubmit")) { ?>
 				submit_form_<?php echo $module->id; ?>();

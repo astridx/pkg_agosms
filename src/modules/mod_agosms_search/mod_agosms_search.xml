@@ -235,16 +235,6 @@
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
-					name="dynobox" 
-					type="radio" 
-					class="btn-group" 
-					default="0" 
-					label="MOD_AGOSMSSEARCHDYNOBOX"
-				>
-					<option value="1">MOD_AGOSMSSEARCHYES</option>
-					<option value="0">MOD_AGOSMSSEARCHNO</option>
-				</field>				
-				<field 
 					name="savesearch" type="radio" class="btn-group" 
 					default="0" 
 					label="MOD_AGOSMSSEARCHSAVE_VALUES_SESSION"

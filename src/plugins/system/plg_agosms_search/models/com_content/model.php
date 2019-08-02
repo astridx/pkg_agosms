@@ -49,7 +49,7 @@ class ArticlesModelAgSearch extends JModelList
 			&& $_GET['applySaved']
 		)
 		{
-			$skip = array("option", "task", "view", "Itemid", "search_mode", "dynobox", "field_id", "field_type", "initial");
+			$skip = array("option", "task", "view", "Itemid", "search_mode", "field_id", "field_type", "initial");
 
 			foreach (JFactory::getSession()->get("SaveSearchValues") as $key => $value)
 			{

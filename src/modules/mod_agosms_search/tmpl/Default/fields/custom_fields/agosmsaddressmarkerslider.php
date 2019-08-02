@@ -18,6 +18,9 @@ $field_params = json_decode($field->instance->fieldparams);
 $min = 0;
 $max = 2000;
 $step = 10;
+$lon = 0;
+$lat = 0;
+$address = 0;
 
 if($field->instance->type == "agosmsaddressmarker") {
 	$min = $field_params->first;
@@ -35,21 +38,36 @@ $active_min =  $min;
 if (JFactory::getApplication()->input->get->get("field{$field->id}-from")) {
 	$active_min = JFactory::getApplication()->input->get->get("field{$field->id}-from");
 }
-
 $active_max =  $max;
 if (JFactory::getApplication()->input->get->get("field{$field->id}-to")) {
 	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to");
+}
+
+$active_lon =  $lon;
+if (JFactory::getApplication()->input->get->get("field{$field->id}-lon")) {
+	$active_lon = JFactory::getApplication()->input->get->get("field{$field->id}-lon");
+}
+$active_lat =  $lat;
+if (JFactory::getApplication()->input->get->get("field{$field->id}-lat")) {
+	$active_lat = JFactory::getApplication()->input->get->get("field{$field->id}-lat");
+}
+$active_address =  $address;
+if (JFactory::getApplication()->input->get->get("field{$field->id}-address")) {
+	$active_address = JFactory::getApplication()->input->get->get("field{$field->id}-address");
 }
 
 $doc = JFactory::getDocument();
 $doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js');
 $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css');
 ?>
-
+<hr>
 <div class="gsearch-field-slider custom-field">	
 	<h3>
 		<?php echo JText::_("{$field->instance->label}"); ?>
 	</h3>
+	<h4>
+		<?php echo JText::_("MOD_AGOSMSSEARCH_DISTANCE"); ?>
+	</h4>
 	<div class="slider-wrapper">
 		<div class="amount">
 			<input id="amount-<?php echo "{$field->id}-{$module->id}"; ?>" type="text" style="border: none; background: none; text-align: center;"
@@ -97,37 +115,42 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 				});
 			});
 		</script>
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo $active_min; ?>" />
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php $active_max; ?>" />
 	</div>
 </div>
 
 <div class="agosmsaddressmarkersurroundingdiv form-horizontal">
-
+	<h4>
+		<?php echo JText::_("MOD_AGOSMSSEARCH_CORDS"); ?>
+	</h4>
 <div class="control-group">
-<label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?></label>	
+<label class="control-label"><?php echo JText::_('MOD_AGOSMSSEARCH_LAT'); ?></label>	
 <div class="controls">
-	<input type="text" class="agosmsaddressmarkerlat" >
+	<input 
+		type="text"
+		name="<?php echo "field{$field->id}-lat"; ?>"
+		value="<?php echo $active_lat; ?>"
+		class="agosmsaddressmarkerlat" >
 </div>
 </div>
 
 <div class="control-group">
-<label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?></label>	
+<label class="control-label"><?php echo JText::_('MOD_AGOSMSSEARCH_LON'); ?></label>	
 <div class="controls">	
-<input type="text" class="agosmsaddressmarkerlon" >
+	<input 
+		type="text"
+		name="<?php echo "field{$field->id}-lon"; ?>"
+		value="<?php echo $active_lon; ?>"
+		class="agosmsaddressmarkerlon" >
 </div>
 </div>
 
 <div class="control-group">
-<label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_ADDRESS'); ?></label>	
+<label class="control-label"><?php echo JText::_('MOD_AGOSMSSEARCH_ADDRESS'); ?></label>	
 <div class="controls">	
 <input type="text" class="agosmsaddressmarkeraddress" >
 </div>
 </div>
 	
-<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-lat"; ?>" value="<?php echo $active_min; ?>" />
-<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-lon"; ?>" value="<?php $active_max; ?>" />
-<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-address"; ?>" value="<?php echo $active_min; ?>" />
 	
 <button 
 		data-fieldsnamearray="<?php //echo $fieldsNameImplode; ?>"
@@ -135,9 +158,10 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 		data-googlekey="<?php //echo $googlekey; ?>"
 		class="btn btn-success agosmsaddressmarkerbutton" 
 		type="button">
-<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
+<?php echo JText::_('MOD_AGOSMSSEARCH_CALCULATE_CORDS'); ?>
 	</button>
 </div>
+<hr>
 
 <script>
 document.addEventListener('click', function (e) {
@@ -155,11 +179,12 @@ document.addEventListener('click', function (e) {
 			if (!suggest && results.length === 1) {
 				lat.value = results[0].lat;
 				lon.value = results[0].lon;
-				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
+				lon.onchange();
+				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSSEARCH_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
 			} else if (results.length > 0) {
 				// Limit is fix set to 1 up to now
 			} else {
-				Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR') + addressstring + ' (Nominatim)']});
+				Joomla.renderMessages({"error": [Joomla.JText._('MOD_AGOSMSSEARCH_ADDRESSE_ERROR') + addressstring + ' (Nominatim)']});
 			}
 		}
 
@@ -210,3 +235,6 @@ function getParamString(obj, existingUrl, uppercase) {
 
 
 </script>
+
+<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo $active_min; ?>" />
+<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php echo $active_max; ?>" />

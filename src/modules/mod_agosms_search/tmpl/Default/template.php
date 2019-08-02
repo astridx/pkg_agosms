@@ -249,10 +249,6 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/acounter')); ?>
 	<?php } ?>
 	
-	<?php if($params->get("dynobox")) { ?>
-		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/dynobox')); ?>
-	<?php } ?>
-
 	<?php if($params->get("field_connection") != "" && 
 			 $params->get("field_connection") != "FieldLabel->FieldLabel2->FieldLabel3") { ?>
 		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/connected_single')); ?>

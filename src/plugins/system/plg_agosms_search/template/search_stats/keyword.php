@@ -77,18 +77,6 @@ $items = $model->getStatsKeywordList();
 					}
 					else {
 						$user_data = array();
-						//j2store additional data
-						if(JComponentHelper::isEnabled('com_j2store')) {
-							$query = "SELECT * FROM #__j2store_addresses WHERE user_id = {$uid}";
-							$obj = JFactory::getDBO()->setQuery($query)->loadObject();
-							if($obj) {
-								$user_data[] = JText::_('Name: ') . $obj->first_name . " " . $obj->last_name;
-								$user_data[] = JText::_('Email: ') . $obj->email;
-								$user_data[] = JText::_('Phone: ') . $obj->phone_1;
-								$user_data[] = JText::_('Mobile: ') . $obj->phone_2;
-								$user_data[] = JText::_('IP: ') . $item->ip_address;
-							}
-						}
 						if(!count($user_data)) {
 							$obj = JFactory::getUser($uid);
 							$user_data[] = JText::_('Name: ') . $obj->name;
