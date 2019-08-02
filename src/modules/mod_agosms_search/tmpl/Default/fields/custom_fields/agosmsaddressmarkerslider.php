@@ -20,7 +20,7 @@ $max = 2000;
 $step = 10;
 $lon = 0;
 $lat = 0;
-$address = 0;
+$address = '';
 
 if($field->instance->type == "agosmsaddressmarker") {
 	$min = $field_params->first;
@@ -129,7 +129,7 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 		type="text"
 		name="<?php echo "field{$field->id}-lat"; ?>"
 		value="<?php echo $active_lat; ?>"
-		class="agosmsaddressmarkerlat" >
+		class="agosmsaddressmarkerlat inputbox" >
 </div>
 </div>
 
@@ -140,14 +140,14 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 		type="text"
 		name="<?php echo "field{$field->id}-lon"; ?>"
 		value="<?php echo $active_lon; ?>"
-		class="agosmsaddressmarkerlon" >
+		class="agosmsaddressmarkerlon inputbox" >
 </div>
 </div>
 
 <div class="control-group">
 <label class="control-label"><?php echo JText::_('MOD_AGOSMSSEARCH_ADDRESS'); ?></label>	
 <div class="controls">	
-<input type="text" class="agosmsaddressmarkeraddress" >
+<input type="text" class="agosmsaddressmarkeraddress inputbox" >
 </div>
 </div>
 	

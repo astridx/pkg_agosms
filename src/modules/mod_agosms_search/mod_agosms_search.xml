@@ -140,7 +140,8 @@
 					name="georestrict" 
 					type="radio" 
 					class="btn-group" 
-					default="0" label="MOD_AGOSMSSEARCHGEORESTRICT_CAT" 
+					default="0" 
+					label="MOD_AGOSMSSEARCHGEORESTRICT_CAT" 
 					description="MOD_AGOSMSSEARCHGEORESTRICT_CAT_DESC"
 				>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>

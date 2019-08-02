@@ -260,20 +260,52 @@ class ArticlesModelAgSearch extends JModelList
 					}
 			}
 		}
+		
+		$filterresult = array();
 
-		if ($total)
+		if (!$this->module_params->georestrict)
 		{
-			$db->setQuery($query);
+			if ($total)
+			{
+				$db->setQuery($query);
 
-			return $db->loadResult();
+				$filterresult = $db->loadResult();
+			}
+			else
+			{
+				$this->limitstart = $this->input->get("page-start", 0, "int");
+				$db->setQuery($query, $this->limitstart, $this->limit);
+
+				$filterresult = $db->loadObjectList();
+			}
 		}
-		else
+
+		if ($this->module_params->georestrict)
 		{
-			$this->limitstart = $this->input->get("page-start", 0, "int");
-			$db->setQuery($query, $this->limitstart, $this->limit);
+			if (!$total) {
+				$this->limitstart = $this->input->get("page-start", 0, "int");
+				$db->setQuery($query, $this->limitstart, $this->limit);
 
-			return $db->loadObjectList();
+				$filterresults = $db->loadObjectList();
+				$tempfilterresults = array();
+				
+				foreach ($filterresults as $filterresults)
+				{
+					$tempfilterresults[] = $filterresults;
+					//Todo Filter geo
+				}
+			}
+			
+			if ($total) {
+				$filterresult = 0;
+			}
+			else
+			{
+				$filterresult = array();
+			}
 		}
+		
+		return $filterresult;
 	}
 
 	function getSearchQuery()
