@@ -13,40 +13,32 @@
 defined('_JEXEC') or die;
 
 $field_params = json_decode($field->instance->fieldparams);
-if($field->instance->type == "integer") {
+
+// Set defaults
+$min = 0;
+$max = 2000;
+$step = 10;
+
+if($field->instance->type == "agosmsaddressmarker") {
 	$min = $field_params->first;
 	$max = $field_params->last;
 	$step = $field_params->step;
 }
-elseif ($field->instance->type == "agosmsaddressmarker") {
-	$min = 10;
-	$max = 1000;
-	$step = 10;
-} else {
+else {
 	$values = $helper->getFieldValuesFromText($field->id, "int", $module->id);
 	$min = $values[0];
 	$max = $values[count($values) - 1];
 	$step = 1;
 }
 
-$active_min =  '';
-if (JFactory::getApplication()->input->get->get("field{$field->id}-from", $min)) {
-	$active_min = JFactory::getApplication()->input->get->get("field{$field->id}-from", $min);
+$active_min =  $min;
+if (JFactory::getApplication()->input->get->get("field{$field->id}-from")) {
+	$active_min = JFactory::getApplication()->input->get->get("field{$field->id}-from");
 }
 
-$active_max =  '';
-if (JFactory::getApplication()->input->get->get("field{$field->id}-to", $max)) {
-	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to", $max);
-}
-
-$active_min_default =  '1';
-if (JFactory::getApplication()->input->get->get("field{$field->id}-from", '')) {
-	$active_min = JFactory::getApplication()->input->get->get("field{$field->id}-from", '');
-}
-
-$active_max_default =  '1000';
-if (JFactory::getApplication()->input->get->get("field{$field->id}-to", '')) {
-	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to", '');
+$active_max =  $max;
+if (JFactory::getApplication()->input->get->get("field{$field->id}-to")) {
+	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to");
 }
 
 $doc = JFactory::getDocument();
@@ -105,8 +97,8 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 				});
 			});
 		</script>
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo $active_min_default; ?>" />
-		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php $active_max_default; ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo $active_min; ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php $active_max; ?>" />
 	</div>
 </div>
 
