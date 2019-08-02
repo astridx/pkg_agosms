@@ -27,6 +27,7 @@ $images = json_decode($item->images);
 $ImageIntro = strlen($images->image_intro) > 1 ? 1 : 0;
 preg_match('/(<img[^>]+>)/i', $item->introtext, $matches);
 $ImageInText = count($matches);
+$ImagesTab = 0;
 
 if (JPluginHelper::isEnabled('system', 'imagestab')) {
 	$db = JFactory::getDBO();
@@ -59,49 +60,24 @@ if($model->module_params->text_limit) {
 }
 $model->execPlugins($item);
 
-// Get J2Store product
-$query = "
-			SELECT p.*, v.* FROM #__j2store_products as p
-			LEFT JOIN #__j2store_variants as v ON v.product_id = p.j2store_product_id
-			WHERE product_source_id = {$item->id}
-		";
-$product = JFactory::getDBO()->setQuery($query)->loadObject();
-require_once(JPATH_ADMINISTRATOR . '/components/com_j2store/helpers/product.php');
-$J2ProductHelper = new J2Product;
-$productPrice = $J2ProductHelper->displayPrice($product->price, $product);
-$productURL = JRoute::_('index.php?option=com_j2store&view=products&task=view&id='.$product->j2store_product_id);
-
-if($product->vendor_id) {
-	$vendor_table = F0FTable::getInstance('Vendor', 'J2StoreTable');
-	$vendor_table->load($product->vendor_id);
-	if($vendor_table->address_id > 0){
-		$address_table = F0FTable::getInstance('Address', 'J2StoreTable');
-		$address_table->load($vendor_table->address_id);
-		$product->vendor_name = $address_table->first_name." ".$address_table->last_name;
-	}
-}
-
 ?>
 
-<div class="item<?php echo $item->featured ? ' featured' : ''; ?> <?php if($columns > 1 && ($items_counter % $columns == 0)) { echo 'unmarged'; } ?> <?php if($columns > 1) { echo 'span' . 12 / $columns; } ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<div class="item<?php echo $item->featured ? ' featured' : ''; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
 	<h3 itemprop="name" class="item-title">
-		<a href="<?php echo $productURL; ?>" itemprop="url">
-			<?php echo $item->title; ?>
-		</a>
+		<?php if (property_exists($item, "slug")) { ?>
+			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>" itemprop="url">
+				<?php echo $item->title; ?>
+			</a>
+		<?php } else { ?>
+				<?php echo $item->title; ?>
+		<?php }  ?>
 	</h3>
-	
-	<?php if($productPrice) { ?>
-	<div class="product-price">
-		<?php echo $productPrice; ?>
-	</div>
-	<?php } ?>
-	
 	<?php echo $item->event->afterDisplayTitle; ?>
 	<?php echo $item->event->beforeDisplayContent; ?>
 
 	<?php if ($ImageIntro && !$ImagesTab && ($image_type == "intro" || $image_type == "")) { ?>
 	<div class="item-image">
-		<a href="<?php echo $productURL; ?>">
+		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>">
 			<img src="<?php echo JURI::root() . htmlspecialchars($images->image_intro, ENT_COMPAT, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt, ENT_COMPAT, 'UTF-8'); ?>" itemprop="thumbnailUrl"/>
 		</a>
 	</div>
@@ -111,7 +87,7 @@ if($product->vendor_id) {
 	$image_empty = $model->module_params->image_empty;
 	if(((!$ImageIntro && $image_type == "intro") || (!$ImageInText && $image_type == "text") || (!$ImageIntro && !$ImageInText && $image_type == "")) && $image_empty != "" && $image_empty != "-1" && !$ImagesTab) { ?>
 	<div class="item-image image-empty">
-		<a href="<?php echo $productURL; ?>">
+		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>">
 			<img src="<?php echo JURI::root(); ?>images/<?php echo $image_empty; ?>" itemprop="thumbnailUrl"/>
 		</a>
 	</div>
@@ -122,13 +98,12 @@ if($product->vendor_id) {
 		<div class="introtext">
 			<?php echo $item->introtext; ?>
 		</div>
-		<div style="clear: both;"></div>
 	</div>
 	<?php } ?>
-	
-	<?php if($model->module_params->show_readmore) { ?>
+
+	<?php if($model->module_params->show_readmore && property_exists($item, "slug")) { ?>
 	<div class="item-readmore">
-		<a class="btn btn-secondary" href="<?php echo $productURL; ?>"><?php echo JText::_('MOD_AGOSMSSEARCHITEM_READMORE'); ?></a>
+		<a class="btn btn-secondary" href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>"><?php echo JText::_('MOD_AGOSMSSEARCHITEM_READMORE'); ?></a>
 	</div>
 	<?php } ?>
 	
@@ -156,7 +131,6 @@ if($product->vendor_id) {
 			?>
 			<li class="tags hasTooltip" title="" data-original-title="Tags">
 				<i class="icon icon-tags"></i>
-				<div style="display: inline-block;">
 				<?php echo JLayoutHelper::render('joomla.content.tags', $item->tags->itemTags); ?>
 				</div>
 			</li>
@@ -164,14 +138,14 @@ if($product->vendor_id) {
 			<li class="created">
 				<i class="icon icon-clock"></i>
 				<time datetime="<?php echo $item->created; ?>" itemprop="dateCreated">
-					<?php echo JText::_('MOD_AGOSMSSEARCHITEM_CREATED'); ?>
+					<?php echo JText::_('MOD_AGOSMSSEARCHITEM_CREATED'); ?> 
 					<?php 
 						setlocale(LC_ALL, JFactory::getLanguage()->getLocale());
 						$date_format = explode("::", $model->module_params_native->get('date_format', '%e %b %Y::d M yyyy'))[0];
 						$date = strftime($date_format, strtotime($item->created));
 						$date = mb_convert_case($date, MB_CASE_TITLE, 'UTF-8');
-						echo $date; 
-					?>
+						echo $date;
+					?>		
 				</time>
 			</li>
 			<li class="hits">
@@ -186,6 +160,3 @@ if($product->vendor_id) {
 	<?php echo $item->event->afterDisplayContent; ?>
 	<div style="clear: both;"></div>
 </div>
-<?php if(($items_counter + 1) % $columns == 0) { ?>
-<div style="clear: both;"></div>
-<?php } ?>

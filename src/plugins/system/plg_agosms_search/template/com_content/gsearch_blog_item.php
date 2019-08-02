@@ -29,13 +29,6 @@ preg_match('/(<img[^>]+>)/i', $item->introtext, $matches);
 $ImageInText = count($matches);
 $ImagesTab = 0;
 
-if (JPluginHelper::isEnabled('system', 'imagestab')) {
-	$db = JFactory::getDBO();
-	$db->setQuery("SELECT COUNT(*) FROM #__content_images_data WHERE article_id = {$item->id}");
-	$res = $db->loadResult();
-	$ImagesTab = (int)$res;
-}
-
 if ($image_type == "intro" || $ImagesTab) {
 	$item->introtext = trim(strip_tags($item->introtext, '<h2><h3>'));
 }
@@ -72,8 +65,8 @@ $model->execPlugins($item);
 				<?php echo $item->title; ?>
 		<?php }  ?>
 	</h3>
-	<?php echo $item->event->afterDisplayTitle; ?>
-	<?php echo $item->event->beforeDisplayContent; ?>
+	<?php //echo $item->event->afterDisplayTitle; ?>
+	<?php //echo $item->event->beforeDisplayContent; ?>
 
 	<?php if ($ImageIntro && !$ImagesTab && ($image_type == "intro" || $image_type == "")) { ?>
 	<div class="item-image">
@@ -157,6 +150,6 @@ $model->execPlugins($item);
 	</div>
 	<?php } ?>
 	
-	<?php echo $item->event->afterDisplayContent; ?>
+	<?php //echo $item->event->afterDisplayContent; ?>
 	<div style="clear: both;"></div>
 </div>
