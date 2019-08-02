@@ -34,23 +34,23 @@ $max = $values[count($values) - 1];
 $step = 1;
 
 $active_min =  '';
-if (JFactory::getApplication()->input->post->get($name_from, $min)) {
-	$active_min = JFactory::getApplication()->input->post->get($name_from, $min);
+if (JFactory::getApplication()->input->get->get($name_from, $min)) {
+	$active_min = JFactory::getApplication()->input->get->get($name_from, $min);
 }
 
 $active_max =  '';
-if (JFactory::getApplication()->input->post->get($name_to, $max)) {
-	$active_max = JFactory::getApplication()->input->post->get($name_to, $max);
+if (JFactory::getApplication()->input->get->get($name_to, $max)) {
+	$active_max = JFactory::getApplication()->input->get->get($name_to, $max);
 }
 
 $name_from_request =  '';
-if (JFactory::getApplication()->input->post->get($name_from)) {
-	$name_from_request = JFactory::getApplication()->input->post->get($name_from);
+if (JFactory::getApplication()->input->get->get($name_from)) {
+	$name_from_request = JFactory::getApplication()->input->get->get($name_from);
 }
 
 $name_to_request =  '';
-if (JFactory::getApplication()->input->post->get($name_to)) {
-	$name_from_request = JFactory::getApplication()->input->post->get($name_to);
+if (JFactory::getApplication()->input->get->get($name_to)) {
+	$name_from_request = JFactory::getApplication()->input->get->get($name_to);
 }
 
 $doc = JFactory::getDocument();

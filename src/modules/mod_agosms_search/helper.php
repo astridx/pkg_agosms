@@ -149,12 +149,12 @@ class modAgosmsSearchHelper
 
 			case 1 : // Auto
 				$view =  '';
-				if (JFactory::getApplication()->input->post->get('view')) {
-					$active = JFactory::getApplication()->input->post->get('view');
+				if (JFactory::getApplication()->input->get->get('view')) {
+					$active = JFactory::getApplication()->input->get->get('view');
 				}
 				$requestid = 0;
-				if (JFactory::getApplication()->input->post->get('id')) {
-					$active = JFactory::getApplication()->input->post->get('id');
+				if (JFactory::getApplication()->input->get->get('id')) {
+					$active = JFactory::getApplication()->input->get->get('id');
 				}
 
 				if (in_array($view, Array("featured", "category")))

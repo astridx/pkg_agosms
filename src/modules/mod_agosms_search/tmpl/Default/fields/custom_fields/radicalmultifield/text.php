@@ -27,8 +27,8 @@ $field->instance->label = $sub_field->title;
 $name = "multifield{$field->id}-{$sub_field_selected}";
 
 $name_from_request =  '';
-if (JFactory::getApplication()->input->post->get($name)) {
-	$name_from_request = JFactory::getApplication()->input->post->get($name);
+if (JFactory::getApplication()->input->get->get($name)) {
+	$name_from_request = JFactory::getApplication()->input->get->get($name);
 }
 ?>
 

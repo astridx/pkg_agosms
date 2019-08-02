@@ -14,8 +14,8 @@ defined('_JEXEC') or die;
 
 $titles = $helper->getItemsTitles($params);
 $active =  '';
-if (JFactory::getApplication()->input->post->get('keyword')) {
-	$active = JFactory::getApplication()->input->post->get('keyword');
+if (JFactory::getApplication()->input->get->get('keyword')) {
+	$active = JFactory::getApplication()->input->get->get('keyword');
 }
 ?>
 

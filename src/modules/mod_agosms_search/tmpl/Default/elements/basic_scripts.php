@@ -64,7 +64,7 @@ defined('_JEXEC') or die;
 			submit_form_<?php echo $module->id; ?>();
 		});
 		<?php if($params->get("search_type") == "ajax"
-				&& JFactory::getApplication()->input->post->get('view') != "article") { //call search results on initial page loading
+				&& JFactory::getApplication()->input->get->get('view') != "article") { //call search results on initial page loading
 		?>	
 		ajax_results<?php echo $module->id; ?>();
 		<?php } ?>

@@ -12,8 +12,8 @@
 defined('_JEXEC') or die;
 
 $active =  array($field->instance->default_value);
-if (JFactory::getApplication()->input->post->get("field" . $field->id)) {
-	$active = JFactory::getApplication()->input->post->get("field" . $field->id);
+if (JFactory::getApplication()->input->get->get("field" . $field->id)) {
+	$active = JFactory::getApplication()->input->get->get("field" . $field->id);
 }
 
 $field_params = json_decode($field->instance->fieldparams);

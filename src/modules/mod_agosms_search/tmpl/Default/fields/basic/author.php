@@ -13,8 +13,8 @@
 defined('_JEXEC') or die;
 
 $active =  array();
-if (JFactory::getApplication()->input->post->get('author')) {
-	$active = JFactory::getApplication()->input->post->get('author');
+if (JFactory::getApplication()->input->get->get('author')) {
+	$active = JFactory::getApplication()->input->get->get('author');
 }
 ?>
 

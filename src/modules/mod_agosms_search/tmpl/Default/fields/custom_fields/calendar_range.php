@@ -14,13 +14,13 @@ defined('_JEXEC') or die;
 $field_params = json_decode($field->instance->fieldparams);
 
 $active_from =  false;
-if (JFactory::getApplication()->input->post->get("field{$field->id}-from")) {
-	$active_from = JFactory::getApplication()->input->post->get("field{$field->id}-from");
+if (JFactory::getApplication()->input->get->get("field{$field->id}-from")) {
+	$active_from = JFactory::getApplication()->input->get->get("field{$field->id}-from");
 }
 
 $active_to =  false;
-if (JFactory::getApplication()->input->post->get("field{$field->id}-to")) {
-	$active_to = JFactory::getApplication()->input->post->get("field{$field->id}-to");
+if (JFactory::getApplication()->input->get->get("field{$field->id}-to")) {
+	$active_to = JFactory::getApplication()->input->get->get("field{$field->id}-to");
 }
 
 $active_from_text_init = '';

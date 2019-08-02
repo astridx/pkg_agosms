@@ -13,8 +13,8 @@
 defined('_JEXEC') or die;
 
 $name_from_request =  '';
-if (JFactory::getApplication()->input->post->get("field".$field->id)) {
-	$name_from_request = JFactory::getApplication()->input->post->get("field".$field->id);
+if (JFactory::getApplication()->input->get->get("field".$field->id)) {
+	$name_from_request = JFactory::getApplication()->input->get->get("field".$field->id);
 }
 ?>
 

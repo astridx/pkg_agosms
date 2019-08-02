@@ -29,7 +29,7 @@ $items = $model->getItems();
 	<div class="page-header">
 		<h3>
 			<?php
-				echo (count($items) ? JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_(MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT));
+				echo (count($items) ? JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_("MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT"));
 			?>
 		</h3>
 	</div>

@@ -30,23 +30,23 @@ elseif ($field->instance->type == "agosmsaddressmarker") {
 }
 
 $active_min =  '';
-if (JFactory::getApplication()->input->post->get("field{$field->id}-from", $min)) {
-	$active_min = JFactory::getApplication()->input->post->get("field{$field->id}-from", $min);
+if (JFactory::getApplication()->input->get->get("field{$field->id}-from", $min)) {
+	$active_min = JFactory::getApplication()->input->get->get("field{$field->id}-from", $min);
 }
 
 $active_max =  '';
-if (JFactory::getApplication()->input->post->get("field{$field->id}-to", $max)) {
-	$active_max = JFactory::getApplication()->input->post->get("field{$field->id}-to", $max);
+if (JFactory::getApplication()->input->get->get("field{$field->id}-to", $max)) {
+	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to", $max);
 }
 
 $active_min_default =  '1';
-if (JFactory::getApplication()->input->post->get("field{$field->id}-from", '')) {
-	$active_min = JFactory::getApplication()->input->post->get("field{$field->id}-from", '');
+if (JFactory::getApplication()->input->get->get("field{$field->id}-from", '')) {
+	$active_min = JFactory::getApplication()->input->get->get("field{$field->id}-from", '');
 }
 
 $active_max_default =  '1000';
-if (JFactory::getApplication()->input->post->get("field{$field->id}-to", '')) {
-	$active_max = JFactory::getApplication()->input->post->get("field{$field->id}-to", '');
+if (JFactory::getApplication()->input->get->get("field{$field->id}-to", '')) {
+	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to", '');
 }
 
 $doc = JFactory::getDocument();

@@ -32,13 +32,13 @@ $name_from = "repeatable{$field->id}-{$sub_field_selected_number}-from";
 $name_to = "repeatable{$field->id}-{$sub_field_selected_number}-to";
 
 $name_from_request =  '';
-if (JFactory::getApplication()->input->post->get($name_from)) {
-	$name_from_request = JFactory::getApplication()->input->post->get($name_from);
+if (JFactory::getApplication()->input->get->get($name_from)) {
+	$name_from_request = JFactory::getApplication()->input->get->get($name_from);
 }
 
 $name_to_request =  '';
-if (JFactory::getApplication()->input->post->get($name_to)) {
-	$name_from_request = JFactory::getApplication()->input->post->get($name_to);
+if (JFactory::getApplication()->input->get->get($name_to)) {
+	$name_from_request = JFactory::getApplication()->input->get->get($name_to);
 }
 ?>
 

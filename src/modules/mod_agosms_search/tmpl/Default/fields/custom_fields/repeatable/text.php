@@ -30,8 +30,8 @@ $field->instance->label = $sub_field->fieldname;
 $name = "repeatable{$field->id}-{$sub_field_selected_number}";
 
 $name_from_request =  '';
-if (JFactory::getApplication()->input->post->get($name)) {
-	$name_from_request = JFactory::getApplication()->input->post->get($name);
+if (JFactory::getApplication()->input->get->get($name)) {
+	$name_from_request = JFactory::getApplication()->input->get->get($name);
 }
 ?>
 

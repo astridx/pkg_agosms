@@ -13,8 +13,8 @@ defined('_JEXEC') or die;
 
 $field_params = json_decode($field->instance->fieldparams);
 $fieldid =  '';
-if (JFactory::getApplication()->input->post->get("field" . $field->id)) {
-	$fieldid = JFactory::getApplication()->input->post->get("field" . $field->id);
+if (JFactory::getApplication()->input->get->get("field" . $field->id)) {
+	$fieldid = JFactory::getApplication()->input->get->get("field" . $field->id);
 }		
 $active = $fieldid;
 $active_text = '';

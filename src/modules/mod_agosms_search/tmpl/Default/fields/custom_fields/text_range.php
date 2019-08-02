@@ -13,13 +13,13 @@
 defined('_JEXEC') or die;
 
 $name_from_request =  '';
-if (JFactory::getApplication()->input->post->get("field{$field->id}-from")) {
-	$name_from_request = JFactory::getApplication()->input->post->get("field{$field->id}-from");
+if (JFactory::getApplication()->input->get->get("field{$field->id}-from")) {
+	$name_from_request = JFactory::getApplication()->input->get->get("field{$field->id}-from");
 }
 
 $name_to_request =  '';
-if (JFactory::getApplication()->input->post->get("field{$field->id}-to")) {
-	$name_from_request = JFactory::getApplication()->input->post->get("field{$field->id}-to");
+if (JFactory::getApplication()->input->get->get("field{$field->id}-to")) {
+	$name_from_request = JFactory::getApplication()->input->get->get("field{$field->id}-to");
 }
 ?>
 

@@ -18,8 +18,8 @@ $curr_locale = JFactory::getLanguage()->getLocale();
 setlocale(LC_ALL, $curr_locale);
 
 $active =  array();
-if (JFactory::getApplication()->input->post->get('field-date-custom'.$field_id_from)) {
-	$active = JFactory::getApplication()->input->post->get('field-date-custom'.$field_id_from);
+if (JFactory::getApplication()->input->get->get('field-date-custom'.$field_id_from)) {
+	$active = JFactory::getApplication()->input->get->get('field-date-custom'.$field_id_from);
 }
 
 $parts = explode(":", $active);

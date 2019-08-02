@@ -29,8 +29,8 @@ $field->instance->label = $sub_field->fieldname;
 $name = "repeatable{$field->id}-{$sub_field_selected_number}";
 
 $active =  false;
-if (JFactory::getApplication()->input->post->get($name)) {
-	$active = JFactory::getApplication()->input->post->get($name);
+if (JFactory::getApplication()->input->get->get($name)) {
+	$active = JFactory::getApplication()->input->get->get($name);
 }
 $active_text_init = '';
 

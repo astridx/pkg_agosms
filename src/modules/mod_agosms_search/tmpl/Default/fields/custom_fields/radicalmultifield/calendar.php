@@ -27,8 +27,8 @@ $field->instance->label = $sub_field->title;
 $name = "multifield{$field->id}-{$sub_field_selected}";
 
 $active =  false;
-if (JFactory::getApplication()->input->post->get($name)) {
-	$active = JFactory::getApplication()->input->post->get($name);
+if (JFactory::getApplication()->input->get->get($name)) {
+	$active = JFactory::getApplication()->input->get->get($name);
 }
 $active_text_init = '';
 

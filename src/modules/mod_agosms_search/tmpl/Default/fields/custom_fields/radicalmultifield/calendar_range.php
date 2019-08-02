@@ -29,13 +29,13 @@ $name_from = "multifield{$field->id}-{$sub_field_selected}-from";
 $name_to = "multifield{$field->id}-{$sub_field_selected}-to";
 
 $active_from =  false;
-if (JFactory::getApplication()->input->post->get($name_from)) {
-	$active_from = JFactory::getApplication()->input->post->get($name_from);
+if (JFactory::getApplication()->input->get->get($name_from)) {
+	$active_from = JFactory::getApplication()->input->get->get($name_from);
 }
 
 $active_to =  false;
-if (JFactory::getApplication()->input->post->get($name_to)) {
-	$active_to = JFactory::getApplication()->input->post->get($name_to);
+if (JFactory::getApplication()->input->get->get($name_to)) {
+	$active_to = JFactory::getApplication()->input->get->get($name_to);
 }
 
 $active_from_text_init = '';
