@@ -207,7 +207,7 @@ $(document).ready(function () {
 			}
 
 			init_box.parent().find(".sortableFields").append("<li><span class='val' rel='" + selected.val() + "'>" +
-				selected.text() + "</span><span class='sortableRightBlock'>" + extra + type_selected + " x </span></li>"
+				selected.text() + "</span><span class='sortableRightBlock'>" + extra + type_selected + "<span class='deleteFilter'>x</span></span></li>"
 			);
 
 			init_field = $(this).parents(".controls");

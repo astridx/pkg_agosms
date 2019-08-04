@@ -60,45 +60,40 @@ class ArticlesModelAgSearch extends JModelList
 	{
 		$db = JFactory::getDBO();
 
-		if ($total)
+		$featuredFirst = false;
+
+		switch ($this->module_params->include_featured) {
+			case "First" :
+				$featuredFirst = true;
+				break;
+			case "Only" :
+				$query .= " AND i.featured = 1";
+				break;
+			case "No" :
+				$query .= " AND i.featured = 0";
+				break;
+		}
+
+		$default_ordering = $featuredFirst ? 'featured' : $this->module_params->ordering_default;
+		$orderby = JRequest::getVar("orderby", $default_ordering);
+		$orderto = JRequest::getVar("orderto", $this->module_params->ordering_default_dir);
+
+		$query = "SELECT i.*, GROUP_CONCAT(tm.tag_id) as tags, cat.title as category";
+
+		// Select field ordering value
+		if ($featuredFirst)
 		{
-			$query = "SELECT COUNT(DISTINCT i.id)";
+			preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
 		} else
 		{
-			$featuredFirst = false;
-
-			switch ($this->module_params->include_featured) {
-				case "First" :
-					$featuredFirst = true;
-					break;
-				case "Only" :
-					$query .= " AND i.featured = 1";
-					break;
-				case "No" :
-					$query .= " AND i.featured = 0";
-					break;
-			}
-
-			$default_ordering = $featuredFirst ? 'featured' : $this->module_params->ordering_default;
-			$orderby = JRequest::getVar("orderby", $default_ordering);
-			$orderto = JRequest::getVar("orderto", $this->module_params->ordering_default_dir);
-
-			$query = "SELECT i.*, GROUP_CONCAT(tm.tag_id) as tags, cat.title as category";
-
-			// Select field ordering value
-			if ($featuredFirst)
-			{
-				preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
-			} else
-			{
-				preg_match('/^field([0-9]+)$/', $orderby, $matches);
-			}
-
-			if (count($matches))
-			{
-				$query .= ", fv2.value as {$matches[0]}";
-			}
+			preg_match('/^field([0-9]+)$/', $orderby, $matches);
 		}
+
+		if (count($matches))
+		{
+			$query .= ", fv2.value as {$matches[0]}";
+		}
+
 
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__categories AS cat ON cat.id = i.catid";
@@ -116,21 +111,18 @@ class ArticlesModelAgSearch extends JModelList
 							AND type_alias = 'com_content.article'
 				";
 
-		if (!$total)
+		// Left join field ordering value
+		if ($featuredFirst)
 		{
-			// Left join field ordering value
-			if ($featuredFirst)
-			{
-				preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
-			} else
-			{
-				preg_match('/^field([0-9]+)$/', $orderby, $matches);
-			}
+			preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
+		} else
+		{
+			preg_match('/^field([0-9]+)$/', $orderby, $matches);
+		}
 
-			if (count($matches))
-			{
-				$query .= " LEFT JOIN #__fields_values AS fv2 ON fv2.item_id = i.id AND fv2.field_id = {$matches[1]}";
-			}
+		if (count($matches))
+		{
+			$query .= " LEFT JOIN #__fields_values AS fv2 ON fv2.item_id = i.id AND fv2.field_id = {$matches[1]}";
 		}
 
 		$query .= " WHERE i.state = 1";
@@ -178,135 +170,163 @@ class ArticlesModelAgSearch extends JModelList
 		// General search query build
 		$query .= $this->search_query;
 
-		if (!$total)
-		{
-			$query .= " GROUP BY i.id";
-			$query .= " ORDER BY ";
+		$query .= " GROUP BY i.id";
+		$query .= " ORDER BY ";
 
-			switch ($orderby) {
-				case "title" :
-					if (JRequest::getVar("orderto") == "")
-					{
-						$orderto = "ASC";
-						JRequest::setVar("orderto", "asc");
-					}
+		switch ($orderby) {
+			case "title" :
+				if (JRequest::getVar("orderto") == "")
+				{
+					$orderto = "ASC";
+					JRequest::setVar("orderto", "asc");
+				}
 
-					$query .= "i.title {$orderto}";
-					break;
-				case "alias" :
-					$query .= "i.alias {$orderto}";
-					break;
-				case "created" :
-					$query .= "i.created {$orderto}";
-					break;
-				case "publish_up" :
-					$query .= "i.publish_up {$orderto}";
-					break;
-				case "category" :
-					$query .= "category {$orderto}";
-					break;
-				case "hits" :
-					$query .= "i.hits {$orderto}";
-					break;
-				case "featured" :
-					$query .= "i.featured {$orderto}";
+				$query .= "i.title {$orderto}";
+				break;
+			case "alias" :
+				$query .= "i.alias {$orderto}";
+				break;
+			case "created" :
+				$query .= "i.created {$orderto}";
+				break;
+			case "publish_up" :
+				$query .= "i.publish_up {$orderto}";
+				break;
+			case "category" :
+				$query .= "category {$orderto}";
+				break;
+			case "hits" :
+				$query .= "i.hits {$orderto}";
+				break;
+			case "featured" :
+				$query .= "i.featured {$orderto}";
 
-					// Order by field value
-					preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
+				// Order by field value
+				preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
 
-					if (count($matches))
-					{
-						$query .= ", {$this->module_params->ordering_default} {$orderto}";
-					} else
-					{
-						$query .= ", i.{$this->module_params->ordering_default} {$orderto}";
-					}
-					break;
-				case "rand" :
-					$currentSession = JFactory::getSession();
-					$sessionNum = substr(preg_replace('/[^0-9]/i', '', $currentSession->getId()), 2, 3);
-					$query .= "RAND({$sessionNum})";
-					break;
-				case "id" :
-				default :
-					// Order by field value
-					preg_match('/^field([0-9]+)$/', $orderby, $matches);
+				if (count($matches))
+				{
+					$query .= ", {$this->module_params->ordering_default} {$orderto}";
+				} else
+				{
+					$query .= ", i.{$this->module_params->ordering_default} {$orderto}";
+				}
+				break;
+			case "rand" :
+				$currentSession = JFactory::getSession();
+				$sessionNum = substr(preg_replace('/[^0-9]/i', '', $currentSession->getId()), 2, 3);
+				$query .= "RAND({$sessionNum})";
+				break;
+			case "id" :
+			default :
+				// Order by field value
+				preg_match('/^field([0-9]+)$/', $orderby, $matches);
 
-					if (count($matches))
-					{
-						$query .= "{$orderby} {$orderto}";
-					} else
-					{
-						$query .= "i.id {$orderto}";
-					}
-			}
+				if (count($matches))
+				{
+					$query .= "{$orderby} {$orderto}";
+				} else
+				{
+					$query .= "i.id {$orderto}";
+				}
 		}
 
 		$filterresult = array();
-
 		if (!$this->module_params->georestrict)
 		{
-			if ($total)
-			{
-				$db->setQuery($query);
+			$this->limitstart = $this->input->get("page-start", 0, "int");
+			$db->setQuery($query, $this->limitstart, $this->limit);
 
-				$filterresult = $db->loadResult();
-			} else
-			{
-				$this->limitstart = $this->input->get("page-start", 0, "int");
-				$db->setQuery($query, $this->limitstart, $this->limit);
+			$filterresult = $db->loadObjectList();
 
-				$filterresult = $db->loadObjectList();
+			foreach ($filterresults as $filterresult) {
+				$jcFields = FieldsHelper::getFields('com_content.article', $filterresult, true);
+
+				foreach ($jcFields as $jcField) {
+
+					if ($jcField->type === "agosmsaddressmarker")
+					{
+						$fieldcords = explode(",", $jcField->rawvalue);
+						$fieldlat = $fieldcords[0];
+						$fieldlon = $fieldcords[1];
+
+						$filterresult->lat = $fieldlat;
+						$filterresult->lon = $fieldlon;
+					}
+				}
 			}
 		}
-
+		
+		$tempfilterresults = array();
 		if ($this->module_params->georestrict)
 		{
-			if (!$total)
-			{
-				$this->limitstart = $this->input->get("page-start", 0, "int");
-				$db->setQuery($query, $this->limitstart, $this->limit);
+			$this->limitstart = $this->input->get("page-start", 0, "int");
+			$db->setQuery($query, $this->limitstart, $this->limit);
 
-				$filterresults = $db->loadObjectList();
-				$tempfilterresults = array();
+			$filterresults = $db->loadObjectList();
 
-				foreach ($filterresults as $filterresult) {
-					//$tempfilterresults[] = $filterresults;
-					$jcFields = FieldsHelper::getFields('com_content.article', $filterresult, True);
+			foreach ($filterresults as $filterresult) {
+				$jcFields = FieldsHelper::getFields('com_content.article', $filterresult, True);
 
-					foreach ($jcFields as $jcField) {
-						if ($jcField->type === "agosmsaddressmarker")
+				foreach ($jcFields as $jcField) {
+					if ($jcField->type === "agosmsaddressmarker")
+					{
+						$getlat = "field_" . $jcField->id . "-lat";
+						$getlon = "field_" . $jcField->id . "-lon";
+						$globallat = JFactory::getApplication()->input->get->get($getlat);
+						$globallon = JFactory::getApplication()->input->get->get($getlon);
+
+						$fieldlat = 0;
+						$fieldlon = 0;
+						if (isset($jcField->rawvalue))
 						{
-							$getlat = "field" . $jcField->id . "-lat";
-							$getlon = "field" . $jcField->id . "-lon";
-							$globallat = JFactory::getApplication()->input->get->get($getlat);
-							$globallon = JFactory::getApplication()->input->get->get($getlon);
-
-
 							$fieldcords = explode(",", $jcField->rawvalue);
 							$fieldlat = $fieldcords[0];
 							$fieldlon = $fieldcords[1];
-							
-							// Check if one is null
-							
-							$distance = $this->distance($fieldlat, $fieldlon, $globallat, $globallon, 'K');
-							
-							
+						}
+
+						// Check if is null
+						if ($fieldlat === "0" 
+							|| $fieldlon === "0"
+							|| $globallat === "0"
+							|| $globallon === "0")
+						{
+							$filterresult->lat = $fieldlat;
+							$filterresult->lon = $fieldlon;
+							$tempfilterresults[] = $filterresult;
+							continue;
+						}
+						else
+						{
+							$from = "field_" . $jcField->id . "-from";
+							$to = "field_" . $jcField->id . "-to";
+							$globalfrom = JFactory::getApplication()->input->get->get($from);
+							$globalto = JFactory::getApplication()->input->get->get($to);
+							$geounit = $this->module_params->geounit;
+							$distance = $this->distance($fieldlat, $fieldlon, $globallat, $globallon, $geounit);
+						}
+
+						if ($distance >= $globalfrom && $distance <= $globalto) 
+						{
+							$filterresult->lat = $fieldlat;
+							$filterresult->lon = $fieldlon;
+							$tempfilterresults[] = $filterresult;
 						}
 					}
-					//Todo Filter geo
 				}
 			}
+			
+		} // Ende georestriction
 
-			if ($total)
-			{
-				$filterresult = 0;
-			} else
-			{
-				$filterresult = array();
-			}
+		if ($total)
+		{
+			$filterresult = (string)sizeof($tempfilterresults);
 		}
-
+		else
+		{
+			$filterresult = $tempfilterresults;
+		}
+		
 		return $filterresult;
 	}
 
@@ -1097,7 +1117,7 @@ class ArticlesModelAgSearch extends JModelList
 		JFactory::getDBO()->setQuery($query)->query();
 	}
 
-	/* N = Seemeilen, K = Kilometer, Meilen egal*/
+	/* N = Seemeilen, K = Kilometer, M = Meter, Meilen default*/
 	function distance($lat1, $lon1, $lat2, $lon2, $unit = 'K')
 	{
 		$theta = $lon1 - $lon2;
@@ -1110,10 +1130,16 @@ class ArticlesModelAgSearch extends JModelList
 		if ($unit == 'K')
 		{
 			return ( $miles * 1.609344 );
-		} else if ($unit == 'N')
+		} 
+		else if ($unit == 'M')
+		{
+			return ( $miles * 1.609344 * 1000 );
+		} 
+		else if ($unit == 'N')
 		{
 			return ( $miles * 0.8684 );
-		} else
+		} 
+		else
 		{
 			return $miles;
 		}

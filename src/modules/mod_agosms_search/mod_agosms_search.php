@@ -24,7 +24,7 @@ if (!JPluginHelper::isEnabled('system', 'plg_agosms_search'))
 if ($filters == "")
 {
 	echo JText::_('MOD_AGOSMS_PLUGIN_NO_FIELDS');
-	echo "Select search fields in Articles Good Search module parameters! <br />";
+	echo "Select search fields in Agosmsearch module parameters! <br />";
 
 	return;
 }

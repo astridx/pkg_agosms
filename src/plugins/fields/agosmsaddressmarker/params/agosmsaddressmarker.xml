@@ -258,58 +258,7 @@
 				showon="showroutingcontrol:1"
 			/>
 			<field type="spacer" name="myspacer7" hr="true" />
-			<field
-				name="usesearchmodule"
-				type="radio"
-				label="PLG_AGOSMSADDRESSMARKER_USESEARCHMODULE"
-				default="0"
-			>
-				<option value="0">JNO</option>
-				<option value="1">JYES</option>
-			</field>
-			<field
-				name="first"
-				type="number"
-				label="PLG_FIELDS_INTEGER_PARAMS_FIRST_LABEL"
-				description="PLG_FIELDS_INTEGER_PARAMS_FIRST_DESC"
-				filter="integer"
-				size="5"
-				showon="usesearchmodule:1"
-				default="0"
-			/>
-
-			<field
-				name="last"
-				type="number"
-				label="PLG_FIELDS_INTEGER_PARAMS_LAST_LABEL"
-				description="PLG_FIELDS_INTEGER_PARAMS_LAST_DESC"
-				filter="integer"
-				size="5"
-				showon="usesearchmodule:1"
-				default="2000"
-			/>
-
-			<field
-				name="step"
-				type="number"
-				label="PLG_FIELDS_INTEGER_PARAMS_STEP_LABEL"
-				description="PLG_FIELDS_INTEGER_PARAMS_STEP_DESC"
-				filter="integer"
-				size="5"
-				default="10"
-				showon="usesearchmodule:1"
-			/>
-			<field 
-				name="usesearchmoduletext" 
-				type="note" 
-				label="PLG_AGOSMSADDRESSMARKER_USESEARCH" 
-				description="PLG_AGOSMSADDRESSMARKER_USESEARCH_DESC" 
-				class="alert" 
-				close="true"
-				showon="usesearchmodule:1"
-			/>
 			<field type="spacer" name="myspacer8" hr="true" />
-			
 		</fieldset>
 	</fields>
 </form>

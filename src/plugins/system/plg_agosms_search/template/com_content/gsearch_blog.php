@@ -57,7 +57,7 @@ $items = $model->getItems();
 	<div class="itemlist">
 	<?php
 	foreach ($items as $items_counter => $item)
-{
+	{
 		if (!property_exists($item, "parent_alias"))
 		{
 			$item->parent_alias = false;
@@ -89,16 +89,16 @@ $items = $model->getItems();
 		?>
 		<?php
 		if ($model->module_params->results_template == "")
-	{
+		{
 			$model->module_params->results_template = "standard";
 		}
 
 		if ($model->module_params->results_template == "standard")
-	{
+		{
 			require dirname(__FILE__) . '/gsearch_blog_item.php';
 		}
 		else
-	{
+		{
 			require dirname(__FILE__) . "/gsearch_blog_item_{$model->module_params->results_template}.php";
 		}
 		?>

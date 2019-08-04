@@ -141,12 +141,55 @@
 					type="radio" 
 					class="btn-group" 
 					default="0" 
-					label="MOD_AGOSMSSEARCHGEORESTRICT_CAT" 
-					description="MOD_AGOSMSSEARCHGEORESTRICT_CAT_DESC"
+					label="MOD_AGOSMSSEARCH_GEORESTRICT_CAT" 
+					description="MOD_AGOSMSSEARCH_GEORESTRICT_CAT_DESC"
 				>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 				</field>
+				<field 
+					name="geounit" 
+					type="list" 
+					class="btn-group" 
+					default="K" 
+					label="MOD_AGOSMSSEARCH_GEO_UNIT" 
+					showon="georestrict:1"
+				>
+					<option value="K">MOD_AGOSMSSEARCH_KILOMETER</option>
+					<option value="M">MOD_AGOSMSSEARCH_METER</option>
+					<option value="N">MOD_AGOSMSSEARCH_NAUTICALMILE</option>
+					<option value="DEFAULT">MOD_AGOSMSSEARCH_MILE</option>
+				</field>
+				<field
+					name="first"
+					type="number"
+					label="MOD_AGOSMSSEARCHFILTER_PARAMS_FIRST_LABEL"
+					filter="integer"
+					size="5"
+					default="0"
+					showon="georestrict:1"
+				/>
+				<field
+					name="last"
+					type="number"
+					label="MOD_AGOSMSSEARCHFILTER_PARAMS_LAST_LABEL"
+					filter="integer"
+					size="5"
+					default="2000"
+					showon="georestrict:1"
+				/>
+				<field
+					name="step"
+					type="number"
+					label="MOD_AGOSMSSEARCHFILTER_PARAMS_STEP_LABEL"
+					filter="integer"
+					size="5"
+					default="10"
+					min="1" 
+					max="50" 
+					step="1"
+					showon="georestrict:1"
+				/>
 				<field 
 					name="georestricttext" 
 					type="note" 

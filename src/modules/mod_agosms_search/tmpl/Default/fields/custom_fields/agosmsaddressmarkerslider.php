@@ -21,39 +21,42 @@ $step = 10;
 $lon = 0;
 $lat = 0;
 $address = '';
+$moduleParams = new JRegistry($module->params);
 
 if($field->instance->type == "agosmsaddressmarker") {
-	$min = $field_params->first;
-	$max = $field_params->last;
-	$step = $field_params->step;
+	$min = $moduleParams->get('first', 0);
+	$max = $moduleParams->get('last', 2000);
+	$step = $moduleParams->get('step', 10);
 }
-else {
+else
+{
 	$values = $helper->getFieldValuesFromText($field->id, "int", $module->id);
 	$min = $values[0];
 	$max = $values[count($values) - 1];
 	$step = 1;
 }
 
+// Attention: Here field_{ is correct
 $active_min =  $min;
-if (JFactory::getApplication()->input->get->get("field{$field->id}-from")) {
-	$active_min = JFactory::getApplication()->input->get->get("field{$field->id}-from");
+if (JFactory::getApplication()->input->get->get("field_{$field->id}-from")) {
+	$active_min = JFactory::getApplication()->input->get->get("field_{$field->id}-from");
 }
 $active_max =  $max;
-if (JFactory::getApplication()->input->get->get("field{$field->id}-to")) {
-	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to");
+if (JFactory::getApplication()->input->get->get("field_{$field->id}-to")) {
+	$active_max = JFactory::getApplication()->input->get->get("field_{$field->id}-to");
 }
 
-$active_lon =  $lon;
-if (JFactory::getApplication()->input->get->get("field{$field->id}-lon")) {
-	$active_lon = JFactory::getApplication()->input->get->get("field{$field->id}-lon");
+$active_lon = $lon;
+if (JFactory::getApplication()->input->get->get("field_{$field->id}-lon")) {
+	$active_lon = JFactory::getApplication()->input->get->get("field_{$field->id}-lon");
 }
-$active_lat =  $lat;
-if (JFactory::getApplication()->input->get->get("field{$field->id}-lat")) {
-	$active_lat = JFactory::getApplication()->input->get->get("field{$field->id}-lat");
+$active_lat = $lat;
+if (JFactory::getApplication()->input->get->get("field_{$field->id}-lat")) {
+	$active_lat = JFactory::getApplication()->input->get->get("field_{$field->id}-lat");
 }
-$active_address =  $address;
-if (JFactory::getApplication()->input->get->get("field{$field->id}-address")) {
-	$active_address = JFactory::getApplication()->input->get->get("field{$field->id}-address");
+$active_address = $address;
+if (JFactory::getApplication()->input->get->get("field_{$field->id}-address")) {
+	$active_address = JFactory::getApplication()->input->get->get("field_{$field->id}-address");
 }
 
 $doc = JFactory::getDocument();
@@ -101,8 +104,8 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 					$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").val(ev.value[0] + ' - ' + ev.value[1]);
 				}).on("slideStop", function(ev) {
 					$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").val(ev.value[0] + ' - ' + ev.value[1]);
-					$("input[name=<?php echo "field{$field->id}-from"; ?>]").val(ev.value[0]);
-					$("input[name=<?php echo "field{$field->id}-to"; ?>]").val(ev.value[1]);
+					$("input[name=<?php echo "field_{$field->id}-from"; ?>]").val(ev.value[0]);
+					$("input[name=<?php echo "field_{$field->id}-to"; ?>]").val(ev.value[1]);
 					sliderLock = 0;
 					$("#GSearch<?php echo $module->id; ?> form").trigger("change");
 				});
@@ -110,11 +113,13 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 				$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").on("keyup", function() {
 					var value = $(this).val().replace(/\s/g, "").split("-").map(Number);
 					$("#slider-<?php echo "{$field->id}-{$module->id}"; ?>").bootstrapSlider('setValue', value);
-					$("input[name=<?php echo "field{$field->id}-from"; ?>]").val(value[0]);
-					$("input[name=<?php echo "field{$field->id}-to"; ?>]").val(value[1]);
+					$("input[name=<?php echo "field_{$field->id}-from"; ?>]").val(value[0]);
+					$("input[name=<?php echo "field_{$field->id}-to"; ?>]").val(value[1]);
 				});
 			});
 		</script>
+		<input class="inputbox" type="hidden" name="<?php echo "field_{$field->id}-from"; ?>" value="<?php echo $active_min; ?>" />
+		<input class="inputbox" type="hidden" name="<?php echo "field_{$field->id}-to"; ?>" value="<?php echo $active_max; ?>" />
 	</div>
 </div>
 
@@ -127,7 +132,7 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 <div class="controls">
 	<input 
 		type="text"
-		name="<?php echo "field{$field->id}-lat"; ?>"
+		name="<?php echo "field_{$field->id}-lat"; ?>"
 		value="<?php echo $active_lat; ?>"
 		class="agosmsaddressmarkerlat inputbox" >
 </div>
@@ -138,7 +143,7 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 <div class="controls">	
 	<input 
 		type="text"
-		name="<?php echo "field{$field->id}-lon"; ?>"
+		name="<?php echo "field_{$field->id}-lon"; ?>"
 		value="<?php echo $active_lon; ?>"
 		class="agosmsaddressmarkerlon inputbox" >
 </div>
@@ -179,7 +184,6 @@ document.addEventListener('click', function (e) {
 			if (!suggest && results.length === 1) {
 				lat.value = results[0].lat;
 				lon.value = results[0].lon;
-				lon.onchange();
 				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSSEARCH_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
 			} else if (results.length > 0) {
 				// Limit is fix set to 1 up to now
@@ -232,9 +236,4 @@ function getParamString(obj, existingUrl, uppercase) {
 	}
 	return (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') + params.join('&');
 }
-
-
 </script>
-
-<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-from"; ?>" value="<?php echo $active_min; ?>" />
-<input class="inputbox" type="hidden" name="<?php echo "field{$field->id}-to"; ?>" value="<?php echo $active_max; ?>" />
