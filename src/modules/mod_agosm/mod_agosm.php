@@ -14,7 +14,6 @@ defined('_JEXEC') or die;
 require_once __DIR__ . '/helper.php';
 require_once __DIR__ . '/Helper/EasyFileUploaderHelper.php';
 
-
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 // Include skripts/styles to the header

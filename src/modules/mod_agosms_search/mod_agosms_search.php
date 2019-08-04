@@ -14,6 +14,8 @@ defined('_JEXEC') or die;
 require_once __DIR__ . '/helper.php';
 $helper = new modAgosmsSearchHelper($params);
 
+$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
+
 $filters = $params->get('filters');
 
 if (!JPluginHelper::isEnabled('system', 'plg_agosms_search'))
@@ -88,4 +90,31 @@ foreach ($filters_tmp as $k => $filter)
 	}
 }
 
-require JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/template');
+
+// Map
+
+// Include skripts/styles to the header
+$document = JFactory::getDocument();
+
+$leafletIsLoaded = false;
+
+foreach ($document->_scripts as $key => $script)
+{
+	$leafletPath = "leaflet/leaflet.js";
+
+	if (strpos($key, $leafletPath))
+	{
+		$leafletIsLoaded = true;
+	}
+}
+
+
+if (!$leafletIsLoaded)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.js');
+}
+
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/js/agosm_search.js');
+
+require JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'default') . '/template');
