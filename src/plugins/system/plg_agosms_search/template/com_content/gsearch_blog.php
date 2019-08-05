@@ -26,6 +26,18 @@ $model->limit = JRequest::getInt("limit", $module_params->get('items_limit', 10)
 $items = $model->getItems();
 ?>
 
+GSEARCHBLOG_ANFANG
+
+<div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
+	 itemscope itemtype="https://schema.org/Blog">
+	<div class="page-header">
+		<h3>
+			<?php
+				echo (count($items) ? JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_("MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT"));
+			?>
+		</h3>
+	</div>
+
 MAPSTART
 <?php $defaultArray = array(); ?>
 <div style="
@@ -62,87 +74,10 @@ MAPSTART
 	data-scale-metric="<?php echo in_array('metric', $module_params->get('scale', $defaultArray)); ?>"
 	data-scale-imperial="<?php echo in_array('imperial', $module_params->get('scale', $defaultArray)); ?>"
 	data-showgeocoder="<?php echo $module_params->get('showgeocoder', '1'); ?>"
-<?php if ($module_params->get('showgeocoder', '1')) : ?>
-	data-geocodercollapsed="<?php echo $module_params->get('geocodercollapsed', 'false'); ?>"
-	data-geocoderposition="<?php echo $module_params->get('geocoderposition', 'bottomleft'); ?>"
-	data-expand="<?php echo $module_params->get('expand', 'click'); ?>"
-<?php endif; ?>
-	data-useesri="<?php echo $module_params->get('useesri', '1'); ?>"
-<?php if ($module_params->get('useesri', '1')) : ?>
-	data-esrireversegeocoding="<?php echo $module_params->get('esrireversegeocoding', false); ?>"
-	data-esrigeocoderopengetaddress="<?php echo $module_params->get('esrigeocoderopengetaddress', false); ?>"
-	data-showgeocoderesri="<?php echo $module_params->get('showgeocoderesri', '1'); ?>"
-	data-positionesrigeocoder="<?php echo $module_params->get('positionesrigeocoder', 'bottomleft'); ?>"
-	data-esrigeocoderzoomToResult="<?php echo $module_params->get('esrigeocoderzoomToResult', true); ?>"
-	data-esrigeocoderuseMapBounds="<?php echo $module_params->get('esrigeocoderuseMapBounds', false); ?>"
-	data-esrigeocodercollapseAfterResult="<?php echo $module_params->get('esrigeocodercollapseAfterResult', true); ?>"
-	data-esrigeocoderexpanded="<?php echo $module_params->get('esrigeocoderexpanded', true); ?>"
-	data-esriallowMultipleResults="<?php echo $module_params->get('esriallowMultipleResults', true); ?>"
-<?php endif; ?>
-	data-showrouting-simple="<?php echo $module_params->get('showrouting_simple', '1'); ?>"
-<?php if ($module_params->get('showrouting_simple', '1')) : ?>
-	data-route-simple-position="<?php echo $module_params->get('routing_simple_position', 'topright'); ?>"
-	data-route-simple-router="<?php echo $module_params->get('routing_simple_router', 'osrm'); ?>"
-	data-route-simple-routerkey="<?php echo $module_params->get('routing_simple_routerkey', ''); ?>"
-	data-route-simple-target="<?php echo $module_params->get('routing_simple_target', 'Koblenz, Rheinland-Pfalz, Deutschland'); ?>"
-<?php endif; ?>
-	data-showrouting="<?php echo $module_params->get('showrouting', '1'); ?>"
-<?php if ($module_params->get('showrouting', '1')) : ?>
-	data-routingstart="<?php echo $module_params->get('routingstart'); ?>"
-	data-routingend="<?php echo $module_params->get('routingend'); ?>"
-	data-mapboxkey-routing="<?php echo $module_params->get('mapboxkey_routing', ''); ?>"
-	data-routingprofile="<?php echo $module_params->get('routingprofile', 'mapbox/driving'); ?>"
-	data-routinglanguage="<?php echo $module_params->get('routinglanguage', 'de'); ?>"
-	data-routingmetric="<?php echo $module_params->get('routingmetric', 'metric'); ?>"
-	data-routewhiledragging="<?php echo $module_params->get('routewhiledragging', 'de'); ?>"
-<?php endif; ?>
-<?php if ($module_params->get('showpin', '1')) : ?>
-	data-specialpins="<?php echo htmlspecialchars(json_encode($module_params->get('specialpins', null)), ENT_QUOTES, 'UTF-8'); ?>"
-	data-showpin="<?php echo $module_params->get('showpin', '1'); ?>"
-<?php endif; ?>
-<?php if (false) : //if ($module_params->get('showcomponentpin', '1')) : ?>
-	data-specialcomponentpins="<?php echo htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8'); ?>"
-	data-showcomponentpin="<?php echo $module_params->get('showcomponentpin', '1'); ?>"
-<?php endif; ?>
-<?php if ($params->get('showcustomfieldpin', '1')) : ?>
-	data-specialcustomfieldpins="<?php echo htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8'); ?>"
-	data-showcustomfieldpin="<?php echo $params->get('showcustomfieldpin', '1'); ?>"
-
-	data-scrollwheelzoom='<?php echo $module_params->get('scrollwheelzoom', '') ?>'
-	data-owngooglegesturetext='<?php echo $module_params->get('owngooglegesturetext', '1') ?>'
-	data-scroll='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLL'); ?>'
-	data-touch='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_TOUCH'); ?>'
-	data-scrollmac='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'); ?>'
-	
 	class="leafletmapModSearch"
 	id="searchmap<?php echo $model->module_id; ?>">
 </div>
-<?php
-JText::script('MOD_AGOSM_MODULE_BY');
-JText::script('MOD_AGOSM_DEFAULT_TEXT_PLACEHOLDER');
-JText::script('MOD_AGOSM_DEFAULT_TEXT_ERRORMESSAGE');
-JText::script('MOD_AGOSM_DEFAULT_ESRI_GEOCODER_PLACEHOLDER');
-JText::script('MOD_AGOSM_DEFAULT_ESRI_GEOCODER_TITLE');
-
-JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_PLACEHOLDER');
-JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE');
-JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE');
-JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION');
-JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR');
-?>
-
 MAPENDE
-GSEARCHBLOG_ANFANG
-
-<div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
-	 itemscope itemtype="https://schema.org/Blog">
-	<div class="page-header">
-		<h3>
-			<?php
-				echo (count($items) ? JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_("MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT"));
-			?>
-		</h3>
-	</div>
 	
 	<?php if (count($items))
 	{

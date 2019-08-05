@@ -259,16 +259,6 @@
 					close="true"
 				/>
 				<field 
-					name="autosubmit" 
-					type="radio" 
-					class="btn-group" 
-					default="0" 
-					label="MOD_AGOSMSSEARCHAUTOSUBMIT"
-				>
-					<option value="1">MOD_AGOSMSSEARCHYES</option>
-					<option value="0">MOD_AGOSMSSEARCHNO</option>
-				</field>
-				<field 
 					name="acounter" 
 					type="radio" 
 					class="btn-group" 
@@ -452,16 +442,12 @@
 				/>
 				<field 
 					name="styles" 
-					type="textarea" filter="raw" cols="10"
-					default="/* styles for columned view */&#13;&#10;div.blog-gsearch.columned .item {&#13;&#10;
-								padding: 10px 20px;&#13;&#10;
-								border: 1px solid #aaa;&#13;&#10;
-								border-radius: 5px;&#13;&#10;
-								background: #f8f8ff;&#13;&#10;
-								box-shadow: 1px 0px 3px #ccc;&#13;&#10;}&#13;&#10;/* general styles */&#13;&#10;div.blog-gsearch img { float: left; margin: 0 20px 10px 0; }&#13;&#10;
-							" 
-					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_STYLES" />
-
+					type="textarea" 
+					filter="raw" 
+					cols="10"
+					default="" 
+					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_STYLES"
+				/>
 			</fieldset>
 			<fieldset 
 				name="advanced">

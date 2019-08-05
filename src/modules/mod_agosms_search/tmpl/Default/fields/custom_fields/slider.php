@@ -36,8 +36,8 @@ if (JFactory::getApplication()->input->get->get("field{$field->id}-to")) {
 }
 
 $doc = JFactory::getDocument();
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/bootstrap-slider.min.js');
-$doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css');
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.css');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.js');
 ?>
 
 <div class="gsearch-field-slider custom-field">	
@@ -88,6 +88,9 @@ $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.
 					$("#slider-<?php echo "{$field->id}-{$module->id}"; ?>").bootstrapSlider('setValue', value);
 					$("input[name=<?php echo "field{$field->id}-from"; ?>]").val(value[0]);
 					$("input[name=<?php echo "field{$field->id}-to"; ?>]").val(value[1]);
+				});
+				$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").on("input", function() {
+					$("#slider-<?php echo "{$field->id}-{$module->id}"; ?>").bootstrapSlider('refresh');
 				});
 			});
 		</script>

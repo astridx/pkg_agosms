@@ -56,17 +56,3 @@ defined('_JEXEC') or die;
 		<?php } ?>
 		jQuery("#GSearch<?php echo $module->id; ?> form").submit();
 	}
-	
-	<?php if($params->get("autosubmit")) { ?>
-	jQuery(document).ready(function($) {
-		if(sliderLock) return false;
-		$("#GSearch<?php echo $module->id; ?> form").on("change", function() {
-			submit_form_<?php echo $module->id; ?>();
-		});
-		<?php if($params->get("search_type") == "ajax"
-				&& JFactory::getApplication()->input->get->get('view') != "article") { //call search results on initial page loading
-		?>	
-		ajax_results<?php echo $module->id; ?>();
-		<?php } ?>
-	});
-	<?php } ?>

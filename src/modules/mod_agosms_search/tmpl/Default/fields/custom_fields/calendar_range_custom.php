@@ -34,6 +34,10 @@ if($active_to) {
 	$active_to = trim(strftime('%b %e %Y', $active_to));
 	$active_to = mb_convert_case($active_to, MB_CASE_TITLE, 'UTF-8');
 }
+$doc = JFactory::getDocument();
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/datepicker/bootstrap-datepicker.min.css');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/bootstrap-datepicker.min.js');
+
 ?>
 
 <div class="gsearch-field-calendar range custom-field calendar-custom<?php echo $field_id_from; ?>">	
@@ -48,8 +52,6 @@ if($active_to) {
 		<input type="hidden" name="field-date-custom<?php echo $field_id_from; ?>" value="<?php echo $active; ?>" id="field-date-custom-<?php echo $field_id_from; ?>" />
 	</div>
 
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
 	<?php 
 		$lang = JFactory::getLanguage()->getTag();
 		$lang = explode("-", $lang)[0];

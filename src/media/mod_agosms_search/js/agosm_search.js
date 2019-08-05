@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var scroll = element.getAttribute('data-scroll');
 		var scrollmac = element.getAttribute('data-scrollmac');
 		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
-
+		
 		// Default: worldCopyJump: false && scrollWheelZoom: true
 		if (noWorldWarp === "1" && scrollwheelzoom === "0")
 		{

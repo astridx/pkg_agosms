@@ -17,13 +17,13 @@ $sub_field_selected = $extra_params->selected;
 
 $field_params = json_decode($field->instance->fieldparams);
 $sub_field = new stdClass;
-foreach($field_params->listtype as $tmp) {
-	if($tmp->name == $sub_field_selected) {
+foreach($field_params->fields as $tmp) {
+	if($tmp->fieldname == $sub_field_selected) {
 		$sub_field = $tmp;
 	}
 }
 
-$field->instance->label = $sub_field->title;
+$field->instance->label = $sub_field->fieldname;
 
 $name_from = "multifield{$field->id}-{$sub_field_selected}-from";
 $name_to = "multifield{$field->id}-{$sub_field_selected}-to";
@@ -54,8 +54,13 @@ if (JFactory::getApplication()->input->get->get($name_to)) {
 }
 
 $doc = JFactory::getDocument();
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.css');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.js');
+/*
+$doc = JFactory::getDocument();
 $doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js');
 $doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css');
+*/
 ?>
 
 <div class="gsearch-field-slider custom-field">	

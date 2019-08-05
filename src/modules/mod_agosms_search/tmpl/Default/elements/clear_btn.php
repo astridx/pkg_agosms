@@ -43,16 +43,15 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 						var min = slider_obj.parent().find(".slider-handle").attr("aria-valuemin");
 						var max = slider_obj.parent().find(".slider-handle").attr("aria-valuemax");
 						slider_obj.parents('.slider-wrapper').find(".amount input").val(min + ' - ' + max);
+						slider_obj.parents('.slider-wrapper').find(".amount input").trigger("input");
 					});
 				}
+				
 				
 				//acounter clean
 				$("#GSearch<?php echo $module->id; ?> div.acounter .data").hide();
 				
-				//autosubmit
-				<?php if($params->get("autosubmit")) { ?>
-				submit_form_<?php echo $module->id; ?>();
-				<?php } ?>
+				//submit_form_<?php //echo $module->id; ?>();
 			}
 		</script>	
 
