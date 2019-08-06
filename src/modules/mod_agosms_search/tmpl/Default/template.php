@@ -1,4 +1,3 @@
-TEMPLATE_ANFANG
 <?php 
 /**
  * @package     Joomla.Site
@@ -275,4 +274,3 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/ajax_search')); ?>
 	<?php } ?>
 </div><!--//gsearch-box-->
-TEMPLATE_ENDE

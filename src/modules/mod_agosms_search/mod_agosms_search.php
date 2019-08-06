@@ -34,12 +34,12 @@ if ($filters == "")
 if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"))
 {
 	$skip = array(
-		"option", 
-		"task", 
-		"view", 
-		"Itemid", 
-		"search_mode", 
-		"field_id", 
+		"option",
+		"task",
+		"view",
+		"Itemid",
+		"search_mode",
+		"field_id",
 		"field_type"
 		);
 

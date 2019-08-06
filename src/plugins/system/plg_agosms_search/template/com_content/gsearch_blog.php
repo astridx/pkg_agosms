@@ -199,7 +199,9 @@ MAPENDE
 
 			echo $PagesLinks;
 		?>
-		<?php echo $pagination->getPagesCounter(); ?>
+		<?php 
+			echo $pagination->getPagesCounter(); 
+		?>
 	</div>
 </div>
 

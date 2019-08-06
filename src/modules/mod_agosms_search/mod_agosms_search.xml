@@ -333,7 +333,7 @@
 					label="MOD_AGOSMSSEARCHRESULTS_TEMPLATE"
 				>
 					<option value="standard">Standard</option>
-					<option value="clean">Clean</option>
+					<option value="simple">Simple</option>
 				</field>
 				<field 
 					name="include_featured" 
@@ -390,7 +390,9 @@
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
-					name="show_info" type="radio" class="btn-group" 
+					name="show_info" 
+					type="radio" 
+					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_INFO"
 				>
@@ -398,7 +400,9 @@
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
-					name="show_readmore" type="radio" class="btn-group" 
+					name="show_readmore" 
+					type="radio" 
+					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_READMORE"
 				>

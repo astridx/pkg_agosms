@@ -23,8 +23,8 @@ class plgSystemPlg_agosms_search extends JPlugin
 		{
 			$doc = JFactory::getDocument();
 
-			JFactory::getApplication()->input->get("search_type", "com_content");
-			JFactory::getApplication()->input->get("search_mode", "html");
+			$search_type = JFactory::getApplication()->input->get("search_type", "com_content");
+			$format = JFactory::getApplication()->input->get("search_mode", "html");
 
 			switch ($search_type)
 			{

@@ -33,9 +33,9 @@ class modAgosmsSearchHelper
 		$query->select($db->quoteName('*'))
 			->from('#__modules')
 			->where('id = ' . $id);
-		
+
 		$db->setQuery($query);
-		
+
 		$result = $db->loadObject();
 
 		if ($native)
@@ -148,12 +148,17 @@ class modAgosmsSearchHelper
 					break;
 
 			case 1 : // Auto
-				$view =  '';
-				if (JFactory::getApplication()->input->get->get('view')) {
+				$view = '';
+
+				if (JFactory::getApplication()->input->get->get('view'))
+				{
 					$active = JFactory::getApplication()->input->get->get('view');
 				}
+
 				$requestid = 0;
-				if (JFactory::getApplication()->input->get->get('id')) {
+
+				if (JFactory::getApplication()->input->get->get('id'))
+				{
 					$active = JFactory::getApplication()->input->get->get('id');
 				}
 
@@ -410,11 +415,14 @@ class modAgosmsSearchHelper
 					{
 						$val = json_decode($val);
 
-						foreach ($val as $repeatable)
+						if ($val)
 						{
-							if ($repeatable->{$sub_field})
+							foreach ($val as $repeatable)
 							{
-								$return[] = $type == "text" ? $repeatable->{$sub_field} : (int) $repeatable->{$sub_field};
+								if ($repeatable->{$sub_field})
+								{
+									$return[] = $type == "text" ? $repeatable->{$sub_field} : (int) $repeatable->{$sub_field};
+								}
 							}
 						}
 					}

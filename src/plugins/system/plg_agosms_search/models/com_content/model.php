@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 
 class ArticlesModelAgSearch extends JModelList
 {
+
 	var $input;
 	var $module_id;
 	var $module_helper;
@@ -32,7 +33,7 @@ class ArticlesModelAgSearch extends JModelList
 		$this->module_params = $this->module_helper->getModuleParams($this->module_id);
 		$this->module_params_native = $this->module_helper->getModuleParams($this->module_id, true);
 
-		if ($this->module_params->savesearch && !JFactory::getApplication()->input->get("initial"))
+		if ($this->module_params->savesearch && !JRequest::getVar("initial"))
 		{
 			$this->saveSearchSession();
 		}
@@ -48,7 +49,7 @@ class ArticlesModelAgSearch extends JModelList
 					continue;
 				}
 
-				JFactory::getApplication()->input->set($key, $value);
+				JRequest::setVar($key, $value);
 			}
 		}
 
@@ -58,215 +59,13 @@ class ArticlesModelAgSearch extends JModelList
 
 	function getItems($total = false)
 	{
-		$db = JFactory::getDBO();
-
-		$featuredFirst = false;
-
-		switch ($this->module_params->include_featured) {
-			case "First" :
-				$featuredFirst = true;
-				break;
-			case "Only" :
-				$query .= " AND i.featured = 1";
-				break;
-			case "No" :
-				$query .= " AND i.featured = 0";
-				break;
-		}
-
-		$default_ordering = $featuredFirst ? 'featured' : $this->module_params->ordering_default;
-		$orderby = JFactory::getApplication()->input->get("orderby", $default_ordering);
-		$orderto = JFactory::getApplication()->input->get("orderto", $this->module_params->ordering_default_dir);
-
-		$query = "SELECT i.*, GROUP_CONCAT(tm.tag_id) as tags, cat.title as category";
-
-		// Select field ordering value
-		if ($featuredFirst)
-		{
-			preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
-		} else
-		{
-			preg_match('/^field([0-9]+)$/', $orderby, $matches);
-		}
-
-		if (count($matches))
-		{
-			$query .= ", fv2.value as {$matches[0]}";
-		}
-
-
-		$query .= " FROM #__content as i";
-		$query .= " LEFT JOIN #__categories AS cat ON cat.id = i.catid";
-
-
-		if (JFactory::getApplication()->input->get("keyword"))
-		{
-			// Left join all fields values for keyword search
-			// commented for prevent slow loading with big databases
-			// $query .= " LEFT JOIN #__fields_values AS fv ON fv.item_id = i.id";
-		}
-
-		$query .= " LEFT JOIN #__contentitem_tag_map AS tm 
-						ON tm.content_item_id = i.id 
-							AND type_alias = 'com_content.article'
-				";
-
-		// Left join field ordering value
-		if ($featuredFirst)
-		{
-			preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
-		} else
-		{
-			preg_match('/^field([0-9]+)$/', $orderby, $matches);
-		}
-
-		if (count($matches))
-		{
-			$query .= " LEFT JOIN #__fields_values AS fv2 ON fv2.item_id = i.id AND fv2.field_id = {$matches[1]}";
-		}
-
-		$query .= " WHERE i.state = 1";
-
-		// Publish up/down
-		$timezone = new DateTimeZone(JFactory::getConfig()->get('offset'));
-		$time = new DateTime(date("Y-m-d H:i:s"), $timezone);
-		$time = $time->format('Y-m-d H:i:s');
-		$query .= " AND i.publish_up <= '{$time}' AND (i.publish_down > '{$time}' OR i.publish_down = '0000-00-00 00:00:00')";
-
-		// Category restriction
-		if ($this->module_params->restrict)
-		{
-			$module_params_native = $this->module_helper->getModuleParams($this->module_id, true);
-			$category_restriction = $this->module_helper->getCategories(0, $module_params_native);
-
-			if (count($category_restriction))
-			{
-				$ids = Array();
-
-				foreach ($category_restriction as $c) {
-					$ids[] = $c->id;
-				}
-
-				// Added for compatibility with cv multicategories plugin
-				if (JPluginHelper::isEnabled('system', 'cwmulticats'))
-				{
-					$query .= " AND (
-									multicats.catid IN (" . implode(",", $ids) . ")
-									OR i.catid IN (" . implode(",", $ids) . ")
-								)";
-				} else
-				{
-					$query .= " AND i.catid IN (" . implode(",", $ids) . ")";
-				}
-			}
-		}
-
-		// Language filter
-		$language = JFactory::getLanguage();
-		$defaultLang = $language->getDefault();
-		$currentLang = $language->getTag();
-		$query .= " AND i.language IN ('*', '{$currentLang}')";
-
-		// General search query build
-		$query .= $this->search_query;
-
-		$query .= " GROUP BY i.id";
-		$query .= " ORDER BY ";
-
-		switch ($orderby) {
-			case "title" :
-				if (JFactory::getApplication()->input->get("orderto") == "")
-				{
-					$orderto = "ASC";
-					JFactory::getApplication()->input->set("orderto", "asc");
-				}
-
-				$query .= "i.title {$orderto}";
-				break;
-			case "alias" :
-				$query .= "i.alias {$orderto}";
-				break;
-			case "created" :
-				$query .= "i.created {$orderto}";
-				break;
-			case "publish_up" :
-				$query .= "i.publish_up {$orderto}";
-				break;
-			case "category" :
-				$query .= "category {$orderto}";
-				break;
-			case "hits" :
-				$query .= "i.hits {$orderto}";
-				break;
-			case "featured" :
-				$query .= "i.featured {$orderto}";
-
-				// Order by field value
-				preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
-
-				if (count($matches))
-				{
-					$query .= ", {$this->module_params->ordering_default} {$orderto}";
-				} else
-				{
-					$query .= ", i.{$this->module_params->ordering_default} {$orderto}";
-				}
-				break;
-			case "rand" :
-				$currentSession = JFactory::getSession();
-				$sessionNum = substr(preg_replace('/[^0-9]/i', '', $currentSession->getId()), 2, 3);
-				$query .= "RAND({$sessionNum})";
-				break;
-			case "id" :
-			default :
-				// Order by field value
-				preg_match('/^field([0-9]+)$/', $orderby, $matches);
-
-				if (count($matches))
-				{
-					$query .= "{$orderby} {$orderto}";
-				} else
-				{
-					$query .= "i.id {$orderto}";
-				}
-		}
-
-		$filterresult = array();
-		if (!$this->module_params->georestrict)
-		{
-			$this->limitstart = $this->input->get("page-start", 0, "int");
-			$db->setQuery($query, $this->limitstart, $this->limit);
-
-			$filterresult = $db->loadObjectList();
-
-			foreach ($filterresults as $filterresult) {
-				$jcFields = FieldsHelper::getFields('com_content.article', $filterresult, true);
-
-				foreach ($jcFields as $jcField) {
-
-					if ($jcField->type === "agosmsaddressmarker")
-					{
-						$fieldcords = explode(",", $jcField->rawvalue);
-						$fieldlat = $fieldcords[0];
-						$fieldlon = $fieldcords[1];
-
-						$filterresult->lat = $fieldlat;
-						$filterresult->lon = $fieldlon;
-					}
-				}
-			}
-		}
-		
-		$tempfilterresults = array();
 		if ($this->module_params->georestrict)
 		{
-			$this->limitstart = $this->input->get("page-start", 0, "int");
-			$db->setQuery($query, $this->limitstart, $this->limit);
-
-			$filterresults = $db->loadObjectList();
-
+			$filterresults = $this->getItemsBeforGeo(false, false);
+			$tempfilterresults = array();
+			
 			foreach ($filterresults as $filterresult) {
-				$jcFields = FieldsHelper::getFields('com_content.article', $filterresult, True);
+				$jcFields = FieldsHelper::getFields('com_content.article', $filterresult, true);
 
 				foreach ($jcFields as $jcField) {
 					if ($jcField->type === "agosmsaddressmarker")
@@ -286,15 +85,11 @@ class ArticlesModelAgSearch extends JModelList
 						}
 
 						// Check if is null
-						if ($fieldlat === "0" 
-							|| $fieldlon === "0"
-							|| $globallat === "0"
-							|| $globallon === "0")
+						if ($fieldlat == "0" || $fieldlon == "0" || $globallat === "0" || $globallon === "0")
 						{
 							$filterresult->lat = $fieldlat;
 							$filterresult->lon = $fieldlon;
 							$tempfilterresults[] = $filterresult;
-							continue;
 						}
 						else
 						{
@@ -304,30 +99,233 @@ class ArticlesModelAgSearch extends JModelList
 							$globalto = JFactory::getApplication()->input->get->get($to);
 							$geounit = $this->module_params->geounit;
 							$distance = $this->distance($fieldlat, $fieldlon, $globallat, $globallon, $geounit);
-						}
 
-						if ($distance >= $globalfrom && $distance <= $globalto) 
-						{
-							$filterresult->lat = $fieldlat;
-							$filterresult->lon = $fieldlon;
-							$tempfilterresults[] = $filterresult;
+							if ($distance >= $globalfrom && $distance <= $globalto)
+							{
+								$filterresult->lat = $fieldlat;
+								$filterresult->lon = $fieldlon;
+								$tempfilterresults[] = $filterresult;
+							}
 						}
 					}
 				}
 			}
 			
-		} // Ende georestriction
+			if ($total)
+			{
+				return (string)sizeof($tempfilterresults);
+			}
+			else
+			{
+				$this->limitstart = $this->input->get("page-start", 0, "int");
+				$tempfilterresultslimit = array_slice($tempfilterresults, $this->limitstart, $this->limit);
+				return $tempfilterresultslimit;
+			}
+		}
+		
+		return $this->getItemsBeforGeo($total);
+	}
+
+	function getItemsBeforGeo($total = false, $limitforpagination = true)
+	{
+		$db = JFactory::getDBO();
 
 		if ($total)
 		{
-			$filterresult = (string)sizeof($tempfilterresults);
-		}
-		else
+			$query = "SELECT COUNT(DISTINCT i.id)";
+		} else
 		{
-			$filterresult = $tempfilterresults;
+			$featuredFirst = false;
+			switch ($this->module_params->include_featured) {
+				case "First" :
+					$featuredFirst = true;
+					break;
+				case "Only" :
+					$query .= " AND i.featured = 1";
+					break;
+				case "No" :
+					$query .= " AND i.featured = 0";
+					break;
+			}
+
+			$default_ordering = $featuredFirst ? 'featured' : $this->module_params->ordering_default;
+			$orderby = JRequest::getVar("orderby", $default_ordering);
+			$orderto = JRequest::getVar("orderto", $this->module_params->ordering_default_dir);
+
+			$query = "SELECT i.*, GROUP_CONCAT(tm.tag_id) as tags, cat.title as category";
+			//select field ordering value
+			if ($featuredFirst)
+			{
+				preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
+			} else
+			{
+				preg_match('/^field([0-9]+)$/', $orderby, $matches);
+			}
+			if (count($matches))
+			{
+				$query .= ", fv2.value as {$matches[0]}";
+			}
 		}
-		
-		return $filterresult;
+
+		$query .= " FROM #__content as i";
+		$query .= " LEFT JOIN #__categories AS cat ON cat.id = i.catid";
+
+		//added for compatibility with cv multicategories plugin
+		if (JPluginHelper::isEnabled('system', 'cwmulticats'))
+		{
+			$query .= " LEFT JOIN #__content_multicats as multicats ON multicats.content_id = i.id";
+		}
+
+		if (JRequest::getVar("keyword"))
+		{
+			//left join all fields values for keyword search
+			//commented for prevent slow loading with big databases
+			//$query .= " LEFT JOIN #__fields_values AS fv ON fv.item_id = i.id";
+		}
+
+		$query .= " LEFT JOIN #__contentitem_tag_map AS tm 
+						ON tm.content_item_id = i.id 
+							AND type_alias = 'com_content.article'
+				";
+
+		if (!$total)
+		{
+			//left join field ordering value
+			if ($featuredFirst)
+			{
+				preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
+			} else
+			{
+				preg_match('/^field([0-9]+)$/', $orderby, $matches);
+			}
+			if (count($matches))
+			{
+				$query .= " LEFT JOIN #__fields_values AS fv2 ON fv2.item_id = i.id AND fv2.field_id = {$matches[1]}";
+			}
+		}
+
+		$query .= " WHERE i.state = 1";
+
+		//publish up/down
+		$timezone = new DateTimeZone(JFactory::getConfig()->get('offset'));
+		$time = new DateTime(date("Y-m-d H:i:s"), $timezone);
+		$time = $time->format('Y-m-d H:i:s');
+		$query .= " AND i.publish_up <= '{$time}' AND (i.publish_down > '{$time}' OR i.publish_down = '0000-00-00 00:00:00')";
+
+		//category restriction
+		if ($this->module_params->restrict)
+		{
+			$module_params_native = $this->module_helper->getModuleParams($this->module_id, true);
+			$category_restriction = $this->module_helper->getCategories(0, $module_params_native);
+			if (count($category_restriction))
+			{
+				$ids = Array();
+				foreach ($category_restriction as $c) {
+					$ids[] = $c->id;
+				}
+				//added for compatibility with cv multicategories plugin
+				if (JPluginHelper::isEnabled('system', 'cwmulticats'))
+				{
+					$query .= " AND (
+									multicats.catid IN (" . implode(",", $ids) . ")
+									OR i.catid IN (" . implode(",", $ids) . ")
+								)";
+				} else
+				{
+					$query .= " AND i.catid IN (" . implode(",", $ids) . ")";
+				}
+			}
+		}
+
+		//language filter
+		$language = JFactory::getLanguage();
+		$defaultLang = $language->getDefault();
+		$currentLang = $language->getTag();
+		$query .= " AND i.language IN ('*', '{$currentLang}')";
+
+		//general search query build
+		$query .= $this->search_query;
+
+		if (!$total)
+		{
+			$query .= " GROUP BY i.id";
+			$query .= " ORDER BY ";
+			switch ($orderby) {
+				case "title" :
+					if (JRequest::getVar("orderto") == "")
+					{
+						$orderto = "ASC";
+						JRequest::setVar("orderto", "asc");
+					}
+					$query .= "i.title {$orderto}";
+					break;
+				case "alias" :
+					$query .= "i.alias {$orderto}";
+					break;
+				case "created" :
+					$query .= "i.created {$orderto}";
+					break;
+				case "publish_up" :
+					$query .= "i.publish_up {$orderto}";
+					break;
+				case "category" :
+					$query .= "category {$orderto}";
+					break;
+				case "hits" :
+					$query .= "i.hits {$orderto}";
+					break;
+				case "featured" :
+					$query .= "i.featured {$orderto}";
+					//order by field value
+					preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
+					if (count($matches))
+					{
+						$query .= ", {$this->module_params->ordering_default} {$orderto}";
+					} else
+					{
+						$query .= ", i.{$this->module_params->ordering_default} {$orderto}";
+					}
+					break;
+				case "rand" :
+					$currentSession = JFactory::getSession();
+					$sessionNum = substr(preg_replace('/[^0-9]/i', '', $currentSession->getId()), 2, 3);
+					$query .= "RAND({$sessionNum})";
+					break;
+				case "id" :
+				default :
+					//order by field value
+					preg_match('/^field([0-9]+)$/', $orderby, $matches);
+					if (count($matches))
+					{
+						$query .= "{$orderby} {$orderto}";
+					} else
+					{
+						$query .= "i.id {$orderto}";
+					}
+			}
+		}
+
+		if ($total)
+		{
+			$db->setQuery($query);
+			$return = $db->loadResult();
+		} else
+		{
+			$this->limitstart = $this->input->get("page-start", 0, "int");
+			
+			if ($limitforpagination)
+			{
+				$db->setQuery($query, $this->limitstart, $this->limit);
+			}
+			else
+			{
+				$db->setQuery($query);				
+			}
+			
+			$return = $db->loadObjectList();
+		}
+
+		return $return;
 	}
 
 	function getSearchQuery()
@@ -336,9 +334,9 @@ class ArticlesModelAgSearch extends JModelList
 		$query = "";
 
 		// Keyword
-		if (JFactory::getApplication()->input->get("keyword"))
+		if (JRequest::getVar("keyword"))
 		{
-			$keyword = strtoupper(JFactory::getApplication()->input->get("keyword"));
+			$keyword = strtoupper(JRequest::getVar("keyword"));
 			$keyword = addslashes($keyword);
 			$keyword = str_replace("/", "\\\\\\\/", $keyword);
 			$keyword = str_replace("(", "\\\\(", $keyword);
@@ -367,9 +365,9 @@ class ArticlesModelAgSearch extends JModelList
 		}
 
 		// Category
-		if (JFactory::getApplication()->input->get("category"))
+		if (JRequest::getInt("category"))
 		{
-			$categories = JFactory::getApplication()->input->get("category");
+			$categories = JRequest::getInt("category");
 
 			if ($categories[0] != "")
 			{
@@ -396,26 +394,26 @@ class ArticlesModelAgSearch extends JModelList
 		}
 
 		// Tag
-		if (JFactory::getApplication()->input->get("tag"))
+		if (JRequest::getInt("tag"))
 		{
-			$query .= " AND tm.tag_id IN (" . implode(",", JFactory::getApplication()->input->get("tag")) . ")";
+			$query .= " AND tm.tag_id IN (" . implode(",", JRequest::getInt("tag")) . ")";
 		}
 
 		// Author
-		if (JFactory::getApplication()->input->get("author"))
+		if (JRequest::getInt("author"))
 		{
-			$query .= " AND i.created_by IN (" . implode(",", JFactory::getApplication()->input->get("author")) . ")";
+			$query .= " AND i.created_by IN (" . implode(",", JRequest::getInt("author")) . ")";
 		}
 
 		// Date
-		if (JFactory::getApplication()->input->get("date-from"))
+		if (JRequest::getVar("date-from"))
 		{
-			$query .= " AND i.created >= '" . JFactory::getApplication()->input->get("date-from") . " 00:00:00'";
+			$query .= " AND i.created >= '" . JRequest::getVar("date-from") . " 00:00:00'";
 		}
 
-		if (JFactory::getApplication()->input->get("date-to"))
+		if (JRequest::getVar("date-to"))
 		{
-			$query .= " AND i.created <= '" . JFactory::getApplication()->input->get("date-to") . " 23:59:59'";
+			$query .= " AND i.created <= '" . JRequest::getVar("date-to") . " 23:59:59'";
 		}
 
 		// Fields search
@@ -425,11 +423,13 @@ class ArticlesModelAgSearch extends JModelList
 		foreach ($_GET as $param => $value) {
 			preg_match('/^field([0-9]+)$/', $param, $matches);
 			$field_id = 0;
+
 			if (!empty($matches))
 			{
 				$field_id = $matches[1];
 			}
-			$query_params = JFactory::getApplication()->input->set("field{$field_id}");
+
+			$query_params = JRequest::getVar("field{$field_id}");
 			$sub_query = "SELECT DISTINCT item_id FROM #__fields_values WHERE 1";
 
 			// Text / date
@@ -482,16 +482,17 @@ class ArticlesModelAgSearch extends JModelList
 			preg_match('/^field([0-9]+)-from$/', $param, $matches);
 
 			$field_id = 0;
+
 			if (!empty($matches))
 			{
 				$field_id = $matches[1];
 			}
 
-			if (JFactory::getApplication()->input->get("field{$field_id}-from") != "")
+			if (JRequest::getVar("field{$field_id}-from") != "")
 			{
 				$sub_query .= " AND field_id = {$field_id}";
 				$field_params = $module_helper->getCustomField($field_id);
-				$query_params = JFactory::getApplication()->input->set("field{$field_id}-from");
+				$query_params = JRequest::getVar("field{$field_id}-from");
 				$query_params = addslashes($query_params);
 
 				if ($field_params->type == "calendar")
@@ -515,16 +516,17 @@ class ArticlesModelAgSearch extends JModelList
 
 			preg_match('/^field([0-9]+)-to$/', $param, $matches);
 			$field_id = 0;
+
 			if (!empty($matches))
 			{
 				$field_id = $matches[1];
 			}
 
-			if (JFactory::getApplication()->input->get("field{$field_id}-to") != "")
+			if (JRequest::getVar("field{$field_id}-to") != "")
 			{
 				$sub_query .= " AND field_id = {$field_id}";
 				$field_params = $module_helper->getCustomField($field_id);
-				$query_params = JFactory::getApplication()->input->get("field{$field_id}-to");
+				$query_params = JRequest::getVar("field{$field_id}-to");
 				$query_params = addslashes($query_params);
 
 				if ($field_params->type == "calendar")
@@ -568,6 +570,7 @@ class ArticlesModelAgSearch extends JModelList
 			$field_id = 0;
 			$sub_field = null;
 			$isRange = false;
+
 			if (!empty($matches))
 			{
 				$field_id = $matches[1];
@@ -582,7 +585,7 @@ class ArticlesModelAgSearch extends JModelList
 
 			$field_params = $module_helper->getCustomField($field_id);
 
-			$uri_params = JFactory::getApplication()->input->get($param);
+			$uri_params = JRequest::getVar($param);
 			$sub_query = "SELECT DISTINCT item_id FROM #__fields_values WHERE 1";
 
 			// Text / date
@@ -626,8 +629,7 @@ class ArticlesModelAgSearch extends JModelList
 				if (count($ids_to_include))
 				{
 					$sub_query .= " AND item_id IN(" . implode(",", $ids_to_include) . ")";
-				}
-				else
+				} else
 				{
 					$sub_query .= " AND item_id = 0";
 				}
@@ -639,13 +641,11 @@ class ArticlesModelAgSearch extends JModelList
 				$values = JFactory::getDBO()->setQuery($range_query)->loadObjectList();
 				$ids_to_include = array();
 
-				foreach ($values as $value)
-				{
+				foreach ($values as $value) {
 					$item_id = $value->item_id;
 					$value = json_decode($value->value);
 
-					foreach ($value as $val)
-					{
+					foreach ($value as $val) {
 						if ($val->{$sub_field} <= $uri_params && $val->{$sub_field} != '')
 						{
 							// Check for less or equal
@@ -659,8 +659,7 @@ class ArticlesModelAgSearch extends JModelList
 				if (count($ids_to_include))
 				{
 					$sub_query .= " AND item_id IN(" . implode(",", $ids_to_include) . ")";
-				}
-				else
+				} else
 				{
 					$sub_query .= " AND item_id = 0";
 				}
@@ -674,8 +673,7 @@ class ArticlesModelAgSearch extends JModelList
 				if (count($ids))
 				{
 					$query .= " AND i.id IN(" . implode(",", $ids) . ")";
-				}
-				else
+				} else
 				{
 					$query .= " AND i.id = 0";
 				}
@@ -683,13 +681,13 @@ class ArticlesModelAgSearch extends JModelList
 		}
 
 		// Added for compatibility with repeatable field
-		foreach ($_GET as $param => $value)
-		{
+		foreach ($_GET as $param => $value) {
 			preg_match('/^repeatable([0-9]+)-([^-]*)(.*)/i', $param, $matches);
 
 			$field_id = 0;
 			$sub_field = null;
 			$isRange = false;
+
 			if (!empty($matches))
 			{
 				$field_id = $matches[1];
@@ -704,7 +702,7 @@ class ArticlesModelAgSearch extends JModelList
 
 			$field_params = $module_helper->getCustomField($field_id);
 
-			$uri_params = JFactory::getApplication()->input->get($param);
+			$uri_params = JRequest::getVar($param);
 			$sub_query = "SELECT DISTINCT item_id FROM #__fields_values WHERE 1";
 
 			$sub_field_values = json_decode($field_params->fieldparams);
@@ -720,8 +718,7 @@ class ArticlesModelAgSearch extends JModelList
 					$date_search = new DateTime($uri_params, $timezone);
 					$uri_params = $date_search->format('Y-m-d');
 					$sub_query .= " AND value LIKE '%{$uri_params}%'";
-				}
-				else
+				} else
 				{
 					$sub_query .= " AND value REGEXP '\"{$sub_field_name}\":\"{$uri_params}\"'";
 				}
@@ -734,13 +731,11 @@ class ArticlesModelAgSearch extends JModelList
 				$values = JFactory::getDBO()->setQuery($range_query)->loadObjectList();
 				$ids_to_include = array();
 
-				foreach ($values as $value)
-				{
+				foreach ($values as $value) {
 					$item_id = $value->item_id;
 					$value = json_decode($value->value);
 
-					foreach ($value as $val)
-					{
+					foreach ($value as $val) {
 						if ($val->{$sub_field_name} >= $uri_params)
 						{
 							// Check for more or equal
@@ -754,8 +749,7 @@ class ArticlesModelAgSearch extends JModelList
 				if (count($ids_to_include))
 				{
 					$sub_query .= " AND item_id IN(" . implode(",", $ids_to_include) . ")";
-				}
-				else
+				} else
 				{
 					$sub_query .= " AND item_id = 0";
 				}
@@ -767,13 +761,11 @@ class ArticlesModelAgSearch extends JModelList
 				$values = JFactory::getDBO()->setQuery($range_query)->loadObjectList();
 				$ids_to_include = array();
 
-				foreach ($values as $value)
-				{
+				foreach ($values as $value) {
 					$item_id = $value->item_id;
 					$value = json_decode($value->value);
 
-					foreach ($value as $val) 
-					{
+					foreach ($value as $val) {
 						if ($val->{$sub_field_name} <= $uri_params && $val->{$sub_field_name} != '')
 						{
 							// Check for less or equal
@@ -787,8 +779,7 @@ class ArticlesModelAgSearch extends JModelList
 				if (count($ids_to_include))
 				{
 					$sub_query .= " AND item_id IN(" . implode(",", $ids_to_include) . ")";
-				}
-				else
+				} else
 				{
 					$sub_query .= " AND item_id = 0";
 				}
@@ -802,8 +793,7 @@ class ArticlesModelAgSearch extends JModelList
 				if (count($ids))
 				{
 					$query .= " AND i.id IN(" . implode(",", $ids) . ")";
-				}
-				else
+				} else
 				{
 					$query .= " AND i.id = 0";
 				}
@@ -818,8 +808,7 @@ class ArticlesModelAgSearch extends JModelList
 		jimport('joomla.html.pagination');
 		$pagination = new JPagination($this->total_items, $this->limitstart, $this->limit);
 
-		foreach ($_GET as $param => $value)
-		{
+		foreach ($_GET as $param => $value) {
 			if (in_array($param, Array("id", "start", "option", "view", "task")))
 			{
 				continue;
@@ -827,12 +816,10 @@ class ArticlesModelAgSearch extends JModelList
 
 			if (is_array($value))
 			{
-				foreach ($value as $k => $val)
-				{
+				foreach ($value as $k => $val) {
 					$pagination->setAdditionalUrlParam($param . "[{$k}]", $val);
 				}
-			}
-			else
+			} else
 			{
 				$pagination->setAdditionalUrlParam($param, $value);
 			}
@@ -948,8 +935,7 @@ class ArticlesModelAgSearch extends JModelList
 			JFactory::getDBO()->setQuery($query)->query();
 			$query = "SELECT id FROM #__content_search_stats WHERE url = '{$search_link}'";
 			$keyword_id = JFactory::getDBO()->setQuery($query)->loadResult();
-		}
-		else
+		} else
 		{
 			$query = "INSERT INTO #__content_search_stats VALUES ('', '{$keyword}', '{$search_link}', '{$date}', 1)";
 			JFactory::getDBO()->setQuery($query)->query();
@@ -966,8 +952,7 @@ class ArticlesModelAgSearch extends JModelList
 		{
 			$query = "UPDATE #__content_search_stats_users SET search_count = (search_count + 1), last_search_date = '{$date}', ip_address = '{$ip_address}' WHERE keyword_id = {$keyword_id} AND user_id = {$user->id}";
 			JFactory::getDBO()->setQuery($query)->query();
-		} 
-		else
+		} else
 		{
 			$query = "INSERT INTO #__content_search_stats_users VALUES ('', {$user->id}, {$keyword_id}, '{$date}', 1, '{$ip_address}')";
 			JFactory::getDBO()->setQuery($query)->query();
@@ -983,11 +968,10 @@ class ArticlesModelAgSearch extends JModelList
 		if ($total)
 		{
 			$query = "SELECT COUNT(DISTINCT id) FROM #__content_search_stats";
-		} 
-		else
+		} else
 		{
 			$query = "SELECT * FROM #__content_search_stats";
-			$order = addslashes(JFactory::getApplication()->input->get("orderby", "last_search_date"));
+			$order = addslashes(JRequest::getVar("orderby", "last_search_date"));
 			$query .= " ORDER BY {$order} DESC";
 		}
 
@@ -996,10 +980,9 @@ class ArticlesModelAgSearch extends JModelList
 			$db->setQuery($query);
 
 			return $db->loadResult();
-		}
-		else
+		} else
 		{
-			$db->setQuery($query, JFactory::getApplication()->input->get("limitstart", 0), 10);
+			$db->setQuery($query, JRequest::getInt("limitstart", 0), 10);
 
 			return $db->loadObjectList();
 		}
@@ -1009,10 +992,9 @@ class ArticlesModelAgSearch extends JModelList
 	{
 		$total_items = $this->getStatsList(true);
 		jimport('joomla.html.pagination');
-		$pagination = new JPagination($total_items, JFactory::getApplication()->input->get("limitstart", 0), 10);
+		$pagination = new JPagination($total_items, JRequest::getInt("limitstart", 0), 10);
 
-		foreach ($_GET as $param => $value)
-		{
+		foreach ($_GET as $param => $value) {
 			if (in_array($param, Array("id", "start", "option", "view", "task", "limit", "featured")))
 			{
 				continue;
@@ -1020,12 +1002,10 @@ class ArticlesModelAgSearch extends JModelList
 
 			if (is_array($value))
 			{
-				foreach ($value as $k => $val) 
-				{
+				foreach ($value as $k => $val) {
 					$pagination->setAdditionalUrlParam($param . "[{$k}]", $val);
 				}
-			}
-			else
+			} else
 			{
 				$pagination->setAdditionalUrlParam($param, $value);
 			}
@@ -1039,16 +1019,15 @@ class ArticlesModelAgSearch extends JModelList
 		$this->searchStatsTableCreate();
 		$db = JFactory::getDBO();
 		$limitstart = $this->limit;
-		$keyword_id = JFactory::getApplication()->input->get("id");
+		$keyword_id = JRequest::getInt("id");
 
 		if ($total)
 		{
 			$query = "SELECT COUNT(DISTINCT id) FROM #__content_search_stats_users WHERE keyword_id = {$keyword_id}";
-		}
-		else
+		} else
 		{
 			$query = "SELECT * FROM #__content_search_stats_users WHERE keyword_id = {$keyword_id}";
-			$order = addslashes(JFactory::getApplication()->input->get("orderby", "last_search_date"));
+			$order = addslashes(JRequest::getVar("orderby", "last_search_date"));
 			$query .= " ORDER BY {$order} DESC";
 		}
 
@@ -1057,10 +1036,9 @@ class ArticlesModelAgSearch extends JModelList
 			$db->setQuery($query);
 
 			return $db->loadResult();
-		}
-		else
+		} else
 		{
-			$db->setQuery($query, JFactory::getApplication()->input->get("limitstart", 0), 10);
+			$db->setQuery($query, JRequest::getInt("limitstart", 0), 10);
 
 			return $db->loadObjectList();
 		}
@@ -1070,10 +1048,9 @@ class ArticlesModelAgSearch extends JModelList
 	{
 		$total_items = $this->getStatsKeywordList(true);
 		jimport('joomla.html.pagination');
-		$pagination = new JPagination($total_items, JFactory::getApplication()->input->set("limitstart", 0), 10);
+		$pagination = new JPagination($total_items, JRequest::getInt("limitstart", 0), 10);
 
-		foreach ($_GET as $param => $value)
-			{
+		foreach ($_GET as $param => $value) {
 			if (in_array($param, Array("id", "start", "option", "view", "task", "limit", "featured")))
 			{
 				continue;
@@ -1081,12 +1058,10 @@ class ArticlesModelAgSearch extends JModelList
 
 			if (is_array($value))
 			{
-				foreach ($value as $k => $val)
-					{
+				foreach ($value as $k => $val) {
 					$pagination->setAdditionalUrlParam($param . "[{$k}]", $val);
 				}
-			}
-			else
+			} else
 			{
 				$pagination->setAdditionalUrlParam($param, $value);
 			}
@@ -1117,7 +1092,8 @@ class ArticlesModelAgSearch extends JModelList
 		JFactory::getDBO()->setQuery($query)->query();
 	}
 
-	/* N = Seemeilen, K = Kilometer, M = Meter, Meilen default*/
+	// N = Seemeilen, K = Kilometer, M = Meter, Meilen default
+
 	function distance($lat1, $lon1, $lat2, $lon2, $unit = 'K')
 	{
 		$theta = $lon1 - $lon2;
@@ -1130,18 +1106,16 @@ class ArticlesModelAgSearch extends JModelList
 		if ($unit == 'K')
 		{
 			return ( $miles * 1.609344 );
-		} 
-		else if ($unit == 'M')
+		} elseif ($unit == 'M')
 		{
 			return ( $miles * 1.609344 * 1000 );
-		} 
-		else if ($unit == 'N')
+		} elseif ($unit == 'N')
 		{
 			return ( $miles * 0.8684 );
-		} 
-		else
+		} else
 		{
 			return $miles;
 		}
 	}
+
 }
