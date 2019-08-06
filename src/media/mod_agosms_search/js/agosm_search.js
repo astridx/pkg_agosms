@@ -68,10 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			var specialcomponentpins = JSON.parse(element.getAttribute('data-specialcomponentpins'));
 		}
 		var showcustomfieldpin = element.getAttribute('data-showcustomfieldpin');
-		if (showcustomfieldpin === '1')
-		{
-			var specialcustomfieldpins = JSON.parse(element.getAttribute('data-specialcustomfieldpins'));
-		}
+		var specialcustomfieldpins = JSON.parse(element.getAttribute('data-specialcustomfieldpins'));
 		var touch = element.getAttribute('data-touch');
 		var scroll = element.getAttribute('data-scroll');
 		var scrollmac = element.getAttribute('data-scrollmac');
@@ -268,11 +265,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		}
 
-
-
-		// Show Pins from customfield
-/*		if (showcustomfieldpin === '1')
-		{
 			var clustermarkers = L.markerClusterGroup();
 
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
@@ -284,54 +276,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				let tempMarkercf = null;
 				
-				if (objcf.cords)
-				{
-					var values = objcf.cords.split(",");
-					tempMarkercf = L.marker(objcf.cords.split(",").slice(0, 2));
+					tempMarkercf = L.marker([objcf.lat,objcf.lon]);
 					
-					if (values.length > 4 && objcf.type !== 'agosmsaddressmarker')
-					{
-						var AwesomeIcon = new L.AwesomeMarkers.icon(
-							{
-								icon: values[4],
-								markerColor: values[2],
-								iconColor: values[3],
-								prefix: 'fa',
-								spin: false,
-								extraClasses: "agosmsmarkerextraklasse",
-							})
-						tempMarkercf.setIcon(AwesomeIcon);
-					}
-					
-					if (objcf.type === 'agosmsaddressmarker' && objcf.iconcolor && objcf.markercolor && objcf.icon)
-					{
-						var AwesomeIcon = new L.AwesomeMarkers.icon(
-							{
-								icon: objcf.icon,
-								markerColor: objcf.markercolor,
-								iconColor: objcf.iconcolor,
-								prefix: 'fa',
-								spin: false,
-								extraClasses: "agosmsaddressmarkerextraklasse",
-							})
-						tempMarkercf.setIcon(AwesomeIcon);
-					}
 
 					let url = "index.php?options=com_content&view=article&id=" + objcf.id;
 					let title = objcf.title;
 
-					if (values.length > 5 && values[5].trim() != '')
-					{
-						title = values[5];
-					}
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
 					tempMarkercf.bindPopup(popuptext);
 					tempMarkercf.addTo(clustermarkers);
 				}
-			}
+			
 			window['mysearchmap' + moduleId].fitBounds(clustermarkers.getBounds());
 			clustermarkers.addTo(window['mysearchmap' + moduleId]);
-		}*/
 
 	})
 }, false);

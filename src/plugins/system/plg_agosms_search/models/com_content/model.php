@@ -119,7 +119,7 @@ class ArticlesModelAgSearch extends JModelList
 			{
 				$this->limitstart = $this->input->get("page-start", 0, "int");
 				
-				if (!empty($tempfilterresults) && JFactory::getApplication()->input->get("orderby", $default_ordering) == "distance")
+				if (!empty($tempfilterresults) && JFactory::getApplication()->input->get("orderby") == "distance")
 				{
 					usort($tempfilterresults, function ($a, $b) {return $a->distance > $b->distance;});
 				}

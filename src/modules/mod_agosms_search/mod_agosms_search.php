@@ -108,13 +108,19 @@ foreach ($document->_scripts as $key => $script)
 	}
 }
 
+if ($params->get('show_map', "1") === "1") 
+{ 
 
-if (!$leafletIsLoaded)
-{
-	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.js');
+	if (!$leafletIsLoaded)
+	{
+		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.css');
+		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.js');
+	}
+
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/cluster/MarkerCluster.css');
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/cluster/MarkerCluster.Default.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/cluster/leaflet.markercluster-src.js');
+	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/js/agosm_search.js');
 }
-
-$document->addScript(JURI::root(true) . '/media/mod_agosms_search/js/agosm_search.js');
 
 require JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'default') . '/template');

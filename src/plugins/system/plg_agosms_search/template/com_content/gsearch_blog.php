@@ -69,6 +69,7 @@ $items = $model->getItems();
 <?php if ($module_params->get('scale') !== null) : ?>
 	data-scale="<?php echo count($module_params->get('scale')); ?>"
 <?php endif; ?>	
+	data-specialcustomfieldpins="<?php echo htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8'); ?>"
 	data-scale-metric="<?php echo in_array('metric', $module_params->get('scale', $defaultArray)); ?>"
 	data-scale-imperial="<?php echo in_array('imperial', $module_params->get('scale', $defaultArray)); ?>"
 	data-showgeocoder="<?php echo $module_params->get('showgeocoder', '1'); ?>"
@@ -161,13 +162,12 @@ $items = $model->getItems();
 			$PagesLinks = preg_replace('/\?start=/', '?page-start=', $PagesLinks);
 
 		if (strpos($PagesLinks, "?") === false)
-{
+		{
 			$PagesLinks = preg_replace('/&amp;page-start=/', '?page-start=', $PagesLinks);
 		}
 
 		if (strpos($PagesLinks, "page-start") === false)
-{
-			// Sh404sef fix
+		{
 			$PagesLinks = preg_replace_callback(
 				'/(title="([^"]*)"[^>]*gsearch=1)/smix',
 				function ($matches) use ($model) {

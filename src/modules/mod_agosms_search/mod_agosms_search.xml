@@ -349,12 +349,14 @@
 					<option value="No">MOD_AGOSMSSEARCHNO</option>
 				</field>
 
+				<field type="spacer" name="myspacero1u" hr="true" />
 				<field 
 					type="spacer" 
 					name="myspacerm1" 
 					label="MOD_AGOSMSSEARCHCLEAR_MAP_SHOW_HEADING" 
 					hr="false"
 				/>
+				<field type="spacer" name="myspacero1o" hr="true" />
 				<field 
 					name="show_map" 
 					type="radio" 
@@ -365,12 +367,14 @@
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 				</field>
 				
+				<field type="spacer" name="myspacero111o" hr="true" />
 				<field 
 					type="spacer" 
 					name="myspacerrl11" 
 					label="MOD_AGOSMSSEARCHCLEAR_RESULTLIST_SHOW_HEADING" 
 					hr="false"
 				/>
+				<field type="spacer" name="myspacero111u" hr="true" />
 				<field 
 					name="show_resultlist" 
 					type="radio" 
