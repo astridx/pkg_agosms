@@ -34,10 +34,10 @@ if($active_to) {
 	$active_to = trim(strftime('%b %e %Y', $active_to));
 	$active_to = mb_convert_case($active_to, MB_CASE_TITLE, 'UTF-8');
 }
+// See https://github.com/uxsolutions/bootstrap-datepicker
 $doc = JFactory::getDocument();
-$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/datepicker/bootstrap-datepicker.min.css');
-$document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/bootstrap-datepicker.min.js');
-
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/datepicker/css/bootstrap-datepicker.min.css');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/bootstrap-datepicker.min.js');
 ?>
 
 <div class="gsearch-field-calendar range custom-field calendar-custom<?php echo $field_id_from; ?>">	
@@ -53,12 +53,12 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/boo
 	</div>
 
 	<?php 
-		$lang = JFactory::getLanguage()->getTag();
-		$lang = explode("-", $lang)[0];
-		if($lang) {
-	?>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.<?php echo $lang; ?>.min.js"></script>
-	<?php } ?>
+	$lang = JFactory::getLanguage()->getTag();
+	$lang = explode("-", $lang)[0];
+	if($lang) {
+		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/locales/bootstrap-datepicker' . $lang . '.min.js');
+	 } ?>
+
 	<script>
 		jQuery(document).ready(function($) {
 			$(".gsearch-field-calendar-wrapper.custom").find(".datepicker").each(function(k, el) {

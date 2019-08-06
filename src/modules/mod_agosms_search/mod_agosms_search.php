@@ -50,7 +50,7 @@ if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"
 			continue;
 		}
 
-		JRequest::setVar($key, $value);
+		JFactory::getApplication()->input->set($key, $value);
 	}
 }
 

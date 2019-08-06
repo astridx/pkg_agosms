@@ -17,14 +17,14 @@ class plgSystemPlg_agosms_search extends JPlugin
 
 	function onAfterDispatch()
 	{
-		$init_parameter = JRequest::getVar('gsearch');
+		$init_parameter = JFactory::getApplication()->input->get('gsearch');
 
 		if ($init_parameter)
 		{
 			$doc = JFactory::getDocument();
 
-			$search_type = JRequest::getVar("search_type", "com_content");
-			$format = JRequest::getVar("search_mode", "html");
+			JFactory::getApplication()->input->get("search_type", "com_content");
+			JFactory::getApplication()->input->get("search_mode", "html");
 
 			switch ($search_type)
 			{
@@ -58,7 +58,7 @@ class plgSystemPlg_agosms_search extends JPlugin
 						break;
 						case "delete" :
 							$this->check_logged_admin();
-							$id = JRequest::getInt("id");
+							$id = JFactory::getApplication()->input->get("id");
 							$query = "DELETE FROM #__content_search_stats WHERE id = {$id}";
 							@JFactory::getDBO()->setQuery($query)->query();
 							$query = "DELETE FROM #__content_search_stats_users WHERE keyword_id = {$id}";
@@ -72,7 +72,7 @@ class plgSystemPlg_agosms_search extends JPlugin
 						break;
 						case "reset" :
 							$this->check_logged_admin();
-							$id = JRequest::getInt("id");
+							$id = JFactory::getApplication()->input->get("id");
 							$query = "TRUNCATE TABLE #__content_search_stats";
 							@JFactory::getDBO()->setQuery($query)->query();
 							$query = "TRUNCATE TABLE #__content_search_stats_users";
@@ -99,7 +99,7 @@ class plgSystemPlg_agosms_search extends JPlugin
 	function onAfterRoute()
 	{
 		$app = JFactory::getApplication();
-		$init_parameter = JRequest::getVar('gsearch');
+		$init_parameter = JFactory::getApplication()->input->get("gsearch");
 
 		if ($init_parameter)
 		{
@@ -108,8 +108,8 @@ class plgSystemPlg_agosms_search extends JPlugin
 				return;
 			}
 
-			JRequest::setVar("option", "com_content");
-			JRequest::setVar("view", "featured");
+			JFactory::getApplication()->input->set("option", "com_content");
+			JFactory::getApplication()->input->set("view", "featured");
 		}
 	}
 

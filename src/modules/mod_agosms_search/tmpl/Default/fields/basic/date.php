@@ -12,8 +12,8 @@
 // no direct access
 defined('_JEXEC') or die;
 
-$active_from = JRequest::getVar("date-from");
-$active_to = JRequest::getVar("date-to");
+$active_from = JFactory::getApplication()->input->get("date-from");
+$active_to = JFactory::getApplication()->input->get("date-to");
 $active_from_text = '';
 $active_to_text = '';
 

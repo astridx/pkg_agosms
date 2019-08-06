@@ -12,11 +12,10 @@
 // no direct access
 defined('_JEXEC') or die;
 
-$field_id_from = 6; //field from
-$field_id_to = 28; //field to
+$field_id_from = 6;
+$field_id_to = 28;
 $values_from = $helper->getFieldValuesFromText($field_id_from, "text", $module->id);
 $values_to = $helper->getFieldValuesFromText($field_id_to, "text", $module->id);
-
 ?>
 
 <div class="gsearch-field-custom-select custom-field">	
@@ -29,7 +28,7 @@ $values_to = $helper->getFieldValuesFromText($field_id_to, "text", $module->id);
 			<?php foreach($values_from as $val) { ?>
 				<option 
 					value="<?php echo $val; ?>"
-					<?php if($val == JRequest::getVar("field{$field_id_from}-from")) { ?> 
+					<?php if($val == JFactory::getApplication()->input->get("field{$field_id_from}-from")) { ?> 
 					selected="selected"
 					<?php } ?>
 				>
@@ -45,7 +44,7 @@ $values_to = $helper->getFieldValuesFromText($field_id_to, "text", $module->id);
 			<?php foreach($values_to as $val) { ?>
 				<option 
 					value="<?php echo $val; ?>"
-					<?php if($val == JRequest::getVar("field{$field_id_to}-to")) { ?> 
+					<?php if($val == JFactory::getApplication()->input->get("field{$field_id_to}-to")) { ?> 
 					selected="selected"
 					<?php } ?>
 				>

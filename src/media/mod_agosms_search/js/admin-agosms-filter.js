@@ -106,7 +106,7 @@ $(document).ready(function () {
 				}
 
 				init_select.parent().find(".sortableFields").append("<li><span class='val' rel='" + selectedValues[i] + "'>" +
-					title + "</span><span class='sortableRightBlock'>" + extra + type_selected + "<span class='deleteFilter'>x</span></span></li>"
+					title + "</span><span class='sortableRightBlock'>" + extra + type_selected + "<span class='deleteFilter icon-cancel'></span></span></li>"
 				);
 			}
 		}
@@ -207,7 +207,7 @@ $(document).ready(function () {
 			}
 
 			init_box.parent().find(".sortableFields").append("<li><span class='val' rel='" + selected.val() + "'>" +
-				selected.text() + "</span><span class='sortableRightBlock'>" + extra + type_selected + "<span class='deleteFilter'>x</span></span></li>"
+				selected.text() + "</span><span class='sortableRightBlock'>" + extra + type_selected + "<span class='deleteFilter icon-cancel'></span></span></li>"
 			);
 
 			init_field = $(this).parents(".controls");

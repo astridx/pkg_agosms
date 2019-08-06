@@ -35,6 +35,7 @@ if (JFactory::getApplication()->input->get->get("field{$field->id}-to")) {
 	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to");
 }
 
+// See https://github.com/seiyria/bootstrap-slider
 $doc = JFactory::getDocument();
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.css');
 $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.js');

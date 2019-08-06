@@ -116,6 +116,9 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstr
 					$("input[name=<?php echo "field_{$field->id}-from"; ?>]").val(value[0]);
 					$("input[name=<?php echo "field_{$field->id}-to"; ?>]").val(value[1]);
 				});
+				$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").on("input", function() {
+					$("#slider-<?php echo "{$field->id}-{$module->id}"; ?>").bootstrapSlider('refresh');
+				});
 			});
 		</script>
 		<input class="inputbox" type="hidden" name="<?php echo "field_{$field->id}-from"; ?>" value="<?php echo $active_min; ?>" />
@@ -155,7 +158,6 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstr
 <input type="text" class="agosmsaddressmarkeraddress inputbox" >
 </div>
 </div>
-	
 	
 <button 
 		data-fieldsnamearray="<?php //echo $fieldsNameImplode; ?>"

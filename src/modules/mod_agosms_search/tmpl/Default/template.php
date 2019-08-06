@@ -32,8 +32,13 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 	<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/basic_scripts')); ?>
 </script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.8/css/bootstrap-select.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.8/js/bootstrap-select.min.js"></script>
+<?php 
+// See https://developer.snapappointments.com/bootstrap-select/ and https://github.com/snapappointments/bootstrap-select
+$doc = JFactory::getDocument();
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/select/bootstrap-select.min.css');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/select/bootstrap-select.min.js');
+?>
+
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$("#GSearch<?php echo $module->id; ?> select").each(function() {
@@ -89,11 +94,15 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 		el_val.val(date_val);
 	}
 </script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />	
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
-<?php if($lang && $lang != 'en') { ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/locales/bootstrap-datepicker.<?php echo $lang; ?>.min.js"></script>
-<?php } ?>
+<?php 
+// See https://github.com/uxsolutions/bootstrap-datepicker
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/datepicker/css/bootstrap-datepicker.min.css');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/bootstrap-datepicker.min.js');
+?>
+<?php if($lang && $lang != 'en') { 
+		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/locales/bootstrap-datepicker' . $lang . '.min.js');
+		} 
+?>
 
 <div id="GSearch<?php echo $module->id; ?>" class="GSearchBlock <?php echo $params->get('moduleclass_sfx'); ?>">
 

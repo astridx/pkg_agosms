@@ -52,7 +52,7 @@ $items = $model->getStatsKeywordList();
 <div class="searchStatsList">
 	<div class="page-header" style="display: inline-block;">
 		<?php 
-			$keyword_id = JRequest::getInt("id");
+			$keyword_id = JFactory::getApplication()->input->get("id");
 			$query = "SELECT keyword FROM #__content_search_stats WHERE id = {$keyword_id}";
 			$keyword = JFactory::getDBO()->setQuery($query)->loadResult();
 		?>
@@ -68,7 +68,7 @@ $items = $model->getStatsKeywordList();
 		</div>
 		<?php foreach($items as $items_counter => $item) { ?>
 		<div class="item <?php echo $items_counter % 2 == 0 ? 'odd' : ''; ?>">
-			<div class="num"><?php echo JRequest::getInt("limitstart", 0) + $items_counter + 1; ?></div>
+			<div class="num"><?php echo JFactory::getApplication()->input->get("limitstart", 0) + $items_counter + 1; ?></div>
 			<div class="user">
 				<?php 
 					$uid = $item->user_id;

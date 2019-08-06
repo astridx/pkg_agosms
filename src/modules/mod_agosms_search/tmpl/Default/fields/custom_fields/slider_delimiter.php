@@ -49,9 +49,10 @@ if (JFactory::getApplication()->input->get->get("field{$field->id}-to", '')) {
 	$active_max = JFactory::getApplication()->input->get->get("field{$field->id}-to", '');
 }
 
+// See https://github.com/seiyria/bootstrap-slider
 $doc = JFactory::getDocument();
-$doc->addScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js');
-$doc->addStyleSheet('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css');
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.css');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.js');
 
 $delimiter = ' '; //thousand separator
 $active_min_amount = number_format($active_min, 0, '', $delimiter);

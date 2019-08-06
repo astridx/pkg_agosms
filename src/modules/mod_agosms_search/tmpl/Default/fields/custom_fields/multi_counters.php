@@ -40,7 +40,7 @@ if(!$values) {
 }
 
 require_once(JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php");
-JRequest::setVar("moduleId", $module->id);
+JFactory::getApplication()->input->set("moduleId", $module->id);
 
 // Reset selected value
 $fieldid =  '';
@@ -48,17 +48,17 @@ if (JFactory::getApplication()->input->get->get("field" . $field->id)) {
 	$fieldid = JFactory::getApplication()->input->get->get("field" . $field->id);
 }		
 $tmp = $fieldid;
-JRequest::setVar("field".$field->id, "");
+JFactory::getApplication()->input->set("field".$field->id, "");
 
 $counters = Array();
 foreach($values as $vk=>$val) {
-	JRequest::setVar("field".$field->id, $val->value);
+	JFactory::getApplication()->input->set("field".$field->id, $val->value);
 	$model = new ArticlesModelAgSearch;
 	$total = $model->total_items;	
 	$counters[] = $total;
 }
 //reset selected value
-JRequest::setVar("field".$field->id, $tmp);
+JFactory::getApplication()->input->set("field".$field->id, $tmp);
 
 ?>
 
@@ -86,4 +86,3 @@ JRequest::setVar("field".$field->id, $tmp);
 		} ?>
 	</select>
 </div>
-

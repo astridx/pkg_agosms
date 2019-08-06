@@ -96,7 +96,7 @@ $items = $model->getStatsList();
 		</div>
 		<?php foreach($items as $items_counter => $item) { ?>
 		<div class="item <?php echo $items_counter % 2 == 0 ? 'odd' : ''; ?>">
-			<div class="num"><?php echo JRequest::getInt("limitstart", 0) + $items_counter + 1; ?></div>
+			<div class="num"><?php echo JFactory::getApplication()->input->get("limitstart", 0) + $items_counter + 1; ?></div>
 			<div class="keyword">
 				<span class="value">
 					<a rel="popup" href="<?php echo JURI::base(); ?>?gsearch=1&search_type=search_stats&search_mode=keyword&id=<?php echo $item->id; ?>&raw=1">

@@ -27,8 +27,8 @@ class ArticlesViewAgSearch extends JViewCategory
 
 		if (count($items))
 		{
-			$filter_fields = JRequest::getVar("field_type");
-			$filter_ids = JRequest::getVar("field_id");
+			$filter_fields = JFactory::getApplication()->input->get("field_type");
+			$filter_ids = JFactory::getApplication()->input->get("field_id");
 			$filter_vals = Array();
 
 			$items_ids = array();

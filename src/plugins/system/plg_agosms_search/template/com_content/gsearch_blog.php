@@ -21,12 +21,10 @@ require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/
 $model = new ArticlesModelAgSearch;
 $module_params = new Registry($model->module_params);
 
-$model->limit = JRequest::getInt("limit", $module_params->get('items_limit', 10));
+$model->limit = JFactory::getApplication()->input->get("limit", $module_params->get('items_limit', 10));
 
 $items = $model->getItems();
 ?>
-
-GSEARCHBLOG_ANFANG
 
 <div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
 	 itemscope itemtype="https://schema.org/Blog">
@@ -204,4 +202,4 @@ MAPENDE
 		<?php echo $pagination->getPagesCounter(); ?>
 	</div>
 </div>
-GSEARCHBLOG_ENDE
+
