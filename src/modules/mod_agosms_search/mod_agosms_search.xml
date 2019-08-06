@@ -190,11 +190,12 @@
 					step="1"
 					showon="georestrict:1"
 				/>
+				
 				<field 
 					name="georestricttext" 
 					type="note" 
-					label="PLG_AGOSMSSEAR_USESEARCHINFO" 
-					description="PLG_AGOSMSSEAR_USESEARCHINFO_DESC" 
+					label="MOD_AGOSMSSEARCH_USESEARCHINFO" 
+					description="MOD_AGOSMSSEARCH_USESEARCHINFO_DESC" 
 					class="alert" 
 					close="true"
 					showon="georestrict:1"
@@ -347,12 +348,47 @@
 					<option value="Only">MOD_AGOSMSSEARCHRESULTS_FEATURED_ONLY</option>
 					<option value="No">MOD_AGOSMSSEARCHNO</option>
 				</field>
+
+				<field 
+					type="spacer" 
+					name="myspacerm1" 
+					label="MOD_AGOSMSSEARCHCLEAR_MAP_SHOW_HEADING" 
+					hr="false"
+				/>
+				<field 
+					name="show_map" 
+					type="radio" 
+					class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHCLEAR_MAP_SHOW">
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+				</field>
+				
+				<field 
+					type="spacer" 
+					name="myspacerrl11" 
+					label="MOD_AGOSMSSEARCHCLEAR_RESULTLIST_SHOW_HEADING" 
+					hr="false"
+				/>
+				<field 
+					name="show_resultlist" 
+					type="radio" 
+					class="btn-group" 
+					default="1" 
+					label="MOD_AGOSMSSEARCHCLEAR_RESULTLIST_SHOW">
+					<option value="0">MOD_AGOSMSSEARCHNO</option>
+					<option value="1">MOD_AGOSMSSEARCHYES</option>
+				</field>
+				
+				<field type="spacer" name="myspacero1" hr="true" showon="show_resultlist:1"/>
 				<field 
 					name="ordering_show" 
 					type="radio" 
 					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_SHOW"
+					showon="show_resultlist:1"
 				>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
@@ -362,6 +398,7 @@
 					type="orderingselect" 
 					default="created" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_DEFAULT" 
+					showon="show_resultlist:1[AND]ordering_show:1"
 				/>
 				<field 
 					name="ordering_default_dir" 
@@ -369,6 +406,7 @@
 					class="btn-group" 
 					default="desc" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_DEFAULT_DIRECTION"
+					showon="show_resultlist:1[AND]ordering_show:1"
 				>
 					<option value="asc">MOD_AGOSMSSEARCHSORTING_ASC</option>
 					<option value="desc">MOD_AGOSMSSEARCHSORTING_DESC</option>
@@ -378,13 +416,17 @@
 					type="fieldselect" 
 					default="" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_FIELDS" 
+					showon="show_resultlist:1[AND]ordering_show:1"
 				/>
+				<field type="spacer" name="myspacero2" hr="true" showon="show_resultlist:1"/>
+
 				<field 
 					name="show_introtext" 
 					type="radio" 
 					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_INTROTEXT"
+					showon="show_resultlist:1"
 				>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
@@ -395,6 +437,7 @@
 					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_INFO"
+					showon="show_resultlist:1"
 				>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
@@ -405,6 +448,7 @@
 					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_READMORE"
+					showon="show_resultlist:1"
 				>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
@@ -414,17 +458,21 @@
 					type="text" 
 					default="10" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ITEMS_LIMIT" 
+					showon="show_resultlist:1"
 				/>
 				<field 
 					name="text_limit" 
 					type="text" 
 					default="200" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_TEXT_LIMIT" 
+					showon="show_resultlist:1"
 				/>
 				<field 
 					name="image_width" 
-					type="text" default="auto" 
+					type="text" 
+					default="auto" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_IMAGE_WIDTH" 
+					showon="show_resultlist:1"
 				/>
 				<field 
 					name="image_type" 
@@ -432,6 +480,7 @@
 					class="btn-group" 
 					default="" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE"
+					showon="show_resultlist:1"
 				>
 					<option value="">MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE_DEFAULT</option>
 					<option value="intro">MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE_INTRO</option>
@@ -443,7 +492,9 @@
 					directory="images" 
 					default="-1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_EMPTY" 
+					showon="show_resultlist:1"
 				/>
+
 				<field 
 					name="styles" 
 					type="textarea" 

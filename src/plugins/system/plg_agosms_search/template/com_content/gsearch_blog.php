@@ -36,7 +36,7 @@ $items = $model->getItems();
 		</h3>
 	</div>
 
-MAPSTART
+<?php if ($module_params->get('show_map', "1") === "1") { ?>
 <?php $defaultArray = array(); ?>
 <div style="
 	width:auto;
@@ -75,26 +75,26 @@ MAPSTART
 	class="leafletmapModSearch"
 	id="searchmap<?php echo $model->module_id; ?>">
 </div>
-MAPENDE
-	
-	<?php if (count($items))
+<?php } ?>
+
+
+
+<?php if ($module_params->get('show_resultlist', "1") === "1") { ?>
+
+<?php if (count($items)) { ?>
+<div class="gsearch-toolbox" >
+	<?php
+	if ($model->module_params->ordering_show)
 	{
 	?>
-	<div class="gsearch-toolbox" >
-		<?php
-		if ($model->module_params->ordering_show)
-		{
-		?>
-			<div class="gsearch-sorting">
-				<?php require dirname(__FILE__) . '/gsearch_sorting.php'; ?>
-			</div>
-		<?php 
-		} 
-		?>
-	</div>
+		<div class="gsearch-sorting">
+			<?php require dirname(__FILE__) . '/gsearch_sorting.php'; ?>
+		</div>
 	<?php 
 	} 
 	?>
+</div>
+<?php } ?>
 	
 	
 	<div class="itemlist">
@@ -203,5 +203,8 @@ MAPENDE
 			echo $pagination->getPagesCounter(); 
 		?>
 	</div>
+<?php } ?>
+
+	
 </div>
 

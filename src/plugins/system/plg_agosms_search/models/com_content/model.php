@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 
 class ArticlesModelAgSearch extends JModelList
 {
-
 	var $input;
 	var $module_id;
 	var $module_helper;
@@ -1117,5 +1116,4 @@ class ArticlesModelAgSearch extends JModelList
 			return $miles;
 		}
 	}
-
 }
