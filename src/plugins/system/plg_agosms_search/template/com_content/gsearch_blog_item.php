@@ -32,18 +32,22 @@ $ImagesTab = 0;
 if ($image_type == "intro" || $ImagesTab) {
 	$item->introtext = trim(strip_tags($item->introtext, '<h2><h3>'));
 }
+
 if($model->module_params->text_limit) {
 	preg_match('/(<img[^>]+>)/i', $item->introtext, $images_text);	
 	$item->introtext = trim(strip_tags($item->introtext, '<h2><h3>'));
+	
 	if(extension_loaded('mbstring')) {
 		$item->introtext = mb_strimwidth($item->introtext, 0, $model->module_params->text_limit, '...', 'utf-8');
 	}
 	else {
 		$item->introtext = strlen($item->introtext) > $model->module_params->text_limit ? substr($item->introtext, 0, $model->module_params->text_limit) . '...' : $item->introtext;
 	}
+	
 	if(count($images_text) && 
 		($image_type == "text" || ($image_type == "" && !$ImageIntro))
 	) {
+		
 		if(strpos($images_text[0], '://') === false) {
 			$parts = explode('src="', $images_text[0]);
 			$images_text[0] = $parts[0] . 'src="' . JURI::root() . $parts[1];
@@ -53,16 +57,20 @@ if($model->module_params->text_limit) {
 }
 $model->execPlugins($item);
 
+if (isset($item->distance))
+{
+	$distance = round($item->distance, 2);
+}
 ?>
 
 <div class="item<?php echo $item->featured ? ' featured' : ''; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
 	<h3 itemprop="name" class="item-title">
 		<?php if (property_exists($item, "slug")) { ?>
 			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>" itemprop="url">
-				<?php echo $item->title; ?>
+				<?php echo $item->title . ' ' . $distance; ?>
 			</a>
 		<?php } else { ?>
-				<?php echo $item->title; ?>
+				<?php echo $item->title . ' ' . $distance; ?>
 		<?php }  ?>
 	</h3>
 	<?php //echo $item->event->afterDisplayTitle; ?>

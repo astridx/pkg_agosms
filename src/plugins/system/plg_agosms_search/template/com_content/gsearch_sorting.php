@@ -38,6 +38,7 @@ foreach($customSorting as $field) {
 	<option value="hits"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_POPULAR'); ?></option>
 	<option value="featured"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'); ?></option>
 	<option value="rand"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'); ?></option>
+	<option value="distance"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DISTANCE'); ?></option>
 	<?php if(count($sortingFields)) { ?>
 		<?php foreach($sortingFields as $field) { ?>
 			<?php if(property_exists($item, "name")) { ?>
