@@ -108,9 +108,8 @@ foreach ($document->_scripts as $key => $script)
 	}
 }
 
-if ($params->get('show_map', "1") === "1") 
-{ 
-
+if ($params->get('show_map', "1") === "1")
+{
 	if (!$leafletIsLoaded)
 	{
 		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.css');

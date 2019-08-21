@@ -732,7 +732,7 @@
 					multiple="true"
 					label="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_LABEL"
 					min= "1"
-					max= "20"
+					max= "1000"
 					description="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_DESC"
 					layout="joomla.form.field.subform.repeatable"
 					showon="showpin:1"
