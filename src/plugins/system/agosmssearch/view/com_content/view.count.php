@@ -15,7 +15,7 @@ class ArticlesViewAgSearch extends JViewCategory
 {
 	function display($search_type = "com_content")
 	{
-		require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
+		require_once JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model.php";
 		$model = new ArticlesModelAgSearch;
 		echo $model->total_items;
 		die;

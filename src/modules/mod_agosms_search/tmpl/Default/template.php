@@ -11,7 +11,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-require_once(JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php");
+require_once(JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model.php");
 
 JHtml::_('bootstrap.framework');
 $document = JFactory::getDocument();

@@ -37,7 +37,7 @@ class plgSystemPlg_agosms_search extends JPlugin
 					switch ($format)
 					{
 						case "save" :
-							require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
+							require_once JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model.php";
 							$model = new ArticlesModelAgSearch;
 							$model->saveSearchStats();
 							exit;

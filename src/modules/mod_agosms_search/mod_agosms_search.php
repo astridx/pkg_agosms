@@ -18,7 +18,7 @@ $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 $filters = $params->get('filters');
 
-if (!JPluginHelper::isEnabled('system', 'plg_agosms_search'))
+if (!JPluginHelper::isEnabled('system', 'agosmssearch'))
 {
 	echo JText::_('MOD_AGOSMS_PLUGIN_NOT_PUBLISHED');
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <extension type="plugin" version="3.7.0" group="system" method="upgrade">
-	<name>plg_system_agosms_search</name>
+	<name>plg_system_agosmssearch</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) ##YEAR## Astrid Günther. All rights reserved.</copyright>

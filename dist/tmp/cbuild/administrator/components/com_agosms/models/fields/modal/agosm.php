@@ -66,7 +66,8 @@ class JFormFieldModal_Agosm extends JFormField
 				function jSelectAgosm_" . $this->id . "(id, title, catid, object, url, language) {
 					window.processModalSelect('Agosm', '" . $this->id . "', id, title, catid, object, url, language);
 				}
-				");
+				"
+				);
 				$scriptSelect[$this->id] = true;
 			}
 		}
@@ -95,6 +96,7 @@ class JFormFieldModal_Agosm extends JFormField
 				->from($db->quoteName('#__agosms'))
 				->where($db->quoteName('id') . ' = ' . (int) $value);
 			$db->setQuery($query);
+
 			try
 			{
 				$title = $db->loadResult();
@@ -104,6 +106,7 @@ class JFormFieldModal_Agosm extends JFormField
 				JError::raiseWarning(500, $e->getMessage());
 			}
 		}
+
 		$title = empty($title) ? JText::_('COM_AGOSMS_SELECT_A_AGOSM') : htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 
 		// The current agosm display field.
@@ -123,6 +126,7 @@ class JFormFieldModal_Agosm extends JFormField
 				. '<span class="icon-file" aria-hidden="true"></span> ' . JText::_('JSELECT')
 				. '</a>';
 		}
+
 		// New agosm button
 		if ($allowNew)
 		{
@@ -136,6 +140,7 @@ class JFormFieldModal_Agosm extends JFormField
 				. '<span class="icon-new" aria-hidden="true"></span> ' . JText::_('JACTION_CREATE')
 				. '</a>';
 		}
+
 		// Edit agosm button
 		if ($allowEdit)
 		{
@@ -149,6 +154,7 @@ class JFormFieldModal_Agosm extends JFormField
 				. '<span class="icon-edit" aria-hidden="true"></span> ' . JText::_('JACTION_EDIT')
 				. '</a>';
 		}
+
 		// Clear agosm button
 		if ($allowClear)
 		{
@@ -160,6 +166,7 @@ class JFormFieldModal_Agosm extends JFormField
 				. '<span class="icon-remove" aria-hidden="true"></span>' . JText::_('JCLEAR')
 				. '</a>';
 		}
+
 		$html .= '</span>';
 
 		// Select agosm modal
@@ -237,10 +244,12 @@ class JFormFieldModal_Agosm extends JFormField
 				)
 			);
 		}
+
 		// Note: class='required' for client side validation.
 		$class = $this->required ? ' class="required modal-value"' : '';
 		$html .= '<input type="hidden" id="' . $this->id . '_id" ' . $class . ' data-required="' . (int) $this->required . '" name="' . $this->name
 			. '" data-text="' . htmlspecialchars(JText::_('COM_AGOSMS_SELECT_A_AGOSM', true), ENT_COMPAT, 'UTF-8') . '" value="' . $value . '" />';
+
 		return $html;
 	}
 

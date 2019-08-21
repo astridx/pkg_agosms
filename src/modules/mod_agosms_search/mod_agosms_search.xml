@@ -14,14 +14,14 @@
 	
 	<!-- Front-end files -->
 	<files>
-		<file module="mod_agosms_search">mod_agosm.php</file>
+		<file module="mod_agosms_search">mod_agosms_search.php</file>
 		##MODULE_FILES##
 	</files>
 	<languages folder="language">
 		##LANGUAGE_FILES##
 	</languages>
 	<!-- Media files -->
-	<media folder="media/mod_agosm" destination="mod_agosm">
+	<media folder="media/mod_agosms_search" destination="mod_agosms_search">
 		##MEDIA_FILES##
 	</media>
 

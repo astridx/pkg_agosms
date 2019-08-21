@@ -17,7 +17,7 @@ $document = JFactory::getDocument();
 $lang = JFactory::getLanguage();
 $lang->load("mod_agosms_search");
 
-require_once JPATH_SITE . "/plugins/system/plg_agosms_search/models/com_content/model.php";
+require_once JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model.php";
 $model = new ArticlesModelAgSearch;
 $module_params = new Registry($model->module_params);
 

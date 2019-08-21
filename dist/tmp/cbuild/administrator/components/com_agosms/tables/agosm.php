@@ -94,7 +94,7 @@ class AgosmsTableAgosm extends JTable
 		// Verify that the alias is unique
 		$table = JTable::getInstance('Agosm', 'AgosmsTable');
 
-		if ($table->load(array('language' => $this->language, 'alias' => $this->alias, 'catid' => $this->catid)) 
+		if ($table->load(array('language' => $this->language, 'alias' => $this->alias, 'catid' => $this->catid))
 			&& ($table->id != $this->id || $this->id == 0))
 		{
 			$this->setError(JText::_('COM_AGOSMS_ERROR_UNIQUE_ALIAS'));
@@ -128,6 +128,7 @@ class AgosmsTableAgosm extends JTable
 		if (trim($this->title) == '')
 		{
 			$this->setError(JText::_('COM_AGOSMS_ERR_TABLES_TITLE'));
+
 			return false;
 		}
 

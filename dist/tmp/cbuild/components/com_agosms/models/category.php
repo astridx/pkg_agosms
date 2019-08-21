@@ -187,7 +187,7 @@ class AgosmsModelCategory extends JModelList
 			$search = $db->quote('%' . $db->escape($search, true) . '%');
 			$query->where('(a.title LIKE ' . $search . ')');
 		}
-		
+
 		// If grouping by subcategory, add the subcategory list ordering clause.
 		if ($this->getState('category.group', 0))
 		{
