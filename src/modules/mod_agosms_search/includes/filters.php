@@ -28,7 +28,6 @@ class JFormFieldFilters extends JFormField
 			$mitems[] = JHTML::_('select.option', 'keyword', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_KEYWORD'));
 			$mitems[] = JHTML::_('select.option', 'title_select', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TITLE_SELECT'));
 			$mitems[] = JHTML::_('select.option', 'tag', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TAG'));
-			$mitems[] = JHTML::_('select.option', 'tag_cloud', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TAG_CLOUD'));
 			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_CATEGORY'));
 			$mitems[] = JHTML::_('select.option', 'author', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_AUTHOR'));
 			$mitems[] = JHTML::_('select.option', 'date', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_DATE'));

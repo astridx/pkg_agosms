@@ -142,7 +142,10 @@ $addressfieldsArray = json_decode($addressfields);
 if (!empty($addressfieldsArray))
 {
 	foreach ($addressfieldsArray as $a) {
-		$addressfieldsvalues[] = $a->value;
+		if(property_exists($a, 'value'))
+		{
+			$addressfieldsvalues[] = $a->value;
+		}
 	}
 }
 
