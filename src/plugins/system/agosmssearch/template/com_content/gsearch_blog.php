@@ -40,7 +40,7 @@ $items = $model->getItems();
 <?php $defaultArray = array(); ?>
 <div style="
 	width:auto;
-	height:<?php echo $module_params->get('height', '400'); ?>px;"
+	height:<?php echo $module_params->get('height', '400'); ?><?php echo $module_params->get('heightunit', 'px'); ?>;"
 	data-module-id="<?php echo $model->module_id; ?>"
 	data-no-world-warp="<?php echo $module_params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $module_params->get('detectRetina', 0); ?>"

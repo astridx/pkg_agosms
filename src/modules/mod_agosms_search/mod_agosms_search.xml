@@ -334,7 +334,7 @@
 					label="MOD_AGOSMSSEARCHRESULTS_TEMPLATE"
 				>
 					<option value="standard">Standard</option>
-					<option value="simple">Simple</option>
+					<!-- <option value="simple">Simple</option> -->
 				</field>
 				<field 
 					name="include_featured" 
@@ -544,7 +544,8 @@
 				</field>
 				<field 
 					name="cache_time" 
-					type="text" default="900" 
+					type="text" 
+					default="900" 
 					label="MOD_AGOSMSSEARCHCACHE_TIME_LABEL" 
 				/>
 			</fieldset>
