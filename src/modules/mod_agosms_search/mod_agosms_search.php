@@ -122,4 +122,4 @@ if ($params->get('show_map', "1") === "1")
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/css/agosms_search.css');
 }
 
-require JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'default') . '/template');
+require JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/template');
