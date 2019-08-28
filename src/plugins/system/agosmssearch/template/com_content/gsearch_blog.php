@@ -1,4 +1,4 @@
-<?php
+blog_anfang<?php
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -206,5 +206,5 @@ $items = $model->getItems();
 <?php } ?>
 
 	
-</div>
+</div>blogende
 

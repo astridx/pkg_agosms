@@ -447,10 +447,17 @@ class ArticlesModelAgSearch extends JModelList
 
 					if (($k + 1) != count($query_params))
 					{
-						if ($_GET['match'] == "all")
+						if (array_key_exists('match', $_GET))
 						{
-							$sub_query .= " AND ";
-						} else
+							if ($_GET['match'] == "all")
+							{
+								$sub_query .= " AND ";
+							} else
+							{
+								$sub_query .= " OR ";
+							}
+						}
+						else
 						{
 							$sub_query .= " OR ";
 						}

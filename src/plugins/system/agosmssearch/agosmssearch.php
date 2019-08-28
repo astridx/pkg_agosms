@@ -12,7 +12,7 @@
 // No direct access
 defined('_JEXEC') or die('');
 
-class plgSystemPlg_agosms_search extends JPlugin
+class PlgSystemAgosmssearch extends JPlugin
 {
 
 	function onAfterDispatch()

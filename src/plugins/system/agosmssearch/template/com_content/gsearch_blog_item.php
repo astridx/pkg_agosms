@@ -57,6 +57,8 @@ if($model->module_params->text_limit) {
 }
 $model->execPlugins($item);
 
+$distance = "";
+
 if (isset($item->distance))
 {
 	$distance = round($item->distance, 2);
