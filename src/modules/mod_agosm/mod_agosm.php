@@ -112,4 +112,5 @@ if ($params->get('showmarkerfromexternaldb', '0') === "1")
 }
 
 $document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosm.js');
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/agosms.css');
 require JModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));

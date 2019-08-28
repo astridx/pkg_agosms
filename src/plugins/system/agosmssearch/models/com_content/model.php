@@ -177,12 +177,6 @@ class ArticlesModelAgSearch extends JModelList
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__categories AS cat ON cat.id = i.catid";
 
-		//added for compatibility with cv multicategories plugin
-		if (JPluginHelper::isEnabled('system', 'cwmulticats'))
-		{
-			$query .= " LEFT JOIN #__content_multicats as multicats ON multicats.content_id = i.id";
-		}
-
 		if (JFactory::getApplication()->input->get("keyword"))
 		{
 			//left join all fields values for keyword search
@@ -230,17 +224,7 @@ class ArticlesModelAgSearch extends JModelList
 				foreach ($category_restriction as $c) {
 					$ids[] = $c->id;
 				}
-				//added for compatibility with cv multicategories plugin
-				if (JPluginHelper::isEnabled('system', 'cwmulticats'))
-				{
-					$query .= " AND (
-									multicats.catid IN (" . implode(",", $ids) . ")
-									OR i.catid IN (" . implode(",", $ids) . ")
-								)";
-				} else
-				{
-					$query .= " AND i.catid IN (" . implode(",", $ids) . ")";
-				}
+				$query .= " AND i.catid IN (" . implode(",", $ids) . ")";
 			}
 		}
 
@@ -387,17 +371,7 @@ class ArticlesModelAgSearch extends JModelList
 					}
 				}
 
-				// Added for compatibility with cv multicategories plugin
-				if (JPluginHelper::isEnabled('system', 'cwmulticats'))
-				{
-					$query .= " AND (
-									multicats.catid IN (" . implode(",", $categories) . ")
-									OR i.catid IN (" . implode(",", $categories) . ")
-								)";
-				} else
-				{
-					$query .= " AND i.catid IN (" . implode(",", $categories) . ")";
-				}
+				$query .= " AND i.catid IN (" . implode(",", $categories) . ")";
 			}
 		}
 
@@ -886,15 +860,6 @@ class ArticlesModelAgSearch extends JModelList
 	{
 		$aCategories = array();
 		$catids = array();
-
-		// Added for compatibility with cv multicategories plugin
-		if (JPluginHelper::isEnabled('system', 'cwmulticats'))
-		{
-			$catids = JFactory::getDBO()->setQuery("SELECT catid FROM #__content_multicats WHERE content_id = {$aItem->id} ORDER BY ordering ASC")->loadColumn();
-		} else
-		{
-			$catids = array($aItem->catid);
-		}
 
 		if (!count($catids))
 		{

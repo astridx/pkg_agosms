@@ -132,11 +132,6 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/tag'));
 				break;
 				
-				case 'tag_cloud' :
-					$tags = (array)$helper->getTags($params);
-					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/tag_cloud'));
-				break;
-				
 				case 'category' :
 					$categories = (array)$helper->getCategories(null, $params);
 					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/category'));
