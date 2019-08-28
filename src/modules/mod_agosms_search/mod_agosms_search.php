@@ -40,7 +40,7 @@ if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"
 		"search_mode",
 		"field_id",
 		"field_type"
-		);
+	);
 
 	foreach (JFactory::getSession()->get("SaveSearchValues") as $key => $value)
 	{

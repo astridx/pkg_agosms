@@ -13,7 +13,7 @@ $defaultArray = [];
 
 <div style="
 	width:auto;
-	height:<?php echo $params->get('height', '400'); ?>px;"
+	height:<?php echo $params->get('height', '400'); ?><?php echo $params->get('heightunit', 'px'); ?>;"
 	data-module-id="<?php echo $module->id; ?>"
 	data-no-world-warp="<?php echo $params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $params->get('detectRetina', 0); ?>"

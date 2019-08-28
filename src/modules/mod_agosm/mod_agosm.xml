@@ -46,6 +46,17 @@
 
 				<field
 					type="list"
+					name="heightunit"
+					label="MOD_AGOSM_HEIGHTUNIT"
+					description="MOD_AGOSM_HEIGHTUNIT_DESC"
+					default="px"
+				>
+					<option value="px">px (Pixel)</option>
+					<option value="vh">vh (Viewport Height)</option>
+				</field>
+
+				<field
+					type="list"
 					name="zoom"
 					default="7"
 					label="MOD_AGOSM_ZOOM"

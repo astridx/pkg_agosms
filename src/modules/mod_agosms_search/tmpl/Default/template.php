@@ -291,8 +291,6 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 		<?php if($params->get("Itemid")) { ?>
 		<input type="hidden" name="Itemid" value="<?php echo $params->get("Itemid"); ?>" />
 		<?php } ?>		
-	
-		<div style="clear:both;"></div>
 	</form>
 	
 	<?php if($params->get("acounter")) { ?>

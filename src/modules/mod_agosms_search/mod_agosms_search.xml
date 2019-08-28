@@ -367,6 +367,30 @@
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 				</field>
 				
+				<field
+					type="integer"
+					name="height"
+					label="MOD_AGOSM_HEIGHT"
+					description="MOD_AGOSM_HEIGHT_DESC"
+					default="400"
+					first="10"
+					last="1000"
+					step="10"
+					showon="show_map:1"
+				/>
+
+				<field
+					type="list"
+					name="heightunit"
+					label="MOD_AGOSM_HEIGHTUNIT"
+					description="MOD_AGOSM_HEIGHTUNIT_DESC"
+					default="px"
+					showon="show_map:1"
+				>
+					<option value="px">px (Pixel)</option>
+					<option value="vh">vh (Viewport Height)</option>
+				</field>
+
 				<field type="spacer" name="myspacero111o" hr="true" />
 				<field 
 					type="spacer" 
