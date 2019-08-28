@@ -58,12 +58,7 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 					$(this).attr("name", "");
 				}
 			});
-			setTimeout(function() {
-				$(".filter_loading<?php echo $module->id; ?>").hide();
-			}, 4000);
 		});
-		
-		$("body").append("<div class='filter_loading<?php echo $module->id; ?>'>loading ...</div>");
 	});
 	
 	function submit_form_<?php echo $module->id; ?>() {
