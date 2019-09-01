@@ -32,12 +32,12 @@ class ArticlesModelAgSearch extends JModelList
 		$this->module_params = $this->module_helper->getModuleParams($this->module_id);
 		$this->module_params_native = $this->module_helper->getModuleParams($this->module_id, true);
 
-		if ($this->module_params->savesearch && !JFactory::getApplication()->input->get("initial"))
+		if (isset($this->module_params->savesearch) && $this->module_params->savesearch && !JFactory::getApplication()->input->get("initial"))
 		{
 			$this->saveSearchSession();
 		}
 
-		if ($this->module_params->savesearch && JFactory::getSession()->get("SaveSearchValues") && $_GET['applySaved']
+		if (isset($this->module_params->savesearch) && $this->module_params->savesearch && JFactory::getSession()->get("SaveSearchValues") && $_GET['applySaved']
 		)
 		{
 			$skip = array("option", "task", "view", "Itemid", "search_mode", "field_id", "field_type", "initial");
@@ -58,7 +58,7 @@ class ArticlesModelAgSearch extends JModelList
 
 	function getItems($total = false)
 	{
-		if ($this->module_params->georestrict)
+		if (isset($this->module_params->georestrict) && $this->module_params->georestrict)
 		{
 			$filterresults = $this->getItemsBeforGeo(false, false);
 			$tempfilterresults = array();
@@ -214,7 +214,7 @@ class ArticlesModelAgSearch extends JModelList
 		$query .= " AND i.publish_up <= '{$time}' AND (i.publish_down > '{$time}' OR i.publish_down = '0000-00-00 00:00:00')";
 
 		//category restriction
-		if ($this->module_params->restrict)
+		if (isset($this->module_params->restrict) && $this->module_params->restrict)
 		{
 			$module_params_native = $this->module_helper->getModuleParams($this->module_id, true);
 			$category_restriction = $this->module_helper->getCategories(0, $module_params_native);

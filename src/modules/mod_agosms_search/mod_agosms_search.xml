@@ -266,7 +266,6 @@
 					default="1" 
 					label="MOD_AGOSMSSEARCHACOUNTER"
 				>
-					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
@@ -274,7 +273,6 @@
 					default="0" 
 					label="MOD_AGOSMSSEARCHSAVE_VALUES_SESSION"
 				>
-					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
@@ -282,7 +280,6 @@
 					default="0" 
 					label="MOD_AGOSMSSEARCHSEARCH_HISTORY"
 				>
-					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
@@ -293,11 +290,14 @@
 					label="MOD_AGOSMSSEARCHSEARCH_STATS" 
 					description="MOD_AGOSMSSEARCHSEARCH_STATS_DESC"
 				>
-					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
 				<field 
-					name="" type="statslink" label="" />
+					name="" 
+					hidden="1" 
+					type="statslink" 
+					label="" 
+				/>
 				
 				<field 
 					name="note5" 

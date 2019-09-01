@@ -62,6 +62,7 @@ if (JFactory::getApplication()->input->get->get("field_{$field->id}-address")) {
 $doc = JFactory::getDocument();
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.css');
 $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.js');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/agosmsaddressmarkerslider/agosmsaddressmarkerslider.js');
 ?>
 <hr>
 <div class="gsearch-field-slider custom-field">	
@@ -78,31 +79,21 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstr
 			/>
 		</div>
 		<div style="padding: 0 10px;">
-			<input id="slider-<?php echo "{$field->id}-{$module->id}"; ?>" class="SliderField" />
+			<input 
+				id="agslider-<?php echo "{$field->id}-{$module->id}"; ?>" 
+				class="agSliderField" 
+				data-slider-min="<?php echo $min; ?>"
+				data-slider-max="<?php echo $max; ?>"
+				data-slider-step="<?php echo $step; ?>"
+				data-slider-tooltip="hide"
+			/>
 		</div>
 		<script>
-			jQuery(document).ready(function($) {
-				//mootools conflict fix
-				if(typeof MooTools != 'undefined' ) {
-					Element.implement({
-						slide: function(how, mode){
-							return this;
-						}
-					});
-				}
+			//jQuery(document).ready(function($) {
 				
-				$("#slider-<?php echo "{$field->id}-{$module->id}"; ?>").bootstrapSlider({ 
-					min: <?php echo $min; ?>, 
-					max: <?php echo $max; ?>, 
-					range: true, 
-					value: [<?php echo $active_min; ?>, <?php echo $active_max; ?>],
-					tooltip: "hide",
-					step: <?php echo $step; ?>,
-				}).on("slideStart", function(ev) {
-					sliderLock = 1;
-				}).on("slide", function(ev) {
-					$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").val(ev.value[0] + ' - ' + ev.value[1]);
-				}).on("slideStop", function(ev) {
+/*	
+ 
+ 				}).on("slideStop", function(ev) {
 					$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").val(ev.value[0] + ' - ' + ev.value[1]);
 					$("input[name=<?php echo "field_{$field->id}-from"; ?>]").val(ev.value[0]);
 					$("input[name=<?php echo "field_{$field->id}-to"; ?>]").val(ev.value[1]);
@@ -119,10 +110,10 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstr
 				$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").on("input", function() {
 					$("#slider-<?php echo "{$field->id}-{$module->id}"; ?>").bootstrapSlider('refresh');
 				});
-			});
+			});*/
 		</script>
-		<input class="inputbox" type="hidden" name="<?php echo "field_{$field->id}-from"; ?>" value="<?php echo $active_min; ?>" />
-		<input class="inputbox" type="hidden" name="<?php echo "field_{$field->id}-to"; ?>" value="<?php echo $active_max; ?>" />
+		<input style="display:none" class="inputbox" type="text" name="<?php echo "field_{$field->id}-from"; ?>" value="<?php echo $active_min; ?>" />
+		<input style="display:none" class="inputbox" type="text" name="<?php echo "field_{$field->id}-to"; ?>" value="<?php echo $active_max; ?>" />
 	</div>
 </div>
 
@@ -169,73 +160,3 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstr
 	</button>
 </div>
 <hr>
-
-<script>
-document.addEventListener('click', function (e) {
-	if (e.target.classList.contains('agosmsaddressmarkerbutton')) {
-		var button = e.target;
-		var surroundingDiv = button.parentNode;
-		var inputs = surroundingDiv.getElementsByTagName('input');
-		var lat = inputs[0];
-		var lon = inputs[1];
-		var address = inputs[2];
-
-		addressstring = address.value;
-
-		var cords = function (results, suggest) {
-			if (!suggest && results.length === 1) {
-				lat.value = results[0].lat;
-				lon.value = results[0].lon;
-				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSSEARCH_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
-			} else if (results.length > 0) {
-				// Limit is fix set to 1 up to now
-			} else {
-				Joomla.renderMessages({"error": [Joomla.JText._('MOD_AGOSMSSEARCH_ADDRESSE_ERROR') + addressstring + ' (Nominatim)']});
-			}
-		}
-
-		var params = {
-			q: addressstring,
-			limit: 1,
-			format: 'json',
-			addressdetails: 1
-		};
-
-		getJSON("https://nominatim.openstreetmap.org/", params, cords);
-	}
-});
-
-function getJSON(url, params, callback) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState !== 4) {
-			return;
-		}
-		if (xmlHttp.status !== 200 && xmlHttp.status !== 304) {
-			callback('');
-			return;
-		}
-		callback(xmlHttp.response);
-	};
-	xmlHttp.open('GET', url + getParamString(params), true);
-	xmlHttp.responseType = 'json';
-	xmlHttp.setRequestHeader('Accept', 'application/json');
-	xmlHttp.send(null);
-}
-
-function getParamString(obj, existingUrl, uppercase) {
-	var params = [];
-	for (var i in obj) {
-		var key = encodeURIComponent(uppercase ? i.toUpperCase() : i);
-		var value = obj[i];
-		if (!L.Util.isArray(value)) {
-			params.push(key + '=' + encodeURIComponent(value));
-		} else {
-			for (var j = 0; j < value.length; j++) {
-				params.push(key + '=' + encodeURIComponent(value[j]));
-			}
-		}
-	}
-	return (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') + params.join('&');
-}
-</script>
