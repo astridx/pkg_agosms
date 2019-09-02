@@ -60,6 +60,8 @@ if (JFactory::getApplication()->input->get->get("field_{$field->id}-address")) {
 }
 
 $doc = JFactory::getDocument();
+
+// See https://github.com/seiyria/bootstrap-slider
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.css');
 $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/bootstrap-slider.min.js');
 $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/agosmsaddressmarkerslider/agosmsaddressmarkerslider.js');

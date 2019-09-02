@@ -135,17 +135,12 @@ class ArticlesModelAgSearch extends JModelList
 
 	function getItemsBeforGeo($total = false, $limitforpagination = true)
 	{
-		// See /var/www/html/joomla-cms/administrator/components/com_actionlogs/models/actionlogs.php
-		// And /var/www/html/joomla-cms/administrator/components/com_languages/helpers/multilangstatus.php
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
+		$db = JFactory::getDBO();
 
 		if ($total)
 		{
-			$query->select('count(distinct(i.id))');
-
-		} 
-		else
+			$query = "SELECT COUNT(DISTINCT i.id)";
+		} else
 		{
 			$featuredFirst = false;
 			switch ($this->module_params->include_featured) {
@@ -165,8 +160,7 @@ class ArticlesModelAgSearch extends JModelList
 			$orderto = JFactory::getApplication()->input->get("orderto", $this->module_params->ordering_default_dir);
 
 			$query = "SELECT i.*, GROUP_CONCAT(tm.tag_id) as tags, cat.title as category";
-			
-			// Select field ordering value
+			//select field ordering value
 			if ($featuredFirst)
 			{
 				preg_match('/^field([0-9]+)$/', $this->module_params->ordering_default, $matches);
