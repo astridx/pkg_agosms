@@ -18,9 +18,24 @@ JText::script('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
 
 $document = JFactory::getDocument();
 
-$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.css');
-$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
-$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
+$leafletIsLoaded = false;
+
+foreach ($document->_scripts as $key => $script)
+{
+	$leafletPath = "leaflet/leaflet.js";
+
+	if (strpos($key, $leafletPath))
+	{
+		$leafletIsLoaded = true;
+	}
+}
+
+if (!$leafletIsLoaded)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.css');
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
+	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
+}
 
 if ($fieldParams->get('showroutingcontrol', '0') == 1)
 {
