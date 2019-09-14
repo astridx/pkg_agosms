@@ -362,6 +362,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				btn.innerHTML = label;
 				return btn;
 			}
+			
 			var control = L.Routing.control({
 				geocoder: L.Control.Geocoder.nominatim({}),
 				waypoints: [
