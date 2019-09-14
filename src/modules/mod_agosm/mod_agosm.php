@@ -103,7 +103,10 @@ if ($params->get('showcomponentpin', '0') === "1")
 
 if ($params->get('showcustomfieldpin', '0') === "1")
 {
-	$listcf = ModagosmHelper::getListCustomField($params);
+	if (!empty(ModagosmHelper::getListCustomField($params)))
+	{
+		$listcf = ModagosmHelper::getListCustomField($params);
+	}
 }
 
 if ($params->get('showmarkerfromexternaldb', '0') === "1")

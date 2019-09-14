@@ -87,7 +87,7 @@ $defaultArray = [];
 	data-specialcomponentpins="<?php echo htmlspecialchars(json_encode($list), ENT_QUOTES, 'UTF-8'); ?>"
 	data-showcomponentpin="<?php echo $params->get('showcomponentpin', '1'); ?>"
 <?php endif; ?>
-<?php if ($params->get('showcustomfieldpin', '1')) : ?>
+<?php if ($params->get('showcustomfieldpin', '1') && isset($listcf)) : ?>
 	data-specialcustomfieldpins="<?php echo htmlspecialchars(json_encode($listcf), ENT_QUOTES, 'UTF-8'); ?>"
 	data-showcustomfieldpin="<?php echo $params->get('showcustomfieldpin', '1'); ?>"
 <?php endif; ?>
