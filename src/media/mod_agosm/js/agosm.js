@@ -351,6 +351,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				addresserror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
 				requesterror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR')
 			}).addTo(window['mymap' + moduleId]);
+
 		}
 
 		// Add Routing Mapbox
