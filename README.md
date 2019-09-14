@@ -5,6 +5,8 @@ Openstreetmap Modul
 
 ## Module
 
+### AGOSM Module 
+
 1. Install this package via Joomla! installer. 
 Please check after the installation if the module is correcly installed. 
 Open the menu `Extension | Modules` and click the toolbar button `new`. 
@@ -28,7 +30,7 @@ will look like in the next image.
 
 Voila!
 
-### Routing to address - How to find us 
+#### Routing to address - How to find us 
 
 A popular feature of this extension is 'Routing to address'.  
 
@@ -46,9 +48,35 @@ a route to the address you entered in the back end.
 
 ![a2](https://user-images.githubusercontent.com/9974686/51428133-82b52c80-1c00-11e9-8d4d-afee1c2e4a3a.png)
 
-### Show markers on a map that link to an article - you can enter the coordinate in a Custom Field
+3. If you activate the option suggestions, you will see a 
+[Algolia Places autocompletion menu](https://community.algolia.com/places/documentation.html#demo).
 
-#### Custom Field of the type text
+![a1](https://user-images.githubusercontent.com/9974686/64909626-f1567580-d70e-11e9-9c9d-fcd70ac48327.png)
+
+#### Routing with Mapbox
+
+You will find the option to enable MapBox Routing in the backend. 
+For this you need a [key](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/).
+
+![a4](https://user-images.githubusercontent.com/9974686/64909623-f0bddf00-d70e-11e9-95eb-00a7b9591427.png)
+
+If you activate the option you will see a collapsed control. 
+When you roll your mouse over the controller, it opens.
+
+![a2](https://user-images.githubusercontent.com/9974686/64909625-f0bddf00-d70e-11e9-8612-ed8849652a5f.png)
+
+To select starting point and destination point you have several options. See following picture. 
+Thank you for the hint with the buttons to [jojo](https://github.com/jojo12)
+
+![a3](https://user-images.githubusercontent.com/9974686/64909624-f0bddf00-d70e-11e9-90c7-b2e78b0b7f64.png)
+
+The result after clicking on Return should look something like this.
+
+![a5](https://user-images.githubusercontent.com/9974686/64909622-f0bddf00-d70e-11e9-9f26-9b785e00fbd2.png)
+
+#### Show markers on a map that link to an article - you can enter the coordinate in a Custom Field
+
+##### Custom Field of the type text
 
 The next picture shows what the map might look like. If the markers are too close together, 
 they will be clustered. If the resolution of the card fits, the marker will be displayed. 
@@ -75,10 +103,11 @@ When you enter `50.150, 7.158, red, green, home` you will see an icon as shown i
 
 ![Custom Marker](https://user-images.githubusercontent.com/9974686/59145384-7250f300-89e3-11e9-96c8-772a0f63ff7e.png)
 
-#### Custom Field agosmsmarker
+##### Custom Field agosmsmarker
 
-instead of the text fields, there is now a special custom field where you can choose all options more user friendly. 
+Instead of the text fields, there is now a special custom field where you can choose all options more user friendly. 
 
+### AGOSM Search Module 
 
 #### Options common to all custom fields
 

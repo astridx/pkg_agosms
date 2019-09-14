@@ -385,8 +385,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			(window['mymap' + moduleId]).on('click', function (e) {
 				var container = L.DomUtil.create('div');
-				var startBtn = button('Startort', container);
-				var destBtn = button('Zielort', container);
+				var startBtn = button('Start', container);
+				var destBtn = button('End', container);
 				L.DomEvent.on(startBtn, 'click', function () {
 					control.spliceWaypoints(0, 1, e.latlng);
 					(window['mymap' + moduleId]).closePopup();
