@@ -222,11 +222,11 @@
 					name="search_type" 
 					type="radio" 
 					class="btn-group" 
-					default="ajax" 
+					default="standard" 
 					label="MOD_AGOSMSSEARCHSEARCH_TYPE"
 				>
 					<option value="standard">MOD_AGOSMSSEARCHSEARCH_TYPE_STANDARD</option>
-					<option value="ajax">MOD_AGOSMSSEARCHSEARCH_TYPE_AJAX</option>
+					<!-- <option value="ajax">MOD_AGOSMSSEARCHSEARCH_TYPE_AJAX</option> -->
 				</field>
 				
 				<field 
