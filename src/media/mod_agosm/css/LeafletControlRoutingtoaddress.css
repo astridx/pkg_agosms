@@ -5,10 +5,11 @@
     color: red;
 }
 .messagebox {
-    background-color: white!important;    
+    background-color: white!important; 
 }
 .addressinput {
     width: 100%;
+	height: auto!important;
 }
 @media only screen and (max-width: 400px) {
     .addressinput {

@@ -2,6 +2,6 @@
 //# sourceMappingURL=places.min.js.map
 document.addEventListener('DOMContentLoaded', function () {
     var placesAutocomplete = places({
-        container: document.querySelector(".addressinput")
+        container: document.querySelector("#addressinput")
     });    
 }, false);

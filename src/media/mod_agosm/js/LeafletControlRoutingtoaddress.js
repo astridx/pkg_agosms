@@ -30,9 +30,10 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
         route_linestring = this._route_linestring = [{}];
 
         input = this._input = L.DomUtil.create('input');
-        input.type = 'text';
+        input.type = 'search';
         input.placeholder = this.options.placeholder;
         input.classList.add("addressinput");
+		input.setAttribute("id", "addressinput");
 
         controlElement.appendChild(input);
 
@@ -40,6 +41,8 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
         messagebox.classList.add("messagebox");
 
         controlElement.appendChild(messagebox);
+		
+		L.DomEvent.disableClickPropagation(controlElement);
 
         L.DomEvent.addListener(input, 'keydown', this._keydown, this);
 
