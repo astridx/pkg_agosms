@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var scroll = element.getAttribute('data-scroll');
 		var scrollmac = element.getAttribute('data-scrollmac');
 		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
-		
+
 		// Default: worldCopyJump: false && scrollWheelZoom: true
 		if (noWorldWarp === "1" && scrollwheelzoom === "0")
 		{
@@ -265,30 +265,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		}
 
-			var clustermarkers = L.markerClusterGroup();
+		var clustermarkers = L.markerClusterGroup();
 
-			for (var specialcustomfieldpin in specialcustomfieldpins) {
-				// skip loop if the property is from prototype
-				if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin))
-					continue;
+		for (var specialcustomfieldpin in specialcustomfieldpins) {
+			// skip loop if the property is from prototype
+			if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin))
+				continue;
 
-				var objcf = specialcustomfieldpins[specialcustomfieldpin];
+			var objcf = specialcustomfieldpins[specialcustomfieldpin];
 
-				let tempMarkercf = null;
-				
-					tempMarkercf = L.marker([objcf.lat,objcf.lon]);
-					
+			let tempMarkercf = null;
 
-					let url = "index.php?options=com_content&view=article&id=" + objcf.id;
-					let title = objcf.title;
+			if (objcf.lat == null)
+			{
+				objcf.lat = 0;
+			}
+			if (objcf.lon == null)
+			{
+				objcf.lon = 0;
+			}
+			tempMarkercf = L.marker([objcf.lat, objcf.lon]);
 
-					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
-					tempMarkercf.bindPopup(popuptext);
-					tempMarkercf.addTo(clustermarkers);
-				}
-			
-			window['mysearchmap' + moduleId].fitBounds(clustermarkers.getBounds());
-			clustermarkers.addTo(window['mysearchmap' + moduleId]);
+
+			let url = "index.php?options=com_content&view=article&id=" + objcf.id;
+			let title = objcf.title;
+
+			let popuptext = "<a href=' " + url + " '> " + title + " </a>";
+			tempMarkercf.bindPopup(popuptext);
+			tempMarkercf.addTo(clustermarkers);
+		}
+
+		window['mysearchmap' + moduleId].fitBounds(clustermarkers.getBounds());
+		clustermarkers.addTo(window['mysearchmap' + moduleId]);
 
 	})
 }, false);
