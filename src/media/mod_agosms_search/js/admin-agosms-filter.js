@@ -3,18 +3,18 @@ $(document).ready(function () {
 	var selectedVal = $(".ValueSelectVal");
 	var type_select =
 			"<select class='field_type_select'>" +
-				"<option value=''>Type (auto)</option>" +
+			//	"<option value=''>Type (auto)</option>" +
 				"<option class='multifield-available' value='text'>Text</option>" +
-				"<option class='multifield-available' value='text_range'>Text range</option>" +
+			//	"<option class='multifield-available' value='text_range'>Text range</option>" +
 				"<option value='select'>Drop-down Select Box</option>" +
-				"<option value='multi'>Multiple Select Box</option>" +
+			//	"<option value='multi'>Multiple Select Box</option>" +
 				"<option value='checkboxes'>Checkboxes</option>" +
 				"<option value='radio'>Radio</option>" +
 				"<option value='agosmsaddressmarker'>AgosmsAdressMarker</option>" +
-				"<option class='multifield-available' value='slider-range'>Slider range</option>" +
-				"<option class='multifield-available' value='calendar'>Calendar</option>" +
-				"<option class='multifield-available' value='calendar_range'>Calendar range</option>" +
-				"<option value='custom_select'>Custom select</option>" +
+			//	"<option class='multifield-available' value='slider-range'>Slider range</option>" +
+			//	"<option class='multifield-available' value='calendar'>Calendar</option>" +
+			//	"<option class='multifield-available' value='calendar_range'>Calendar range</option>" +
+			//	"<option value='custom_select'>Custom select</option>" +
 			"</select>";
 
 	selectedVal.each(function () {

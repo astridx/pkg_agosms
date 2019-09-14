@@ -107,9 +107,7 @@ When you enter `50.150, 7.158, red, green, home` you will see an icon as shown i
 
 Instead of the text fields, there is now a special custom field where you can choose all options more user friendly. 
 
-### AGOSM Search Module 
-
-#### Options common to all custom fields
+##### Options common to all custom fields
 
 The next picture shows where you can activate the option in the module.
 
@@ -120,12 +118,17 @@ Just select the option `Do not automatically display` in the Custom Field option
 
 ![Beiträge  Feld bearbeiten   Administration](https://user-images.githubusercontent.com/9974686/59145428-19358f00-89e4-11e9-8446-6079f655e0d8.png)
 
-## GPX - Fileupload
+
+#### GPX - Fileupload
 
 Please choose the layout `upload` 
 if you want to allow a user to upload a GPX file to the server and view it on the map.
 
 ![Module  AGOSM Modul Administration](https://user-images.githubusercontent.com/9974686/59145427-189cf880-89e4-11e9-8900-4a4b7f30e44e.png)
+
+### AGOSM Search Module 
+
+
 
 ## Component
 
