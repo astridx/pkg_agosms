@@ -1,6 +1,10 @@
 # pkg_agosm
 Openstreetmap Modul
 
+> Attention, this extension is not compatible with 
+[plg_fields_agosmmapwithmarker](https://github.com/astridx/plg_fields_agosmmapwithmarker). 
+The two extensions can be installed together. They may not be displayed on one page at the same time.
+
 # Quickstart
 
 ## Module
