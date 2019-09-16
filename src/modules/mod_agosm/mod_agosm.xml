@@ -852,6 +852,19 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
+				<field
+					name="catid"
+					type="category"
+					label="JCATEGORY"
+					extension="com_agosms"
+					multiple="false"
+					filter="int_array"
+					class="multipleCategories"
+					showon="showcomponentpin:1"
+				>
+					<option value="0">JOPTION_SELECT_CATEGORY</option>
+				</field>
 			</fieldset>
 
 			<!-- upload -->

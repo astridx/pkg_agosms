@@ -141,8 +141,8 @@ class ModagosmHelper
 		$model->setState('list.ordering', $ordering == 'order' ? 'ordering' : $ordering);
 		$model->setState('list.direction', $params->get('direction', 'asc'));
 
-		$catid = (int) $params->get('catid', 0);
-		$model->setState('category.id', $catid);
+		$catid = $params->get('catid', null);
+		$model->setState('category.id', $catid[0]);
 		$model->setState('category.group', $params->get('groupby', 0));
 		$model->setState('category.ordering', $params->get('groupby_ordering', 'c.lft'));
 		$model->setState('category.direction', $params->get('groupby_direction', 'ASC'));
