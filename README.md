@@ -107,9 +107,35 @@ When you enter `50.150, 7.158, red, green, home` you will see an icon as shown i
 
 ![Custom Marker](https://user-images.githubusercontent.com/9974686/59145384-7250f300-89e3-11e9-96c8-772a0f63ff7e.png)
 
-##### Custom Field agosmsmarker
+##### Custom Field agosmsmarker and agosmsaddressmarker
 
-Instead of the text fields, there is now a special custom field where you can choose all options more user friendly. 
+Instead of the text fields, there are now two special custom fields where you 
+can choose all options more user friendly.
+
+###### agosmsmarker 
+
+Create the Custom field agosmmarker
+
+![omarker2](https://user-images.githubusercontent.com/9974686/65074589-7357d000-d995-11e9-998c-fe0ad2ad413f.png)
+
+Fill the Custom Field agosmsmarker while editing an article. You can choose many options, 
+but you need to know the correct coordinates. 
+
+![omarker1](https://user-images.githubusercontent.com/9974686/65074590-7357d000-d995-11e9-9ac9-609ed6bef35a.png)
+
+###### agosmsaddressmarker
+
+The Custom Field agosmsaddressmarker calculates the coordinates for a given address. 
+For this you need another Custom Field whitch contains the address.  
+
+![amarker1](https://user-images.githubusercontent.com/9974686/65074594-7488fd00-d995-11e9-81f8-dda8e011f27c.png)
+
+Fill the Custom Field agosmsaddressmarker while editing an article. 
+You do not need the full address. You can enter only 
+the name of the city if you want a marker in the center of a city.
+
+![amarker2](https://user-images.githubusercontent.com/9974686/65074593-73f06680-d995-11e9-8eb7-091f34e12079.png)
+
 
 ##### Options common to all custom fields
 
