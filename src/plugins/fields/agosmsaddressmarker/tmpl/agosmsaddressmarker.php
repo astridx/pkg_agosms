@@ -99,7 +99,7 @@ $popuptext = $values[5];
 	?>
 	id="map<?php echo $unique ?>"
 	class = 'agosmsaddressmarkerleafletmap' 
-	style="height: <?php echo $fieldParams->get('map_height', '400') ?>px;"
+	style="height: <?php echo $fieldParams->get('mapheight', '400') ?><?php echo $fieldParams->get('mapheightunit', 'px') ?>"
 	data-unique='<?php echo $unique ?>'
 	data-lat='<?php echo $lat ?>'
 	data-lon='<?php echo $lon ?>'

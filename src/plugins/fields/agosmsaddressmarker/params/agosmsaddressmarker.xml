@@ -13,6 +13,7 @@
 				formsource="plugins/fields/agosmsaddressmarker/models/forms/address_data.xml"
 			/>
 			<field type="spacer" name="myspacer1" hr="true" />
+
 			<field
 				name="mapheight"
 				type="number"
@@ -21,6 +22,19 @@
 				min="100"
 				step="10"
 			/>
+
+			<field
+				type="list"
+				name="mapheightunit"
+				label="PLG_AGOSMSADDRESSMARKER_HEIGHT_UNIT"
+				default="px"
+			>
+				<option value="px">px (Pixel)</option>
+				<option value="vh">vh (Viewport Height)</option>
+			</field>
+
+			<field type="spacer" name="myspacer2" hr="true" />
+
 			<field
 				name="maptype"
 				type="list"
@@ -31,7 +45,7 @@
 				<option value="mapbox">mapbox</option>
 				<option value="google">google</option>
 			</field>
-			<field type="spacer" name="myspacer2" hr="true" />
+
 			<field
 				name="geocoder"
 				type="list"
@@ -42,6 +56,7 @@
 				<option value="mapbox">mapbox</option>
 				<option value="google">google</option>
 			</field>
+
 			<field
 				name="googlekey"
 				type="text"
