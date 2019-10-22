@@ -107,7 +107,6 @@ $popuptext = $values[5];
 	data-markercolor='<?php echo $markercolor ?>'
 	data-icon='<?php echo $icon ?>'
 	data-popuptext='<?php echo $popuptext ?>'
-	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
 	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '1') ?>'
 	data-owngooglegesturetext='<?php echo $fieldParams->get('owngooglegesturetext', '1') ?>'
 	data-specialicon='<?php echo $fieldParams->get('specialicon', '0') ?>'
@@ -124,6 +123,6 @@ $popuptext = $values[5];
 	data-collapsible="<?php echo $fieldParams->get('collapsible', 'false'); ?>"
 	data-showAlternatives="<?php echo $fieldParams->get('showAlternatives', 'false'); ?>"
 	data-routewhiledragging="<?php echo $fieldParams->get('routewhiledragging', 'false'); ?>"
-	
+	data-uriroot='<?php echo JUri::root(); ?>'	
 >
 </div>

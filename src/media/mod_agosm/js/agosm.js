@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	[].forEach.call(leafletmapsMod, function (element) {
 
 		// Create map with worldWarp
+		var uriroot = element.getAttribute('data-uriroot');
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
 		var noWorldWarp = element.getAttribute('data-no-world-warp');
 		var moduleId = element.getAttribute('data-module-id');
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var esrigeocoderexpanded = (element.getAttribute('data-esrigeocoderexpanded') === "true");
 		var esriallowMultipleResults = (element.getAttribute('data-esriallowMultipleResults') === "true");
 		var showrouting_simple = element.getAttribute('data-showrouting-simple');
+
 		if (showrouting_simple === '1')
 		{
 			var routesimpleposition = element.getAttribute('data-route-simple-position');
@@ -463,12 +465,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (obj.popup === "1")
 				{
-					tempMarker.bindPopup(obj.popuptext);
+						tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 				}
 
 				if (obj.popup === "2")
 				{
-					tempMarker.bindPopup(obj.popuptext).openPopup();
+					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
 				}
 			}
 		}
@@ -538,12 +540,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (obj.showpopup === "1")
 				{
-					tempMarker.bindPopup(obj.popuptext);
+					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 				}
 
 				if (obj.showpopup === "2")
 				{
-					tempMarker.bindPopup(obj.popuptext).openPopup();
+					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
 				}
 			}
 		}
@@ -603,7 +605,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						title = values[5];
 					}
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
-					tempMarkercf.bindPopup(popuptext);
+					tempMarkercf.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}

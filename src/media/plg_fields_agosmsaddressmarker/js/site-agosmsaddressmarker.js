@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// For all maps [start]
 	[].forEach.call(leafletmaps, function (element) {
 
+		var uriroot = element.getAttribute('data-uriroot');
 		var unique = element.getAttribute('data-unique');
 		var lat = element.getAttribute('data-lat');
 		var lon = element.getAttribute('data-lon');
@@ -163,10 +164,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			// If popup
 			if (popup === "1") {
-				marker.bindPopup(popuptext);
+				marker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 			}
 			if (popup === "2") {
-				marker.bindPopup(popuptext).openPopup();
+				marker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
 			}
 
 		} catch (e) {

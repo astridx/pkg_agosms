@@ -184,6 +184,8 @@
 		type="editor"
 		name="popuptext"
 		default=""
+		buttons="true"
+		hide="pagebreak,readmore"
 		label="MOD_AGOSM_POPUPTEXT"
 		description="MOD_AGOSM_POPUPTEXT_DESC"
 		filter="safehtml"

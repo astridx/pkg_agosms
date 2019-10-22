@@ -214,7 +214,9 @@ If the restrictions of your key to restricte, you see the message
 You can change the restrictions 
 [here](https://developers.google.com/maps/documentation/javascript/get-api-key#restrict_key).
 
-
+## Markers are not at the correct position
+If the shift does not change in relation to the map scale; it is always the same pixel value. 
+Please check if the problem also exists with the standard template Protostar or Cassiopeia.
 
 Google Maps JavaScript API error: RefererNotAllowedMapError
 

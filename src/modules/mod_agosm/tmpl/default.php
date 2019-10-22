@@ -96,6 +96,7 @@ $defaultArray = [];
 	data-scroll='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLL'); ?>'
 	data-touch='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_TOUCH'); ?>'
 	data-scrollmac='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'); ?>'
+	data-uriroot='<?php echo JUri::root(); ?>'
 	
 	class="leafletmapMod"
 	id="map<?php echo $module->id; ?>">
