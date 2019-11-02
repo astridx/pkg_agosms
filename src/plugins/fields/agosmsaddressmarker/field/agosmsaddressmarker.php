@@ -261,7 +261,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 		$template = JFactory::getApplication()->getTemplate();
 
 		return array(
-			JPATH_ADMINISTRATOR . '/templates/' . $template . '/html/layouts/plugins/system/stats',
+			JPATH_ADMINISTRATOR . '/templates/' . $template . '/html/layouts/plugins/fields/agosmsaddressmarker',
 			dirname(__DIR__) . '/layouts',
 			JPATH_SITE . '/layouts'
 		);
