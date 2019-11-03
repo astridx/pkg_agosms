@@ -100,4 +100,16 @@ class RoboFile extends \Robo\Tasks
 	{
 		(new \Joomla\Jorobo\Tasks\BumpVersion())->run();
 	}
+
+	/**
+	 * Bump Version placeholder __DEPLOY_VERSION__ in this project. (Set the version up in the jorobo.ini)
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0.0
+	 */
+	public function minify()
+	{
+		(new \Joomla\Jorobo\Tasks\Minify())->run();
+	}
 }
