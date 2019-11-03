@@ -17,8 +17,8 @@
 	<files>
 		<!-- The id for each extension is the element stored in the DB -->
 		<file type="component" id="com_agosms">com_agosms.zip</file>
-		<file type="module" id="mod_agosm" client="site">mod_agosms.zip</file>
-		<file type="module" id="mod_agosm_search" client="site">mod_agosm_search.zip</file>
+		<file type="module" id="mod_agosm" client="site">mod_agosm.zip</file>
+		<file type="module" id="mod_agosm_search" client="site">mod_agosms_search.zip</file>
 		<file type="plugin" id="agosmssearch" group="system">plg_system_agosmssearch.zip</file>
 		<file type="plugin" id="agosmsmarker" group="fields">plg_fields_agosmsmarker.zip</file>
 		<file type="plugin" id="agosmsaddressmarker" group="fields">plg_fields_agosmsaddressmarker.zip</file>
