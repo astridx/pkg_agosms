@@ -68,19 +68,6 @@ if ($specialicon)
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/css/font-awesome.min.css');
 }
 
-/*
-if ($geocoder === "mapbox")
-{
-	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerMapbox.js', array('version' => 'auto', 'relative' => true));
-} elseif ($geocoder === "google")
-{
-	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerGoogle.js', array('version' => 'auto', 'relative' => true));
-} else
-{
-	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerNominatim.js', array('version' => 'auto', 'relative' => true));
-}
-*/
-
 JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', array('version' => 'auto', 'relative' => true));
 
 JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR');
