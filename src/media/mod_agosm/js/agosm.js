@@ -561,7 +561,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					continue;
 
 				var objcf = specialcustomfieldpins[specialcustomfieldpin];
-				console.log(specialcustomfieldpins[specialcustomfieldpin]);
 
 				let tempMarkercf = null;
 				if (objcf.lat &&objcf.lon){
