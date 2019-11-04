@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<field
+		name="latlonpin"
+		type="agosm"
+		default="50.273543, 7.262993"
+		label="MOD_AGOSM_LATLON"
+		description="MOD_AGOSM_LATLON_DESC"
+	/>
+
+	<field
+		type="spacer"
+		name="spacerPosMedia0"
+		hr="true"
+	/>
+
+	<field
+		type="radio"
+		name="pin"
+		default="1"
+		label="MOD_AGOSM_PIN"
+		description="MOD_AGOSM_PIN_DESC"
+	>
+		<option value="1">standard &lt;img src="../media/mod_agosm/leaflet/images/marker-icon.png" alt="default" /&gt;</option>
+		<option value="3">MOD_AGOSM_AWESOMEPLUGIN</option>
+		<option value="2">MOD_AGOSM_OWNPIN</option>
+	</field>
+
+
+	<field
+		type="spacer"
+		name="spacerstartpin3"
+		hr="true"
+		showon="pin:3"
+	/>
+	<field
+		name="awesomeicon_icon"
+		type="falist"
+		label="MOD_AGOSM_FONTAWESOME_ICON_LABEL"
+		description="MOD_AGOSM_FONTAWESOME_ICON_DESC"
+		showon="pin:3"
+	>
+	</field>
+
+	<field
+		name="awesomeicon_markercolor"
+		type="list"
+		default="red"
+		label="MOD_AGOSM_FONTAWESOME_MARKERCOLOR_LABEL"
+		description="MOD_AGOSM_FONTAWESOME_MARKERCOLOR_DESC"
+		showon="pin:3"
+	>
+		<option value="red">red</option>
+		<option value="darkred">darkred</option>
+		<option value="orange">orange</option>
+		<option value="green">green</option>
+		<option value="darkgreen">darkgreen</option>
+		<option value="blue">blue</option>
+		<option value="red">red</option>
+		<option value="purple">purple</option>
+		<option value="darkpurple">darkpurple</option>
+		<option value="cadetblue">cadetblue</option>
+	</field>
+
+	<field
+		name="awesomeicon_iconcolor"
+		type="color"
+		default="#ffffff"
+		label="MOD_AGOSM_FONTAWESOME_ICONCOLOR_LABEL"
+		description="MOD_AGOSM_FONTAWESOME_ICONCOLOR_DESC"
+		showon="pin:3"
+	/>
+
+	<field
+		name="awesomeicon_extraclasses"
+		type="text"
+		default=""
+		label="MOD_AGOSM_FONTAWESOME_EXTRACLASSES_LABEL"
+		description="MOD_AGOSM_FONTAWESOME_EXTRACLASSES_DESC"
+		size="40"
+		showon="pin:3"
+	/>
+
+	<field
+		name="awesomeicon_spin"
+		type="radio"
+		label="MOD_AGOSM_FONTAWESOME_SPIN_LABEL"
+		description="MOD_AGOSM_FONTAWESOME_SPIN_DESC"
+		class="btn-group btn-group-yesno switcher"
+		default="false"
+		showon="pin:3"
+	>
+		<option value="true">JYES</option>
+		<option value="false">JNO</option>
+	</field>
+	<field
+		type="spacer"
+		name="spacerendpin3"
+		hr="true"
+		showon="pin:3"
+	/>
+
+
+	<field
+		type="spacer"
+		name="spacerstartpin2"
+		hr="true"
+		showon="pin:2"
+	/>
+	<field
+		type="media"
+		name="customPinPath"
+		label="MOD_AGOSM_PINPATH"
+		description="MOD_AGOSM_PINPATH_DESC"
+		default=""
+		showon="pin:2"
+	/>
+
+	<field
+		type="text"
+		name="customPinSize"
+		label="MOD_AGOSM_PINSIZE"
+		description="MOD_AGOSM_PINSIZE_DESC"
+		default="38, 95"
+		showon="pin:2"
+	/>
+
+	<field
+		type="media"
+		name="customPinShadowPath"
+		label="MOD_AGOSM_PINSHADOWPATH"
+		description="MOD_AGOSM_PINSHADOWPATH_DESC"
+		default=""
+		showon="pin:2"
+	/>
+
+	<field
+		type="text"
+		name="customPinShadowSize"
+		label="MOD_AGOSM_PINSHADOWSIZE"
+		description="MOD_AGOSM_PINSHADOWSIZE_DESC"
+		default="50, 64"
+		showon="pin:2"
+	/>
+
+	<field
+		type="text"
+		name="customPinOffset"
+		label="MOD_AGOSM_PINOFFSET"
+		description="MOD_AGOSM_PINOFFSET_DESC"
+		default="22, 94"
+		showon="pin:2"
+	/>
+
+	<field
+		type="text"
+		name="customPinPopupOffset"
+		label="MOD_AGOSM_PINPOPUPOFFSET"
+		description="MOD_AGOSM_PINPOPUPOFFSET_DESC"
+		default="-3, -76"
+		showon="pin:2"
+	/>
+
+	<field
+		type="spacer"
+		name="spacerPosMedia1"
+		hr="true"
+		showon="pin:2"
+	/>
+
+	<field
+		type="list"
+		name="popup"
+		default="0"
+		label="MOD_AGOSM_POPUP"
+		description="MOD_AGOSM_POPUP_DESC"
+	>
+		<option value="1">MOD_AGOSM_KLICK</option>
+		<option value="2">MOD_AGOSM_ALWAYS</option>
+		<option value="0">MOD_AGOSM_NEVER</option>
+	</field>
+
+	<field
+		type="editor"
+		name="popuptext"
+		default=""
+		label="MOD_AGOSM_POPUPTEXT"
+		description="MOD_AGOSM_POPUPTEXT_DESC"
+		filter="safehtml"
+		showon="popup!:0"
+	/>
+</form>

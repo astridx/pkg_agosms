@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="plugin" version="3.7.0" group="system" method="upgrade">
+	<name>plg_agosms_search</name>
+	<author>Astrid Günther</author>
+	<creationDate>2019-07-31</creationDate>
+	<copyright>(C) 2019 Astrid Günther. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>1.0.48</version>
+	<description>PLG_FIELDS_AGOSMSADDRESSMARKER_XML_DESCRIPTION</description>
+<files>
+		<filename plugin="plg_agosms_search">plg_agosms_search.php</filename>
+		<folder>models</folder>
+		<folder>template</folder>
+		<folder>view</folder>
+	</files>
+</extension>

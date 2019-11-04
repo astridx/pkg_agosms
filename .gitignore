@@ -1,7 +1,5 @@
 .gitignore
 vendor/
-dist/
-sik/
 composer.json
 composer.lock
 jorobo.ini

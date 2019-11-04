@@ -1,0 +1,6 @@
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer
+{
+	margin: 0 0 0 0 !important;
+}
+

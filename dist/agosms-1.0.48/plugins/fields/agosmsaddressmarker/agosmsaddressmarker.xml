@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="plugin" version="3.7.0" group="fields" method="upgrade">
+	<name>plg_fields_agosmsaddressmarker</name>
+	<author>Astrid Günther</author>
+	<creationDate>2019-07-31</creationDate>
+	<copyright>(C) 2019 Astrid Günther. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>1.0.48</version>
+	<description>PLG_FIELDS_AGOSMSADDRESSMARKER_XML_DESCRIPTION</description>
+	<files>
+		<folder>models</folder>
+<folder>tmpl</folder>
+<file plugin="agosmsaddressmarker">agosmsaddressmarker.php</file>
+<folder>field</folder>
+<folder>layouts</folder>
+<folder>params</folder>
+<file>agosmsaddressmarker.xml</file>
+	</files>
+	<languages folder="administrator/language">
+		<language tag="en-GB">en-GB/en-GB.plg_fields_agosmsaddressmarker.sys.ini</language>
+<language tag="en-GB">en-GB/en-GB.plg_fields_agosmsaddressmarker.ini</language>
+	</languages>
+	<!-- Media files -->
+	<media folder="media/plg_fields_agosmsaddressmarker" destination="plg_fields_agosmsaddressmarker">
+		<folder>GoogleMutant</folder>
+<folder>Leaflet.awesome-markers</folder>
+<folder>fonts</folder>
+<folder>GoogleGestureHandling</folder>
+<folder>css</folder>
+<folder>js</folder>
+<folder>Routing</folder>
+<folder>leaflet</folder>
+	</media>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+			</fieldset>
+		</fields>
+	</config>
+</extension>

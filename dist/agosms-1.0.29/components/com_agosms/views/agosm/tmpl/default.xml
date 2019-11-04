@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_AGOSMS_AGOSM_VIEW_DEFAULT_TITLE" option="COM_AGOSMS_AGOSM_VIEW_DEFAULT_OPTION">
+		<help
+			key = "JHELP_MENUS_MENU_ITEM_AGOSM_SINGLE_AGOSM"
+		/>
+		<message>
+			<![CDATA[COM_AGOSMS_AGOSM_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+
+	<fields name="request">
+		<fieldset
+			name="request"
+			addfieldpath="/administrator/components/com_agosms/models/fields"
+		>
+
+			<field name="id"
+				type="modal_agosm"
+				label="COM_AGOSMS_FIELD_SELECT_AGOSM_LABEL"
+				required="true"
+				select="true"
+				new="true"
+				edit="true"
+				clear="true"
+				description="COM_AGOSMS_FIELD_SELECT_AGOSM_DESC"
+			/>
+		</fieldset>
+	</fields>
+</metadata>
