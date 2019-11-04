@@ -1,4 +1,3 @@
-;
 var L=L||require('leaflet'),_MAX_POINT_INTERVAL_MS=15000,_SECOND_IN_MILLIS=1000,_MINUTE_IN_MILLIS=60*_SECOND_IN_MILLIS,_HOUR_IN_MILLIS=60*_MINUTE_IN_MILLIS,_DAY_IN_MILLIS=24*_HOUR_IN_MILLIS,_DEFAULT_MARKER_OPTS={startIconUrl:'pin-icon-start.png',endIconUrl:'pin-icon-end.png',shadowUrl:'pin-shadow.png',wptIconUrls:{'':'pin-icon-wpt.png',},iconSize:[33,50],shadowSize:[50,50],iconAnchor:[16,45],shadowAnchor:[16,47],clickable:!1};
 var _DEFAULT_POLYLINE_OPTS={color:'blue'};
 var _DEFAULT_GPX_OPTS={parseElements:['track','route','waypoint'],show_kilometer_point:!1,kilometer_point_options:{kilometer_point_color:'blue',kilometer_point_color_text:'white',kilometer_point_intervall:1,kilometer_point_radius:10,},show_mile_point:!0,mile_point_options:{mile_point_color:'blue',mile_point_color_text:'white',mile_intervall:1,mile_point_radius:10,},};
@@ -83,12 +82,12 @@ this._info.hr.avg=Math.round(this._info.hr._total/this._info.hr._points.length);
 this._info.cad.avg=Math.round(this._info.cad._total/this._info.cad._points.length);
 this._info.atemp.avg=Math.round(this._info.atemp._total/this._info.atemp._points.length);
 if(d.indexOf('waypoint')>-1){n=t.getElementsByTagName('wpt');
-for(i=0;i<n.length;i++){var y=new L.LatLng(n[i].getAttribute('lat'),n[i].getAttribute('lon')),M=n[i].getElementsByTagName('name'),a='';
+for(i=0;i<n.length;i++){var N=new L.LatLng(n[i].getAttribute('lat'),n[i].getAttribute('lon')),M=n[i].getElementsByTagName('name'),a='';
 if(M.length>0){a=M[0].textContent};
 var I=n[i].getElementsByTagName('desc'),r='';
 if(I.length>0){r=I[0].textContent};
-var N=n[i].getElementsByTagName('sym'),s='';
-if(N.length>0){s=N[0].textContent};
+var y=n[i].getElementsByTagName('sym'),s='';
+if(y.length>0){s=y[0].textContent};
 var l=e.marker_options.wptIcons,p=e.marker_options.wptIconUrls,c;
 if(l&&l[s]){c=l[s]}
 else if(p&&p[s]){c=new L.GPXTrackIcon({iconUrl:p[s]})}
@@ -96,7 +95,7 @@ else if(l&&l['']){c=l['']}
 else if(p&&p['']){c=new L.GPXTrackIcon({iconUrl:p['']})}
 else{console.log('No icon or icon URL configured for symbol type "'+s+'", and no fallback configured; ignoring waypoint.');
 continue};
-var g=new L.Marker(y,{clickable:!0,title:a,icon:c});
+var g=new L.Marker(N,{clickable:!0,title:a,icon:c});
 g.bindPopup('<b>'+a+'</b>'+(r.length>0?'<br>'+r:'')).openPopup();
 this.fire('addpoint',{point:g,point_type:'waypoint'});
 o.push(g)}};

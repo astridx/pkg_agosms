@@ -1,4 +1,3 @@
-;
 $=jQuery.noConflict();
 $(document).ready(function(){var l=$(".ValueSelectVal"),e="<select class='field_type_select'><option class='multifield-available' value='text'>Text</option><option value='select'>Drop-down Select Box</option><option value='checkboxes'>Checkboxes</option><option value='radio'>Radio</option><option value='agosmsaddressmarker'>AgosmsAdressMarker</option></select>";
 l.each(function(){if($(this).val()!=""){var p=$(this),s=$(this).val().split("\n");
