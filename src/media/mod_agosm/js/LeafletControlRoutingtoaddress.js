@@ -1,4 +1,3 @@
-;
 L.LeafletControlRoutingtoaddress=L.Control.extend({options:{position:'topright',router:'osrm',token:'',placeholder:'Please insert your address here.',errormessage:'Address not valid.',distance:'Entfernung:',duration:'Fahrzeit',target:'Koblenz, Rheinland-Pfalz, Deutschland',requesterror:'"Too Many Requests" or "Not Authorized - Invalid Token"'},initialize:function(e){L.Util.setOptions(this,e)},onAdd:function(e){this._map=e;
 var t='div',o='leaflet-control-routingtoaddress';
 controlElement=this._controlElement=controlElement=L.DomUtil.create(t,o);

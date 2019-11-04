@@ -1,4 +1,3 @@
-;
 L.GridLayer.GoogleMutant=L.GridLayer.extend({options:{minZoom:0,maxZoom:23,tileSize:256,subdomains:'abc',errorTileUrl:'',attribution:'',opacity:1,continuousWorld:!1,noWrap:!1,type:'roadmap',maxNativeZoom:21},initialize:function(t){L.GridLayer.prototype.initialize.call(this,t);
 this._ready=!!window.google&&!!window.google.maps&&!!window.google.maps.Map;
 this._GAPIPromise=this._ready?Promise.resolve(window.google):new Promise(function(t,e){var n=0,i=null;

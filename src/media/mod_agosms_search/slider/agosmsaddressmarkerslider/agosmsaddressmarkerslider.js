@@ -1,4 +1,3 @@
-;
 document.addEventListener('DOMContentLoaded',function(){var e=document.querySelectorAll('.agSliderField');[].forEach.call(e,function(e){var a=parseInt(e.getAttribute('data-slider-min')),r=parseInt(e.getAttribute('data-slider-max')),l=e.parentNode.parentNode,o=l.getElementsByTagName('input'),n=o[0],s=o[2],i=o[3],t=new Slider(e,{range:!0,value:[a,r]});
 n.onchange=function(){var o=n.value.split('-').map(Number);
 if(o[0]<a){o[0]=a};

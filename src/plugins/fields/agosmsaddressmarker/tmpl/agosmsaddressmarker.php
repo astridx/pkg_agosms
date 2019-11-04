@@ -57,20 +57,12 @@ if ($fieldParams->get('scrollwheelzoom') === "2")
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.min.js');
 }
 
-if ($fieldParams->get('maptype') === "mapbox")
-{
-	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-mapbox.js');
-}
-elseif ($fieldParams->get('maptype') === "google")
+if ($fieldParams->get('maptype') === "google")
 {
 	$document->addScript('https://maps.googleapis.com/maps/api/js?key=' . $fieldParams->get('googlekey', ''));
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleMutant/Leaflet.GoogleMutant.js');
-	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-google.js');
 }
-else
-{
-	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker-openstreetmap.js');
-}
+
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
 
 // We need this for list views
@@ -101,6 +93,7 @@ $popuptext = $values[5];
 	class = 'agosmsaddressmarkerleafletmap' 
 	style="height: <?php echo $fieldParams->get('mapheight', '400') ?><?php echo $fieldParams->get('mapheightunit', 'px') ?>"
 	data-unique='<?php echo $unique ?>'
+	data-maptype='<?php echo $fieldParams->get('maptype') ?>'
 	data-lat='<?php echo $lat ?>'
 	data-lon='<?php echo $lon ?>'
 	data-iconcolor='<?php echo $iconcolor ?>'
