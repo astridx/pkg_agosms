@@ -68,6 +68,7 @@ if ($specialicon)
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/css/font-awesome.min.css');
 }
 
+/*
 if ($geocoder === "mapbox")
 {
 	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerMapbox.js', array('version' => 'auto', 'relative' => true));
@@ -78,6 +79,7 @@ if ($geocoder === "mapbox")
 {
 	JHtml::_('script', 'plg_fields_agosmsaddressmarker/agosmsaddressmarkerNominatim.js', array('version' => 'auto', 'relative' => true));
 }
+*/
 
 JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', array('version' => 'auto', 'relative' => true));
 
@@ -188,6 +190,7 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 	
 <button 
 		data-fieldsnamearray="<?php echo $fieldsNameImplode; ?>"
+		data-geocoder="<?php echo $geocoder; ?>"
 		data-mapboxkey="<?php echo $mapboxkey; ?>"
 		data-googlekey="<?php echo $googlekey; ?>"
 		class="btn btn-success agosmsaddressmarkerbutton" 
