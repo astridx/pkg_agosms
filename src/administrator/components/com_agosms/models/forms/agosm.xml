@@ -250,6 +250,14 @@
 			description="MOD_AGOSM_LATLON_DESC"
 		/>
 		<field
+			name="coordinates1"
+			type="agosmsaddressfinder"
+			default="50.273543, 7.262993"
+			label="MOD_AGOSM_LATLON"
+			description="MOD_AGOSM_LATLON_DESC"
+		/>
+
+		<field
 			name="url"
 			type="hidden"
 			label="COM_AGOSMS_FIELD_URL_LABEL"
@@ -258,6 +266,7 @@
 			filter="url"
 			size="40"
 		/>
+
 		<field
 			type="radio"
 			name="showdefaultpin"
