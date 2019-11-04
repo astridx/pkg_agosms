@@ -1,4 +1,26 @@
-document.addEventListener('click',function(e){if(e.target.classList.contains('agosmsaddressmarkerbutton')){var a=e.target,t=[],i=a.getAttribute('data-fieldsnamearray').split(','),u=a.getAttribute('data-mapboxkey'),c=a.parentNode,n=c.getElementsByTagName('input'),p=n[0],o=n[1];[].forEach.call(i,function(e){var a=document.getElementById(e);t.push(a.value)});t=t.join();var r=function(e){if(e.features&&e.features.length===1){var a=e.features[0].center;p.value=a[1];o.value=a[0];o.onchange();Joomla.renderMessages({'notice':[(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE')+t)+' (Mapbox)']})}
+;
+document.addEventListener('click',function(e){if(e.target.classList.contains('agosmsaddressmarkerbutton')){var n=e.target,t=[],i=n.getAttribute('data-fieldsnamearray').split(','),u=n.getAttribute('data-mapboxkey'),c=n.parentNode,a=c.getElementsByTagName('input'),p=a[0],o=a[1];[].forEach.call(i,function(e){var n=document.getElementById(e);
+t.push(n.value)});
+t=t.join();
+var r=function(e){if(e.features&&e.features.length===1){var n=e.features[0].center;
+p.value=n[1];
+o.value=n[0];
+o.onchange();
+Joomla.renderMessages({'notice':[(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE')+t)+' (Mapbox)']})}
 else if(e.features&&e.features.length>0){}
-else{Joomla.renderMessages({'error':[Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR')+t+' (Mapbox)']})}},s={limit:1,access_token:u};getJSON('https://api.mapbox.com/geocoding/v5/mapbox.places/'+encodeURIComponent(t)+'.json',s,r)}});function getJSON(t,n,a){var e=new XMLHttpRequest();e.onreadystatechange=function(){if(e.readyState!==4){return};if(e.status!==200&&e.status!==304){a('');return};a(e.response)};e.open('GET',t+getParamString(n),!0);e.responseType='json';e.setRequestHeader('Accept','application/json');e.send(null)};function getParamString(e,a,s){var r=[];for(var o in e){var i=encodeURIComponent(s?o.toUpperCase():o),t=e[o];if(!L.Util.isArray(t)){r.push(i+'='+encodeURIComponent(t))}
-else{for(var n=0;n<t.length;n++){r.push(i+'='+encodeURIComponent(t[n]))}}};return(!a||a.indexOf('?')===-1?'?':'&')+r.join('&')};
+else{Joomla.renderMessages({'error':[Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR')+t+' (Mapbox)']})}},s={limit:1,access_token:u};
+getJSON('https://api.mapbox.com/geocoding/v5/mapbox.places/'+encodeURIComponent(t)+'.json',s,r)}});
+function getJSON(t,a,n){var e=new XMLHttpRequest();
+e.onreadystatechange=function(){if(e.readyState!==4){return};
+if(e.status!==200&&e.status!==304){n('');
+return};
+n(e.response)};
+e.open('GET',t+getParamString(a),!0);
+e.responseType='json';
+e.setRequestHeader('Accept','application/json');
+e.send(null)};
+function getParamString(e,n,s){var r=[];
+for(var o in e){var i=encodeURIComponent(s?o.toUpperCase():o),t=e[o];
+if(!L.Util.isArray(t)){r.push(i+'='+encodeURIComponent(t))}
+else{for(var a=0;a<t.length;a++){r.push(i+'='+encodeURIComponent(t[a]))}}};
+return(!n||n.indexOf('?')===-1?'?':'&')+r.join('&')};
