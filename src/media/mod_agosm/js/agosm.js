@@ -577,9 +577,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					{
 						var AwesomeIcon = new L.AwesomeMarkers.icon(
 							{
-								icon: values[4],
-								markerColor: values[2],
-								iconColor: values[3],
+								icon: values[4].trim(),
+								markerColor: values[2].trim(),
+								iconColor: values[3].trim(),
 								prefix: 'fa',
 								spin: false,
 								extraClasses: "agosmsmarkerextraklasse",
