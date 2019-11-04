@@ -102,7 +102,7 @@ class RoboFile extends \Robo\Tasks
 	}
 
 	/**
-	 * Bump Version placeholder __DEPLOY_VERSION__ in this project. (Set the version up in the jorobo.ini)
+	 * Copy files in media folder and minify all css and js files this folder. (Set the file type up in the jorobo.ini)
 	 *
 	 * @return  void
 	 *
