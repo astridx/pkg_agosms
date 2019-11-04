@@ -1,72 +1,26 @@
-document.addEventListener('click', function (e) {
-	if (e.target.classList.contains('agosmsaddressmarkerbutton')) {
-		var button = e.target;
-		var addressstring = [];
-		var fieldsNameArray =  button.getAttribute('data-fieldsnamearray').split(',');
-		var mapboxkey = button.getAttribute('data-mapboxkey');
-		var surroundingDiv = button.parentNode;
-		var inputs = surroundingDiv.getElementsByTagName('input');
-		var lat = inputs[0];
-		var lon = inputs[1];
-
-		[].forEach.call(fieldsNameArray, function(el){
-			var field = document.getElementById(el);
-			addressstring.push(field.value);
-		});
-
-		addressstring = addressstring.join();
-
-		var cords = function (results) {
-			if (results.features && results.features.length === 1) {
-				var lonlat = results.features[0].center;
-				lat.value = lonlat[1];
-				lon.value = lonlat[0];
-				lon.onchange();
-				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring) + ' (Mapbox)']});
-			} else if (results.features && results.features.length > 0) {
-				// Limit is fix set to 1 up to now
-			} else {
-				Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR') + addressstring + ' (Mapbox)']});
-			}
-		}
-		var params = {
-	        limit: 1,
-			access_token: mapboxkey
-		};
-		getJSON("https://api.mapbox.com/geocoding/v5/mapbox.places/" + encodeURIComponent(addressstring) + '.json', params, cords);
-	}
-});
-
-function getJSON(url, params, callback) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState !== 4) {
-			return;
-		}
-		if (xmlHttp.status !== 200 && xmlHttp.status !== 304) {
-			callback('');
-			return;
-		}
-		callback(xmlHttp.response);
-	};
-	xmlHttp.open('GET', url + getParamString(params), true);
-	xmlHttp.responseType = 'json';
-	xmlHttp.setRequestHeader('Accept', 'application/json');
-	xmlHttp.send(null);
-}
-
-function getParamString(obj, existingUrl, uppercase) {
-	var params = [];
-	for (var i in obj) {
-		var key = encodeURIComponent(uppercase ? i.toUpperCase() : i);
-		var value = obj[i];
-		if (!L.Util.isArray(value)) {
-			params.push(key + '=' + encodeURIComponent(value));
-		} else {
-			for (var j = 0; j < value.length; j++) {
-				params.push(key + '=' + encodeURIComponent(value[j]));
-			}
-		}
-	}
-	return (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') + params.join('&');
-}
+;
+document.addEventListener('click',function(e){if(e.target.classList.contains('agosmsaddressmarkerbutton')){var n=e.target,t=[],i=n.getAttribute('data-fieldsnamearray').split(','),u=n.getAttribute('data-mapboxkey'),c=n.parentNode,a=c.getElementsByTagName('input'),p=a[0],o=a[1];[].forEach.call(i,function(e){var n=document.getElementById(e);
+t.push(n.value)});
+t=t.join();
+var r=function(e){if(e.features&&e.features.length===1){var n=e.features[0].center;
+p.value=n[1];
+o.value=n[0];
+o.onchange();
+Joomla.renderMessages({'notice':[(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE')+t)+' (Mapbox)']})}
+else if(e.features&&e.features.length>0){}
+else{Joomla.renderMessages({'error':[Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR')+t+' (Mapbox)']})}},s={limit:1,access_token:u};
+getJSON('https://api.mapbox.com/geocoding/v5/mapbox.places/'+encodeURIComponent(t)+'.json',s,r)}});
+function getJSON(t,a,n){var e=new XMLHttpRequest();
+e.onreadystatechange=function(){if(e.readyState!==4){return};
+if(e.status!==200&&e.status!==304){n('');
+return};
+n(e.response)};
+e.open('GET',t+getParamString(a),!0);
+e.responseType='json';
+e.setRequestHeader('Accept','application/json');
+e.send(null)};
+function getParamString(e,n,s){var r=[];
+for(var o in e){var i=encodeURIComponent(s?o.toUpperCase():o),t=e[o];
+if(!L.Util.isArray(t)){r.push(i+'='+encodeURIComponent(t))}
+else{for(var a=0;a<t.length;a++){r.push(i+'='+encodeURIComponent(t[a]))}}};
+return(!n||n.indexOf('?')===-1?'?':'&')+r.join('&')};

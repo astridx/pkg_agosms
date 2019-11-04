@@ -1,32 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
-	var leafletmaps = document.querySelectorAll('.agosmsaddressmarkerleafletmap');
-
-	// For all maps [start]
-	[].forEach.call(leafletmaps, function (element) {
-
-		var unique = element.getAttribute('data-unique');
-		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
-		var mapboxkey = element.getAttribute('data-mapboxkey');
-
-		// Initialize the Map if needed
-		var container = L.DomUtil.get('map' + unique);
-		if (!container.children.length > 0) {
-			if (scrollwheelzoom === "0")
-			{
-				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: false});
-			} else
-			{
-				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
-			}
-		}
-
-		var osmUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey;
-		var osmAttrib = 'Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
-			'<a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
-			'Imagery © <a href=\"http://mapbox.com\">Mapbox</a>';
-		var osm = new L.TileLayer(osmUrl, {attribution: osmAttrib, id: 'mapbox.streets'});
-		window['map' + unique].addLayer(osm);
-	});
-	// For all maps [end]
-
-}, false);
+;
+document.addEventListener('DOMContentLoaded',function(){var e=document.querySelectorAll('.agosmsaddressmarkerleafletmap');[].forEach.call(e,function(a){var e=a.getAttribute('data-unique'),n=a.getAttribute('data-scrollwheelzoom'),p=a.getAttribute('data-mapboxkey'),m=L.DomUtil.get('map'+e);
+if(!m.children.length>0){if(n==='0'){window['map'+e]=new L.Map('map'+e,{scrollWheelZoom:!1})}
+else{window['map'+e]=new L.Map('map'+e,{scrollWheelZoom:!0})}};
+var t='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+p,o='Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',r=new L.TileLayer(t,{attribution:o,id:'mapbox.streets'});
+window['map'+e].addLayer(r)})},!1);

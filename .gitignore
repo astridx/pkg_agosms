@@ -1,3 +1,7 @@
+.gitignore
 vendor/
-sik/
 dist/
+sik/
+composer.json
+composer.lock
+jorobo.ini

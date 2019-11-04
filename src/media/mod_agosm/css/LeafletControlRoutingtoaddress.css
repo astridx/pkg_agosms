@@ -1,18 +1,1 @@
-.leaflet-control-routingtoaddress {
-    width:300px;
-}
-.address-error {
-    color: red;
-}
-.messagebox {
-    background-color: white!important; 
-}
-.addressinput {
-    width: 100%;
-	height: auto!important;
-}
-@media only screen and (max-width: 400px) {
-    .addressinput {
-       margin-left: 20%;
-    }
-}
+.leaflet-control-routingtoaddress{width:300px}.address-error{color:red}.messagebox{background-color:white !important}.addressinput{width:100%;height:auto !important}@media only screen and (max-width: 400px){.addressinput{margin-left:20%}}

@@ -1,7 +1,9 @@
 {
-    "name": "astrid/plg_fields_agosmmapwithmarker",
+    "name": "astrid/pkg_agosms",
     "require": {
-        "joomla-projects/jorobo": "^0.7.0"
+        "astridx/jorobo": "0.8.*",
+		"patchwork/jsqueeze": "~1.0",
+		"natxet/CssMin": "~3.0"
     },
     "authors": [
         {

@@ -100,4 +100,16 @@ class RoboFile extends \Robo\Tasks
 	{
 		(new \Joomla\Jorobo\Tasks\BumpVersion())->run();
 	}
+
+	/**
+	 * Copy files in media folder and minify all css and js files this folder. (Set the file type up in the jorobo.ini)
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0.0
+	 */
+	public function minify()
+	{
+		(new \Joomla\Jorobo\Tasks\Minify())->run();
+	}
 }
