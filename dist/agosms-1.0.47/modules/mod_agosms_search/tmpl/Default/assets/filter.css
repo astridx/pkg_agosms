@@ -1,0 +1,307 @@
+.GSearchBlock * { box-sizing: border-box; max-width: 100%; }
+.gsearch-cell {	display: inline-block; padding: 0 20px 10px 0; position: relative; vertical-align: top; min-width: 110px; }
+.columns-1 .gsearch-cell { padding-right: 0px !important; }
+.GSearchBlock .inputbox { margin-bottom: 0px; height: auto !important; border: none !important; padding: 0 !important; box-shadow: none !important; }
+.GSearchBlock .inputbox:not(.bootstrap-select):not(.form-check-input) { 
+	height: auto !important; 
+	padding: 6px 8px 5px 8px !important;
+	line-height: 17px !important;
+    font-size: 14px !important;
+	border: 1px solid #aaa !important; 
+	margin: 0 !important;
+	border-radius: 3px;
+}
+.GSearchBlock h3 { margin-top: 20px; margin-bottom: 10px; }
+.GSearchBlock input { height: auto !important; }
+.GSearchBlock label input { display: inline !important; }
+.GSearchBlock .keyword input { min-width: 220px; }
+.GSearchBlock .columns-1 .keyword input { min-width: inherit; width: 100%; }
+.GSearchBlock .icon-calendar:before { 
+	content: "\43"; 	
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin-right: .25em;
+	line-height: 14px; 
+	font-family: 'IcoMoon';
+	font-style: normal;
+	speak: none;
+}
+ 
+.gsearch-buttons { margin-top: 15px; }
+.gsearch-buttons .btn { width: auto; }
+.GSearchBlock h3 { font-size: 16px; display: block !important; float: none !important; text-align: left; }
+.GSearchBlock label { display: block !important; font-weight: normal !important; }
+.GSearchBlock .amount { text-align: center; }
+.GSearchBlock .acounter { margin-top: 20px; }
+.GSearchBlock .search_history { margin-top: 20px; }
+
+/* bootstrap select styles */
+.GSearchBlock .dropup,
+.GSearchBlock .dropdown {
+	position: relative;
+}
+.GSearchBlock .dropdown-toggle {
+	*margin-bottom: -3px;
+}
+.GSearchBlock .dropdown-toggle:active,
+.GSearchBlock .open .dropdown-toggle {
+	outline: 0;
+}
+
+.GSearchBlock .caret {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	vertical-align: top;
+	border-top: 4px solid #000;
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+	content: "";
+}
+.GSearchBlock .dropdown .caret {
+	margin-top: 8px;
+	margin-left: 2px;
+}
+.GSearchBlock .dropdown-toggle::after {
+	display: none;
+}
+.GSearchBlock .tags { 
+	margin: 0px;
+}
+.GSearchBlock .bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
+	margin-top: 0px;
+}
+.GSearchBlock .dropdown-menu:not(.show) {
+	display: none;
+}
+.GSearchBlock .dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	float: left;
+	min-width: 160px;
+	padding: 5px 0;
+	margin: 2px 0 0;
+	list-style: none;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,0.2);
+	*border-right-width: 2px;
+	*border-bottom-width: 2px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding;
+	background-clip: padding-box;
+}
+.GSearchBlock .dropdown-menu.pull-right {
+	right: 0;
+	left: auto;
+}
+.GSearchBlock .dropdown-menu .divider {
+	*width: 100%;
+	height: 1px;
+	margin: 8px 1px;
+	*margin: -5px 0 5px;
+	overflow: hidden;
+	background-color: #e5e5e5;
+	border-bottom: 1px solid #fff;
+}
+.GSearchBlock .dropdown-menu .menuitem-group {
+	margin: 4px 1px;
+	overflow: hidden;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	background-color: #eee;
+	color: #555;
+	text-transform: capitalize;
+	font-size: 95%;
+	padding: 3px 20px;
+}
+
+.GSearchBlock .dropdown-menu > li { border: none; }
+
+.GSearchBlock .dropdown-menu > li > a {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 18px;
+	color: #333;
+	white-space: nowrap;
+}
+.GSearchBlock .dropdown-menu > li > a:hover,
+.GSearchBlock .dropdown-menu > li > a:focus,
+.GSearchBlock .dropdown-submenu:hover > a,
+.GSearchBlock .dropdown-submenu:focus > a {
+	text-decoration: none;
+	color: #fff;
+	background-color: #005783;
+	background-image: -moz-linear-gradient(top,#005e8d,#004d74);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#005e8d),to(#004d74));
+	background-image: -webkit-linear-gradient(top,#005e8d,#004d74);
+	background-image: -o-linear-gradient(top,#005e8d,#004d74);
+	background-image: linear-gradient(to bottom,#005e8d,#004d74);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff005e8d', endColorstr='#ff004c73', GradientType=0);
+}
+.GSearchBlock .dropdown-menu > .active > a,
+.GSearchBlock .dropdown-menu > .active > a:hover,
+.GSearchBlock .dropdown-menu > .active > a:focus {
+	color: #333;
+	text-decoration: none;
+	outline: 0;
+	background-color: #005783;
+	background-image: -moz-linear-gradient(top,#005e8d,#004d74);
+	background-image: -webkit-gradient(linear,0 0,0 100%,from(#005e8d),to(#004d74));
+	background-image: -webkit-linear-gradient(top,#005e8d,#004d74);
+	background-image: -o-linear-gradient(top,#005e8d,#004d74);
+	background-image: linear-gradient(to bottom,#005e8d,#004d74);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff005e8d', endColorstr='#ff004c73', GradientType=0);
+}
+.GSearchBlock .dropdown-menu > .disabled > a,
+.GSearchBlock .dropdown-menu > .disabled > a:hover,
+.GSearchBlock .dropdown-menu > .disabled > a:focus {
+	color: #999;
+}
+.GSearchBlock .dropdown-menu > .disabled > a:hover,
+.GSearchBlock .dropdown-menu > .disabled > a:focus {
+	text-decoration: none;
+	background-color: transparent;
+	background-image: none;
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+	cursor: default;
+}
+.GSearchBlock .open {
+	*z-index: 1000;
+}
+.GSearchBlock .open > .dropdown-menu {
+	display: block;
+}
+.GSearchBlock .dropdown-backdrop {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	z-index: 990;
+}
+.GSearchBlock .pull-right > .dropdown-menu {
+	right: 0;
+	left: auto;
+}
+
+.GSearchBlock .btn-group {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+
+.gsearch-field-text-range input { width: 100px; }
+.gsearch-field-checkboxes input { margin-top: 0px; }
+
+.gsearch-field-calendar .field-calendar { display: inline-block; }
+.gsearch-field-calendar input { width: 100px !important; }
+.gsearch-field-calendar .calendar-container { float: none; min-width: 240px; }
+.gsearch-field-calendar .btn-exit { display: none; }
+
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child>.dropdown-toggle {
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+}
+.input-append .add-on, .input-append .btn, .input-append .btn-group {
+    margin-left: -1px;
+}
+
+.input-append input, .input-append select, .input-append .uneditable-input {
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.input-append, .input-prepend {
+    display: inline-block;
+    margin-bottom: 9px;
+	vertical-align: middle;
+    font-size: 0;
+    white-space: nowrap;
+}
+
+.input-append input, .input-append select, .input-append .uneditable-input, .input-prepend input, .input-prepend select, .input-prepend .uneditable-input {
+	display: inline-block;
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+}
+.bootstrap-select .dropdown-menu li.active a { color: #fff; }
+
+/* Chosen conflict fix */
+.GSearchBlock .chzn-container { display: none; }
+
+/* Bootstrap Conflicts fix */
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover { 
+	color: #333 !important; 
+	font-weight: normal;
+}
+
+.GSearchBlock .btn {
+	position: relative;
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #333333 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75) !important;
+    background-color: #f5f5f5 !important;
+    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6) !important;
+    background-repeat: repeat-x !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0) !important;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf !important;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false) !important;
+    border: 1px solid #cccccc !important;
+    border-bottom-color: #b3b3b3 !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05) !important;
+}
+
+.GSearchBlock .btn:hover { 
+	border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25) !important; 
+	border-bottom-color: #b3b3b3 !important; 
+	background-image: none !important; 
+	text-shadow: none !important; 
+	background-color: #e6e6e6 !important; 
+}
+
+.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
+	width: -webkit-fill-available !important;
+	min-width: 220px;
+    max-width: 300px; /* selected elements count can be adjusted here */
+}
+.columns-1 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) { 
+	min-width: inherit !important;
+}
+.bootstrap-select.btn-group .dropdown-menu.inner { overflow-x: hidden !important; }
+.bootstrap-select .dropdown-menu { width: auto !important; min-width: 100% !important; 
+	max-width: intrinsic !important; 
+	max-width: -moz-max-content !important; 
+	max-width: -webkit-max-content !important;
+	display: table;
+	overflow-x: hidden !important; 
+}

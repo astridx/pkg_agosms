@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="plugin" version="3.7.0" group="system" method="upgrade">
+	<name>plg_system_agosmssearch</name>
+	<author>Astrid Günther</author>
+	<creationDate>2019-08-21</creationDate>
+	<copyright>(C) 2019 Astrid Günther. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>1.0.49</version>
+	<description>PLG_SYSTEM_AGOSMS_SEARCH_XML_DESCRIPTION</description>
+	<files>
+		<folder>models</folder>
+<folder>view</folder>
+<folder>template</folder>
+<file plugin="agosmssearch">agosmssearch.php</file>
+<file>agosmssearch.xml</file>
+	</files>
+	<languages folder="administrator/language">
+		<language tag="en-GB">en-GB/en-GB.plg_system_agosmssearch.ini</language>
+<language tag="en-GB">en-GB/en-GB.plg_system_agosmssearch.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+			</fieldset>
+		</fields>
+	</config>
+</extension>

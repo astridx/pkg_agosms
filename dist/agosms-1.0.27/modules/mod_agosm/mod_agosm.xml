@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.6" client="site" method="upgrade">
+	<name>mod_agosm</name>
+	<author>Astrid Günther</author>
+	<creationDate>2019-01-19</creationDate>
+	<copyright>(C) 2019 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later;</license>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>1.0.27</version>
+	<description>MOD_AGOSM_XML_DESCRIPTION</description>
+	<scriptfile>script.php</scriptfile>
+
+	<!-- Front-end files -->
+	<files>
+		<file module="mod_agosm">mod_agosm.php</file>
+		<file>LICENSE</file>
+<file>mod_agosm.xml</file>
+<folder>models</folder>
+<folder>tmpl</folder>
+<file>script.php</file>
+<file>helper.php</file>
+<file module="mod_agosm">mod_agosm.php</file>
+<file>CHANGES.txt</file>
+	</files>
+	<languages folder="language">
+		<language tag="de-DE">de-DE/de-DE.mod_agosm.ini</language>
+<language tag="de-DE">de-DE/de-DE.mod_agosm.sys.ini</language>
+<language tag="en-GB">en-GB/en-GB.mod_agosm.ini</language>
+<language tag="en-GB">en-GB/en-GB.mod_agosm.sys.ini</language>
+	</languages>
+	<!-- Media files -->
+	<media folder="media/mod_agosm" destination="mod_agosm">
+		<folder>Leaflet.awesome-markers</folder>
+<folder>fonts</folder>
+<folder>css</folder>
+<folder>js</folder>
+<folder>leaflet</folder>
+	</media>
+
+	<!-- Configuration -->
+	<config>
+		<fields name="params"  addfieldpath="modules/mod_agosm/models/fields/field">
+			<!-- Map Configuration -->
+			<fieldset
+				name="mapConfig"
+				label="MOD_AGOSM_H_MAP"
+			>
+				<field
+					type="integer"
+					name="height"
+					label="MOD_AGOSM_HEIGHT"
+					description="MOD_AGOSM_HEIGHT_DESC"
+					default="400"
+					first="10"
+					last="1000"
+					step="10"
+				/>
+
+				<field
+					type="list"
+					name="zoom"
+					default="7"
+					label="MOD_AGOSM_ZOOM"
+					description="MOD_AGOSM_ZOOM_DESC"
+				>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+				</field>
+
+				<field
+					type="list"
+					name="baselayer"
+					default="mapnik"
+					label="MOD_AGOSM_BASELAYER"
+					description="MOD_AGOSM_BASELAYER_DESC"
+				>
+					<option value="mapbox">Mapbox</option>
+					<option value="mapnik">OpenStreetMap</option>
+					<option value="mapnikde">OpenStreetMap DE</option>
+					<option value="stamen">Stamen</option>
+					<option value="opentopomap">OpenTopoMap</option>
+					<option value="openmapsurfer">OpenMapSurfer</option>
+					<option value="humanitarian">Humanitarian (HOT)</option>
+					<option value="thunderforest">Thunderforest</option>
+					<option value="google">Google</option>
+					<option value="custom">custom</option>
+				</field>
+				<field
+					name="mapboxkey"
+					type="text"
+					default=""
+					label="MOD_AGOSM_MAPBOXKEY_LABEL"
+					description="MOD_AGOSM_MAPBOXKEY_DESC"
+					size="40"
+					showon="baselayer:mapbox"
+				/>
+				<field
+					type="list"
+					name="mapboxmaptype"
+					default="streets"
+					label="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_LABEL"
+					description="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_DESC"
+					showon="baselayer:mapbox"
+				>
+					<option value="mapbox.streets">streets</option>
+					<option value="mapbox.light">light</option>
+					<option value="mapbox.dark">dark</option>
+					<option value="mapbox.satellite">satellite</option>
+					<option value="mapbox.streets-satellite">streets-satellite</option>
+					<option value="mapbox.wheatpaste">wheatpaste</option>
+					<option value="mapbox.streets-basic">basic</option>
+					<option value="mapbox.comic">comic</option>
+					<option value="mapbox.outdoors">outdoors</option>
+					<option value="mapbox.run-bike-hike">run-bike-hike</option>
+					<option value="mapbox.pencil">pencil</option>
+					<option value="mapbox.pirates">pirates</option>
+					<option value="mapbox.emerald">emerald</option>
+					<option value="mapbox.high-contrast">high-contrast</option>
+				</field>
+				<field
+					name="googlekey"
+					type="text"
+					default=""
+					label="MOD_AGOSM_GOOGLEKEY_LABEL"
+					description="MOD_AGOSM_GOOGLEKEY_DESC"
+					size="40"
+					showon="baselayer:google"
+				/>
+				<field
+					name="thunderforestkey"
+					type="text"
+					default=""
+					label="MOD_AGOSM_THUNDERKEY_LABEL"
+					description="MOD_AGOSM_THUNDERKEY_DESC"
+					size="40"
+					showon="baselayer:thunderforest"
+				/>
+				<field
+					type="list"
+					name="stamenmaptype"
+					default="watercolor"
+					label="MOD_AGOSM_CONTROL_STAMENMAPTYPE_LABEL"
+					description="MOD_AGOSM_CONTROL_STAMENMAPTYPE_DESC"
+					showon="baselayer:stamen"
+				>
+					<option value="toner">toner</option>
+					<option value="terrain">terrain</option>
+					<option value="watercolor">watercolor</option>
+				</field>
+				<field
+					type="list"
+					name="thunderforestmaptype"
+					default="cycle"
+					label="MOD_AGOSM_CONTROL_THUNDERFORESTMAPTYPE_LABEL"
+					description="MOD_AGOSM_CONTROL_THUNDERFORESTMAPTYPE_DESC"
+					showon="baselayer:thunderforest"
+				>
+					<option value="cycle">cycle</option>
+					<option value="transport">transport</option>
+					<option value="landscape">landscape</option>
+					<option value="outdoors">outdoors</option>
+					<option value="transport-dark">transport-dark</option>
+					<option value="spinal-map">spinal-map</option>
+					<option value="pioneer">pioneer</option>
+					<option value="mobile-atlas">mobile-atlas</option>
+					<option value="neighbourhood">neighbourhood</option>
+				</field>
+				<field
+					type="list"
+					name="googlemapstype"
+					default="satellite"
+					label="MOD_AGOSM_CONTROL_GOOGLETYPE_LABEL"
+					description="MOD_AGOSM_CONTROL_GOOGLETYPE_DESC"
+					showon="baselayer:google"
+				>
+					<option value="satellite">satellite</option>
+					<option value="roadmap">roadmap</option>
+					<option value="terrain">terrain</option>
+					<option value="hybrid">hybrid</option>
+				</field>
+				<field
+					type="text"
+					name="customBaselayer"
+					label="MOD_AGOSM_CUSTOMBASELAYER"
+					description="MOD_AGOSM_CUSTOMBASELAYER_DESC"
+					default="maxZoom: 18,"
+					showon="baselayer:custom"
+				/>
+				<field
+					type="text"
+					name="customBaselayerURL"
+					label="MOD_AGOSM_CUSTOMBASELAYERURL"
+					description="MOD_AGOSM_CUSTOMBASELAYERURL_DESC"
+					default="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+					showon="baselayer:custom"
+				/>
+				<field
+					type="checkboxes"
+					name="scale"
+					label="MOD_AGOSM_SCALE"
+					description="MOD_AGOSM_SCALE_DESC"
+				>
+					<option value="metric">MOD_AGOSM_METRIC</option>
+					<option value="imperial">MOD_AGOSM_IMPERIAL</option>
+				</field>
+				<field
+					type="list"
+					name="detectRetina"
+					default="0"
+					label="MOD_AGOSM_DETECTRETINA"
+					description="MOD_AGOSM_DETECTRETINA_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					type="list"
+					name="noWorldWarp"
+					default="1"
+					label="MOD_AGOSM_NOWORLDWARP"
+					description="MOD_AGOSM_NOWORLDWARP_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					type="list"
+					name="attrModule"
+					default="0"
+					label="MOD_AGOSM_ATTRMODULE"
+					description="MOD_AGOSM_ATTRMODULE_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field
+					type="spacer"
+					name="spacerPos0"
+					hr="true"
+				/>
+				<field
+					type="spacer"
+					name="spacerPos"
+					label="MOD_AGOSM_POSITION"
+					class="text"
+				/>
+
+				<field
+					name="lonlat"
+					type="agosm"
+					default="50.281168, 7.276211"
+					label="MOD_AGOSM_LONLAT"
+					description="MOD_AGOSM_LONLAT_DESC"
+				/>
+			</fieldset>
+			<!-- Routing Simple-->
+			<fieldset
+				name="agosmControlRoutingSimple"
+				label="MOD_AGOSM_ROUTING_SIMPLE_CONTROL_FIELDSETLABEL"
+			>
+				<field
+					type="spacer"
+					name="routingSearch"
+					label="MOD_AGOSM_ROUTING_SIMPLE_FIELDSETDESCRIPTION"
+					class="text"
+				/>
+
+				<field
+					type="list"
+					name="showrouting_simple"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="routing_simple_position"
+					default="bottomleft"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_DESC"
+					showon="showrouting_simple:1"
+				>
+					<option value="bottomleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMLEFT</option>
+					<option value="bottomright">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMRIGHT</option>
+					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
+					<option value="topright">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPRIGHT</option>
+				</field>
+
+                                <field
+					type="list"
+					name="showrouting_places"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_PLACES_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_PLACES_DESC"
+					showon="showrouting_simple:1"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+                                <field
+					name="routing_simple_target"
+					type="text"
+					default="Koblenz, Rheinland-Pfalz, Deutschland"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_TARGET_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_TARGET_DESC"
+					size="40"
+					showon="showrouting_simple:1"
+				/>
+				<field
+					type="list"
+					name="routing_simple_router"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_ROUTER_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_ROUTER_DESC"
+					showon="showrouting_simple:1"
+				>
+					<option value="1">mapbox</option>
+					<option value="0">osrm</option>
+				</field>
+
+				<field
+					name="routing_simple_routerkey"
+					type="text"
+					default=""
+					label="MOD_AGOSM_MAPBOXKEY_LABEL"
+					description="MOD_AGOSM_MAPBOXKEY_DESC"
+					size="40"
+					showon="showrouting_simple:1[AND]routing_simple_router:1"
+				/>
+                        </fieldset>
+			<!-- Routing Mapbox-->
+			<fieldset
+				name="agosmControlRouting"
+				label="MOD_AGOSM_ROUTING_CONTROL_FIELDSETLABEL"
+			>
+				<field
+					type="spacer"
+					name="routingSearch"
+					label="MOD_AGOSM_ROUTING_FIELDSETDESCRIPTION"
+					class="text"
+				/>
+
+				<field
+					type="list"
+					name="showrouting"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					name="mapboxkey_routing"
+					type="text"
+					default=""
+					label="MOD_AGOSM_MAPBOXKEY_LABEL"
+					description="MOD_AGOSM_MAPBOXKEY_DESC"
+					size="40"
+					showon="showrouting:1"
+				/>
+
+				<field
+					name="routingstart"
+					type="agosm"
+					default="50.273543, 7.262993"
+					label="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_DESC"
+					showon="showrouting:1[AND]mapboxkey_routing!:"
+				/>
+
+				<field
+					name="routingend"
+					type="agosm"
+					default="50.281168, 7.276211"
+					label="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_DESC"
+					showon="showrouting:1[AND]mapboxkey_routing!:"
+				/>
+
+				<field
+					type="list"
+					name="routinglanguage"
+					default="de"
+					label="MOD_AGOSM_CONFIG_CONTROL_LANGUAGEROUTING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_LANGUAGEROUTING_DESC"
+					showon="showrouting:1[AND]mapboxkey_routing!:"
+				>
+					<option value="de">de</option>
+					<option value="fr">fr</option>
+					<option value="en">en</option>
+					<option value="nl">nl</option>
+					<option value="es">es</option>
+					<option value="it">it</option>
+					<option value="pl">pl</option>
+					<option value="sv">sv</option>
+					<option value="tr">tr</option>
+					<option value="uk">uk</option>
+					<option value="vi">vi</option>
+					<option value="zh-Hans">zh-Hans</option>
+				</field>
+
+				<field
+					type="list"
+					name="routingprofile"
+					default="mapbox/driving"
+					label="MOD_AGOSM_CONFIG_CONTROL_PROFILEOUTING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_PROFILEROUTING_DESC"
+					showon="showrouting:1[AND]mapboxkey_routing!:"
+				>
+					<option value="mapbox/driving">mapbox/driving</option>
+					<option value="mapbox/driving-traffic">mapbox/driving-traffic</option>
+					<option value="mapbox/walking">mapbox/walking</option>
+					<option value="mapbox/cycling">mapbox/cycling</option>
+				</field>
+
+				<field
+					type="list"
+					name="routewhiledragging"
+					default="false"
+					label="MOD_AGOSM_CONFIG_CONTROL_ROUTEWHILEDRAGGING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ROUTEWHILEDRAGGING_DESC"
+					showon="showrouting:1[AND]mapboxkey_routing!:"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="routingmetric"
+					label="MOD_AGOSM_CONFIG_CONTROL_UNITROUTING_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_UNITROUTING_DESC"
+					default="metric"
+					showon="showrouting:1[AND]mapboxkey_routing!:"
+				>
+					<option value="metric">MOD_AGOSM_METRIC</option>
+					<option value="imperial">MOD_AGOSM_IMPERIAL</option>
+				</field>
+			</fieldset>
+			<!-- Geocoder -->
+			<fieldset
+				name="agosmControl"
+				label="MOD_AGOSM_GEOCODER_CONTROL_FIELDSETLABEL"
+			>
+				<field
+					type="spacer"
+					name="geocoderSearch"
+					label="MOD_AGOSM_GEOCODER_FIELDSETDESCRIPTION"
+					class="text"
+				/>
+
+				<field
+					type="list"
+					name="showgeocoder"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODER_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODER_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					type="spacer"
+					name="spacerPos0"
+					hr="true"
+				/>
+
+				<field
+					type="spacer"
+					name="spacerPos"
+					label="MOD_AGOSM_CONTROL_HEADLINE"
+					class="text"
+					showon="showgeocoder:1"
+				/>
+
+				<field
+					type="list"
+					name="geocodercollapsed"
+					default="true"
+					label="MOD_AGOSM_CONFIG_CONTROL_COLLAPSED_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_COLLAPSED_DESC"
+					showon="showgeocoder:1"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="expand"
+					default="click"
+					label="MOD_AGOSM_CONFIG_CONTROL_EXPAND_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_EXPAND_DESC"
+					showon="showgeocoder:1[AND]geocodercollapsed:true"
+				>
+					<option value="click">click</option>
+					<option value="touch">touch</option>
+				</field>
+
+				<field
+					type="list"
+					name="geocoderposition"
+					default="topright"
+					label="MOD_AGOSM_CONFIG_CONTROL_POSITION_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_POSITION_DESC"
+					showon="showgeocoder:1"
+				>
+					<option value="bottomleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMLEFT</option>
+					<option value="bottomright">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMRIGHT</option>
+					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
+					<option value="topright">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPRIGHT</option>
+				</field>
+			</fieldset>
+			<!-- Geocoder ESRI-->
+			<fieldset
+				name="agosmGeocoderEsriControl"
+				label="MOD_AGOSM_GEOCODER_ESRI_CONTROL_FIELDSETLABEL"
+			>
+				<field
+					type="spacer"
+					name="geocoderEsriSearch"
+					label="MOD_AGOSM_GEOCODER_ESRI_FIELDSETDESCRIPTION"
+					class="text"
+				/>
+
+				<field
+					type="list"
+					name="useesri"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_USEESRI_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_USEESRI_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					type="spacer"
+					name="spacerESRI1"
+					hr="true"
+					showon="useesri:1"
+				/>
+
+				<field
+					type="list"
+					name="showgeocoderesri"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODERESRI_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODERESRI_DESC"
+					showon="useesri:1"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="positionesrigeocoder"
+					default="bottomleft"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_DESC"
+					showon="showgeocoderesri:1[AND]useesri:1"
+				>
+					<option value="bottomleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMLEFT</option>
+					<option value="bottomright">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMRIGHT</option>
+					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
+					<option value="topright">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPRIGHT</option>
+				</field>
+
+				<field
+					type="list"
+					name="esriallowMultipleResults"
+					default="true"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_ALLOWMULTIPELRESULTS_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_ALLOWMULTIPELRESULTS_DESC"
+					showon="showgeocoderesri:1[AND]useesri:1"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="esrigeocoderzoomToResult"
+					default="true"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_ZOOMTORESULTS_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_ZOOMTORESULTS_DESC"
+					showon="showgeocoderesri:1[AND]useesri:1"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="esrigeocoderuseMapBounds"
+					default="false"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_USEMAPBOUNDS_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_USEMAPBOUNDS_DESC"
+					showon="showgeocoderesri:1[AND]useesri:1"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="esrigeocodercollapseAfterResult"
+					default="true"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_COLLAPSEAFTERRESULT_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_COLLAPSEAFTERRESULT_DESC"
+					showon="showgeocoderesri:1[AND]useesri:1"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+
+				<field
+					type="list"
+					name="esrigeocoderexpanded"
+					default="true"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_EXPANDED_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_EXPANDED_DESC"
+					showon="showgeocoderesri:1[AND]useesri:1"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+
+				<field
+					type="spacer"
+					name="spacerESRI2"
+					hr="true"
+					showon="useesri:1"
+				/>
+
+				<field
+					type="list"
+					name="esrigeocoderopengetaddress"
+					default="false"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_OPENGETADDRESS_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_OPENGETADDRESS_DESC"
+					showon="useesri:1"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+
+				<field
+					type="spacer"
+					name="spacerESRI3"
+					hr="true"
+					showon="useesri:1"
+				/>
+
+				<field
+					type="list"
+					name="esrireversegeocoding"
+					default="false"
+					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_REVERSE_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_REVERSE_DESC"
+					showon="useesri:1"
+				>
+					<option value="true">JYES</option>
+					<option value="false">JNO</option>
+				</field>
+			</fieldset>
+			<!-- Special Marker -->
+			<fieldset
+				name="pinConfig"
+				label="MOD_AGOSM_H_PIN"
+			>
+				<field
+					type="list"
+					name="showpin"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWPIN_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWPIN_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					name="specialpins"
+					type="subform"
+					formsource="modules/mod_agosm/models/forms/custombuttons.xml"
+					multiple="true"
+					label="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_LABEL"
+					min= "1"
+					max= "20"
+					description="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_DESC"
+					layout="joomla.form.field.subform.repeatable"
+					showon="showpin:1"
+				/>
+			</fieldset>
+
+			<!-- Special Marker -->
+			<fieldset
+				name="pinConfigFromComponent"
+				label="MOD_AGOSM_H_PINCOM"
+			>
+				<field
+					type="list"
+					name="showcomponentpin"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWCOMPONENTPIN_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWCOMPONENTPIN_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+
+			<!-- advanced -->
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					description="JFIELD_ALT_MODULE_LAYOUT_DESC"
+				/>
+
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					rows="3"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC"
+				/>
+
+				<field
+					name="cache"
+					type="list"
+					default="1"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+					description="COM_MODULES_FIELD_CACHING_DESC"
+				>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="text"
+					default="900"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					description="COM_MODULES_FIELD_CACHE_TIME_DESC"
+				/>
+
+				<field
+					name="cachemode"
+					type="hidden"
+					default="static"
+				/>
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>

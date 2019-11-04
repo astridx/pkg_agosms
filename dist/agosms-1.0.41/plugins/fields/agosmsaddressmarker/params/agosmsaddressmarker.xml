@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields 
+		name="fieldparams"
+	>
+		<fieldset name="fieldparams">
+			<field
+				name="addressfields"
+				type="subform"
+				label="PLG_AGOSMSADDRESSMARKER_ADDRESSFIELDS"
+				layout="joomla.form.field.subform.repeatable-table"
+				multiple="true"
+				formsource="plugins/fields/agosmsaddressmarker/models/forms/address_data.xml"
+			/>
+			<field
+				name="mapheight"
+				type="number"
+				default="400"
+				label="PLG_AGOSMSADDRESSMARKER_HEIGHT"
+				min="100"
+				step="10"
+			/>
+			<field
+				name="maptype"
+				type="list"
+				default="openstreetmap"
+				label="PLG_AGOSMSADDRESSMARKER_MAPTYPE"
+				>
+				<option value="openstreetmap">openstreetmap</option>
+				<option value="mapbox">mapbox</option>
+				<option value="google">google</option>
+			</field>
+			<field
+				name="geocoder"
+				type="list"
+				default="openstreetmap"
+				label="PLG_AGOSMSADDRESSMARKER_GEOCODER"
+				>
+				<option value="openstreetmap">openstreetmap_nominatim</option>
+				<option value="mapbox">mapbox</option>
+				<option value="google">google</option>
+			</field>
+			<field
+				name="googlekey"
+				type="text"
+				default="openstreetmap"
+				label="PLG_AGOSMSADDRESSMARKER_GOOGLEKEY"
+				size="30"
+				showon="maptype:google[OR]geocoder:google"
+			/>
+			<field
+				name="mapboxkey"
+				type="text"
+				default="openstreetmap"
+				label="PLG_AGOSMSADDRESSMARKER_MAPBOXKEY"
+				size="30"
+				showon="maptype:mapbox[OR]geocoder:mapbox"
+			/>
+		</fieldset>
+	</fields>
+</form>
