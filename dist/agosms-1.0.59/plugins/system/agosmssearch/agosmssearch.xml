@@ -2,7 +2,7 @@
 <extension type="plugin" version="3.7.0" group="system" method="upgrade">
 	<name>plg_system_agosmssearch</name>
 	<author>Astrid Günther</author>
-	<creationDate>2019-11-03</creationDate>
+	<creationDate>2019-11-05</creationDate>
 	<copyright>(C) 2019 Astrid Günther. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>info@astrid-guenther.de</authorEmail>

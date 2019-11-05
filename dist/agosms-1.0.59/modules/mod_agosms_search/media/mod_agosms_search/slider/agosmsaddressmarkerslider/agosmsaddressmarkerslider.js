@@ -1,132 +1,41 @@
-document.addEventListener('DOMContentLoaded', function () {
-	var agSliderFields = document.querySelectorAll('.agSliderField');
-
-	[].forEach.call(agSliderFields, function (element) {
-
-		var min = parseInt(element.getAttribute('data-slider-min'));
-		var max = parseInt(element.getAttribute('data-slider-max'));
-		var surroundingDivAmount = element.parentNode.parentNode;
-		var inputAmount = surroundingDivAmount.getElementsByTagName('input');
-		var inputforamount = inputAmount[0];
-		var inputforfrom = inputAmount[2];
-		var inputforto = inputAmount[3];
-
-		var agosmsaddressmarkerSlider = new Slider(element, {
-			range: true,
-			value: [min, max]
-		});
-		
-		inputforamount.onchange = function() {
-			var splitedvalue = inputforamount.value.split("-").map(Number);
-
-			if (splitedvalue[0] < min)
-			{
-				splitedvalue[0] = min;
-			}
-
-			if (splitedvalue[1] > max)
-			{
-				splitedvalue[1] = max;
-			}
-
-			if (splitedvalue[0] > splitedvalue[1])
-			{
-				splitedvalue[1] = splitedvalue[0];
-			}
-
-			inputforamount.value = splitedvalue[0] + ' - ' + splitedvalue[1];
-			inputforfrom.value = splitedvalue[0];
-			inputforto.value = splitedvalue[1];
-			element.value = splitedvalue[0] + ',' + splitedvalue[1];
-			console.log(agosmsaddressmarkerSlider);
-			
-			console.log(agosmsaddressmarkerSlider.getValue());
-			
-			agosmsaddressmarkerSlider.setValue([ splitedvalue[0], splitedvalue[1] ]);
-			
-			agosmsaddressmarkerSlider.refresh({useCurrentValue: true});
-		};
-		
-		agosmsaddressmarkerSlider.on('slideStart', function (e) {
-			agosmsaddressmarkerSlider.sliderLock = 1;
-		});
-		agosmsaddressmarkerSlider.on('slide', function (e) {
-			inputforamount.value = e[0] + ' - ' + e[1];
-		});
-		agosmsaddressmarkerSlider.on('slideStop', function (e) {
-			inputforamount.value = e[0] + ' - ' + e[1];
-			inputforfrom.value = e[0];
-			inputforto.value = e[1];
-			agosmsaddressmarkerSlider.sliderLock = 0;
-		});
-	})
-
-});
-
-document.addEventListener('click', function (e) {
-	if (e.target.classList.contains('agosmsaddressmarkerbutton')) {
-		var button = e.target;
-		var surroundingDiv = button.parentNode;
-		var inputs = surroundingDiv.getElementsByTagName('input');
-		var lat = inputs[0];
-		var lon = inputs[1];
-		var address = inputs[2];
-
-		addressstring = address.value;
-
-		var cords = function (results, suggest) {
-			if (!suggest && results.length === 1) {
-				lat.value = results[0].lat;
-				lon.value = results[0].lon;
-				Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSSEARCH_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
-			} else if (results.length > 0) {
-				// Limit is fix set to 1 up to now
-			} else {
-				Joomla.renderMessages({"error": [Joomla.JText._('MOD_AGOSMSSEARCH_ADDRESSE_ERROR') + addressstring + ' (Nominatim)']});
-			}
-		}
-
-		var params = {
-			q: addressstring,
-			limit: 1,
-			format: 'json',
-			addressdetails: 1
-		};
-
-		getJSON("https://nominatim.openstreetmap.org/", params, cords);
-	}
-});
-
-function getJSON(url, params, callback) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function () {
-		if (xmlHttp.readyState !== 4) {
-			return;
-		}
-		if (xmlHttp.status !== 200 && xmlHttp.status !== 304) {
-			callback('');
-			return;
-		}
-		callback(xmlHttp.response);
-	};
-	xmlHttp.open('GET', url + getParamString(params), true);
-	xmlHttp.responseType = 'json';
-	xmlHttp.setRequestHeader('Accept', 'application/json');
-	xmlHttp.send(null);
-}
-
-function getParamString(obj, existingUrl, uppercase) {
-	var params = [];
-	for (var i in obj) {
-		var key = encodeURIComponent(uppercase ? i.toUpperCase() : i);
-		var value = obj[i];
-		if (!L.Util.isArray(value)) {
-			params.push(key + '=' + encodeURIComponent(value));
-		} else {
-			for (var j = 0; j < value.length; j++) {
-				params.push(key + '=' + encodeURIComponent(value[j]));
-			}
-		}
-	}
-	return (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&') + params.join('&');
-}
+document.addEventListener('DOMContentLoaded',function(){var e=document.querySelectorAll('.agSliderField');[].forEach.call(e,function(e){var a=parseInt(e.getAttribute('data-slider-min')),r=parseInt(e.getAttribute('data-slider-max')),l=e.parentNode.parentNode,o=l.getElementsByTagName('input'),n=o[0],s=o[2],i=o[3],t=new Slider(e,{range:!0,value:[a,r]});
+n.onchange=function(){var o=n.value.split('-').map(Number);
+if(o[0]<a){o[0]=a};
+if(o[1]>r){o[1]=r};
+if(o[0]>o[1]){o[1]=o[0]};
+n.value=o[0]+' - '+o[1];
+s.value=o[0];
+i.value=o[1];
+e.value=o[0]+','+o[1];
+console.log(t);
+console.log(t.getValue());
+t.setValue([o[0],o[1]]);
+t.refresh({useCurrentValue:!0})};
+t.on('slideStart',function(e){t.sliderLock=1});
+t.on('slide',function(e){n.value=e[0]+' - '+e[1]});
+t.on('slideStop',function(e){n.value=e[0]+' - '+e[1];
+s.value=e[0];
+i.value=e[1];
+t.sliderLock=0})})});
+document.addEventListener('click',function(e){if(e.target.classList.contains('agosmsaddressmarkerbutton')){var r=e.target,o=r.parentNode,t=o.getElementsByTagName('input'),s=t[0],i=t[1],l=t[2];
+addressstring=l.value;
+var n=function(e,t){if(!t&&e.length===1){s.value=e[0].lat;
+i.value=e[0].lon;
+Joomla.renderMessages({'notice':[(Joomla.JText._('PLG_AGOSMSSEARCH_ADDRESSE_NOTICE')+addressstring+' (Nominatim)')]})}
+else if(e.length>0){}
+else{Joomla.renderMessages({'error':[Joomla.JText._('MOD_AGOSMSSEARCH_ADDRESSE_ERROR')+addressstring+' (Nominatim)']})}},a={q:addressstring,limit:1,format:'json',addressdetails:1};
+getJSON('https://nominatim.openstreetmap.org/',a,n)}});
+function getJSON(t,n,a){var e=new XMLHttpRequest();
+e.onreadystatechange=function(){if(e.readyState!==4){return};
+if(e.status!==200&&e.status!==304){a('');
+return};
+a(e.response)};
+e.open('GET',t+getParamString(n),!0);
+e.responseType='json';
+e.setRequestHeader('Accept','application/json');
+e.send(null)};
+function getParamString(e,t,s){var o=[];
+for(var r in e){var i=encodeURIComponent(s?r.toUpperCase():r),n=e[r];
+if(!L.Util.isArray(n)){o.push(i+'='+encodeURIComponent(n))}
+else{for(var a=0;a<n.length;a++){o.push(i+'='+encodeURIComponent(n[a]))}}};
+return(!t||t.indexOf('?')===-1?'?':'&')+o.join('&')};

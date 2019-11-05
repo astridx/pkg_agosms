@@ -1,181 +1,35 @@
-document.addEventListener('DOMContentLoaded', function () {
-	var leafletmaps = document.querySelectorAll('.agosmsaddressmarkerleafletmap');
-
-	// For all maps [start]
-	[].forEach.call(leafletmaps, function (element) {
-
-		var uriroot = element.getAttribute('data-uriroot');
-		var unique = element.getAttribute('data-unique');
-		var lat = element.getAttribute('data-lat');
-		var lon = element.getAttribute('data-lon');
-		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
-		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
-		var touch = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_TOUCH');
-		var scroll = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLL');
-		var scrollmac = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
-		var specialicon = element.getAttribute('data-specialicon');
-		var popup = element.getAttribute('data-popup');
-		var showroutingcontrol = element.getAttribute('data-showroutingcontrol');
-		if (showroutingcontrol === '1')
-		{
-			var routingprofile = element.getAttribute('data-routingprofile');
-			var routinglanguage = element.getAttribute('data-routinglanguage');
-			var routingmetric = element.getAttribute('data-routingmetric');
-			var routewhiledragging = element.getAttribute('data-routewhiledragging');
-			var routing_position = element.getAttribute('data-routing_position');
-			var routing_router = element.getAttribute('data-routing_router');
-			var fitSelectedRoutes = element.getAttribute('data-fitSelectedRoutes');
-			var reverseWaypoints = (element.getAttribute('data-reverseWaypoints') === "true");
-			var collapsible = element.getAttribute('data-collapsible');
-			var showAlternatives = element.getAttribute('data-showAlternatives');
-		}
-		var iconcolor = element.getAttribute('data-iconcolor');
-		var markercolor = element.getAttribute('data-markercolor');
-		var icon = element.getAttribute('data-icon');
-		var popuptext = element.getAttribute('data-popuptext');
-		var mapboxkey = element.getAttribute('data-mapboxkey');
-		
-
-		// Initialize the Map if needed
-		var container = L.DomUtil.get('map' + unique);
-		if (!container.children.length > 0) {
-			if (scrollwheelzoom === "0")
-			{
-				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: false});
-				// Add Google Cooperative Gesture Handling 
-			} else if (scrollwheelzoom === "2")
-			{
-				if (owngooglegesturetext === "1") {
-					window['map' + unique] = new L.Map('map' + unique, {
-						gestureHandling: true,
-						gestureHandlingText: {
-							touch: touch,
-							scroll: scroll,
-							scrollMac: scrollmac
-						}
-					});
-				} else
-				{
-					window['map' + unique] = new L.Map('map' + unique, {
-						gestureHandling: true
-					});
-				}
-			} else
-			{
-				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
-			}
-		}
-
-		// Add Scrollwheele Listener, so that you can activate it on mouse click
-		if (scrollwheelzoom === "0") {
-			window['map' + unique].on('click', function () {
-				if (window['map' + unique].scrollWheelZoom.enabled()) {
-					window['map' + unique].scrollWheelZoom.disable();
-				} else
-				{
-					window['map' + unique].scrollWheelZoom.enable();
-				}
-			});
-		}
-
-
-		// If routing control 
-		if (showroutingcontrol === "1") {
-			
-			var routingcontrol;
-			
-			if (routing_router === 'mapbox')
-			{
-				routingcontrol = L.Routing.control(L.extend({
-					fitSelectedRoutes: fitSelectedRoutes,
-					position: routing_position,
-					units: routingmetric,
-					router: L.Routing.mapbox(mapboxkey,
-						{
-							profile: routingprofile,
-							language: routinglanguage,
-						}),
-					waypoints: [
-						L.latLng(lat, lon),
-					],
-					geocoder: L.Control.Geocoder.nominatim(),
-					routeWhileDragging: routewhiledragging,
-					reverseWaypoints: reverseWaypoints,
-					collapsible: collapsible,
-					showAlternatives: showAlternatives,
-					altLineOptions: {
-						styles: [
-							{color: 'black', opacity: 0.15, weight: 9},
-							{color: 'white', opacity: 0.8, weight: 6},
-							{color: 'blue', opacity: 0.5, weight: 2}
-						]
-					}
-				})).addTo(window['map' + unique]);
-			} else {
-				routingcontrol = L.Routing.control(L.extend({
-					fitSelectedRoutes: fitSelectedRoutes,
-					position: routing_position,
-					units: routingmetric,
-					router: L.Routing.osrmv1({language:routinglanguage}),
-					waypoints: [
-						L.latLng(lat, lon),
-					],
-					geocoder: L.Control.Geocoder.nominatim(),
-					routeWhileDragging: routewhiledragging,
-					reverseWaypoints: reverseWaypoints,
-					collapsible: collapsible,
-					showAlternatives: showAlternatives,
-					altLineOptions: {
-						styles: [
-							{color: 'black', opacity: 0.15, weight: 9},
-							{color: 'white', opacity: 0.8, weight: 6},
-							{color: 'blue', opacity: 0.5, weight: 2}
-						]
-					}
-				})).addTo(window['map' + unique]);
-				
-			}
-
-			L.Routing.errorControl(routingcontrol).addTo(window['map' + unique]);			
-		}
-
-		// Add Marker if possible - fallback cords 0,0
-		try {
-			window['map' + unique].setView(new L.LatLng(lat, lon), 13);
-
-			var marker = L.marker([lat, lon]);
-
-			// If special Icon
-			if (specialicon === "1") {
-				var AwesomeIcon = new L.AwesomeMarkers.icon(
-					{
-						icon: icon,
-						markerColor: markercolor,
-						iconColor: iconcolor,
-						prefix: 'fa',
-						spin: false,
-						extraClasses: 'agosmsaddressmarkericonclass',
-					})
-				marker.setIcon(AwesomeIcon);
-			}
-
-
-			marker.addTo(window['map' + unique]);
-
-			// If popup
-			if (popup === "1") {
-				marker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
-			}
-			if (popup === "2") {
-				marker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
-			}
-
-		} catch (e) {
-			window['map' + unique].setView(new L.LatLng(0, 0), 13);
-			var marker = L.marker([0, 0]).addTo(window['map' + unique]);
-			console.log(e);
-		}
-	});
-	// For all maps [end]
-
-}, false);
+;
+document.addEventListener('DOMContentLoaded',function(){var e=document.querySelectorAll('.agosmsaddressmarkerleafletmap');[].forEach.call(e,function(o){var m=o.getAttribute('data-uriroot'),t=o.getAttribute('data-unique'),M=o.getAttribute('data-maptype'),l=o.getAttribute('data-lat'),n=o.getAttribute('data-lon'),a=o.getAttribute('data-scrollwheelzoom'),S=o.getAttribute('data-owngooglegesturetext'),R=Joomla.JText._('PLG_AGOSMSADDRESSMARKER_TOUCH'),W=Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLL'),v=Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'),x=o.getAttribute('data-specialicon'),h=o.getAttribute('data-popup'),g=o.getAttribute('data-showroutingcontrol');
+if(g==='1'){var T=o.getAttribute('data-routingprofile'),y=o.getAttribute('data-routinglanguage'),A=o.getAttribute('data-routingmetric'),f=o.getAttribute('data-routewhiledragging'),d=o.getAttribute('data-routing_position'),C=o.getAttribute('data-routing_router'),b=o.getAttribute('data-fitSelectedRoutes'),u=(o.getAttribute('data-reverseWaypoints')==='true'),w=o.getAttribute('data-collapsible'),c=o.getAttribute('data-showAlternatives')};
+var O=o.getAttribute('data-iconcolor'),Z=o.getAttribute('data-markercolor'),k=o.getAttribute('data-icon'),H=o.getAttribute('data-popuptext'),s=o.getAttribute('data-mapboxkey'),r=L.DomUtil.get('map'+t);
+if(M=='mapbox'){var s=o.getAttribute('data-mapboxkey');
+if(!r.children.length>0){if(a==='0'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!1})}
+else{window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!0})}};
+var G='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+s,E='Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',D=new L.TileLayer(G,{attribution:E,id:'mapbox.streets'});
+window['map'+t].addLayer(D)}
+else if(M=='google'){if(!r.children.length>0){if(a==='0'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!1})}
+else{window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!0})}};
+var z=L.gridLayer.googleMutant({type:'roadmap'}).addTo(window['map'+t])}
+else{[].forEach.call(e,function(e){if(!r.children.length>0){if(a==='0'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!1})}
+else{window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!0})}};
+var o='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',i='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',n=new L.TileLayer(o,{attribution:i});
+window['map'+t].addLayer(n)})};
+if(!r.children.length>0){if(a==='0'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!1})}
+else if(a==='2'){if(S==='1'){window['map'+t]=new L.Map('map'+t,{gestureHandling:!0,gestureHandlingText:{touch:R,scroll:W,scrollMac:v}})}
+else{window['map'+t]=new L.Map('map'+t,{gestureHandling:!0})}}
+else{window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!0})}};
+if(a==='0'){window['map'+t].on('click',function(){if(window['map'+t].scrollWheelZoom.enabled()){window['map'+t].scrollWheelZoom.disable()}
+else{window['map'+t].scrollWheelZoom.enable()}})};
+if(g==='1'){var p;
+if(C==='mapbox'){p=L.Routing.control(L.extend({fitSelectedRoutes:b,position:d,units:A,router:L.Routing.mapbox(s,{profile:T,language:y,}),waypoints:[L.latLng(l,n),],geocoder:L.Control.Geocoder.nominatim(),routeWhileDragging:f,reverseWaypoints:u,collapsible:w,showAlternatives:c,altLineOptions:{styles:[{color:'black',opacity:0.15,weight:9},{color:'white',opacity:0.8,weight:6},{color:'blue',opacity:0.5,weight:2}]}})).addTo(window['map'+t])}
+else{p=L.Routing.control(L.extend({fitSelectedRoutes:b,position:d,units:A,router:L.Routing.osrmv1({language:y}),waypoints:[L.latLng(l,n),],geocoder:L.Control.Geocoder.nominatim(),routeWhileDragging:f,reverseWaypoints:u,collapsible:w,showAlternatives:c,altLineOptions:{styles:[{color:'black',opacity:0.15,weight:9},{color:'white',opacity:0.8,weight:6},{color:'blue',opacity:0.5,weight:2}]}})).addTo(window['map'+t])};
+L.Routing.errorControl(p).addTo(window['map'+t])};
+try{window['map'+t].setView(new L.LatLng(l,n),13);
+var i=L.marker([l,n]);
+if(x==='1'){var P=new L.AwesomeMarkers.icon({icon:k,markerColor:Z,iconColor:O,prefix:'fa',spin:!1,extraClasses:'agosmsaddressmarkericonclass',});
+i.setIcon(P)};
+i.addTo(window['map'+t]);
+if(h==='1'){i.bindPopup(obj.popuptext.replace(/<img src="images/g,'<img src="'+m+'images'))};
+if(h==='2'){i.bindPopup(obj.popuptext.replace(/<img src="images/g,'<img src="'+m+'images')).openPopup()}}catch(J){window['map'+t].setView(new L.LatLng(0,0),13);
+var i=L.marker([0,0]).addTo(window['map'+t]);
+console.log(J)}})},!1);
