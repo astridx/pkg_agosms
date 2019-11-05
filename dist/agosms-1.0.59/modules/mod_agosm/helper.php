@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -97,8 +98,7 @@ class ModagosmHelper
 
 		if ($items)
 		{
-			foreach ($items as $item)
-			{
+			foreach ($items as $item) {
 				$category = $model->getCategory($item->id);
 				break;
 			}
@@ -205,8 +205,7 @@ class ModagosmHelper
 
 			if ($items)
 			{
-				foreach ($items as $key => $item)
-				{
+				foreach ($items as $key => $item) {
 					if ($item->state !== "1")
 					{
 						continue;
@@ -216,37 +215,34 @@ class ModagosmHelper
 					// (calling plugins events and loading layouts to get their HTML display)
 					$fields = FieldsHelper::getFields('com_content.article', $item, true);
 
-					$itemfiltered1 = new stdClass;
-					$itemfiltered2 = new stdClass;
-					$itemfiltered3 = new stdClass;
 
-					foreach ($fields as $key => $field)
-					{
+					foreach ($fields as $key => $field) {
+
+						$itemfiltered = new stdClass;
+
 						if ($field->title == 'lat, lon')
 						{
-							$itemfiltered1->cords = $field->value;
-							$test = explode(",", $itemfiltered1->cords);
+							$itemfiltered->cords = $field->value;
+							$test = explode(",", $itemfiltered->cords);
 
 							if (is_numeric($test[0]) && is_numeric($test[1]))
 							{
-								$itemfiltered1->title = $item->title;
-								$itemfiltered1->id = $item->id;
-								$itemfiltered1->type = $field->type;
-								$itemsfiltered[] = $itemfiltered1;
+								$itemfiltered->title = $item->title;
+								$itemfiltered->id = $item->id;
+								$itemfiltered->type = $field->type;
 							}
 						}
 
 						if ($field->type == 'agosmsmarker')
 						{
-							$itemfiltered2->cords = $field->value;
-							$test = explode(",", $itemfiltered2->cords);
+							$itemfiltered->cords = $field->value;
+							$test = explode(",", $itemfiltered->cords);
 
 							if (is_numeric($test[0]) && is_numeric($test[1]))
 							{
-								$itemfiltered2->title = $item->title;
-								$itemfiltered2->id = $item->id;
-								$itemfiltered2->type = $field->type;
-								$itemsfiltered[] = $itemfiltered2;
+								$itemfiltered->title = $item->title;
+								$itemfiltered->id = $item->id;
+								$itemfiltered->type = $field->type;
 							}
 						}
 
@@ -256,32 +252,31 @@ class ModagosmHelper
 							$popup = $field->fieldparams->get('popup', '0');
 							$specialicon = $field->fieldparams->get('specialicon', '0');
 
-							$itemfiltered3->cords = $field->rawvalue;
-							$test = explode(",", $itemfiltered3->cords);
+							$itemfiltered->cords = $field->rawvalue;
+							$test = explode(",", $itemfiltered->cords);
 
 							if (sizeof($test) > 5 && is_numeric($test[0]) && is_numeric($test[1]))
 							{
-								$itemfiltered3->title = $item->title;
-								$itemfiltered3->id = $item->id;
-								$itemfiltered3->type = $field->type;
-								$itemfiltered3->lat = $test[0];
-								$itemfiltered3->lon = $test[1];
+								$itemfiltered->title = $item->title;
+								$itemfiltered->id = $item->id;
+								$itemfiltered->type = $field->type;
+								$itemfiltered->lat = $test[0];
+								$itemfiltered->lon = $test[1];
 
 								if ($specialicon)
 								{
-									$itemfiltered3->iconcolor = $test[2];
-									$itemfiltered3->markercolor = $test[3];
-									$itemfiltered3->icon = $test[4];
+									$itemfiltered->iconcolor = $test[2];
+									$itemfiltered->markercolor = $test[3];
+									$itemfiltered->icon = $test[4];
 								}
 
 								if ($popup)
 								{
-									$itemfiltered3->popuptext = $test[5];
+									$itemfiltered->popuptext = $test[5];
 								}
-
-								$itemsfiltered[] = $itemfiltered3;
 							}
 						}
+					$itemsfiltered[] = $itemfiltered;
 					}
 				}
 			}
@@ -328,4 +323,5 @@ class ModagosmHelper
 
 		return $results;
 	}
+
 }

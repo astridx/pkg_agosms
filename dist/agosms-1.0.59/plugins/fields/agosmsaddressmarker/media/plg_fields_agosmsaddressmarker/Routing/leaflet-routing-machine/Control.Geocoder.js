@@ -1,733 +1,181 @@
-(function (factory) {
-	// Packaging/modules magic dance
-	var L;
-	if (typeof define === 'function' && define.amd) {
-		// AMD
-		define(['leaflet'], factory);
-	} else if (typeof module !== 'undefined') {
-		// Node/CommonJS
-		L = require('leaflet');
-		module.exports = factory(L);
-	} else {
-		// Browser globals
-		if (typeof window.L === 'undefined')
-			throw 'Leaflet must be loaded first';
-		factory(window.L);
-	}
-}(function (L) {
-	'use strict';
-	L.Control.Geocoder = L.Control.extend({
-		options: {
-			showResultIcons: false,
-			collapsed: true,
-			expand: 'click',
-			position: 'topright',
-			placeholder: 'Search...',
-			errorMessage: 'Nothing found.'
-		},
-
-		_callbackId: 0,
-
-		initialize: function (options) {
-			L.Util.setOptions(this, options);
-			if (!this.options.geocoder) {
-				this.options.geocoder = new L.Control.Geocoder.Nominatim();
-			}
-		},
-
-		onAdd: function (map) {
-			var className = 'leaflet-control-geocoder',
-			    container = L.DomUtil.create('div', className),
-				icon = L.DomUtil.create('div', 'leaflet-control-geocoder-icon', container),
-			    form = this._form = L.DomUtil.create('form', className + '-form', container),
-			    input;
-
-			this._map = map;
-			this._container = container;
-			input = this._input = L.DomUtil.create('input');
-			input.type = 'text';
-			input.placeholder = this.options.placeholder;
-
-			L.DomEvent.addListener(input, 'keydown', this._keydown, this);
-			//L.DomEvent.addListener(input, 'onpaste', this._clearResults, this);
-			//L.DomEvent.addListener(input, 'oninput', this._clearResults, this);
-
-			this._errorElement = document.createElement('div');
-			this._errorElement.className = className + '-form-no-error';
-			this._errorElement.innerHTML = this.options.errorMessage;
-
-			this._alts = L.DomUtil.create('ul', className + '-alternatives leaflet-control-geocoder-alternatives-minimized');
-
-			form.appendChild(input);
-			form.appendChild(this._errorElement);
-			container.appendChild(this._alts);
-
-			L.DomEvent.addListener(form, 'submit', this._geocode, this);
-
-			if (this.options.collapsed) {
-				if (this.options.expand === 'click') {
-					L.DomEvent.addListener(icon, 'click', function(e) {
-						// TODO: touch
-						if (e.button === 0 && e.detail === 1) {
-							this._toggle();
-						}
-					}, this);
-				} else {
-					L.DomEvent.addListener(icon, 'mouseover', this._expand, this);
-					L.DomEvent.addListener(icon, 'mouseout', this._collapse, this);
-					this._map.on('movestart', this._collapse, this);
-				}
-			} else {
-				this._expand();
-			}
-
-			L.DomEvent.disableClickPropagation(container);
-
-			return container;
-		},
-
-		_geocodeResult: function (results) {
-			L.DomUtil.removeClass(this._container, 'leaflet-control-geocoder-throbber');
-			if (results.length === 1) {
-				this._geocodeResultSelected(results[0]);
-			} else if (results.length > 0) {
-				this._alts.innerHTML = '';
-				this._results = results;
-				L.DomUtil.removeClass(this._alts, 'leaflet-control-geocoder-alternatives-minimized');
-				for (var i = 0; i < results.length; i++) {
-					this._alts.appendChild(this._createAlt(results[i], i));
-				}
-			} else {
-				L.DomUtil.addClass(this._errorElement, 'leaflet-control-geocoder-error');
-			}
-		},
-
-		markGeocode: function(result) {
-			this._map.fitBounds(result.bbox);
-
-			if (this._geocodeMarker) {
-				this._map.removeLayer(this._geocodeMarker);
-			}
-
-			this._geocodeMarker = new L.Marker(result.center)
-				.bindPopup(result.html || result.name)
-				.addTo(this._map)
-				.openPopup();
-
-			return this;
-		},
-
-		_geocode: function(event) {
-			L.DomEvent.preventDefault(event);
-
-			L.DomUtil.addClass(this._container, 'leaflet-control-geocoder-throbber');
-			this._clearResults();
-			this.options.geocoder.geocode(this._input.value, this._geocodeResult, this);
-
-			return false;
-		},
-
-		_geocodeResultSelected: function(result) {
-			if (this.options.collapsed) {
-				this._collapse();
-			} else {
-				this._clearResults();
-			}
-			this.markGeocode(result);
-		},
-
-		_toggle: function() {
-			if (this._container.className.indexOf('leaflet-control-geocoder-expanded') >= 0) {
-				this._collapse();
-			} else {
-				this._expand();
-			}
-		},
-
-		_expand: function () {
-			L.DomUtil.addClass(this._container, 'leaflet-control-geocoder-expanded');
-			this._input.select();
-		},
-
-		_collapse: function () {
-			this._container.className = this._container.className.replace(' leaflet-control-geocoder-expanded', '');
-			L.DomUtil.addClass(this._alts, 'leaflet-control-geocoder-alternatives-minimized');
-			L.DomUtil.removeClass(this._errorElement, 'leaflet-control-geocoder-error');
-		},
-
-		_clearResults: function () {
-			L.DomUtil.addClass(this._alts, 'leaflet-control-geocoder-alternatives-minimized');
-			this._selection = null;
-			L.DomUtil.removeClass(this._errorElement, 'leaflet-control-geocoder-error');
-		},
-
-		_createAlt: function(result, index) {
-			var li = document.createElement('li'),
-			    a = L.DomUtil.create('a', '', li),
-			    icon = this.options.showResultIcons && result.icon ? L.DomUtil.create('img', '', a) : null,
-			    text = result.html ? undefined : document.createTextNode(result.name);
-
-			if (icon) {
-				icon.src = result.icon;
-			}
-
-			a.href = '#';
-			a.setAttribute('data-result-index', index);
-
-			if (result.html) {
-				a.innerHTML = result.html;
-			} else {
-				a.appendChild(text);
-			}
-
-			L.DomEvent.addListener(li, 'click', function clickHandler(e) {
-				L.DomEvent.preventDefault(e);
-				this._geocodeResultSelected(result);
-			}, this);
-
-			return li;
-		},
-
-		_keydown: function(e) {
-			var _this = this,
-				select = function select(dir) {
-					if (_this._selection) {
-						L.DomUtil.removeClass(_this._selection.firstChild, 'leaflet-control-geocoder-selected');
-						_this._selection = _this._selection[dir > 0 ? 'nextSibling' : 'previousSibling'];
-					}
-					if (!_this._selection) {
-						_this._selection = _this._alts[dir > 0 ? 'firstChild' : 'lastChild'];
-					}
-
-					if (_this._selection) {
-						L.DomUtil.addClass(_this._selection.firstChild, 'leaflet-control-geocoder-selected');
-					}
-				};
-
-			switch (e.keyCode) {
-			// Escape
-			case 27:
-				this._collapse();
-				break;
-			// Up
-			case 38:
-				select(-1);
-				L.DomEvent.preventDefault(e);
-				break;
-			// Up
-			case 40:
-				select(1);
-				L.DomEvent.preventDefault(e);
-				break;
-			// Enter
-			case 13:
-				if (this._selection) {
-					var index = parseInt(this._selection.firstChild.getAttribute('data-result-index'), 10);
-					this._geocodeResultSelected(this._results[index]);
-					this._clearResults();
-					L.DomEvent.preventDefault(e);
-				}
-			}
-			return true;
-		}
-	});
-
-	L.Control.geocoder = function(id, options) {
-		return new L.Control.Geocoder(id, options);
-	};
-
-	L.Control.Geocoder.callbackId = 0;
-	L.Control.Geocoder.jsonp = function(url, params, callback, context, jsonpParam) {
-		var callbackId = '_l_geocoder_' + (L.Control.Geocoder.callbackId++);
-		params[jsonpParam || 'callback'] = callbackId;
-		window[callbackId] = L.Util.bind(callback, context);
-		var script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.src = url + L.Util.getParamString(params);
-		script.id = callbackId;
-		document.getElementsByTagName('head')[0].appendChild(script);
-	};
-	L.Control.Geocoder.getJSON = function(url, params, callback) {
-		var xmlHttp = new XMLHttpRequest();
-		xmlHttp.open( "GET", url + L.Util.getParamString(params), true);
-		xmlHttp.send(null);
-		xmlHttp.onreadystatechange = function () {
-			if (xmlHttp.readyState != 4) return;
-			if (xmlHttp.status != 200 && req.status != 304) return;
-			callback(JSON.parse(xmlHttp.response));
-		};
-	};
-
-	L.Control.Geocoder.template = function (str, data, htmlEscape) {
-		return str.replace(/\{ *([\w_]+) *\}/g, function (str, key) {
-			var value = data[key];
-			if (value === undefined) {
-				value = '';
-			} else if (typeof value === 'function') {
-				value = value(data);
-			}
-			return L.Control.Geocoder.htmlEscape(value);
-		});
-	};
-
-	// Adapted from handlebars.js
-	// https://github.com/wycats/handlebars.js/
-	L.Control.Geocoder.htmlEscape = (function() {
-		var badChars = /[&<>"'`]/g;
-		var possible = /[&<>"'`]/;
-		var escape = {
-		  '&': '&amp;',
-		  '<': '&lt;',
-		  '>': '&gt;',
-		  '"': '&quot;',
-		  '\'': '&#x27;',
-		  '`': '&#x60;'
-		};
-
-		function escapeChar(chr) {
-		  return escape[chr];
-		}
-
-		return function(string) {
-			if (string == null) {
-				return '';
-			} else if (!string) {
-				return string + '';
-			}
-
-			// Force a string conversion as this will be done by the append regardless and
-			// the regex test will do this transparently behind the scenes, causing issues if
-			// an object's to string has escaped characters in it.
-			string = '' + string;
-
-			if (!possible.test(string)) {
-				return string;
-			}
-			return string.replace(badChars, escapeChar);
-		};
-	})();
-
-	L.Control.Geocoder.Nominatim = L.Class.extend({
-		options: {
-			serviceUrl: '//nominatim.openstreetmap.org/',
-			geocodingQueryParams: {},
-			reverseQueryParams: {},
-			htmlTemplate: function(r) {
-				var a = r.address,
-					parts = [];
-				if (a.road || a.building) {
-					parts.push('{building} {road} {house_number}');
-				}
-
-				if (a.city || a.town || a.village) {
-					parts.push('<span class="' + (parts.length > 0 ? 'leaflet-control-geocoder-address-detail' : '') +
-						'">{postcode} {city}{town}{village}</span>');
-				}
-
-				if (a.state || a.country) {
-					parts.push('<span class="' + (parts.length > 0 ? 'leaflet-control-geocoder-address-context' : '') +
-						'">{state} {country}</span>');
-				}
-
-				return L.Control.Geocoder.template(parts.join('<br/>'), a, true);
-			}
-		},
-
-		initialize: function(options) {
-			L.Util.setOptions(this, options);
-		},
-
-		geocode: function(query, cb, context) {
-			L.Control.Geocoder.jsonp(this.options.serviceUrl + 'search/', L.extend({
-				q: query,
-				limit: 5,
-				format: 'json',
-				addressdetails: 1
-			}, this.options.geocodingQueryParams),
-			function(data) {
-				var results = [];
-				for (var i = data.length - 1; i >= 0; i--) {
-					var bbox = data[i].boundingbox;
-					for (var j = 0; j < 4; j++) bbox[j] = parseFloat(bbox[j]);
-					results[i] = {
-						icon: data[i].icon,
-						name: data[i].display_name,
-						html: this.options.htmlTemplate ?
-							this.options.htmlTemplate(data[i])
-							: undefined,
-						bbox: L.latLngBounds([bbox[0], bbox[2]], [bbox[1], bbox[3]]),
-						center: L.latLng(data[i].lat, data[i].lon),
-						properties: data[i]
-					};
-				}
-				cb.call(context, results);
-			}, this, 'json_callback');
-		},
-
-		reverse: function(location, scale, cb, context) {
-			L.Control.Geocoder.jsonp(this.options.serviceUrl + 'reverse/', L.extend({
-				lat: location.lat,
-				lon: location.lng,
-				zoom: Math.round(Math.log(scale / 256) / Math.log(2)),
-				addressdetails: 1,
-				format: 'json'
-			}, this.options.reverseQueryParams), function(data) {
-				var result = [],
-				    loc;
-
-				if (data && data.lat && data.lon) {
-					loc = L.latLng(data.lat, data.lon);
-					result.push({
-						name: data.display_name,
-						html: this.options.htmlTemplate ?
-							this.options.htmlTemplate(data)
-							: undefined,
-						center: loc,
-						bounds: L.latLngBounds(loc, loc),
-						properties: data
-					});
-				}
-
-				cb.call(context, result);
-			}, this, 'json_callback');
-		}
-	});
-
-	L.Control.Geocoder.nominatim = function(options) {
-		return new L.Control.Geocoder.Nominatim(options);
-	};
-
-	L.Control.Geocoder.Bing = L.Class.extend({
-		initialize: function(key) {
-			this.key = key;
-		},
-
-		geocode : function (query, cb, context) {
-			L.Control.Geocoder.jsonp('//dev.virtualearth.net/REST/v1/Locations', {
-				query: query,
-				key : this.key
-			}, function(data) {
-				var results = [];
-				for (var i = data.resourceSets[0].resources.length - 1; i >= 0; i--) {
-					var resource = data.resourceSets[0].resources[i],
-						bbox = resource.bbox;
-					results[i] = {
-						name: resource.name,
-						bbox: L.latLngBounds([bbox[0], bbox[1]], [bbox[2], bbox[3]]),
-						center: L.latLng(resource.point.coordinates)
-					};
-				}
-				cb.call(context, results);
-			}, this, 'jsonp');
-		},
-
-		reverse: function(location, scale, cb, context) {
-			L.Control.Geocoder.jsonp('//dev.virtualearth.net/REST/v1/Locations/' + location.lat + ',' + location.lng, {
-				key : this.key
-			}, function(data) {
-				var results = [];
-				for (var i = data.resourceSets[0].resources.length - 1; i >= 0; i--) {
-					var resource = data.resourceSets[0].resources[i],
-						bbox = resource.bbox;
-					results[i] = {
-						name: resource.name,
-						bbox: L.latLngBounds([bbox[0], bbox[1]], [bbox[2], bbox[3]]),
-						center: L.latLng(resource.point.coordinates)
-					};
-				}
-				cb.call(context, results);
-			}, this, 'jsonp');
-		}
-	});
-
-	L.Control.Geocoder.bing = function(key) {
-		return new L.Control.Geocoder.Bing(key);
-	};
-
-	L.Control.Geocoder.RaveGeo = L.Class.extend({
-		options: {
-			querySuffix: '',
-			deepSearch: true,
-			wordBased: false
-		},
-
-		jsonp: function(params, callback, context) {
-			var callbackId = '_l_geocoder_' + (L.Control.Geocoder.callbackId++),
-				paramParts = [];
-			params.prepend = callbackId + '(';
-			params.append = ')';
-			for (var p in params) {
-				paramParts.push(p + '=' + escape(params[p]));
-			}
-
-			window[callbackId] = L.Util.bind(callback, context);
-			var script = document.createElement('script');
-			script.type = 'text/javascript';
-			script.src = this._serviceUrl + '?' + paramParts.join('&');
-			script.id = callbackId;
-			document.getElementsByTagName('head')[0].appendChild(script);
-		},
-
-		initialize: function(serviceUrl, scheme, options) {
-			L.Util.setOptions(this, options);
-
-			this._serviceUrl = serviceUrl;
-			this._scheme = scheme;
-		},
-
-		geocode: function(query, cb, context) {
-			L.Control.Geocoder.jsonp(this._serviceUrl, {
-				address: query + this.options.querySuffix,
-				scheme: this._scheme,
-				outputFormat: 'jsonp',
-				deepSearch: this.options.deepSearch,
-				wordBased: this.options.wordBased
-			}, function(data) {
-				var results = [];
-				for (var i = data.length - 1; i >= 0; i--) {
-					var r = data[i],
-						c = L.latLng(r.y, r.x);
-					results[i] = {
-						name: r.address,
-						bbox: L.latLngBounds([c]),
-						center: c
-					};
-				}
-				cb.call(context, results);
-			}, this);
-		}
-	});
-
-	L.Control.Geocoder.raveGeo = function(serviceUrl, scheme, options) {
-		return new L.Control.Geocoder.RaveGeo(serviceUrl, scheme, options);
-	};
-
-	L.Control.Geocoder.MapQuest = L.Class.extend({
-		initialize: function(key) {
-			// MapQuest seems to provide URI encoded API keys,
-			// so to avoid encoding them twice, we decode them here
-			this._key = decodeURIComponent(key);
-		},
-
-		_formatName: function() {
-			var r = [],
-				i;
-			for (i = 0; i < arguments.length; i++) {
-				if (arguments[i]) {
-					r.push(arguments[i]);
-				}
-			}
-
-			return r.join(', ');
-		},
-
-		geocode: function(query, cb, context) {
-			L.Control.Geocoder.jsonp('//www.mapquestapi.com/geocoding/v1/address', {
-				key: this._key,
-				location: query,
-				limit: 5,
-				outFormat: 'json'
-			}, function(data) {
-				var results = [],
-					loc,
-					latLng;
-				if (data.results && data.results[0].locations) {
-					for (var i = data.results[0].locations.length - 1; i >= 0; i--) {
-						loc = data.results[0].locations[i];
-						latLng = L.latLng(loc.latLng);
-						results[i] = {
-							name: this._formatName(loc.street, loc.adminArea4, loc.adminArea3, loc.adminArea1),
-							bbox: L.latLngBounds(latLng, latLng),
-							center: latLng
-						};
-					}
-				}
-
-				cb.call(context, results);
-			}, this);
-		},
-
-		reverse: function(location, scale, cb, context) {
-			L.Control.Geocoder.jsonp('//www.mapquestapi.com/geocoding/v1/reverse', {
-				key: this._key,
-				location: location.lat + ',' + location.lng,
-				outputFormat: 'json'
-			}, function(data) {
-				var results = [],
-					loc,
-					latLng;
-				if (data.results && data.results[0].locations) {
-					for (var i = data.results[0].locations.length - 1; i >= 0; i--) {
-						loc = data.results[0].locations[i];
-						latLng = L.latLng(loc.latLng);
-						results[i] = {
-							name: this._formatName(loc.street, loc.adminArea4, loc.adminArea3, loc.adminArea1),
-							bbox: L.latLngBounds(latLng, latLng),
-							center: latLng
-						};
-					}
-				}
-
-				cb.call(context, results);
-			}, this);
-		}
-	});
-
-	L.Control.Geocoder.mapQuest = function(key) {
-		return new L.Control.Geocoder.MapQuest(key);
-	};
-
-	L.Control.Geocoder.Mapbox = L.Class.extend({
-		options: {
-			service_url: 'https://api.tiles.mapbox.com/v4/geocode/mapbox.places-v1/'
-		},
-
-		initialize: function(access_token) {
-			this._access_token = access_token;
-		},
-
-		geocode: function(query, cb, context) {
-			L.Control.Geocoder.getJSON(this.options.service_url + encodeURIComponent(query) + '.json', {
-				access_token: this._access_token,
-			}, function(data) {
-				var results = [],
-				loc,
-				latLng,
-				latLngBounds;
-				if (data.features && data.features.length) {
-					for (var i = 0; i <= data.features.length - 1; i++) {
-						loc = data.features[i];
-						latLng = L.latLng(loc.center.reverse());
-						if(loc.hasOwnProperty('bbox'))
-							{
-								latLngBounds = L.latLngBounds(L.latLng(loc.bbox.slice(0, 2).reverse()), L.latLng(loc.bbox.slice(2, 4).reverse()));
-							}
-							else
-							{
-								latLngBounds = L.latLngBounds(latLng, latLng);
-							}
-							results[i] = {
-								name: loc.place_name,
-								bbox: latLngBounds,
-								center: latLng
-							};
-						}
-					}
-
-					cb.call(context, results);
-			});
-		},
-
-		reverse: function(location, scale, cb, context) {
-			L.Control.Geocoder.getJSON(this.options.service_url + encodeURIComponent(location.lng) + ',' + encodeURIComponent(location.lat) + '.json', {
-				access_token: this._access_token,
-			}, function(data) {
-				var results = [],
-				loc,
-				latLng,
-				latLngBounds;
-				if (data.features && data.features.length) {
-					for (var i = 0; i <= data.features.length - 1; i++) {
-						loc = data.features[i];
-						latLng = L.latLng(loc.center.reverse());
-						if(loc.hasOwnProperty('bbox'))
-						{
-							latLngBounds = L.latLngBounds(L.latLng(loc.bbox.slice(0, 2).reverse()), L.latLng(loc.bbox.slice(2, 4).reverse()));
-						}
-						else
-						{
-							latLngBounds = L.latLngBounds(latLng, latLng);
-						}
-						results[i] = {
-							name: loc.place_name,
-							bbox: latLngBounds,
-							center: latLng
-						};
-					}
-				}
-
-				cb.call(context, results);
-			});
-		}
-	});
-
-	L.Control.Geocoder.mapbox = function(access_token) {
-			return new L.Control.Geocoder.Mapbox(access_token);
-	};
-
-	L.Control.Geocoder.Google = L.Class.extend({
-		options: {
-			service_url: 'https://maps.googleapis.com/maps/api/geocode/json'
-		},
-
-		initialize: function(key) {
-				this._key = key;
-		},
-
-		geocode: function(query, cb, context) {
-			var params = {
-				address: query,
-			};
-			if(this._key && this._key.length)
-			{
-				params['key'] = this._key
-			}
-
-			L.Control.Geocoder.getJSON(this.options.service_url, params, function(data) {
-					var results = [],
-							loc,
-							latLng,
-							latLngBounds;
-					if (data.results && data.results.length) {
-						for (var i = 0; i <= data.results.length - 1; i++) {
-							loc = data.results[i];
-							latLng = L.latLng(loc.geometry.location);
-							latLngBounds = L.latLngBounds(L.latLng(loc.geometry.viewport.northeast), L.latLng(loc.geometry.viewport.southwest));
-							results[i] = {
-									name: loc.formatted_address,
-									bbox: latLngBounds,
-									center: latLng
-							};
-						}
-					}
-
-					cb.call(context, results);
-			});
-		},
-
-		reverse: function(location, scale, cb, context) {
-			var params = {
-				latlng: encodeURIComponent(location.lat) + ',' + encodeURIComponent(location.lng)
-			};
-			if(this._key && this._key.length)
-			{
-				params['key'] = this._key
-			}
-			L.Control.Geocoder.getJSON(this.options.service_url, params, function(data) {
-				var results = [],
-						loc,
-						latLng,
-						latLngBounds;
-				if (data.results && data.results.length) {
-					for (var i = 0; i <= data.results.length - 1; i++) {
-						loc = data.results[i];
-						latLng = L.latLng(loc.geometry.location);
-						latLngBounds = L.latLngBounds(L.latLng(loc.geometry.viewport.northeast), L.latLng(loc.geometry.viewport.southwest));
-						results[i] = {
-							name: loc.formatted_address,
-							bbox: latLngBounds,
-							center: latLng
-						};
-					}
-				}
-
-				cb.call(context, results);
-			});
-		}
-	});
-
-	L.Control.Geocoder.google = function(key) {
-		return new L.Control.Geocoder.Google(key);
-	};
-	return L.Control.Geocoder;
-}));
+(function(e){var t;
+if(typeof define==='function'&&define.amd){define(['leaflet'],e)}
+else if(typeof module!=='undefined'){t=require('leaflet');
+module.exports=e(t)}
+else{if(typeof window.L==='undefined')throw'Leaflet must be loaded first';
+e(window.L)}}(function(e){'use strict';
+e.Control.Geocoder=e.Control.extend({options:{showResultIcons:!1,collapsed:!0,expand:'click',position:'topright',placeholder:'Search...',errorMessage:'Nothing found.'},_callbackId:0,initialize:function(t){e.Util.setOptions(this,t);
+if(!this.options.geocoder){this.options.geocoder=new e.Control.Geocoder.Nominatim()}},onAdd:function(t){var r='leaflet-control-geocoder',o=e.DomUtil.create('div',r),s=e.DomUtil.create('div','leaflet-control-geocoder-icon',o),i=this._form=e.DomUtil.create('form',r+'-form',o),n;
+this._map=t;
+this._container=o;
+n=this._input=e.DomUtil.create('input');
+n.type='text';
+n.placeholder=this.options.placeholder;
+e.DomEvent.addListener(n,'keydown',this._keydown,this);
+this._errorElement=document.createElement('div');
+this._errorElement.className=r+'-form-no-error';
+this._errorElement.innerHTML=this.options.errorMessage;
+this._alts=e.DomUtil.create('ul',r+'-alternatives leaflet-control-geocoder-alternatives-minimized');
+i.appendChild(n);
+i.appendChild(this._errorElement);
+o.appendChild(this._alts);
+e.DomEvent.addListener(i,'submit',this._geocode,this);
+if(this.options.collapsed){if(this.options.expand==='click'){e.DomEvent.addListener(s,'click',function(e){if(e.button===0&&e.detail===1){this._toggle()}},this)}
+else{e.DomEvent.addListener(s,'mouseover',this._expand,this);
+e.DomEvent.addListener(s,'mouseout',this._collapse,this);
+this._map.on('movestart',this._collapse,this)}}
+else{this._expand()};
+e.DomEvent.disableClickPropagation(o);
+return o},_geocodeResult:function(t){e.DomUtil.removeClass(this._container,'leaflet-control-geocoder-throbber');
+if(t.length===1){this._geocodeResultSelected(t[0])}
+else if(t.length>0){this._alts.innerHTML='';
+this._results=t;
+e.DomUtil.removeClass(this._alts,'leaflet-control-geocoder-alternatives-minimized');
+for(var o=0;o<t.length;o++){this._alts.appendChild(this._createAlt(t[o],o))}}
+else{e.DomUtil.addClass(this._errorElement,'leaflet-control-geocoder-error')}},markGeocode:function(t){this._map.fitBounds(t.bbox);
+if(this._geocodeMarker){this._map.removeLayer(this._geocodeMarker)};
+this._geocodeMarker=new e.Marker(t.center).bindPopup(t.html||t.name).addTo(this._map).openPopup();
+return this},_geocode:function(t){e.DomEvent.preventDefault(t);
+e.DomUtil.addClass(this._container,'leaflet-control-geocoder-throbber');
+this._clearResults();
+this.options.geocoder.geocode(this._input.value,this._geocodeResult,this);
+return!1},_geocodeResultSelected:function(e){if(this.options.collapsed){this._collapse()}
+else{this._clearResults()};
+this.markGeocode(e)},_toggle:function(){if(this._container.className.indexOf('leaflet-control-geocoder-expanded')>=0){this._collapse()}
+else{this._expand()}},_expand:function(){e.DomUtil.addClass(this._container,'leaflet-control-geocoder-expanded');
+this._input.select()},_collapse:function(){this._container.className=this._container.className.replace(' leaflet-control-geocoder-expanded','');
+e.DomUtil.addClass(this._alts,'leaflet-control-geocoder-alternatives-minimized');
+e.DomUtil.removeClass(this._errorElement,'leaflet-control-geocoder-error')},_clearResults:function(){e.DomUtil.addClass(this._alts,'leaflet-control-geocoder-alternatives-minimized');
+this._selection=null;
+e.DomUtil.removeClass(this._errorElement,'leaflet-control-geocoder-error')},_createAlt:function(t,o){var r=document.createElement('li'),n=e.DomUtil.create('a','',r),s=this.options.showResultIcons&&t.icon?e.DomUtil.create('img','',n):null,i=t.html?undefined:document.createTextNode(t.name);
+if(s){s.src=t.icon};
+n.href='#';
+n.setAttribute('data-result-index',o);
+if(t.html){n.innerHTML=t.html}
+else{n.appendChild(i)};
+e.DomEvent.addListener(r,'click',function(o){e.DomEvent.preventDefault(o);
+this._geocodeResultSelected(t)},this);
+return r},_keydown:function(t){var o=this,n=function(t){if(o._selection){e.DomUtil.removeClass(o._selection.firstChild,'leaflet-control-geocoder-selected');
+o._selection=o._selection[t>0?'nextSibling':'previousSibling']};
+if(!o._selection){o._selection=o._alts[t>0?'firstChild':'lastChild']};
+if(o._selection){e.DomUtil.addClass(o._selection.firstChild,'leaflet-control-geocoder-selected')}};
+switch(t.keyCode){case 27:this._collapse();
+break;
+case 38:n(-1);
+e.DomEvent.preventDefault(t);
+break;
+case 40:n(1);
+e.DomEvent.preventDefault(t);
+break;
+case 13:if(this._selection){var r=parseInt(this._selection.firstChild.getAttribute('data-result-index'),10);
+this._geocodeResultSelected(this._results[r]);
+this._clearResults();
+e.DomEvent.preventDefault(t)}};
+return!0}});
+e.Control.geocoder=function(t,o){return new e.Control.Geocoder(t,o)};
+e.Control.Geocoder.callbackId=0;
+e.Control.Geocoder.jsonp=function(t,o,n,r,l){var i='_l_geocoder_'+(e.Control.Geocoder.callbackId++);
+o[l||'callback']=i;
+window[i]=e.Util.bind(n,r);
+var s=document.createElement('script');
+s.type='text/javascript';
+s.src=t+e.Util.getParamString(o);
+s.id=i;
+document.getElementsByTagName('head')[0].appendChild(s)};
+e.Control.Geocoder.getJSON=function(t,o,n){var r=new XMLHttpRequest();
+r.open('GET',t+e.Util.getParamString(o),!0);
+r.send(null);
+r.onreadystatechange=function(){if(r.readyState!=4)return;
+if(r.status!=200&&req.status!=304)return;
+n(JSON.parse(r.response))}};
+e.Control.Geocoder.template=function(t,o,n){return t.replace(/\{ *([\w_]+) *\}/g,function(t,n){var r=o[n];
+if(r===undefined){r=''}
+else if(typeof r==='function'){r=r(o)};
+return e.Control.Geocoder.htmlEscape(r)})};
+e.Control.Geocoder.htmlEscape=(function(){var e=/[&<>"'`]/g,t=/[&<>"'`]/,o={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#x27;','`':'&#x60;'};
+function n(e){return o[e]};
+return function(o){if(o==null){return''}
+else if(!o){return o+''};
+o=''+o;
+if(!t.test(o)){return o};
+return o.replace(e,n)}})();
+e.Control.Geocoder.Nominatim=e.Class.extend({options:{serviceUrl:'//nominatim.openstreetmap.org/',geocodingQueryParams:{},reverseQueryParams:{},htmlTemplate:function(t){var o=t.address,n=[];
+if(o.road||o.building){n.push('{building} {road} {house_number}')};
+if(o.city||o.town||o.village){n.push('<span class="'+(n.length>0?'leaflet-control-geocoder-address-detail':'')+'">{postcode} {city}{town}{village}</span>')};
+if(o.state||o.country){n.push('<span class="'+(n.length>0?'leaflet-control-geocoder-address-context':'')+'">{state} {country}</span>')};
+return e.Control.Geocoder.template(n.join('<br/>'),o,!0)}},initialize:function(t){e.Util.setOptions(this,t)},geocode:function(t,o,n){e.Control.Geocoder.jsonp(this.options.serviceUrl+'search/',e.extend({q:t,limit:5,format:'json',addressdetails:1},this.options.geocodingQueryParams),function(t){var l=[];
+for(var r=t.length-1;r>=0;r--){var s=t[r].boundingbox;
+for(var i=0;i<4;i++)s[i]=parseFloat(s[i]);
+l[r]={icon:t[r].icon,name:t[r].display_name,html:this.options.htmlTemplate?this.options.htmlTemplate(t[r]):undefined,bbox:e.latLngBounds([s[0],s[2]],[s[1],s[3]]),center:e.latLng(t[r].lat,t[r].lon),properties:t[r]}};
+o.call(n,l)},this,'json_callback')},reverse:function(t,o,n,r){e.Control.Geocoder.jsonp(this.options.serviceUrl+'reverse/',e.extend({lat:t.lat,lon:t.lng,zoom:Math.round(Math.log(o/256)/Math.log(2)),addressdetails:1,format:'json'},this.options.reverseQueryParams),function(t){var s=[],o;
+if(t&&t.lat&&t.lon){o=e.latLng(t.lat,t.lon);
+s.push({name:t.display_name,html:this.options.htmlTemplate?this.options.htmlTemplate(t):undefined,center:o,bounds:e.latLngBounds(o,o),properties:t})};
+n.call(r,s)},this,'json_callback')}});
+e.Control.Geocoder.nominatim=function(t){return new e.Control.Geocoder.Nominatim(t)};
+e.Control.Geocoder.Bing=e.Class.extend({initialize:function(e){this.key=e},geocode:function(t,o,n){e.Control.Geocoder.jsonp('//dev.virtualearth.net/REST/v1/Locations',{query:t,key:this.key},function(t){var l=[];
+for(var s=t.resourceSets[0].resources.length-1;s>=0;s--){var i=t.resourceSets[0].resources[s],r=i.bbox;
+l[s]={name:i.name,bbox:e.latLngBounds([r[0],r[1]],[r[2],r[3]]),center:e.latLng(i.point.coordinates)}};
+o.call(n,l)},this,'jsonp')},reverse:function(t,o,n,r){e.Control.Geocoder.jsonp('//dev.virtualearth.net/REST/v1/Locations/'+t.lat+','+t.lng,{key:this.key},function(t){var l=[];
+for(var s=t.resourceSets[0].resources.length-1;s>=0;s--){var i=t.resourceSets[0].resources[s],o=i.bbox;
+l[s]={name:i.name,bbox:e.latLngBounds([o[0],o[1]],[o[2],o[3]]),center:e.latLng(i.point.coordinates)}};
+n.call(r,l)},this,'jsonp')}});
+e.Control.Geocoder.bing=function(t){return new e.Control.Geocoder.Bing(t)};
+e.Control.Geocoder.RaveGeo=e.Class.extend({options:{querySuffix:'',deepSearch:!0,wordBased:!1},jsonp:function(t,o,n){var s='_l_geocoder_'+(e.Control.Geocoder.callbackId++),l=[];
+t.prepend=s+'(';
+t.append=')';
+for(var i in t){l.push(i+'='+escape(t[i]))};
+window[s]=e.Util.bind(o,n);
+var r=document.createElement('script');
+r.type='text/javascript';
+r.src=this._serviceUrl+'?'+l.join('&');
+r.id=s;
+document.getElementsByTagName('head')[0].appendChild(r)},initialize:function(t,o,n){e.Util.setOptions(this,n);
+this._serviceUrl=t;
+this._scheme=o},geocode:function(t,o,n){e.Control.Geocoder.jsonp(this._serviceUrl,{address:t+this.options.querySuffix,scheme:this._scheme,outputFormat:'jsonp',deepSearch:this.options.deepSearch,wordBased:this.options.wordBased},function(t){var l=[];
+for(var r=t.length-1;r>=0;r--){var s=t[r],i=e.latLng(s.y,s.x);
+l[r]={name:s.address,bbox:e.latLngBounds([i]),center:i}};
+o.call(n,l)},this)}});
+e.Control.Geocoder.raveGeo=function(t,o,n){return new e.Control.Geocoder.RaveGeo(t,o,n)};
+e.Control.Geocoder.MapQuest=e.Class.extend({initialize:function(e){this._key=decodeURIComponent(e)},_formatName:function(){var t=[],e;
+for(e=0;e<arguments.length;e++){if(arguments[e]){t.push(arguments[e])}};
+return t.join(', ')},geocode:function(t,o,n){e.Control.Geocoder.jsonp('//www.mapquestapi.com/geocoding/v1/address',{key:this._key,location:t,limit:5,outFormat:'json'},function(t){var l=[],r,i;
+if(t.results&&t.results[0].locations){for(var s=t.results[0].locations.length-1;s>=0;s--){r=t.results[0].locations[s];
+i=e.latLng(r.latLng);
+l[s]={name:this._formatName(r.street,r.adminArea4,r.adminArea3,r.adminArea1),bbox:e.latLngBounds(i,i),center:i}}};
+o.call(n,l)},this)},reverse:function(t,o,n,r){e.Control.Geocoder.jsonp('//www.mapquestapi.com/geocoding/v1/reverse',{key:this._key,location:t.lat+','+t.lng,outputFormat:'json'},function(t){var l=[],o,i;
+if(t.results&&t.results[0].locations){for(var s=t.results[0].locations.length-1;s>=0;s--){o=t.results[0].locations[s];
+i=e.latLng(o.latLng);
+l[s]={name:this._formatName(o.street,o.adminArea4,o.adminArea3,o.adminArea1),bbox:e.latLngBounds(i,i),center:i}}};
+n.call(r,l)},this)}});
+e.Control.Geocoder.mapQuest=function(t){return new e.Control.Geocoder.MapQuest(t)};
+e.Control.Geocoder.Mapbox=e.Class.extend({options:{service_url:'https://api.tiles.mapbox.com/v4/geocode/mapbox.places-v1/'},initialize:function(e){this._access_token=e},geocode:function(t,o,n){e.Control.Geocoder.getJSON(this.options.service_url+encodeURIComponent(t)+'.json',{access_token:this._access_token,},function(t){var a=[],r,i,l;
+if(t.features&&t.features.length){for(var s=0;s<=t.features.length-1;s++){r=t.features[s];
+i=e.latLng(r.center.reverse());
+if(r.hasOwnProperty('bbox')){l=e.latLngBounds(e.latLng(r.bbox.slice(0,2).reverse()),e.latLng(r.bbox.slice(2,4).reverse()))}
+else{l=e.latLngBounds(i,i)};
+a[s]={name:r.place_name,bbox:l,center:i}}};
+o.call(n,a)})},reverse:function(t,o,n,r){e.Control.Geocoder.getJSON(this.options.service_url+encodeURIComponent(t.lng)+','+encodeURIComponent(t.lat)+'.json',{access_token:this._access_token,},function(t){var a=[],o,i,l;
+if(t.features&&t.features.length){for(var s=0;s<=t.features.length-1;s++){o=t.features[s];
+i=e.latLng(o.center.reverse());
+if(o.hasOwnProperty('bbox')){l=e.latLngBounds(e.latLng(o.bbox.slice(0,2).reverse()),e.latLng(o.bbox.slice(2,4).reverse()))}
+else{l=e.latLngBounds(i,i)};
+a[s]={name:o.place_name,bbox:l,center:i}}};
+n.call(r,a)})}});
+e.Control.Geocoder.mapbox=function(t){return new e.Control.Geocoder.Mapbox(t)};
+e.Control.Geocoder.Google=e.Class.extend({options:{service_url:'https://maps.googleapis.com/maps/api/geocode/json'},initialize:function(e){this._key=e},geocode:function(t,o,n){var r={address:t,};
+if(this._key&&this._key.length){r['key']=this._key};
+e.Control.Geocoder.getJSON(this.options.service_url,r,function(t){var i=[],r,l,a;
+if(t.results&&t.results.length){for(var s=0;s<=t.results.length-1;s++){r=t.results[s];
+l=e.latLng(r.geometry.location);
+a=e.latLngBounds(e.latLng(r.geometry.viewport.northeast),e.latLng(r.geometry.viewport.southwest));
+i[s]={name:r.formatted_address,bbox:a,center:l}}};
+o.call(n,i)})},reverse:function(t,o,n,r){var s={latlng:encodeURIComponent(t.lat)+','+encodeURIComponent(t.lng)};
+if(this._key&&this._key.length){s['key']=this._key};
+e.Control.Geocoder.getJSON(this.options.service_url,s,function(t){var i=[],o,l,a;
+if(t.results&&t.results.length){for(var s=0;s<=t.results.length-1;s++){o=t.results[s];
+l=e.latLng(o.geometry.location);
+a=e.latLngBounds(e.latLng(o.geometry.viewport.northeast),e.latLng(o.geometry.viewport.southwest));
+i[s]={name:o.formatted_address,bbox:a,center:l}}};
+n.call(r,i)})}});
+e.Control.Geocoder.google=function(t){return new e.Control.Geocoder.Google(t)};
+return e.Control.Geocoder}));

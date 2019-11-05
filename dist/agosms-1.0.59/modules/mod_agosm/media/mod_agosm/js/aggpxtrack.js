@@ -1,44 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
-	var leafletmaps = document.querySelectorAll('.leafletmapModGpx');
-
-	// For all maps [start]
-	[].forEach.call(leafletmaps, function (element) {
-
-		var moduleId = element.getAttribute('data-module-id');
-		var gpx_file_name = element.getAttribute('data-gpx_file_name');
-		var startIconUrl = element.getAttribute('data-startIconUrl');
-		var endIconUrl = element.getAttribute('data-endIconUrl');
-		var shadowIconUrl = element.getAttribute('data-shadowUrl');
-		var wptIconUrls = element.getAttribute('data-wptIconUrls');
-
-		var gpxfilenames = gpx_file_name.split(';;');
-		
-		var group = L.featureGroup([]);
-		window['mymap' + moduleId].fitBounds([[0, 0],[0, 0]]);
-
-		for (var i = 0; i < gpxfilenames.length; i++) {
-			new L.GPX(gpxfilenames[i],
-				{
-					marker_options: {
-						startIconUrl: startIconUrl,
-						endIconUrl: endIconUrl,
-						shadowUrl: shadowIconUrl,
-						wptIconUrls: {
-							'': wptIconUrls
-						}
-					},
-					async: true
-				}).on('loaded', function (e) {
-				if (!window['mymap' + moduleId].getBounds().contains(L.latLng(0, 0))){
-					var bounds = window['mymap' + moduleId].getBounds().extend(e.target.getBounds());
-					window['mymap' + moduleId].fitBounds(bounds);
-				} else {
-					window['mymap' + moduleId].fitBounds(e.target.getBounds());
-				}
-			}).addTo(group);
-		}
-		;
-		group.addTo(window['mymap' + moduleId]);
-	});
-
-}, false);
+document.addEventListener('DOMContentLoaded',function(){var t=document.querySelectorAll('.leafletmapModGpx');[].forEach.call(t,function(t){var e=t.getAttribute('data-module-id'),d=t.getAttribute('data-gpx_file_name'),r=t.getAttribute('data-startIconUrl'),i=t.getAttribute('data-endIconUrl'),u=t.getAttribute('data-shadowUrl'),l=t.getAttribute('data-wptIconUrls'),n=d.split(';;'),o=L.featureGroup([]);
+window['mymap'+e].fitBounds([[0,0],[0,0]]);
+for(var a=0;a<n.length;a++){new L.GPX(n[a],{marker_options:{startIconUrl:r,endIconUrl:i,shadowUrl:u,wptIconUrls:{'':l}},async:!0}).on('loaded',function(t){if(!window['mymap'+e].getBounds().contains(L.latLng(0,0))){var a=window['mymap'+e].getBounds().extend(t.target.getBounds());
+window['mymap'+e].fitBounds(a)}
+else{window['mymap'+e].fitBounds(t.target.getBounds())}}).addTo(o)};
+o.addTo(window['mymap'+e])})},!1);

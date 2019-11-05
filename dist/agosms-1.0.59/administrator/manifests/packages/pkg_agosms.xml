@@ -2,7 +2,7 @@
 <extension type="package" version="1.0" method="upgrade">
 	<name>pkg_agosms</name>
 	<packagename>agosms</packagename>
-	<creationDate>2019-11-03</creationDate>
+	<creationDate>2019-11-05</creationDate>
 	<packager>Astrid Günther</packager>
 	<copyright>(C) 2019 Astrid Günther. All rights reserved.</copyright>
 	<packageremail>info@astrid-guenther.de</packageremail>
