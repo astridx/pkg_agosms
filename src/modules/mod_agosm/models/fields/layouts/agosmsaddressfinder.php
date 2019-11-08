@@ -88,41 +88,34 @@ elseif ($app->input->getCmd('option') !== 'com_users'
 <input type="text" class="agomsaddressfinderlon" >
 </div>
 </div>
-	
+<p>
+<?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_OPTIONAL_HINT'); ?>	
+</p>	
 <hr>
-<div style="height: 180px;" id="mapid"></div>
+<div style="height:300px;width:auto" id="<?php echo $mapid; ?>"></div>
+<hr>
 <div class="control-group">
 <label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_LON'); ?></label>	
 <div class="controls">	
 <input type="text" class="agomsaddressfinderaddressfield" >
 </div>
-</div>
-<hr>	
+</div>	
 	
 <button 
+		data-mapid="<?php echo $mapid; ?>"
 		class="btn btn-success agomsaddressfinderbutton_address" 
 		type="button">
 <?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_CALCULATE_CORDS_FROM_ADDRESS'); ?>
 </button>
-
-<button 
-		data-mapid="<?php echo $mapid; ?>"
-		class="btn btn-success agomsaddressfinderbutton_map" 
-		type="button">
-<?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_CALCULATE_CORDS_FROM_MAP'); ?>
-</button>
 	
 <hr>
 
-<p>
-<?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_OPTIONAL_HINT'); ?>	
-</p>
-
 <input 
 	class="agomsaddressfinderhiddenfield" 
-	type="hidden" 
+	type="text" 
 	readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" 
 	value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> 
 />
+
 </div>
 <hr>
