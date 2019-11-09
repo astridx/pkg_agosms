@@ -95,7 +95,7 @@ elseif ($app->input->getCmd('option') !== 'com_users'
 <div style="height:300px;width:auto" id="<?php echo $mapid; ?>"></div>
 <hr>
 <div class="control-group">
-<label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_LON'); ?></label>	
+<label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_ADRESSE'); ?></label>	
 <div class="controls">	
 <input type="text" class="agomsaddressfinderaddressfield" >
 </div>
@@ -108,11 +108,9 @@ elseif ($app->input->getCmd('option') !== 'com_users'
 <?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_CALCULATE_CORDS_FROM_ADDRESS'); ?>
 </button>
 	
-<hr>
-
 <input 
 	class="agomsaddressfinderhiddenfield" 
-	type="text" 
+	type="hidden" 
 	readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" 
 	value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> 
 />

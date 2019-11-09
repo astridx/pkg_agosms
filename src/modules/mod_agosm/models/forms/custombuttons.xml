@@ -2,8 +2,8 @@
 <form>
 	<field
 		name="latlonpin"
-		type="agosm"
-		default="50.273543, 7.262993"
+		type="agosmsaddressfinder"
+		default=""
 		label="MOD_AGOSM_LATLON"
 		description="MOD_AGOSM_LATLON_DESC"
 	/>
