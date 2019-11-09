@@ -737,6 +737,14 @@
 				</field>
 
 				<field
+					type="spacer"
+					name="specialPin"
+					label="MOD_AGOSM_H_PINCF_SPECIALPIN"
+					class="text"
+					showon="showpin:1"
+				/>
+
+				<field
 					name="specialpins"
 					type="subform"
 					formsource="modules/mod_agosm/models/forms/custombuttons.xml"
