@@ -1,4 +1,6 @@
 .gitignore
+dist/
+sik/
 vendor/
 composer.json
 composer.lock

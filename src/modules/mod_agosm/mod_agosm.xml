@@ -296,8 +296,8 @@
 
 				<field
 					name="lonlat"
-					type="agosm"
-					default="50.281168, 7.276211"
+					type="agosmsaddressfinder"
+					default=""
 					label="MOD_AGOSM_LONLAT"
 					description="MOD_AGOSM_LONLAT_DESC"
 				/>
@@ -417,7 +417,7 @@
 
 				<field
 					name="routingstart"
-					type="agosm"
+					type="agosmsaddressfinder"
 					label="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"
@@ -425,7 +425,7 @@
 
 				<field
 					name="routingend"
-					type="agosm"
+					type="agosmsaddressfinder"
 					label="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"
@@ -735,6 +735,14 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
+				<field
+					type="spacer"
+					name="specialPin"
+					label="MOD_AGOSM_H_PINCF_SPECIALPIN"
+					class="text"
+					showon="showpin:1"
+				/>
 
 				<field
 					name="specialpins"
