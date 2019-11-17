@@ -1,4 +1,3 @@
-;
 document.addEventListener('DOMContentLoaded',function(){var e=document.querySelectorAll('.agomsaddressfindersurroundingdiv');[].forEach.call(e,function(e){setTimeout(function(){var g=e.getElementsByTagName('button'),s=g[0],d=s.getAttribute('data-mapid'),a=e.getElementsByTagName('input'),t=a[0],n=a[1],v=a[2],r=a[3];
 if(r.value.split(',').length!==2){r.value='50.27,7.26,'};
 var i=r.value.split(',');
