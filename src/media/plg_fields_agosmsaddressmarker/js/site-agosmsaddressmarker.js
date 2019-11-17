@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			localStorage.setItem("privacyState", '0')
 		}
-			
 		
 		for (i = 0; i < buttons.length; i++) {
 			if (localStorage.getItem("privacyState") === '0') {
@@ -23,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 			buttons[i].onclick = function () {
 				if (localStorage.getItem("privacyState") === '0') {
+					document.getElementById('map' + unique).style.display = "block";
 					localStorage.setItem("privacyState", '1');
 				} else { 
 					localStorage.setItem("privacyState", '0');
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		if (addprivacybox === '1' && (localStorage.getItem("privacyState") === '0'))
 		{
+			document.getElementById('map' + unique).style.display = "none";
 			return;
 		}
 		
