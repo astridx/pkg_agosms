@@ -61,7 +61,6 @@ if ($fieldParams->get('scrollwheelzoom') === "2")
 
 if ($fieldParams->get('maptype') === "google")
 {
-	$document->addScript('https://maps.googleapis.com/maps/api/js?key=' . $fieldParams->get('googlekey', ''));
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleMutant/Leaflet.GoogleMutant.js');
 }
 
@@ -104,6 +103,7 @@ $popuptext = $values[5];
 	data-popuptext='<?php echo $popuptext ?>'
 	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '1') ?>'
 	data-owngooglegesturetext='<?php echo $fieldParams->get('owngooglegesturetext', '1') ?>'
+	data-googekey='<?php echo $fieldParams->get('googlekey', '') ?>'
 	data-specialicon='<?php echo $fieldParams->get('specialicon', '0') ?>'
 	data-addprivacybox='<?php echo $fieldParams->get('addprivacybox', '0') ?>'
 	data-popup='<?php echo $fieldParams->get('popup', '0') ?>'
