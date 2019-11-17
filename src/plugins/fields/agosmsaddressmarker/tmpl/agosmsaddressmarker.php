@@ -88,6 +88,7 @@ $popuptext = $values[5];
 ?>
 <div>
 <?php if ($fieldParams->get('addprivacybox', '0')) : ?>
+	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP_TEXT'); ?>
 	<button class="btn btn-success <?php echo $unique ?>" 
 		type="button">	
 			<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP'); ?>
