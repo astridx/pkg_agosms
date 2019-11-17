@@ -98,7 +98,8 @@ class ModagosmHelper
 
 		if ($items)
 		{
-			foreach ($items as $item) {
+			foreach ($items as $item)
+			{
 				$category = $model->getCategory($item->id);
 				break;
 			}
@@ -205,7 +206,8 @@ class ModagosmHelper
 
 			if ($items)
 			{
-				foreach ($items as $key => $item) {
+				foreach ($items as $key => $item)
+				{
 					if ($item->state !== "1")
 					{
 						continue;
@@ -215,9 +217,8 @@ class ModagosmHelper
 					// (calling plugins events and loading layouts to get their HTML display)
 					$fields = FieldsHelper::getFields('com_content.article', $item, true);
 
-
-					foreach ($fields as $key => $field) {
-
+					foreach ($fields as $key => $field)
+					{
 						$itemfiltered = new stdClass;
 
 						if ($field->title == 'lat, lon')
@@ -276,7 +277,8 @@ class ModagosmHelper
 								}
 							}
 						}
-					$itemsfiltered[] = $itemfiltered;
+
+						$itemsfiltered[] = $itemfiltered;
 					}
 				}
 			}

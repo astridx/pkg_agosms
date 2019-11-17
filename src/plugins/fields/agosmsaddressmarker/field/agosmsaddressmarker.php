@@ -115,6 +115,14 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected $specialicon;
 
 	/**
+	 * The name of the addprivacybox field.
+	 *
+	 * @var    boolean
+	 * @since  1.0.61
+	 */
+	protected $addprivacybox;
+
+	/**
 	 * The name of the showrouting field.
 	 *
 	 * @var    string
@@ -142,6 +150,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			case 'mapboxkey':
 			case 'owngooglegesturetext':
 			case 'specialicon':
+			case 'addprivacybox':
 			case 'popup':
 			case 'showroutingcontrol':
 				return $this->$name;
@@ -179,6 +188,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$this->scrollwheelzoom = (string) $this->element['scrollwheelzoom'];
 			$this->owngooglegesturetext = (string) $this->element['owngooglegesturetext'];
 			$this->specialicon = (string) $this->element['specialicon'];
+			$this->addprivacybox = (string) $this->element['addprivacybox'];
 			$this->popup = (string) $this->element['popup'];
 			$this->showroutingcontrol = (string) $this->element['showroutingcontrol'];
 		}
@@ -234,6 +244,10 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 
 			case 'specialicon':
 				$this->specialicon = (string) $value;
+				break;
+
+			case 'addprivacybox':
+				$this->addprivacybox = (string) $value;
 				break;
 
 			case 'popup':
@@ -304,6 +318,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			'addressfields' => $this->addressfields,
 			'scrollwheelzoom' => $this->scrollwheelzoom,
 			'owngooglegesturetext' => $this->owngooglegesturetext,
+			'addprivacybox' => $this->addprivacybox,
 			'specialicon' => $this->specialicon,
 			'popup' => $this->popup,
 			'showroutingcontrol' => $this->showroutingcontrol,

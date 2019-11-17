@@ -65,6 +65,7 @@
 				size="30"
 				showon="maptype:google[OR]geocoder:google"
 			/>
+
 			<field
 				name="mapboxkey"
 				type="text"
@@ -73,7 +74,9 @@
 				size="30"
 				showon="maptype:mapbox[OR]geocoder:mapbox[OR]routing_router:mapbox"
 			/>
+
 			<field type="spacer" name="myspacer3" hr="true" />
+
 			<field
 				name="scrollwheelzoom"
 				type="radio"
@@ -84,6 +87,7 @@
 				<option value="1">JYES</option>
 				<option value="2">Google Gesture Handling</option>
 			</field>
+
 			<field
 				name="owngooglegesturetext"
 				type="radio"
@@ -94,6 +98,7 @@
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
 			</field>
+
 			<field 
 				name="notescrollwheelzoom" 
 				type="note" 
@@ -102,6 +107,7 @@
 				class="alert" 
 				close="true"
 			/>
+
 			<field 
 				name="noteowngooglegesturetext" 
 				type="note" 
@@ -111,7 +117,9 @@
 				close="true"
 				showon="owngooglegesturetext:1[AND]scrollwheelzoom:2"
 			/>
+
 			<field type="spacer" name="myspacer4" hr="true" />
+
 			<field
 				name="popup"
 				type="radio"
@@ -122,7 +130,9 @@
 				<option value="1">JYES (closed)</option>
 				<option value="2">JYES (open)</option>
 			</field>
+
 			<field type="spacer" name="myspacer5" hr="true" />
+
 			<field
 				name="specialicon"
 				type="radio"
@@ -132,7 +142,9 @@
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
 			</field>
+
 			<field type="spacer" name="myspacer6" hr="true" />
+
 			<field
 				name="showroutingcontrol"
 				type="radio"
@@ -142,6 +154,7 @@
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
 			</field>
+
 			<field
 				name="routewhiledragging"
 				type="list"
@@ -152,6 +165,7 @@
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
 			</field>
+
 			<field
 				name="reverseWaypoints"
 				type="list"
@@ -162,6 +176,7 @@
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
 			</field>
+
 			<field
 				name="collapsible"
 				type="list"
@@ -172,6 +187,7 @@
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
 			</field>
+
 			<field
 				name="showAlternatives"
 				type="list"
@@ -182,6 +198,7 @@
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
 			</field>
+
 			<field
 				name="fitSelectedRoutes"
 				type="list"
@@ -192,6 +209,7 @@
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
 			</field>
+
 			<field
 				type="list"
 				name="routing_position"
@@ -204,6 +222,7 @@
 				<option value="topleft">PLG_AGOSMSADDRESSMARKER_POSITION_TOPLEFT</option>
 				<option value="topright">PLG_AGOSMSADDRESSMARKER_POSITION_TOPRIGHT</option>
 			</field>
+
 			<field
 				type="list"
 				name="routing_router"
@@ -214,6 +233,7 @@
 				<option value="mapbox">mapbox</option>
 				<option value="osrm">osrm</option>
 			</field>
+
 			<field
 				type="list"
 				name="routinglanguage"
@@ -244,6 +264,7 @@
 			>
 				<option value="mapbox/driving">mapbox/driving</option>
 			</field>
+
 			<field
 				type="list"
 				name="routingmetric"
@@ -254,6 +275,7 @@
 				<option value="metric">MOD_AGOSM_METRIC</option>
 				<option value="imperial">MOD_AGOSM_IMPERIAL</option>
 			</field>
+
 			<field 
 				name="routing_simple_routertext" 
 				type="note" 
@@ -263,6 +285,7 @@
 				close="true"
 				showon="showroutingcontrol:1[AND]routing_router:mapbox"
 			/>
+
 			<field 
 				name="showroutingcontroltext" 
 				type="note" 
@@ -272,7 +295,19 @@
 				close="true"
 				showon="showroutingcontrol:1"
 			/>
+
 			<field type="spacer" name="myspacer7" hr="true" />
+
+			<field
+				name="addprivacybox"
+				type="radio"
+				label="PLG_AGOSMSADDRESSMARKER_ADDPRIVACYBOX"
+				default="0"
+			>
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>			
+
 			<field type="spacer" name="myspacer8" hr="true" />
 		</fieldset>
 	</fields>

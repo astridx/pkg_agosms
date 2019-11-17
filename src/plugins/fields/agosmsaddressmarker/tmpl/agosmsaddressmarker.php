@@ -15,6 +15,8 @@ $value = $field->value;
 JText::script('PLG_AGOSMSADDRESSMARKER_SCROLL');
 JText::script('PLG_AGOSMSADDRESSMARKER_TOUCH');
 JText::script('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
 
 $document = JFactory::getDocument();
 
@@ -84,7 +86,7 @@ $icon = $values[4];
 $popuptext = $values[5];
 
 ?>
-
+<div>
 <div
 	<?php 
 	if ( $lat == 0 && $lon == 0) echo 'style="display:none"' 
@@ -103,6 +105,7 @@ $popuptext = $values[5];
 	data-scrollwheelzoom='<?php echo $fieldParams->get('scrollwheelzoom', '1') ?>'
 	data-owngooglegesturetext='<?php echo $fieldParams->get('owngooglegesturetext', '1') ?>'
 	data-specialicon='<?php echo $fieldParams->get('specialicon', '0') ?>'
+	data-addprivacybox='<?php echo $fieldParams->get('addprivacybox', '0') ?>'
 	data-popup='<?php echo $fieldParams->get('popup', '0') ?>'
 	data-showroutingcontrol='<?php echo $fieldParams->get('showroutingcontrol', '0') ?>'
 	data-mapboxkey='<?php echo $fieldParams->get('mapboxkey', '') ?>'
@@ -118,4 +121,12 @@ $popuptext = $values[5];
 	data-routewhiledragging="<?php echo $fieldParams->get('routewhiledragging', 'false'); ?>"
 	data-uriroot='<?php echo JUri::root(); ?>'	
 >
+</div>
+<?php if ($fieldParams->get('addprivacybox', '0')) : ?>
+	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP_TEXT'); ?>
+	<button class="btn btn-success <?php echo $unique ?>" 
+		type="button">	
+			<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP'); ?>
+	</button>
+<?php endif; ?>
 </div>
