@@ -15,6 +15,8 @@ $value = $field->value;
 JText::script('PLG_AGOSMSADDRESSMARKER_SCROLL');
 JText::script('PLG_AGOSMSADDRESSMARKER_TOUCH');
 JText::script('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
 
 $document = JFactory::getDocument();
 
@@ -84,6 +86,13 @@ $icon = $values[4];
 $popuptext = $values[5];
 
 ?>
+<div>
+<?php if ($fieldParams->get('addprivacybox', '0')) : ?>
+	<button class="btn btn-success <?php echo $unique ?>" 
+		type="button">	
+			<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP'); ?>
+	</button>
+<?php endif; ?>
 
 <div
 	<?php 
@@ -119,4 +128,5 @@ $popuptext = $values[5];
 	data-routewhiledragging="<?php echo $fieldParams->get('routewhiledragging', 'false'); ?>"
 	data-uriroot='<?php echo JUri::root(); ?>'	
 >
+</div>
 </div>

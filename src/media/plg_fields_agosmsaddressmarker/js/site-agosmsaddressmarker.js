@@ -5,12 +5,38 @@ document.addEventListener('DOMContentLoaded', function () {
 	[].forEach.call(leafletmaps, function (element) {
 
 		var addprivacybox = element.getAttribute('data-addprivacybox');
-		if (addprivacybox === '1')
+		var unique = element.getAttribute('data-unique');
+		var buttons = document.getElementsByClassName(unique);
+		var i;
+
+		if (localStorage.getItem("privacyState") === null)
+		{
+			localStorage.setItem("privacyState", '0')
+		}
+			
+		
+		for (i = 0; i < buttons.length; i++) {
+			if (localStorage.getItem("privacyState") === '0') {
+				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+			} else { 
+				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
+			}
+			buttons[i].onclick = function () {
+				if (localStorage.getItem("privacyState") === '0') {
+					localStorage.setItem("privacyState", '1');
+				} else { 
+					localStorage.setItem("privacyState", '0');
+				}
+				window.location.reload();
+			}
+		} 
+
+		if (addprivacybox === '1' && (localStorage.getItem("privacyState") === '0'))
 		{
 			return;
 		}
+		
 		var uriroot = element.getAttribute('data-uriroot');
-		var unique = element.getAttribute('data-unique');
 		var maptype = element.getAttribute('data-maptype');
 		var lat = element.getAttribute('data-lat');
 		var lon = element.getAttribute('data-lon');
