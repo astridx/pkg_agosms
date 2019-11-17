@@ -87,14 +87,6 @@ $popuptext = $values[5];
 
 ?>
 <div>
-<?php if ($fieldParams->get('addprivacybox', '0')) : ?>
-	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP_TEXT'); ?>
-	<button class="btn btn-success <?php echo $unique ?>" 
-		type="button">	
-			<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP'); ?>
-	</button>
-<?php endif; ?>
-
 <div
 	<?php 
 	if ( $lat == 0 && $lon == 0) echo 'style="display:none"' 
@@ -130,4 +122,11 @@ $popuptext = $values[5];
 	data-uriroot='<?php echo JUri::root(); ?>'	
 >
 </div>
+<?php if ($fieldParams->get('addprivacybox', '0')) : ?>
+	<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP_TEXT'); ?>
+	<button class="btn btn-success <?php echo $unique ?>" 
+		type="button">	
+			<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP'); ?>
+	</button>
+<?php endif; ?>
 </div>
