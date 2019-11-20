@@ -1,4 +1,3 @@
-;
 var version='1.6.0+HEAD.0c81bdf',freeze=Object.freeze;
 Object.freeze=function(t){return t};
 function extend(t){var i,e,o,n;
