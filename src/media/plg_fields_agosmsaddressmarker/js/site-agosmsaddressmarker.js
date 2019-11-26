@@ -1,54 +1,316 @@
-;
-document.addEventListener('DOMContentLoaded',function(){var e=document.querySelectorAll('.agosmsaddressmarkerleafletmap');[].forEach.call(e,function(a){var O=a.getAttribute('data-addprivacybox'),t=a.getAttribute('data-unique'),p=document.getElementsByClassName(t);
-if(localStorage.getItem('privacyState')===null){localStorage.setItem('privacyState','0')};
-var i;
-for(i=0;i<p.length;i++){if(localStorage.getItem('privacyState')==='0'){p[i].innerHTML=Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP')}
-else{p[i].innerHTML=Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP')};
-p[i].onclick=function(){if(localStorage.getItem('privacyState')==='0'){document.getElementById('map'+t).style.display='block';
-localStorage.setItem('privacyState','1')}
-else{localStorage.setItem('privacyState','0')};
-window.location.reload()}};
-if(O==='1'&&(localStorage.getItem('privacyState')==='0')){document.getElementById('map'+t).style.display='none';
-return};
-var S=a.getAttribute('data-uriroot'),y=a.getAttribute('data-maptype'),l=a.getAttribute('data-lat'),n=a.getAttribute('data-lon'),o=a.getAttribute('data-scrollwheelzoom'),c=a.getAttribute('data-owngooglegesturetext'),B=a.getAttribute('data-googekey'),m=Joomla.JText._('PLG_AGOSMSADDRESSMARKER_TOUCH'),b=Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLL'),u=Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'),k=a.getAttribute('data-specialicon'),h=a.getAttribute('data-popup'),f=a.getAttribute('data-showroutingcontrol');
-if(f==='1'){var K=a.getAttribute('data-routingprofile'),W=a.getAttribute('data-routinglanguage'),E=a.getAttribute('data-routingmetric'),T=a.getAttribute('data-routewhiledragging'),R=a.getAttribute('data-routing_position'),Z=a.getAttribute('data-routing_router'),v=a.getAttribute('data-fitSelectedRoutes'),x=(a.getAttribute('data-reverseWaypoints')==='true'),A=a.getAttribute('data-collapsible'),M=a.getAttribute('data-showAlternatives')};
-var G=a.getAttribute('data-iconcolor'),P=a.getAttribute('data-markercolor'),J=a.getAttribute('data-icon'),U=a.getAttribute('data-popuptext'),w=a.getAttribute('data-mapboxkey'),s=L.DomUtil.get('map'+t);
-if(y=='mapbox'){var w=a.getAttribute('data-mapboxkey');
-if(!s.children.length>0){if(o==='0'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!1})}
-else{window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!0})}};
-var D='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token='+w,I='Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',H=new L.TileLayer(D,{attribution:I,id:'mapbox.streets'});
-window['map'+t].addLayer(H)}
-else if(y=='google'){if(!document.getElementById('google-map-script')){var g=document.createElement('script');
-g.setAttribute('src','https://maps.googleapis.com/maps/api/js?key='+B);
-g.setAttribute('id','google-map-script');
-document.head.appendChild(g)};
-if(!s.children.length>0){if(o==='0'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!1})}
-else if(o==='1'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!0})}
-else{if(c==='1'){window['map'+t]=new L.Map('map'+t,{gestureHandling:!0,gestureHandlingText:{touch:m,scroll:b,scrollMac:u}})}
-else{window['map'+t]=new L.Map('map'+t,{gestureHandling:!0})}}};
-var Y=L.gridLayer.googleMutant({type:'roadmap'}).addTo(window['map'+t])}
-else{[].forEach.call(e,function(e){if(!s.children.length>0){if(o==='0'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!1})}
-else if(o==='1'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!0})}
-else{if(c==='1'){window['map'+t]=new L.Map('map'+t,{gestureHandling:!0,gestureHandlingText:{touch:m,scroll:b,scrollMac:u}})}
-else{window['map'+t]=new L.Map('map'+t,{gestureHandling:!0})}}};
-var a='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',i='Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',r=new L.TileLayer(a,{attribution:i});
-window['map'+t].addLayer(r)})};
-if(!s.children.length>0){if(o==='0'){window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!1})}
-else if(o==='2'){if(c==='1'){window['map'+t]=new L.Map('map'+t,{gestureHandling:!0,gestureHandlingText:{touch:m,scroll:b,scrollMac:u}})}
-else{window['map'+t]=new L.Map('map'+t,{gestureHandling:!0})}}
-else{window['map'+t]=new L.Map('map'+t,{scrollWheelZoom:!0})}};
-if(o==='0'){window['map'+t].on('click',function(){if(window['map'+t].scrollWheelZoom.enabled()){window['map'+t].scrollWheelZoom.disable()}
-else{window['map'+t].scrollWheelZoom.enable()}})};
-if(f==='1'){var d;
-if(Z==='mapbox'){d=L.Routing.control(L.extend({fitSelectedRoutes:v,position:R,units:E,router:L.Routing.mapbox(w,{profile:K,language:W,}),waypoints:[L.latLng(l,n),],geocoder:L.Control.Geocoder.nominatim(),routeWhileDragging:T,reverseWaypoints:x,collapsible:A,showAlternatives:M,altLineOptions:{styles:[{color:'black',opacity:0.15,weight:9},{color:'white',opacity:0.8,weight:6},{color:'blue',opacity:0.5,weight:2}]}})).addTo(window['map'+t])}
-else{d=L.Routing.control(L.extend({fitSelectedRoutes:v,position:R,units:E,router:L.Routing.osrmv1({language:W}),waypoints:[L.latLng(l,n),],geocoder:L.Control.Geocoder.nominatim(),routeWhileDragging:T,reverseWaypoints:x,collapsible:A,showAlternatives:M,altLineOptions:{styles:[{color:'black',opacity:0.15,weight:9},{color:'white',opacity:0.8,weight:6},{color:'blue',opacity:0.5,weight:2}]}})).addTo(window['map'+t])};
-L.Routing.errorControl(d).addTo(window['map'+t])};
-try{window['map'+t].setView(new L.LatLng(l,n),13);
-var r=L.marker([l,n]);
-if(k==='1'){var C=new L.AwesomeMarkers.icon({icon:J,markerColor:P,iconColor:G,prefix:'fa',spin:!1,extraClasses:'agosmsaddressmarkericonclass',});
-r.setIcon(C)};
-r.addTo(window['map'+t]);
-if(h==='1'){r.bindPopup(obj.popuptext.replace(/<img src="images/g,'<img src="'+S+'images'))};
-if(h==='2'){r.bindPopup(obj.popuptext.replace(/<img src="images/g,'<img src="'+S+'images')).openPopup()}}catch(V){window['map'+t].setView(new L.LatLng(0,0),13);
-var r=L.marker([0,0]).addTo(window['map'+t]);
-console.log(V)}})},!1);
+document.addEventListener('DOMContentLoaded', function () {
+	var leafletmaps = document.querySelectorAll('.agosmsaddressmarkerleafletmap');
+
+	// For all maps [start]
+	[].forEach.call(leafletmaps, function (element) {
+
+		var addprivacybox = element.getAttribute('data-addprivacybox');
+		var unique = element.getAttribute('data-unique');
+		var buttons = document.getElementsByClassName('b' + unique);
+		var privacyfields = document.getElementsByClassName('p' + unique);
+
+		if (localStorage.getItem("privacyState") === null)
+		{
+			localStorage.setItem("privacyState", '0')
+		}
+
+		var i;
+		for (i = 0; i < buttons.length; i++) {
+			if (localStorage.getItem("privacyState") === '0') {
+				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_SHOW_MAP');
+			} else {
+				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
+				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_HIDE_MAP');
+			}
+			buttons[i].onclick = function () {
+				if (localStorage.getItem("privacyState") === '0') {
+					document.getElementById('map' + unique).style.display = "block";
+					localStorage.setItem("privacyState", '1');
+				} else {
+					localStorage.setItem("privacyState", '0');
+				}
+				window.location.reload();
+			}
+		}
+
+		if (addprivacybox === '1' && (localStorage.getItem("privacyState") === '0'))
+		{
+			document.getElementById('map' + unique).style.display = "none";
+			return;
+		}
+
+		var uriroot = element.getAttribute('data-uriroot');
+		var maptype = element.getAttribute('data-maptype');
+		var lat = element.getAttribute('data-lat');
+		var lon = element.getAttribute('data-lon');
+		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
+		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
+		var dataGoogekey = element.getAttribute('data-googekey');
+		var touch = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_TOUCH');
+		var scroll = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLL');
+		var scrollmac = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_SCROLLMAC');
+		var specialicon = element.getAttribute('data-specialicon');
+		var popup = element.getAttribute('data-popup');
+		var showroutingcontrol = element.getAttribute('data-showroutingcontrol');
+		if (showroutingcontrol === '1')
+		{
+			var routingprofile = element.getAttribute('data-routingprofile');
+			var routinglanguage = element.getAttribute('data-routinglanguage');
+			var routingmetric = element.getAttribute('data-routingmetric');
+			var routewhiledragging = element.getAttribute('data-routewhiledragging');
+			var routing_position = element.getAttribute('data-routing_position');
+			var routing_router = element.getAttribute('data-routing_router');
+			var fitSelectedRoutes = element.getAttribute('data-fitSelectedRoutes');
+			var reverseWaypoints = (element.getAttribute('data-reverseWaypoints') === "true");
+			var collapsible = element.getAttribute('data-collapsible');
+			var showAlternatives = element.getAttribute('data-showAlternatives');
+		}
+		var iconcolor = element.getAttribute('data-iconcolor');
+		var markercolor = element.getAttribute('data-markercolor');
+		var icon = element.getAttribute('data-icon');
+		var popuptext = element.getAttribute('data-popuptext');
+		var mapboxkey = element.getAttribute('data-mapboxkey');
+
+		var container = L.DomUtil.get('map' + unique);
+
+		if (maptype == 'mapbox') {
+			var mapboxkey = element.getAttribute('data-mapboxkey');
+
+			if (!container.children.length > 0) {
+				if (scrollwheelzoom === "0")
+				{
+					window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: false});
+				} else
+				{
+					window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
+				}
+			}
+
+			var osmUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey;
+			var osmAttrib = 'Map data &copy; <a href=\"http://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
+				'<a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
+				'Imagery © <a href=\"http://mapbox.com\">Mapbox</a>';
+			var osm = new L.TileLayer(osmUrl, {attribution: osmAttrib, id: 'mapbox.streets'});
+			window['map' + unique].addLayer(osm);
+
+		} else if (maptype == 'google')
+		{
+			if (!document.getElementById('google-map-script')) {
+				var googleapikeyscript = document.createElement('script');
+				googleapikeyscript.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=' + dataGoogekey);
+				googleapikeyscript.setAttribute('id', 'google-map-script');
+				document.head.appendChild(googleapikeyscript);
+			}
+
+			if (!container.children.length > 0) {
+				if (scrollwheelzoom === "0")
+				{
+					window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: false});
+				} else if (scrollwheelzoom === "1")
+				{
+					window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
+				} else {
+					if (owngooglegesturetext === "1") {
+						window['map' + unique] = new L.Map('map' + unique, {
+							gestureHandling: true,
+							gestureHandlingText: {
+								touch: touch,
+								scroll: scroll,
+								scrollMac: scrollmac
+							}
+						});
+					} else
+					{
+						window['map' + unique] = new L.Map('map' + unique, {
+							gestureHandling: true
+						});
+					}
+				}
+			}
+
+			var googleLayer = L.gridLayer.googleMutant({
+				type: 'roadmap'
+			}).addTo(window['map' + unique]);
+
+		} else
+		{
+			[].forEach.call(leafletmaps, function (element) {
+
+
+				// Initialize the Map if needed
+				if (!container.children.length > 0) {
+					if (scrollwheelzoom === "0")
+					{
+						window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: false});
+					} else if (scrollwheelzoom === "1")
+					{
+						window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
+					} else {
+						if (owngooglegesturetext === "1") {
+							window['map' + unique] = new L.Map('map' + unique, {
+								gestureHandling: true,
+								gestureHandlingText: {
+									touch: touch,
+									scroll: scroll,
+									scrollMac: scrollmac
+								}
+							});
+						} else
+						{
+							window['map' + unique] = new L.Map('map' + unique, {
+								gestureHandling: true
+							});
+						}
+					}
+				}
+
+				var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+				var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
+				var osm = new L.TileLayer(osmUrl, {attribution: osmAttrib});
+				window['map' + unique].addLayer(osm);
+			});
+
+		}
+
+		if (!container.children.length > 0) {
+			if (scrollwheelzoom === "0")
+			{
+				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: false});
+				// Add Google Cooperative Gesture Handling 
+			} else if (scrollwheelzoom === "2")
+			{
+				if (owngooglegesturetext === "1") {
+					window['map' + unique] = new L.Map('map' + unique, {
+						gestureHandling: true,
+						gestureHandlingText: {
+							touch: touch,
+							scroll: scroll,
+							scrollMac: scrollmac
+						}
+					});
+				} else
+				{
+					window['map' + unique] = new L.Map('map' + unique, {
+						gestureHandling: true
+					});
+				}
+			} else
+			{
+				window['map' + unique] = new L.Map('map' + unique, {scrollWheelZoom: true});
+			}
+		}
+
+		// Add Scrollwheele Listener, so that you can activate it on mouse click
+		if (scrollwheelzoom === "0") {
+			window['map' + unique].on('click', function () {
+				if (window['map' + unique].scrollWheelZoom.enabled()) {
+					window['map' + unique].scrollWheelZoom.disable();
+				} else
+				{
+					window['map' + unique].scrollWheelZoom.enable();
+				}
+			});
+		}
+
+
+		// If routing control 
+		if (showroutingcontrol === "1") {
+
+			var routingcontrol;
+
+			if (routing_router === 'mapbox')
+			{
+				routingcontrol = L.Routing.control(L.extend({
+					fitSelectedRoutes: fitSelectedRoutes,
+					position: routing_position,
+					units: routingmetric,
+					router: L.Routing.mapbox(mapboxkey,
+						{
+							profile: routingprofile,
+							language: routinglanguage,
+						}),
+					waypoints: [
+						L.latLng(lat, lon),
+					],
+					geocoder: L.Control.Geocoder.nominatim(),
+					routeWhileDragging: routewhiledragging,
+					reverseWaypoints: reverseWaypoints,
+					collapsible: collapsible,
+					showAlternatives: showAlternatives,
+					altLineOptions: {
+						styles: [
+							{color: 'black', opacity: 0.15, weight: 9},
+							{color: 'white', opacity: 0.8, weight: 6},
+							{color: 'blue', opacity: 0.5, weight: 2}
+						]
+					}
+				})).addTo(window['map' + unique]);
+			} else {
+				routingcontrol = L.Routing.control(L.extend({
+					fitSelectedRoutes: fitSelectedRoutes,
+					position: routing_position,
+					units: routingmetric,
+					router: L.Routing.osrmv1({language: routinglanguage}),
+					waypoints: [
+						L.latLng(lat, lon),
+					],
+					geocoder: L.Control.Geocoder.nominatim(),
+					routeWhileDragging: routewhiledragging,
+					reverseWaypoints: reverseWaypoints,
+					collapsible: collapsible,
+					showAlternatives: showAlternatives,
+					altLineOptions: {
+						styles: [
+							{color: 'black', opacity: 0.15, weight: 9},
+							{color: 'white', opacity: 0.8, weight: 6},
+							{color: 'blue', opacity: 0.5, weight: 2}
+						]
+					}
+				})).addTo(window['map' + unique]);
+
+			}
+
+			L.Routing.errorControl(routingcontrol).addTo(window['map' + unique]);
+		}
+
+		// Add Marker if possible - fallback cords 0,0
+		try {
+			window['map' + unique].setView(new L.LatLng(lat, lon), 13);
+
+			var marker = L.marker([lat, lon]);
+
+			// If special Icon
+			if (specialicon === "1") {
+				var AwesomeIcon = new L.AwesomeMarkers.icon(
+					{
+						icon: icon,
+						markerColor: markercolor,
+						iconColor: iconcolor,
+						prefix: 'fa',
+						spin: false,
+						extraClasses: 'agosmsaddressmarkericonclass',
+					})
+				marker.setIcon(AwesomeIcon);
+			}
+
+
+			marker.addTo(window['map' + unique]);
+
+			// If popup
+			if (popup === "1") {
+				marker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+			}
+			if (popup === "2") {
+				marker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
+			}
+
+		} catch (e) {
+			window['map' + unique].setView(new L.LatLng(0, 0), 13);
+			var marker = L.marker([0, 0]).addTo(window['map' + unique]);
+			console.log(e);
+		}
+	});
+	// For all maps [end]
+
+}, false);
