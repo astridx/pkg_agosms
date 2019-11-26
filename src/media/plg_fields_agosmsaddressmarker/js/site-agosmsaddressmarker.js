@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		var addprivacybox = element.getAttribute('data-addprivacybox');
 		var unique = element.getAttribute('data-unique');
-		var buttons = document.getElementsByClassName(unique);
+		var buttons = document.getElementsByClassName('b' + unique);
+		var privacyfields = document.getElementsByClassName('p' + unique);
 
 		if (localStorage.getItem("privacyState") === null)
 		{
@@ -17,8 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		for (i = 0; i < buttons.length; i++) {
 			if (localStorage.getItem("privacyState") === '0') {
 				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_SHOW_MAP');
 			} else {
 				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
+				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_HIDE_MAP');
 			}
 			buttons[i].onclick = function () {
 				if (localStorage.getItem("privacyState") === '0') {
