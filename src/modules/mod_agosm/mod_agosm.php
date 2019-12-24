@@ -72,7 +72,7 @@ if ($params->get('showpin', '1') === "1" || $params->get('showcustompin', '1') =
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/Leaflet.awesome-markers/leaflet.awesome-markers.js');
 }
 
-if ($params->get('showcustomfieldpin', '0') === "1")
+if (true || $params->get('showcustomfieldpin', '0') === "1")
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/cluster/MarkerCluster.css');
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/cluster/MarkerCluster.Default.css');
