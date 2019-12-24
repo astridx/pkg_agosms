@@ -2,7 +2,7 @@
 <extension type="component" version="3.5" method="upgrade">
         <name>com_agosms</name>
 	<author>Astrid Günther</author>
-	<creationDate>2019-11-27</creationDate>
+	<creationDate>2019-12-24</creationDate>
 	<copyright>(C) 2019 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later;</license>
 	<authorEmail>info@astrid-guenther.de</authorEmail>
