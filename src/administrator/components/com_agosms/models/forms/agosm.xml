@@ -339,7 +339,6 @@
 			name="customPinPath"
 			label="MOD_AGOSM_PINPATH"
 			description="MOD_AGOSM_PINPATH_DESC"
-			default="http://leafletjs.com/examples/custom-icons/leaf-green.png"
 			showon="showdefaultpin:2"
 		/>
 
@@ -357,7 +356,6 @@
 			name="customPinShadowPath"
 			label="MOD_AGOSM_PINSHADOWPATH"
 			description="MOD_AGOSM_PINSHADOWPATH_DESC"
-			default="http://leafletjs.com/examples/custom-icons/leaf-shadow.png"
 			showon="showdefaultpin:2"
 		/>
 
