@@ -114,5 +114,17 @@ if ($params->get('showrouting_simple', '1') == 1 && $params->get('showrouting_pl
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/places.js');
 }
 
+if ($params->get('showlocate', '1') == 1)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/locate/L.Control.Locate.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/locate/L.Control.Locate.min.js', "text/javascript", true);
+}
+
+if ($params->get('spacermouseposition', '1') == 1)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.js', "text/javascript", true);
+}
+
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/agosms.css');
 require JModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));

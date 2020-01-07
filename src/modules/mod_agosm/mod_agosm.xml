@@ -324,7 +324,7 @@
 				/>
 				<field
 					type="list"
-					name="ahowmouseposition"
+					name="showmouseposition"
 					default="0"
 					label="MOD_AGOSM_MOUSEPOSITION"
 					description="MOD_AGOSM_MOUSEPOSITION_DESC"
