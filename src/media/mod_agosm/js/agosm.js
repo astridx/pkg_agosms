@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	[].forEach.call(leafletmapsMod, function (element) {
 
 		// Create map with worldWarp
+		var locate = element.getAttribute('data-locate');
+		var mouseposition = element.getAttribute('data-mouseposition');
 		var uriroot = element.getAttribute('data-uriroot');
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
 		var noWorldWarp = element.getAttribute('data-no-world-warp');
@@ -636,6 +638,22 @@ document.addEventListener('DOMContentLoaded', function () {
 			clustermarkers.addTo(window['mymap' + moduleId]);
 		}
 
+		// Show locate
+		if (locate === '1')
+		{
+			var lc = L.control.locate({
+				position: 'topright',
+				strings: {
+					title: "Show me where I am, yo!"
+				}
+			}).addTo(window['mymap' + moduleId]);
+		}
+
+		// Show mouseposition
+		if (mouseposition === '1')
+		{
+			L.control.mousePosition().addTo(window['mymap' + moduleId]);
+		}
 	})
 }, false);
 

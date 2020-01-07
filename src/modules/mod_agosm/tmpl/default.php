@@ -20,6 +20,9 @@ $defaultArray = [];
 	data-baselayer="<?php echo $params->get('baselayer', 'mapnik'); ?>"
 	data-lonlat="<?php echo $params->get('lonlat', '50.281168, 7.276211'); ?>"
 	data-zoom="<?php echo $params->get('zoom', '10'); ?>"
+	data-locate="<?php echo $params->get('showlocate', false); ?>"
+	data-mouseposition="<?php echo $params->get('showmouseposition', false); ?>"
+	
 <?php if ($params->get('baselayer', 'mapbox')) : ?>
 	data-mapboxmaptype="<?php echo $params->get('mapboxmaptype', 'streets'); ?>"
 	data-mapboxkey="<?php echo $params->get('mapboxkey', ''); ?>"
