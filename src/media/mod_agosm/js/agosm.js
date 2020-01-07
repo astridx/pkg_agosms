@@ -432,16 +432,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (obj.pin === "2" && obj.customPinPath != "")
 				{
-					/*					var LeafIcon = L.Icon.extend({
-					 options: {
-					 iconUrl: obj.customPinPath,
-					 shadowUrl: obj.customPinShadowPath,
-					 iconSize: obj.customPinSize.split(",", 3).map(e => parseInt(e)),
-					 shadowSize: obj.customPinShadowSize.split(",", 3).map(e => parseInt(e)),
-					 iconAnchor: obj.customPinOffset.split(",", 3).map(e => parseInt(e)),
-					 popupAnchor: obj.customPinPopupOffset.split(",", 3).map(e => parseInt(e)),
-					 }
-					 });*/
 					var LeafIcon = L.Icon.extend({
 						options: {
 							iconUrl: obj.customPinPath,
@@ -476,8 +466,6 @@ document.addEventListener('DOMContentLoaded', function () {
 						})
 					tempMarker.setIcon(AwesomeIcon);
 				}
-
-
 
 				tempMarker.addTo(window['mymap' + moduleId]);
 
@@ -598,7 +586,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				let tempMarkercf = null;
 
-				if (objcf.cords)
+				if (objcf.cords && !objcf.cords.startsWith(",,"))
 				{
 					var values = objcf.cords.split(",");
 					tempMarkercf = L.marker(objcf.cords.split(",").slice(0, 2));
@@ -638,8 +626,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					{
 						title = values[5];
 					}
+
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
-					//tempMarkercf.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+					tempMarkercf.bindPopup(popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}
