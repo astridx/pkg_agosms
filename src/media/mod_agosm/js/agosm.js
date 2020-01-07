@@ -365,25 +365,43 @@ document.addEventListener('DOMContentLoaded', function () {
 				btn.innerHTML = label;
 				return btn;
 			}
-			
-			var control = L.Routing.control({
-				geocoder: L.Control.Geocoder.nominatim({}),
-				waypoints: [
-					L.latLng(routingstart),
-					L.latLng(routingend)
-				],
-				collapsible: true,
-				show: false,
-				autoRoute: true,
-				router: L.Routing.mapbox(mapboxkeyRouting,
-					{
-						profile: routingprofile,
-						language: routinglanguage,
-					}),
-				units: routingmetric,
-				reverseWaypoints: true,
-				routeWhileDragging: routewhiledragging
-			}).addTo(window['mymap' + moduleId]);
+
+			if (routingstart == '0,0' || routingend == '0,0') {
+				var control = L.Routing.control({
+					geocoder: L.Control.Geocoder.nominatim({}),
+					collapsible: true,
+					show: false,
+					autoRoute: true,
+					router: L.Routing.mapbox(mapboxkeyRouting,
+						{
+							profile: routingprofile,
+							language: routinglanguage,
+						}),
+					units: routingmetric,
+					reverseWaypoints: true,
+					routeWhileDragging: routewhiledragging
+				}).addTo(window['mymap' + moduleId]);
+			} else
+			{
+				var control = L.Routing.control({
+					geocoder: L.Control.Geocoder.nominatim({}),
+					waypoints: [
+						L.latLng(routingstart),
+						L.latLng(routingend)
+					],
+					collapsible: true,
+					show: false,
+					autoRoute: true,
+					router: L.Routing.mapbox(mapboxkeyRouting,
+						{
+							profile: routingprofile,
+							language: routinglanguage,
+						}),
+					units: routingmetric,
+					reverseWaypoints: true,
+					routeWhileDragging: routewhiledragging
+				}).addTo(window['mymap' + moduleId]);
+			}
 
 			(window['mymap' + moduleId]).on('click', function (e) {
 				var container = L.DomUtil.create('div');
@@ -465,7 +483,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (obj.popup === "1")
 				{
-						tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 				}
 
 				if (obj.popup === "2")
@@ -491,34 +509,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (obj.showdefaultpin === "2" && obj.customPinPath != "")
 				{
-					/*					var LeafIcon = L.Icon.extend({
-					 options: {
-					 iconUrl: obj.customPinPath,
-					 shadowUrl: obj.customPinShadowPath,
-					 iconSize: obj.customPinSize.split(",", 3).map(e => parseInt(e)),
-					 shadowSize: obj.customPinShadowSize.split(",", 3).map(e => parseInt(e)),
-					 iconAnchor: obj.customPinOffset.split(",", 3).map(e => parseInt(e)),
-					 popupAnchor: obj.customPinPopupOffset.split(",", 3).map(e => parseInt(e)),
-					 }
-					 });*/
-					var LeafIcon = L.Icon.extend({
-						options: {
-							iconUrl: obj.customPinPath,
-							shadowUrl: obj.customPinShadowPath,
-							iconSize: obj.customPinSize.split(",", 3).map(function (e) {
-								return parseInt(e);
-							}),
-							shadowSize: obj.customPinShadowSize.split(",", 3).map(function (e) {
-								return parseInt(e);
-							}),
-							iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
-								return parseInt(e);
-							}),
-							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
-								return parseInt(e);
-							})
-						}
-					});
+
+					if (obj.customPinShadowPath != "") {
+						var LeafIcon = L.Icon.extend({
+							options: {
+								iconUrl: uriroot + obj.customPinPath,
+								shadowUrl: uriroot + obj.customPinShadowPath,
+								iconSize: obj.customPinSize.split(",", 3).map(function (e) {
+									return parseInt(e);
+								}),
+								shadowSize: obj.customPinShadowSize.split(",", 3).map(function (e) {
+									return parseInt(e);
+								}),
+								iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
+									return parseInt(e);
+								}),
+								popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
+									return parseInt(e);
+								})
+							}
+						});
+					} else
+					{
+						var LeafIcon = L.Icon.extend({
+							options: {
+								iconUrl: uriroot + obj.customPinPath,
+								iconSize: obj.customPinSize.split(",", 3).map(function (e) {
+									return parseInt(e);
+								}),
+								iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
+									return parseInt(e);
+								}),
+								popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
+									return parseInt(e);
+								})
+							}
+						});
+					}
 					tempMarker.setIcon(new LeafIcon());
 				}
 
@@ -554,7 +581,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
 			clustermarkers.addTo(window['mymap' + moduleId]);
-		
+
 		}
 
 		// Show Pins from customfield
@@ -612,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						title = values[5];
 					}
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
-					tempMarkercf.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+					//tempMarkercf.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}
