@@ -366,24 +366,42 @@ document.addEventListener('DOMContentLoaded', function () {
 				return btn;
 			}
 
-			var control = L.Routing.control({
-				geocoder: L.Control.Geocoder.nominatim({}),
-				waypoints: [
-					L.latLng(routingstart),
-					L.latLng(routingend)
-				],
-				collapsible: true,
-				show: false,
-				autoRoute: true,
-				router: L.Routing.mapbox(mapboxkeyRouting,
-					{
-						profile: routingprofile,
-						language: routinglanguage,
-					}),
-				units: routingmetric,
-				reverseWaypoints: true,
-				routeWhileDragging: routewhiledragging
-			}).addTo(window['mymap' + moduleId]);
+			if (routingstart == '0,0' || routingend == '0,0') {
+				var control = L.Routing.control({
+					geocoder: L.Control.Geocoder.nominatim({}),
+					collapsible: true,
+					show: false,
+					autoRoute: true,
+					router: L.Routing.mapbox(mapboxkeyRouting,
+						{
+							profile: routingprofile,
+							language: routinglanguage,
+						}),
+					units: routingmetric,
+					reverseWaypoints: true,
+					routeWhileDragging: routewhiledragging
+				}).addTo(window['mymap' + moduleId]);
+			} else
+			{
+				var control = L.Routing.control({
+					geocoder: L.Control.Geocoder.nominatim({}),
+					waypoints: [
+						L.latLng(routingstart),
+						L.latLng(routingend)
+					],
+					collapsible: true,
+					show: false,
+					autoRoute: true,
+					router: L.Routing.mapbox(mapboxkeyRouting,
+						{
+							profile: routingprofile,
+							language: routinglanguage,
+						}),
+					units: routingmetric,
+					reverseWaypoints: true,
+					routeWhileDragging: routewhiledragging
+				}).addTo(window['mymap' + moduleId]);
+			}
 
 			(window['mymap' + moduleId]).on('click', function (e) {
 				var container = L.DomUtil.create('div');
@@ -526,7 +544,7 @@ document.addEventListener('DOMContentLoaded', function () {
 									return parseInt(e);
 								})
 							}
-						});						
+						});
 					}
 					tempMarker.setIcon(new LeafIcon());
 				}
@@ -621,7 +639,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						title = values[5];
 					}
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
-					tempMarkercf.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+					//tempMarkercf.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}
