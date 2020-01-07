@@ -301,6 +301,39 @@
 					label="MOD_AGOSM_LONLAT"
 					description="MOD_AGOSM_LONLAT_DESC"
 				/>
+				<field
+					type="spacer"
+					name="spacerlocate"
+					hr="true"
+				/>
+				<field
+					type="list"
+					name="showlocate"
+					default="0"
+					label="MOD_AGOSM_SHOWLOCATE"
+					description="MOD_AGOSM_SHOWLOCATE_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					type="spacer"
+					name="spacermouseposition"
+					hr="true"
+				/>
+				<field
+					type="list"
+					name="ahowmouseposition"
+					default="0"
+					label="MOD_AGOSM_MOUSEPOSITION"
+					description="MOD_AGOSM_MOUSEPOSITION_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+
 			</fieldset>
 			<!-- Routing Simple-->
 			<fieldset
