@@ -120,6 +120,12 @@ if ($params->get('showlocate', '1') == 1)
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/locate/L.Control.Locate.min.js', "text/javascript", true);
 }
 
+if ($params->get('showfullscreen', '1') == 1)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/fullscreen/leaflet.fullscreen.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/fullscreen/Leaflet.fullscreen.min.js', "text/javascript", true);
+}
+
 if ($params->get('spacermouseposition', '1') == 1)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.css');
