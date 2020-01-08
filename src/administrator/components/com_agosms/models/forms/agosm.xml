@@ -415,10 +415,7 @@
 			filter="safehtml"
 			showon="showpopup!:0"
 		/>
-
 	</fieldset>
-
-
 
 	<fields
 		name="params"
