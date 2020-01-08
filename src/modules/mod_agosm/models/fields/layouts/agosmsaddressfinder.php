@@ -14,8 +14,8 @@ extract($displayData);
 $mapid = "map" . uniqid();
 $document = JFactory::getDocument();
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.css');
-$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js');
-JHtml::_('script', 'mod_agosm/agosmsaddressfinder.js', array('version' => 'auto', 'relative' => true));
+$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js', true);
+$document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosmsaddressfinder.js', true);
 
 JHtml::_('stylesheet', 'mod_agosm/agomsaddressfinder.css', array('version' => 'auto', 'relative' => true));
 
