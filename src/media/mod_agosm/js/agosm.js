@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	[].forEach.call(leafletmapsMod, function (element) {
 
-		// Create map with worldWarp
+		var fullscreen = element.getAttribute('data-fullscreen');
 		var locate = element.getAttribute('data-locate');
 		var mouseposition = element.getAttribute('data-mouseposition');
 		var uriroot = element.getAttribute('data-uriroot');
@@ -647,6 +647,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					title: "Show me where I am, yo!"
 				}
 			}).addTo(window['mymap' + moduleId]);
+		}
+
+		// Add Fullscreen
+		if (fullscreen === "1") {
+			window['mymap' + moduleId].addControl(new L.Control.Fullscreen());
 		}
 
 		// Show mouseposition
