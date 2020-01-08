@@ -480,6 +480,17 @@ document.addEventListener('DOMContentLoaded', function () {
 				{
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
 				}
+
+				if (obj.popup === "3")
+				{
+					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+					tempMarker.on('mouseover', function (e) {
+						this.openPopup();
+					});
+					tempMarker.on('mouseout', function (e) {
+						this.closePopup();
+					});
+				}
 			}
 		}
 
@@ -553,9 +564,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					tempMarker.setIcon(AwesomeIcon);
 				}
 
-
-
-				//tempMarker.addTo(window['mymap' + moduleId]);
 				tempMarker.addTo(clustermarkers);
 
 				if (obj.showpopup === "1")
@@ -566,6 +574,17 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (obj.showpopup === "2")
 				{
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
+				}
+
+				if (obj.showpopup === "3")
+				{
+					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+					tempMarker.on('mouseover', function (e) {
+						this.openPopup();
+					});
+					tempMarker.on('mouseout', function (e) {
+						this.closePopup();
+					});
 				}
 			}
 
