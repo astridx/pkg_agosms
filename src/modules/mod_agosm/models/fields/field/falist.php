@@ -111,6 +111,7 @@ class JFormFieldFalist extends JFormField
 		$options = array();
 
 		$fontawesome_icons = [
+			"" => "no icon",
 			"home" => "&#xf015;",
 			"500px" => "&#xf26e;",
 			"address-book" => "&#xf2b9;",
