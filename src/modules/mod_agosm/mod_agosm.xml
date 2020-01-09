@@ -371,7 +371,24 @@
 					<option value="0">JNO</option>
 				</field>
 
+				<field
+					type="spacer"
+					name="saveStatetoSession"
+					hr="true"
+				/>
+
+				<field
+					type="list"
+					name="savestate"
+					default="0"
+					label="MOD_AGOSM_SAVESTATE"
+					description="MOD_AGOSM_SAVESTATE_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
 			</fieldset>
+
 			<!-- Routing Simple-->
 			<fieldset
 				name="agosmControlRoutingSimple"

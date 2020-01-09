@@ -35,7 +35,7 @@ foreach ($document->_scripts as $key => $script)
 if (!$leafletIsLoaded)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js', "text/javascript", false, true);
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js', "text/javascript");
 }
 
 if ($params->get('showgeocoder', '1') == 1 || $params->get('showrouting', '1') == 1)
