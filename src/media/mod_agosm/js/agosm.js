@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	[].forEach.call(leafletmapsMod, function (element) {
 
+		var savestate = element.getAttribute('data-savestate');
 		var fullscreen = element.getAttribute('data-fullscreen');
 		var locate = element.getAttribute('data-locate');
 		var mouseposition = element.getAttribute('data-mouseposition');
@@ -80,6 +81,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		var scroll = element.getAttribute('data-scroll');
 		var scrollmac = element.getAttribute('data-scrollmac');
 		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
+
+		// Fetch the States
+		if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1")
+		{
+			var mapState = JSON.parse(sessionStorage.getItem('mapState'));
+			zoom = mapState.zoom;
+			lonlat = mapState.center;
+		}
 
 		// Default: worldCopyJump: false && scrollWheelZoom: true
 		if (noWorldWarp === "1" && scrollwheelzoom === "0")
@@ -588,7 +597,12 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			}
 
-			window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
+			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1")
+			{
+				window['mymap' + moduleId].fitBounds(mapState.bounds);
+			} else {
+				window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
+			}
 			clustermarkers.addTo(window['mymap' + moduleId]);
 
 		}
@@ -653,7 +667,12 @@ document.addEventListener('DOMContentLoaded', function () {
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}
-			window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
+			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1")
+			{
+				window['mymap' + moduleId].fitBounds(mapState.bounds);
+			} else {
+				window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
+			}
 			clustermarkers.addTo(window['mymap' + moduleId]);
 		}
 
@@ -677,6 +696,41 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (mouseposition === '1')
 		{
 			L.control.mousePosition().addTo(window['mymap' + moduleId]);
+		}
+
+		// Save the state
+		if (savestate === "1")
+		{
+			window['mymap' + moduleId].on('zoom', function (ev) {
+				var center = window['mymap' + moduleId].getCenter();
+				var bounds = window['mymap' + moduleId].getBounds();
+				var mapState = {
+					zoom: window['mymap' + moduleId].getZoom(),
+					center: [center.lat, center.lng],
+					bounds: [
+						[bounds.getNorth(), bounds.getWest()],
+						[bounds.getSouth(), bounds.getEast()]
+					],
+				};
+				sessionStorage.setItem('mapState', JSON.stringify(mapState));
+			});
+		}
+
+		if (savestate === "1")
+		{
+			window['mymap' + moduleId].on('move', function (ev) {
+				var center = window['mymap' + moduleId].getCenter();
+				var bounds = window['mymap' + moduleId].getBounds();
+				var mapState = {
+					zoom: window['mymap' + moduleId].getZoom(),
+					center: [center.lat, center.lng],
+					bounds: [
+						[bounds.getNorth(), bounds.getWest()],
+						[bounds.getSouth(), bounds.getEast()]
+					],
+				};
+				sessionStorage.setItem('mapState', JSON.stringify(mapState));
+			});
 		}
 	})
 }, false);
