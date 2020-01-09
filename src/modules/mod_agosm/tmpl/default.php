@@ -19,6 +19,7 @@ $defaultArray = [];
 	data-detect-retina="<?php echo $params->get('detectRetina', 0); ?>"
 	data-baselayer="<?php echo $params->get('baselayer', 'mapnik'); ?>"
 	data-lonlat="<?php echo $params->get('lonlat', '50.281168, 7.276211'); ?>"
+	data-savestate="<?php echo $params->get('savestate', false); ?>"
 	data-zoom="<?php echo $params->get('zoom', '10'); ?>"
 	data-locate="<?php echo $params->get('showlocate', false); ?>"
 	data-fullscreen="<?php echo $params->get('showfullscreen', false); ?>"

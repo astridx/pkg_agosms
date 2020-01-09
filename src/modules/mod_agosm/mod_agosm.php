@@ -35,13 +35,13 @@ foreach ($document->_scripts as $key => $script)
 if (!$leafletIsLoaded)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js', "text/javascript", false, true);
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js');
 }
 
 if ($params->get('showgeocoder', '1') == 1 || $params->get('showrouting', '1') == 1)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/Control.Geocoder.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/Control.Geocoder.js', "text/javascript", true);
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/js/Control.Geocoder.js');
 }
 
 if ($params->get('useesri', '1') == 1)
@@ -67,14 +67,14 @@ if ($params->get('showpin', '1') === "1" || $params->get('showcustompin', '1') =
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/font-awesome.min.css');
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/Leaflet.awesome-markers/leaflet.awesome-markers.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/Leaflet.awesome-markers/leaflet.awesome-markers.js', "text/javascript", true);
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/Leaflet.awesome-markers/leaflet.awesome-markers.js');
 }
 
 if (true || $params->get('showcustomfieldpin', '0') === "1")
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/cluster/MarkerCluster.css');
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/cluster/MarkerCluster.Default.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/cluster/leaflet.markercluster-src.js', "text/javascript", true);
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/cluster/leaflet.markercluster-src.js');
 }
 
 if ($params->get('baselayer', 'mapnik') == 'google')
@@ -107,7 +107,7 @@ if ($params->get('showmarkerfromexternaldb', '0') === "1")
 	$listexternaldb = ModagosmHelper::getListExternaldb($params);
 }
 
-$document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosm.js', "text/javascript", false, true);
+$document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosm.js');
 
 if ($params->get('showrouting_simple', '1') == 1 && $params->get('showrouting_places', '1') == 1)
 {
@@ -117,19 +117,19 @@ if ($params->get('showrouting_simple', '1') == 1 && $params->get('showrouting_pl
 if ($params->get('showlocate', '1') == 1)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/locate/L.Control.Locate.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/locate/L.Control.Locate.min.js', "text/javascript", true);
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/locate/L.Control.Locate.min.js');
 }
 
 if ($params->get('showfullscreen', '1') == 1)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/fullscreen/leaflet.fullscreen.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/fullscreen/Leaflet.fullscreen.min.js', "text/javascript", true);
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/fullscreen/Leaflet.fullscreen.min.js');
 }
 
 if ($params->get('spacermouseposition', '1') == 1)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.css');
-	$document->addScript(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.js', "text/javascript", true);
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.js');
 }
 
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/agosms.css');
