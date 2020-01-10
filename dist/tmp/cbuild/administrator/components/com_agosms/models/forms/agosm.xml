@@ -403,6 +403,7 @@
 			<option value="1">MOD_AGOSM_KLICK</option>
 			<option value="2">MOD_AGOSM_ALWAYS</option>
 			<option value="0">MOD_AGOSM_NEVER</option>
+			<option value="3">MOD_AGOSM_MOUSEOVER</option>
 		</field>
 
 		<field
@@ -414,10 +415,7 @@
 			filter="safehtml"
 			showon="showpopup!:0"
 		/>
-
 	</fieldset>
-
-
 
 	<fields
 		name="params"
