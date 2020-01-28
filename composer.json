@@ -1,5 +1,5 @@
 {
-    "name": "astrid/pkg_agosms",
+    "name": "astridx/pkg_agosms",
     "require": {
         "astridx/jorobo": "0.8.*",
 		"patchwork/jsqueeze": "~1.0",
