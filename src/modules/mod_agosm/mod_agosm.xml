@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="3.6" client="site" method="upgrade">
+<extension type="module" client="site" method="upgrade">
 	<name>mod_agosm</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
@@ -9,7 +9,7 @@
 	<authorUrl>www.astrid-guenther.de</authorUrl>
 	<version>##VERSION##</version>
 	<description>MOD_AGOSM_XML_DESCRIPTION</description>
-	<namespace>AG\Module\Agosms</namespace>
+	<namespace path="src">AG\Module\Agosms</namespace>
 	<scriptfile>script.php</scriptfile>
 
 	<!-- Front-end files -->
@@ -25,14 +25,15 @@
 		##MEDIA_FILES##
 	</media>
 
-	<!-- Configuration -->
+	<help key="JHELP_EXTENSIONS_MODULE_AGOSM_HELP"/>
+
 	<config>
-		<fields name="params"  addfieldpath="modules/mod_agosm/models/fields/field">
+		<fields name="params"  addfieldpath="modules/mod_agosm/src/Fields/">
 			<!-- Map Configuration -->
 			<fieldset
 				name="mapConfig"
 				label="MOD_AGOSM_H_MAP"
-			>
+				>
 				<field
 					type="integer"
 					name="height"
@@ -50,7 +51,7 @@
 					label="MOD_AGOSM_HEIGHTUNIT"
 					description="MOD_AGOSM_HEIGHTUNIT_DESC"
 					default="px"
-				>
+					>
 					<option value="px">px (Pixel)</option>
 					<option value="vh">vh (Viewport Height)</option>
 				</field>
@@ -61,7 +62,7 @@
 					default="7"
 					label="MOD_AGOSM_ZOOM"
 					description="MOD_AGOSM_ZOOM_DESC"
-				>
+					>
 					<option value="0">0</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -90,7 +91,7 @@
 					default="mapnik"
 					label="MOD_AGOSM_BASELAYER"
 					description="MOD_AGOSM_BASELAYER_DESC"
-				>
+					>
 					<option value="mapbox">Mapbox</option>
 					<option value="mapnik">OpenStreetMap</option>
 					<option value="mapnikde">OpenStreetMap DE</option>
@@ -102,6 +103,7 @@
 					<option value="google">Google</option>
 					<option value="custom">custom</option>
 				</field>
+
 				<field
 					name="mapboxkey"
 					type="text"
@@ -119,7 +121,7 @@
 					label="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_LABEL"
 					description="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_DESC"
 					showon="baselayer:mapbox"
-				>
+					>
 					<option value="mapbox.streets">streets</option>
 					<option value="mapbox.light">light</option>
 					<option value="mapbox.dark">dark</option>
@@ -163,7 +165,7 @@
 					label="MOD_AGOSM_CONTROL_STAMENMAPTYPE_LABEL"
 					description="MOD_AGOSM_CONTROL_STAMENMAPTYPE_DESC"
 					showon="baselayer:stamen"
-				>
+					>
 					<option value="toner">toner</option>
 					<option value="terrain">terrain</option>
 					<option value="watercolor">watercolor</option>
@@ -176,7 +178,7 @@
 					label="MOD_AGOSM_CONTROL_THUNDERFORESTMAPTYPE_LABEL"
 					description="MOD_AGOSM_CONTROL_THUNDERFORESTMAPTYPE_DESC"
 					showon="baselayer:thunderforest"
-				>
+					>
 					<option value="cycle">cycle</option>
 					<option value="transport">transport</option>
 					<option value="landscape">landscape</option>
@@ -195,7 +197,7 @@
 					label="MOD_AGOSM_CONTROL_GOOGLETYPE_LABEL"
 					description="MOD_AGOSM_CONTROL_GOOGLETYPE_DESC"
 					showon="baselayer:google"
-				>
+					>
 					<option value="satellite">satellite</option>
 					<option value="roadmap">roadmap</option>
 					<option value="terrain">terrain</option>
@@ -225,7 +227,7 @@
 					name="scale"
 					label="MOD_AGOSM_SCALE"
 					description="MOD_AGOSM_SCALE_DESC"
-				>
+					>
 					<option value="metric">MOD_AGOSM_METRIC</option>
 					<option value="imperial">MOD_AGOSM_IMPERIAL</option>
 				</field>
@@ -236,7 +238,7 @@
 					default="0"
 					label="MOD_AGOSM_DETECTRETINA"
 					description="MOD_AGOSM_DETECTRETINA_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -247,7 +249,7 @@
 					default="1"
 					label="MOD_AGOSM_NOWORLDWARP"
 					description="MOD_AGOSM_NOWORLDWARP_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -264,7 +266,7 @@
 					label="MOD_AGOSM_SCROLLWHEELZOOM_LABEL"
 					description="MOD_AGOSM_NOWORLDWARP_SCROLLWHEELZOOM_DESC"
 					default="1"
-				>
+					>
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 					<option value="2">Google Gesture Handling</option>
@@ -277,7 +279,7 @@
 					description="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT_DESC"
 					default="1"
 					showon="scrollwheelzoom:2"
-				>
+					>
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -294,7 +296,7 @@
 					default="0"
 					label="MOD_AGOSM_ATTRMODULE"
 					description="MOD_AGOSM_ATTRMODULE_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -332,7 +334,7 @@
 					default="0"
 					label="MOD_AGOSM_SHOWLOCATE"
 					description="MOD_AGOSM_SHOWLOCATE_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -349,7 +351,7 @@
 					default="0"
 					label="MOD_AGOSM_MOUSEPOSITION"
 					description="MOD_AGOSM_MOUSEPOSITION_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -366,7 +368,7 @@
 					default="0"
 					label="MOD_AGOSM_FULLSCREEN"
 					description="MOD_AGOSM_FULLSCREEN_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -383,7 +385,7 @@
 					default="0"
 					label="MOD_AGOSM_SAVESTATE"
 					description="MOD_AGOSM_SAVESTATE_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -393,7 +395,7 @@
 			<fieldset
 				name="agosmControlRoutingSimple"
 				label="MOD_AGOSM_ROUTING_SIMPLE_CONTROL_FIELDSETLABEL"
-			>
+				>
 				<field
 					type="spacer"
 					name="routingSearch"
@@ -407,7 +409,7 @@
 					default="0"
 					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -419,7 +421,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_DESC"
 					showon="showrouting_simple:1"
-				>
+					>
 					<option value="bottomleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMLEFT</option>
 					<option value="bottomright">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMRIGHT</option>
 					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
@@ -433,7 +435,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_PLACES_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_PLACES_DESC"
 					showon="showrouting_simple:1"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -447,6 +449,7 @@
 					size="40"
 					showon="showrouting_simple:1"
 				/>
+
 				<field
 					type="list"
 					name="routing_simple_router"
@@ -454,7 +457,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_ROUTER_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_SHOWROUTING_ROUTER_DESC"
 					showon="showrouting_simple:1"
-				>
+					>
 					<option value="mapbox">mapbox</option>
 					<option value="osrm">osrm</option>
 				</field>
@@ -469,6 +472,7 @@
 					showon="showrouting_simple:1[AND]routing_simple_router:mapbox"
 				/>
 			</fieldset>
+
 			<!-- Routing Mapbox-->
 			<fieldset
 				name="agosmControlRouting"
@@ -525,7 +529,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_LANGUAGEROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_LANGUAGEROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"
-				>
+					>
 					<option value="de">de</option>
 					<option value="fr">fr</option>
 					<option value="en">en</option>
@@ -578,11 +582,12 @@
 					<option value="imperial">MOD_AGOSM_IMPERIAL</option>
 				</field>
 			</fieldset>
+
 			<!-- Geocoder -->
 			<fieldset
 				name="agosmControl"
 				label="MOD_AGOSM_GEOCODER_CONTROL_FIELDSETLABEL"
-			>
+				>
 				<field
 					type="spacer"
 					name="geocoderSearch"
@@ -596,7 +601,7 @@
 					default="0"
 					label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODER_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODER_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -622,7 +627,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_COLLAPSED_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_COLLAPSED_DESC"
 					showon="showgeocoder:1"
-				>
+					>
 					<option value="true">JYES</option>
 					<option value="false">JNO</option>
 				</field>
@@ -634,7 +639,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_EXPAND_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_EXPAND_DESC"
 					showon="showgeocoder:1[AND]geocodercollapsed:true"
-				>
+					>
 					<option value="click">click</option>
 					<option value="touch">touch</option>
 				</field>
@@ -646,18 +651,19 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_POSITION_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_POSITION_DESC"
 					showon="showgeocoder:1"
-				>
+					>
 					<option value="bottomleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMLEFT</option>
 					<option value="bottomright">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMRIGHT</option>
 					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
 					<option value="topright">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPRIGHT</option>
 				</field>
 			</fieldset>
+
 			<!-- Geocoder ESRI-->
 			<fieldset
 				name="agosmGeocoderEsriControl"
 				label="MOD_AGOSM_GEOCODER_ESRI_CONTROL_FIELDSETLABEL"
-			>
+				>
 				<field
 					type="spacer"
 					name="geocoderEsriSearch"
@@ -671,7 +677,7 @@
 					default="0"
 					label="MOD_AGOSM_CONFIG_CONTROL_USEESRI_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_USEESRI_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -690,7 +696,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODERESRI_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODERESRI_DESC"
 					showon="useesri:1"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
@@ -702,7 +708,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_POSITION_DESC"
 					showon="showgeocoderesri:1[AND]useesri:1"
-				>
+					>
 					<option value="bottomleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMLEFT</option>
 					<option value="bottomright">MOD_AGOSM_CONFIG_CONTROL_POSITION_BOTTOMRIGHT</option>
 					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
@@ -716,7 +722,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_ALLOWMULTIPELRESULTS_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_ALLOWMULTIPELRESULTS_DESC"
 					showon="showgeocoderesri:1[AND]useesri:1"
-				>
+					>
 					<option value="true">JYES</option>
 					<option value="false">JNO</option>
 				</field>
@@ -728,7 +734,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_ZOOMTORESULTS_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_ZOOMTORESULTS_DESC"
 					showon="showgeocoderesri:1[AND]useesri:1"
-				>
+					>
 					<option value="true">JYES</option>
 					<option value="false">JNO</option>
 				</field>
@@ -740,7 +746,7 @@
 					label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_USEMAPBOUNDS_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_USEMAPBOUNDS_DESC"
 					showon="showgeocoderesri:1[AND]useesri:1"
-				>
+					>
 					<option value="true">JYES</option>
 					<option value="false">JNO</option>
 				</field>
@@ -807,6 +813,7 @@
 					<option value="false">JNO</option>
 				</field>
 			</fieldset>
+
 			<!-- Special Marker -->
 			<fieldset
 				name="pinConfig"
@@ -834,7 +841,7 @@
 				<field
 					name="specialpins"
 					type="subform"
-					formsource="modules/mod_agosm/models/forms/custombuttons.xml"
+					formsource="modules/mod_agosm/forms/custombuttons.xml"
 					multiple="true"
 					label="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_LABEL"
 					min= "1"
@@ -849,7 +856,7 @@
 			<fieldset
 				name="pinConfigFromCustomField"
 				label="MOD_AGOSM_H_PINCF"
-			>
+				>
 				<field
 					type="spacer"
 					name="routingSearch"
@@ -863,22 +870,24 @@
 					default="0"
 					label="MOD_AGOSM_CONFIG_CONTROL_SHOWCUSTOMFIELDPIN_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_SHOWSUCTOMFIELDPIN_DESC"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 			</fieldset>
+
 			<!-- Marker from database -->
 			<fieldset
 				name="agosmControlMarkers"
 				label="MOD_AGOSM_DATABASE_FIELDSET"
-			>
+				>
 				<field
 					type="spacer"
 					name="spacerMarkers"
 					label="MOD_AGOSM_MARKERS"
 					class="text"
 				/>
+
 				<field
 					type="list"
 					name="showmarkerfromexternaldb"
@@ -889,6 +898,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
 				<field
 					type="text"
 					name="host"
@@ -896,6 +906,7 @@
 					default="localhost"
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="text"
 					name="user"
@@ -903,6 +914,7 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="password"
 					name="password"
@@ -910,6 +922,7 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="text"
 					name="table"
@@ -917,6 +930,7 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="text"
 					name="column_coordinates"
@@ -924,6 +938,7 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="text"
 					name="column_popuptext"
@@ -932,6 +947,7 @@
 					showon="showmarkerfromexternaldb:1"
 				/>
 			</fieldset>
+
 			<!-- Show Pins from Component -->
 			<fieldset
 				name="pinConfigFromComponent"
@@ -966,7 +982,7 @@
 			<fieldset 
 				name="upload"
 				label="MOD_AGOSM_UPLOAD_FIELDSET"
-			>
+				>
 				<!-- Basic Required Fields -->
 				<field name="ag_parent" 
 					   type="fixedfolderlist" 
@@ -978,23 +994,27 @@
 					   hide_default="true" 
 					   exclude="^[Aa]dministrator$|^[Cc]ache$|^[Cc]omponents$|^[Cc]li$|^[Ii]ncludes$|^[Ll]anguage$|^[Ll]ibraries$|^[Ll]ogs$|^[Mm]odules$|^[Pp]lugins$|^[Tt]emplates$|^[Xx]mlrpc$" 
 				/>
+
 				<field name="ag_folder" 
 					   type="text" 
 					   default="" 
 					   label="MOD_AG_FOLDER_LABEL" 
 					   description="MOD_AG_FOLDER_DESC" 
 				/>
+
 				<field name="ag_maxsize" 
 					   type="text" 
 					   default="1000000" 
 					   label="MOD_AG_MAXSIZE_LABEL" 
 					   description="MOD_AG_MAXSIZE_DESC" 
 				/>
+
 				<!-- Security -->
 				<field name="ag_spacer_details" 
 					   type="spacer" 
 					   label="MOD_AG_DETAILS_SPACER" 
 				/>
+
 				<field name="ag_filetypes" 
 					   type="textarea" 
 					   default="text/xml;application/gpx+xml;application/octet-stream;" 
@@ -1003,16 +1023,18 @@
 					   rows="10" 
 					   cols="40" 
 				/>
+
 				<field name="ag_default_replace" 
 					   type="radio" 
 					   default="0" 
 					   label="MOD_AG_DEFAULT_REPLACE_LABEL" 
 					   description="MOD_AG_DEFAULT_REPLACE_DESC"
 					   class="btn-group btn-group-yesno"
-				>
+					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
 				<field name="ag_replace" 
 					   type="radio" 
 					   default="1" 
@@ -1023,6 +1045,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
 				<field name="ag_scriptsinarchives" 
 					   type="radio" 
 					   default="0" 
@@ -1033,23 +1056,26 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
 				<!-- Formatting -->
 				<field name="ag_spacer_format" 
 					   type="spacer" 
 					   label="MOD_AG_FORMAT_SPACER" 
 				/>
+
 				<field name="ag_variable" 
 					   type="text" 
 					   default="fileToUpload" 
 					   label="MOD_AG_VARIABLE_LABEL" 
 					   description="MOD_AG_VARIABLE_DESC" 
 				/>
+
 				<field name="ag_multiple" 
 					   type="list" 
 					   default="1" 
 					   label="MOD_AG_MULTIPLE_LABEL" 
 					   description="MOD_AG_MULTIPLE_DESC"
-				>
+					>
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
@@ -1061,6 +1087,7 @@
 					<option value="9">9</option>
 					<option value="10">10</option>
 				</field>
+
 				<field name="ag_shownofile" 
 					   type="radio" 
 					   default="1" 
@@ -1071,11 +1098,13 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+	
 				<!-- Advanced Features -->
 				<field name="ag_spacer_advanced" 
 					   type="spacer" 
 					   label="MOD_AG_ADVANCED_SPACER" 
 				/>
+
 				<field name="ag_user" 
 					   type="radio" 
 					   default="0" 
@@ -1111,7 +1140,7 @@
 					default="1"
 					label="COM_MODULES_FIELD_CACHING_LABEL"
 					description="COM_MODULES_FIELD_CACHING_DESC"
-				>
+					>
 					<option value="1">JGLOBAL_USE_GLOBAL</option>
 					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
 				</field>
@@ -1130,7 +1159,6 @@
 					default="static"
 				/>
 			</fieldset>
-
 		</fields>
 	</config>
 </extension>

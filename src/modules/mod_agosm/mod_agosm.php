@@ -10,10 +10,6 @@
 
 defined('_JEXEC') or die;
 
-// Include the agosm functions only once
-require_once __DIR__ . '/helper.php';
-require_once __DIR__ . '/Helper/EasyFileUploaderHelper.php';
-
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 // Include skripts/styles to the header
@@ -30,7 +26,6 @@ foreach ($document->_scripts as $key => $script)
 		$leafletIsLoaded = true;
 	}
 }
-
 
 if (!$leafletIsLoaded)
 {

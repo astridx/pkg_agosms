@@ -8,7 +8,11 @@
  * @link        astrid-guenther.de
  */
 
+namespace AG\Module\Agosms\Site\Fields;
+
 defined('JPATH_PLATFORM') or die;
+
+use Joomla\CMS\Form\FormField;
 
 /**
  * Form Field class for the Joomla Platform.
@@ -16,7 +20,7 @@ defined('JPATH_PLATFORM') or die;
  *
  * @since  1.0.40
  */
-class JFormFieldFalist extends JFormField
+class JFormFieldFalist extends FormField
 {
 	/**
 	 * The form field type.

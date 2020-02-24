@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<extension type="package" version="1.0" method="upgrade">
+<extension type="package" method="upgrade">
 	<name>pkg_agosms</name>
 	<packagename>agosms</packagename>
 	<creationDate>##DATE##</creationDate>
@@ -19,7 +19,6 @@
 		<file type="component" id="com_agosms">com_agosms.zip</file>
 		<file type="module" id="mod_agosm" client="site">mod_agosm.zip</file>
 		<file type="module" id="mod_agosm_search" client="site">mod_agosms_search.zip</file>
-		<file type="plugin" id="agosmssearch" group="system">plg_system_agosmssearch.zip</file>
 		<file type="plugin" id="agosmsmarker" group="fields">plg_fields_agosmsmarker.zip</file>
 		<file type="plugin" id="agosmsaddressmarker" group="fields">plg_fields_agosmsaddressmarker.zip</file>
 	</files>
@@ -28,6 +27,7 @@
 		<language tag="de-DE">de-DE/de-DE.pkg_agosms.sys.ini</language>
 	</languages>
 	<updateservers>
-		<server type="extension" name="Agosm Update Site">https://raw.githubusercontent.com/astridx/pkg_agosms/master/agosms-update.xml</server>
+		<server type="extension" name="Agosm Update Site">https://raw.githubusercontent.com/astridx/pkg_agosms/4.0/agosms-update.xml</server>
 	</updateservers>
+	<changelogurl>https://raw.githubusercontent.com/astridx/pkg_agosms/4.0/changelog.xml</changelogurl>
 </extension>
