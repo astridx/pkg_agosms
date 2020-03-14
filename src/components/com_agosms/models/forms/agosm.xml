@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fieldset addfieldpath="/administrator/components/com_categories/models/fields">
+	<fieldset 
+		addfieldpath="modules/mod_agosm/models/fields/field"
+	>
+		<field
+			name="coordinates"
+			type="agosmsaddressfinder"
+			default="50.273543, 7.262993"
+			label="MOD_AGOSM_LATLON"
+			description="MOD_AGOSM_LATLON_DESC"
+		/>
+	</fieldset>
+
+	<fieldset 
+		addfieldpath="/administrator/components/com_categories/models/fields"
+	>
 		<field
 			name="id"
 			type="hidden"
@@ -71,11 +85,12 @@
 
 		<field
 			name="url"
-			type="url"
+			type="hidden"
 			label="COM_AGOSMS_FIELD_URL_LABEL"
 			description="COM_AGOSMS_FIELD_URL_DESC"
 			filter="url"
 			required="true"
+			default="https://www.google.com/"
 			size="45"
 		/>
 

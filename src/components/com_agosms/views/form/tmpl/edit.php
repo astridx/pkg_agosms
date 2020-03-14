@@ -54,6 +54,7 @@ $params = $this->state->get('params');
 		<?php echo $this->form->renderField('catid'); ?>
 		<?php echo $this->form->renderField('url'); ?>
 		<?php echo $this->form->renderField('tags'); ?>
+		<?php echo $this->form->renderField('coordinates'); ?>
 
 		<?php if ($params->get('save_history', 0)) : ?>
 			<?php echo $this->form->renderField('version_note'); ?>
