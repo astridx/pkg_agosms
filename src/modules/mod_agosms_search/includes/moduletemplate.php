@@ -50,7 +50,7 @@ class JFormFieldModuletemplate extends JFormField
 			$folders = $moduleTemplatesFolders;
 		}
 
-		$exclude = 'Default';
+		$exclude = 'default';
 		$options = array ();
 
 		foreach ($folders as $folder)
@@ -63,7 +63,7 @@ class JFormFieldModuletemplate extends JFormField
 			$options[] = JHTML::_('select.option', $folder, $folder);
 		}
 
-		array_unshift($options, JHTML::_('select.option', 'Default', '-- ' . JText::_('MOD_AGOSMSSEARCHMODULE_TEMPLATE_DEFAULT') . ' --'));
+		array_unshift($options, JHTML::_('select.option', 'default', '-- ' . JText::_('MOD_AGOSMSSEARCHMODULE_TEMPLATE_DEFAULT') . ' --'));
 		$fieldName = $name;
 
 		return JHTML::_('select.genericlist', $options, $fieldName, 'class="inputbox"', 'value', 'text', $value, $control_name . $name);

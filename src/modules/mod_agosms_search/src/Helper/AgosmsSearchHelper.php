@@ -8,11 +8,18 @@
  * @link        astrid-guenther.de
  */
 
+namespace Joomla\Module\AgosmsSearch\Site\Helper;
 
-// No direct access
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
-class modAgosmsSearchHelper
+use Joomla\CMS\Factory;
+
+/**
+ * Helper for mod_articles_archive
+ *
+ * @since  __BUMP_VERSION__
+ */
+class AgosmsSearchHelper
 {
 	var $params;
 
@@ -28,7 +35,7 @@ class modAgosmsSearchHelper
 			return;
 		}
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$query->select($db->quoteName('*'))
 			->from('#__modules')
@@ -52,7 +59,7 @@ class modAgosmsSearchHelper
 
 	function getCategories($parent = 0, $params = null)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$categories = Array();
 
 		if ($parent)
@@ -94,7 +101,7 @@ class modAgosmsSearchHelper
 		{
 			$categories[] = $category;
 
-			if (JFactory::getApplication()->isSite() && $params)
+			if (Factory::getApplication()->isClient('site') && $params)
 			{
 				if ($params->get("restrict"))
 				{
@@ -150,16 +157,16 @@ class modAgosmsSearchHelper
 			case 1 : // Auto
 				$view = '';
 
-				if (JFactory::getApplication()->input->get->get('view'))
+				if (Factory::getApplication()->input->get->get('view'))
 				{
-					$active = JFactory::getApplication()->input->get->get('view');
+					$active = Factory::getApplication()->input->get->get('view');
 				}
 
 				$requestid = 0;
 
-				if (JFactory::getApplication()->input->get->get('id'))
+				if (Factory::getApplication()->input->get->get('id'))
 				{
-					$active = JFactory::getApplication()->input->get->get('id');
+					$active = Factory::getApplication()->input->get->get('id');
 				}
 
 				if (in_array($view, Array("featured", "category")))
@@ -179,7 +186,7 @@ class modAgosmsSearchHelper
 
 	function getSubCategories($parent)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = "SELECT id FROM #__categories WHERE extension = 'com_content' AND parent_id = {$parent} AND published = 1";
 		$db->setQuery($query);
 		$results = $db->loadColumn();
@@ -199,7 +206,7 @@ class modAgosmsSearchHelper
 	function getTags($params)
 	{
 		$items = Array();
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = "SELECT id FROM #__content WHERE state = 1";
 
 		if ($params->get("restrict"))
@@ -252,7 +259,7 @@ class modAgosmsSearchHelper
 	function getAuthors($params)
 	{
 		$items = Array();
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = "SELECT created_by FROM #__content WHERE state = 1";
 
 		if ($params->get("restrict"))
@@ -291,7 +298,7 @@ class modAgosmsSearchHelper
 
 	function getCustomField($id)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = "SELECT * FROM #__fields WHERE id = {$id}";
 		$db->setQuery($query);
 
@@ -300,7 +307,7 @@ class modAgosmsSearchHelper
 
 	function getFieldValuesFromText($field_id, $type = "int", $module_id)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__fields_values AS field{$field_id} ON field{$field_id}.item_id = i.id AND field{$field_id}.field_id = {$field_id}";
@@ -364,7 +371,7 @@ class modAgosmsSearchHelper
 
 	function getMultiFieldValuesFromText($field_id, $sub_field, $type = "int", $module_id)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
 		$query .= " FROM #__content as i";
 		$query .= " LEFT JOIN #__fields_values AS field{$field_id} ON field{$field_id}.item_id = i.id AND field{$field_id}.field_id = {$field_id}";
@@ -441,7 +448,7 @@ class modAgosmsSearchHelper
 	{
 		$query = "SELECT field_id as id, GROUP_CONCAT(value SEPARATOR ';;') AS value FROM #__fields_values WHERE item_id = {$iId} GROUP BY field_id";
 
-		return JFactory::getDBO()->setQuery($query)->loadObjectList();
+		return Factory::getDBO()->setQuery($query)->loadObjectList();
 	}
 
 	function getItemTags($iId)
@@ -451,12 +458,12 @@ class modAgosmsSearchHelper
 					WHERE m.type_alias = 'com_content.article' AND content_item_id = {$iId}
 					";
 
-		return JFactory::getDBO()->setQuery($query)->loadObjectList();
+		return Factory::getDBO()->setQuery($query)->loadObjectList();
 	}
 
 	function getItemsTitles($params)
 	{
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = "SELECT i.title";
 		$query .= " FROM #__content as i";
 		$query .= " WHERE state = 1";

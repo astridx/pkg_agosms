@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -7,9 +8,11 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
+\defined('_JEXEC') or die;
 
+use Joomla\Module\AgosmsSearch\Site\Helper\AgosmsSearchHelper;
 
-defined('_JEXEC') or die;
+require_once(JPATH_SITE . "/modules/mod_agosms_search/src/Helper/AgosmsSearchHelper.php");
 
 class JFormFieldCategorySelect extends JFormField
 {
@@ -22,30 +25,25 @@ class JFormFieldCategorySelect extends JFormField
 	function fetchElement($name, $value, &$node, $control_name)
 	{
 
-			$mitems[] = JHTML::_('select.option', '', '');
+		$mitems[] = JHTML::_('select.option', '', '');
+		$AgosmsSearchHelper = new AgosmsSearchHelper();
+		$categories = $AgosmsSearchHelper->getCategories();
 
-			require_once JPATH_SITE . "/modules/mod_agosms_search/helper.php";
-			$helper = new modAgosmsSearchHelper;
-			$categories = $helper->getCategories();
-
-		foreach ($categories as $category)
-		{
+		foreach ($categories as $category) {
 			$indent = "";
 
-			for ($i = 1; $i < $category->level;
-			$i++)
-			{
+			for ($i = 1; $i < $category->level; $i++) {
 				$indent .= " - ";
 			}
 
 			$mitems[] = JHTML::_('select.option', $category->id, $indent . $category->title);
 		}
 
-			$output = JHTML::_('select.genericlist',  $mitems, '', 'class="ValueSelect inputbox"', 'value', 'text', '0');
-			$output .= "<div class='clear'></div><ul class='sortableFields'></ul>";
-			$output .= "<div class='clear'></div>";
-			$output .= "<textarea style='display: none;' name='" . $name . "' class='ValueSelectVal'>" . $value . "</textarea>";
-			$output .= "
+		$output = JHTML::_('select.genericlist', $mitems, '', 'class="ValueSelect inputbox"', 'value', 'text', '0');
+		$output .= "<div class='clear'></div><ul class='sortableFields'></ul>";
+		$output .= "<div class='clear'></div>";
+		$output .= "<textarea style='display: none;' name='" . $name . "' class='ValueSelectVal'>" . $value . "</textarea>";
+		$output .= "
 			
 			<script type='text/javascript'>
 				
@@ -115,20 +113,16 @@ class JFormFieldCategorySelect extends JFormField
 			
 			";
 
-			return $output;
+		return $output;
 	}
 
 	function addOptions(&$mitems, $category)
 	{
-		while ($category->subs)
-		{
-			foreach ($category->subs as $category)
-			{
+		while ($category->subs) {
+			foreach ($category->subs as $category) {
 				$indent = "";
 
-				for ($i = 0; $i < $category->level;
-				$i++)
-				{
+				for ($i = 0; $i < $category->level; $i++) {
 					$indent .= " - ";
 				}
 
@@ -137,6 +131,5 @@ class JFormFieldCategorySelect extends JFormField
 			}
 		}
 	}
+
 }
-
-

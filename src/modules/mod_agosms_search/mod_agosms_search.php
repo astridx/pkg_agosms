@@ -8,13 +8,11 @@
  * @link        astrid-guenther.de
  */
 
-// No direct access
 defined('_JEXEC') or die;
 
-require_once __DIR__ . '/helper.php';
-$helper = new modAgosmsSearchHelper($params);
-
-$moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
+use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\Module\AgosmsSearch\Site\Helper\AgosmsSearchHelper;
+use Joomla\CMS\Factory;
 
 $filters = $params->get('filters');
 
@@ -30,7 +28,7 @@ if ($filters == "")
 	return;
 }
 
-if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"))
+if ($params->get('savesearch') && Factory::getSession()->get("SaveSearchValues"))
 {
 	$skip = array(
 		"option",
@@ -42,14 +40,14 @@ if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"
 		"field_type"
 	);
 
-	foreach (JFactory::getSession()->get("SaveSearchValues") as $key => $value)
+	foreach (Factory::getSession()->get("SaveSearchValues") as $key => $value)
 	{
 		if (in_array($key, $skip))
 		{
 			continue;
 		}
 
-		JFactory::getApplication()->input->set($key, $value);
+		Factory::getApplication()->input->set($key, $value);
 	}
 }
 
@@ -63,7 +61,7 @@ foreach ($filters_tmp as $k => $filter)
 
 	if ($filter[0] == 'field')
 	{
-		$instance = $helper->getCustomField($filter[1]);
+		$instance = AgosmsSearchHelper::getCustomField($filter[1]);
 		$filters[$k]->id = $filter[1];
 
 		if ($filter[2] == "")
@@ -93,7 +91,7 @@ foreach ($filters_tmp as $k => $filter)
 // Map
 
 // Include skripts/styles to the header
-$document = JFactory::getDocument();
+$document = Factory::getDocument();
 
 $leafletIsLoaded = false;
 
@@ -116,10 +114,10 @@ if ($params->get('show_map', "1") === "1")
 	}
 
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/cluster/MarkerCluster.css');
-	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/cluster/MarkerCluster.Default.css');
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/cluster/MarkerCluster.default.css');
 	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/cluster/leaflet.markercluster-src.js');
 	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/js/agosm_search.js');
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/css/agosms_search.css');
 }
 
-require JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/template');
+require ModuleHelper::getLayoutPath('mod_agosms_search', $params->get('layout', 'default') . '/template');
