@@ -15,7 +15,7 @@ use AG\Module\Agosms\Site\Helper\ModagosmsHelper;
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 // Include skripts/styles to the header
-$document = JFactory::getDocument();
+$document = $app->getDocument();
 
 $leafletIsLoaded = false;
 

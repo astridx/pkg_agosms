@@ -18,6 +18,8 @@ require_once JPATH_SITE . '/components/com_agosms/helpers/category.php';
 use Joomla\CMS\MVC\Model\BaseModel;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Component\ComponentHelper;
+use Joomla\Component\Content\Administrator\Model\ArticlesModel;
+use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
 
 //JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'AgosmsModel');
 BaseModel::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'AgosmsModel');
@@ -179,7 +181,7 @@ class ModagosmsHelper
 	public static function getListCustomField(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = BaseModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
+		$model = new ArticlesModel();
 
 		// Todo check if other compontent than com_content
 		if ($model)
@@ -214,7 +216,7 @@ class ModagosmsHelper
 			{
 				foreach ($items as $key => $item)
 				{
-					if ($item->state !== "1")
+					if ($item->state !== 1)
 					{
 						continue;
 					}
@@ -225,7 +227,7 @@ class ModagosmsHelper
 
 					foreach ($fields as $key => $field)
 					{
-						$itemfiltered = new stdClass;
+						$itemfiltered = new \stdClass;
 
 						if ($field->title == 'lat, lon')
 						{

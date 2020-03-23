@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	var leafletmapsMod = document.querySelectorAll('.leafletmapMod');
 
 	[].forEach.call(leafletmapsMod, function (element) {
+		
+		console.log('here i am');
 
 		var savestate = element.getAttribute('data-savestate');
 		var fullscreen = element.getAttribute('data-fullscreen');
@@ -614,6 +616,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			 };
 		}
 		// Show Pins from customfield
+		console.log('showcustomfieldpin' + showcustomfieldpin);
 		if (showcustomfieldpin === '1')
 		{
 			var clustermarkers = L.markerClusterGroup();
