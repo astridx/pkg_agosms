@@ -10,6 +10,8 @@
 
 defined('_JEXEC') or die;
 
+use AG\Module\Agosms\Site\Helper\ModagosmsHelper;
+
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 // Include skripts/styles to the header
@@ -86,14 +88,14 @@ if ($params->get('scrollwheelzoom') === "2")
 
 if ($params->get('showcomponentpin', '0') === "1")
 {
-	$list = ModagosmHelper::getList($params);
+	$list = ModagosmsHelper::getList($params);
 }
 
 if ($params->get('showcustomfieldpin', '0') === "1")
 {
-	if (!empty(ModagosmHelper::getListCustomField($params)))
+	if (!empty(ModagosmsHelper::getListCustomField($params)))
 	{
-		$listcf = ModagosmHelper::getListCustomField($params);
+		$listcf = ModagosmsHelper::getListCustomField($params);
 	}
 }
 

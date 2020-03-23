@@ -10,10 +10,7 @@
 
 namespace AG\Module\Agosms\Site\Helper;
 
-defined('_JEXEC') or die;
-
-// No direct access
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Filesystem\File;

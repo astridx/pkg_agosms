@@ -8,13 +8,19 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-defined('_JEXEC') or die('');
+
+namespace AG\Module\Agosms\Site\Helper;
+
+\defined('_JEXEC') or die;
 
 require_once JPATH_SITE . '/components/com_agosms/helpers/route.php';
 require_once JPATH_SITE . '/components/com_agosms/helpers/category.php';
+use Joomla\CMS\MVC\Model\BaseModel;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Component\ComponentHelper;
 
-JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'AgosmsModel');
-
+//JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'AgosmsModel');
+BaseModel::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'AgosmsModel');
 /**
  * Helper for mod_agosm
  *
@@ -22,7 +28,7 @@ JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'Agos
  * @subpackage  mod_agosm
  * @since       1.0.40
  */
-class ModagosmHelper
+class ModagosmsHelper
 {
 
 	/**
@@ -37,10 +43,10 @@ class ModagosmHelper
 	public static function getCategory(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = JModelLegacy::getInstance('Category', 'AosmsModel', array('ignore_request' => true));
+		$model = BaseModel::getInstance('Category', 'AosmsModel', array('ignore_request' => true));
 
 		// Set application parameters in model
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$appParams = $app->getParams();
 		$model->setState('params', $appParams);
 
@@ -52,7 +58,7 @@ class ModagosmHelper
 		$model->setState('filter.publish_date', true);
 
 		// Access filter
-		$access = !JComponentHelper::getParams('com_agosms')->get('show_noauth');
+		$access = !ComponentHelper::getParams('com_agosms')->get('show_noauth');
 		$model->setState('filter.access', $access);
 
 		$ordering = $params->get('ordering', 'ordering');
@@ -66,7 +72,7 @@ class ModagosmHelper
 		$model->setState('category.direction', $params->get('groupby_direction', 'ASC'));
 
 		// Create query object
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 
 		$case_when1 = ' CASE WHEN ';
@@ -122,10 +128,10 @@ class ModagosmHelper
 	public static function getList(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = JModelLegacy::getInstance('Category', 'AgosmsModel', array('ignore_request' => true));
+		$model = BaseModel::getInstance('Category', 'AgosmsModel', array('ignore_request' => true));
 
 		// Set application parameters in model
-		$app = JFactory::getApplication();
+		$app = Factory::getApplication();
 		$appParams = $app->getParams();
 		$model->setState('params', $appParams);
 
@@ -135,7 +141,7 @@ class ModagosmHelper
 		$model->setState('filter.publish_date', true);
 
 		// Access filter
-		$access = !JComponentHelper::getParams('com_agosms')->get('show_noauth');
+		$access = !ComponentHelper::getParams('com_agosms')->get('show_noauth');
 		$model->setState('filter.access', $access);
 
 		$ordering = $params->get('ordering', 'ordering');
@@ -149,7 +155,7 @@ class ModagosmHelper
 		$model->setState('category.direction', $params->get('groupby_direction', 'ASC'));
 
 		// Create query object
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		$items = $model->getItems();
 
@@ -173,13 +179,13 @@ class ModagosmHelper
 	public static function getListCustomField(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
+		$model = BaseModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 
 		// Todo check if other compontent than com_content
 		if ($model)
 		{
 			// Set application parameters in model
-			$app = JFactory::getApplication();
+			$app = Factory::getApplication();
 			$appParams = $app->getParams();
 			$model->setState('params', $appParams);
 
@@ -189,7 +195,7 @@ class ModagosmHelper
 			$model->setState('filter.publish_date', true);
 
 			// Access filter
-			$access = !JComponentHelper::getParams('com_agosms')->get('show_noauth');
+			$access = !ComponentHelper::getParams('com_agosms')->get('show_noauth');
 			$model->setState('filter.access', $access);
 
 			$catid = (int) $params->get('catid', 0);
@@ -199,7 +205,7 @@ class ModagosmHelper
 			$model->setState('category.direction', $params->get('groupby_direction', 'ASC'));
 
 			// Create query object
-			$db = JFactory::getDbo();
+			$db = Factory::getDbo();
 			$query = $db->getQuery(true);
 			$items = $model->getItems();
 			$itemsfiltered = array();
