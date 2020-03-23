@@ -8,13 +8,13 @@
  * @link        astrid-guenther.de
  */
 
+namespace Joomla\Module\Agosmssearch\Site\Helper;
 
-// No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.form.formfield');
+use Joomla\CMS\Form\FormField;
 
-class JFormFieldModuletemplate extends JFormField
+class JFormFieldModuletemplate extends FormField
 {
 	var $_name = 'moduletemplate';
 

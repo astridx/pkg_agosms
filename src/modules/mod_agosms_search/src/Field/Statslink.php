@@ -8,10 +8,13 @@
  * @link        astrid-guenther.de
  */
 
+namespace Joomla\Module\Agosmssearch\Site\Helper;
 
 defined('_JEXEC') or die;
 
-class JFormFieldStatsLink extends JFormField
+use Joomla\CMS\Form\FormField;
+
+class JFormFieldStatsLink extends FormField
 {
 
 	function getInput()

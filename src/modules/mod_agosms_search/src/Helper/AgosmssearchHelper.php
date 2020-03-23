@@ -8,7 +8,7 @@
  * @link        astrid-guenther.de
  */
 
-namespace Joomla\Module\AgosmsSearch\Site\Helper;
+namespace Joomla\Module\Agosmssearch\Site\Helper;
 
 \defined('_JEXEC') or die;
 
@@ -19,7 +19,7 @@ use Joomla\CMS\Factory;
  *
  * @since  __BUMP_VERSION__
  */
-class AgosmsSearchHelper
+class AgosmssearchHelper
 {
 	var $params;
 

@@ -10,14 +10,14 @@
 
 defined('_JEXEC') or die;
 
-JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
+use Joomla\CMS\Form\Form;
 
 /**
  * Fields Plugin for collecting all the relevant fields for calculating geo cords
  *
  * @since  1.0.40
  */
-class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
+class PlgFieldsAgosmsaddressmarker extends \Joomla\Component\Fields\Administrator\Plugin\FieldsPlugin
 {
 	/**
 	 * Constructor
@@ -43,7 +43,7 @@ class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 	 *
 	 * @since   1.0.40
 	 */
-	public function onCustomFieldsPrepareDom($field, DOMElement $parent, JForm $form)
+	public function onCustomFieldsPrepareDom($field, DOMElement $parent, Form $form)
 	{
 		$fieldNode = parent::onCustomFieldsPrepareDom($field, $parent, $form);
 

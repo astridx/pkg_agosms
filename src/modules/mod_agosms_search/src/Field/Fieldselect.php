@@ -8,9 +8,13 @@
  * @link        astrid-guenther.de
  */
 
+namespace Joomla\Module\Agosmssearch\Site\Helper;
+
 defined('_JEXEC') or die;
 
-class JFormFieldOrderingSelect extends JFormField
+use Joomla\CMS\Form\FormField;
+
+class JFormFieldFieldSelect extends FormField
 {
 
 	function getInput()
@@ -20,16 +24,8 @@ class JFormFieldOrderingSelect extends JFormField
 
 	function fetchElement($name, $value, &$node, $control_name)
 	{
-			$mitems[] = JHTML::_('select.option', 'title', JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'));
-			$mitems[] = JHTML::_('select.option', 'alias', JText::_('MOD_AGOSMSSEARCHSORTING_ALIAS'));
-			$mitems[] = JHTML::_('select.option', 'created', JText::_('MOD_AGOSMSSEARCHSORTING_DATE'));
-			$mitems[] = JHTML::_('select.option', 'publish_up', JText::_('MOD_AGOSMSSEARCHSORTING_DATE_PUBLISHING'));
-			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGOSMSSEARCHSORTING_CATEGORY'));
-			$mitems[] = JHTML::_('select.option', 'hits', JText::_('MOD_AGOSMSSEARCHSORTING_POPULAR'));
-			$mitems[] = JHTML::_('select.option', 'featured', JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'));
-			$mitems[] = JHTML::_('select.option', 'rand', JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'));
 
-			$mitems[] = JHTML::_('select.option', '', JText::_('-- Custom Fields --'));
+			$mitems[] = JHTML::_('select.option', '', '');
 
 			$query = "SELECT f.*, g.title as group_name FROM #__fields as f 
 						LEFT JOIN #__fields_groups AS g ON f.group_id = g.id
@@ -110,7 +106,11 @@ class JFormFieldOrderingSelect extends JFormField
 					}
 					else
 					{
-						$mitems[] = JHTML::_("select.option", "field{$field->id}", $offset . JText::_("{$field->label} [id: {$field->id}]"));
+						$extra = array(
+							'name' => $field->label,
+						);
+						$extra = json_encode($extra);
+						$mitems[] = JHTML::_("select.option", "field:{$field->id}:{$field->type}:{$extra}", $offset . JText::_("{$field->label} [id: {$field->id}]"));
 					}
 				}
 				else
@@ -120,7 +120,17 @@ class JFormFieldOrderingSelect extends JFormField
 			}
 		}
 
-			return JHTML::_('select.genericlist', $mitems, $name, 'class="inputbox"', 'value', 'text', $value, $control_name . $name);
+			$output = JHTML::_('select.genericlist',  $mitems, '', 'class="ValueSelect inputbox"', 'value', 'text', '0');
+			$output .= "<div class='clear'></div><ul class='sortableFields fieldselect'></ul>";
+			$output .= "<div class='clear'></div>";
+			$output .= "
+				<textarea style='display: none;' name='" . $name . "' class='ValueSelectVal'>" . $value . "</textarea>
+				<style>
+					ul.fieldselect select.field_type_select { display: none; }
+				</style>
+			";
+
+			return $output;
 	}
 }
 

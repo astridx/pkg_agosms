@@ -8,14 +8,22 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-\defined('_JEXEC') or die;
 
-use Joomla\Module\AgosmsSearch\Site\Helper\AgosmsSearchHelper;
+namespace Joomla\Module\Agosmssearch\Site\Field;
 
-require_once(JPATH_SITE . "/modules/mod_agosms_search/src/Helper/AgosmsSearchHelper.php");
+defined('_JEXEC') or die;
 
-class JFormFieldCategorySelect extends JFormField
+use Joomla\CMS\Form\Field\CategoryField;
+
+class CategoryselectField extends CategoryField
 {
+	/**
+	 * The form field type.
+	 *
+	 * @var    string
+	 * @since  __BUMP_VERSION__
+	 */
+	protected $type = 'categoryselect';
 
 	function getInput()
 	{
@@ -26,8 +34,8 @@ class JFormFieldCategorySelect extends JFormField
 	{
 
 		$mitems[] = JHTML::_('select.option', '', '');
-		$AgosmsSearchHelper = new AgosmsSearchHelper();
-		$categories = $AgosmsSearchHelper->getCategories();
+
+		$categories = AgosmssearchHelper::getCategories();
 
 		foreach ($categories as $category) {
 			$indent = "";
@@ -131,5 +139,4 @@ class JFormFieldCategorySelect extends JFormField
 			}
 		}
 	}
-
 }

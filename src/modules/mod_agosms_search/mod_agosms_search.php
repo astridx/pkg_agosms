@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Helper\ModuleHelper;
-use Joomla\Module\AgosmsSearch\Site\Helper\AgosmsSearchHelper;
+use Joomla\Module\Agosmssearch\Site\Helper\AgosmsSearchHelper;
 use Joomla\CMS\Factory;
 
 $filters = $params->get('filters');

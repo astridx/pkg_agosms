@@ -8,8 +8,7 @@
  * @link        astrid-guenther.de
  */
 
-// no direct access
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 require_once(JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model.php");
 

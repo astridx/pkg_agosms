@@ -8,9 +8,13 @@
  * @link        astrid-guenther.de
  */
 
+namespace Joomla\Module\Agosmssearch\Site\Helper;
+
 defined('_JEXEC') or die;
 
-class JFormFieldFilters extends JFormField
+use Joomla\CMS\Form\FormField;
+
+class JFormFieldOrderingSelect extends FormField
 {
 
 	function getInput()
@@ -20,19 +24,17 @@ class JFormFieldFilters extends JFormField
 
 	function fetchElement($name, $value, &$node, $control_name)
 	{
-			$db = JFactory::getDBO();
-
-			// Basic filters
-			$mitems[] = JHTML::_('select.option', '', '');
-
-			$mitems[] = JHTML::_('select.option', 'keyword', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_KEYWORD'));
-			$mitems[] = JHTML::_('select.option', 'title_select', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TITLE_SELECT'));
-			$mitems[] = JHTML::_('select.option', 'tag', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TAG'));
-			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_CATEGORY'));
-			$mitems[] = JHTML::_('select.option', 'author', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_AUTHOR'));
-			$mitems[] = JHTML::_('select.option', 'date', JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_DATE'));
+			$mitems[] = JHTML::_('select.option', 'title', JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'));
+			$mitems[] = JHTML::_('select.option', 'alias', JText::_('MOD_AGOSMSSEARCHSORTING_ALIAS'));
+			$mitems[] = JHTML::_('select.option', 'created', JText::_('MOD_AGOSMSSEARCHSORTING_DATE'));
+			$mitems[] = JHTML::_('select.option', 'publish_up', JText::_('MOD_AGOSMSSEARCHSORTING_DATE_PUBLISHING'));
+			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGOSMSSEARCHSORTING_CATEGORY'));
+			$mitems[] = JHTML::_('select.option', 'hits', JText::_('MOD_AGOSMSSEARCHSORTING_POPULAR'));
+			$mitems[] = JHTML::_('select.option', 'featured', JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'));
+			$mitems[] = JHTML::_('select.option', 'rand', JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'));
 
 			$mitems[] = JHTML::_('select.option', '', JText::_('-- Custom Fields --'));
+
 			$query = "SELECT f.*, g.title as group_name FROM #__fields as f 
 						LEFT JOIN #__fields_groups AS g ON f.group_id = g.id
 						WHERE f.context = 'com_content.article'
@@ -41,8 +43,7 @@ class JFormFieldFilters extends JFormField
 
 		try
 		{
-			$db->setQuery($query);
-			$fields = $db->loadObjectList();
+			$fields = JFactory::getDBO()->setQuery($query)->loadObjectList();
 		}
 		catch (Exception $e)
 		{
@@ -73,6 +74,7 @@ class JFormFieldFilters extends JFormField
 
 					if ($field->type == 'radicalmultifield')
 					{
+						continue; // Do not use for ordering for now
 						$field_params = json_decode($field->fieldparams);
 						$sub_fields = array();
 
@@ -92,6 +94,7 @@ class JFormFieldFilters extends JFormField
 					}
 					elseif ($field->type == 'repeatable')
 					{
+						continue; // Do not use for ordering for now
 						$field_params = json_decode($field->fieldparams);
 						$sub_fields = array();
 
@@ -111,7 +114,7 @@ class JFormFieldFilters extends JFormField
 					}
 					else
 					{
-						$mitems[] = JHTML::_("select.option", "field:{$field->id}:{$field->type}", $offset . JText::_("{$field->label} [id: {$field->id}]"));
+						$mitems[] = JHTML::_("select.option", "field{$field->id}", $offset . JText::_("{$field->label} [id: {$field->id}]"));
 					}
 				}
 				else
@@ -120,23 +123,9 @@ class JFormFieldFilters extends JFormField
 				}
 			}
 		}
-		else
-		{
-			$mitems[] = JHTML::_('select.option', '', 'None');
-		}
 
-			$output = JHTML::_('select.genericlist',  $mitems, '', 'class="ValueSelect inputbox"', 'value', 'text', '0');
-			$output .= "<div class='clear'></div><ul class='sortableFields'></ul>";
-			$output .= "<div class='clear'></div>";
-			$output .= "<textarea style='display: none;' name='" . $name . "' class='ValueSelectVal'>" . $value . "</textarea>";
-
-			$output .= "
-				<script>
-					var MOD_AGOSMSSEARCHFILTER_SELECT_FIELD_TYPE = '" . JText::_("MOD_AGOSMSSEARCHFILTER_SELECT_FIELD_TYPE") . "';
-					var MOD_AGOSMSSEARCHFILTER_TYPE_TEXT_FIELD = \"" . JText::_("MOD_AGOSMSSEARCHFIELD") . "\";
-				</script>
-			";
-
-			return $output;
+			return JHTML::_('select.genericlist', $mitems, $name, 'class="inputbox"', 'value', 'text', $value, $control_name . $name);
 	}
 }
+
+
