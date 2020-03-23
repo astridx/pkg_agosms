@@ -389,13 +389,13 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-			</fieldset>
 
 			<!-- Routing Simple-->
-			<fieldset
-				name="agosmControlRoutingSimple"
-				label="MOD_AGOSM_ROUTING_SIMPLE_CONTROL_FIELDSETLABEL"
-				>
+			<field 
+				type="spacer" 
+				name="agosmControlRoutingSimple" 
+				label="MOD_AGOSM_ROUTING_SIMPLE_CONTROL_FIELDSETLABEL" 
+			/>
 				<field
 					type="spacer"
 					name="routingSearch"
@@ -471,13 +471,13 @@
 					size="40"
 					showon="showrouting_simple:1[AND]routing_simple_router:mapbox"
 				/>
-			</fieldset>
 
 			<!-- Routing Mapbox-->
-			<fieldset
-				name="agosmControlRouting"
-				label="MOD_AGOSM_ROUTING_CONTROL_FIELDSETLABEL"
-			>
+			<field 
+				type="spacer" 
+				name="agosmControlRouting" 
+				label="MOD_AGOSM_ROUTING_CONTROL_FIELDSETLABEL" 
+			/>
 				<field
 					type="spacer"
 					name="routingSearch"
@@ -581,13 +581,13 @@
 					<option value="metric">MOD_AGOSM_METRIC</option>
 					<option value="imperial">MOD_AGOSM_IMPERIAL</option>
 				</field>
-			</fieldset>
 
 			<!-- Geocoder -->
-			<fieldset
-				name="agosmControl"
-				label="MOD_AGOSM_GEOCODER_CONTROL_FIELDSETLABEL"
-				>
+			<field 
+				type="spacer" 
+				name="agosmControl" 
+				label="MOD_AGOSM_GEOCODER_CONTROL_FIELDSETLABEL" 
+			/>
 				<field
 					type="spacer"
 					name="geocoderSearch"
@@ -657,13 +657,13 @@
 					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
 					<option value="topright">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPRIGHT</option>
 				</field>
-			</fieldset>
 
 			<!-- Geocoder ESRI-->
-			<fieldset
-				name="agosmGeocoderEsriControl"
-				label="MOD_AGOSM_GEOCODER_ESRI_CONTROL_FIELDSETLABEL"
-				>
+			<field 
+				type="spacer" 
+				name="agosmGeocoderEsriControl" 
+				label="MOD_AGOSM_GEOCODER_ESRI_CONTROL_FIELDSETLABEL" 
+			/>
 				<field
 					type="spacer"
 					name="geocoderEsriSearch"
@@ -874,13 +874,13 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-			</fieldset>
 
 			<!-- Marker from database -->
-			<fieldset
+			<field 
+				type="spacer" 
 				name="agosmControlMarkers"
 				label="MOD_AGOSM_DATABASE_FIELDSET"
-				>
+			/>
 				<field
 					type="spacer"
 					name="spacerMarkers"
@@ -946,13 +946,13 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
-			</fieldset>
 
 			<!-- Show Pins from Component -->
-			<fieldset
+			<field 
+				type="spacer" 
 				name="pinConfigFromComponent"
 				label="MOD_AGOSM_H_PINCOM"
-			>
+			/>
 				<field
 					type="list"
 					name="showcomponentpin"
@@ -976,13 +976,13 @@
 				>
 					<option value="0">JOPTION_SELECT_CATEGORY</option>
 				</field>
-			</fieldset>
 
 			<!-- upload -->
-			<fieldset 
+			<field 
+				type="spacer" 
 				name="upload"
 				label="MOD_AGOSM_UPLOAD_FIELDSET"
-				>
+			/>
 				<!-- Basic Required Fields -->
 				<field name="ag_parent" 
 					   type="fixedfolderlist" 
