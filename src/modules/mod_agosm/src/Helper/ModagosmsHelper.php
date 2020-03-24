@@ -21,7 +21,7 @@ use Joomla\CMS\Component\ComponentHelper;
 use Joomla\Component\Content\Administrator\Model\ArticlesModel;
 use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
 
-//JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'AgosmsModel');
+// JModelLegacy::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'AgosmsModel');
 BaseModel::addIncludePath(JPATH_SITE . '/components/com_agosms/models', 'AgosmsModel');
 /**
  * Helper for mod_agosm
@@ -181,7 +181,7 @@ class ModagosmsHelper
 	public static function getListCustomField(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = new ArticlesModel();
+		$model = new ArticlesModel;
 
 		// Todo check if other compontent than com_content
 		if ($model)

@@ -7,7 +7,9 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
+
 defined('_JEXEC') or die;
+
 $defaultArray = [];
 ?>
 

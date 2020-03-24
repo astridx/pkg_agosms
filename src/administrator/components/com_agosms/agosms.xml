@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="3.5" method="upgrade">
-        <name>com_agosms</name>
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="component" method="upgrade">
+	<name>COM_AGOSMS</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) ##YEAR## Open Source Matters. All rights reserved.</copyright>
@@ -9,58 +9,78 @@
 	<authorUrl>www.astrid-guenther.de</authorUrl>
 	<version>##VERSION##</version>
 	<description>COM_AGOSMS_XML_DESCRIPTION</description>
+	<namespace path="src">Joomla\Component\Agosms</namespace>
 	<scriptfile>script.php</scriptfile>
-
-	<install>
+	<install> <!-- Runs on install -->
 		<sql>
-			<file charset="utf8" driver="mysql">sql/install.mysql.sql</file>
-			<file charset="utf8" driver="postgresql">sql/install.postgresql.sql</file>
-			<file charset="utf8" driver="sqlsrv">sql/install.sqlsrv.sql</file>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
 		</sql>
 	</install>
-	<uninstall>
+	<uninstall> <!-- Runs on uninstall -->
 		<sql>
-			<file charset="utf8" driver="mysql">sql/uninstall.mysql.sql</file>
-			<file charset="utf8" driver="postgresql">sql/uninstall.postgresql.sql</file>
-			<file charset="utf8" driver="sqlsrv">sql/uninstall.sqlsrv.sql</file>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
 		</sql>
 	</uninstall>
-	<update>
+	<update>  <!-- Runs on update -->
 		<schemas>
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
-			<schemapath type="postgresql">sql/updates/postgresql</schemapath>
-			<schemapath type="sqlsrv">sql/updates/sqlsrv</schemapath>
 		</schemas>
 	</update>
-
-	<media folder="media/com_agosms" destination="com_agosms">
-		##MEDIA_FILES##
-	</media>
-
+	<!-- Frond-end files -->
 	<files folder="components/com_agosms">
-		##FRONTEND_COMPONENT_FILES##
+		<folder>language</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
 	</files>
-	<languages folder="language">
-		##FRONTEND_LANGUAGE_FILES##
-	</languages>
+    <media folder="media/com_agosms" destination="com_agosms">
+		<folder>js</folder>
+    </media>
+	<!-- Back-end files -->
 	<administration>
-		<menu img="class:agosms">com_agosms</menu>
+		<menu img="class:comment">
+			COM_AGOSMS
+			<params>
+				<dashboard>agosms</dashboard>
+			</params>
+		</menu>
 		<submenu>
-			<!--
-				Note that all & must be escaped to &amp; for the file to be valid
-				XML and be parsed by the installer
-			-->
-			<menu link="option=com_agosms" view="links" img="class:agosms"
-				alt="Agosms/Links">com_agosms_links</menu>
+			<menu link="option=com_agosms">
+				COM_AGOSMS
+				<params>
+					<menu-quicktask-title>COM_AGOSMS</menu-quicktask-title>
+					<menu-quicktask>index.php?option=com_agosms&amp;view=agosm&amp;layout=edit</menu-quicktask>
+				</params>
+			</menu>
 			<menu link="option=com_categories&amp;extension=com_agosms"
-				view="categories" img="class:agosms-cat" alt="Agosms/Categories">com_agosms_categories</menu>
+				view="categories" img="class:agosms-cat" alt="Agosms/Categories">
+				JCATEGORY
+				<params>
+					<menu-quicktask-title>JCATEGORY</menu-quicktask-title>
+					<menu-quicktask>index.php?option=com_categories&amp;view=category&amp;layout=edit&amp;extension=com_agosms</menu-quicktask>
+				</params>
+			</menu>
 		</submenu>
 		<files folder="administrator/components/com_agosms">
-			##BACKEND_COMPONENT_FILES##
+			<filename>access.xml</filename>
+			<filename>agosms.xml</filename>
+			<filename>config.xml</filename>
+			<folder>forms</folder>
+			<folder>language</folder>
+			<folder>services</folder>
+			<folder>sql</folder>
+			<folder>src</folder>
+			<folder>tmpl</folder>
 		</files>
-		<languages folder="administrator/language">
-			##BACKEND_LANGUAGE_FILES##
-		</languages>
 	</administration>
+	<api>
+		<files folder="api/components/com_agosms">
+			<folder>Controller</folder>
+			<folder>View</folder>
+		</files>
+	</api>
+	<changelogurl>https://raw.githubusercontent.com/astridx/boilerplate/tutorial/changelog.xml</changelogurl>
+	<updateservers>
+		<server type="extension" name="Agosm Updates">https://raw.githubusercontent.com/astridx/boilerplate/tutorial/agosm_update.xml</server>
+	</updateservers>
+	<dlid prefix="dlid=" suffix="" />
 </extension>
-

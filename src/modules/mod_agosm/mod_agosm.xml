@@ -28,11 +28,14 @@
 	<help key="JHELP_EXTENSIONS_MODULE_AGOSM_HELP"/>
 
 	<config>
-		<fields name="params"  addfieldpath="modules/mod_agosm/src/Fields/">
+		<fields 
+			name="params"  
+			>
 			<!-- Map Configuration -->
 			<fieldset
 				name="mapConfig"
 				label="MOD_AGOSM_H_MAP"
+				class="column-count-lg-1"
 				>
 				<field
 					type="integer"
@@ -316,8 +319,8 @@
 
 				<field
 					name="lonlat"
-					type="agosmsaddressfinder"
-					default=""
+					type="text"
+					default="50.273543, 7.262993"
 					label="MOD_AGOSM_LONLAT"
 					description="MOD_AGOSM_LONLAT_DESC"
 				/>
@@ -508,7 +511,7 @@
 
 				<field
 					name="routingstart"
-					type="agosmsaddressfinder"
+					type="xx"
 					label="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"
@@ -516,7 +519,7 @@
 
 				<field
 					name="routingend"
-					type="agosmsaddressfinder"
+					type="xx"
 					label="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"
@@ -818,6 +821,7 @@
 			<fieldset
 				name="pinConfig"
 				label="MOD_AGOSM_H_PIN"
+				class="column-count-lg-1"
 			>
 				<field
 					type="list"
@@ -856,6 +860,7 @@
 			<fieldset
 				name="pinConfigFromCustomField"
 				label="MOD_AGOSM_H_PINCF"
+				class="column-count-lg-1"
 				>
 				<field
 					type="spacer"
@@ -1118,7 +1123,8 @@
 			</fieldset>
 
 			<!-- advanced -->
-			<fieldset name="advanced">
+			<fieldset name="advanced"
+			class="column-count-lg-1">
 				<field
 					name="layout"
 					type="modulelayout"

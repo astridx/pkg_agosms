@@ -38,13 +38,15 @@ class CategoryselectField extends FormField
 
 		$mitems[] = HTMLHelper::_('select.option', '', '');
 
-		$AgosmsSearchHelper = new AgosmssearchHelper();
+		$AgosmsSearchHelper = new AgosmssearchHelper;
 		$categories = $AgosmsSearchHelper->getCategories();
 
-		foreach ($categories as $category) {
+		foreach ($categories as $category)
+		{
 			$indent = "";
 
-			for ($i = 1; $i < $category->level; $i++) {
+			for ($i = 1; $i < $category->level; $i++)
+			{
 				$indent .= " - ";
 			}
 
@@ -130,11 +132,14 @@ class CategoryselectField extends FormField
 
 	function addOptions(&$mitems, $category)
 	{
-		while ($category->subs) {
-			foreach ($category->subs as $category) {
+		while ($category->subs)
+		{
+			foreach ($category->subs as $category)
+			{
 				$indent = "";
 
-				for ($i = 0; $i < $category->level; $i++) {
+				for ($i = 0; $i < $category->level; $i++)
+				{
 					$indent .= " - ";
 				}
 

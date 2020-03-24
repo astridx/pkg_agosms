@@ -1,282 +1,310 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  pkg_agosms
+ * @package     Joomla.Administrator
+ * @subpackage  com_agosms
  *
- * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later;
- * @link        astrid-guenther.de
+ * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
+\defined('_JEXEC') or die;
 
-defined('_JEXEC') or die;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Installer\InstallerAdapter;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\Installer\InstallerScript;
 
 /**
- * Installation class to perform additional changes during install/uninstall/update
+ * Script file of Agosm Component
  *
- * @since  1.0.40
+ * @since  __BUMP_VERSION__
  */
-class Com_AgosmsInstallerScript
+class Com_AgosmsInstallerScript extends InstallerScript
 {
 	/**
-	 * Function to perform changes during install
+	 * Minimum Joomla version to check
 	 *
-	 * @param   JInstallerAdapterComponent  $parent  The class calling this method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0.40
+	 * @var    string
+	 * @since  __BUMP_VERSION__
 	 */
-	public function install($parent)
+	private $minimumJoomlaVersion = '4.0';
+
+	/**
+	 * Minimum PHP version to check
+	 *
+	 * @var    string
+	 * @since  __BUMP_VERSION__
+	 */
+	private $minimumPHPVersion = JOOMLA_MINIMUM_PHP;
+
+	/**
+	 * Method to install the extension
+	 *
+	 * @param   InstallerAdapter  $parent  The class calling this method
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since  __BUMP_VERSION__
+	 */
+	public function install($parent): bool
 	{
-		// Initialize a new category
-		/** @type  JTableCategory  $category  */
-		$category = JTable::getInstance('Category');
+		echo Text::_('COM_AGOSMS_INSTALLERSCRIPT_INSTALL');
 
-		// Check if the Uncategorised category exists before adding it
-		if (!$category->load(array('extension' => 'com_agosms', 'title' => 'Uncategorised')))
+		$db = Factory::getDbo();
+
+		// Initialize a new category.
+		$category = Table::getInstance('Category');
+
+		$data = array(
+			'extension'       => 'com_agosms',
+			'title'           => 'Uncategorised',
+			'description'     => '',
+			'published'       => 1,
+			'access'          => 1,
+			'level'           => 1,
+			'path'            => 'uncategorised',
+			'params'          => '{"category_layout":"","image":"", "image_alt":""}',
+			'metadesc'        => '',
+			'metakey'         => '',
+			'metadata'        => '{"author":"","robots":""}',
+			'created_time'    => Factory::getDate()->toSql(),
+			'created_user_id' => (int) $this->getAdminId(),
+			'rules'           => array(),
+			'parent_id'       => 1,
+		);
+
+		// Bind the data to the table
+		if (!$category->bind($data))
 		{
-			$category->extension = 'com_agosms';
-			$category->title = 'Uncategorised';
-			$category->description = '';
-			$category->published = 1;
-			$category->access = 1;
-			$category->params = '{"category_layout":"","image":""}';
-			$category->metadata = '{"author":"","robots":""}';
-			$category->metadesc = '';
-			$category->metakey = '';
-			$category->language = '*';
-			$category->checked_out_time = JFactory::getDbo()->getNullDate();
-			$category->version = 1;
-			$category->hits = 0;
-			$category->modified_user_id = 0;
-			$category->checked_out = 0;
-
-			// Set the location in the tree
-			$category->setLocation(1, 'last-child');
-
-			// Check to make sure our data is valid
-			if (!$category->check())
-			{
-				JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_AGOSMS_ERROR_INSTALL_CATEGORY', $category->getError()));
-
-				return;
-			}
-
-			// Now store the category
-			if (!$category->store(true))
-			{
-				JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_AGOSMS_ERROR_INSTALL_CATEGORY', $category->getError()));
-
-				return;
-			}
-
-			// Build the path for our category
-			$category->rebuildPath($category->id);
+			return false;
 		}
+
+		// Check to make sure our data is valid.
+		if (!$category->check())
+		{
+			return false;
+		}
+
+		// Store the category.
+		if (!$category->store(true))
+		{
+			return false;
+		}
+
+		$this->addDashboardMenu('agosms', 'agosms');
+
+		return true;
 	}
 
 	/**
-	 * Method to run after the install routine.
+	 * Method to uninstall the extension
 	 *
-	 * @param   string                      $type    The action being performed
-	 * @param   JInstallerAdapterComponent  $parent  The class calling this method
+	 * @param   InstallerAdapter  $parent  The class calling this method
 	 *
-	 * @return  void
+	 * @return  boolean  True on success
 	 *
-	 * @since   1.0.40
+	 * @since  __BUMP_VERSION__
+	 */
+	public function uninstall($parent): bool
+	{
+		echo Text::_('COM_AGOSMS_INSTALLERSCRIPT_UNINSTALL');
+
+		return true;
+	}
+
+	/**
+	 * Method to update the extension
+	 *
+	 * @param   InstallerAdapter  $parent  The class calling this method
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since  __BUMP_VERSION__
+	 *
+	 */
+	public function update($parent): bool
+	{
+		echo Text::_('COM_AGOSMS_INSTALLERSCRIPT_UPDATE');
+
+		$this->addDashboardMenu('agosm', 'agosm');
+
+		return true;
+	}
+
+	/**
+	 * Function called before extension installation/update/removal procedure commences
+	 *
+	 * @param   string            $type    The type of change (install, update or discover_install, not uninstall)
+	 * @param   InstallerAdapter  $parent  The class calling this method
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since  __BUMP_VERSION__
+	 *
+	 * @throws Exception
+	 */
+	public function preflight($type, $parent): bool
+	{
+		if ($type !== 'uninstall')
+		{
+			// Check for the minimum PHP version before continuing
+			if (!empty($this->minimumPHPVersion) && version_compare(PHP_VERSION, $this->minimumPHPVersion, '<'))
+			{
+				Log::add(
+					Text::sprintf('JLIB_INSTALLER_MINIMUM_PHP', $this->minimumPHPVersion),
+					Log::WARNING,
+					'jerror'
+				);
+
+				return false;
+			}
+
+			// Check for the minimum Joomla version before continuing
+			if (!empty($this->minimumJoomlaVersion) && version_compare(JVERSION, $this->minimumJoomlaVersion, '<'))
+			{
+				Log::add(
+					Text::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', $this->minimumJoomlaVersion),
+					Log::WARNING,
+					'jerror'
+				);
+
+				return false;
+			}
+		}
+
+		echo Text::_('COM_AGOSMS_INSTALLERSCRIPT_PREFLIGHT');
+
+		return true;
+	}
+
+	/**
+	 * Function called after extension installation/update/removal procedure commences
+	 *
+	 * @param   string            $type    The type of change (install, update or discover_install, not uninstall)
+	 * @param   InstallerAdapter  $parent  The class calling this method
+	 *
+	 * @return  boolean  True on success
+	 *
+	 * @since  __BUMP_VERSION__
+	 *
 	 */
 	public function postflight($type, $parent)
 	{
-		// Only execute database changes on MySQL databases
-		$dbName = JFactory::getDbo()->name;
+		echo Text::_('COM_AGOSMS_INSTALLERSCRIPT_POSTFLIGHT');
 
-		if (strpos($dbName, 'mysql') !== false)
-		{
-			// Add Missing Table Colums if needed
-			$this->addColumnsIfNeeded();
+		$this->saveContentTypes();
 
-			// Drop the Table Colums if needed
-			$this->dropColumnsIfNeeded();
-		}
-
-		// Insert missing UCM Records if needed
-		$this->insertMissingUcmRecords();
+		return true;
 	}
 
 	/**
-	 * Method to insert missing records for the UCM tables
+	 * Retrieve the admin user id.
 	 *
-	 * @return  void
+	 * @return  integer|boolean  One Administrator ID.
 	 *
-	 * @since   1.0.40
+	 * @since   __BUMP_VERSION__
 	 */
-	private function insertMissingUcmRecords()
+	private function getAdminId()
 	{
-		// Insert the rows in the #__content_types table if they don't exist already
-		$db = JFactory::getDbo();
-
-		// Get the type ID for a Agosm
+		$db    = Factory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select($db->quoteName('type_id'))
-			->from($db->quoteName('#__content_types'))
-			->where($db->quoteName('type_alias') . ' = ' . $db->quote('com_agosms.agosm'));
-		$db->setQuery($query);
 
-		$agosmTypeId = $db->loadResult();
-
-		// Get the type ID for a Agosm Category
-		$query->clear('where');
-		$query->where($db->quoteName('type_alias') . ' = ' . $db->quote('com_agosms.category'));
-		$db->setQuery($query);
-
-		$categoryTypeId = $db->loadResult();
-
-		// Set the table columns to insert table to
-		$columnsArray = array(
-			$db->quoteName('type_title'),
-			$db->quoteName('type_alias'),
-			$db->quoteName('table'),
-			$db->quoteName('rules'),
-			$db->quoteName('field_mappings'),
-			$db->quoteName('router'),
-			$db->quoteName('content_history_options'),
-		);
-
-		// If we have no type id for com_agosms.agosm insert it
-		if (!$agosmTypeId)
-		{
-			// Insert the data.
-			$query->clear();
-			$query->insert($db->quoteName('#__content_types'));
-			$query->columns($columnsArray);
-			$query->values(
-				$db->quote('Agosm') . ', '
-				. $db->quote('com_agosms.agosm') . ', '
-				. $db->quote(
-					'{"special":{"dbtable":"#__agosms","key":"id","type":"Agosm","prefix":"AgosmsTable","config":"array()"},
-					"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}'
-				) . ', '
-				. $db->quote('') . ', '
-				. $db->quote(
-					'{"common":{"core_content_item_id":"id","core_title":"title","core_state":"state","core_alias":"alias",
-					"core_created_time":"created","core_modified_time":"modified","core_body":"description", "core_hits":"hits",
-					"core_publish_up":"publish_up","core_publish_down":"publish_down","core_access":"access", "core_params":"params",
-					"core_featured":"featured", "core_metadata":"metadata", "core_language":"language", "core_images":"images", "core_urls":"url",
-					"core_version":"version", "core_ordering":"ordering", "core_metakey":"metakey", "core_metadesc":"metadesc",
-					"core_catid":"catid", "core_xreference":"xreference", "asset_id":"null"}, "special":{}}'
-				) . ', '
-				. $db->quote('AgosmsHelperRoute::getAgosmRoute') . ', '
-				. $db->quote(
-					'{"formFile":"administrator\\/components\\/com_agosms\\/models\\/forms\\/agosm.xml",
-					"hideFields":["asset_id","checked_out","checked_out_time","version","featured","images"], "ignoreChanges":["modified_by",
-					"modified", "checked_out", "checked_out_time", "version", "hits"], "convertToInt":["publish_up", "publish_down", "featured",
-					"ordering"], "displayLookup":[{"sourceColumn":"catid","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"},
-					{"sourceColumn":"created_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},
-					{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},
-					{"sourceColumn":"modified_by","targetTable":"#__users","targetColumn":"id","displayColumn":"name"} ]}'
-				)
+		// Select the admin user ID
+		$query
+			->clear()
+			->select($db->quoteName('u') . '.' . $db->quoteName('id'))
+			->from($db->quoteName('#__users', 'u'))
+			->join(
+				'LEFT',
+				$db->quoteName('#__user_usergroup_map', 'map')
+				. ' ON ' . $db->quoteName('map') . '.' . $db->quoteName('user_id')
+				. ' = ' . $db->quoteName('u') . '.' . $db->quoteName('id')
+			)
+			->join(
+				'LEFT',
+				$db->quoteName('#__usergroups', 'g')
+				. ' ON ' . $db->quoteName('map') . '.' . $db->quoteName('group_id')
+				. ' = ' . $db->quoteName('g') . '.' . $db->quoteName('id')
+			)
+			->where(
+				$db->quoteName('g') . '.' . $db->quoteName('title')
+				. ' = ' . $db->quote('Super Users')
 			);
 
-			$db->setQuery($query);
-			$db->execute();
-		}
+		$db->setQuery($query);
+		$id = $db->loadResult();
 
-		// If we have no type id for com_agosms.category insert it
-		if (!$categoryTypeId)
+		if (!$id || $id instanceof \Exception)
 		{
-			// Insert the data.
-			$query->clear();
-			$query->insert($db->quoteName('#__content_types'));
-			$query->columns($columnsArray);
-			$query->values(
-				$db->quote('Agosms Category') . ', '
-				. $db->quote('com_agosms.category') . ', '
-				. $db->quote('
-					{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},
-					"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}'
-				) . ', '
-				. $db->quote('') . ', '
-				. $db->quote('
-					{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias",
-					"core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description",
-					"core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access",
-					"core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language",
-					"core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey",
-					"core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"},
-					"special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}'
-				) . ', '
-				. $db->quote('AgosmsHelperRoute::getCategoryRoute') . ', '
-				. $db->quote('
-					{"formFile":"administrator\\/components\\/com_categories\\/models\\/forms\\/category.xml",
-					"hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"],
-					"ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version",
-					"hits", "path"],"convertToInt":["publish_up", "publish_down"],
-					"displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id",
-					"displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id",
-					"displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id",
-					"displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id",
-					"displayColumn":"title"}]}'
-				)
-			);
-
-			$db->setQuery($query);
-			$db->execute();
+			return false;
 		}
+
+		return $id;
 	}
 
 	/**
-	 * Method to drop colums from #__agosms if they still there.
+	 * Adding content_type for tags.
 	 *
-	 * @return  void
+	 * @return  integer|boolean  One Administrator ID.
 	 *
-	 * @since   1.0.40
+	 * @since   __BUMP_VERSION__
 	 */
-	private function dropColumnsIfNeeded()
+	private function saveContentTypes()
 	{
-		$oldColumns = array(
-			'sid',
-			'date',
-			'archived',
-			'approved',
-		);
+		$table = Table::getInstance('Contenttype', 'JTable');
 
-		$db    = JFactory::getDbo();
-		$table = $db->getTableColumns('#__agosms');
+		$table->load(array('type_alias' => 'com_agosms.agosm'));
 
-		$columns = array_intersect($oldColumns, array_keys($table));
+		$tablestring = '{
+			"special": {
+			  "dbtable": "#__contact_agosms",
+			  "key": "id",
+			  "type": "AgosmTable",
+			  "prefix": "Joomla\\\\Component\\\\Agosms\\\\Administrator\\\\Table\\\\",
+			  "config": "array()"
+			},
+			"common": {
+			  "dbtable": "#__ucm_content",
+			  "key": "ucm_id",
+			  "type": "Corecontent",
+			  "prefix": "JTable",
+			  "config": "array()"
+			}
+		  }';
 
-		foreach ($columns as $column)
-		{
-			$sql = 'ALTER TABLE ' . $db->quoteName('#__agosms') . ' DROP COLUMN ' . $db->quoteName($column);
-			$db->setQuery($sql);
-			$db->execute();
-		}
-	}
+		$fieldmapping = '{
+			"common": {
+			  "core_content_item_id": "id",
+			  "core_title": "name",
+			  "core_state": "published",
+			  "core_alias": "alias",
+			  "core_publish_up": "publish_up",
+			  "core_publish_down": "publish_down",
+			  "core_access": "access",
+			  "core_params": "params",
+			  "core_featured": "featured",
+			  "core_language": "language",
+			  "core_ordering": "ordering",
+			  "core_catid": "catid",
+			  "asset_id": "null"
+			},
+			"special": {
+			}
+		  }';
 
-	/**
-	 * Method to add colums from #__agosms if they are missing.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0.40
-	 */
-	private function addColumnsIfNeeded()
-	{
-		$db    = JFactory::getDbo();
-		$table = $db->getTableColumns('#__agosms');
+		$contenttype = array();
+		$contenttype['type_id'] = ($table->type_id) ? $table->type_id : 0;
+		$contenttype['type_title'] = 'Agosms';
+		$contenttype['type_alias'] = 'com_agosms.agosm';
+		$contenttype['table'] = $tablestring;
+		$contenttype['rules'] = '';
+		$contenttype['router'] = 'RouteHelper::getAgosmRoute';
+		$contenttype['field_mappings'] = $fieldmapping;
+		$contenttype['content_history_options'] = '';
 
-		if (!array_key_exists('version', $table))
-		{
-			$sql = 'ALTER TABLE ' . $db->quoteName('#__agosms') . ' ADD COLUMN ' . $db->quoteName('version') . " int(10) unsigned NOT NULL DEFAULT '1'";
-			$db->setQuery($sql);
-			$db->execute();
-		}
+		$table->save($contenttype);
 
-		if (!array_key_exists('images', $table))
-		{
-			$sql = 'ALTER TABLE ' . $db->quoteName('#__agosms') . ' ADD COLUMN ' . $db->quoteName('images') . ' text NOT NULL';
-			$db->setQuery($sql);
-			$db->execute();
-		}
+		return;
 	}
 }

@@ -60,7 +60,7 @@ foreach ($filters_tmp as $k => $filter)
 
 	if ($filter[0] == 'field')
 	{
-		$instance = new AgosmsSearchHelper();
+		$instance = new AgosmsSearchHelper;
 			$filters[$k]->id = $filter[1];
 
 		if ($filter[2] == "")
