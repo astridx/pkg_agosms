@@ -8,9 +8,9 @@
  * @link        astrid-guenther.de
  */
 
-namespace Joomla\Module\Agosmssearch\Site\Helper;
+namespace AG\Module\Agosmssearch\Site\Field;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Form\FormField;
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_agosms_search</name>
+	<author>Astrid Günther</author>
+	<creationDate>##DATE##</creationDate>
+	<copyright>(C) ##YEAR## Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later;</license>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>##VERSION##</version>
+	<description>MOD_AGOSMSSEARCH_XML_DESCRIPTION</description>
+	<namespace path="src">AG\Module\Agosmssearch</namespace>
+	<scriptfile>script.php</scriptfile>
+	
+	<!-- Front-end files -->
+	<files>
+		<file module="mod_agosms_search">mod_agosms_search.php</file>
+		##MODULE_FILES##
+	</files>
+	<languages folder="language">
+		##LANGUAGE_FILES##
+	</languages>
+	<!-- Media files -->
+	<media folder="media/mod_agosms_search" destination="mod_agosms_search">
+		##MEDIA_FILES##
+	</media>
+
+	<help key="JHELP_EXTENSIONS_MODULE_AGOSMSSEARCH_HELP"/>
+	<config>
+		<fields name="params">
+			<fieldset 
+				name="basic"
+				addfieldprefix="AG\Module\Agosmssearch\Site\Field"
+			>
+				<field 
+					name="restcat"
+					type="categoryselect" 
+					default="" 
+					label="MOD_AGOSMSSEARCHRESTRICTION_CAT_ID" 
+				/>
+			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="layout"
+					type="modulelayout"
+					label="JFIELD_ALT_LAYOUT_LABEL"
+					class="custom-select"
+				/>
+
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					rows="3"
+				/>
+
+				<field
+					name="cache"
+					type="list"
+					label="COM_MODULES_FIELD_CACHING_LABEL"
+
+					default="1"
+					filter="integer"
+				>
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field
+					name="cache_time"
+					type="number"
+					label="COM_MODULES_FIELD_CACHE_TIME_LABEL"
+					default="900"
+					filter="integer"
+				/>
+			</fieldset>
+		</fields>
+	</config>  
+</extension>

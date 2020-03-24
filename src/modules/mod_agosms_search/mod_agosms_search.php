@@ -11,7 +11,6 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Helper\ModuleHelper;
-use Joomla\Module\Agosmssearch\Site\Helper\AgosmsSearchHelper;
 use Joomla\CMS\Factory;
 
 $filters = $params->get('filters');
@@ -61,8 +60,8 @@ foreach ($filters_tmp as $k => $filter)
 
 	if ($filter[0] == 'field')
 	{
-		$instance = AgosmsSearchHelper::getCustomField($filter[1]);
-		$filters[$k]->id = $filter[1];
+		$instance = new AgosmsSearchHelper();
+			$filters[$k]->id = $filter[1];
 
 		if ($filter[2] == "")
 		{

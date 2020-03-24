@@ -8,7 +8,7 @@
  * @link        astrid-guenther.de
  */
 
-namespace Joomla\Module\Agosmssearch\Site\Helper;
+namespace AG\Module\Agosmssearch\Site\Helper;
 
 \defined('_JEXEC') or die;
 
