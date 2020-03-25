@@ -90,6 +90,64 @@
 
 				<field
 					type="list"
+					name="maxzoom"
+					default="19"
+					label="MOD_AGOSM_MAXZOOM"
+					description="MOD_AGOSM_ZOOM_DESC"
+					>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+				</field>
+
+				<field
+					type="list"
+					name="minzoom"
+					default="0"
+					label="MOD_AGOSM_MINZOOM"
+					description="MOD_AGOSM_ZOOM_DESC"
+					>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+				</field>
+
+				<field
+					type="list"
 					name="baselayer"
 					default="mapnik"
 					label="MOD_AGOSM_BASELAYER"
@@ -299,6 +357,18 @@
 					default="0"
 					label="MOD_AGOSM_ATTRMODULE"
 					description="MOD_AGOSM_ATTRMODULE_DESC"
+					>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					type="text"
+					name="astrid"
+					default="Module by Astrid Günther"
+					label="MOD_AGOSM_ATTRMODULETEXT"
+					description="MOD_AGOSM_ATTRMODULETEXT_DESC"
+					showon="attrModule:1"
 					>
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>

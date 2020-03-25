@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		console.log('here i am');
 
 		var savestate = element.getAttribute('data-savestate');
+		var astrid = element.getAttribute('data-astrid');
 		var fullscreen = element.getAttribute('data-fullscreen');
 		var locate = element.getAttribute('data-locate');
 		var mouseposition = element.getAttribute('data-mouseposition');
@@ -18,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		var baselayer = element.getAttribute('data-baselayer');
 		var lonlat = element.getAttribute('data-lonlat').split(",", 3);
 		var zoom = element.getAttribute('data-zoom');
+		var minZoom = element.getAttribute('data-minzoom');
+		var maxZoom = element.getAttribute('data-maxzoom');
 		var mapboxkey = element.getAttribute('data-mapboxkey');
 		var thunderforestkey = element.getAttribute('data-thunderforestkey');
 		var stamenmaptype = element.getAttribute('data-stamenmaptype');
@@ -179,10 +182,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Base layer url
-		var astrid = '';
 		if (attrModule === '1')
 		{
-			astrid = ' ' + Joomla.JText._('MOD_AGOSM_MODULE_BY') + ' <a href="https://www.astrid-guenther.de">Astrid Günther</a>';
+			astrid = astrid;
 		}
 		var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,
@@ -262,6 +264,14 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 		}
 
+		if (tileLayer.maxZoom > maxZoom) {
+			tileLayer.maxZoom = maxZoom;
+		}
+		
+		if (tileLayer.minZoom < minZoom) {
+			tileLayer.minZoom = minZoom;
+		}
+		
 		tileLayer.addTo(window['mymap' + moduleId]);
 
 		// SCALE CONTROL
