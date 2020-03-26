@@ -21,6 +21,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		var zoom = element.getAttribute('data-zoom');
 		var minZoom = element.getAttribute('data-minzoom');
 		var maxZoom = element.getAttribute('data-maxzoom');
+		var maxboundswest = element.getAttribute('data-maxboundswest');
+		var maxboundseast = element.getAttribute('data-maxboundseast');
+		var maxboundsnorth = element.getAttribute('data-maxboundsnorth');
+		var maxboundssouth = element.getAttribute('data-maxboundssouth');
 		var mapboxkey = element.getAttribute('data-mapboxkey');
 		var thunderforestkey = element.getAttribute('data-thunderforestkey');
 		var stamenmaptype = element.getAttribute('data-stamenmaptype');
@@ -94,25 +98,25 @@ document.addEventListener('DOMContentLoaded', function () {
 			zoom = mapState.zoom;
 			lonlat = mapState.center;
 		}
-
+		
 		// Default: worldCopyJump: false && scrollWheelZoom: true
 		if (noWorldWarp === "1" && scrollwheelzoom === "0")
 		{
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 				scrollWheelZoom: false,
 				worldCopyJump: false,
-				maxBounds: [[82, -180], [-82, 180]]
+				maxBounds: [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]]
 			}).setView(lonlat, zoom);
 		} else if (noWorldWarp === "1" && scrollwheelzoom === "1") {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 				worldCopyJump: false,
-				maxBounds: [[82, -180], [-82, 180]]
+				maxBounds: [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]]
 			}).setView(lonlat, zoom);
 		} else if (noWorldWarp === "1" && scrollwheelzoom === "2") {
 			if (owngooglegesturetext === "1") {
 				window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 					worldCopyJump: false,
-					maxBounds: [[82, -180], [-82, 180]],
+					maxBounds: [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]],
 					gestureHandling: true,
 					gestureHandlingText: {
 						touch: touch,
@@ -124,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			{
 				window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 					worldCopyJump: false,
-					maxBounds: [[82, -180], [-82, 180]],
+					maxBounds: [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]],
 					gestureHandling: true
 				}).setView(lonlat, zoom);
 			}
