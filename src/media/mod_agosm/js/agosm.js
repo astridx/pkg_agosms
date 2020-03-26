@@ -191,6 +191,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			astrid = astrid;
 		}
+		console.log(maxZoom);
+
+		window['mymap' + moduleId].options.maxZoom = maxZoom;
+		window['mymap' + moduleId].options.minZoom = minZoom;
 
 		// TILELAYER IF NO TREE
 		if (showlayertreefrontend === '0')
@@ -271,14 +275,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					apikey: thunderforestkey,
 					attribution: '&copy; <a href=\"http://www.thunderforest.com/\">Thunderforest</a>, &copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>'
 				});
-			}
-
-			if (tileLayer.maxZoom > maxZoom) {
-				tileLayer.maxZoom = maxZoom;
-			}
-
-			if (tileLayer.minZoom < minZoom) {
-				tileLayer.minZoom = minZoom;
 			}
 
 			tileLayer.addTo(window['mymap' + moduleId]);
@@ -441,7 +437,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			lay.addTo(window['mymap' + moduleId]).collapseTree().expandSelected().collapseTree(true);
 			
-			console.log('layertree');
+			
 			
 			
 			
