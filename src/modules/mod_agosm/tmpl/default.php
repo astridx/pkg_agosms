@@ -112,6 +112,9 @@ $defaultArray = [];
 	data-touch='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_TOUCH'); ?>'
 	data-scrollmac='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'); ?>'
 	data-uriroot='<?php echo JUri::root(); ?>'
+
+	data-layertreebase='<?php echo json_encode($params->get('layertreebase', '')); ?>'
+	data-layertreesvgoverlay='<?php echo json_encode($params->get('layertreesvgoverlay', '')); ?>'
 	
 	class="leafletmapMod"
 	id="map<?php echo $module->id; ?>">

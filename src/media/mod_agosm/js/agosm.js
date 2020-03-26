@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	var leafletmapsMod = document.querySelectorAll('.leafletmapMod');
 
 	[].forEach.call(leafletmapsMod, function (element) {
-		
-		console.log('here i am');
 
 		var savestate = element.getAttribute('data-savestate');
 		var showlayertreefrontend = element.getAttribute('data-showlayertreefrontend');
@@ -92,6 +90,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		var scrollmac = element.getAttribute('data-scrollmac');
 		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
 
+		var layertreebase = JSON.parse(element.getAttribute('data-layertreebase'));
+		var layertreesvgoverlay = JSON.parse(element.getAttribute('data-layertreesvgoverlay'));
+
 		// Fetch the States
 		if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1")
 		{
@@ -99,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			zoom = mapState.zoom;
 			lonlat = mapState.center;
 		}
-		
+
 		// Default: worldCopyJump: false && scrollWheelZoom: true
 		if (noWorldWarp === "1" && scrollwheelzoom === "0")
 		{
@@ -191,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			astrid = astrid;
 		}
-		console.log(maxZoom);
 
 		window['mymap' + moduleId].options.maxZoom = maxZoom;
 		window['mymap' + moduleId].options.minZoom = minZoom;
@@ -281,72 +281,37 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// TILELAYER IF YES TREE
+		console.log(layertreebase);
+		//console.log(layertreesvgoverlay);
+
+
 		if (showlayertreefrontend === '1')
 		{
-
-			
-			var tiles = L.tileLayer(
-				'./tiles/{z}/{x}/{y}.png',
-				{attribution: '<a href="http://www.werbeagentur-smile.de/">werbeagentur-smile.de</a>',
-					opacity: 1
+			var baseTree = [];
+			var osm;
+			Object.keys(layertreebase).forEach(function (key, index) {
+				
+				layertreebase[key].tilelayer = L.tileLayer(
+					layertreebase[key].baselayerurl,
+					{attribution: layertreebase[key].attribution,
+						opacity: layertreebase[key].opacity / 100,
+					}
+				);
+				if (index == 0) {
+					osm = layertreebase[key].tilelayer;
 				}
-			);
+				layertreebase[key].basetreeentry = {
+					label: layertreebase[key].baselayername,
+					layer: layertreebase[key].tilelayer,					
+				}
+				baseTree.push(layertreebase[key].basetreeentry);
+				console.log(layertreebase[key].tilelayer);
 
-			var osm = L.tileLayer(
-				'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-				{attribution: '© OpenStreetMap contributors',
-					opacity: 0.3, }
-			);
+			});
 
-			var osmBw = L.tileLayer(
-				'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
-				{attribution: '© OpenStreetMap contributors',
-					opacity: 0.3, }
-			);
-
-			var otopomap = L.tileLayer(
-				'http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-				{attribution: '© OpenStreetMap contributors. OpenTopoMap.org',
-					opacity: 0.3, }
-			);
-
-			var thunderAttr = {attribution: '© OpenStreetMap contributors. Tiles courtesy of Andy Allan',
-				opacity: 0.3}
-			var transport = L.tileLayer(
-				'http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png',
-				thunderAttr
-				);
-
-			var cycle = L.tileLayer(
-				'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png',
-				thunderAttr
-				);
-			
-			
 			osm.addTo(window['mymap' + moduleId]);
-			
-			var baseTree = [
-				{
-					label: 'Eigene Tiles',
-					layer: osm	
-				},
-				{
-					label: 'OpenStreeMap',
-					layer: osm,
-					children: [
-						{label: 'B&W', layer: osmBw, name: 'OpenStreeMap <b>B&W</b>'},
-						{label: 'OpenTopoMap', layer: otopomap, name: 'Topographic - OSM'},
-					]
-				},
-				{
-					label: 'Thunder',
-					children: [
-						{label: 'Cycle', layer: cycle},
-						{label: 'Transport', layer: transport},
-					]
-				},
-			];
-			
+
+
 
 
 			var overlaysTree = {
@@ -423,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				]
 			}
 
-			
+
 			var lay = L.control.layers.tree(baseTree, overlaysTree,
 				{
 					namedToggle: true,
@@ -436,16 +401,16 @@ document.addEventListener('DOMContentLoaded', function () {
 				});
 
 			lay.addTo(window['mymap' + moduleId]).collapseTree().expandSelected().collapseTree(true);
-			
-			
-			
-			
-			
-			
-			
-		
+
+
+
+
+
+
+
+
 		}
-		
+
 		// SCALE CONTROL
 		if ((scale) !== '0')
 		{
@@ -792,13 +757,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		if (!String.prototype.startsWith) {
-			   String.prototype.startsWith = function(searchString, position){
-				 position = position || 0;
-				 return this.substr(position, searchString.length) === searchString;
-			 };
+			String.prototype.startsWith = function (searchString, position) {
+				position = position || 0;
+				return this.substr(position, searchString.length) === searchString;
+			};
 		}
 		// Show Pins from customfield
-		console.log('showcustomfieldpin' + showcustomfieldpin);
 		if (showcustomfieldpin === '1')
 		{
 			var clustermarkers = L.markerClusterGroup();

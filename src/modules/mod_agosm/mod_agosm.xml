@@ -202,10 +202,16 @@
 					>
 					<form>
 						<field
-							name="baselayerurl"
+							name="baselayername"
 							type="text"
 							label="MOD_AGOSM_LAYERTREEBASE_LAYERNAME"
 							description="MOD_AGOSM_LAYERTREEBASE_LAYERNAME_DESC"
+						/>
+						<field
+							name="baselayerurl"
+							type="text"
+							label="MOD_AGOSM_LAYERTREEBASE_LAYERURL"
+							description="MOD_AGOSM_LAYERTREEBASE_LAYERURL_DESC"
 						/>
 						<field
 							name="attribution"
@@ -215,7 +221,11 @@
 						/>
 						<field
 							name="opacity"
-							type="number"
+							type="integer"
+							first="1" 
+							last="100" 
+							step="1"
+							default="100"
 							label="MOD_AGOSM_LAYERTREEBASE_OPACITY"
 							description="MOD_AGOSM_LAYERTREEBASE_LAYERNAME_DESC"
 						/>
@@ -240,7 +250,7 @@
 						<form>
 							<field
 								name="svglayer"
-								type="filelist"
+								type="text"
 								label="MOD_AGOSM_LAYERTREEBASE_SVGNAME"
 								directory="images"
 							/>
@@ -252,7 +262,11 @@
 							/>
 							<field
 								name="opacity"
-								type="number"
+								type="integer"
+								first="1" 
+								last="100" 
+								step="1"
+								default="100"
 								label="MOD_AGOSM_LAYERTREEBASE_SVGNAME"
 								directory="images"
 							/>
