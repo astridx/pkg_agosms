@@ -202,9 +202,22 @@
 					>
 					<form>
 						<field
-							name="baselayer"
+							name="baselayerurl"
 							type="text"
 							label="MOD_AGOSM_LAYERTREEBASE_LAYERNAME"
+							description="MOD_AGOSM_LAYERTREEBASE_LAYERNAME_DESC"
+						/>
+						<field
+							name="attribution"
+							type="text"
+							label="MOD_AGOSM_LAYERTREEBASE_ATTRIBUTION"
+							description="MOD_AGOSM_LAYERTREEBASE_LAYERNAME_DESC"
+						/>
+						<field
+							name="opacity"
+							type="number"
+							label="MOD_AGOSM_LAYERTREEBASE_OPACITY"
+							description="MOD_AGOSM_LAYERTREEBASE_LAYERNAME_DESC"
 						/>
 					</form>
 				</field>
@@ -217,12 +230,34 @@
 					showon="showlayertreefrontend:1"
 					>
 					<form>
-						<field
-							name="svglayer"
-							type="filelist"
-							label="MOD_AGOSM_LAYERTREEBASE_SVGNAME"
-							directory="images"
-						/>
+					<field
+						name="layertreesvgoverlayinner"
+						type="subform"
+						label="MOD_AGOSM_LAYERTREESVGOVERLAY"
+						multiple="true"
+						showon="showlayertreefrontend:1"
+						>
+						<form>
+							<field
+								name="svglayer"
+								type="filelist"
+								label="MOD_AGOSM_LAYERTREEBASE_SVGNAME"
+								directory="images"
+							/>
+							<field
+								name="attribution"
+								type="text"
+								label="MOD_AGOSM_LAYERTREEBASE_SVGNAME"
+								directory="images"
+							/>
+							<field
+								name="opacity"
+								type="number"
+								label="MOD_AGOSM_LAYERTREEBASE_SVGNAME"
+								directory="images"
+							/>
+						</form>
+						</field>
 					</form>
 				</field>
 
