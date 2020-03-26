@@ -129,5 +129,11 @@ if ($params->get('spacermouseposition', '1') == 1)
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.js');
 }
 
+if ($params->get('showlayertreefrontend', '1') == 1)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/L.Control.Layer.Tree/L.Control.Layers.Tree.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/L.Control.Layer.Tree/L.Control.Layers.Tree.js');
+}
+
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/agosms.css');
 require JModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));

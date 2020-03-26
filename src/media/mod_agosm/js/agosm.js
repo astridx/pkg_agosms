@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		console.log('here i am');
 
 		var savestate = element.getAttribute('data-savestate');
+		var showlayertreefrontend = element.getAttribute('data-showlayertreefrontend');
 		var astrid = element.getAttribute('data-astrid');
 		var fullscreen = element.getAttribute('data-fullscreen');
 		var locate = element.getAttribute('data-locate');
@@ -190,94 +191,265 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			astrid = astrid;
 		}
-		var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			maxZoom: 18,
-			attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
-		});
-		if (baselayer === 'mapbox')
+
+		// TILELAYER IF NO TREE
+		if (showlayertreefrontend === '0')
 		{
-			tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey, {
+			var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				maxZoom: 18,
-				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
-					'<a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
-					'Imagery © <a href=\"https://mapbox.com\">Mapbox</a>' + astrid,
-				id: mapboxmaptype
+				attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
 			});
-		}
-		if (baselayer === 'mapnikde')
-		{
-			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
-				maxZoom: 18,
-				attribution: '&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
-			});
-		}
-		if (baselayer === 'stamen')
-		{
-			tileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/' + stamenmaptype + '/{z}/{x}/{y}.png', {
-				subdomains: 'abcd', minZoom: 1, maxZoom: 16,
-				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
-					'<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-					'Imagery &copy; <a href=\"http://stamen.com\">Stamen Design</a>' + astrid,
-				id: ''
-			});
-		}
-		if (baselayer === 'opentopomap')
-		{
-			tileLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-				maxZoom: 16,
-				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-					'Imagery &copy; <a href=\"http://viewfinderpanoramas.org\">SRTM</a>' + astrid,
-				id: ''
-			});
-		}
-		if (baselayer === 'openmapsurfer')
-		{
-			tileLayer = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
-				maxZoom: 20,
-				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-					'Imagery &copy; <a href=\"http://giscience.uni-hd.de\">GIScience Research Group</a>' + astrid,
-				id: ''
-			});
-		}
-		if (baselayer === 'humanitarian')
-		{
-			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-				maxZoom: 20,
-				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-					'Imagery &copy; <a href=\"https://hotosm.org\">Humanitarian OpenStreetMap Team</a>' + astrid,
-				id: ''
-			});
-		}
-		if (baselayer === 'custom')
-		{
-			//tileLayer = L.tileLayer(customBaselayerURL, {customBaselayer});
-		}
-		if (baselayer === 'google')
-		{
-			tileLayer = L.gridLayer.googleMutant({
-				type: googlemapstype,
-				attribution: astrid
-			});
-		}
-		if (baselayer === 'thunderforest')
-		{
-			tileLayer = L.tileLayer('https://{s}.tile.thunderforest.com/' + thunderforestmaptype + '/{z}/{x}/{y}.png?apikey={apikey}', {
-				maxZoom: 22,
-				apikey: thunderforestkey,
-				attribution: '&copy; <a href=\"http://www.thunderforest.com/\">Thunderforest</a>, &copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>'
-			});
+			if (baselayer === 'mapbox')
+			{
+				tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey, {
+					maxZoom: 18,
+					attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
+						'<a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
+						'Imagery © <a href=\"https://mapbox.com\">Mapbox</a>' + astrid,
+					id: mapboxmaptype
+				});
+			}
+			if (baselayer === 'mapnikde')
+			{
+				tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+					maxZoom: 18,
+					attribution: '&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
+				});
+			}
+			if (baselayer === 'stamen')
+			{
+				tileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/' + stamenmaptype + '/{z}/{x}/{y}.png', {
+					subdomains: 'abcd', minZoom: 1, maxZoom: 16,
+					attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
+						'<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
+						'Imagery &copy; <a href=\"http://stamen.com\">Stamen Design</a>' + astrid,
+					id: ''
+				});
+			}
+			if (baselayer === 'opentopomap')
+			{
+				tileLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+					maxZoom: 16,
+					attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
+						'Imagery &copy; <a href=\"http://viewfinderpanoramas.org\">SRTM</a>' + astrid,
+					id: ''
+				});
+			}
+			if (baselayer === 'openmapsurfer')
+			{
+				tileLayer = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
+					maxZoom: 20,
+					attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
+						'Imagery &copy; <a href=\"http://giscience.uni-hd.de\">GIScience Research Group</a>' + astrid,
+					id: ''
+				});
+			}
+			if (baselayer === 'humanitarian')
+			{
+				tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+					maxZoom: 20,
+					attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
+						'Imagery &copy; <a href=\"https://hotosm.org\">Humanitarian OpenStreetMap Team</a>' + astrid,
+					id: ''
+				});
+			}
+			if (baselayer === 'custom')
+			{
+				//tileLayer = L.tileLayer(customBaselayerURL, {customBaselayer});
+			}
+			if (baselayer === 'google')
+			{
+				tileLayer = L.gridLayer.googleMutant({
+					type: googlemapstype,
+					attribution: astrid
+				});
+			}
+			if (baselayer === 'thunderforest')
+			{
+				tileLayer = L.tileLayer('https://{s}.tile.thunderforest.com/' + thunderforestmaptype + '/{z}/{x}/{y}.png?apikey={apikey}', {
+					maxZoom: 22,
+					apikey: thunderforestkey,
+					attribution: '&copy; <a href=\"http://www.thunderforest.com/\">Thunderforest</a>, &copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>'
+				});
+			}
+
+			if (tileLayer.maxZoom > maxZoom) {
+				tileLayer.maxZoom = maxZoom;
+			}
+
+			if (tileLayer.minZoom < minZoom) {
+				tileLayer.minZoom = minZoom;
+			}
+
+			tileLayer.addTo(window['mymap' + moduleId]);
 		}
 
-		if (tileLayer.maxZoom > maxZoom) {
-			tileLayer.maxZoom = maxZoom;
-		}
-		
-		if (tileLayer.minZoom < minZoom) {
-			tileLayer.minZoom = minZoom;
-		}
-		
-		tileLayer.addTo(window['mymap' + moduleId]);
+		// TILELAYER IF YES TREE
+		if (showlayertreefrontend === '1')
+		{
 
+			
+			var tiles = L.tileLayer(
+				'./tiles/{z}/{x}/{y}.png',
+				{attribution: '<a href="http://www.werbeagentur-smile.de/">werbeagentur-smile.de</a>',
+					opacity: 1
+				}
+			);
+
+			var osm = L.tileLayer(
+				'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+				{attribution: '© OpenStreetMap contributors',
+					opacity: 0.3, }
+			);
+
+			var osmBw = L.tileLayer(
+				'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
+				{attribution: '© OpenStreetMap contributors',
+					opacity: 0.3, }
+			);
+
+			var otopomap = L.tileLayer(
+				'http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+				{attribution: '© OpenStreetMap contributors. OpenTopoMap.org',
+					opacity: 0.3, }
+			);
+
+			var thunderAttr = {attribution: '© OpenStreetMap contributors. Tiles courtesy of Andy Allan',
+				opacity: 0.3}
+			var transport = L.tileLayer(
+				'http://{s}.tile.thunderforest.com/transport/{z}/{x}/{y}.png',
+				thunderAttr
+				);
+
+			var cycle = L.tileLayer(
+				'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png',
+				thunderAttr
+				);
+			
+			
+			osm.addTo(window['mymap' + moduleId]);
+			
+			var baseTree = [
+				{
+					label: 'Eigene Tiles',
+					layer: osm	
+				},
+				{
+					label: 'OpenStreeMap',
+					layer: osm,
+					children: [
+						{label: 'B&W', layer: osmBw, name: 'OpenStreeMap <b>B&W</b>'},
+						{label: 'OpenTopoMap', layer: otopomap, name: 'Topographic - OSM'},
+					]
+				},
+				{
+					label: 'Thunder',
+					children: [
+						{label: 'Cycle', layer: cycle},
+						{label: 'Transport', layer: transport},
+					]
+				},
+			];
+			
+
+
+			var overlaysTree = {
+				label: 'Linien',
+				selectAllCheckbox: 'Un/select all',
+				children: [
+					{
+						label: 'NE',
+						selectAllCheckbox: true,
+						children: [
+							{
+								label: 'Neue SVG-Dateien',
+								selectAllCheckbox: true,
+								children: [
+									{label: '159', layer: L.imageOverlay('159.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: '344', layer: L.imageOverlay('344.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: '345', layer: L.imageOverlay('345.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: '353', layer: L.imageOverlay('353.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: '355', layer: L.imageOverlay('355.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: '365', layer: L.imageOverlay('365.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+								]
+							}, {
+								label: 'Unterpunkt 1',
+								selectAllCheckbox: true,
+								children: [
+									{label: '302_305_310', layer: L.imageOverlay('302_305_310.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: '306_3016', layer: L.imageOverlay('306_3016.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: '308_318', layer: L.imageOverlay('308_318.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne9', layer: L.imageOverlay('ne9.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 't51', layer: L.imageOverlay('t51.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'u35', layer: L.imageOverlay('u35.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+								]
+							}, {
+								label: 'Unterpunkt 2',
+								selectAllCheckbox: true,
+								children: [
+									{label: 'ne1', layer: L.imageOverlay('ne1.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne10', layer: L.imageOverlay('ne10.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne4', layer: L.imageOverlay('ne4.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne40', layer: L.imageOverlay('ne40.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne5', layer: L.imageOverlay('ne5.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne6', layer: L.imageOverlay('ne6.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne7', layer: L.imageOverlay('ne7.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne8', layer: L.imageOverlay('ne8.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+								]
+							}, {label: 'Unterpunkt 3',
+								selectAllCheckbox: 'De/seleccionar todo',
+								children: [
+									{label: 'ne12', layer: L.imageOverlay('ne12.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne13', layer: L.imageOverlay('ne13.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne17', layer: L.imageOverlay('ne17.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne18', layer: L.imageOverlay('ne18.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne2', layer: L.imageOverlay('ne2.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne3', layer: L.imageOverlay('ne3.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne32', layer: L.imageOverlay('ne32.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'ne34', layer: L.imageOverlay('ne34.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+								]
+							}
+						]
+					}, {
+						label: 'Umgebung',
+						selectAllCheckbox: true,
+						children: [
+							{
+								label: 'Umriss und Straßen',
+								selectAllCheckbox: true,
+								children: [
+									{label: 'Straßen', layer: L.imageOverlay('fürPNGReferenzierung.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
+									{label: 'Umriss Bochum', layer: L.imageOverlay('umriss_bochum.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])}
+								]
+							}
+						]
+					}
+				]
+			}
+
+			
+			var lay = L.control.layers.tree(baseTree, overlaysTree,
+				{
+					namedToggle: true,
+					selectorBack: false,
+					closedSymbol: '&#8862; &#x1f5c0;',
+					openedSymbol: '&#8863; &#x1f5c1;',
+					collapseAll: 'Collapse all',
+					expandAll: 'Expand all',
+					collapsed: false,
+				});
+
+			lay.addTo(window['mymap' + moduleId]).collapseTree().expandSelected().collapseTree(true);
+			
+			console.log('layertree');
+			
+			
+			
+			
+			
+		
+		}
+		
 		// SCALE CONTROL
 		if ((scale) !== '0')
 		{

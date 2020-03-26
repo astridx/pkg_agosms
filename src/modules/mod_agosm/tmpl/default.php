@@ -23,6 +23,7 @@ $defaultArray = [];
 	data-lonlat="<?php echo $params->get('lonlat', '50.281168, 7.276211'); ?>"
 	data-savestate="<?php echo $params->get('savestate', false); ?>"
 	data-astrid="<?php echo $params->get('astrid', 'Module by Astrid Günther'); ?>"
+	data-showlayertreefrontend="<?php echo $params->get('showlayertreefrontend', 0); ?>"
 	data-zoom="<?php echo $params->get('zoom', '14'); ?>"
 	data-minzoom="<?php echo $params->get('minzoom', '13'); ?>"
 	data-maxzoom="<?php echo $params->get('maxzoom', '15'); ?>"
