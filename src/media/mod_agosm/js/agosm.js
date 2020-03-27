@@ -321,6 +321,11 @@ document.addEventListener('DOMContentLoaded', function () {
 						console.log(layertreesvgoverlay[key][key2][key3]);
 						if (typeof layertreesvgoverlay[key][key2][key3] === 'object' && layertreesvgoverlay[key][key2][key3] !== null)
 						{
+							if (layertreesvgoverlay[key][key2][key3].svglayer){
+								layertreesvgoverlay[key][key2][key3].svglayer =
+									uriroot + '/images/' + layertreesvgoverlay[key][key2][key3].svglayer;
+								console.log(layertreesvgoverlay[key][key2][key3].svglayer);
+							}
 							layertreesvgoverlay[key][key2][key3].imageoverlay = {
 								label: layertreesvgoverlay[key][key2][key3].svglayername,
 								layer: L.imageOverlay(layertreesvgoverlay[key][key2][key3].svglayer,
