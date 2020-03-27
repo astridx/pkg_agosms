@@ -289,7 +289,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				
 				if (layertreebase[key].baselayerurl.startsWith("images")) {
 					layertreebase[key].baselayerurl = uriroot + layertreebase[key].baselayerurl;
-					console.log(layertreebase[key].baselayerurl);
 				}
 				// uriroot
 				layertreebase[key].tilelayer = L.tileLayer(
@@ -306,28 +305,30 @@ document.addEventListener('DOMContentLoaded', function () {
 					layer: layertreebase[key].tilelayer,					
 				}
 				baseTree.push(layertreebase[key].basetreeentry);
-				console.log(layertreebase[key].tilelayer);
 
 			});
 
 			osm.addTo(window['mymap' + moduleId]);
 
 			console.log(layertreesvgoverlay);
-
-
+			var layerTreeChildren = [];
+			var layerTreeGrandchild = [];
+			Object.keys(layertreesvgoverlay).forEach(function (key, index) {
+				
+				layertreesvgoverlay[key].children = {
+					label: layertreesvgoverlay[key].layertreesvgoverlayname,
+					selectAllCheckbox: true,
+					children: layerTreeGrandchild
+				
+				},
+				layerTreeChildren.push(layertreesvgoverlay[key].children);
+				console.log(layertreesvgoverlay[key]);
+			});
 
 			var overlaysTree = {
 				label: '',
 				selectAllCheckbox: 'Un/select all',
-				children: [
-					{
-						label: 'NE',
-						selectAllCheckbox: true,
-						children: [
-							{label: '302_305_310', layer: L.imageOverlay('302_305_310.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},							
-						]
-					}
-				]
+				children: layerTreeChildren
 			}
 
 			var lay = L.control.layers.tree(baseTree, overlaysTree,
