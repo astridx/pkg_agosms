@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			var baseTree = [];
 			var osm;
 			Object.keys(layertreebase).forEach(function (key, index) {
-				
+
 				if (layertreebase[key].baselayerurl.startsWith("images")) {
 					layertreebase[key].baselayerurl = uriroot + layertreebase[key].baselayerurl;
 				}
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 				layertreebase[key].basetreeentry = {
 					label: layertreebase[key].baselayername,
-					layer: layertreebase[key].tilelayer,					
+					layer: layertreebase[key].tilelayer,
 				}
 				baseTree.push(layertreebase[key].basetreeentry);
 
@@ -310,19 +310,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			osm.addTo(window['mymap' + moduleId]);
 
-			console.log(layertreesvgoverlay);
+//			console.log(layertreesvgoverlay);
+
 			var layerTreeChildren = [];
-			var layerTreeGrandchild = [];
-			Object.keys(layertreesvgoverlay).forEach(function (key, index) {
-				
+			Object.keys(layertreesvgoverlay).forEach(function (key) {
+
+				var layerTreeGrandchilds = [];
+				Object.keys(layertreesvgoverlay[key]).forEach(function (key2) {
+					Object.keys(layertreesvgoverlay[key][key2]).forEach(function (key3) {
+						console.log(layertreesvgoverlay[key][key2][key3]);
+						if (typeof layertreesvgoverlay[key][key2][key3] === 'object' && layertreesvgoverlay[key][key2][key3] !== null)
+						{
+							layertreesvgoverlay[key][key2][key3].imageoverlay = {
+								label: layertreesvgoverlay[key][key2][key3].svglayername,
+								layer: L.imageOverlay(layertreesvgoverlay[key][key2][key3].svglayer,
+									[[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]],
+									{opacity: layertreesvgoverlay[key][key2][key3].opacity / 100, attribution: layertreesvgoverlay[key][key2][key3].attribution})
+							},
+								layerTreeGrandchilds.push(layertreesvgoverlay[key][key2][key3].imageoverlay);
+						}
+					});
+
+
+				});
+				console.log(layerTreeGrandchilds);
+
 				layertreesvgoverlay[key].children = {
 					label: layertreesvgoverlay[key].layertreesvgoverlayname,
 					selectAllCheckbox: true,
-					children: layerTreeGrandchild
-				
+					children: layerTreeGrandchilds
+
 				},
-				layerTreeChildren.push(layertreesvgoverlay[key].children);
-				console.log(layertreesvgoverlay[key]);
+					layerTreeChildren.push(layertreesvgoverlay[key].children);
 			});
 
 			var overlaysTree = {

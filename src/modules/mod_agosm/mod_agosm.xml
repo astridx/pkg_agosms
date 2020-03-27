@@ -255,6 +255,11 @@
 						>
 							<form>
 								<field
+									name="svglayername"
+									type="text"
+									label="MOD_AGOSM_LAYERTREESVGOVERLAY_SUBFFORM_SVGLAYERNAME"
+								/>
+								<field
 									name="svglayer"
 									type="filelist"
 									label="MOD_AGOSM_LAYERTREESVGOVERLAY_SUBFFORM_SVGLAYER"
