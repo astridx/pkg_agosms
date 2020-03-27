@@ -287,6 +287,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			var osm;
 			Object.keys(layertreebase).forEach(function (key, index) {
 				
+				if (layertreebase[key].baselayerurl.startsWith("images")) {
+					layertreebase[key].baselayerurl = uriroot + layertreebase[key].baselayerurl;
+					console.log(layertreebase[key].baselayerurl);
+				}
+				// uriroot
 				layertreebase[key].tilelayer = L.tileLayer(
 					layertreebase[key].baselayerurl,
 					{attribution: layertreebase[key].attribution,
