@@ -281,10 +281,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// TILELAYER IF YES TREE
-		console.log(layertreebase);
-		//console.log(layertreesvgoverlay);
-
-
 		if (showlayertreefrontend === '1')
 		{
 			var baseTree = [];
@@ -311,83 +307,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			osm.addTo(window['mymap' + moduleId]);
 
+			console.log(layertreesvgoverlay);
 
 
 
 			var overlaysTree = {
-				label: 'Linien',
+				label: '',
 				selectAllCheckbox: 'Un/select all',
 				children: [
 					{
 						label: 'NE',
 						selectAllCheckbox: true,
 						children: [
-							{
-								label: 'Neue SVG-Dateien',
-								selectAllCheckbox: true,
-								children: [
-									{label: '159', layer: L.imageOverlay('159.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: '344', layer: L.imageOverlay('344.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: '345', layer: L.imageOverlay('345.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: '353', layer: L.imageOverlay('353.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: '355', layer: L.imageOverlay('355.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: '365', layer: L.imageOverlay('365.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-								]
-							}, {
-								label: 'Unterpunkt 1',
-								selectAllCheckbox: true,
-								children: [
-									{label: '302_305_310', layer: L.imageOverlay('302_305_310.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: '306_3016', layer: L.imageOverlay('306_3016.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: '308_318', layer: L.imageOverlay('308_318.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne9', layer: L.imageOverlay('ne9.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 't51', layer: L.imageOverlay('t51.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'u35', layer: L.imageOverlay('u35.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-								]
-							}, {
-								label: 'Unterpunkt 2',
-								selectAllCheckbox: true,
-								children: [
-									{label: 'ne1', layer: L.imageOverlay('ne1.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne10', layer: L.imageOverlay('ne10.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne4', layer: L.imageOverlay('ne4.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne40', layer: L.imageOverlay('ne40.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne5', layer: L.imageOverlay('ne5.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne6', layer: L.imageOverlay('ne6.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne7', layer: L.imageOverlay('ne7.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne8', layer: L.imageOverlay('ne8.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-								]
-							}, {label: 'Unterpunkt 3',
-								selectAllCheckbox: 'De/seleccionar todo',
-								children: [
-									{label: 'ne12', layer: L.imageOverlay('ne12.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne13', layer: L.imageOverlay('ne13.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne17', layer: L.imageOverlay('ne17.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne18', layer: L.imageOverlay('ne18.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne2', layer: L.imageOverlay('ne2.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne3', layer: L.imageOverlay('ne3.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne32', layer: L.imageOverlay('ne32.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'ne34', layer: L.imageOverlay('ne34.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-								]
-							}
-						]
-					}, {
-						label: 'Umgebung',
-						selectAllCheckbox: true,
-						children: [
-							{
-								label: 'Umriss und Straßen',
-								selectAllCheckbox: true,
-								children: [
-									{label: 'Straßen', layer: L.imageOverlay('fürPNGReferenzierung.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},
-									{label: 'Umriss Bochum', layer: L.imageOverlay('umriss_bochum.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])}
-								]
-							}
+							{label: '302_305_310', layer: L.imageOverlay('302_305_310.svg', [[maxboundssouth, maxboundswest], [maxboundsnorth, maxboundseast]])},							
 						]
 					}
 				]
 			}
-
 
 			var lay = L.control.layers.tree(baseTree, overlaysTree,
 				{
