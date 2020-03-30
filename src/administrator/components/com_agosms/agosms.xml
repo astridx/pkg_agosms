@@ -26,15 +26,13 @@
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
 	</update>
-	<!-- Frond-end files -->
+	<media folder="media/com_agosms" destination="com_agosms">
+		##MEDIA_FILES##
+	</media>
+
 	<files folder="components/com_agosms">
-		<folder>language</folder>
-		<folder>src</folder>
-		<folder>tmpl</folder>
+		##FRONTEND_COMPONENT_FILES##
 	</files>
-    <media folder="media/com_agosms" destination="com_agosms">
-		<folder>js</folder>
-    </media>
 	<!-- Back-end files -->
 	<administration>
 		<menu img="class:comment">
@@ -61,15 +59,7 @@
 			</menu>
 		</submenu>
 		<files folder="administrator/components/com_agosms">
-			<filename>access.xml</filename>
-			<filename>agosms.xml</filename>
-			<filename>config.xml</filename>
-			<folder>forms</folder>
-			<folder>language</folder>
-			<folder>services</folder>
-			<folder>sql</folder>
-			<folder>src</folder>
-			<folder>tmpl</folder>
+			##BACKEND_COMPONENT_FILES##
 		</files>
 	</administration>
 	<api>
