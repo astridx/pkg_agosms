@@ -192,6 +192,13 @@ should be shown.
 
 # Options
 
+# Fahrpläne
+1. Install this Extension
+2. Add it to an Position
+3. Allow SVG in Media Manager
+4. Tiles und Overlays hochladen
+5. 
+
 
 
 # All parts of this extension

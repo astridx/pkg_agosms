@@ -52,6 +52,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		var esriallowMultipleResults = (element.getAttribute('data-esriallowMultipleResults') === "true");
 		var showrouting_simple = element.getAttribute('data-showrouting-simple');
 
+		var addprivacybox = element.getAttribute('data-addprivacybox');
+		var unique = element.getAttribute('data-unique');
+		var buttons = document.getElementsByClassName('b' + unique);
+		var privacyfields = document.getElementsByClassName('p' + unique);
+		
 		if (showrouting_simple === '1')
 		{
 			var routesimpleposition = element.getAttribute('data-route-simple-position');
@@ -163,6 +168,39 @@ document.addEventListener('DOMContentLoaded', function () {
 			}).setView(lonlat, zoom);
 		}
 
+
+		// Privacy
+		if (localStorage.getItem("privacyState") === null)
+		{
+			localStorage.setItem("privacyState", '0')
+		}
+
+		var i;
+		for (i = 0; i < buttons.length; i++) {
+			if (localStorage.getItem("privacyState") === '0') {
+				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_SHOW_MAP');
+			} else {
+				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
+				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_HIDE_MAP');
+			}
+			buttons[i].onclick = function () {
+				if (localStorage.getItem("privacyState") === '0') {
+					document.getElementById('map' + moduleId).style.display = "block";
+					localStorage.setItem("privacyState", '1');
+				} else {
+					localStorage.setItem("privacyState", '0');
+				}
+				window.location.reload();
+			}
+		}
+
+		if (addprivacybox === '1' && (localStorage.getItem("privacyState") === '0'))
+		{
+			document.getElementById('map' + moduleId).style.display = "none";
+			return;
+		}
+		
 		// Add Scrollwheele Listener, so that you can activate it on mouse click
 		if (scrollwheelzoom === "0") {
 			window['mymap' + moduleId].on('click', function () {
@@ -286,17 +324,20 @@ document.addEventListener('DOMContentLoaded', function () {
 			var baseTree = [];
 			var osm;
 			Object.keys(layertreebase).forEach(function (key, index) {
-
+				
 				if (layertreebase[key].baselayerurl.startsWith("images")) {
 					layertreebase[key].baselayerurl = uriroot + layertreebase[key].baselayerurl;
 				}
-				// uriroot
+				
 				layertreebase[key].tilelayer = L.tileLayer(
 					layertreebase[key].baselayerurl,
 					{attribution: layertreebase[key].attribution,
 						opacity: layertreebase[key].opacity / 100,
 					}
 				);
+
+				console.log(layertreebase[key].baselayerurl);
+
 				if (index == 0) {
 					osm = layertreebase[key].tilelayer;
 				}
@@ -310,9 +351,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			osm.addTo(window['mymap' + moduleId]);
 
-//			console.log(layertreesvgoverlay);
-
 			var layerTreeChildren = [];
+			
 			Object.keys(layertreesvgoverlay).forEach(function (key) {
 
 				var layerTreeGrandchilds = [];
@@ -369,7 +409,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			lay.addTo(window['mymap' + moduleId]).collapseTree().expandSelected().collapseTree(true);
 
 
-
+			console.log(lay);
 
 
 

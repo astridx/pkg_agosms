@@ -11,12 +11,15 @@
 defined('_JEXEC') or die;
 
 $defaultArray = [];
+$unique = $module->id . '_' . uniqid();
 ?>
 
 <div style="
 	width:auto;
 	height:<?php echo $params->get('height', '400'); ?><?php echo $params->get('heightunit', 'px'); ?>;"
 	data-module-id="<?php echo $module->id; ?>"
+	data-addprivacybox="<?php echo $params->get('addprivacybox', '0') ?>"
+	data-unique='<?php echo $unique ?>'
 	data-no-world-warp="<?php echo $params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $params->get('detectRetina', 0); ?>"
 	data-baselayer="<?php echo $params->get('baselayer', 'mapnik'); ?>"
@@ -118,7 +121,17 @@ $defaultArray = [];
 	
 	class="leafletmapMod"
 	id="map<?php echo $module->id; ?>">
+		
 </div>
+<?php if ($params->get('addprivacybox', '0')) : ?>
+	<p 
+		class="p<?php echo $unique ?>"></p>
+	<button 
+		class="btn btn-success b<?php echo $unique ?>" 
+		type="button">	
+			<?php echo JText::_('MOD_AGOSM_PRIVACYBUTTON_SHOW_MAP'); ?>
+	</button>
+<?php endif; ?>
 
 <?php
 JText::script('MOD_AGOSM_MODULE_BY');
@@ -132,3 +145,8 @@ JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE');
 JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE');
 JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION');
 JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR');
+
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_SHOW_MAP');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_HIDE_MAP');

@@ -64,7 +64,7 @@
 	</administration>
 	<api>
 		<files folder="api/components/com_agosms">
-			
+			##API_FILES##
 		</files>
 	</api>
 	<changelogurl>https://raw.githubusercontent.com/astridx/boilerplate/tutorial/changelog.xml</changelogurl>
