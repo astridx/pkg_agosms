@@ -103,7 +103,7 @@ class PlgSystemAgosmssearch extends JPlugin
 
 		if ($init_parameter)
 		{
-			if ($app->isAdmin())
+			if ($app->isClient('admin'))
 			{
 				return;
 			}

@@ -1,0 +1,36 @@
+<changelogs>
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>2.0.0</version>
+		<note>
+			<item>Initial Version</item>
+		</note>
+	</changelog>
+	<changelog>
+		<element>com_foos</element>
+		<type>component</type>
+		<version>2.0.1</version>
+		<security>
+			<item><![CDATA[<p>No security issues.</p>]]></item>
+		</security>
+		<fix>
+			<item>No fix</item>
+		</fix>
+		<language>
+			<item>English</item>
+		</language>
+		<addition>
+			<item>Change log and Update Server added.</item>
+		</addition>
+		<change>
+			<item>No change</item>
+		</change>
+		<remove>
+			<item>No remove</item>
+		</remove>
+		<note>
+			<item>Change log and Update Server added.</item>
+		</note>
+	</changelog>
+</changelogs>

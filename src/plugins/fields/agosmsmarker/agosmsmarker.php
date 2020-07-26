@@ -10,14 +10,14 @@
 
 defined('_JEXEC') or die;
 
-JLoader::import('components.com_fields.libraries.fieldsplugin', JPATH_ADMINISTRATOR);
+use Joomla\CMS\Form\Form;
 
 /**
  * Fields Text Plugin
  *
  * @since  1.0.40
  */
-class PlgFieldsAgosmsmarker extends FieldsPlugin
+class PlgFieldsAgosmsmarker extends \Joomla\Component\Fields\Administrator\Plugin\FieldsPlugin
 {
 	/**
 	 * Constructor

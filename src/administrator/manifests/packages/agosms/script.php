@@ -24,7 +24,7 @@ class Pkg_AgosmsInstallerScript extends JInstallerScript
 	 */
 	public function __construct()
 	{
-		$this->minimumJoomla = '3.7.0';
+		$this->minimumJoomla = '4.0.0-beta1-dev';
 		$this->minimumPhp    = JOOMLA_MINIMUM_PHP;
 	}
 }

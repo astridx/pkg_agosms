@@ -9,6 +9,8 @@
  */
 defined('JPATH_BASE') or die;
 
+use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
+
 extract($displayData);
 
 /**

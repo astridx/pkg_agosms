@@ -10,14 +10,12 @@
 
 defined('_JEXEC') or die;
 
-// Include the agosm functions only once
-require_once __DIR__ . '/helper.php';
-require_once __DIR__ . '/Helper/EasyFileUploaderHelper.php';
+use AG\Module\Agosms\Site\Helper\ModagosmsHelper;
 
 $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 // Include skripts/styles to the header
-$document = JFactory::getDocument();
+$document = $app->getDocument();
 
 $leafletIsLoaded = false;
 
@@ -30,7 +28,6 @@ foreach ($document->_scripts as $key => $script)
 		$leafletIsLoaded = true;
 	}
 }
-
 
 if (!$leafletIsLoaded)
 {
@@ -91,14 +88,14 @@ if ($params->get('scrollwheelzoom') === "2")
 
 if ($params->get('showcomponentpin', '0') === "1")
 {
-	$list = ModagosmHelper::getList($params);
+	$list = ModagosmsHelper::getList($params);
 }
 
 if ($params->get('showcustomfieldpin', '0') === "1")
 {
-	if (!empty(ModagosmHelper::getListCustomField($params)))
+	if (!empty(ModagosmsHelper::getListCustomField($params)))
 	{
-		$listcf = ModagosmHelper::getListCustomField($params);
+		$listcf = ModagosmsHelper::getListCustomField($params);
 	}
 }
 
@@ -130,6 +127,12 @@ if ($params->get('spacermouseposition', '1') == 1)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.css');
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.js');
+}
+
+if ($params->get('showlayertreefrontend', '1') == 1)
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/L.Control.Layer.Tree/L.Control.Layers.Tree.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/L.Control.Layer.Tree/L.Control.Layers.Tree.js');
 }
 
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/agosms.css');

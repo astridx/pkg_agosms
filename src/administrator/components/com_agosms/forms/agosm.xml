@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form addfieldprefix="Joomla\Component\Agosms\Administrator\Field">
+	<fieldset 
+		addruleprefix="Joomla\Component\Agosms\Administrator\Rule"
+	>
+		<field
+			name="id"
+			type="number"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			default="0"
+			class="readonly"
+			readonly="true"
+		/>
+
+		<field
+			name="name"
+			type="text"
+			validate="Letter"
+			class="validate-letter"
+			label="COM_AGOSMS_FIELD_NAME_LABEL"
+			size="40"
+			required="true"
+		 />
+
+		<field
+			name="alias"
+			type="text"
+			label="JFIELD_ALIAS_LABEL"
+			size="45"
+			hint="JFIELD_ALIAS_PLACEHOLDER"
+		/>
+
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			>
+			<option value="*">JALL</option>
+		</field>
+
+		<field
+			name="featured"
+			type="radio"
+			class="switcher"
+			label="JFEATURED"
+			default="0"
+			>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+
+		<field
+			name="published"
+			type="list"
+			label="JSTATUS"
+			default="1"
+			id="published"
+			class="custom-select-color-state"
+			size="1"
+			>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+			<option value="2">JARCHIVED</option>
+			<option value="-2">JTRASHED</option>
+		</field>
+
+		<field
+			name="publish_up"
+			type="calendar"
+			label="COM_AGOSMS_FIELD_PUBLISH_UP_LABEL"
+			translateformat="true"
+			showtime="true"
+			size="22"
+			filter="user_utc"
+		/>
+
+		<field
+			name="publish_down"
+			type="calendar"
+			label="COM_AGOSMS_FIELD_PUBLISH_DOWN_LABEL"
+			translateformat="true"
+			showtime="true"
+			size="22"
+			filter="user_utc"
+		/>
+
+		<field
+			name="catid"
+			type="categoryedit"
+			label="JCATEGORY"
+			extension="com_agosms"
+			addfieldprefix="Joomla\Component\Categories\Administrator\Field"
+			required="true"
+			default=""
+		/>
+
+		<field
+			name="access"
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			size="1"
+		/>
+
+		<field
+			name="checked_out"
+			type="hidden"
+			filter="unset"
+		/>
+
+		<field
+			name="checked_out_time"
+			type="hidden"
+			filter="unset"
+		/>
+
+		<field
+			name="ordering"
+			type="ordering"
+			label="JFIELD_ORDERING_LABEL"
+			content_type="com_agosms.agosm"
+		/>
+
+		<field
+			name="tags"
+			type="tag"
+			label="JTAG"
+			class="advancedSelect"
+			multiple="true"
+		/>
+	</fieldset>
+	<fieldset
+		name="pinbasic"
+		label="COM_AGOSMS_FIELDSET_PINOPTIONS"
+	>
+		<field
+			name="coordinates"
+			type="agosmsaddressfinder"
+			default="50.273543, 7.262993"
+			label="MOD_AGOSM_LATLON"
+			description="MOD_AGOSM_LATLON_DESC"
+		/>
+
+		<field
+			name="showdefaultpin"
+			type="radio"
+			default="1"
+			label="MOD_AGOSM_PIN"
+			description="MOD_AGOSM_PIN_DESC"
+		>
+			<option value="1">standard &lt;img src="../media/mod_agosm/leaflet/images/marker-icon.png" alt="default" /&gt;</option>
+			<option value="2">MOD_AGOSM_OWNPIN</option>
+			<option value="3">MOD_AGOSM_AWESOMEPLUGIN</option>
+		</field>
+
+		<field
+			name="awesomeicon_icon"
+			type="falist"
+			label="MOD_AGOSM_FONTAWESOME_ICON_LABEL"
+			description="MOD_AGOSM_FONTAWESOME_ICON_DESC"
+			showon="showdefaultpin:3"
+		>
+		</field>
+
+		<field
+			name="awesomeicon_markercolor"
+			type="list"
+			default="red"
+			label="MOD_AGOSM_FONTAWESOME_MARKERCOLOR_LABEL"
+			description="MOD_AGOSM_FONTAWESOME_MARKERCOLOR_DESC"
+			showon="showdefaultpin:3"
+		>
+			<option value="red">red</option>
+			<option value="darkred">darkred</option>
+			<option value="orange">orange</option>
+			<option value="green">green</option>
+			<option value="darkgreen">darkgreen</option>
+			<option value="blue">blue</option>
+			<option value="red">red</option>
+			<option value="purple">purple</option>
+			<option value="darkpurple">darkpurple</option>
+			<option value="cadetblue">cadetblue</option>
+		</field>
+
+		<field
+			name="awesomeicon_iconcolor"
+			type="color"
+			default="#ffffff"
+			label="MOD_AGOSM_FONTAWESOME_ICONCOLOR_LABEL"
+			description="MOD_AGOSM_FONTAWESOME_ICONCOLOR_DESC"
+			showon="showdefaultpin:3"
+		/>
+
+		<field
+			name="awesomeicon_extraclasses"
+			type="text"
+			default=""
+			label="MOD_AGOSM_FONTAWESOME_EXTRACLASSES_LABEL"
+			description="MOD_AGOSM_FONTAWESOME_EXTRACLASSES_DESC"
+			size="40"
+			showon="showdefaultpin:3"
+		/>
+
+		<field
+			name="awesomeicon_spin"
+			type="radio"
+			label="MOD_AGOSM_FONTAWESOME_SPIN_LABEL"
+			description="MOD_AGOSM_FONTAWESOME_SPIN_DESC"
+			class="btn-group btn-group-yesno switcher"
+			default="false"
+			showon="showdefaultpin:3"
+		>
+			<option value="true">JYES</option>
+			<option value="false">JNO</option>
+		</field>
+
+		//
+		<field
+			type="media"
+			name="customPinPath"
+			label="MOD_AGOSM_PINPATH"
+			description="MOD_AGOSM_PINPATH_DESC"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="text"
+			name="customPinSize"
+			label="MOD_AGOSM_PINSIZE"
+			description="MOD_AGOSM_PINSIZE_DESC"
+			default="38, 95"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="media"
+			name="customPinShadowPath"
+			label="MOD_AGOSM_PINSHADOWPATH"
+			description="MOD_AGOSM_PINSHADOWPATH_DESC"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="text"
+			name="customPinShadowSize"
+			label="MOD_AGOSM_PINSHADOWSIZE"
+			description="MOD_AGOSM_PINSHADOWSIZE_DESC"
+			default="50, 64"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="text"
+			name="customPinOffset"
+			label="MOD_AGOSM_PINOFFSET"
+			description="MOD_AGOSM_PINOFFSET_DESC"
+			default="22, 94"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="text"
+			name="customPinPopupOffset"
+			label="MOD_AGOSM_PINPOPUPOFFSET"
+			description="MOD_AGOSM_PINPOPUPOFFSET_DESC"
+			default="-3, -76"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="spacer"
+			name="spacerPosMedia1"
+			hr="true"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="list"
+			name="showpopup"
+			default="0"
+			label="MOD_AGOSM_POPUP"
+			description="MOD_AGOSM_POPUP_DESC"
+		>
+			<option value="1">MOD_AGOSM_KLICK</option>
+			<option value="2">MOD_AGOSM_ALWAYS</option>
+			<option value="0">MOD_AGOSM_NEVER</option>
+			<option value="3">MOD_AGOSM_MOUSEOVER</option>
+		</field>
+
+		<field
+			type="editor"
+			name="popuptext"
+			default=""
+			label="MOD_AGOSM_POPUPTEXT"
+			description="MOD_AGOSM_POPUPTEXT_DESC"
+			filter="safehtml"
+			showon="showpopup!:0"
+		/>
+	</fieldset>
+	<fields name="params" label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
+		<fieldset name="display" label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
+			<field
+				name="show_name"
+				type="list"
+				label="COM_AGOSMS_FIELD_PARAMS_NAME_LABEL"
+				useglobal="true"
+			>
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field
+				name="agosms_layout"
+				type="componentlayout"
+				label="JFIELD_ALT_LAYOUT_LABEL"
+				class="custom-select"
+				extension="com_agosms"
+				view="agosm"
+				useglobal="true"
+			/>
+		</fieldset>
+	</fields>
+</form>

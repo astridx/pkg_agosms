@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="3.6" client="site" method="upgrade">
+<extension type="module" client="site" method="upgrade">
 	<name>mod_agosms_search</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
@@ -9,7 +9,7 @@
 	<authorUrl>www.astrid-guenther.de</authorUrl>
 	<version>##VERSION##</version>
 	<description>MOD_AGOSMSSEARCH_XML_DESCRIPTION</description>
-	<namespace>AG\Module\Agosmssearch</namespace>
+	<namespace path="src">AG\Module\Agosmssearch</namespace>
 	<scriptfile>script.php</scriptfile>
 	
 	<!-- Front-end files -->
@@ -25,11 +25,13 @@
 		##MEDIA_FILES##
 	</media>
 
+	<help key="JHELP_EXTENSIONS_MODULE_AGOSMSSEARCH_HELP"/>
+
 	<config>
 		<fields name="params">
 			<fieldset 
-				name="basic" 
-				addfieldpath="/modules/mod_agosms_search/includes/"
+				name="basic"
+				addfieldprefix="AG\Module\Agosmssearch\Site\Field"
 			>
 				<field 
 					name="note1" 
@@ -41,17 +43,10 @@
 				/>
 				
 				<field 
-					name="moduleclass_sfx" 
-					type="text" default="" 
-					label="MOD_AGOSMSSEARCHMODULE_CLASS_SUFFIX" 
-					description="MOD_AGOSMSSEARCHPARAMMODULECLASSSUFFIX" 
-				/>
-				
-				<field 
-					name="module_template" 
+					name="layout" 
 					type="moduletemplate" 
 					modulename="mod_agosms_search" 
-					default="Default" 
+					default="default" 
 					label="MOD_AGOSMSSEARCHMODULE_TEMPLATE" 
 				/>
 				
@@ -86,9 +81,10 @@
 				
 				<field 
 					name="restrict" 
-					type="radio" 
+					type="list" 
 					class="btn-group" 
-					default="0" label="MOD_AGOSMSSEARCHRESTRICT_CAT" 
+					default="0" 
+					label="MOD_AGOSMSSEARCHRESTRICT_CAT" 
 					description="MOD_AGOSMSSEARCHRESTRICT_CAT_DESC"
 				>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
@@ -97,7 +93,7 @@
 				
 				<field 
 					name="restmode" 
-					type="radio" 
+					type="list" 
 					class="btn-group" 
 					default="0" label="MOD_AGOSMSSEARCHRESTRICTION_MODE" 
 					description="MOD_AGOSMSSEARCHRESTRICTION_MODE_DESC"
@@ -244,7 +240,7 @@
 					label="MOD_AGOSMSSEARCHDATE_FORMAT" 
 					description="MOD_AGOSMSSEARCHDATE_FORMAT_DESC"
 				>
-					<option value="">Default</option>
+					<option value="">default</option>
 					<option value="%e %b %Y::d M yyyy">1 Jan 2012</option>
 					<option value="%e %B %Y::d MM yyyy">1 January 2012</option>
 					<option value="%b %e %Y::M d yyyy">Jan 1 2012</option>
@@ -282,6 +278,7 @@
 				>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
+
 				<field 
 					name="search_stats" 
 					type="radio" 
@@ -292,6 +289,7 @@
 				>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
+
 				<field 
 					name="" 
 					hidden="1" 
@@ -307,6 +305,7 @@
 					class="alert" 
 					close="true"
 				/>
+
 				<field 
 					name="field_connection" 
 					type="textarea" 
@@ -336,6 +335,7 @@
 					<option value="standard">Standard</option>
 					<!-- <option value="simple">Simple</option> -->
 				</field>
+
 				<field 
 					name="include_featured" 
 					type="radio" 
@@ -350,13 +350,16 @@
 				</field>
 
 				<field type="spacer" name="myspacero1u" hr="true" />
+
 				<field 
 					type="spacer" 
 					name="myspacerm1" 
 					label="MOD_AGOSMSSEARCHCLEAR_MAP_SHOW_HEADING" 
 					hr="false"
 				/>
+
 				<field type="spacer" name="myspacero1o" hr="true" />
+
 				<field 
 					name="show_map" 
 					type="radio" 
@@ -392,13 +395,16 @@
 				</field>
 
 				<field type="spacer" name="myspacero111o" hr="true" />
+
 				<field 
 					type="spacer" 
 					name="myspacerrl11" 
 					label="MOD_AGOSMSSEARCHCLEAR_RESULTLIST_SHOW_HEADING" 
 					hr="false"
 				/>
+
 				<field type="spacer" name="myspacero111u" hr="true" />
+
 				<field 
 					name="show_resultlist" 
 					type="radio" 
@@ -410,6 +416,7 @@
 				</field>
 				
 				<field type="spacer" name="myspacero1" hr="true" showon="show_resultlist:1"/>
+
 				<field 
 					name="ordering_show" 
 					type="radio" 
@@ -421,6 +428,7 @@
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
+
 				<field 
 					name="ordering_default" 
 					type="orderingselect" 
@@ -428,6 +436,7 @@
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ORDERING_DEFAULT" 
 					showon="show_resultlist:1[AND]ordering_show:1"
 				/>
+
 				<field 
 					name="ordering_default_dir" 
 					type="radio" 
@@ -439,6 +448,7 @@
 					<option value="asc">MOD_AGOSMSSEARCHSORTING_ASC</option>
 					<option value="desc">MOD_AGOSMSSEARCHSORTING_DESC</option>
 				</field>
+
 				<field 
 					name="ordering_fields" 
 					type="fieldselect" 
@@ -459,6 +469,7 @@
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
+
 				<field 
 					name="show_info" 
 					type="radio" 
@@ -470,6 +481,7 @@
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
+
 				<field 
 					name="show_readmore" 
 					type="radio" 
@@ -477,10 +489,11 @@
 					default="1" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_SHOW_READMORE"
 					showon="show_resultlist:1"
-				>
+					>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>
+
 				<field 
 					name="items_limit" 
 					type="text" 
@@ -488,6 +501,7 @@
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_ITEMS_LIMIT" 
 					showon="show_resultlist:1"
 				/>
+
 				<field 
 					name="text_limit" 
 					type="text" 
@@ -495,6 +509,7 @@
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_TEXT_LIMIT" 
 					showon="show_resultlist:1"
 				/>
+
 				<field 
 					name="image_width" 
 					type="text" 
@@ -502,6 +517,7 @@
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_IMAGE_WIDTH" 
 					showon="show_resultlist:1"
 				/>
+
 				<field 
 					name="image_type" 
 					type="radio" 
@@ -514,6 +530,7 @@
 					<option value="intro">MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE_INTRO</option>
 					<option value="text">MOD_AGOSMSSEARCHFILTER_RESULTS_IMAGE_TYPE_TEXT</option>
 				</field>
+
 				<field 
 					name="image_empty" 
 					type="imagelist" 
@@ -533,15 +550,17 @@
 				/>
 			</fieldset>
 			<fieldset 
-				name="advanced">
+				name="advanced"
+				>
 				<field 
 					name="cache" 
 					type="list" default="1" 
 					label="MOD_AGOSMSSEARCHCACHING"
-				>
+					>
 					<option value="1">MOD_AGOSMSSEARCHUSE_GLOBAL</option>
 					<option value="0">MOD_AGOSMSSEARCHNOCACHING</option>
 				</field>
+
 				<field 
 					name="cache_time" 
 					type="text" 

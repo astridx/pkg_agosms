@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<metadata>
+	<layout title="COM_AGOSMS_FEATURED_VIEW_DEFAULT_TITLE">
+		<help
+			key = "JHELP_MENUS_MENU_ITEM_AGOSMS_FEATURED"
+		/>
+		<message>
+			<![CDATA[COM_AGOSMS_FEATURED_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="advanced" label="JGLOBAL_LIST_LAYOUT_OPTIONS">
+
+				<field
+					name="spacer"
+					type="spacer"
+					label="JGLOBAL_SUBSLIDER_DRILL_CATEGORIES_LABEL"
+					class="text"
+				/>
+
+				<field
+					name="show_headings"
+					type="list"
+					label="JGLOBAL_SHOW_HEADINGS_LABEL"
+					useglobal="true"
+					class="custom-select-color-state"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+
+				<field
+					name="show_pagination"
+					type="list"
+					label="JGLOBAL_PAGINATION_LABEL"
+					useglobal="true"
+					class="custom-select-color-state"
+					>
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+					<option value="2">JGLOBAL_AUTO</option>
+				</field>
+		</fieldset>
+	</fields>
+</metadata>

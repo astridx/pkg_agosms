@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="webservices" method="upgrade">
+	<name>plg_webservices_agosms</name>
+	<author>Astrid Günther</author>
+	<creationDate>##DATE##</creationDate>
+	<copyright>(C) ##YEAR## Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later;</license>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>##VERSION##</version>
+	<description>PLG_WEBSERVICES_AGOSMS_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="agosms">agosms.php</filename>
+		<folder>language</folder>
+	</files>
+</extension>

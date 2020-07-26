@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="3.6" client="site" method="upgrade">
+<extension type="module" client="site" method="upgrade">
 	<name>mod_agosm</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
@@ -9,7 +9,7 @@
 	<authorUrl>www.astrid-guenther.de</authorUrl>
 	<version>##VERSION##</version>
 	<description>MOD_AGOSM_XML_DESCRIPTION</description>
-	<namespace>AG\Module\Agosms</namespace>
+	<namespace path="src">AG\Module\Agosms</namespace>
 	<scriptfile>script.php</scriptfile>
 
 	<!-- Front-end files -->
@@ -25,13 +25,17 @@
 		##MEDIA_FILES##
 	</media>
 
-	<!-- Configuration -->
+	<help key="JHELP_EXTENSIONS_MODULE_AGOSM_HELP"/>
+
 	<config>
-		<fields name="params"  addfieldpath="modules/mod_agosm/models/fields/field">
+		<fields 
+			name="params"  
+		>
 			<!-- Map Configuration -->
 			<fieldset
 				name="mapConfig"
 				label="MOD_AGOSM_H_MAP"
+				class="column-count-lg-1"
 			>
 				<field
 					type="integer"
@@ -43,6 +47,17 @@
 					last="1000"
 					step="10"
 				/>
+
+				<field
+					name="addprivacybox"
+					type="list"
+					label="MOD_AGOSM_ADDPRIVACYBOX"
+					default="0"
+					description="MOD_AGOSM_ADDPRIVACYBOX_DESC"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>			
 
 				<field
 					type="list"
@@ -58,7 +73,7 @@
 				<field
 					type="list"
 					name="zoom"
-					default="7"
+					default="14"
 					label="MOD_AGOSM_ZOOM"
 					description="MOD_AGOSM_ZOOM_DESC"
 				>
@@ -86,10 +101,208 @@
 
 				<field
 					type="list"
+					name="maxzoom"
+					default="15"
+					label="MOD_AGOSM_MAXZOOM"
+					description="MOD_AGOSM_ZOOM_DESC"
+				>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+				</field>
+
+				<field
+					type="list"
+					name="minzoom"
+					default="13"
+					label="MOD_AGOSM_MINZOOM"
+					description="MOD_AGOSM_ZOOM_DESC"
+				>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+				</field>
+
+				<field
+					type="spacer"
+					label="MOD_AGOSM_MAXBOUNDSSPACER"
+					description="MOD_AGOSM_MAXBOUNDSSPACER_DESC"
+					name="maxboundsspacer2"
+				/>
+
+				<field
+					name="maxboundswest"
+					type="text"
+					default="7.088"
+					label="MOD_AGOSM_MAXBOUNDSWEST"
+					description="MOD_AGOSM_MAXBOUNDSWEST_DESC"
+				/>
+				<field
+					name="maxboundseast"
+					type="text"
+					default="7.364"
+					label="MOD_AGOSM_MAXBOUNDSEAST"
+					description="MOD_AGOSM_MAXBOUNDSEAST_DESC"
+				/>
+				<field
+					name="maxboundssouth"
+					type="text"
+					default="51.397"
+					label="MOD_AGOSM_MAXBOUNDSSOUTH"
+					description="MOD_AGOSM_MAXBOUNDSSOUTH_DESC"
+				/>
+				<field
+					name="maxboundsnorth"
+					type="text"
+					default="51.545"
+					label="MOD_AGOSM_MAXBOUNDSNORTH"
+					description="MOD_AGOSM_MAXBOUNDSNORTH_DESC"
+				/>
+
+				<field
+					type="list"
+					name="showlayertreefrontend"
+					default="1"
+					label="MOD_AGOSM_SHWOWLAYERTREE"
+					description="MOD_AGOSM_SHWOWLAYERTREE_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
+					name="layertreebase"
+					type="subform"
+					label="MOD_AGOSM_LAYERTREEBASE"
+					multiple="true"
+					showon="showlayertreefrontend:1"
+				>
+					<form>
+						<field
+							name="baselayername"
+							type="text"
+							label="MOD_AGOSM_LAYERTREEBASE_LAYERNAME"
+							description="MOD_AGOSM_LAYERTREEBASE_LAYERNAME_DESC"
+						/>
+						<field
+							name="baselayerurl"
+							type="text"
+							label="MOD_AGOSM_LAYERTREEBASE_LAYERURL"
+							description="MOD_AGOSM_LAYERTREEBASE_LAYERURL_DESC"
+						/>
+						<field
+							name="attribution"
+							type="text"
+							label="MOD_AGOSM_LAYERTREEBASE_ATTRIBUTION"
+							description="MOD_AGOSM_LAYERTREEBASE_LAYERNAME_DESC"
+						/>
+						<field
+							name="opacity"
+							type="integer"
+							first="1" 
+							last="100" 
+							step="1"
+							default="100"
+							label="MOD_AGOSM_LAYERTREEBASE_OPACITY"
+							description="MOD_AGOSM_LAYERTREEBASE_LAYERNAME_DESC"
+						/>
+					</form>
+				</field>
+
+				<field
+					name="layertreesvgoverlay"
+					type="subform"
+					label="MOD_AGOSM_LAYERTREESVGOVERLAY"
+					multiple="true"
+					showon="showlayertreefrontend:1"
+				>
+					<form>
+						<field
+							name="layertreesvgoverlayname"
+							type="text"
+							label="MOD_AGOSM_LAYERTREESVGOVERLAY_NAME"
+							directory="images"
+						/>
+						<field
+							name="layertreesvgoverlayinner"
+							type="subform"
+							label="MOD_AGOSM_LAYERTREESVGOVERLAY_SUBFFORM"
+							multiple="true"
+							showon="showlayertreefrontend:1"
+						>
+							<form>
+								<field
+									name="svglayername"
+									type="text"
+									label="MOD_AGOSM_LAYERTREESVGOVERLAY_SUBFFORM_SVGLAYERNAME"
+								/>
+								<field
+									name="svglayer"
+									type="filelist"
+									label="MOD_AGOSM_LAYERTREESVGOVERLAY_SUBFFORM_SVGLAYER"
+									directory="images"
+								/>
+								<field
+									name="attribution"
+									type="text"
+									label="MOD_AGOSM_LAYERTREESVGOVERLAY_SUBFFORM_ATTRIBUTION"
+								/>
+								<field
+									name="opacity"
+									type="integer"
+									first="1" 
+									last="100" 
+									step="1"
+									default="100"
+									label="MOD_AGOSM_LAYERTREESVGOVERLAY_SUBFFORM_OPACITY"
+									directory="images"
+								/>
+							</form>
+						</field>
+					</form>
+				</field>
+
+				<field
+					type="list"
 					name="baselayer"
 					default="mapnik"
 					label="MOD_AGOSM_BASELAYER"
 					description="MOD_AGOSM_BASELAYER_DESC"
+					showon="showlayertreefrontend:0"
 				>
 					<option value="mapbox">Mapbox</option>
 					<option value="mapnik">OpenStreetMap</option>
@@ -102,6 +315,7 @@
 					<option value="google">Google</option>
 					<option value="custom">custom</option>
 				</field>
+
 				<field
 					name="mapboxkey"
 					type="text"
@@ -300,6 +514,18 @@
 				</field>
 
 				<field
+					type="text"
+					name="astrid"
+					default="Module by Astrid Günther"
+					label="MOD_AGOSM_ATTRMODULETEXT"
+					description="MOD_AGOSM_ATTRMODULETEXT_DESC"
+					showon="attrModule:1"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field
 					type="spacer"
 					name="spacerPos0"
 					hr="true"
@@ -314,8 +540,8 @@
 
 				<field
 					name="lonlat"
-					type="agosmsaddressfinder"
-					default=""
+					type="text"
+					default="50.273543, 7.262993"
 					label="MOD_AGOSM_LONLAT"
 					description="MOD_AGOSM_LONLAT_DESC"
 				/>
@@ -387,13 +613,13 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-			</fieldset>
 
-			<!-- Routing Simple-->
-			<fieldset
-				name="agosmControlRoutingSimple"
-				label="MOD_AGOSM_ROUTING_SIMPLE_CONTROL_FIELDSETLABEL"
-			>
+				<!-- Routing Simple-->
+				<field 
+					type="spacer" 
+					name="agosmControlRoutingSimple" 
+					label="MOD_AGOSM_ROUTING_SIMPLE_CONTROL_FIELDSETLABEL" 
+				/>
 				<field
 					type="spacer"
 					name="routingSearch"
@@ -447,6 +673,7 @@
 					size="40"
 					showon="showrouting_simple:1"
 				/>
+
 				<field
 					type="list"
 					name="routing_simple_router"
@@ -468,12 +695,13 @@
 					size="40"
 					showon="showrouting_simple:1[AND]routing_simple_router:mapbox"
 				/>
-			</fieldset>
-			<!-- Routing Mapbox-->
-			<fieldset
-				name="agosmControlRouting"
-				label="MOD_AGOSM_ROUTING_CONTROL_FIELDSETLABEL"
-			>
+
+				<!-- Routing Mapbox-->
+				<field 
+					type="spacer" 
+					name="agosmControlRouting" 
+					label="MOD_AGOSM_ROUTING_CONTROL_FIELDSETLABEL" 
+				/>
 				<field
 					type="spacer"
 					name="routingSearch"
@@ -504,7 +732,7 @@
 
 				<field
 					name="routingstart"
-					type="agosmsaddressfinder"
+					type="xx"
 					label="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_STARTROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"
@@ -512,7 +740,7 @@
 
 				<field
 					name="routingend"
-					type="agosmsaddressfinder"
+					type="xx"
 					label="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_LABEL"
 					description="MOD_AGOSM_CONFIG_CONTROL_ENDROUTING_DESC"
 					showon="showrouting:1[AND]mapboxkey_routing!:"
@@ -577,12 +805,13 @@
 					<option value="metric">MOD_AGOSM_METRIC</option>
 					<option value="imperial">MOD_AGOSM_IMPERIAL</option>
 				</field>
-			</fieldset>
-			<!-- Geocoder -->
-			<fieldset
-				name="agosmControl"
-				label="MOD_AGOSM_GEOCODER_CONTROL_FIELDSETLABEL"
-			>
+
+				<!-- Geocoder -->
+				<field 
+					type="spacer" 
+					name="agosmControl" 
+					label="MOD_AGOSM_GEOCODER_CONTROL_FIELDSETLABEL" 
+				/>
 				<field
 					type="spacer"
 					name="geocoderSearch"
@@ -652,12 +881,13 @@
 					<option value="topleft">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPLEFT</option>
 					<option value="topright">MOD_AGOSM_CONFIG_CONTROL_POSITION_TOPRIGHT</option>
 				</field>
-			</fieldset>
-			<!-- Geocoder ESRI-->
-			<fieldset
-				name="agosmGeocoderEsriControl"
-				label="MOD_AGOSM_GEOCODER_ESRI_CONTROL_FIELDSETLABEL"
-			>
+
+				<!-- Geocoder ESRI-->
+				<field 
+					type="spacer" 
+					name="agosmGeocoderEsriControl" 
+					label="MOD_AGOSM_GEOCODER_ESRI_CONTROL_FIELDSETLABEL" 
+				/>
 				<field
 					type="spacer"
 					name="geocoderEsriSearch"
@@ -807,10 +1037,12 @@
 					<option value="false">JNO</option>
 				</field>
 			</fieldset>
+
 			<!-- Special Marker -->
 			<fieldset
 				name="pinConfig"
 				label="MOD_AGOSM_H_PIN"
+				class="column-count-lg-1"
 			>
 				<field
 					type="list"
@@ -834,7 +1066,7 @@
 				<field
 					name="specialpins"
 					type="subform"
-					formsource="modules/mod_agosm/models/forms/custombuttons.xml"
+					formsource="modules/mod_agosm/forms/custombuttons.xml"
 					multiple="true"
 					label="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_LABEL"
 					min= "1"
@@ -849,6 +1081,7 @@
 			<fieldset
 				name="pinConfigFromCustomField"
 				label="MOD_AGOSM_H_PINCF"
+				class="column-count-lg-1"
 			>
 				<field
 					type="spacer"
@@ -867,18 +1100,20 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-			</fieldset>
-			<!-- Marker from database -->
-			<fieldset
-				name="agosmControlMarkers"
-				label="MOD_AGOSM_DATABASE_FIELDSET"
-			>
+
+				<!-- Marker from database -->
+				<field 
+					type="spacer" 
+					name="agosmControlMarkers"
+					label="MOD_AGOSM_DATABASE_FIELDSET"
+				/>
 				<field
 					type="spacer"
 					name="spacerMarkers"
 					label="MOD_AGOSM_MARKERS"
 					class="text"
 				/>
+
 				<field
 					type="list"
 					name="showmarkerfromexternaldb"
@@ -889,6 +1124,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
 				<field
 					type="text"
 					name="host"
@@ -896,6 +1132,7 @@
 					default="localhost"
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="text"
 					name="user"
@@ -903,6 +1140,7 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="password"
 					name="password"
@@ -910,6 +1148,7 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="text"
 					name="table"
@@ -917,6 +1156,7 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="text"
 					name="column_coordinates"
@@ -924,6 +1164,7 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
+
 				<field
 					type="text"
 					name="column_popuptext"
@@ -931,12 +1172,13 @@
 					default=""
 					showon="showmarkerfromexternaldb:1"
 				/>
-			</fieldset>
-			<!-- Show Pins from Component -->
-			<fieldset
-				name="pinConfigFromComponent"
-				label="MOD_AGOSM_H_PINCOM"
-			>
+
+				<!-- Show Pins from Component -->
+				<field 
+					type="spacer" 
+					name="pinConfigFromComponent"
+					label="MOD_AGOSM_H_PINCOM"
+				/>
 				<field
 					type="list"
 					name="showcomponentpin"
@@ -960,13 +1202,13 @@
 				>
 					<option value="0">JOPTION_SELECT_CATEGORY</option>
 				</field>
-			</fieldset>
 
-			<!-- upload -->
-			<fieldset 
-				name="upload"
-				label="MOD_AGOSM_UPLOAD_FIELDSET"
-			>
+				<!-- upload -->
+				<field 
+					type="spacer" 
+					name="upload"
+					label="MOD_AGOSM_UPLOAD_FIELDSET"
+				/>
 				<!-- Basic Required Fields -->
 				<field name="ag_parent" 
 					   type="fixedfolderlist" 
@@ -978,23 +1220,27 @@
 					   hide_default="true" 
 					   exclude="^[Aa]dministrator$|^[Cc]ache$|^[Cc]omponents$|^[Cc]li$|^[Ii]ncludes$|^[Ll]anguage$|^[Ll]ibraries$|^[Ll]ogs$|^[Mm]odules$|^[Pp]lugins$|^[Tt]emplates$|^[Xx]mlrpc$" 
 				/>
+
 				<field name="ag_folder" 
 					   type="text" 
 					   default="" 
 					   label="MOD_AG_FOLDER_LABEL" 
 					   description="MOD_AG_FOLDER_DESC" 
 				/>
+
 				<field name="ag_maxsize" 
 					   type="text" 
 					   default="1000000" 
 					   label="MOD_AG_MAXSIZE_LABEL" 
 					   description="MOD_AG_MAXSIZE_DESC" 
 				/>
+
 				<!-- Security -->
 				<field name="ag_spacer_details" 
 					   type="spacer" 
 					   label="MOD_AG_DETAILS_SPACER" 
 				/>
+
 				<field name="ag_filetypes" 
 					   type="textarea" 
 					   default="text/xml;application/gpx+xml;application/octet-stream;" 
@@ -1003,6 +1249,7 @@
 					   rows="10" 
 					   cols="40" 
 				/>
+
 				<field name="ag_default_replace" 
 					   type="radio" 
 					   default="0" 
@@ -1013,6 +1260,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
 				<field name="ag_replace" 
 					   type="radio" 
 					   default="1" 
@@ -1023,6 +1271,7 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
 				<field name="ag_scriptsinarchives" 
 					   type="radio" 
 					   default="0" 
@@ -1033,17 +1282,20 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+
 				<!-- Formatting -->
 				<field name="ag_spacer_format" 
 					   type="spacer" 
 					   label="MOD_AG_FORMAT_SPACER" 
 				/>
+
 				<field name="ag_variable" 
 					   type="text" 
 					   default="fileToUpload" 
 					   label="MOD_AG_VARIABLE_LABEL" 
 					   description="MOD_AG_VARIABLE_DESC" 
 				/>
+
 				<field name="ag_multiple" 
 					   type="list" 
 					   default="1" 
@@ -1061,6 +1313,7 @@
 					<option value="9">9</option>
 					<option value="10">10</option>
 				</field>
+
 				<field name="ag_shownofile" 
 					   type="radio" 
 					   default="1" 
@@ -1071,11 +1324,13 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
+	
 				<!-- Advanced Features -->
 				<field name="ag_spacer_advanced" 
 					   type="spacer" 
 					   label="MOD_AG_ADVANCED_SPACER" 
 				/>
+
 				<field name="ag_user" 
 					   type="radio" 
 					   default="0" 
@@ -1089,7 +1344,8 @@
 			</fieldset>
 
 			<!-- advanced -->
-			<fieldset name="advanced">
+			<fieldset name="advanced"
+					  class="column-count-lg-1">
 				<field
 					name="layout"
 					type="modulelayout"
@@ -1130,7 +1386,6 @@
 					default="static"
 				/>
 			</fieldset>
-
 		</fields>
 	</config>
 </extension>

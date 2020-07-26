@@ -7,20 +7,33 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
+
 defined('_JEXEC') or die;
+
 $defaultArray = [];
+$unique = $module->id . '_' . uniqid();
 ?>
 
 <div style="
 	width:auto;
 	height:<?php echo $params->get('height', '400'); ?><?php echo $params->get('heightunit', 'px'); ?>;"
 	data-module-id="<?php echo $module->id; ?>"
+	data-addprivacybox="<?php echo $params->get('addprivacybox', '0') ?>"
+	data-unique='<?php echo $unique ?>'
 	data-no-world-warp="<?php echo $params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $params->get('detectRetina', 0); ?>"
 	data-baselayer="<?php echo $params->get('baselayer', 'mapnik'); ?>"
 	data-lonlat="<?php echo $params->get('lonlat', '50.281168, 7.276211'); ?>"
 	data-savestate="<?php echo $params->get('savestate', false); ?>"
-	data-zoom="<?php echo $params->get('zoom', '10'); ?>"
+	data-astrid="<?php echo $params->get('astrid', 'Module by Astrid Günther'); ?>"
+	data-showlayertreefrontend="<?php echo $params->get('showlayertreefrontend', 0); ?>"
+	data-zoom="<?php echo $params->get('zoom', '14'); ?>"
+	data-minzoom="<?php echo $params->get('minzoom', '13'); ?>"
+	data-maxzoom="<?php echo $params->get('maxzoom', '15'); ?>"
+	data-maxboundswest="<?php echo $params->get('maxboundswest', '7.088'); ?>"
+	data-maxboundseast="<?php echo $params->get('maxboundseast', '7.365'); ?>"
+	data-maxboundsnorth="<?php echo $params->get('maxboundsnorth', '51.541'); ?>"
+	data-maxboundssouth="<?php echo $params->get('maxboundssouth', '51.401'); ?>"
 	data-locate="<?php echo $params->get('showlocate', false); ?>"
 	data-fullscreen="<?php echo $params->get('showfullscreen', false); ?>"
 	data-mouseposition="<?php echo $params->get('showmouseposition', false); ?>"
@@ -102,10 +115,23 @@ $defaultArray = [];
 	data-touch='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_TOUCH'); ?>'
 	data-scrollmac='<?php echo JText::_('PLG_AGOSMSADDRESSMARKER_SCROLLMAC'); ?>'
 	data-uriroot='<?php echo JUri::root(); ?>'
+
+	data-layertreebase='<?php echo json_encode($params->get('layertreebase', '')); ?>'
+	data-layertreesvgoverlay='<?php echo json_encode($params->get('layertreesvgoverlay', '')); ?>'
 	
 	class="leafletmapMod"
 	id="map<?php echo $module->id; ?>">
+		
 </div>
+<?php if ($params->get('addprivacybox', '0')) : ?>
+	<p 
+		class="p<?php echo $unique ?>"></p>
+	<button 
+		class="btn btn-success b<?php echo $unique ?>" 
+		type="button">	
+			<?php echo JText::_('MOD_AGOSM_PRIVACYBUTTON_SHOW_MAP'); ?>
+	</button>
+<?php endif; ?>
 
 <?php
 JText::script('MOD_AGOSM_MODULE_BY');
@@ -119,3 +145,8 @@ JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE');
 JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE');
 JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION');
 JText::script('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR');
+
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_SHOW_MAP');
+JText::script('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_HIDE_MAP');

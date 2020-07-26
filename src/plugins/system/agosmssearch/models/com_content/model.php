@@ -26,10 +26,12 @@ class ArticlesModelAgSearch extends JModelList
 	function __construct()
 	{
 		$this->input = JFactory::getApplication()->input;
-		require_once JPATH_SITE . "/modules/mod_agosms_search/helper.php";
+		
+		require_once(JPATH_SITE . "/modules/mod_agosms_search/src/Helper/AgosmsSearchHelper.php");
+		
 		$this->module_id = $this->input->get("moduleId", "", "int");
-		$this->module_helper = new modAgosmsSearchHelper;
-		$this->module_params = $this->module_helper->getModuleParams($this->module_id);
+		//$this->module_helper = new AgosmsSearchHelper();
+		$this->module_params = AgosmsSearchHelper::getModuleParams($this->module_id);
 		$this->module_params_native = $this->module_helper->getModuleParams($this->module_id, true);
 
 		if (isset($this->module_params->savesearch) && $this->module_params->savesearch && !JFactory::getApplication()->input->get("initial"))

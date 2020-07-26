@@ -18,6 +18,17 @@ defined('_JEXEC') or die('');
 class Mod_AgosmsearchInstallerScript
 {
 	/**
+	 * Extension script constructor.
+	 *
+	 * @since   2.0.0
+	 */
+	public function __construct()
+	{
+		$this->minimumJoomla = '4.0.0-beta1-dev';
+		$this->minimumPhp    = JOOMLA_MINIMUM_PHP;
+	}
+
+	/**
 	 * Method to install mod_agosms_search
 	 *
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
