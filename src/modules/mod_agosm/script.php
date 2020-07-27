@@ -67,7 +67,7 @@ class Mod_AgosmInstallerScript
 	 */
 	public function update($parent)
 	{
-		echo '<p>' . JText::sprintf('MOD_AGOSM_UPDATE', $parent->get('manifest')->version) . '</p>';
+		echo '<p>' . JText::sprintf('MOD_AGOSM_UPDATE', 'x') . '</p>';
 	}
 
 	/**

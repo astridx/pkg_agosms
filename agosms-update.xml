@@ -536,7 +536,7 @@
         <downloads>
             <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v2.0.2/pkg-agosms-2.0.2.zip</downloadurl>
         </downloads>
-		<sha384>e6fea82deb38420d763bac7ebdc42952e5d0dc83daf01dbf4729651526cede443dc7003d28fb27946412e846c2e96c36</sha384>
+		<sha384>d978aac9efeab3d44fe4e63dac99cf2b5e46f2fb28a7de80e1decd09da31f8fdbfa69c21f4c0380b7bce72aa79e28eff</sha384>
         <tags>
             <tag>stable</tag>
         </tags>

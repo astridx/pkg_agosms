@@ -8,14 +8,16 @@
  * @link        astrid-guenther.de
  */
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
+
+use Joomla\CMS\Installer\InstallerScript;
 
 /**
  * Installation class to perform additional changes during install/uninstall/update
  *
  * @since  1.0.40
  */
-class Pkg_AgosmsInstallerScript extends JInstallerScript
+class Pkg_AgosmsInstallerScript extends InstallerScript
 {
 	/**
 	 * Extension script constructor.
