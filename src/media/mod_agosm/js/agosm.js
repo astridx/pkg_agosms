@@ -44,6 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		var esriallowMultipleResults = (element.getAttribute('data-esriallowMultipleResults') === "true");
 		var showrouting_simple = element.getAttribute('data-showrouting-simple');
 
+		var addprivacybox = element.getAttribute('data-addprivacybox');
+		var unique = element.getAttribute('data-unique');
+		var buttons = document.getElementsByClassName('b' + unique);
+		var privacyfields = document.getElementsByClassName('p' + unique);
+
 		if (showrouting_simple === '1')
 		{
 			var routesimpleposition = element.getAttribute('data-route-simple-position');
@@ -150,6 +155,38 @@ document.addEventListener('DOMContentLoaded', function () {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 				worldCopyJump: true
 			}).setView(lonlat, zoom);
+		}
+
+		// Privacy
+		if (localStorage.getItem("privacyState") === null)
+		{
+			localStorage.setItem("privacyState", '0')
+		}
+
+		var i;
+		for (i = 0; i < buttons.length; i++) {
+			if (localStorage.getItem("privacyState") === '0') {
+				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
+				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_SHOW_MAP');
+			} else {
+				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_HIDE_MAP');
+				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_HIDE_MAP');
+			}
+			buttons[i].onclick = function () {
+				if (localStorage.getItem("privacyState") === '0') {
+					document.getElementById('map' + moduleId).style.display = "block";
+					localStorage.setItem("privacyState", '1');
+				} else {
+					localStorage.setItem("privacyState", '0');
+				}
+				window.location.reload();
+			}
+		}
+
+		if (addprivacybox === '1' && (localStorage.getItem("privacyState") === '0'))
+		{
+			document.getElementById('map' + moduleId).style.display = "none";
+			return;
 		}
 
 		// Add Scrollwheele Listener, so that you can activate it on mouse click
@@ -608,10 +645,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		if (!String.prototype.startsWith) {
-			   String.prototype.startsWith = function(searchString, position){
-				 position = position || 0;
-				 return this.substr(position, searchString.length) === searchString;
-			 };
+			String.prototype.startsWith = function (searchString, position) {
+				position = position || 0;
+				return this.substr(position, searchString.length) === searchString;
+			};
 		}
 		// Show Pins from customfield
 		if (showcustomfieldpin === '1')

@@ -45,6 +45,17 @@
 				/>
 
 				<field
+					name="addprivacybox"
+					type="list"
+					label="MOD_AGOSM_ADDPRIVACYBOX"
+					default="0"
+					description="MOD_AGOSM_ADDPRIVACYBOX_DESC"
+				>
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+	
+				<field
 					type="list"
 					name="heightunit"
 					label="MOD_AGOSM_HEIGHTUNIT"
