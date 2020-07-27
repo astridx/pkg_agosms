@@ -1,4 +1,6 @@
 .gitignore
+dist
+sik
 dist/
 sik/
 vendor/
