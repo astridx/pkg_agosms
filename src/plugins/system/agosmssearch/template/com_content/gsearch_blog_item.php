@@ -75,7 +75,7 @@ if (isset($item->distance))
 				<?php echo $item->title . ' ' . $distance; ?>
 		<?php }  ?>
 	</h3>
-	<?php //echo $item->event->afterDisplayTitle; ?>
+	<?php echo $item->event->afterDisplayTitle; ?>
 	<?php //echo $item->event->beforeDisplayContent; ?>
 
 	<?php if ($ImageIntro && !$ImagesTab && ($image_type == "intro" || $image_type == "")) { ?>

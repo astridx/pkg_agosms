@@ -657,14 +657,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
 				// skip loop if the property is from prototype
-				if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin))
+				if (!specialcustomfieldpins.hasOwnProperty(specialcustomfieldpin)) {
 					continue;
+				}
 
 				var objcf = specialcustomfieldpins[specialcustomfieldpin];
+				
+				if (Object.keys(objcf).length === 0) {
+					continue;
+				}
 
 				let tempMarkercf = null;
 
-				if (objcf.cords && !objcf.cords.startsWith(",,"))
+				if (objcf.cords && !objcf.cords.startsWith(",,") && !objcf.cords.startsWith("0,0,"))
 				{
 					var values = objcf.cords.split(",");
 					tempMarkercf = L.marker(objcf.cords.split(",").slice(0, 2));

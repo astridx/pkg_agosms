@@ -284,7 +284,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (Object.keys(objcf).length === 0) {
 					continue;
 				}
-				
 
 				let tempMarkercf = null;
 

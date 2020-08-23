@@ -430,7 +430,7 @@ class ArticlesModelAgSearch extends JModelList
 			$keyword = str_replace(")", "\\\\)", $keyword);
 			$keyword = str_replace("*", "\\\\*", $keyword);
 
-			if ($_GET['match'] == 'any')
+			if (array_key_exists('match', $_GET) && $_GET['match'] == 'any')
 			{
 				$query .= " AND (";
 
