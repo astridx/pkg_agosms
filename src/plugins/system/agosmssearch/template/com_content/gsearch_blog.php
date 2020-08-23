@@ -1,4 +1,4 @@
-blog_anfang<?php
+<?php
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
 
-$document = JFactory::getDocument();
 $lang = JFactory::getLanguage();
 $lang->load("mod_agosms_search");
 
@@ -21,9 +20,41 @@ require_once JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model
 $model = new ArticlesModelAgSearch;
 $module_params = new Registry($model->module_params);
 
+// Include skripts/styles to the header
+$document = JFactory::getDocument();
+
+$leafletIsLoaded = false;
+
+foreach ($document->_scripts as $key => $script)
+{
+	$leafletPath = "leaflet/leaflet.js";
+
+	if (strpos($key, $leafletPath))
+	{
+		$leafletIsLoaded = true;
+	}
+}
+
+if ($module_params->get('show_map', "1") === "1")
+{
+	if (!$leafletIsLoaded)
+	{
+		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.css');
+		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.js');
+	}
+
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/cluster/MarkerCluster.css');
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/cluster/MarkerCluster.Default.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/cluster/leaflet.markercluster-src.js');
+	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/js/agosm_search.js');
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/css/agosms_search.css');
+}
+
+
 $model->limit = JFactory::getApplication()->input->get("limit", $module_params->get('items_limit', 10));
 
 $items = $model->getItems();
+$itemsForMap = $model->getItemsForMap();
 ?>
 
 <div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
@@ -42,6 +73,7 @@ $items = $model->getItems();
 	width:auto;
 	height:<?php echo $module_params->get('height', '400'); ?><?php echo $module_params->get('heightunit', 'px'); ?>;"
 	data-module-id="<?php echo $model->module_id; ?>"
+	data-uriroot="<?php echo JUri::root(); ?>"
 	data-no-world-warp="<?php echo $module_params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $module_params->get('detectRetina', 0); ?>"
 	data-baselayer="<?php echo $module_params->get('baselayer', 'mapnik'); ?>"
@@ -70,7 +102,7 @@ $items = $model->getItems();
 	data-scale="<?php echo count($module_params->get('scale')); ?>"
 <?php endif; ?>	
 	data-specialcustomfieldpins="<?php 
-	echo htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8'); 
+	echo htmlspecialchars(json_encode($itemsForMap), ENT_QUOTES, 'UTF-8'); 
 	?>"
 	data-scale-metric="<?php echo in_array('metric', $module_params->get('scale', $defaultArray)); ?>"
 	data-scale-imperial="<?php echo in_array('imperial', $module_params->get('scale', $defaultArray)); ?>"
@@ -208,5 +240,5 @@ $items = $model->getItems();
 <?php } ?>
 
 	
-</div>blogende
+</div>
 
