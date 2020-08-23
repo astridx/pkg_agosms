@@ -30,7 +30,7 @@ class modAgosmsSearchHelper
 
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select($db->quoteName('*'))
+		$query->select($db->quoteName('params'))
 			->from('#__modules')
 			->where('id = ' . $id);
 
