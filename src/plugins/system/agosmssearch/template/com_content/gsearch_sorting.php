@@ -39,7 +39,7 @@ foreach($customSorting as $field) {
 	<option value="featured"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'); ?></option>
 	<option value="rand"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'); ?></option>
 	<option value="distance"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DISTANCE'); ?></option>
-	<?php if(count($sortingFields)) { ?>
+	<?php if(count($sortingFields) && isset($item)) { ?>
 		<?php foreach($sortingFields as $field) { ?>
 			<?php if(property_exists($item, "name")) { ?>
 				<option value="field<?php echo $field->id; ?>"><?php echo JText::_($field->name); ?></option>
