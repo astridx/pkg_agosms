@@ -16,7 +16,7 @@ $sortingFields = array();
 foreach($customSorting as $field) {
 	$tmp = new stdClass;
 	$aField = explode(":", $field);
-	if(array_key_exists('id', $aField))
+	//if(array_key_exists('id', $aField))
 		$tmp->id = $aField[1];
 	$flt = explode('{', $field, 2);
 	if(!empty($flt[1]) && $flt[1] != '') {
@@ -31,17 +31,11 @@ foreach($customSorting as $field) {
 <select class="inputbox select ordering">
 	<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_SELECT'); ?></option>
 	<option value="title"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'); ?></option>
-	<option value="alias"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_ALIAS'); ?></option>
-	<option value="created"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE'); ?></option>
 	<option value="publish_up"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE_PUBLISHING'); ?></option>
 	<option value="category"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_CATEGORY'); ?></option>
-	<option value="hits"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_POPULAR'); ?></option>
-	<option value="featured"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_FEATURED'); ?></option>
-	<option value="rand"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_RANDOM'); ?></option>
-	<option value="distance"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DISTANCE'); ?></option>
 	<?php if(count($sortingFields)) { ?>
 		<?php foreach($sortingFields as $field) { ?>
-			<?php if(property_exists($item, "name")) { ?>
+			<?php if(property_exists($field, "name") && property_exists($field, "id")) { ?>
 				<option value="field<?php echo $field->id; ?>"><?php echo JText::_($field->name); ?></option>
 			<?php } ?>
 		<?php } ?>

@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 
 class ArticlesModelAgSearch extends JModelList
 {
+
 	var $input;
 	var $module_id;
 	var $module_helper;
@@ -56,13 +57,16 @@ class ArticlesModelAgSearch extends JModelList
 		$this->total_items = $this->getItems(true);
 	}
 
-	function getItems($total = false)
-	{
+	function getItemsForMap(){
+		return $this->addCustomfieldvalues($this->getItems());
+	}
+
+	function getItems($total = false) {
 		if (isset($this->module_params->georestrict) && $this->module_params->georestrict)
 		{
 			$filterresults = $this->getItemsBeforGeo(false, false);
 			$tempfilterresults = array();
-			
+
 			foreach ($filterresults as $filterresult) {
 				$jcFields = FieldsHelper::getFields('com_content.article', $filterresult, true);
 
@@ -89,8 +93,7 @@ class ArticlesModelAgSearch extends JModelList
 							$filterresult->lat = $fieldlat;
 							$filterresult->lon = $fieldlon;
 							//$tempfilterresults[] = $filterresult;
-						}
-						else
+						} else
 						{
 							$from = "field_" . $jcField->id . "-from";
 							$to = "field_" . $jcField->id . "-to";
@@ -110,31 +113,120 @@ class ArticlesModelAgSearch extends JModelList
 					}
 				}
 			}
-			
+
 			if ($total)
 			{
-				return (string)sizeof($tempfilterresults);
-			}
-			else
+				return (string) sizeof($tempfilterresults);
+			} else
 			{
 				$this->limitstart = $this->input->get("page-start", 0, "int");
-				
+
 				if (!empty($tempfilterresults) && JFactory::getApplication()->input->get("orderby") == "distance")
 				{
-					usort($tempfilterresults, function ($a, $b) {return $a->distance > $b->distance;});
+					usort($tempfilterresults, function ($a, $b) {
+						return $a->distance > $b->distance;
+					});
 				}
-				
+
 				$tempfilterresultslimit = array_slice($tempfilterresults, $this->limitstart, $this->limit);
-				
-				return $tempfilterresultslimit;
+
+				return $this->addCustomfieldvalues($tempfilterresultslimit);
 			}
 		}
-		
+
 		return $this->getItemsBeforGeo($total);
 	}
 
-	function getItemsBeforGeo($total = false, $limitforpagination = true)
-	{
+	function addCustomfieldvalues($items) {
+		$itemsfiltered = array();
+		
+		if ($items)
+		{
+			foreach ($items as $key => $item) {
+				if ($item->state !== "1")
+				{
+					continue;
+				}
+
+				// Get item's fields, also preparing their value property for manual display
+				// (calling plugins events and loading layouts to get their HTML display)
+				$fields = FieldsHelper::getFields('com_content.article', $item, true);
+
+				foreach ($fields as $key => $field) {
+					$itemfiltered = new stdClass;
+
+					if ($field->title == 'lat, lon')
+					{
+						$itemfiltered->cords = $field->value;
+						$test = explode(",", $itemfiltered->cords);
+
+						if (is_numeric($test[0]) && is_numeric($test[1]))
+						{
+							$itemfiltered->title = $item->title;
+							$itemfiltered->id = $item->id;
+							$itemfiltered->type = $field->type;
+						}
+					}
+
+					if ($field->type == 'agosmsmarker')
+					{
+						$itemfiltered->cords = $field->value;
+						$test = explode(",", $itemfiltered->cords);
+
+						if (is_numeric($test[0]) && is_numeric($test[1]))
+						{
+							$itemfiltered->title = $item->title;
+							$itemfiltered->id = $item->id;
+							$itemfiltered->type = $field->type;
+						}
+					}
+
+					if ($field->type == 'agosmsaddressmarker')
+					{
+						// Get plugin parameters
+						$popup = $field->fieldparams->get('popup', '0');
+						$specialicon = $field->fieldparams->get('specialicon', '0');
+
+						$itemfiltered->cords = $field->rawvalue;
+						$test = explode(",", $itemfiltered->cords);
+
+						if (sizeof($test) > 5 && is_numeric($test[0]) && is_numeric($test[1]))
+						{
+							$itemfiltered->title = $item->title;
+							$itemfiltered->id = $item->id;
+							$itemfiltered->type = $field->type;
+							$itemfiltered->lat = $test[0];
+							$itemfiltered->lon = $test[1];
+
+							if ($specialicon)
+							{
+								$itemfiltered->iconcolor = $test[2];
+								$itemfiltered->markercolor = $test[3];
+								$itemfiltered->icon = $test[4];
+							}
+
+							if ($popup)
+							{
+								$itemfiltered->popuptext = $test[5];
+							}
+						}
+					}
+
+					$itemsfiltered[] = $itemfiltered;
+				}
+			}
+		}
+
+		if ($itemsfiltered)
+		{
+			return $itemsfiltered;
+		}
+
+
+		return array();
+	}
+
+	function getItemsBeforGeo($total = false, $limitforpagination = true) {
 		// See /var/www/html/joomla-cms/administrator/components/com_actionlogs/models/actionlogs.php
 		// And /var/www/html/joomla-cms/administrator/components/com_languages/helpers/multilangstatus.php
 		$db = JFactory::getDbo();
@@ -143,9 +235,7 @@ class ArticlesModelAgSearch extends JModelList
 		if ($total)
 		{
 			$query->select('count(distinct(i.id))');
-
-		} 
-		else
+		} else
 		{
 			$featuredFirst = false;
 			switch ($this->module_params->include_featured) {
@@ -165,7 +255,7 @@ class ArticlesModelAgSearch extends JModelList
 			$orderto = JFactory::getApplication()->input->get("orderto", $this->module_params->ordering_default_dir);
 
 			$query = "SELECT i.*, GROUP_CONCAT(tm.tag_id) as tags, cat.title as category";
-			
+
 			// Select field ordering value
 			if ($featuredFirst)
 			{
@@ -310,16 +400,15 @@ class ArticlesModelAgSearch extends JModelList
 		} else
 		{
 			$this->limitstart = $this->input->get("page-start", 0, "int");
-			
+
 			if ($limitforpagination)
 			{
 				$db->setQuery($query, $this->limitstart, $this->limit);
-			}
-			else
+			} else
 			{
-				$db->setQuery($query);				
+				$db->setQuery($query);
 			}
-			
+
 			$return = $db->loadObjectList();
 		}
 
@@ -341,7 +430,7 @@ class ArticlesModelAgSearch extends JModelList
 			$keyword = str_replace(")", "\\\\)", $keyword);
 			$keyword = str_replace("*", "\\\\*", $keyword);
 
-			if ($_GET['match'] == 'any')
+			if (array_key_exists('match', $_GET) && $_GET['match'] == 'any')
 			{
 				$query .= " AND (";
 
@@ -462,8 +551,7 @@ class ArticlesModelAgSearch extends JModelList
 							{
 								$sub_query .= " OR ";
 							}
-						}
-						else
+						} else
 						{
 							$sub_query .= " OR ";
 						}
@@ -1103,4 +1191,5 @@ class ArticlesModelAgSearch extends JModelList
 			return $miles;
 		}
 	}
+
 }
