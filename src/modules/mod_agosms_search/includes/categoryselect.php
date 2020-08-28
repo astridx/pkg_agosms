@@ -16,6 +16,9 @@ class JFormFieldCategorySelect extends JFormField
 
 	function getInput()
 	{
+		if (!isset($this->options['control'])) {
+			return self::fetchElement($this->name, $this->value, $this->element, '');
+		}
 		return self::fetchElement($this->name, $this->value, $this->element, $this->options['control']);
 	}
 
