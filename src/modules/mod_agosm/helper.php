@@ -209,6 +209,11 @@ class ModagosmHelper
 			{
 				foreach ($items as $key => $item)
 				{
+					if ($cat[0] != 0 && $item->catid != $cat[0])
+					{
+						continue;
+					}
+
 					if ($item->state !== "1")
 					{
 						continue;
