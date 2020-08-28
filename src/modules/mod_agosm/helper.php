@@ -192,6 +192,7 @@ class ModagosmHelper
 			$access = !JComponentHelper::getParams('com_agosms')->get('show_noauth');
 			$model->setState('filter.access', $access);
 
+			$cat = $params->get('catidcf', 0);
 			$catid = (int) $params->get('catid', 0);
 			$model->setState('category.id', $catid);
 			$model->setState('category.group', $params->get('groupby', 0));
