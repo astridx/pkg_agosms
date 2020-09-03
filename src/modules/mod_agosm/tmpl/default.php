@@ -95,6 +95,10 @@ $unique = $module->id . '_' . uniqid();
 	data-specialcomponentpins="<?php echo htmlspecialchars(json_encode($list), ENT_QUOTES, 'UTF-8'); ?>"
 	data-showcomponentpin="<?php echo $params->get('showcomponentpin', '1'); ?>"
 <?php endif; ?>
+<?php if ($params->get('showcomponentpinone', '1')) : ?>
+	data-specialcomponentpinone="<?php echo htmlspecialchars(json_encode($listone), ENT_QUOTES, 'UTF-8'); ?>"
+	data-showcomponentpinone="<?php echo $params->get('showcomponentpinone', '1'); ?>"
+<?php endif; ?>
 <?php if ($params->get('showcustomfieldpin', '1') && isset($listcf)) : ?>
 	data-specialcustomfieldpins="<?php echo htmlspecialchars(json_encode($listcf), ENT_QUOTES, 'UTF-8'); ?>"
 	data-showcustomfieldpin="<?php echo $params->get('showcustomfieldpin', '1'); ?>"

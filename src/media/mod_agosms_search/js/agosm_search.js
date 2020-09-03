@@ -1,6 +1,13 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
+	var form = document.querySelector('form');
+	form.addEventListener('change', function () {
+		document.getElementById("gsearch-results").style.display = "none";
+	});
+
+
 	var leafletmapsMod = document.querySelectorAll('.leafletmapModSearch');
 
 	[].forEach.call(leafletmapsMod, function (element) {
@@ -290,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (objcf.cords && !objcf.cords.startsWith(",,"))
 				{
 					var values = objcf.cords.split(",");
-					
+
 					tempMarkercf = L.marker(objcf.cords.split(",").slice(0, 2));
 
 					if (values.length > 4 && objcf.type !== 'agosmsaddressmarker')
@@ -306,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
 							})
 						tempMarkercf.setIcon(AwesomeIcon);
 					}
-					
+
 					if (objcf.type === 'agosmsaddressmarker' && objcf.iconcolor && objcf.markercolor && objcf.icon)
 					{
 						var AwesomeIcon = new L.AwesomeMarkers.icon(
@@ -347,3 +354,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	})
 }, false);
+

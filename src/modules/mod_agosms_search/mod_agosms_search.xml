@@ -69,10 +69,9 @@
 					name="clear_btn_show" 
 					type="radio" 
 					class="btn-group" 
-					default="1" 
+					default="0" 
 					label="MOD_AGOSMSSEARCHCLEAR_BTN_SHOW">
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
-					<option value="1">MOD_AGOSMSSEARCHYES</option>
 				</field>
 				
 				<field 

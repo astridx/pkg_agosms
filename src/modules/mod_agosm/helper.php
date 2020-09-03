@@ -168,6 +168,31 @@ class ModagosmHelper
 	 *
 	 * @return  mixed   Null if no agosms based on input parameters else an array containing all the agosms.
 	 *
+	 * @since   1.0.72
+	 * */
+	public static function getListone(&$params)
+	{
+		// Get an instance of the generic articles model
+		$model = JModelLegacy::getInstance('Agosm', 'AgosmsModel', array('ignore_request' => true));
+		
+		$id = $params->get('showcomponentpinoneid', null);
+		$item = $model->getItem((int)$id);
+
+		if ($item)
+		{
+			return $item;
+		}
+
+		return;
+	}
+
+	/**
+	 * Show online member names
+	 *
+	 * @param   mixed  &$params  The parameters set in the administrator backend
+	 *
+	 * @return  mixed   Null if no agosms based on input parameters else an array containing all the agosms.
+	 *
 	 * @since   1.0.40
 	 * */
 	public static function getListCustomField(&$params)

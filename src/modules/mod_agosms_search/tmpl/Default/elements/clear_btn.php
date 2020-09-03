@@ -37,7 +37,7 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 				});
 				
 				//sliders reset
-				if($("#GSearch<?php echo $module->id; ?>").find(".SliderField").length) {
+			/*	if($("#GSearch<?php echo $module->id; ?>").find(".SliderField").length) {
 					$("#GSearch<?php echo $module->id; ?>").find(".SliderField").each(function() {
 						var slider_obj = $(this);
 						var min = slider_obj.parent().find(".slider-handle").attr("aria-valuemin");
@@ -45,11 +45,12 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 						slider_obj.parents('.slider-wrapper').find(".amount input").val(min + ' - ' + max);
 						slider_obj.parents('.slider-wrapper').find(".amount input").trigger("input");
 					});
-				}
+				}*/
 				
 				
-				//acounter clean
-				$("#GSearch<?php echo $module->id; ?> div.acounter .data").hide();
+				//acounter clean gsearch-results
+				//$("#GSearch<?php //echo $module->id; ?> div.acounter .data").hide();
+				document.getElementById("gsearch-results").style.display = "none";
 				
 				//submit_form_<?php //echo $module->id; ?>();
 			}

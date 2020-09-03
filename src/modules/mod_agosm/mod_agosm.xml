@@ -984,6 +984,43 @@
 					<option value="0">JOPTION_SELECT_CATEGORY</option>
 				</field>
 			</fieldset>
+			<!-- One Marker from Component -->
+			<fieldset
+				name="pinConfigComponentOne"
+				label="MOD_AGOSM_ONE_MARKER_FROM_COMPONENT"
+				addfieldpath="/administrator/components/com_agosms/models/fields"
+			>
+				<field
+					type="spacer"
+					name="showcomponentpinonespacer"
+					label="MOD_AGOSM_ONE_MARKER_FROM_COMPONENT_FIELDSETDESCRIPTION"
+					class="text"
+				/>
+
+				<field
+					type="list"
+					name="showcomponentpinone"
+					default="0"
+					label="MOD_AGOSM_CONFIG_CONTROL_SHOWCOMPONENTPIN_ONE_LABEL"
+					description="MOD_AGOSM_CONFIG_CONTROL_SHOWCOMPONENTPIN_ONE_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field 
+					name="showcomponentpinoneid"
+					type="modal_agosm"
+					label="COM_AGOSMS_FIELD_SELECT_AGOSM_LABEL"
+					required="true"
+					select="true"
+					new="true"
+					edit="true"
+					clear="true"
+					description="COM_AGOSMS_FIELD_SELECT_AGOSM_DESC"
+					showon="showcomponentpinone:1"
+				/>
+			</fieldset>
 
 			<!-- upload -->
 			<fieldset 

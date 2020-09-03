@@ -31,7 +31,6 @@ foreach ($document->_scripts as $key => $script)
 	}
 }
 
-
 if (!$leafletIsLoaded)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.css');
@@ -92,6 +91,11 @@ if ($params->get('scrollwheelzoom') === "2")
 if ($params->get('showcomponentpin', '0') === "1")
 {
 	$list = ModagosmHelper::getList($params);
+}
+
+if ($params->get('showcomponentpinone', '0') === "1")
+{
+	$listone = ModagosmHelper::getListone($params);
 }
 
 if ($params->get('showcustomfieldpin', '0') === "1")

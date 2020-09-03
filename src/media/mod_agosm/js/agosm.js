@@ -77,6 +77,12 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			var specialcomponentpins = JSON.parse(element.getAttribute('data-specialcomponentpins'));
 		}
+		var showcomponentpinone = element.getAttribute('data-showcomponentpinone');
+		if (showcomponentpinone === '1')
+		{
+			var specialcomponentpinone = JSON.parse(element.getAttribute('data-specialcomponentpinone'));
+		}
+
 		var showcustomfieldpin = element.getAttribute('data-showcustomfieldpin');
 		if (showcustomfieldpin === '1')
 		{
@@ -644,6 +650,106 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		}
 
+		// Show Pins from component
+		if (showcomponentpinone === '1')
+		{
+
+			var clustermarkers = L.markerClusterGroup();
+
+			var obj = specialcomponentpinone;
+			let tempMarker = L.marker(obj.coordinates.split(",", 3));
+
+			if (obj.showdefaultpin === "2" && obj.customPinPath != "")
+			{
+
+				if (obj.customPinShadowPath != "") {
+					var LeafIcon = L.Icon.extend({
+						options: {
+							iconUrl: uriroot + obj.customPinPath,
+							shadowUrl: uriroot + obj.customPinShadowPath,
+							iconSize: obj.customPinSize.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							shadowSize: obj.customPinShadowSize.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
+								return parseInt(e);
+							})
+						}
+					});
+				} else
+				{
+					var LeafIcon = L.Icon.extend({
+						options: {
+							iconUrl: uriroot + obj.customPinPath,
+							iconSize: obj.customPinSize.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							iconAnchor: obj.customPinOffset.split(",", 3).map(function (e) {
+								return parseInt(e);
+							}),
+							popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
+								return parseInt(e);
+							})
+						}
+					});
+				}
+				tempMarker.setIcon(new LeafIcon());
+			}
+
+			if (obj.showdefaultpin === "3")
+			{
+				var AwesomeIcon = new L.AwesomeMarkers.icon(
+					{
+						icon: obj.awesomeicon_icon,
+						markerColor: obj.awesomeicon_markercolor,
+						iconColor: obj.awesomeicon_iconcolor,
+						prefix: 'fa',
+						spin: (obj.awesomeicon_spin === "true"),
+						extraClasses: obj.awesomeicon_extraclasses,
+					})
+				tempMarker.setIcon(AwesomeIcon);
+			}
+
+			tempMarker.addTo(clustermarkers);
+
+			if (obj.showpopup === "1")
+			{
+				tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+			}
+
+			if (obj.showpopup === "2")
+			{
+				tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
+			}
+
+			if (obj.showpopup === "3")
+			{
+				tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+				tempMarker.on('mouseover', function (e) {
+					this.openPopup();
+				});
+				tempMarker.on('mouseout', function (e) {
+					this.closePopup();
+				});
+			}
+			
+
+			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1")
+			{
+				window['mymap' + moduleId].fitBounds(mapState.bounds);
+			} else {
+				window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
+			}
+			clustermarkers.addTo(window['mymap' + moduleId]);
+		}
+		
+		
+		
 		if (!String.prototype.startsWith) {
 			String.prototype.startsWith = function (searchString, position) {
 				position = position || 0;
