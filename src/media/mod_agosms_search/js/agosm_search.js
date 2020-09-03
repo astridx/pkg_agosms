@@ -330,6 +330,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 					let url = "index.php?options=com_content&view=article&id=" + objcf.id;
 					let title = objcf.title;
+					let introtext = objcf.introtext;
+					let image = '';
+					console.log(objcf.image);
+					if (objcf.image) {
+						image = "<img class='searchpopupimage' src='" + uriroot + objcf.image + "' />" ;
+					}
 
 					if (values.length > 5 && values[5].trim() != '')
 					{
@@ -337,7 +343,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					}
 
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
-					tempMarkercf.bindPopup(popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+					tempMarkercf.bindPopup(
+						image +
+						popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images') +
+						introtext
+						);
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}

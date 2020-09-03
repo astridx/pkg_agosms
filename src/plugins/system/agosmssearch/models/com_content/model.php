@@ -194,6 +194,15 @@ class ArticlesModelAgSearch extends JModelList
 						{
 							$itemfiltered->title = $item->title;
 							$itemfiltered->id = $item->id;
+							$itemfiltered->introtext = $item->introtext;
+							$images = json_decode($item->images);
+							$itemfiltered->image = "";
+							if (!empty($images->image_intro)) {
+								$itemfiltered->image =
+									"" .
+									htmlspecialchars($images->image_intro, ENT_COMPAT, 'UTF-8') .
+									"" ;
+							}
 							$itemfiltered->type = $field->type;
 							$itemfiltered->lat = $test[0];
 							$itemfiltered->lon = $test[1];
