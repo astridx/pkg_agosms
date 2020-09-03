@@ -530,6 +530,22 @@
 					default="" 
 					label="MOD_AGOSMSSEARCHFILTER_RESULTS_TEMPLATE_STYLES"
 				/>
+				<field
+					type="spacer"
+					name="spacerlocate"
+					hr="true"
+				/>
+
+				<field
+					type="list"
+					name="showlocate"
+					default="0"
+					label="MOD_AGOSM_SHOWLOCATE"
+					description="MOD_AGOSM_SHOWLOCATE_DESC"
+				>
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
 			</fieldset>
 			<fieldset 
 				name="advanced">

@@ -835,8 +835,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		{
 			var lc = L.control.locate({
 				position: 'topright',
+				initialZoomLevel: 17,
 				strings: {
-					title: "Show me where I am, yo!"
+					title: "Wo bin ich?",
 				}
 			}).addTo(window['mymap' + moduleId]);
 		}

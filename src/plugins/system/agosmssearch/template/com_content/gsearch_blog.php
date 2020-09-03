@@ -107,6 +107,7 @@ $itemsForMap = $model->getItemsForMap();
 	data-scale-metric="<?php echo in_array('metric', $module_params->get('scale', $defaultArray)); ?>"
 	data-scale-imperial="<?php echo in_array('imperial', $module_params->get('scale', $defaultArray)); ?>"
 	data-showgeocoder="<?php echo $module_params->get('showgeocoder', '1'); ?>"
+	data-locate="<?php echo $module_params->get('showlocate', false); ?>"
 	class="leafletmapModSearch"
 	id="searchmap<?php echo $model->module_id; ?>">
 </div>

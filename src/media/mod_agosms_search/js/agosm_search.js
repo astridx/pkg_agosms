@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Create map with worldWarp
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
+		var locate = element.getAttribute('data-locate');
 		var uriroot = element.getAttribute('data-uriroot');
 		var noWorldWarp = element.getAttribute('data-no-world-warp');
 		var moduleId = element.getAttribute('data-module-id');
@@ -332,7 +333,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					let title = objcf.title;
 					let introtext = objcf.introtext;
 					let image = '';
-					console.log(objcf.image);
 					if (objcf.image) {
 						image = "<img class='searchpopupimage' src='" + uriroot + objcf.image + "' />" ;
 					}
@@ -361,6 +361,18 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		window['mysearchmap' + moduleId].fitBounds(clustermarkers.getBounds());
 		clustermarkers.addTo(window['mysearchmap' + moduleId]);
+
+		// Show locate
+		if (locate === '1')
+		{
+			var lc = L.control.locate({
+				position: 'topright',
+				initialZoomLevel: 17,
+				strings: {
+					title: "Wo bin ich?"
+				}
+			}).addTo(window['mysearchmap' + moduleId]);
+		}
 
 	})
 }, false);

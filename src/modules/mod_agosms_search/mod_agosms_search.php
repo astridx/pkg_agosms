@@ -107,6 +107,12 @@ foreach ($document->_scripts as $key => $script)
 	}
 }
 
+if ($params->get('showlocate', "1") == "1")
+{
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/locate/L.Control.Locate.css');
+	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/locate/L.Control.Locate.min.js');
+}
+
 if ($params->get('show_map', "1") === "1")
 {
 	if (!$leafletIsLoaded)
