@@ -1012,7 +1012,6 @@
 					name="showcomponentpinoneid"
 					type="modal_agosm"
 					label="COM_AGOSMS_FIELD_SELECT_AGOSM_LABEL"
-					required="true"
 					select="true"
 					new="true"
 					edit="true"
