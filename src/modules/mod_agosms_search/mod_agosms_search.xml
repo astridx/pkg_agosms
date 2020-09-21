@@ -219,7 +219,7 @@
 
 				<field 
 					name="search_type" 
-					type="radio" 
+					type="hidden" 
 					class="btn-group" 
 					default="standard" 
 					label="MOD_AGOSMSSEARCHSEARCH_TYPE"
@@ -238,7 +238,7 @@
 				
 				<field 
 					name="date_format" 
-					type="list" 
+					type="hidden" 
 					default="%e %b %Y::d M yyyy" 
 					label="MOD_AGOSMSSEARCHDATE_FORMAT" 
 					description="MOD_AGOSMSSEARCHDATE_FORMAT_DESC"
@@ -252,7 +252,7 @@
 				
 				<field 
 					name="note4" 
-					type="note" 
+					type="hidden" 
 					label="MOD_AGOSMSSEARCHFEATURES_HEADER" 
 					description="MOD_AGOSMSSEARCHFEATURES_HEADER_DESC" 
 					class="alert" 
@@ -260,7 +260,7 @@
 				/>
 				<field 
 					name="acounter" 
-					type="radio" 
+					type="hidden"  
 					class="btn-group" 
 					default="1" 
 					label="MOD_AGOSMSSEARCHACOUNTER"
@@ -268,14 +268,16 @@
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
-					name="savesearch" type="radio" class="btn-group" 
+					name="savesearch" 
+					type="hidden" class="btn-group" 
 					default="0" 
 					label="MOD_AGOSMSSEARCHSAVE_VALUES_SESSION"
 				>
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 				</field>				
 				<field 
-					name="search_history" type="radio" class="btn-group" 
+					name="search_history" 
+					type="hidden" class="btn-group" 
 					default="0" 
 					label="MOD_AGOSMSSEARCHSEARCH_HISTORY"
 				>
@@ -283,7 +285,7 @@
 				</field>				
 				<field 
 					name="search_stats" 
-					type="radio" 
+					type="hidden" 
 					class="btn-group" 
 					default="0" 
 					label="MOD_AGOSMSSEARCHSEARCH_STATS" 
@@ -300,15 +302,16 @@
 				
 				<field 
 					name="note5" 
-					type="note" 
+					type="hidden" 
 					label="MOD_AGOSMSSEARCHFIELD_CONNECTION_HEADER" 
 					description="MOD_AGOSMSSEARCHFIELD_CONNECTION_HEADER_DESC" 
 					class="alert" 
 					close="true"
 				/>
+				<!-- textarea-->
 				<field 
 					name="field_connection" 
-					type="textarea" 
+					type="hidden" 
 					default="FieldLabel->FieldLabel2->FieldLabel3" 
 					label="MOD_AGOSMSSEARCHFIELD_CONNECTION" 
 					description="MOD_AGOSMSSEARCHFIELD_CONNECTION_DESC" 
@@ -407,7 +410,7 @@
 					<option value="0">MOD_AGOSMSSEARCHNO</option>
 					<option value="1">MOD_AGOSMSSEARCHYES</option>
 				</field>
-				
+				<!--
 				<field type="spacer" name="myspacero1" hr="true" showon="show_resultlist:1"/>
 				<field 
 					name="ordering_show" 
@@ -446,7 +449,7 @@
 					showon="show_resultlist:1[AND]ordering_show:1"
 				/>
 				<field type="spacer" name="myspacero2" hr="true" showon="show_resultlist:1"/>
-
+				-->
 				<field 
 					name="show_introtext" 
 					type="radio" 
