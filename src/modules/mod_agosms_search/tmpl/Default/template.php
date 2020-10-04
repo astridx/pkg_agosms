@@ -270,7 +270,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 ?>
 
 			<div class="gsearch-buttons">
-				<input type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
+				<input style="float:right;padding:1% 10%;" type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
 				<?php
 				if($params->get("clear_btn_show", 1)) {
 					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/clear_btn')); 

@@ -46,7 +46,7 @@ if(!$values) {
 		<?php echo JText::_("{$field->instance->label}"); ?>
 	</h3>
 	
-	<div class="checkboxes-container form-check">
+	<div class="uk-column-1-2 checkboxes-container form-check">
 	<?php foreach($values as $val) { ?>
 		<label class="form-check-label">
 			<input class="inputbox form-check-input" type="checkbox" name="field<?php echo $field->id; ?>[]" value="<?php echo $val->value; ?>"

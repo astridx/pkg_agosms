@@ -48,6 +48,14 @@ if ($module_params->get('show_map', "1") === "1")
 	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/cluster/leaflet.markercluster-src.js');
 	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/js/agosm_search.js');
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/css/agosms_search.css');
+	
+	if ($module_params->get('showlocate', "1") == "1")
+	{
+		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/locate/L.Control.Locate.css');
+		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/locate/font-awesome.min.css');
+		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/locate/L.Control.Locate.min.js');
+	}
+	
 }
 
 
@@ -120,7 +128,8 @@ $itemsForMap = $model->getItemsForMap();
 <?php if (count($items)) { ?>
 <div class="gsearch-toolbox" >
 	<?php
-	if ($model->module_params->ordering_show)
+	//if ($model->module_params->ordering_show)
+	if (false)
 	{
 	?>
 		<div class="gsearch-sorting">

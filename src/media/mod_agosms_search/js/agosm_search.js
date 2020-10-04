@@ -3,9 +3,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	var form = document.querySelector('form');
-	form.addEventListener('change', function () {
-		document.getElementById("gsearch-results").style.display = "none";
-	});
+	if (form) {
+		form.addEventListener('change', function () {
+			document.getElementById("gsearch-results").style.display = "none";
+		});
+	}
 
 
 	var leafletmapsMod = document.querySelectorAll('.leafletmapModSearch');
@@ -174,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var astrid = '';
 		if (attrModule === '1')
 		{
-			astrid = ' ' + Joomla.JText._('MOD_AGOSM_MODULE_BY') + ' <a href="https://www.astrid-guenther.de">Astrid Günther</a>';
+			astrid = ' | Joomla-Module by <a href="https://www.astrid-guenther.de">Astrid Günther</a>';
 		}
 		var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,

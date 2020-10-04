@@ -259,9 +259,11 @@ class ArticlesModelAgSearch extends JModelList
 					break;
 			}
 
-			$default_ordering = $featuredFirst ? 'featured' : $this->module_params->ordering_default;
+			//$default_ordering = $featuredFirst ? 'featured' : $this->module_params->ordering_default;
+			$default_ordering =  'created';
 			$orderby = JFactory::getApplication()->input->get("orderby", $default_ordering);
-			$orderto = JFactory::getApplication()->input->get("orderto", $this->module_params->ordering_default_dir);
+			//$orderto = JFactory::getApplication()->input->get("orderto", $this->module_params->ordering_default_dir);
+			$orderto = 'desc';
 
 			$query = "SELECT i.*, GROUP_CONCAT(tm.tag_id) as tags, cat.title as category";
 

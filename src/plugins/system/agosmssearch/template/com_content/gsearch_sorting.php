@@ -16,8 +16,11 @@ $sortingFields = array();
 foreach($customSorting as $field) {
 	$tmp = new stdClass;
 	$aField = explode(":", $field);
-	//if(array_key_exists('id', $aField))
+	try {
 		$tmp->id = $aField[1];
+	} catch (Exception $e) {
+		
+	}
 	$flt = explode('{', $field, 2);
 	if(!empty($flt[1]) && $flt[1] != '') {
 		$extra_params = json_decode('{' . $flt[1]);

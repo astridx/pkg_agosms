@@ -742,8 +742,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1")
 			{
 				window['mymap' + moduleId].fitBounds(mapState.bounds);
-			} else {
-				window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
 			}
 			clustermarkers.addTo(window['mymap' + moduleId]);
 		}
