@@ -226,6 +226,26 @@ Please check if the problem also exists with the standard template Protostar or 
 
 Google Maps JavaScript API error: RefererNotAllowedMapError
 
+## Resources
+
+- [Joomla](https://www.joomla.de/)
+- [LeafletJs](https://leafletjs.com/)
+
+## License
+
+[GNU General Public License v3.0](https://github.com/astridx/pkg_agosms/blob/master/LICENSE)
+
+## How you can help
+
+Enjoying Gatsby Starter bonsai.css and want to help? You can:
+
+- [Create an issue](https://github.com/astridx/pkg_agosms/issues/new) with some constructive criticism
+- [Submit a pull request](https://github.com/astridx/pkg_agosms/compare) with some improvements to the project
+
+## Contributors
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
 # Support and New Features
 
 This Joomla! Extension is a simple feature. But it is most likely, that your requirements are 
