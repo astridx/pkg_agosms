@@ -414,6 +414,8 @@
 			description="MOD_AGOSM_POPUPTEXT_DESC"
 			filter="safehtml"
 			showon="showpopup!:0"
+			buttons="true"
+			hide="pagebreak,readmore"
 		/>
 	</fieldset>
 
