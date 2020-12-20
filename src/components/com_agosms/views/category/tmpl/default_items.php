@@ -34,6 +34,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 	<p> <?php echo JText::_('COM_AGOSMS_NO_AGOSMS'); ?></p>
 <?php else : ?>
 
+<!-- TGE
 <form action="<?php echo htmlspecialchars(JUri::getInstance()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 	<?php if ($this->params->get('filter_field') != 'hide' || $this->params->get('show_pagination_limit')) : ?>
 	<fieldset class="filters btn-toolbar">
@@ -54,9 +55,108 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 		<?php endif; ?>
 	</fieldset>
 	<?php endif; ?>
+ -->
+
+<!-- TGE
 		<ul class="category list-striped list-condensed">
+-->
+
+<?php
+  // Some vars
+  $idx = 0;
+  $jumpToMapImg = JURI::base() . 'media/mod_agosm/leaflet-gpx/pin-icon-start.png';
+?>
+
+<div id="pager" class="tge-ts-pager">
+  <form>
+    <img src="media/mod_agosm/tablesorter/first.png" class="first"/>
+    <img src="media/mod_agosm/tablesorter/prev.png" class="prev"/>
+    <!-- the "pagedisplay" can be any element, including an input -->
+    <span class="pagedisplay" data-pager-output-filtered="{startRow:input} &ndash; {endRow} / {filteredRows} of {totalRows} total rows"></span>
+    <img src="media/mod_agosm/tablesorter/next.png" class="next"/>
+    <img src="media/mod_agosm/tablesorter/last.png" class="last"/>
+    <select class="pagesize">
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option selected="selected" value="9999">Alle</option>
+    </select>
+  </form>
+</div>
+
+<div style="overflow-x:scroll;">
+<table class="tge_agosm_tablesorter tablesorter" id="tge_agosm_tablesorter">
+
 			<?php foreach ($this->items as $i => $item) : ?>
 				<?php if (in_array($item->access, $this->user->getAuthorisedViewLevels())) : ?>
+<?php
+  $customFields = FieldsHelper::getFields('com_agosms.agosm', $item, true);
+
+  // We need that one to format the custom fields, namely description
+  $dispatcher = JEventDispatcher::getInstance();
+
+  // First item? Generate table header. The two columns Koordinaten and ID will be hidden (above)
+  if($idx == 0) :
+    echo "<thead>";
+    echo "<tr>";
+    echo "<th>Name</th>";
+    echo "<th>Beschreibung</th>";
+    echo "<th>Koordinaten</th>"; // Hidden
+    echo "<th>ID</th>"; // Hidden
+    foreach ($customFields as $i) :
+      echo "<th> $i->label </th>";
+    endforeach;
+    echo "<th>Zeige in Karte</th>";
+    if ($canEdit) :
+      echo "<th>Editiere</th>";
+    endif;
+    echo "</tr>";
+    echo "</thead>";
+    echo "<tbody>";
+  endif; 
+
+  // Generate current row
+  echo "<tr>";
+  $t = $this->escape($item->title);
+  echo "<td>$t</td>";
+
+  $d = $item->description;
+  if(strpos($d, '{field'))
+  {
+    // TGE: Pretty ugly, but did not find a better way :-|
+    // Save away possibly set item->text, then set that to popuptext. The standard plugins/content/fields/fields.php cares for "text" only
+    $tmpText = $item->text ? $item->text : null;
+    $item->text = $item->description;
+    // This will trigger the standard fields plugin:
+    $dispatcher->trigger('onContentPrepare', array('com_agosms.agosm', &$item, &$item->params, 0));
+    $d = $item->text;
+    if($tmpText) { $item->text = $tmpText; };
+  }
+
+  echo "<td>$d</td>";
+  echo "<td>$item->coordinates</td>"; // Hidden
+  echo "<td>$item->id</td>"; // Hidden
+  foreach ($customFields as $i) :
+    echo "<td>$i->value</td>";
+  endforeach;
+  // Have a button that centers the map to this entry
+  echo "<td><img alt='Karte' title='Karte' src='$jumpToMapImg' onclick='focusMap($item->coordinates);' width='18' height='18' /></td>";
+
+  if($canEdit) :
+   echo '<td><span class="list-edit pull-left width-50">';
+   echo JHtml::_('icon.edit', $item, $params); 
+   echo "</span></td>";
+  endif;
+
+  echo "</tr>";
+
+  // Increment index
+  $idx++;
+
+?>
+
+<!--
 					<?php if ($this->items[$i]->state == 0) : ?>
 						<li class="system-unpublished cat-list-row<?php echo $i % 2; ?>">
 					<?php else : ?>
@@ -153,10 +253,17 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 						<?php echo $item->description; ?>
 						<?php endif; ?>
 						</li>
+-->
 				<?php endif;?>
 			<?php endforeach; ?>
+<!-- TGE
 		</ul>
+-->
+</tbody>
+</table>
+</div>
 
+<!--
 		<?php // Code to add a link to submit a agosm. ?>
 		<?php if ($this->params->get('show_pagination')) : ?>
 		 <div class="pagination">
@@ -169,4 +276,6 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 			</div>
 		<?php endif; ?>
 	</form>
+-->
 <?php endif; ?>
+
