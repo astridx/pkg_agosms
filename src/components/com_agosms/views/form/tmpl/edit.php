@@ -48,13 +48,20 @@ $params = $this->state->get('params');
 	</h1>
 	<?php endif; ?>
 	<form action="<?php echo JRoute::_('index.php?option=com_agosms&view=form&w_id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate form-vertical">
+<!-- TGE hier: -->
+		<?php echo $this->form->renderField('coordinates'); ?>
 
 		<?php echo $this->form->renderField('title'); ?>
+<!-- TGE
 		<?php echo $this->form->renderField('alias'); ?>
+-->
 		<?php echo $this->form->renderField('catid'); ?>
 		<?php echo $this->form->renderField('url'); ?>
 		<?php echo $this->form->renderField('tags'); ?>
-		<?php echo $this->form->renderField('coordinates'); ?>
+<!-- TGE: Map displayed above
+  Better because address finder is the close to it
+ -->
+		<?php // TGE echo $this->form->renderField('coordinates'); ?>
 
 		<?php if ($params->get('save_history', 0)) : ?>
 			<?php echo $this->form->renderField('version_note'); ?>
