@@ -11,11 +11,13 @@ defined('JPATH_BASE') or die;
 
 extract($displayData);
 
-$mapid = "map" . uniqid();
 $document = JFactory::getDocument();
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.css');
-$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js', true);
-$document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosmsaddressfinder.js', true);
+// TGE $document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js', true);
+// TGE $document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosmsaddressfinder.js', true);
+// TGE:
+$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js');
+$document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosmsaddressfinder.js');
 
 JHtml::_('stylesheet', 'mod_agosm/agomsaddressfinder.css', array('version' => 'auto', 'relative' => true));
 
@@ -72,48 +74,49 @@ elseif ($app->input->getCmd('option') !== 'com_users'
 
 ?>
 
-<hr>
-<div class="agomsaddressfindersurroundingdiv form-horizontal">
+<div class="form-horizontal">
+<!-- TGE -->
+<table>
+  <tr><td><label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_LAT'); ?></label></td><td><input type="text" class="agomsaddressfinderlat" /></td><td></td></tr>
+  <tr><td><label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_LON'); ?></label></td><td><input type="text" class="agomsaddressfinderlon" /></td><td></td></tr>
+  <tr><td><label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_ADRESSE'); ?></label> </td><td> <input type="text" class="agomsaddressfinderaddressfield" /></td>
+  <td>
+    <div class="agomsaddressfindersurroundingdiv">
+      <button class="btn btn-success agomsaddressfinderbutton_address" type="button">
+       <?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_CALCULATE_CORDS_FROM_ADDRESS'); ?>
+      </button>
+      <input class="agomsaddressfinderhiddenfield" type="hidden" readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" 
+             value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> />
+    </div>
+  </td></tr>
+</table>
+<?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_OPTIONAL_HINT'); ?>
 
-<div class="control-group">
-<label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_LAT'); ?></label>	
-<div class="controls">
-	<input type="text" class="agomsaddressfinderlat" >
-</div>
-</div>
-
-<div class="control-group">
-<label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_LON'); ?></label>	
-<div class="controls">	
-<input type="text" class="agomsaddressfinderlon" >
-</div>
-</div>
-<p>
-<?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_OPTIONAL_HINT'); ?>	
-</p>	
 <hr>
-<div style="height:300px;width:auto" id="<?php echo $mapid; ?>"></div>
-<hr>
-<div class="control-group">
-<label class="control-label"><?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_ADRESSE'); ?></label>	
-<div class="controls">	
-<input type="text" class="agomsaddressfinderaddressfield" >
-</div>
-</div>	
-	
-<button 
-		data-mapid="<?php echo $mapid; ?>"
-		class="btn btn-success agomsaddressfinderbutton_address" 
-		type="button">
-<?php echo JText::_('MOD_AGOSM_ADDRESSFINDER_CALCULATE_CORDS_FROM_ADDRESS'); ?>
-</button>
-	
-<input 
-	class="agomsaddressfinderhiddenfield" 
-	type="hidden" 
-	readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" 
-	value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> 
-/>
+<div class="tge_addressfinder_map"></div>
 
 </div>
-<hr>
+
+<script>
+ // Effectively we need the map ID. If there is no map yet, create a temporary one, which will get 
+ var mapID = "tge_" + new Date().getTime();
+
+ // Possibly there is already a map - this is the case of a frontend edit. Then use that map.
+ var mapContainer = jQuery(".leafletmapMod");
+ if(mapContainer.length)
+ {
+   mapID = "my" + mapContainer.attr("id");
+   console.log("TGE: Map already exists, ID: " + mapID);
+   jQuery(".tge_addressfinder_map").remove();
+ }
+ else
+ {
+   mapContainer = jQuery(".tge_addressfinder_map");
+   mapContainer.attr("id", mapID);
+   mapContainer.css("height", "300px").css("width", "auto");
+   console.log("TGE: Generated map ID: " + mapID);
+ }
+ var button = jQuery(".agomsaddressfinderbutton_address");
+ button.attr('data-mapid', mapID);
+</script>
+
