@@ -225,7 +225,9 @@ class AgosmsModelCategory extends JModelList
 
 		// List state information
 		$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->get('list_limit'), 'uint');
-		$this->setState('list.limit', $limit);
+// TGE With tablesorter we need all entries
+		$this->setState('list.limit', 0);
+//		$this->setState('list.limit', $limit);
 
 		$limitstart = $app->input->get('limitstart', 0, 'uint');
 		$this->setState('list.start', $limitstart);
