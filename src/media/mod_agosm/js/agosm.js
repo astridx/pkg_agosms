@@ -1,3 +1,13 @@
+
+function mapChangeListener(e)
+{
+  // Cannot register that function directly, depending on load order that may not be known yet
+  if(filterListOnMapChange)
+  {
+    return filterListOnMapChange(e);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
 
 	var leafletmapsMod = document.querySelectorAll('.leafletmapMod');
@@ -48,6 +58,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		var unique = element.getAttribute('data-unique');
 		var buttons = document.getElementsByClassName('b' + unique);
 		var privacyfields = document.getElementsByClassName('p' + unique);
+
+// TGE: Store a map of marker objects - needed to later reference them for dynamic add/remove to map
+// depending on list filter results
+window['agosm' + moduleId] = {};
+window['agosm' + moduleId]['markers'] = {};
 
 		if (showrouting_simple === '1')
 		{
@@ -579,7 +594,7 @@ document.addEventListener('DOMContentLoaded', function () {
 								}),
 								popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
 									return parseInt(e);
-								})
+								}),
 							}
 						});
 					} else
@@ -595,7 +610,7 @@ document.addEventListener('DOMContentLoaded', function () {
 								}),
 								popupAnchor: obj.customPinPopupOffset.split(",", 3).map(function (e) {
 									return parseInt(e);
-								})
+								}),
 							}
 						});
 					}
@@ -638,6 +653,10 @@ document.addEventListener('DOMContentLoaded', function () {
 						this.closePopup();
 					});
 				}
+
+// TGE
+window['agosm' + moduleId]['markers'][obj.id] = { ref: tempMarker, visible: true };
+
 			}
 
 			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1")
@@ -648,6 +667,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 			clustermarkers.addTo(window['mymap' + moduleId]);
 
+// TGE
+window['agosm' + moduleId]['cluster'] = { ref: clustermarkers };
 		}
 
 		// Show Pins from component
@@ -885,6 +906,11 @@ document.addEventListener('DOMContentLoaded', function () {
 				sessionStorage.setItem('mapState', JSON.stringify(mapState));
 			});
 		}
+
+    var map = window["mymap" + moduleId]
+    map.on("zoomend", mapChangeListener);
+    map.on("moveend", mapChangeListener);
+
 	})
 }, false);
 
