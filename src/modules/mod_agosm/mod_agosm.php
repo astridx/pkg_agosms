@@ -37,6 +37,30 @@ if (!$leafletIsLoaded)
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js');
 }
 
+// TGE BEGIN
+$tableSorterIsLoaded = false;
+foreach ($document->_scripts as $key => $script)
+{
+  $tableSorterPath = "jquery.tablesorter.js";
+
+  if (strpos($key, $tableSorterPath))
+  {
+    $tableSorterIsLoaded = true;
+  }
+}
+
+if (! $tableSorterIsLoaded)
+{
+  $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/tablesorter/theme.jui.css');
+  $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/tablesorter/jquery.tablesorter.pager.css');
+  $document->addScript(JURI::root(true) . '/media/mod_agosm/tablesorter/jquery.tablesorter.js');
+  $document->addScript(JURI::root(true) . '/media/mod_agosm/tablesorter/jquery.tablesorter.pager.js');
+  $document->addScript(JURI::root(true) . '/media/mod_agosm/tablesorter/jquery.tablesorter.widgets.js');
+  $document->addScript(JURI::root(true) . '/media/mod_agosm/tablesorter/agosm_tablesorter.js');
+}
+// TGE END
+
+
 if ($params->get('showgeocoder', '1') == 1 || $params->get('showrouting', '1') == 1)
 {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/Control.Geocoder.css');

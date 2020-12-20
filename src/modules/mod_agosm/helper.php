@@ -155,6 +155,24 @@ class ModagosmHelper
 
 		if ($items)
 		{
+
+  // TGE: Pre-process popuptext - resolve fields
+  // We need that one to format the custom fields, namely popuptext:
+  $dispatcher = JEventDispatcher::getInstance();
+  foreach($items as $item) :
+    if($item->popuptext && strpos($item->popuptext, '{field'))
+    {
+      // Save away possibly set item->text, then set that to popuptext. The standard plugins/content/fields/fields.php cares for "text" only
+      $tmpText = $item->text ? $item->text : null;
+      $item->text = $item->popuptext;
+      // TGE: Pretty ugly, but did not find a better way :-|
+      // This will trigger the standard fields plugin
+      $dispatcher->trigger('onContentPrepare', array('com_agosms.agosm', &$item, &$item->params, 0));
+      $item->popuptext = $item->text;
+      if($tmpText) { $item->text = $tmpText; }
+    }
+  endforeach;
+
 			return $items;
 		}
 
