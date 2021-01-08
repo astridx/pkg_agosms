@@ -17,6 +17,7 @@ $unique = $module->id . '_' . uniqid();
 	height:<?php echo $params->get('height', '400'); ?><?php echo $params->get('heightunit', 'px'); ?>;"
 	data-module-id="<?php echo $module->id; ?>"
 	data-addprivacybox="<?php echo $params->get('addprivacybox', '0') ?>"
+	data-disableClusteringAtZoom="<?php echo $params->get('disableClusteringAtZoom', '20') ?>"
 	data-unique='<?php echo $unique ?>'
 	data-no-world-warp="<?php echo $params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $params->get('detectRetina', 0); ?>"

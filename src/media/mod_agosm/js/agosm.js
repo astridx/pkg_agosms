@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	[].forEach.call(leafletmapsMod, function (element) {
 
+		var disableClusteringAtZoom = element.getAttribute('data-disableClusteringAtZoom');
 		var savestate = element.getAttribute('data-savestate');
 		var fullscreen = element.getAttribute('data-fullscreen');
 		var locate = element.getAttribute('data-locate');
@@ -550,7 +551,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (showcomponentpin === '1')
 		{
 
-			var clustermarkers = L.markerClusterGroup();
+			var clustermarkers = L.markerClusterGroup({ disableClusteringAtZoom: disableClusteringAtZoom });
 
 			for (var specialcomponentpin in specialcomponentpins) {
 				// skip loop if the property is from prototype
@@ -654,7 +655,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (showcomponentpinone === '1')
 		{
 
-			var clustermarkers = L.markerClusterGroup();
+			var clustermarkers = L.markerClusterGroup({ disableClusteringAtZoom: disableClusteringAtZoom });
 
 			var obj = specialcomponentpinone;
 			let tempMarker = L.marker(obj.coordinates.split(",", 3));
@@ -757,7 +758,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show Pins from customfield
 		if (showcustomfieldpin === '1')
 		{
-			var clustermarkers = L.markerClusterGroup();
+			var clustermarkers = L.markerClusterGroup({ disableClusteringAtZoom: disableClusteringAtZoom });
 
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
 				// skip loop if the property is from prototype
