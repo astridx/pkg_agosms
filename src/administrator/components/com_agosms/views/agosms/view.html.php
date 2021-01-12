@@ -99,10 +99,11 @@ class AgosmsViewAgosms extends JViewLegacy
 
 		JToolbarHelper::title(JText::_('COM_AGOSMS_MANAGER_AGOSMS'), 'link agosms');
 
-		if (count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0)
+		/*if (count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0)
 		{
 			JToolbarHelper::addNew('agosm.add');
-		}
+		}*/
+		JToolbarHelper::addNew('agosm.add');
 
 		if ($canDo->get('core.edit') || $canDo->get('core.edit.own'))
 		{
