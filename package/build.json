@@ -1,0 +1,34 @@
+{
+  "packages": [
+    {
+      "name": "Agosms",
+      "originalManifestFileName": "pkg_agosms",
+      "substituteManifestFileName": "pkg_agosms",
+      "extensions": [
+        {
+          "name": "com_agosms",
+          "substitutes": [
+            {
+              "original": "administrator/components/com_agosms/agosms.xml",
+              "replace": "agosms.xml"
+            },
+            {
+              "original": "administrator/components/com_agosms/script.php",
+              "replace": "script.php"
+            }
+          ]
+        },
+        {
+          "name": "mod_agosm",
+          "substitutes": [
+          ]
+        },
+        {
+          "name": "mod_agosms_search",
+          "substitutes": [
+          ]
+        }
+      ]
+    }
+  ]
+}

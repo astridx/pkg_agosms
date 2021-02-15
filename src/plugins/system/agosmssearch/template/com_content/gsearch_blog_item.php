@@ -11,6 +11,13 @@
 
 defined('_JEXEC') or die;
 
+$lang = JFactory::getLanguage();
+$extension = 'mod_agosms_search';
+$base_dir = JPATH_SITE . '/modules/mod_agosms_search';
+$language_tag = 'en-GB';
+$reload = true;
+$lang->load($extension, $base_dir, $language_tag, $reload);
+
 $fields = FieldsHelper::getFields('com_content.article', $item, true);
 $tmp = new stdClass;
 foreach($fields as $field) {
@@ -24,7 +31,8 @@ $fields = $tmp;
 
 $image_type = $model->module_params->image_type;
 $images = json_decode($item->images);			
-$ImageIntro = strlen($images->image_intro) > 1 ? 1 : 0;
+//$ImageIntro = strlen($images->image_intro) > 1 ? 1 : 0;
+$ImageIntro = 0;
 preg_match('/(<img[^>]+>)/i', $item->introtext, $matches);
 $ImageInText = count($matches);
 $ImagesTab = 0;
@@ -141,7 +149,7 @@ if (isset($item->distance))
 			<li class="created">
 				<i class="icon icon-clock"></i>
 				<time datetime="<?php echo $item->created; ?>" itemprop="dateCreated">
-					<?php echo JText::_('MOD_AGOSMSSEARCHITEM_CREATED'); ?> 
+					<?php echo JText::_('MOD_AGOSMSSEARCHITEM_CREATED'); ?>
 					<?php 
 						setlocale(LC_ALL, JFactory::getLanguage()->getLocale());
 						$date_format = explode("::", $model->module_params_native->get('date_format', '%e %b %Y::d M yyyy'))[0];

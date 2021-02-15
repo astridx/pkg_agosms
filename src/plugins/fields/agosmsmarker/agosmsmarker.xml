@@ -10,11 +10,18 @@
 	<version>##VERSION##</version>
 	<description>PLG_FIELDS_AGOSMSMARKER_XML_DESCRIPTION</description>
 	<files>
-		##FILES##
+		<file>agosmsmarker.xml</file>
+
+<folder>tmpl</folder>
+<folder>language</folder>
+<folder>field</folder>
+
+<folder>layouts</folder>
+
+<file plugin="agosmsmarker">agosmsmarker.php</file>
+
+<folder>params</folder>
 	</files>
-	<languages folder="administrator/language">
-		##LANGUAGE_FILES##
-	</languages>
 
 	<config>
 		<fields name="params">

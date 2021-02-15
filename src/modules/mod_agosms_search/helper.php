@@ -298,7 +298,7 @@ class modAgosmsSearchHelper
 		return $db->loadObject();
 	}
 
-	function getFieldValuesFromText($field_id, $type = "int", $module_id)
+	function getFieldValuesFromText($field_id, $type, $module_id)
 	{
 		$db = JFactory::getDbo();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
@@ -362,7 +362,7 @@ class modAgosmsSearchHelper
 		return $return;
 	}
 
-	function getMultiFieldValuesFromText($field_id, $sub_field, $type = "int", $module_id)
+	function getMultiFieldValuesFromText($field_id, $sub_field, $type, $module_id)
 	{
 		$db = JFactory::getDbo();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";

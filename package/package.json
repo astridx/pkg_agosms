@@ -1,0 +1,12 @@
+{
+  "name": "Agosms",
+  "description": "Agosms Extensions",
+  "repository": {},
+  "license": "See license in license.md",
+  "engines": {
+    "node": "14.x"
+  },
+  "dependencies": {
+    "leaflet": "^1.7.1"
+  }
+}

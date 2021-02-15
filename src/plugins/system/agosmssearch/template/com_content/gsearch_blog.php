@@ -13,8 +13,13 @@ defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
 
+
 $lang = JFactory::getLanguage();
-$lang->load("mod_agosms_search");
+$extension = 'mod_agosms_search';
+$base_dir = JPATH_SITE . '/modules/mod_agosms_search';
+$language_tag = 'en-GB';
+$reload = true;
+$lang->load($extension, $base_dir, $language_tag, $reload);
 
 require_once JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model.php";
 $model = new ArticlesModelAgSearch;
@@ -58,7 +63,6 @@ if ($module_params->get('show_map', "1") === "1")
 	
 }
 
-
 $model->limit = JFactory::getApplication()->input->get("limit", $module_params->get('items_limit', 10));
 
 $items = $model->getItems();
@@ -68,6 +72,11 @@ $itemsForMap = $model->getItemsForMap();
 <div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
 	 itemscope itemtype="https://schema.org/Blog">
 	<div class="page-header">
+		<div class="new-search-buttons">
+			<a href="javascript:history.back()">
+				<input style="float:right;padding:1% 10%;" type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_NEW_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
+			</a>
+		</div>
 		<h3>
 			<?php
 				echo (count($items) ? JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_("MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT"));
@@ -247,8 +256,5 @@ $itemsForMap = $model->getItemsForMap();
 			echo $pagination->getPagesCounter(); 
 		?>
 	</div>
-<?php } ?>
-
-	
+<?php } ?>	
 </div>
-

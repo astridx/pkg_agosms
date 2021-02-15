@@ -1,9 +1,7 @@
 {
     "name": "astridx/pkg_agosms",
     "require": {
-        "astridx/jorobo": "0.8.*",
-		"patchwork/jsqueeze": "~1.0",
-		"natxet/CssMin": "~3.0"
+        "astridx/jorobo": "0.8.*"
     },
     "authors": [
         {

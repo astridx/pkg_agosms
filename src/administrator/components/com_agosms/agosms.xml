@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.5" method="upgrade">
-        <name>com_agosms</name>
+	<name>com_agosms</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
 	<copyright>(C) ##YEAR## Open Source Matters. All rights reserved.</copyright>
@@ -34,15 +34,20 @@
 	</update>
 
 	<media folder="media/com_agosms" destination="com_agosms">
-		##MEDIA_FILES##
+		<folder>js</folder>
 	</media>
 
 	<files folder="components/com_agosms">
-		##FRONTEND_COMPONENT_FILES##
+		<folder>controllers</folder>
+		<file>controller.php</file>
+		<folder>models</folder>
+		<folder>language</folder>
+		<file>agosms.php</file>
+		<folder>helpers</folder>
+		<file>metadata.xml</file>
+		<file>router.php</file>
+		<folder>views</folder>
 	</files>
-	<languages folder="language">
-		##FRONTEND_LANGUAGE_FILES##
-	</languages>
 	<administration>
 		<menu img="class:agosms">com_agosms</menu>
 		<submenu>
@@ -50,17 +55,24 @@
 				Note that all & must be escaped to &amp; for the file to be valid
 				XML and be parsed by the installer
 			-->
-			<menu link="option=com_agosms" view="links" img="class:agosms"
-				alt="Agosms/Links">com_agosms_links</menu>
-			<menu link="option=com_categories&amp;extension=com_agosms"
-				view="categories" img="class:agosms-cat" alt="Agosms/Categories">com_agosms_categories</menu>
+			<menu link="option=com_agosms" view="links" img="class:agosms" alt="Agosms/Links">com_agosms_links</menu>
+			<menu link="option=com_categories&amp;extension=com_agosms" view="categories" img="class:agosms-cat" alt="Agosms/Categories">com_agosms_categories</menu>
 		</submenu>
 		<files folder="administrator/components/com_agosms">
-			##BACKEND_COMPONENT_FILES##
+<folder>controllers</folder>
+<file>controller.php</file>
+<folder>models</folder>
+<folder>language</folder>
+<file>agosms.php</file>
+<file>access.xml</file>
+<folder>tables</folder>
+
+<folder>helpers</folder>
+<folder>sql</folder>
+<file>config.xml</file>
+
+<folder>views</folder>
 		</files>
-		<languages folder="administrator/language">
-			##BACKEND_LANGUAGE_FILES##
-		</languages>
 	</administration>
 </extension>
 

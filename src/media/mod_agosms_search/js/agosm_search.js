@@ -1,6 +1,4 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-
 
 	var form = document.querySelector('form');
 	if (form) {
@@ -8,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			document.getElementById("gsearch-results").style.display = "none";
 		});
 	}
-
 
 	var leafletmapsMod = document.querySelectorAll('.leafletmapModSearch');
 
@@ -378,4 +375,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	})
 }, false);
-

@@ -244,7 +244,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 						$sub_field = $extra_params->selected;
 						if(!$sub_field) {
 							echo "Select radicalmultifield in the module parameters";
-							continue;
+							break;
 						}
 						$field_type = $extra_params->type ? $extra_params->type : "text";
 						require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/radicalmultifield/'.$field_type));
@@ -256,7 +256,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 						$sub_field = $extra_params->selected;
 						if(!$sub_field) {
 							echo "Select repeatable field in the module parameters";
-							continue;
+							break;
 						}
 						$field_type = $extra_params->type ? $extra_params->type : "text";
 						require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/repeatable/'.$field_type));

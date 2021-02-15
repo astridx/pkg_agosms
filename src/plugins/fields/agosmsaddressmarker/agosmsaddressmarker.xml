@@ -10,14 +10,26 @@
 	<version>##VERSION##</version>
 	<description>PLG_FIELDS_AGOSMSADDRESSMARKER_XML_DESCRIPTION</description>
 	<files>
-		##FILES##
+		<folder>models</folder>
+
+		<folder>tmpl</folder>
+		<folder>language</folder>
+		<file plugin="agosmsaddressmarker">agosmsaddressmarker.php</file>
+		<folder>field</folder>
+		<folder>layouts</folder>
+		<folder>params</folder>
+		<file>agosmsaddressmarker.xml</file>
 	</files>
-	<languages folder="administrator/language">
-		##LANGUAGE_FILES##
-	</languages>
 	<!-- Media files -->
 	<media folder="media/plg_fields_agosmsaddressmarker" destination="plg_fields_agosmsaddressmarker">
-		##MEDIA_FILES##
+		<folder>GoogleMutant</folder>
+		<folder>Leaflet.awesome-markers</folder>
+		<folder>fonts</folder>
+		<folder>GoogleGestureHandling</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+		<folder>Routing</folder>
+		<folder>leaflet</folder>
 	</media>
 	<config>
 		<fields name="params">
