@@ -144,6 +144,9 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/locales/bootstrap-datepicker' . $lang . '.min.js');
 		} 
 ?>
+<?php 
+	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/css/agosms_search_helix_template.css');
+?>
 
 <div id="GSearch<?php echo $module->id; ?>" class="GSearchBlock <?php echo $params->get('moduleclass_sfx'); ?>">
 
@@ -157,7 +160,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 <?php for($filters_counter = 0; $filters_counter < count($filters); $filters_counter++) { 
 		$field = $filters[$filters_counter];
 ?>
-		<div style="min-width:50%; max-width:50%; float:left" class="gsearch-cell gsearch-cell<?php echo $filters_counter; ?>">
+		<div class="helix-gsearch-cell gsearch-cell gsearch-cell<?php echo $filters_counter; ?>">
 		
 		<?php	
 			switch($field->type) {				
@@ -270,7 +273,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 ?>
 
 			<div class="gsearch-buttons">
-				<input style="float:right;padding:1% 10%;" type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
+				<input style="float:right;padding:1% 10%;margin:5% 0%;" type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
 				<?php
 				if($params->get("clear_btn_show", 1)) {
 					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/clear_btn')); 

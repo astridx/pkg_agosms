@@ -11,6 +11,9 @@
 
 defined('_JEXEC') or die;
 
+$document = JFactory::getDocument();
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/css/agosms_search_helix_template.css');
+
 $lang = JFactory::getLanguage();
 $extension = 'mod_agosms_search';
 $base_dir = JPATH_SITE . '/modules/mod_agosms_search';
@@ -78,7 +81,42 @@ if (isset($item->distance))
 }
 ?>
 
-<div class="item<?php echo $item->featured ? ' featured' : ''; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<hr>
+<div class="helix-search-result item<?php echo $item->featured ? ' featured' : ''; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+
+	<?php if ($ImageIntro && !$ImagesTab && ($image_type == "intro" || $image_type == "")) { ?>
+	<div class="item-image helix-image">
+		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>">
+			<img src="<?php echo JURI::root() . htmlspecialchars($images->image_intro, ENT_COMPAT, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt, ENT_COMPAT, 'UTF-8'); ?>" itemprop="thumbnailUrl"/>
+		</a>
+	</div>
+	<?php } ?>
+	
+	<?php 
+	$image_empty = $model->module_params->image_empty;
+	if(((!$ImageIntro && $image_type == "intro") || (!$ImageInText && $image_type == "text") || (!$ImageIntro && !$ImageInText && $image_type == "")) && $image_empty != "" && $image_empty != "-1" && !$ImagesTab) { ?>
+	<div class="item-image image-empty helix-image">
+		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>">
+			<img src="<?php echo JURI::root(); ?>images/<?php echo $image_empty; ?>" itemprop="thumbnailUrl"/>
+		</a>
+	</div>
+	<?php } ?>
+
+
+	<div class="helix-infos">
+	
+	<time class="helix_time" datetime="<?php echo $item->created; ?>" itemprop="dateCreated">
+					<?php 
+						setlocale(LC_ALL, JFactory::getLanguage()->getLocale());
+						$date_format = explode("::", $model->module_params_native->get('date_format', '%e %b %Y::d M yyyy'))[0];
+						$date = strftime($date_format, strtotime($item->created));
+						$date = mb_convert_case($date, MB_CASE_TITLE, 'UTF-8');
+						echo $date;
+					?>		
+					<?php echo JText::_('MOD_AGOSMSSEARCHITEM_CREATED_SEPARATOR'); ?>
+	</time>
+	<?php echo $item->event->beforeDisplayContent; ?>
+	</div>
 	<h3 itemprop="name" class="item-title">
 		<?php if (property_exists($item, "slug")) { ?>
 			<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>" itemprop="url">
@@ -89,25 +127,7 @@ if (isset($item->distance))
 		<?php }  ?>
 	</h3>
 	<?php echo $item->event->afterDisplayTitle; ?>
-	<?php //echo $item->event->beforeDisplayContent; ?>
 
-	<?php if ($ImageIntro && !$ImagesTab && ($image_type == "intro" || $image_type == "")) { ?>
-	<div class="item-image">
-		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>">
-			<img src="<?php echo JURI::root() . htmlspecialchars($images->image_intro, ENT_COMPAT, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($images->image_intro_alt, ENT_COMPAT, 'UTF-8'); ?>" itemprop="thumbnailUrl"/>
-		</a>
-	</div>
-	<?php } ?>
-	
-	<?php 
-	$image_empty = $model->module_params->image_empty;
-	if(((!$ImageIntro && $image_type == "intro") || (!$ImageInText && $image_type == "text") || (!$ImageIntro && !$ImageInText && $image_type == "")) && $image_empty != "" && $image_empty != "-1" && !$ImagesTab) { ?>
-	<div class="item-image image-empty">
-		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>">
-			<img src="<?php echo JURI::root(); ?>images/<?php echo $image_empty; ?>" itemprop="thumbnailUrl"/>
-		</a>
-	</div>
-	<?php } ?>
 	
 	<?php if($model->module_params->show_introtext) { ?>
 	<div class="item-body">
@@ -122,7 +142,8 @@ if (isset($item->distance))
 		<a class="btn btn-secondary" href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>"><?php echo JText::_('MOD_AGOSMSSEARCHITEM_READMORE'); ?></a>
 	</div>
 	<?php } ?>
-	
+
+<!--	
 	<?php if($model->module_params->show_info) { ?>
 	<div class="item-info">
 		<ul>
@@ -172,7 +193,8 @@ if (isset($item->distance))
 		</ul>
 	</div>
 	<?php } ?>
-	
+-->
+
 	<?php //echo $item->event->afterDisplayContent; ?>
 	<div style="clear: both;"></div>
 </div>
