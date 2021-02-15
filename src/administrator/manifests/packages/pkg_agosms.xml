@@ -23,10 +23,6 @@
 		<file type="plugin" id="agosmsmarker" group="fields">plg_fields_agosmsmarker.zip</file>
 		<file type="plugin" id="agosmsaddressmarker" group="fields">plg_fields_agosmsaddressmarker.zip</file>
 	</files>
-	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.pkg_agosms.sys.ini</language>
-		<language tag="de-DE">de-DE/de-DE.pkg_agosms.sys.ini</language>
-	</languages>
 	<updateservers>
 		<server type="extension" name="Agosm Update Site">https://raw.githubusercontent.com/astridx/pkg_agosms/master/agosms-update.xml</server>
 	</updateservers>
