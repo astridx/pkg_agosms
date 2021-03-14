@@ -403,6 +403,8 @@ document.addEventListener('DOMContentLoaded', function () {
 				errormessage: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ERRORMESSAGE'),
 				distance: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DISTANCE'),
 				duration: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_DURATION'),
+				kilometer: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_KILOMETER'),
+				stunden: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_STUNDEN'),
 				target: routesimpletarget,
 				addresserror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_ADDRESSERROR'),
 				requesterror: Joomla.JText._('MOD_AGOSM_ROUTING_SIMPLE_TEXT_REQUESTERROR')
