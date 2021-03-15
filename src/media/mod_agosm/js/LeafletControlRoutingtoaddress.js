@@ -22,7 +22,7 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
 
     onAdd: function (map) {
         this._map = map;
-        
+
         var controlElementTag = 'div';
         var controlElementClass = 'leaflet-control-routingtoaddress';
         controlElement = this._controlElement = controlElement = L.DomUtil.create(controlElementTag, controlElementClass);
@@ -35,7 +35,7 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
         input.type = 'search';
         input.placeholder = this.options.placeholder;
         input.classList.add("addressinput");
-		input.setAttribute("id", "addressinput");
+        input.setAttribute("id", "addressinput");
 
         controlElement.appendChild(input);
 
@@ -43,8 +43,8 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
         messagebox.classList.add("messagebox");
 
         controlElement.appendChild(messagebox);
-		
-		L.DomEvent.disableClickPropagation(controlElement);
+
+        L.DomEvent.disableClickPropagation(controlElement);
 
         L.DomEvent.addListener(input, 'keydown', this._keydown, this);
 
@@ -52,7 +52,7 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
     },
 
     _keydown: function (e) {
-        
+
         this._messagebox.innerHTML = '';
         messagebox.classList.remove("messagebox");
 
@@ -69,76 +69,81 @@ L.LeafletControlRoutingtoaddress = L.Control.extend({
                 if (this._route_linestring) {
                     this._map.removeLayer(this._route_linestring);
                 }
-            
+
                 var json_obj_target = JSON.parse(Get('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + this.options.target));
                 var json_obj_startingpoint = JSON.parse(Get('https://nominatim.openstreetmap.org/search?format=json&limit=5&q=' + input.value));
 
-                if (typeof json_obj_startingpoint[0] === 'undefined' || 
-                        json_obj_startingpoint[0] === null || 
-                        typeof json_obj_target[0] === 'undefined' || 
-                        json_obj_target[0] === null
-                        )
-                {
+                if (typeof json_obj_startingpoint[0] === 'undefined' ||
+                    json_obj_startingpoint[0] === null ||
+                    typeof json_obj_target[0] === 'undefined' ||
+                    json_obj_target[0] === null
+                ) {
                     input.placeholder = this.options.errormessage;
                     this._input.value = '';
                 }
-                else
-                {
+                else {
                     this._marker_target = L.marker([json_obj_target[0].lat, json_obj_target[0].lon]).addTo(this._map);
                     this._marker_startingpoint = L.marker([json_obj_startingpoint[0].lat, json_obj_startingpoint[0].lon]).addTo(this._map);
 
                     var json_obj_route;
-                    if (this.options.router === 'mapbox')
-                    {
-                            json_obj_route = JSON.parse(Get('https://api.mapbox.com/directions/v5/mapbox/driving/' + 
-                                json_obj_target[0].lon + 
-                                ',' + 
-                                json_obj_target[0].lat + 
-                                ';' +
-                                json_obj_startingpoint[0].lon +
-                                ',' +
-                                json_obj_startingpoint[0].lat +
-                                '?access_token=' + this.options.token +
-                                '&overview=full&geometries=geojson'));
+                    if (this.options.router === 'mapbox') {
+                        json_obj_route = JSON.parse(Get('https://api.mapbox.com/directions/v5/mapbox/driving/' +
+                            json_obj_target[0].lon +
+                            ',' +
+                            json_obj_target[0].lat +
+                            ';' +
+                            json_obj_startingpoint[0].lon +
+                            ',' +
+                            json_obj_startingpoint[0].lat +
+                            '?access_token=' + this.options.token +
+                            '&overview=full&geometries=geojson'));
                     }
-                    else
-                    {
-                            json_obj_route = JSON.parse(Get('https://router.project-osrm.org/route/v1/driving/' + 
-                                    json_obj_target[0].lon + 
-                                    ',' + 
-                                    json_obj_target[0].lat + 
-                                    ';' +
-                                    json_obj_startingpoint[0].lon +
-                                    ',' +
-                                    json_obj_startingpoint[0].lat +
-                                    '?overview=full&geometries=geojson'));
-                    }
-                    
-                    if (json_obj_route.message === 'Too Many Requests' || json_obj_route.message === 'Not Authorized - Invalid Token')
-                    {
-                        this._messagebox.innerHTML = this.options.requesterror;
-                    } 
-                    else if (typeof json_obj_route.routes[0] === 'undefined' )
-                    {
-                        this._messagebox.innerHTML = this.options.errormessage  + '( ' + this.options.router +' )';
-                    }
-                    else
-                    {
-                        this._route_linestring = L.geoJSON(json_obj_route.routes[0].geometry).addTo(this._map);
-                        var distance = (json_obj_route.routes[0].legs[0].distance)/1000;
-                        var duration = (json_obj_route.routes[0].legs[0].duration)/60;
-                        this._map.fitBounds(this._route_linestring.getBounds());
-                        this._messagebox.innerHTML = this.options.distance + ' ' + distance.toFixed(2) + this.options.kilometer + this.options.duration + ' ' +  (duration/60).toFixed(2).replace(".", ":") + this.options.stunden + '( ' + this.options.router +' )';
+                    else {
+                        json_obj_route = JSON.parse(Get('https://router.project-osrm.org/route/v1/driving/' +
+                            json_obj_target[0].lon +
+                            ',' +
+                            json_obj_target[0].lat +
+                            ';' +
+                            json_obj_startingpoint[0].lon +
+                            ',' +
+                            json_obj_startingpoint[0].lat +
+                            '?overview=full&geometries=geojson'));
                     }
 
+                    if (json_obj_route.message === 'Too Many Requests' || json_obj_route.message === 'Not Authorized - Invalid Token') {
+                        this._messagebox.innerHTML = this.options.requesterror;
+                    }
+                    else if (typeof json_obj_route.routes[0] === 'undefined') {
+                        this._messagebox.innerHTML = this.options.errormessage + '( ' + this.options.router + ' )';
+                    }
+                    else {
+                        this._route_linestring = L.geoJSON(json_obj_route.routes[0].geometry).addTo(this._map);
+                        var distance = (json_obj_route.routes[0].legs[0].distance) / 1000;
+                        var duration = (json_obj_route.routes[0].legs[0].duration) / 60;
+                        this._map.fitBounds(this._route_linestring.getBounds());
+                        var stunden = Math.floor(duration / 60);
+                        var minuten = Math.floor(duration % 60);
+                        this._messagebox.innerHTML = this.options.distance
+                            + ' ' + distance.toFixed(2)
+                            + this.options.kilometer
+                            + this.options.duration
+                            + ' ' 
+                            + stunden 
+                            + ':'
+                            + minuten 
+                            + this.options.stunden;
+                    }
+
+                    console.log('Router: ' + this.options.router + ' ' + stunden + ' : ' + minuten);
+
                 }
-                
-                function Get(url){
+
+                function Get(url) {
                     var Httpreq = new XMLHttpRequest(); // a new request
-                    Httpreq.open("GET",url,false);
+                    Httpreq.open("GET", url, false);
                     Httpreq.send(null);
-                    return Httpreq.responseText;          
-                }            
+                    return Httpreq.responseText;
+                }
 
         }
         return true;

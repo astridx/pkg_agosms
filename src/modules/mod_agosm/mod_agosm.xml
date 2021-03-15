@@ -443,6 +443,17 @@
 				<field name="showcomponentpinoneid" type="modal_agosm" label="COM_AGOSMS_FIELD_SELECT_AGOSM_LABEL" select="true" new="true" edit="true" clear="true" description="COM_AGOSMS_FIELD_SELECT_AGOSM_DESC" showon="showcomponentpinone:1" />
 			</fieldset>
 
+			<!-- GeoJSON -->
+			<fieldset name="GeoJSON" label="MOD_AGOSM_GEOJSON">
+				<field type="spacer" name="showgeojson1" label="MOD_AGOSM_GEOJSON_FIELDSETDESCRIPTION" class="text" />
+
+				<field type="list" name="showgeojson" default="0" label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="showgeojson_text" type="textarea" default="{}" label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_TEXT_LABEL" description="MMOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_TEXT_DESC" rows="10" cols="40" showon="showgeojson:1" />
+			</fieldset>
+
 			<!-- upload -->
 			<fieldset name="upload" label="MOD_AGOSM_UPLOAD_FIELDSET">
 				<!-- Basic Required Fields -->
