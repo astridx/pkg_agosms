@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		var geojson = element.getAttribute('data-geojson');
 		var geojsonTextRaw = element.getAttribute('data-geojson-text');
 		var geojsonText = JSON.parse(element.getAttribute('data-geojson-text'));
+		var geojsonfile = element.getAttribute('data-geojsonfile');
+		var geojsonfilename = element.getAttribute('data-geojson-file');
 
 		var uriroot = element.getAttribute('data-uriroot');
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
@@ -794,15 +796,43 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Show GeoJson
 		if (geojson === '1') {
-			try {
-				if (geojsonTextRaw === '{}') {
-					console.log('No GeoJson Object');
-				} else {
-					L.geoJSON(geojsonText).addTo(window['mymap' + moduleId]);
+
+			if (geojsonfile === '0') {
+				try {
+					if (geojsonTextRaw === '{}') {
+						console.log('No GeoJson Object');
+					} else {
+						L.geoJSON(geojsonText).addTo(window['mymap' + moduleId]);
+					}
+				}
+				catch (e) {
+					console.log('GeoJsonError: ' + geojsonTextRaw);
 				}
 			}
-			catch (e) {
-				console.log('GeoJsonError: ' + geojsonTextRaw);
+
+			if (geojsonfile === '1') {
+				geojsonTextRaw = '{}';
+
+				async function postData() {
+					const response = await fetch(uriroot + '/images/' + geojsonfilename);
+					return response.json();
+				}
+				geojsonFileContent = postData();
+
+				geojsonFileContent.then((response) => {
+					geojsonTextRaw = response;
+
+					try {
+						if (geojsonTextRaw === '{}') {
+							console.log('No GeoJson Object');
+						} else {
+							L.geoJSON(geojsonTextRaw).addTo(window['mymap' + moduleId]);
+						}
+					}
+					catch (e) {
+						console.log('GeoJsonError: ' + geojsonTextRaw);
+					}
+				});
 			}
 		}
 

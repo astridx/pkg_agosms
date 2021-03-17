@@ -451,7 +451,12 @@
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
-				<field name="showgeojson_text" type="textarea" default="{}" label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_TEXT_LABEL" description="MMOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_TEXT_DESC" rows="10" cols="40" showon="showgeojson:1" />
+				<field type="list" name="showgeojsonfile" default="0" label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSONFILE_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSONFILE_DESC" showon="showgeojson:1">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="showgeojson_text" type="textarea" default="{}" label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_TEXT_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_TEXT_DESC" rows="10" cols="40" showon="showgeojson:1[AND]showgeojsonfile:0" />
+				<field name="showgeojson_file" type="filelist" label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_TEXT_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOJSON_TEXT_DESC" directory="images" showon="showgeojson:1[AND]showgeojsonfile:1"/>			
 			</fieldset>
 
 			<!-- upload -->

@@ -100,7 +100,11 @@ $unique = $module->id . '_' . uniqid();
 	data-showcomponentpinone="<?php echo $params->get('showcomponentpinone', '1'); ?>"
 <?php endif; ?>
 	data-geojson="<?php echo $params->get('showgeojson', false); ?>"
+<?php if ($params->get('showgeojson', '1')) : ?>
+	data-geojsonfile="<?php echo $params->get('showgeojsonfile', false); ?>"
 	data-geojson-text="<?php echo htmlspecialchars($params->get('showgeojson_text', '{}'), ENT_QUOTES, 'UTF-8'); ?>"
+	data-geojson-file="<?php echo $params->get('showgeojson_file', ''); ?>"
+<?php endif; ?>
 <?php if ($params->get('showcustomfieldpin', '1') && isset($listcf)) : ?>
 	data-specialcustomfieldpins="<?php echo htmlspecialchars(json_encode($listcf), ENT_QUOTES, 'UTF-8'); ?>"
 	data-showcustomfieldpin="<?php echo $params->get('showcustomfieldpin', '1'); ?>"
