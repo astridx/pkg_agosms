@@ -29,7 +29,7 @@ $unique = $module->id . '_' . uniqid();
 	data-mouseposition="<?php echo $params->get('showmouseposition', false); ?>"
 	
 <?php if ($params->get('baselayer', 'mapbox')) : ?>
-	data-mapboxmaptype="<?php echo $params->get('mapboxmaptype', 'streets'); ?>"
+	data-mapboxmaptype="<?php echo $params->get('mapboxmaptype', 'mapbox/streets-v11'); ?>"
 	data-mapboxkey="<?php echo $params->get('mapboxkey', ''); ?>"
 <?php endif; ?>
 <?php if ($params->get('baselayer', 'thunderforest')) : ?>

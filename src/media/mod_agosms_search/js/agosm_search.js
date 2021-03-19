@@ -179,15 +179,15 @@ document.addEventListener('DOMContentLoaded', function () {
 			maxZoom: 18,
 			attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
 		});
-		if (baselayer === 'mapbox')
-		{
-			tileLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + mapboxkey, {
+		if (baselayer === 'mapbox') {
+			tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+				attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>' + astrid,
+				tileSize: 512,
 				maxZoom: 18,
-				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
-					'<a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, ' +
-					'Imagery © <a href=\"https://mapbox.com\">Mapbox</a>' + astrid,
-				id: mapboxmaptype
-			});
+				zoomOffset: -1,
+				id: mapboxmaptype,
+				accessToken: mapboxkey
+				});			
 		}
 		if (baselayer === 'mapnikde')
 		{
