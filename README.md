@@ -183,7 +183,7 @@ in the tab `Module Agosms - Marker Options`
 ![b6](https://user-images.githubusercontent.com/9974686/51428139-834dc300-1c00-11e9-92bb-0c517883da5f.png)
 
 4. Adjust the map
-In the tab `Map configuration` you can set the zoom and the coordinates that 
+In the tab `Map configuration` you can set the zoom (Can be overridden by other functions - such as grouping or routing) and the coordinates that 
 should be shown.
 
 ![b7](https://user-images.githubusercontent.com/9974686/51428140-834dc300-1c00-11e9-909c-fcc57f855849.png)
