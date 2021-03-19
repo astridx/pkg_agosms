@@ -85,7 +85,6 @@
 					<option value="mapnikde">OpenStreetMap DE</option>
 					<option value="stamen">Stamen</option>
 					<option value="opentopomap">OpenTopoMap</option>
-					<option value="openmapsurfer">OpenMapSurfer</option>
 					<option value="humanitarian">Humanitarian (HOT)</option>
 					<option value="thunderforest">Thunderforest</option>
 					<option value="google">Google</option>

@@ -215,15 +215,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				id: ''
 			});
 		}
-		if (baselayer === 'openmapsurfer')
-		{
-			tileLayer = L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
-				maxZoom: 20,
-				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-					'Imagery &copy; <a href=\"http://giscience.uni-hd.de\">GIScience Research Group</a>' + astrid,
-				id: ''
-			});
-		}
 		if (baselayer === 'humanitarian')
 		{
 			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
