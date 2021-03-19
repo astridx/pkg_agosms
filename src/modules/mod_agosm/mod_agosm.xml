@@ -94,20 +94,11 @@
 				<field name="mapboxkey" type="text" default="" label="MOD_AGOSM_MAPBOXKEY_LABEL" description="MOD_AGOSM_MAPBOXKEY_DESC" size="40" showon="baselayer:mapbox" />
 
 				<field type="list" name="mapboxmaptype" default="streets" label="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_LABEL" description="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_DESC" showon="baselayer:mapbox">
-					<option value="mapbox.streets">streets</option>
-					<option value="mapbox.light">light</option>
-					<option value="mapbox.dark">dark</option>
-					<option value="mapbox.satellite">satellite</option>
-					<option value="mapbox.streets-satellite">streets-satellite</option>
-					<option value="mapbox.wheatpaste">wheatpaste</option>
-					<option value="mapbox.streets-basic">basic</option>
-					<option value="mapbox.comic">comic</option>
-					<option value="mapbox.outdoors">outdoors</option>
-					<option value="mapbox.run-bike-hike">run-bike-hike</option>
-					<option value="mapbox.pencil">pencil</option>
-					<option value="mapbox.pirates">pirates</option>
-					<option value="mapbox.emerald">emerald</option>
-					<option value="mapbox.high-contrast">high-contrast</option>
+					<option value="mapbox/streets-v11">streets-v11</option>
+					<option value="mapbox/light-v10">light-v10</option>
+					<option value="mapbox/dark-v10">dark-v10</option>
+					<option value="mapbox/satellite-v9">satellite-v9</option>
+					<option value="mapbox/outdoors-v11">outdoors-v11</option>
 				</field>
 
 				<field name="googlekey" type="text" default="" label="MOD_AGOSM_GOOGLEKEY_LABEL" description="MOD_AGOSM_GOOGLEKEY_DESC" size="40" showon="baselayer:google" />
