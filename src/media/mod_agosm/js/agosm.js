@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var baselayer = element.getAttribute('data-baselayer');
 		var lonlat = element.getAttribute('data-lonlat').split(",", 3);
 		var zoom = element.getAttribute('data-zoom');
+		var disableClusteringAtZoom = element.getAttribute('data-disable-clustering-at-zoom');
 		var mapboxkey = element.getAttribute('data-mapboxkey');
 		var thunderforestkey = element.getAttribute('data-thunderforestkey');
 		var stamenmaptype = element.getAttribute('data-stamenmaptype');
@@ -509,7 +510,46 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show Pins from component
 		if (showcomponentpin === '1') {
 
-			var clustermarkers = L.markerClusterGroup();
+			var clustermarkers = L.markerClusterGroup({
+					maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
+					iconCreateFunction: null,
+					clusterPane: L.Marker.prototype.options.pane,
+			
+					spiderfyOnMaxZoom: true,
+					showCoverageOnHover: true,
+					zoomToBoundsOnClick: true,
+					singleMarkerMode: false,
+			
+					disableClusteringAtZoom: disableClusteringAtZoom,
+			
+					// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
+					// is the default behaviour for performance reasons.
+					removeOutsideVisibleBounds: true,
+			
+					// Set to false to disable all animations (zoom and spiderfy).
+					// If false, option animateAddingMarkers below has no effect.
+					// If L.DomUtil.TRANSITION is falsy, this option has no effect.
+					animate: true,
+			
+					//Whether to animate adding markers after adding the MarkerClusterGroup to the map
+					// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
+					animateAddingMarkers: false,
+			
+					//Increase to increase the distance away that spiderfied markers appear from the center
+					spiderfyDistanceMultiplier: 1,
+			
+					// Make it possible to specify a polyline options on a spider leg
+					spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
+			
+					// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
+					chunkedLoading: false,
+					chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
+					chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
+					chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
+			
+					//Options to pass to the L.Polygon constructor
+					polygonOptions: {}
+				});
 
 			for (var specialcomponentpin in specialcomponentpins) {
 				// skip loop if the property is from prototype
@@ -605,7 +645,46 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show Pins from component
 		if (showcomponentpinone === '1') {
 
-			var clustermarkers = L.markerClusterGroup();
+			var clustermarkers = L.markerClusterGroup({
+					maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
+					iconCreateFunction: null,
+					clusterPane: L.Marker.prototype.options.pane,
+			
+					spiderfyOnMaxZoom: true,
+					showCoverageOnHover: true,
+					zoomToBoundsOnClick: true,
+					singleMarkerMode: false,
+			
+					disableClusteringAtZoom: disableClusteringAtZoom,
+			
+					// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
+					// is the default behaviour for performance reasons.
+					removeOutsideVisibleBounds: true,
+			
+					// Set to false to disable all animations (zoom and spiderfy).
+					// If false, option animateAddingMarkers below has no effect.
+					// If L.DomUtil.TRANSITION is falsy, this option has no effect.
+					animate: true,
+			
+					//Whether to animate adding markers after adding the MarkerClusterGroup to the map
+					// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
+					animateAddingMarkers: false,
+			
+					//Increase to increase the distance away that spiderfied markers appear from the center
+					spiderfyDistanceMultiplier: 1,
+			
+					// Make it possible to specify a polyline options on a spider leg
+					spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
+			
+					// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
+					chunkedLoading: false,
+					chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
+					chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
+					chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
+			
+					//Options to pass to the L.Polygon constructor
+					polygonOptions: {}
+				});
 
 			var obj = specialcomponentpinone;
 			let tempMarker = L.marker(obj.coordinates.split(",", 3));
@@ -700,7 +779,46 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		// Show Pins from customfield
 		if (showcustomfieldpin === '1') {
-			var clustermarkers = L.markerClusterGroup();
+			var clustermarkers = L.markerClusterGroup({
+					maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
+					iconCreateFunction: null,
+					clusterPane: L.Marker.prototype.options.pane,
+			
+					spiderfyOnMaxZoom: true,
+					showCoverageOnHover: true,
+					zoomToBoundsOnClick: true,
+					singleMarkerMode: false,
+			
+					disableClusteringAtZoom: disableClusteringAtZoom,
+			
+					// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
+					// is the default behaviour for performance reasons.
+					removeOutsideVisibleBounds: true,
+			
+					// Set to false to disable all animations (zoom and spiderfy).
+					// If false, option animateAddingMarkers below has no effect.
+					// If L.DomUtil.TRANSITION is falsy, this option has no effect.
+					animate: true,
+			
+					//Whether to animate adding markers after adding the MarkerClusterGroup to the map
+					// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
+					animateAddingMarkers: false,
+			
+					//Increase to increase the distance away that spiderfied markers appear from the center
+					spiderfyDistanceMultiplier: 1,
+			
+					// Make it possible to specify a polyline options on a spider leg
+					spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
+			
+					// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
+					chunkedLoading: false,
+					chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
+					chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
+					chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
+			
+					//Options to pass to the L.Polygon constructor
+					polygonOptions: {}
+				});
 
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
 				// skip loop if the property is from prototype

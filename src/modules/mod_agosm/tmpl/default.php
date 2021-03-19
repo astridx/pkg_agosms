@@ -24,6 +24,7 @@ $unique = $module->id . '_' . uniqid();
 	data-lonlat="<?php echo $params->get('lonlat', '50.281168, 7.276211'); ?>"
 	data-savestate="<?php echo $params->get('savestate', false); ?>"
 	data-zoom="<?php echo $params->get('zoom', '10'); ?>"
+	data-disable-clustering-at-zoom="<?php echo $params->get('disableClusteringAtZoom', '0'); ?>"
 	data-locate="<?php echo $params->get('showlocate', false); ?>"
 	data-fullscreen="<?php echo $params->get('showfullscreen', false); ?>"
 	data-mouseposition="<?php echo $params->get('showmouseposition', false); ?>"
