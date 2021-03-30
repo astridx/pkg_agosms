@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						tempMarkercf.setIcon(AwesomeIcon);
 					}
 
-					let url = "index.php?options=com_content&view=article&id=" + objcf.id;
+					let url = "index.php?option=com_content&view=article&id=" + objcf.id;
 					let title = objcf.title;
 					let introtext = objcf.introtext;
 					let image = '';
