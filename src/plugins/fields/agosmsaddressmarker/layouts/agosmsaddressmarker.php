@@ -72,6 +72,8 @@ JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css',
 
 JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR');
 JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE');
+JText::script('PLG_AGOSMSADDRESSMARKER_LAT_ERROR');
+JText::script('PLG_AGOSMSADDRESSMARKER_LON_ERROR');
 
 $attributes = array(
 	!empty($class) ? 'class="' . $class . '"' : '',
@@ -159,6 +161,8 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 ?>
 
 <hr>
+<div class="alert" style="display:none" id="addressmarker-alert"></div>
+<div class="alert" style="display:none" id="addressmarker-alert-latlon">kk</div>
 <div class="agosmsaddressmarkersurroundingdiv form-horizontal">
 
 <div class="control-group">
@@ -184,9 +188,6 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 		type="button">
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
 </button>
-<div class="alert" style="display:none" id="addressmarker-alert">
-
-</div>
 
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>

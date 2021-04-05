@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 	document.formvalidator.setHandler('lat', function(value) {
+		document.getElementById("addressmarker-alert-latlon").style.display = "none";
 		var test = false;
 		var latmax = document.getElementById("latmax").value;
 		var latmin = document.getElementById("latmin").value;
@@ -7,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		test = regex.test(Math.round(value));
 		if (Math.round(value) > latmax || Math.round(value) < latmin) {
 			test = false;
+			Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_LAT_ERROR')]});
+			document.getElementById("addressmarker-alert-latlon").innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_LAT_ERROR');
+			document.getElementById("addressmarker-alert-latlon").style.display = "block";
 		}
 		return test;
 	});
@@ -14,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
 	document.formvalidator.setHandler('lon', function(value) {
+		document.getElementById("addressmarker-alert-latlon").style.display = "none";
 		var test = false;
 		var lonmax = document.getElementById("lonmax").value;
 		var lonmin = document.getElementById("lonmin").value;
@@ -21,7 +26,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		test = regex.test(Math.round(value));
 		if (Math.round(value) > lonmax || Math.round(value) < lonmin) {
 			test = false;
-		}
+			Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_LON_ERROR')]});
+			document.getElementById("addressmarker-alert-latlon").innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_LON_ERROR');
+			document.getElementById("addressmarker-alert-latlon").style.display = "block";
+}
 		return test;
 	});
 });
