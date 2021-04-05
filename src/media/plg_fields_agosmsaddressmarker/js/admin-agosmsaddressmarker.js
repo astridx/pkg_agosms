@@ -172,9 +172,12 @@ document.addEventListener('DOMContentLoaded', function () {
 						lon.value = results[0].lon;
 						lon.onchange();
 						Joomla.renderMessages({"notice": [(Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE') + addressstring + ' (Nominatim)')]});
+						document.getElementById("addressmarker-alert").style.display = "none";
 					} else if (results.length > 0) {
 						// Limit is fix set to 1 up to now
 					} else {
+						document.getElementById("addressmarker-alert").innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR') + addressstring;
+						document.getElementById("addressmarker-alert").style.display = "block";
 						Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR') + addressstring + ' (Nominatim)']});
 					}
 				}

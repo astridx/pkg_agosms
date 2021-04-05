@@ -183,7 +183,10 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 		class="btn btn-success agosmsaddressmarkerbutton" 
 		type="button">
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_CALCULATE_CORDS'); ?>
-	</button>
+</button>
+<div class="alert" style="display:none" id="addressmarker-alert">
+
+</div>
 
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_HINT'); ?>
 <?php echo JText::_('PLG_AGOSMSADDRESSMARKER_USED_FIELDS'); ?>
