@@ -15,6 +15,48 @@
 			<field type="spacer" name="myspacer1" hr="true" />
 
 			<field
+				name="latmax"
+				type="number"
+				default="75"
+				label="PLG_AGOSMSADDRESSMARKER_LATMAX"
+				min="-90"
+				max="90"
+				step="1"
+			/>
+
+			<field
+				name="latmin"
+				type="number"
+				default="30"
+				label="PLG_AGOSMSADDRESSMARKER_LATMIN"
+				min="-90"
+				max="90"
+				step="1"
+			/>
+
+			<field
+				name="lonmax"
+				type="number"
+				default="60"
+				label="PLG_AGOSMSADDRESSMARKER_LONMAX"
+				min="-180"
+				max="180"
+				step="1"
+			/>
+
+			<field
+				name="lonmin"
+				type="number"
+				default="-30"
+				label="PLG_AGOSMSADDRESSMARKER_LONMIN"
+				min="-180"
+				max="180"
+				step="1"
+			/>
+
+			<field type="spacer" name="myspacer2" hr="true" />
+
+			<field
 				name="mapheight"
 				type="number"
 				default="400"

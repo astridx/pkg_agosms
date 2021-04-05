@@ -130,6 +130,11 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 */
 	protected $showroutingcontrol;
 
+	protected $latmin;
+	protected $latmax;
+	protected $lonmin;
+	protected $lonmax;
+
 	/**
 	 * Method to get certain otherwise inaccessible properties from the form field object.
 	 *
@@ -143,6 +148,10 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	{
 		switch ($name)
 		{
+			case 'latmin':
+			case 'latmax':
+			case 'lonmin':
+			case 'lonmax':
 			case 'mapheight':
 			case 'maptype':
 			case 'geocoder':
@@ -179,6 +188,10 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 
 		if ($result == true)
 		{
+			$this->latmax = (int) $this->element['latmax'];
+			$this->latmin = (int) $this->element['latmin'];
+			$this->lonmax = (int) $this->element['lonmax'];
+			$this->lonmin = (int) $this->element['lonmin'];
 			$this->mapheight = (int) $this->element['mapheight'];
 			$this->maptype = (string) $this->element['maptype'];
 			$this->geocoder = (string) $this->element['geocoder'];
@@ -212,6 +225,24 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 		{
 			case 'mapheight':
 				$this->mapheight = (int) $value;
+				break;
+
+			case 'lonmin':
+				$this->lonmin = (int) $value;
+				break;
+
+
+			case 'lonmax':
+				$this->lonmax = (int) $value;
+				break;
+
+
+			case 'latmin':
+				$this->latmin = (int) $value;
+				break;
+
+			case 'latmax':
+				$this->latmax = (int) $value;
 				break;
 
 			case 'maptype':
@@ -310,6 +341,10 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 		$options = (array) $this->getOptions();
 
 		$extraData = array(
+			'latmin' => $this->latmin,
+			'latmax' => $this->latmax,
+			'lonmin' => $this->lonmin,
+			'lonmax' => $this->lonmax,
 			'mapheight' => $this->mapheight,
 			'maptype' => $this->maptype,
 			'geocoder' => $this->geocoder,

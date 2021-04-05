@@ -1,4 +1,33 @@
 document.addEventListener('DOMContentLoaded', function () {
+	document.formvalidator.setHandler('lat', function(value) {
+		var test = false;
+		var latmax = document.getElementById("latmax").value;
+		var latmin = document.getElementById("latmin").value;
+		regex=/^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$/;
+		test = regex.test(Math.round(value));
+		if (Math.round(value) > latmax || Math.round(value) < latmin) {
+			test = false;
+		}
+		return test;
+	});
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+	document.formvalidator.setHandler('lon', function(value) {
+		var test = false;
+		var lonmax = document.getElementById("lonmax").value;
+		var lonmin = document.getElementById("lonmin").value;
+		regex=/^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$/;
+		test = regex.test(Math.round(value));
+		if (Math.round(value) > lonmax || Math.round(value) < lonmin) {
+			test = false;
+		}
+		return test;
+	});
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
 
 	var agosmsaddressmarkersurroundingdiv = document.querySelectorAll('.agosmsaddressmarkersurroundingdiv');
 

@@ -164,14 +164,14 @@ $fieldsNameImplode = implode(',', $fieldsNameArray);
 <div class="control-group">
 <label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LAT'); ?></label>	
 <div class="controls">
-	<input type="text" class="agosmsaddressmarkerlat" >
+	<input type="text" class="agosmsaddressmarkerlat required validate-lat" >
 </div>
 </div>
 
 <div class="control-group">
 <label class="control-label"><?php echo JText::_('PLG_AGOSMSADDRESSMARKER_LON'); ?></label>	
 <div class="controls">	
-<input type="text" class="agosmsaddressmarkerlon" >
+<input type="text" class="agosmsaddressmarkerlon required validate-lon" >
 </div>
 </div>
 	
@@ -1059,5 +1059,30 @@ class="agosmsaddressmarkericon">
 	readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" 
 	value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> 
 />
+<input 
+	class="agosmsaddressmarkerhiddenfield" 
+	type="hidden" 
+	readonly name="latmax" id="latmax" 
+	value="<?php echo $latmax; ?>"
+/>
+<input 
+	class="agosmsaddressmarkerhiddenfield" 
+	type="hidden" 
+	readonly name="latmin" id="latmin" 
+	value="<?php echo $latmin; ?>"
+/>
+<input 
+	class="agosmsaddressmarkerhiddenfield" 
+	type="hidden" 
+	readonly name="lonmax" id="lonmax" 
+	value="<?php echo $lonmax; ?>"
+/>
+<input 
+	class="agosmsaddressmarkerhiddenfield" 
+	type="hidden" 
+	readonly name="lonmin" id="lonmin" 
+	value="<?php echo $lonmin; ?>"
+/>
+
 </div>
 <hr>
