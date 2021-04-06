@@ -23,6 +23,9 @@
 		<file>mod_agosms_search.xml</file>
 		<file module="mod_agosms_search">mod_agosms_search.php</file>
 	</files>
+	<languages folder="language">
+		##LANGUAGE_FILES##
+	</languages>
 	<!-- Media files -->
 	<media folder="media/mod_agosms_search" destination="mod_agosms_search">
 		<folder>locate</folder>

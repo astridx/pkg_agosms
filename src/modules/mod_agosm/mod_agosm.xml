@@ -38,6 +38,9 @@
 		<folder>mouseposition</folder>
 		<folder>leaflet</folder>
 	</media>
+	<languages folder="language">
+		##LANGUAGE_FILES##
+	</languages>
 
 	<!-- Configuration -->
 	<config>
