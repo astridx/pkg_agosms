@@ -1060,30 +1060,23 @@ class="agosmsaddressmarkericon">
 	readonly name="<?php echo $name; ?>" id="<?php echo $id; ?>" 
 	value="<?php echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', $attributes); ?> 
 />
-<input 
-	class="agosmsaddressmarkerhiddenfield" 
-	type="hidden" 
-	readonly name="latmax" id="latmax" 
+<ul style="display:none">
+<li 
+	id="latmax" 
 	value="<?php echo $latmax; ?>"
 />
-<input 
-	class="agosmsaddressmarkerhiddenfield" 
-	type="hidden" 
-	readonly name="latmin" id="latmin" 
+<li 
+	id="latmin" 
 	value="<?php echo $latmin; ?>"
 />
-<input 
-	class="agosmsaddressmarkerhiddenfield" 
-	type="hidden" 
-	readonly name="lonmax" id="lonmax" 
+<li 
+	id="lonmax" 
 	value="<?php echo $lonmax; ?>"
 />
-<input 
-	class="agosmsaddressmarkerhiddenfield" 
-	type="hidden" 
-	readonly name="lonmin" id="lonmin" 
+<li 
+	id="lonmin" 
 	value="<?php echo $lonmin; ?>"
 />
-
+</ul>
 </div>
 <hr>
