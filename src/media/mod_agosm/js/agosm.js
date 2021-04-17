@@ -908,12 +908,59 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show GeoJson
 		if (geojson === '1') {
 
+			// Get Style Start
+			function areaStyle(feature){
+				return {
+					fillColor: getAreaFill(feature),
+					color: getAreaStroke(feature),
+					weight: getAreaStrokeWidth(feature),
+					opacity: getAreaStrokeOpacity(feature),
+					fillOpacity: getAreaFillOpacity(feature)
+			  }
+			};	
+			function getAreaFill(feature){
+				if (feature.properties.fill) {
+					return feature.properties.fill;
+				} else {
+					return 'blue';
+				}
+			};
+			function getAreaStroke(feature){
+				if (feature.properties.stroke) {
+					return feature.properties.stroke;
+				} else {
+					return 'blue';
+				}
+			};
+			function getAreaStrokeWidth(feature){
+				if (feature.properties["stroke-width"]) {
+					return feature.properties["stroke-width"];
+				} else {
+					return 2;
+				}
+			};
+			function getAreaStrokeOpacity(feature){
+				if (feature.properties["stroke-opacity"]) {
+					return feature.properties["stroke-opacity"];
+				} else {
+					return 1;
+				}
+			};
+			function getAreaFillOpacity(feature){
+				if (feature.properties["fill-opacity"]) {
+					return feature.properties["fill-opacity"];
+				} else {
+					return 0.7;
+				}
+			};
+			// Get Style End
+
 			if (geojsonfile === '0') {
 				try {
 					if (geojsonTextRaw === '{}') {
 						console.log('No GeoJson Object');
 					} else {
-						L.geoJSON(geojsonText).addTo(window['mymap' + moduleId]);
+						L.geoJSON(geojsonText, {style: areaStyle}).addTo(window['mymap' + moduleId]);
 					}
 				}
 				catch (e) {
@@ -937,7 +984,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						if (geojsonTextRaw === '{}') {
 							console.log('No GeoJson Object');
 						} else {
-							L.geoJSON(geojsonTextRaw).addTo(window['mymap' + moduleId]);
+							L.geoJSON(geojsonTextRaw, {style: areaStyle}).addTo(window['mymap' + moduleId]);
 						}
 					}
 					catch (e) {
