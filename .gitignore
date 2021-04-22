@@ -1,9 +1,8 @@
 .gitignore
 dist
-sik
 dist/
 sik/
 vendor/
-composer.json
-composer.lock
-jorobo.ini
+j4/pkg_agosms/sik
+j4/pkg_agosms/dist/
+j4/pkg_agosms/vendor/

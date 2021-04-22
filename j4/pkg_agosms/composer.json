@@ -1,0 +1,12 @@
+{
+    "name": "astridx/pkg_agosms",
+    "require": {
+        "astridx/jorobo": "0.8.*"
+    },
+    "authors": [
+        {
+            "name": "astridx",
+            "email": "info@astrid-guenther.de"
+        }
+    ]
+}
