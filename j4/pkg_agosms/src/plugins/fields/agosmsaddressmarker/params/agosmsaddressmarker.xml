@@ -70,6 +70,7 @@
 				name="mapheightunit"
 				label="PLG_AGOSMSADDRESSMARKER_HEIGHT_UNIT"
 				default="px"
+				validate="options"
 			>
 				<option value="px">px (Pixel)</option>
 				<option value="vh">vh (Viewport Height)</option>
@@ -82,6 +83,7 @@
 				type="list"
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_MAPTYPE"
+				validate="options"
 			>
 				<option value="openstreetmap">openstreetmap</option>
 				<option value="mapbox">mapbox</option>
@@ -93,6 +95,7 @@
 				type="list"
 				default="openstreetmap"
 				label="PLG_AGOSMSADDRESSMARKER_GEOCODER"
+				validate="options"
 			>
 				<option value="openstreetmap">openstreetmap_nominatim</option>
 				<option value="mapbox">mapbox</option>
@@ -121,7 +124,7 @@
 
 			<field
 				name="scrollwheelzoom"
-				type="radio"
+				type="list"
 				label="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM"
 				default="1"
 			>
@@ -133,6 +136,7 @@
 			<field
 				name="owngooglegesturetext"
 				type="radio"
+				layout="joomla.form.field.radio.switcher"
 				label="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT"
 				default="0"
 				showon="scrollwheelzoom:2"
@@ -146,8 +150,7 @@
 				type="note" 
 				label="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM" 
 				description="PLG_AGOSMSADDRESSMARKER_SRCOLLWHEELZOOM_DESC" 
-				class="alert" 
-				close="true"
+				class="small" 
 			/>
 
 			<field 
@@ -164,7 +167,7 @@
 
 			<field
 				name="popup"
-				type="radio"
+				type="list"
 				label="PLG_AGOSMSADDRESSMARKER_POPUP"
 				default="0"
 			>
@@ -178,6 +181,7 @@
 			<field
 				name="specialicon"
 				type="radio"
+				layout="joomla.form.field.radio.switcher"
 				label="PLG_AGOSMSADDRESSMARKER_SPECIALICON"
 				default="0"
 			>
@@ -190,6 +194,7 @@
 			<field
 				name="showroutingcontrol"
 				type="radio"
+				layout="joomla.form.field.radio.switcher"
 				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTINGCONTROL"
 				default="0"
 			>
@@ -203,6 +208,7 @@
 				default="false"
 				label="PLG_AGOSMSADDRESSMARKER_ROUTEWHILEDRAGGING_LABEL"
 				showon="showroutingcontrol:1"
+				validate="options"
 			>
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
@@ -214,6 +220,7 @@
 				label="PLG_AGOSMSADDRESSMARKER_REVERSEWAYPOINTS"
 				default="false"
 				showon="showroutingcontrol:1"
+				validate="options"
 			>
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
@@ -225,6 +232,7 @@
 				label="PLG_AGOSMSADDRESSMARKER_COLLAPSIBLE"
 				default="false"
 				showon="showroutingcontrol:1"
+				validate="options"
 			>
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
@@ -236,6 +244,7 @@
 				label="PLG_AGOSMSADDRESSMARKER_SHOWALTERNATIVES"
 				default="false"
 				showon="showroutingcontrol:1"
+				validate="options"
 			>
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
@@ -247,6 +256,7 @@
 				label="PLG_AGOSMSADDRESSMARKER_FITSELECTEDROUTES"
 				default="true"
 				showon="showroutingcontrol:1"
+				validate="options"
 			>
 				<option value="true">JYES</option>
 				<option value="false">JNO</option>
@@ -258,6 +268,7 @@
 				default="topright"
 				label="PLG_AGOSMSADDRESSMARKER_POSITION_LABEL"
 				showon="showroutingcontrol:1"
+				validate="options"
 			>
 				<option value="bottomleft">PLG_AGOSMSADDRESSMARKER_POSITION_BOTTOMLEFT</option>
 				<option value="bottomright">PLG_AGOSMSADDRESSMARKER_POSITION_BOTTOMRIGHT</option>
@@ -271,6 +282,7 @@
 				default="osrm"
 				label="PLG_AGOSMSADDRESSMARKER_SHOWROUTING_ROUTER_LABEL"
 				showon="showroutingcontrol:1"
+				validate="options"
 			>
 				<option value="mapbox">mapbox</option>
 				<option value="osrm">osrm</option>
@@ -282,6 +294,7 @@
 				default="de"
 				label="PLG_AGOSMSADDRESSMARKER_LANGUAGEROUTING_LABEL"
 				showon="showroutingcontrol:1"
+				validate="options"
 			>
 				<option value="de">de</option>
 				<option value="fr">fr</option>
@@ -303,6 +316,7 @@
 				default="mapbox/driving"
 				label="PLG_AGOSMSADDRESSMARKER_PROFILEOUTING_LABEL"
 				showon="showroutingcontrol:1[AND]routing_router:mapbox"
+				validate="options"
 			>
 				<option value="mapbox/driving">mapbox/driving</option>
 			</field>
@@ -313,6 +327,7 @@
 				label="PLG_AGOSMSADDRESSMARKER_UNITROUTING_LABEL"
 				default="metric"
 				showon="showroutingcontrol:1[AND]routing_router:mapbox"
+				validate="options"
 			>
 				<option value="metric">MOD_AGOSM_METRIC</option>
 				<option value="imperial">MOD_AGOSM_IMPERIAL</option>
@@ -343,6 +358,7 @@
 			<field
 				name="addprivacybox"
 				type="radio"
+				layout="joomla.form.field.radio.switcher"
 				label="PLG_AGOSMSADDRESSMARKER_ADDPRIVACYBOX"
 				default="0"
 			>

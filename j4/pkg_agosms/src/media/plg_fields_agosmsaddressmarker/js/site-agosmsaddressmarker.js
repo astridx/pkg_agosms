@@ -299,10 +299,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			// If popup
 			if (popup === "1") {
-				marker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+				marker.bindPopup(popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 			}
 			if (popup === "2") {
-				marker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
+				marker.bindPopup(popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
 			}
 
 		} catch (e) {
