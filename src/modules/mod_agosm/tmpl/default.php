@@ -131,7 +131,7 @@ $unique = $module->id . '_' . uniqid();
 	</button>
 <?php endif; ?>
 
-<?php if ($params->get('agmarkerlist', '0')) : ?>
+<?php if ($params->get('agmarkerlist', '0') && $params->get('showcustomfieldpin', '1') && isset($listcf)) : ?>
 	<?php echo JText::_('MOD_AGOSM_MARKERLIST_HEADING') . '<ul class="agmarkerlistul">'; ?>
 	<?php 
 		foreach($listcf as $marker) {
@@ -142,6 +142,19 @@ $unique = $module->id . '_' . uniqid();
 	?>
 	<?php echo '</ul>' . JText::_('MOD_AGOSM_MARKERLIST_BOTTOM'); ?>
 <?php endif; ?>
+
+<?php if ($params->get('agmarkerlist', '0') && $params->get('showpin', '1')) : ?>
+	<?php echo JText::_('MOD_AGOSM_MARKERLIST_HEADING') . '<ul class="agmarkerlistul">'; ?>
+	<?php 
+		foreach($params->get('specialpins', null) as $marker) {
+			if(property_exists($marker, 'pin')){
+				echo '<li class="agmarkerlistli' . $marker->pin . '"><a id="' . $marker->pin . '" class="agmarkerlista' . $marker->pin . '" href="#">' . $marker->popuptext . '</a>';
+			}
+		}
+	?>
+	<?php echo '</ul>' . JText::_('MOD_AGOSM_MARKERLIST_BOTTOM'); ?>
+<?php endif; ?>
+
 
 <?php
 JText::script('MOD_AGOSM_MODULE_BY');

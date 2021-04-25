@@ -504,6 +504,43 @@ document.addEventListener('DOMContentLoaded', function () {
 						this.closePopup();
 					});
 				}
+
+				var clickAgmarkerlista = document.querySelector('.agmarkerlista' + tempMarker.pin);
+
+				if (clickAgmarkerlista) {
+					clickAgmarkerlista.addEventListener('click', function () {
+						window['mymap' + moduleId].setView(tempMarker.getLatLng());
+						tempMarker.openPopup();
+					});
+				}
+				window['mymap' + moduleId].on("moveend", function (event) { 
+					var bounds =  event.target.getBounds();
+					for (var specialpin in specialpins) {
+						if(specialpins[specialpin].pin){
+							var latlonpin = L.latLng(specialpins[specialpin].latlonpin.split(",").slice(0, 2));
+							if (!bounds.contains(latlonpin) && document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin)) {
+								document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin).hidden = true;
+							} else {
+								document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin).hidden = false;
+							}
+						}
+					}
+				});
+		
+				window['mymap' + moduleId].on("zoomend", function (event) { 
+					var bounds =  event.target.getBounds();
+					for (var specialpin in specialpins) {
+						if(specialpins[specialpin].pin){
+							var latlonpin = L.latLng(specialpins[specialpin].latlonpin.split(",").slice(0, 2));
+							if (!bounds.contains(latlonpin) && document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin)) {
+								document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin).hidden = true;
+							} else {
+								document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin).hidden = false;
+							}
+						}
+					}
+				});
+
 			}
 		}
 
