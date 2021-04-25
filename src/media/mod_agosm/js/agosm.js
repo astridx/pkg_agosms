@@ -873,6 +873,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
 					tempMarkercf.bindPopup(popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
+
+					var clickAgmarkerlista = document.querySelector('.agmarkerlista' + objcf.id);
+
+					if (clickAgmarkerlista) {
+						clickAgmarkerlista.addEventListener('click', function () {
+							window['mymap' + moduleId].setView(tempMarkercf.getLatLng());
+							tempMarkercf.openPopup();
+						});
+					}
+		
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}

@@ -131,6 +131,18 @@ $unique = $module->id . '_' . uniqid();
 	</button>
 <?php endif; ?>
 
+<?php if ($params->get('agmarkerlist', '0')) : ?>
+	<?php echo JText::_('MOD_AGOSM_MARKERLIST_HEADING') . '<ul class="agmarkerlistul">'; ?>
+	<?php 
+		foreach($listcf as $marker) {
+			if(property_exists($marker, 'popuptext')){
+				echo '<li class="agmarkerlistli"><a id="' . $marker->id . '" class="agmarkerlista' . $marker->id . '" href="#">' . $marker->popuptext . '</a>';
+			}
+		}
+	?>
+	<?php echo '</ul>' . JText::_('MOD_AGOSM_MARKERLIST_BOTTOM'); ?>
+<?php endif; ?>
+
 <?php
 JText::script('MOD_AGOSM_MODULE_BY');
 JText::script('MOD_AGOSM_DEFAULT_TEXT_PLACEHOLDER');
