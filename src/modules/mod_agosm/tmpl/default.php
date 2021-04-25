@@ -136,7 +136,7 @@ $unique = $module->id . '_' . uniqid();
 	<?php 
 		foreach($listcf as $marker) {
 			if(property_exists($marker, 'popuptext')){
-				echo '<li class="agmarkerlistli"><a id="' . $marker->id . '" class="agmarkerlista' . $marker->id . '" href="#">' . $marker->popuptext . '</a>';
+				echo '<li class="agmarkerlistli' . $marker->id . '"><a id="' . $marker->id . '" class="agmarkerlista' . $marker->id . '" href="#">' . $marker->popuptext . '</a>';
 			}
 		}
 	?>

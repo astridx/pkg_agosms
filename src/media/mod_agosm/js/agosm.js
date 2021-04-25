@@ -882,7 +882,34 @@ document.addEventListener('DOMContentLoaded', function () {
 							tempMarkercf.openPopup();
 						});
 					}
-		
+					window['mymap' + moduleId].on("moveend", function (event) { 
+						var bounds =  event.target.getBounds();
+						for (var specialcustomfieldpin in specialcustomfieldpins) {
+							if(specialcustomfieldpins[specialcustomfieldpin].id){
+								var cords = L.latLng(specialcustomfieldpins[specialcustomfieldpin].cords.split(",").slice(0, 2));
+								if (!bounds.contains(cords)) {
+									document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = true;
+								} else {
+									document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = false;
+								}
+							}
+						}
+					});
+			
+					window['mymap' + moduleId].on("zoomend", function (event) { 
+						var bounds =  event.target.getBounds();
+						for (var specialcustomfieldpin in specialcustomfieldpins) {
+							if(specialcustomfieldpins[specialcustomfieldpin].id){
+								var cords = L.latLng(specialcustomfieldpins[specialcustomfieldpin].cords.split(",").slice(0, 2));
+								if (!bounds.contains(cords)) {
+									document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = true;
+								} else {
+									document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = false;
+								}
+							}
+						}
+					});
+			
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}
