@@ -442,6 +442,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Special Pins
 		if (showpin === '1') {
+			var index = 0;
 			for (var specialpin in specialpins) {
 				// skip loop if the property is from prototype
 				if (!specialpins.hasOwnProperty(specialpin))
@@ -505,41 +506,48 @@ document.addEventListener('DOMContentLoaded', function () {
 					});
 				}
 
-				var clickAgmarkerlista = document.querySelector('.agmarkerlista' + tempMarker.pin);
+				index++;
+				var clickmarkerlista = document.querySelector('.agmarkerlista_specialpin' + index);
 
-				if (clickAgmarkerlista) {
-					clickAgmarkerlista.addEventListener('click', function () {
+				if (clickmarkerlista) {
+					clickmarkerlista.addEventListener('click', function () {
 						window['mymap' + moduleId].setView(tempMarker.getLatLng());
 						tempMarker.openPopup();
 					});
 				}
 				window['mymap' + moduleId].on("moveend", function (event) { 
 					var bounds =  event.target.getBounds();
+					var indexhidemove = 0;
 					for (var specialpin in specialpins) {
-						if(specialpins[specialpin].pin){
-							var latlonpin = L.latLng(specialpins[specialpin].latlonpin.split(",").slice(0, 2));
-							if (!bounds.contains(latlonpin) && document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin)) {
-								document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin).hidden = true;
+						indexhidemove++;
+						var hidemove = document.querySelector('.agmarkerlistli_specialpin' + indexhidemove);
+						if(hidemove){
+							var cords = L.latLng(specialpins[specialpin].latlonpin.split(",", 3));
+							if (!bounds.contains(cords)) {
+								hidemove.hidden = true;
 							} else {
-								document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin).hidden = false;
+								hidemove.hidden = false;
 							}
 						}
 					}
 				});
-		
 				window['mymap' + moduleId].on("zoomend", function (event) { 
 					var bounds =  event.target.getBounds();
+					var indexhidezoom = 0;
 					for (var specialpin in specialpins) {
-						if(specialpins[specialpin].pin){
-							var latlonpin = L.latLng(specialpins[specialpin].latlonpin.split(",").slice(0, 2));
-							if (!bounds.contains(latlonpin) && document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin)) {
-								document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin).hidden = true;
+						indexhidezoom++;
+						var hidezoom = document.querySelector('.agmarkerlistli_specialpin' + indexhidezoom);
+						if(hidezoom){
+							var cords = L.latLng(specialpins[specialpin].latlonpin.split(",", 3));
+							if (!bounds.contains(cords)) {
+								hidezoom.hidden = true;
 							} else {
-								document.querySelector('.agmarkerlistli' + specialpins[specialpin].pin).hidden = false;
+								hidezoom.hidden = false;
 							}
 						}
 					}
 				});
+
 
 			}
 		}
@@ -668,6 +676,42 @@ document.addEventListener('DOMContentLoaded', function () {
 						this.closePopup();
 					});
 				}
+
+				var clickgmarkerlista = document.querySelector('.agmarkerlista_component' + obj.id);
+
+				if (clickgmarkerlista) {
+					clickgmarkerlista.addEventListener('click', function () {
+						window['mymap' + moduleId].setView(tempMarker.getLatLng());
+						tempMarker.openPopup();
+					});
+				}
+				window['mymap' + moduleId].on("moveend", function (event) { 
+					var bounds =  event.target.getBounds();
+					for (var specialcomponentpin in specialcomponentpins) {
+						if(specialcomponentpins[specialcomponentpin].id){
+							var cords = L.latLng(specialcomponentpins[specialcomponentpin].coordinates.split(",", 3));
+							if (!bounds.contains(cords)) {
+								document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = true;
+							} else {
+								document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = false;
+							}
+						}
+					}
+				});
+				window['mymap' + moduleId].on("zoomend", function (event) { 
+					var bounds =  event.target.getBounds();
+					for (var specialcomponentpin in specialcomponentpins) {
+						if(specialcomponentpins[specialcomponentpin].id){
+							var cords = L.latLng(specialcomponentpins[specialcomponentpin].coordinates.split(",", 3));
+							if (!bounds.contains(cords)) {
+								document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = true;
+							} else {
+								document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = false;
+							}
+						}
+					}
+				});
+	
 			}
 
 			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1") {
@@ -679,7 +723,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		}
 
-		// Show Pins from component
+		// One Pin from component
 		if (showcomponentpinone === '1') {
 
 			var clustermarkers = L.markerClusterGroup({
@@ -911,10 +955,10 @@ document.addEventListener('DOMContentLoaded', function () {
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
 					tempMarkercf.bindPopup(popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 
-					var clickAgmarkerlista = document.querySelector('.agmarkerlista' + objcf.id);
+					var clickgmarkerlista = document.querySelector('.agmarkerlista' + objcf.id);
 
-					if (clickAgmarkerlista) {
-						clickAgmarkerlista.addEventListener('click', function () {
+					if (clickgmarkerlista) {
+						clickgmarkerlista.addEventListener('click', function () {
 							window['mymap' + moduleId].setView(tempMarkercf.getLatLng());
 							tempMarkercf.openPopup();
 						});
