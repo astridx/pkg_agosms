@@ -7,16 +7,18 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-defined('JPATH_PLATFORM') or die;
+namespace AG\Module\Agosms;
 
-JFormHelper::loadFieldClass('text');
+ \defined('JPATH_PLATFORM') or die;
+
+ use Joomla\CMS\Form\Field\TextField;
 
 /**
  * Provides a mechanism for calculating geographic coordinates
  *
  * @since  1.0.40
  */
-class JFormFieldAgosmsaddressfinder extends JFormFieldText
+class JFormFieldAgosmsaddressfinder extends TextField
 {
 	/**
 	 * The form field type.
@@ -76,7 +78,7 @@ class JFormFieldAgosmsaddressfinder extends JFormFieldText
 	 * @see     JFormField::setup()
 	 * @since   1.0.40
 	 */
-	public function setup(SimpleXMLElement $element, $value, $group = null)
+	public function setup(\SimpleXMLElement $element, $value, $group = null)
 	{
 		$result = parent::setup($element, $value, $group);
 
