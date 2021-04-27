@@ -1,0 +1,31 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_agosms",
+  "version": "1.0.0",
+  "description": "Joomla CMS",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+    {
+      "name": "com_agosms.admin-agosms-letter",
+      "type": "script",
+      "uri": "com_agosms/admin-agosms-letter.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    },
+    {
+      "name": "com_agosms.admin-agosms-modal",
+      "type": "script",
+      "uri": "com_agosms/admin-agosms-modal.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "defer": true
+      }
+    }
+  ]
+}

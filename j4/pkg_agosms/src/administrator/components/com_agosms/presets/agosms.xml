@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<menu
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="urn:joomla.org"
+	xsi:schemaLocation="urn:joomla.org menu.xsd"
+	>
+	<menuitem
+		title="COM_AGOSMS"
+		type="heading"
+		icon="comment"
+		class="class:comment"
+		>
+		<menuitem
+			title="COM_AGOSMS"
+			type="component"
+			element="com_agosms"
+			link="index.php?option=com_agosms"
+			quicktask="index.php?option=com_agosms&amp;view=agosm&amp;layout=edit"
+			quicktask-title="COM_AGOSMS"
+		/>
+
+		<menuitem
+			title="JCATEGORY"
+			type="component"
+			element="com_agosms"
+			link="index.php?option=com_categories&amp;extension=com_agosms"
+			quicktask="index.php?option=com_categories&amp;view=category&amp;layout=edit&amp;extension=com_agosms"
+			quicktask-title="JCATEGORY"
+		/>
+	</menuitem>
+</menu>
