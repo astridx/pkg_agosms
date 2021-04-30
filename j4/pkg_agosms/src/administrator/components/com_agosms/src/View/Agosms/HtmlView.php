@@ -87,6 +87,11 @@ class HtmlView extends BaseHtmlView
 		$this->activeFilters = $this->get('ActiveFilters');
 		$this->state = $this->get('State');
 
+		if (!count($this->items) && $this->get('IsEmptyState'))
+		{
+			$this->setLayout('emptystate');
+		}
+
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			throw new GenericDataException(implode("\n", $errors), 500);
