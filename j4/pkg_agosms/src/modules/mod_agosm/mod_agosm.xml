@@ -9,7 +9,7 @@
 	<authorUrl>www.astrid-guenther.de</authorUrl>
 	<version>##VERSION##</version>
 	<description>MOD_AGOSM_XML_DESCRIPTION</description>
-	<namespace>AG\Module\Agosms</namespace>
+	<namespace path="src">AG\Module\Agosm</namespace>
 	<scriptfile>script.php</scriptfile>
 
 	<!-- Front-end files -->
@@ -20,7 +20,6 @@
 		<folder>language</folder>
 		<folder>tmpl</folder>
 		<file>script.php</file>
-		<file>helper.php</file>
 		<folder>Helper</folder>
 		<file module="mod_agosm">mod_agosm.php</file>
 	</files>
@@ -37,10 +36,8 @@
 		<folder>js</folder>
 		<folder>mouseposition</folder>
 		<folder>leaflet</folder>
+		<file>joomla.asset.json</file>
 	</media>
-	<languages folder="language">
-		##LANGUAGE_FILES##
-	</languages>
 
 	<!-- Configuration -->
 	<config>
@@ -433,7 +430,6 @@
 			<fieldset name="agosmControlMarkers" label="MOD_AGOSM_DATABASE_FIELDSET">
 				<field type="spacer" name="spacerMarkers" label="MOD_AGOSM_MARKERS" class="text" />
 				<field type="list" name="showmarkerfromexternaldb" default="0" label="MOD_AGOSM_SHOWEXTERNALDATABASE_LABEL" description="MOD_AGOSM_SHOWEXTERNALDATABASE_DESC">
-					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 				<field type="text" name="host" label="MOD_AGOSM_HOST" default="localhost" showon="showmarkerfromexternaldb:1" />
@@ -455,7 +451,7 @@
 				</field>
 			</fieldset>
 			<!-- One Marker from Component -->
-			<fieldset name="pinConfigComponentOne" label="MOD_AGOSM_ONE_MARKER_FROM_COMPONENT" addfieldpath="/administrator/components/com_agosms/models/fields">
+			<fieldset name="pinConfigComponentOne" label="MOD_AGOSM_ONE_MARKER_FROM_COMPONENT" addfieldprefix="AgosmNamespace\Component\Agosms\Administrator\Field">
 				<field type="spacer" name="showcomponentpinonespacer" label="MOD_AGOSM_ONE_MARKER_FROM_COMPONENT_FIELDSETDESCRIPTION" class="text" />
 
 				<field type="list" name="showcomponentpinone" default="0" label="MOD_AGOSM_CONFIG_CONTROL_SHOWCOMPONENTPIN_ONE_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWCOMPONENTPIN_ONE_DESC">

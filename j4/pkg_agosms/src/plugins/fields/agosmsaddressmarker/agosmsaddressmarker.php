@@ -27,7 +27,7 @@ class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 	 *
 	 * @since   1.0.40
 	 */
-	public function __construct(& $subject, $config)
+	public function __construct(&$subject, $config)
 	{
 		parent::__construct($subject, $config);
 		JFormHelper::addFieldPath(__DIR__ . '/field');
@@ -47,12 +47,11 @@ class PlgFieldsAgosmsaddressmarker extends FieldsPlugin
 	{
 		$fieldNode = parent::onCustomFieldsPrepareDom($field, $parent, $form);
 
-		if (!$fieldNode)
-		{
+		if (!$fieldNode) {
 			return $fieldNode;
 		}
 
-		$addressfields = json_encode($field->fieldparams->get('addressfields', array()), true);
+		$addressfields = json_encode($field->fieldparams->get('addressfields', []), true);
 		$fieldNode->setAttribute('addressfields', $addressfields);
 
 		return $fieldNode;

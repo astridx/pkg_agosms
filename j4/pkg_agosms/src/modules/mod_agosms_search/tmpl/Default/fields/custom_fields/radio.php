@@ -11,28 +11,28 @@
 // no direct access
 defined('_JEXEC') or die;
 
-$active =  array($field->instance->default_value);
+$active =  [$field->instance->default_value];
 if (JFactory::getApplication()->input->get->get("field" . $field->id)) {
 	$active = JFactory::getApplication()->input->get->get("field" . $field->id);
 }
 
 $field_params = json_decode($field->instance->fieldparams);
 $values = $field_params->options;
-if($field->instance->type == "integer") {
-	$values = Array();
+if ($field->instance->type == "integer") {
+	$values = [];
 	$range = range($field_params->first, $field_params->last, $field_params->step);
-	foreach($range as $val) {
+	foreach ($range as $val) {
 		$tmp = new stdClass;
 		$tmp->value = $val;
 		$tmp->name = $val;
 		$values[] = $tmp;
 	}
 }
-if(!$values) {
+if (!$values) {
 	//try to get a values from text (autofill)
-	$values = Array();
+	$values = [];
 	$text_values = $helper->getFieldValuesFromText($field->id, "text", $module->id);
-	foreach($text_values as $val) {
+	foreach ($text_values as $val) {
 		$tmp = new stdClass;
 		$tmp->value = $val;
 		$tmp->name = $val;
@@ -47,10 +47,10 @@ if(!$values) {
 	</h3>
 	
 	<div class="radio-container form-check">
-	<?php foreach($values as $val) { ?>
+	<?php foreach ($values as $val) { ?>
 		<label class="form-check-label">
 			<input class="inputbox form-check-input" type="radio" name="field<?php echo $field->id; ?>[]" value="<?php echo $val->value; ?>"
-				<?php if(in_array($val->value, $active)) { ?> 
+				<?php if (in_array($val->value, $active)) { ?> 
 				checked="checked"
 				<?php } ?>
 			/>

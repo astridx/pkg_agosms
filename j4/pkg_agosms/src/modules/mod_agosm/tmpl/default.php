@@ -133,38 +133,38 @@ $unique = $module->id . '_' . uniqid();
 
 <?php if ($params->get('agmarkerlist', '0') && $params->get('showcustomfieldpin', '1') && isset($listcf)) : ?>
 	<?php echo JText::_('MOD_AGOSM_MARKERLISTCF_HEADING') . '<ul class="agmarkerlistul">'; ?>
-	<?php 
-		foreach($listcf as $marker) {
-			if(property_exists($marker, 'popuptext')){
-				echo '<li class="agmarkerlistli' . $marker->id . '"><a class="agmarkerlista' . $marker->id . '" href="#">' . $marker->popuptext . '</a>';
-			}
+	<?php
+	foreach ($listcf as $marker) {
+		if (property_exists($marker, 'popuptext')) {
+			echo '<li class="agmarkerlistli' . $marker->id . '"><a class="agmarkerlista' . $marker->id . '" href="#">' . $marker->popuptext . '</a>';
 		}
+	}
 	?>
 	<?php echo '</ul>' . JText::_('MOD_AGOSMCF_MARKERLIST_BOTTOM'); ?>
 <?php endif; ?>
 
 <?php if ($params->get('agmarkerlist', '0') && $params->get('showcomponentpin', '1') && isset($list)) : ?>
 	<?php echo JText::_('MOD_AGOSM_MARKERLISTCOMONENT_HEADING') . '<ul class="agmarkerlistul">'; ?>
-	<?php 
-		foreach($list as $marker) {
-			if(property_exists($marker, 'popuptext')){
-				echo '<li class="agmarkerlistli_component' . $marker->id . '">' . $marker->popuptext . '<a class="agmarkerlista_component' . $marker->id . '" href="#">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
-			}
+	<?php
+	foreach ($list as $marker) {
+		if (property_exists($marker, 'popuptext')) {
+			echo '<li class="agmarkerlistli_component' . $marker->id . '">' . $marker->popuptext . '<a class="agmarkerlista_component' . $marker->id . '" href="#">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
 		}
+	}
 	?>
 	<?php echo '</ul>' . JText::_('MOD_AGOSM_MARKERLISTCOMONENT_BOTTOM'); ?>
 <?php endif; ?>
 
 <?php if ($params->get('agmarkerlist', '0') && $params->get('showpin', '1')) : ?>
 	<?php echo JText::_('MOD_AGOSM_MARKERLISTSPECIAL_HEADING') . '<ul class="agmarkerlistul">'; ?>
-	<?php 
+	<?php
 		$index = 0;
-		foreach($params->get('specialpins', null) as $marker) {
-			$index++;
-			if(property_exists($marker, 'popuptext')){
-				echo '<li class="agmarkerlistli_specialpin' . $index . '">' . $marker->popuptext . '<a class="agmarkerlista_specialpin' . $index . '" href="#">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
-			}
+	foreach ($params->get('specialpins', null) as $marker) {
+		$index++;
+		if (property_exists($marker, 'popuptext')) {
+			echo '<li class="agmarkerlistli_specialpin' . $index . '">' . $marker->popuptext . '<a class="agmarkerlista_specialpin' . $index . '" href="#">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
 		}
+	}
 	?>
 	<?php echo '</ul>' . JText::_('MOD_AGOSM_MARKERLISTSPECIAL_BOTTOM'); ?>
 <?php endif; ?>

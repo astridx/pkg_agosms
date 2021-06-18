@@ -15,7 +15,7 @@ $mainframe = JFactory::getApplication();
 //check for template override
 $override = JPATH_SITE . "/templates/{$mainframe->getTemplate()}/html/com_content/search_stats/list.php";
 $file_path = __FILE__;
-if(JFile::exists($override)
+if (JFile::exists($override)
 	&& strpos($file_path, "html") === false //do not trigger in override file
 ) {
 	ob_start();
@@ -94,7 +94,7 @@ $items = $model->getStatsList();
 			<div class="count"><a data-orderby="search_count" href="#"><?php echo JText::_("Count"); ?></a></div>
 			<div class="actions"><?php echo JText::_("Actions"); ?></a></div>
 		</div>
-		<?php foreach($items as $items_counter => $item) { ?>
+		<?php foreach ($items as $items_counter => $item) { ?>
 		<div class="item <?php echo $items_counter % 2 == 0 ? 'odd' : ''; ?>">
 			<div class="num"><?php echo JFactory::getApplication()->input->get("limitstart", 0) + $items_counter + 1; ?></div>
 			<div class="keyword">
@@ -122,9 +122,11 @@ $items = $model->getStatsList();
 	<!-- admin fix -->
 	<form name="adminForm" id="adminForm" method="get" action="">
 		<input name="limitstart" type="hidden" value="" />
-		<?php foreach($_GET as $param=>$value) { 
-			if(in_array($param, Array("id", "start", "option", "view", "task", "limit", "limitstart", "featured"))) continue;
-		?>
+		<?php foreach ($_GET as $param => $value) {
+			if (in_array($param, ["id", "start", "option", "view", "task", "limit", "limitstart", "featured"])) {
+				continue;
+			}
+			?>
 		<input name="<?php echo $param; ?>" value="<?php echo $value; ?>" type="hidden" />
 		<?php } ?>
 	</form>

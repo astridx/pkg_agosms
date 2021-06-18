@@ -6,3 +6,4 @@ vendor/
 j4/pkg_agosms/sik
 j4/pkg_agosms/dist/
 j4/pkg_agosms/vendor/
+.vscode

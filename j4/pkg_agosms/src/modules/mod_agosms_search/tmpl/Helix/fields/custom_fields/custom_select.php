@@ -25,15 +25,15 @@ $values_to = $helper->getFieldValuesFromText($field_id_to, "text", $module->id);
 	<div class="fields-wrapper">		
 		<select class="inputbox" name="field<?php echo $field_id_from; ?>-from">
 			<option class="empty" value=""><?php echo JText::_("Custom Select"); ?></option>
-			<?php foreach($values_from as $val) { ?>
+			<?php foreach ($values_from as $val) { ?>
 				<option 
 					value="<?php echo $val; ?>"
-					<?php if($val == JFactory::getApplication()->input->get("field{$field_id_from}-from")) { ?> 
+					<?php if ($val == JFactory::getApplication()->input->get("field{$field_id_from}-from")) { ?> 
 					selected="selected"
 					<?php } ?>
 				>
-					<?php 
-						echo $val; 
+					<?php
+						echo $val;
 					?>
 				</option>
 			<?php } ?>
@@ -41,15 +41,15 @@ $values_to = $helper->getFieldValuesFromText($field_id_to, "text", $module->id);
 		<span>-</span>
 		<select class="inputbox" name="field<?php echo $field_id_to; ?>-to">
 			<option class="empty" value=""><?php echo JText::_("Custom Select"); ?></option>
-			<?php foreach($values_to as $val) { ?>
+			<?php foreach ($values_to as $val) { ?>
 				<option 
 					value="<?php echo $val; ?>"
-					<?php if($val == JFactory::getApplication()->input->get("field{$field_id_to}-to")) { ?> 
+					<?php if ($val == JFactory::getApplication()->input->get("field{$field_id_to}-to")) { ?> 
 					selected="selected"
 					<?php } ?>
 				>
-					<?php 
-						echo $val; 
+					<?php
+						echo $val;
 					?>
 				</option>
 			<?php } ?>

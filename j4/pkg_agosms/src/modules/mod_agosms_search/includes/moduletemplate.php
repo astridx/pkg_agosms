@@ -42,24 +42,19 @@ class JFormFieldModuletemplate extends JFormField
 		$defaultemplate = $db->loadResult();
 		$templatePath = JPATH_SITE . '/templates/' . $defaultemplate . '/html/mod_agosms_search';
 
-		if (JFolder::exists($templatePath))
-		{
+		if (JFolder::exists($templatePath)) {
 			$templateFolders = JFolder::folders($templatePath);
 			$folders = @array_merge($templateFolders, $moduleTemplatesFolders);
 			$folders = @array_unique($folders);
-		}
-		else
-		{
+		} else {
 			$folders = $moduleTemplatesFolders;
 		}
 
 		$exclude = 'Default';
-		$options = array ();
+		$options =  [];
 
-		foreach ($folders as $folder)
-		{
-			if ($folder == $exclude)
-			{
+		foreach ($folders as $folder) {
+			if ($folder == $exclude) {
 				continue;
 			}
 

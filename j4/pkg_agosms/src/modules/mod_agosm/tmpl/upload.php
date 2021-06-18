@@ -13,8 +13,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
 use AG\Module\Agosms\Site\Helper\EasyFileUploaderHelper;
 
-if (isset($_FILES[$params->get('ag_variable')]))
-{
+if (isset($_FILES[$params->get('ag_variable')])) {
 	$result = EasyFileUploaderHelper::getFileToUpload($params);
 }
 
@@ -35,8 +34,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosm/js/aggpxtrack.js');
 $total = intval($params->get('ag_multiple'));
 
 $gpxfile = "";
-if (isset($_FILES[$params->get('ag_variable')]))
-{
+if (isset($_FILES[$params->get('ag_variable')])) {
 	for ($i = 0; $i < $total; $i++) {
 		$gpxfile .= JURI::base() . $result[$i]['rpath'] . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i] . ';;';
 	}
@@ -63,22 +61,22 @@ if (isset($_FILES[$params->get('ag_variable')])) :
 				<?php echo $result[$j]['text']; ?>
 			</div>
 		<?php endfor; ?>
-	<?php endif; ?>
+<?php endif; ?>
 	<!-- Input form for the File Upload -->
 	<form enctype="multipart/form-data" action="<?php echo $action; ?>" method="post">
-		<?php if ($params->get('ag_multiple') == "1"): ?>
+		<?php if ($params->get('ag_multiple') == "1") : ?>
 			<label for=<?php echo '"' . $params->get('ag_variable') . '[]"'; ?>><?php echo $labelText; ?></label>
-		<?php else: ?>
+		<?php else : ?>
 			<?php echo $labelText; ?><br />
 		<?php endif; ?>
 		<?php
 		$max = intval($params->get('ag_multiple'));
-		for ($i = 0; $i < $max; $i++):
+		for ($i = 0; $i < $max; $i++) :
 			?>
 			<input type="file" name=<?php echo '"' . $params->get('ag_variable') . '[]"'; ?> id=<?php echo '"' . $params->get('ag_variable') . '[]"'; ?> /> 
 			<br />
 		<?php endfor; ?>
-		<?php if ($params->get('ag_default_replace') == false && $params->get('ag_replace') == true): /* 1 means 'Yes' or true. 0 means 'No' or false. */ ?>
+		<?php if ($params->get('ag_default_replace') == false && $params->get('ag_replace') == true) : /* 1 means 'Yes' or true. 0 means 'No' or false. */ ?>
 			<div><?php echo $questionText; ?></div>
 			<input type="radio" name="answer" value="1" /><?php echo $yesText; ?><br />
 			<input type="radio" name="answer" value="0" checked /><?php echo $noText; ?><br />

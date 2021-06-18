@@ -43,7 +43,11 @@ $tmpl = $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
 			<div class="col-md-9">
 				<div class="row">
 					<div class="col-md-6">
-						<?php echo 'Hier ist Platz für die Inhalte deiner Erweiterung'; ?>
+						<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_DESC'); ?>
+						<?php echo $this->getForm()->renderField('description'); ?>
+						<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_POPUP'); ?>
+						<?php echo $this->getForm()->renderField('popuptext'); ?>
+						<?php echo $this->getForm()->renderField('coordinates'); ?>
 					</div>
 				</div>
 			</div>

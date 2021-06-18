@@ -32,6 +32,33 @@
 		/>
 
 		<field
+			name="description"
+			type="editor"
+			label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL"
+			filter="JComponentHelper::filterText"
+			buttons="true"
+		/>
+
+		<field
+			name="popuptext"
+			type="editor"
+			label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL"
+			filter="JComponentHelper::filterText"
+			buttons="true"
+		/>
+
+		<field
+			name="coordinates"
+			type="text"
+			validate="Coordinates"
+			class="validate-coordinates"
+			label="COM_AGOSMS_FIELD_COORDINATES_LABEL"
+			size="40"
+			default="50,7"
+			required="true"
+		 />
+
+		<field
 			name="language"
 			type="contentlanguage"
 			label="JFIELD_LANGUAGE_LABEL"

@@ -7,7 +7,6 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-
 namespace AG\Module\Agosms\Site\Helper;
 
 defined('_JEXEC') or die;
@@ -41,7 +40,7 @@ class EasyFileUploaderHelper
 	 */
 	public static function getFileToUpload(&$params)
 	{
-		$result = array();
+		$result = [];
 
 		// Get the Joomla Path and trim whitespace and slashes from the end
 		$jpath = JPATH_SITE;
@@ -54,7 +53,7 @@ class EasyFileUploaderHelper
 		// Get the folder location and trim whitespace and slashes from both ends
 		$folder = $params->get('ag_folder');
 		$folder = trim($folder, "/\\ \t\n\r\0\x0B");
-		$folder = str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $folder);
+		$folder = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $folder);
 
 		// Compile the full absolute path
 		$path = $jpath . DIRECTORY_SEPARATOR . $parent . DIRECTORY_SEPARATOR . $folder;
@@ -64,37 +63,30 @@ class EasyFileUploaderHelper
 		$relativepath = $parent . DIRECTORY_SEPARATOR . $folder;
 		$relativepath = rtrim($relativepath, "/\\ \t\n\r\0\x0B");
 
-		if ($params->get('ag_user') == true)
-		{
+		if ($params->get('ag_user') == true) {
 			// Get the user data
 			$user = Factory::getUser();
 
-			if ($user->guest == false)
-			{
+			if ($user->guest == false) {
 				$path .= DIRECTORY_SEPARATOR . $user->username;
 				$relativepath .= DIRECTORY_SEPARATOR . $user->username;
-			}
-			else
-			{
+			} else {
 				// Todo
 			}
 		}
 
 		// Check to see if the upload process has started
-		if (isset($_FILES[$params->get('ag_variable')]))
-		{
+		if (isset($_FILES[$params->get('ag_variable')])) {
 			// Now, we're going to check each of the uploaded files
 			$total = intval($params->get('ag_multiple'));
 
-			for ($i = 0; $i < $total; $i++)
-			{
+			for ($i = 0; $i < $total; $i++) {
 				$result[$i]['show'] = true;
 				$result[$i]['rpath'] = $relativepath;
 				$result[$i]['path'] = $path;
 
 				// So, now, check for any other errors
-				if ($_FILES[$params->get('ag_variable')]["error"][$i] > 0)
-				{
+				if ($_FILES[$params->get('ag_variable')]["error"][$i] > 0) {
 					// Error was found. Show the return code.
 					$error_text = Text::_('MOD_AG_RETURN_CODE') . ": " . $_FILES[$params->get('ag_variable')]["error"][$i] . "<br />";
 					$error_text .= self::fileUploadErrorMessage($_FILES[$params->get('ag_variable')]["error"][$i]);
@@ -103,71 +95,54 @@ class EasyFileUploaderHelper
 					$result[$i]['text'] = $error_text;
 
 					// Note that UPLOAD_ERR_NO_FILE = 4
-					if ($_FILES[$params->get('ag_variable')]["error"][$i] == UPLOAD_ERR_NO_FILE)
-					{
+					if ($_FILES[$params->get('ag_variable')]["error"][$i] == UPLOAD_ERR_NO_FILE) {
 						// Set the result type to warning instead of error
 						$result[$i]['type'] = 'warning';
 
 						// Get the value for 'ag_shownofile', the default is 1
 						$shownofile = $params->get('ag_shownofile', 1);
 
-						if ($shownofile == false)
-						{
+						if ($shownofile == false) {
 							$result[$i]['show'] = false;
 						}
 					}
-				}
-				else
-				{
+				} else {
 					/*
 					 No errors found.
 					 Check to see if the file type is correct
 					 But first, we have to store the file types in a variable. I was getting an issue with empty() */
-					if (self::isValidFileType($params, $i))
-					{
+					if (self::isValidFileType($params, $i)) {
 						// The file type is permitted
 						// So, check for the right size
-						if ($_FILES[$params->get('ag_variable')]["size"][$i] < $params->get('ag_maxsize'))
-						{
+						if ($_FILES[$params->get('ag_variable')]["size"][$i] < $params->get('ag_maxsize')) {
 							// File is an acceptable size
 							// Check to see if file already exists in the destination folder
-							if (file_exists($path . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i]))
-							{
+							if (file_exists($path . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i])) {
 								// File already exists
 								// Check whether the user wants to replace the file or not.
 								if ($params->get('ag_default_replace') == true
-									|| ($params->get('ag_replace') == true && $_POST["answer"] == true))
-								{
+									|| ($params->get('ag_replace') == true && $_POST["answer"] == true)) {
 									// Yep, the user wants to replace the file, so just delete the existing file
 									File::delete($path . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i]);
 									self::storeUploadedFile($path, $params, $result, $i, true);
-								}
-								else
-								{
+								} else {
 									$result[$i]['type'] = 'info';
 									$result[$i]['text'] = $_FILES[$params->get('ag_variable')]["name"][$i] . " " . Text::_('MOD_AG_ALREADY_EXISTS');
 								}
-							}
-							else
-							{
+							} else {
 								// Check to see if the file meets the safety standards
 								$is_safe = self::checkFileSafety($params, $result, $i);
 
-								if ($is_safe)
-								{
+								if ($is_safe) {
 									self::storeUploadedFile($path, $params, $result, $i);
 								}
 							}
-						}
-						else
-						{
+						} else {
 							// File is too large
 							$result[$i]['type'] = 'warning';
 							$result[$i]['text'] = Text::_('MOD_AG_TOO_LARGE_ERROR') . self::sizeToText($params->get('ag_maxsize')) . ".";
 						}
-					}
-					else
-					{
+					} else {
 						// The file type is not permitted
 						$fakeMIME = $_FILES[$params->get('ag_variable')]["type"][$i];
 						$trueMIME = self::actualMIME($_FILES[$params->get('ag_variable')]["tmp_name"][$i]);
@@ -207,8 +182,7 @@ class EasyFileUploaderHelper
 		if ($filetypes == "*"
 			|| (stripos($filetypes, $_FILES[$params->get('ag_variable')]["type"][$i]) !== false
 			&& $actualMIME !== false
-			&& stripos($filetypes, $actualMIME) !== false))
-		{
+			&& stripos($filetypes, $actualMIME) !== false)) {
 			$valid = true;
 		}
 
@@ -226,8 +200,7 @@ class EasyFileUploaderHelper
 	 */
 	private static function actualMIME($file)
 	{
-		if (!file_exists($file))
-		{
+		if (!file_exists($file)) {
 			return false;
 		}
 
@@ -240,30 +213,24 @@ class EasyFileUploaderHelper
 			&& function_exists('finfo_file')
 			&& is_callable('finfo_file')
 			&& function_exists('finfo_close')
-			&& is_callable('finfo_close'))
-		{
+			&& is_callable('finfo_close')) {
 			$finfo = finfo_open(FILEINFO_MIME_TYPE);
 			$mime = finfo_file($finfo, $file);
 
-			if ($mime === '')
-			{
+			if ($mime === '') {
 				$mime = false;
 			}
 
 			finfo_close($finfo);
-		}
-		elseif (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
-		{
+		} else if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
 			$f = "'" . $file . "'";
 
-			if (function_exists('escapeshellarg') && is_callable('escapeshellarg'))
-			{
+			if (function_exists('escapeshellarg') && is_callable('escapeshellarg')) {
 				// Prefer to use escapeshellarg if it is available
 				$f = escapeshellarg($file);
 			}
 
-			if (function_exists('exec') && is_callable('exec'))
-			{
+			if (function_exists('exec') && is_callable('exec')) {
 				/*
 				 Didn't like how 'system' flushes output to browser. replaced with 'exec'
 				 Note: You can change this to: shell_exec("file -b --mime-type $f"); if you get
@@ -275,9 +242,7 @@ class EasyFileUploaderHelper
 
 				// Remove any remaining whitespace
 				$mime = trim($mime);
-			}
-			elseif (function_exists('shell_exec') && is_callable('shell_exec'))
-			{
+			} else if (function_exists('shell_exec') && is_callable('shell_exec')) {
 				// Note: You can change this to: shell_exec("file -b --mime-type $f"); if you get
 				// "Regular file" as the mime type
 				$mime = shell_exec("file -bi $f");
@@ -289,9 +254,7 @@ class EasyFileUploaderHelper
 				// Remove any remaining whitespace
 				$mime = trim($mime);
 			}
-		}
-		elseif (function_exists('mime_content_type') && is_callable('mime_content_type'))
-		{
+		} else if (function_exists('mime_content_type') && is_callable('mime_content_type')) {
 			// Test using mime_content_type last, since it sometimes detects the mime incorrectly
 			$mime = mime_content_type($file);
 		}
@@ -318,24 +281,20 @@ class EasyFileUploaderHelper
 		$success = false;
 
 		// Move the file to the destination folder
-		if (file_exists($filepath))
-		{
+		if (file_exists($filepath)) {
 			$success = move_uploaded_file(
-				$_FILES[$params->get('ag_variable')]["tmp_name"][$i], $filepath . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i]
+				$_FILES[$params->get('ag_variable')]["tmp_name"][$i],
+				$filepath . DIRECTORY_SEPARATOR . $_FILES[$params->get('ag_variable')]["name"][$i]
 			);
-		}
-		else
-		{
+		} else {
 			$result_text .= Text::_('MOD_AG_FOLDER_NOT_EXISTS') . " ";
 		}
 
-		if ($replaced)
-		{
+		if ($replaced) {
 			$result_text .= Text::_('MOD_AG_REPLACEMENT_APPROVED') . " ";
 		}
 
-		if ($success)
-		{
+		if ($success) {
 			// Upload was successful.
 			$result_text .= Text::_('MOD_AG_UPLOAD_SUCCESSFUL') . "<br />";
 			$result_text .= Text::_('MOD_AG_NAME') . ": " . $_FILES[$params->get('ag_variable')]["name"][$i] . "<br />";
@@ -344,9 +303,7 @@ class EasyFileUploaderHelper
 
 			$result[$i]['type'] = 'success';
 			$result[$i]['text'] = $result_text;
-		}
-		else
-		{
+		} else {
 			$result_text .= Text::_('MOD_AG_UPLOAD_UNSUCCESSFUL');
 
 			$result[$i]['type'] = 'error';
@@ -365,8 +322,7 @@ class EasyFileUploaderHelper
 	 */
 	protected static function fileUploadErrorMessage($error_code)
 	{
-		switch ($error_code)
-		{
+		switch ($error_code) {
 			case UPLOAD_ERR_INI_SIZE:
 				$message = Text::_('MOD_AG_INI_SIZE_ERROR');
 				break;
@@ -412,23 +368,16 @@ class EasyFileUploaderHelper
 		$mb = $kb * $kb;
 		$gb = $mb * $kb;
 
-		if ($size >= $gb)
-		{
+		if ($size >= $gb) {
 			$size = round($size / $gb, 2);
 			$text = $size . "GB";
-		}
-		elseif ($size >= $mb)
-		{
+		} else if ($size >= $mb) {
 			$size = round($size / $mb, 2);
 			$text = $size . "MB";
-		}
-		elseif ($size >= $kb)
-		{
+		} else if ($size >= $kb) {
 			$size = round($size / $kb, 2);
 			$text = $size . "KB";
-		}
-		else
-		{
+		} else {
 			$text = $size . Text::_('MOD_AG_BYTES');
 		}
 
@@ -449,9 +398,8 @@ class EasyFileUploaderHelper
 		&$params,
 		&$result,
 		&$i,
-		$forbidden = array('php', 'phps', 'php5', 'php3', 'php4', 'inc', 'pl', 'cgi', 'fcgi', 'java', 'jar', 'py')
-	)
-	{
+		$forbidden = ['php', 'phps', 'php5', 'php3', 'php4', 'inc', 'pl', 'cgi', 'fcgi', 'java', 'jar', 'py']
+	) {
 		$safe = true;
 
 		/**
@@ -459,8 +407,7 @@ class EasyFileUploaderHelper
 		 */
 		$null_byte = "\x00";
 
-		if (stripos($_FILES[$params->get('ag_variable')]["name"][$i], $null_byte) !== false)
-		{
+		if (stripos($_FILES[$params->get('ag_variable')]["name"][$i], $null_byte) !== false) {
 			$result[$i]['type'] = 'error';
 			$result[$i]['text'] = Text::_('MOD_AG_NULL_BYTE_FOUND');
 
@@ -475,10 +422,8 @@ class EasyFileUploaderHelper
 		array_shift($split);
 		$only_extensions = array_map('strtolower', $split);
 
-		foreach ($forbidden as $script)
-		{
-			if (in_array($script, $only_extensions))
-			{
+		foreach ($forbidden as $script) {
+			if (in_array($script, $only_extensions)) {
 				$result[$i]['type'] = 'error';
 				$result[$i]['text'] = Text::_('MOD_AG_FORBIDDEN_SCRIPT_FOUND');
 
@@ -495,19 +440,16 @@ class EasyFileUploaderHelper
 		$buffer = 1024 * 8;
 		$fp = @fopen($_FILES[$params->get('ag_variable')]["tmp_name"][$i], 'r');
 
-		if ($fp !== false)
-		{
+		if ($fp !== false) {
 			$data = '';
 
-			while (!feof($fp) && $safe === true)
-			{
+			while (!feof($fp) && $safe === true) {
 				$data .= @fread($fp, $buffer);
 
 				/**
 				 * a. Check for the presence of the PHP tag, <?php
 				 */
-				if (stripos($data, '<?php') !== false)
-				{
+				if (stripos($data, '<?php') !== false) {
 					$result[$i]['type'] = 'error';
 					$result[$i]['text'] = Text::_('MOD_AG_PHP_TAG_FOUND');
 
@@ -518,23 +460,19 @@ class EasyFileUploaderHelper
 				/**
 				 * b. Check for the presence of the PHP short tag, <?, but only if file is a script text file
 				 */
-				$script_files = array('php', 'phps', 'php3', 'php4', 'php5', 'class', 'inc', 'txt', 'dat', 'tpl', 'tmpl');
+				$script_files = ['php', 'phps', 'php3', 'php4', 'php5', 'class', 'inc', 'txt', 'dat', 'tpl', 'tmpl'];
 				$is_script = false;
 
-				foreach ($script_files as $script)
-				{
+				foreach ($script_files as $script) {
 					// Check to see if uploaded file is a script file
-					if (in_array($script, $only_extensions))
-					{
+					if (in_array($script, $only_extensions)) {
 						$is_script = true;
 					}
 				}
 
-				if ($is_script)
-				{
+				if ($is_script) {
 					// Search for the short tag
-					if (stripos($data, '<?') !== false)
-					{
+					if (stripos($data, '<?') !== false) {
 						$result[$i]['type'] = 'error';
 						$result[$i]['text'] = Text::_('MOD_AG_SHORT_TAG_FOUND');
 
@@ -548,27 +486,21 @@ class EasyFileUploaderHelper
 				 */
 				$allow_scripts_in_archive = $params->get('ag_scriptsinarchives');
 
-				if (!$allow_scripts_in_archive)
-				{
-					$archive_exts = array('zip', '7z', 'jar', 'rar', 'tar', 'gz', 'tgz', 'bz2', 'tbz', 'jpa');
+				if (!$allow_scripts_in_archive) {
+					$archive_exts = ['zip', '7z', 'jar', 'rar', 'tar', 'gz', 'tgz', 'bz2', 'tbz', 'jpa'];
 					$is_archive = false;
 
-					foreach ($archive_exts as $archive)
-					{
+					foreach ($archive_exts as $archive) {
 						// Check to see if uploaded file is an archive file
-						if (in_array($archive, $only_extensions))
-						{
+						if (in_array($archive, $only_extensions)) {
 							$is_archive = true;
 						}
 					}
 
-					if ($is_archive)
-					{
-						foreach ($forbidden as $ext)
-						{
+					if ($is_archive) {
+						foreach ($forbidden as $ext) {
 							// Search for the short tag
-							if (stripos($data, '.' . $ext) !== false)
-							{
+							if (stripos($data, '.' . $ext) !== false) {
 								$result[$i]['type'] = 'error';
 								$result[$i]['text'] = Text::_('MOD_AG_FORBIDDEN_IN_ARCHIVE_FOUND');
 

@@ -19,44 +19,41 @@ class PlgSystemAgosmssearch extends JPlugin
 	{
 		$init_parameter = JFactory::getApplication()->input->get('gsearch');
 
-		if ($init_parameter)
-		{
+		if ($init_parameter) {
 			$doc = JFactory::getDocument();
 
 			$search_type = JFactory::getApplication()->input->get("search_type", "com_content");
 			$format = JFactory::getApplication()->input->get("search_mode", "html");
 
-			switch ($search_type)
-			{
-				case "com_content" :
+			switch ($search_type) {
+				case "com_content":
 					require_once dirname(__FILE__) . "/view/com_content/view.{$format}.php";
 					$view = new ArticlesViewAgSearch;
 					$template = $view->display($search_type);
 					break;
-				case "search_stats" :
-					switch ($format)
-					{
-						case "save" :
+				case "search_stats":
+					switch ($format) {
+						case "save":
 							require_once JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model.php";
 							$model = new ArticlesModelAgSearch;
 							$model->saveSearchStats();
 							exit;
 						break;
-						case "list" :
+						case "list":
 							$this->check_logged_admin();
 							ob_start();
 								require_once dirname(__FILE__) . "/template/search_stats/list.php";
 								$template = ob_get_contents();
 							ob_end_clean();
-						break;
-						case "keyword" :
+							break;
+						case "keyword":
 							$this->check_logged_admin();
 							ob_start();
 								require_once dirname(__FILE__) . "/template/search_stats/keyword.php";
 								$template = ob_get_contents();
 							ob_end_clean();
-						break;
-						case "delete" :
+							break;
+						case "delete":
 							$this->check_logged_admin();
 							$id = JFactory::getApplication()->input->get("id");
 							$query = "DELETE FROM #__content_search_stats WHERE id = {$id}";
@@ -70,7 +67,7 @@ class PlgSystemAgosmssearch extends JPlugin
 							echo $deleted;
 							exit; // Raw output for ajax
 						break;
-						case "reset" :
+						case "reset":
 							$this->check_logged_admin();
 							$id = JFactory::getApplication()->input->get("id");
 							$query = "TRUNCATE TABLE #__content_search_stats";
@@ -84,13 +81,10 @@ class PlgSystemAgosmssearch extends JPlugin
 					break;
 			}
 
-			if (JFactory::getApplication()->input->get->get('raw', false))
-			{
+			if (JFactory::getApplication()->input->get->get('raw', false)) {
 				echo $template;
 				exit;
-			}
-			else
-			{
+			} else {
 				$doc->setBuffer($template, "component");
 			}
 		}
@@ -101,10 +95,8 @@ class PlgSystemAgosmssearch extends JPlugin
 		$app = JFactory::getApplication();
 		$init_parameter = JFactory::getApplication()->input->get("gsearch");
 
-		if ($init_parameter)
-		{
-			if ($app->isAdmin())
-			{
+		if ($init_parameter) {
+			if ($app->isAdmin()) {
 				return;
 			}
 
@@ -117,8 +109,7 @@ class PlgSystemAgosmssearch extends JPlugin
 	{
 		$user = JFactory::getUser();
 
-		if (!in_array(7, $user->groups) && !in_array(8, $user->groups))
-		{
+		if (!in_array(7, $user->groups) && !in_array(8, $user->groups)) {
 			echo JText::_("Restricted only for admins <br /> Try to log in first");
 			exit;
 		}

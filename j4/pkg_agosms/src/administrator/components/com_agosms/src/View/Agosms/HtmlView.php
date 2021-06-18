@@ -87,8 +87,7 @@ class HtmlView extends BaseHtmlView
 		$this->activeFilters = $this->get('ActiveFilters');
 		$this->state = $this->get('State');
 
-		if (!count($this->items) && $this->get('IsEmptyState'))
-		{
+		if (!count($this->items) && $this->get('IsEmptyState')) {
 			$this->setLayout('emptystate');
 		}
 

@@ -18,15 +18,12 @@ class ArticlesViewAgSearch extends JViewCategory
 		$mainframe = JFactory::getApplication();
 		$override = JPATH_SITE . "/templates/{$mainframe->getTemplate()}/html/com_content/gsearch_blog.php";
 
-		if (JFile::exists($override))
-		{
+		if (JFile::exists($override)) {
 			ob_start();
 				require $override;
 				$return = ob_get_contents();
 			ob_end_clean();
-		}
-		else
-		{
+		} else {
 			ob_start();
 				require JPATH_SITE . "/plugins/system/agosmssearch/template/com_content/gsearch_blog.php";
 				$return = ob_get_contents();
@@ -37,5 +34,3 @@ class ArticlesViewAgSearch extends JViewCategory
 		die;
 	}
 }
-
-

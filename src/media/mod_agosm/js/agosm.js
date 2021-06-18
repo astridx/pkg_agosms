@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				zoomOffset: -1,
 				id: mapboxmaptype,
 				accessToken: mapboxkey
-				});			
+			});
 		}
 		if (baselayer === 'mapnikde') {
 			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
@@ -515,34 +515,32 @@ document.addEventListener('DOMContentLoaded', function () {
 						tempMarker.openPopup();
 					});
 				}
-				window['mymap' + moduleId].on("moveend", function (event) { 
-					var bounds =  event.target.getBounds();
+				window['mymap' + moduleId].on("moveend", function (event) {
+					var bounds = event.target.getBounds();
 					var indexhidemove = 0;
 					for (var specialpin in specialpins) {
 						indexhidemove++;
-						var hidemove = document.querySelector('.agmarkerlistli_specialpin' + indexhidemove);
-						if(hidemove){
+						if (document.querySelector('.agmarkerlistli_specialpin' + indexhidemove)) {
 							var cords = L.latLng(specialpins[specialpin].latlonpin.split(",", 3));
 							if (!bounds.contains(cords)) {
-								hidemove.hidden = true;
+								document.querySelector('.agmarkerlistli_specialpin' + indexhidemove).hidden = true;
 							} else {
-								hidemove.hidden = false;
+								document.querySelector('.agmarkerlistli_specialpin' + indexhidemove).hidden = false;
 							}
 						}
 					}
 				});
-				window['mymap' + moduleId].on("zoomend", function (event) { 
-					var bounds =  event.target.getBounds();
+				window['mymap' + moduleId].on("zoomend", function (event) {
+					var bounds = event.target.getBounds();
 					var indexhidezoom = 0;
 					for (var specialpin in specialpins) {
 						indexhidezoom++;
-						var hidezoom = document.querySelector('.agmarkerlistli_specialpin' + indexhidezoom);
-						if(hidezoom){
+						if (document.querySelector('.agmarkerlistli_specialpin' + indexhidezoom)) {
 							var cords = L.latLng(specialpins[specialpin].latlonpin.split(",", 3));
 							if (!bounds.contains(cords)) {
-								hidezoom.hidden = true;
+								document.querySelector('.agmarkerlistli_specialpin' + indexhidezoom).hidden = true;
 							} else {
-								hidezoom.hidden = false;
+								document.querySelector('.agmarkerlistli_specialpin' + indexhidezoom).hidden = false;
 							}
 						}
 					}
@@ -554,47 +552,46 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Show Pins from component
 		if (showcomponentpin === '1') {
-
 			var clustermarkers = L.markerClusterGroup({
-					maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
-					iconCreateFunction: null,
-					clusterPane: L.Marker.prototype.options.pane,
-			
-					spiderfyOnMaxZoom: true,
-					showCoverageOnHover: true,
-					zoomToBoundsOnClick: true,
-					singleMarkerMode: false,
-			
-					disableClusteringAtZoom: disableClusteringAtZoom,
-			
-					// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
-					// is the default behaviour for performance reasons.
-					removeOutsideVisibleBounds: true,
-			
-					// Set to false to disable all animations (zoom and spiderfy).
-					// If false, option animateAddingMarkers below has no effect.
-					// If L.DomUtil.TRANSITION is falsy, this option has no effect.
-					animate: true,
-			
-					//Whether to animate adding markers after adding the MarkerClusterGroup to the map
-					// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
-					animateAddingMarkers: false,
-			
-					//Increase to increase the distance away that spiderfied markers appear from the center
-					spiderfyDistanceMultiplier: 1,
-			
-					// Make it possible to specify a polyline options on a spider leg
-					spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
-			
-					// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
-					chunkedLoading: false,
-					chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
-					chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
-					chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
-			
-					//Options to pass to the L.Polygon constructor
-					polygonOptions: {}
-				});
+				maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
+				iconCreateFunction: null,
+				clusterPane: L.Marker.prototype.options.pane,
+
+				spiderfyOnMaxZoom: true,
+				showCoverageOnHover: true,
+				zoomToBoundsOnClick: true,
+				singleMarkerMode: false,
+
+				disableClusteringAtZoom: disableClusteringAtZoom,
+
+				// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
+				// is the default behaviour for performance reasons.
+				removeOutsideVisibleBounds: true,
+
+				// Set to false to disable all animations (zoom and spiderfy).
+				// If false, option animateAddingMarkers below has no effect.
+				// If L.DomUtil.TRANSITION is falsy, this option has no effect.
+				animate: true,
+
+				//Whether to animate adding markers after adding the MarkerClusterGroup to the map
+				// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
+				animateAddingMarkers: false,
+
+				//Increase to increase the distance away that spiderfied markers appear from the center
+				spiderfyDistanceMultiplier: 1,
+
+				// Make it possible to specify a polyline options on a spider leg
+				spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
+
+				// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
+				chunkedLoading: false,
+				chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
+				chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
+				chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
+
+				//Options to pass to the L.Polygon constructor
+				polygonOptions: {}
+			});
 
 			for (var specialcomponentpin in specialcomponentpins) {
 				// skip loop if the property is from prototype
@@ -685,33 +682,37 @@ document.addEventListener('DOMContentLoaded', function () {
 						tempMarker.openPopup();
 					});
 				}
-				window['mymap' + moduleId].on("moveend", function (event) { 
-					var bounds =  event.target.getBounds();
+				window['mymap' + moduleId].on("moveend", function (event) {
+					var bounds = event.target.getBounds();
 					for (var specialcomponentpin in specialcomponentpins) {
-						if(specialcomponentpins[specialcomponentpin].id){
+						if (specialcomponentpins[specialcomponentpin].id) {
 							var cords = L.latLng(specialcomponentpins[specialcomponentpin].coordinates.split(",", 3));
-							if (!bounds.contains(cords)) {
-								document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = true;
-							} else {
-								document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = false;
+							if (document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id)) {
+								if (!bounds.contains(cords)) {
+									document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = true;
+								} else {
+									document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = false;
+								}
 							}
 						}
 					}
 				});
-				window['mymap' + moduleId].on("zoomend", function (event) { 
-					var bounds =  event.target.getBounds();
+				window['mymap' + moduleId].on("zoomend", function (event) {
+					var bounds = event.target.getBounds();
 					for (var specialcomponentpin in specialcomponentpins) {
-						if(specialcomponentpins[specialcomponentpin].id){
+						if (specialcomponentpins[specialcomponentpin].id) {
 							var cords = L.latLng(specialcomponentpins[specialcomponentpin].coordinates.split(",", 3));
-							if (!bounds.contains(cords)) {
-								document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = true;
-							} else {
-								document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = false;
+							if (document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id)) {
+								if (!bounds.contains(cords)) {
+									document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = true;
+								} else {
+									document.querySelector('.agmarkerlistli_component' + specialcomponentpins[specialcomponentpin].id).hidden = false;
+								}
 							}
 						}
 					}
 				});
-	
+
 			}
 
 			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1") {
@@ -725,47 +726,46 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// One Pin from component
 		if (showcomponentpinone === '1') {
-
 			var clustermarkers = L.markerClusterGroup({
-					maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
-					iconCreateFunction: null,
-					clusterPane: L.Marker.prototype.options.pane,
-			
-					spiderfyOnMaxZoom: true,
-					showCoverageOnHover: true,
-					zoomToBoundsOnClick: true,
-					singleMarkerMode: false,
-			
-					disableClusteringAtZoom: disableClusteringAtZoom,
-			
-					// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
-					// is the default behaviour for performance reasons.
-					removeOutsideVisibleBounds: true,
-			
-					// Set to false to disable all animations (zoom and spiderfy).
-					// If false, option animateAddingMarkers below has no effect.
-					// If L.DomUtil.TRANSITION is falsy, this option has no effect.
-					animate: true,
-			
-					//Whether to animate adding markers after adding the MarkerClusterGroup to the map
-					// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
-					animateAddingMarkers: false,
-			
-					//Increase to increase the distance away that spiderfied markers appear from the center
-					spiderfyDistanceMultiplier: 1,
-			
-					// Make it possible to specify a polyline options on a spider leg
-					spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
-			
-					// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
-					chunkedLoading: false,
-					chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
-					chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
-					chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
-			
-					//Options to pass to the L.Polygon constructor
-					polygonOptions: {}
-				});
+				maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
+				iconCreateFunction: null,
+				clusterPane: L.Marker.prototype.options.pane,
+
+				spiderfyOnMaxZoom: true,
+				showCoverageOnHover: true,
+				zoomToBoundsOnClick: true,
+				singleMarkerMode: false,
+
+				disableClusteringAtZoom: disableClusteringAtZoom,
+
+				// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
+				// is the default behaviour for performance reasons.
+				removeOutsideVisibleBounds: true,
+
+				// Set to false to disable all animations (zoom and spiderfy).
+				// If false, option animateAddingMarkers below has no effect.
+				// If L.DomUtil.TRANSITION is falsy, this option has no effect.
+				animate: true,
+
+				//Whether to animate adding markers after adding the MarkerClusterGroup to the map
+				// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
+				animateAddingMarkers: false,
+
+				//Increase to increase the distance away that spiderfied markers appear from the center
+				spiderfyDistanceMultiplier: 1,
+
+				// Make it possible to specify a polyline options on a spider leg
+				spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
+
+				// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
+				chunkedLoading: false,
+				chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
+				chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
+				chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
+
+				//Options to pass to the L.Polygon constructor
+				polygonOptions: {}
+			});
 
 			var obj = specialcomponentpinone;
 			let tempMarker = L.marker(obj.coordinates.split(",", 3));
@@ -861,45 +861,45 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show Pins from customfield
 		if (showcustomfieldpin === '1') {
 			var clustermarkers = L.markerClusterGroup({
-					maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
-					iconCreateFunction: null,
-					clusterPane: L.Marker.prototype.options.pane,
-			
-					spiderfyOnMaxZoom: true,
-					showCoverageOnHover: true,
-					zoomToBoundsOnClick: true,
-					singleMarkerMode: false,
-			
-					disableClusteringAtZoom: disableClusteringAtZoom,
-			
-					// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
-					// is the default behaviour for performance reasons.
-					removeOutsideVisibleBounds: true,
-			
-					// Set to false to disable all animations (zoom and spiderfy).
-					// If false, option animateAddingMarkers below has no effect.
-					// If L.DomUtil.TRANSITION is falsy, this option has no effect.
-					animate: true,
-			
-					//Whether to animate adding markers after adding the MarkerClusterGroup to the map
-					// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
-					animateAddingMarkers: false,
-			
-					//Increase to increase the distance away that spiderfied markers appear from the center
-					spiderfyDistanceMultiplier: 1,
-			
-					// Make it possible to specify a polyline options on a spider leg
-					spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
-			
-					// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
-					chunkedLoading: false,
-					chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
-					chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
-					chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
-			
-					//Options to pass to the L.Polygon constructor
-					polygonOptions: {}
-				});
+				maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
+				iconCreateFunction: null,
+				clusterPane: L.Marker.prototype.options.pane,
+
+				spiderfyOnMaxZoom: true,
+				showCoverageOnHover: true,
+				zoomToBoundsOnClick: true,
+				singleMarkerMode: false,
+
+				disableClusteringAtZoom: disableClusteringAtZoom,
+
+				// Setting this to false prevents the removal of any clusters outside of the viewpoint, which
+				// is the default behaviour for performance reasons.
+				removeOutsideVisibleBounds: true,
+
+				// Set to false to disable all animations (zoom and spiderfy).
+				// If false, option animateAddingMarkers below has no effect.
+				// If L.DomUtil.TRANSITION is falsy, this option has no effect.
+				animate: true,
+
+				//Whether to animate adding markers after adding the MarkerClusterGroup to the map
+				// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
+				animateAddingMarkers: false,
+
+				//Increase to increase the distance away that spiderfied markers appear from the center
+				spiderfyDistanceMultiplier: 1,
+
+				// Make it possible to specify a polyline options on a spider leg
+				spiderLegPolylineOptions: { weight: 1.5, color: '#222', opacity: 0.5 },
+
+				// When bulk adding layers, adds markers in chunks. Means addLayers may not add all the layers in the call, others will be loaded during setTimeouts
+				chunkedLoading: false,
+				chunkInterval: 200, // process markers for a maximum of ~ n milliseconds (then trigger the chunkProgress callback)
+				chunkDelay: 50, // at the end of each interval, give n milliseconds back to system/browser
+				chunkProgress: null, // progress callback: function(processed, total, elapsed) (e.g. for a progress indicator)
+
+				//Options to pass to the L.Polygon constructor
+				polygonOptions: {}
+			});
 
 			for (var specialcustomfieldpin in specialcustomfieldpins) {
 				// skip loop if the property is from prototype
@@ -963,34 +963,38 @@ document.addEventListener('DOMContentLoaded', function () {
 							tempMarkercf.openPopup();
 						});
 					}
-					window['mymap' + moduleId].on("moveend", function (event) { 
-						var bounds =  event.target.getBounds();
+					window['mymap' + moduleId].on("moveend", function (event) {
+						var bounds = event.target.getBounds();
 						for (var specialcustomfieldpin in specialcustomfieldpins) {
-							if(specialcustomfieldpins[specialcustomfieldpin].id){
+							if (specialcustomfieldpins[specialcustomfieldpin].id) {
 								var cords = L.latLng(specialcustomfieldpins[specialcustomfieldpin].cords.split(",").slice(0, 2));
-								if (!bounds.contains(cords)) {
-									document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = true;
-								} else {
-									document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = false;
+								if (document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id)) {
+									if (!bounds.contains(cords)) {
+										document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = true;
+									} else {
+										document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = false;
+									}
 								}
 							}
 						}
 					});
-			
-					window['mymap' + moduleId].on("zoomend", function (event) { 
-						var bounds =  event.target.getBounds();
+
+					window['mymap' + moduleId].on("zoomend", function (event) {
+						var bounds = event.target.getBounds();
 						for (var specialcustomfieldpin in specialcustomfieldpins) {
-							if(specialcustomfieldpins[specialcustomfieldpin].id){
+							if (specialcustomfieldpins[specialcustomfieldpin].id) {
 								var cords = L.latLng(specialcustomfieldpins[specialcustomfieldpin].cords.split(",").slice(0, 2));
-								if (!bounds.contains(cords)) {
-									document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = true;
-								} else {
-									document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = false;
+								if (document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id)) {
+									if (!bounds.contains(cords)) {
+										document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = true;
+									} else {
+										document.querySelector('.agmarkerlistli' + specialcustomfieldpins[specialcustomfieldpin].id).hidden = false;
+									}
 								}
 							}
 						}
 					});
-			
+
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}
@@ -1027,44 +1031,44 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (geojson === '1') {
 
 			// Get Style Start
-			function areaStyle(feature){
+			function areaStyle(feature) {
 				return {
 					fillColor: getAreaFill(feature),
 					color: getAreaStroke(feature),
 					weight: getAreaStrokeWidth(feature),
 					opacity: getAreaStrokeOpacity(feature),
 					fillOpacity: getAreaFillOpacity(feature)
-			  }
-			};	
-			function getAreaFill(feature){
+				}
+			};
+			function getAreaFill(feature) {
 				if (feature.properties.fill) {
 					return feature.properties.fill;
 				} else {
 					return 'blue';
 				}
 			};
-			function getAreaStroke(feature){
+			function getAreaStroke(feature) {
 				if (feature.properties.stroke) {
 					return feature.properties.stroke;
 				} else {
 					return 'blue';
 				}
 			};
-			function getAreaStrokeWidth(feature){
+			function getAreaStrokeWidth(feature) {
 				if (feature.properties["stroke-width"]) {
 					return feature.properties["stroke-width"];
 				} else {
 					return 2;
 				}
 			};
-			function getAreaStrokeOpacity(feature){
+			function getAreaStrokeOpacity(feature) {
 				if (feature.properties["stroke-opacity"]) {
 					return feature.properties["stroke-opacity"];
 				} else {
 					return 1;
 				}
 			};
-			function getAreaFillOpacity(feature){
+			function getAreaFillOpacity(feature) {
 				if (feature.properties["fill-opacity"]) {
 					return feature.properties["fill-opacity"];
 				} else {
@@ -1078,7 +1082,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					if (geojsonTextRaw === '{}') {
 						console.log('No GeoJson Object');
 					} else {
-						L.geoJSON(geojsonText, {style: areaStyle}).addTo(window['mymap' + moduleId]);
+						L.geoJSON(geojsonText, { style: areaStyle }).addTo(window['mymap' + moduleId]);
 					}
 				}
 				catch (e) {
@@ -1102,7 +1106,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						if (geojsonTextRaw === '{}') {
 							console.log('No GeoJson Object');
 						} else {
-							L.geoJSON(geojsonTextRaw, {style: areaStyle}).addTo(window['mymap' + moduleId]);
+							L.geoJSON(geojsonTextRaw, { style: areaStyle }).addTo(window['mymap' + moduleId]);
 						}
 					}
 					catch (e) {

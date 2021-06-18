@@ -20,7 +20,7 @@ $lang->load($extension, $base_dir, $language_tag, $reload);
 
 $fields = FieldsHelper::getFields('com_content.article', $item, true);
 $tmp = new stdClass;
-foreach($fields as $field) {
+foreach ($fields as $field) {
 	$name = $field->name;
 	$tmp->{$name} = $field;
 }
@@ -30,7 +30,7 @@ $fields = $tmp;
 //echo $fields->{"test1"}->title . ' - ' .  $fields->{"test1"}->value;
 
 $image_type = $model->module_params->image_type;
-$images = json_decode($item->images);			
+$images = json_decode($item->images);
 //$ImageIntro = strlen($images->image_intro) > 1 ? 1 : 0;
 $ImageIntro = 0;
 preg_match('/(<img[^>]+>)/i', $item->introtext, $matches);
@@ -41,22 +41,20 @@ if ($image_type == "intro" || $ImagesTab) {
 	$item->introtext = trim(strip_tags($item->introtext, '<h2><h3>'));
 }
 
-if($model->module_params->text_limit) {
-	preg_match('/(<img[^>]+>)/i', $item->introtext, $images_text);	
+if ($model->module_params->text_limit) {
+	preg_match('/(<img[^>]+>)/i', $item->introtext, $images_text);
 	$item->introtext = trim(strip_tags($item->introtext, '<h2><h3>'));
 	
-	if(extension_loaded('mbstring')) {
+	if (extension_loaded('mbstring')) {
 		$item->introtext = mb_strimwidth($item->introtext, 0, $model->module_params->text_limit, '...', 'utf-8');
-	}
-	else {
+	} else {
 		$item->introtext = strlen($item->introtext) > $model->module_params->text_limit ? substr($item->introtext, 0, $model->module_params->text_limit) . '...' : $item->introtext;
 	}
 	
-	if(count($images_text) && 
+	if (count($images_text) &&
 		($image_type == "text" || ($image_type == "" && !$ImageIntro))
 	) {
-		
-		if(strpos($images_text[0], '://') === false) {
+		if (strpos($images_text[0], '://') === false) {
 			$parts = explode('src="', $images_text[0]);
 			$images_text[0] = $parts[0] . 'src="' . JURI::root() . $parts[1];
 		}
@@ -67,8 +65,7 @@ $model->execPlugins($item);
 
 $distance = "";
 
-if (isset($item->distance))
-{
+if (isset($item->distance)) {
 	$distance = round($item->distance, 2);
 }
 ?>
@@ -94,9 +91,9 @@ if (isset($item->distance))
 	</div>
 	<?php } ?>
 	
-	<?php 
+	<?php
 	$image_empty = $model->module_params->image_empty;
-	if(((!$ImageIntro && $image_type == "intro") || (!$ImageInText && $image_type == "text") || (!$ImageIntro && !$ImageInText && $image_type == "")) && $image_empty != "" && $image_empty != "-1" && !$ImagesTab) { ?>
+	if (((!$ImageIntro && $image_type == "intro") || (!$ImageInText && $image_type == "text") || (!$ImageIntro && !$ImageInText && $image_type == "")) && $image_empty != "" && $image_empty != "-1" && !$ImagesTab) { ?>
 	<div class="item-image image-empty">
 		<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>">
 			<img src="<?php echo JURI::root(); ?>images/<?php echo $image_empty; ?>" itemprop="thumbnailUrl"/>
@@ -104,7 +101,7 @@ if (isset($item->distance))
 	</div>
 	<?php } ?>
 	
-	<?php if($model->module_params->show_introtext) { ?>
+	<?php if ($model->module_params->show_introtext) { ?>
 	<div class="item-body">
 		<div class="introtext">
 			<?php echo $item->introtext; ?>
@@ -112,13 +109,13 @@ if (isset($item->distance))
 	</div>
 	<?php } ?>
 
-	<?php if($model->module_params->show_readmore && property_exists($item, "slug")) { ?>
+	<?php if ($model->module_params->show_readmore && property_exists($item, "slug")) { ?>
 	<div class="item-readmore">
 		<a class="btn btn-secondary" href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catid, $item->language)); ?>"><?php echo JText::_('MOD_AGOSMSSEARCHITEM_READMORE'); ?></a>
 	</div>
 	<?php } ?>
 	
-	<?php if($model->module_params->show_info) { ?>
+	<?php if ($model->module_params->show_info) { ?>
 	<div class="item-info">
 		<ul>
 			<li class="createdby hasTooltip" itemprop="author" itemscope="" itemtype="http://schema.org/Person" title="" data-original-title="Written by">
@@ -127,7 +124,7 @@ if (isset($item->distance))
 			</li>
 			<li class="category-name hasTooltip" title="" data-original-title="Category">
 				<i class="icon icon-folder"></i>
-				<?php foreach($model->getItemCategories($item) as $category) { ?>
+				<?php foreach ($model->getItemCategories($item) as $category) { ?>
 				<a href="<?php echo $category->link; ?>">
 					<span itemprop="genre">
 						<?php echo $category->title; ?>
@@ -136,10 +133,10 @@ if (isset($item->distance))
 				<?php } ?>
 			</li>
 			<?php
-			if($item->tags != "") {
+			if ($item->tags != "") {
 				$item->tags = new JHelperTags;
 				$item->tags->getItemTags('com_content.article', $item->id);
-			?>
+				?>
 			<li class="tags hasTooltip" title="" data-original-title="Tags">
 				<i class="icon icon-tags"></i>
 				<?php echo JLayoutHelper::render('joomla.content.tags', $item->tags->itemTags); ?>
@@ -150,7 +147,7 @@ if (isset($item->distance))
 				<i class="icon icon-clock"></i>
 				<time datetime="<?php echo $item->created; ?>" itemprop="dateCreated">
 					<?php echo JText::_('MOD_AGOSMSSEARCHITEM_CREATED'); ?>
-					<?php 
+					<?php
 						setlocale(LC_ALL, JFactory::getLanguage()->getLocale());
 						$date_format = explode("::", $model->module_params_native->get('date_format', '%e %b %Y::d M yyyy'))[0];
 						$date = strftime($date_format, strtotime($item->created));

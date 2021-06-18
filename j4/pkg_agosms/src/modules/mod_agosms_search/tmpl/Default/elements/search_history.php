@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -13,11 +13,11 @@ defined('_JEXEC') or die;
 
 $history = json_decode($_COOKIE['search_history'.$module->id]);
 
-if($history) {
+if ($history) {
 	echo "<div id='search-history{$module->id}' class='search_history'>
 			<ul>
 	";
-	foreach($history as $h) {
+	foreach ($history as $h) {
 		echo "<li><a href='{$h->link}'>{$h->title}</a></li>";
 	}
 	echo "

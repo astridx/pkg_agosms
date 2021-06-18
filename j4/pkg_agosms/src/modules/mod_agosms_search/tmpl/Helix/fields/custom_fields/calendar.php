@@ -15,11 +15,11 @@ $field_params = json_decode($field->instance->fieldparams);
 $fieldid =  '';
 if (JFactory::getApplication()->input->get->get("field" . $field->id)) {
 	$fieldid = JFactory::getApplication()->input->get->get("field" . $field->id);
-}		
+}
 $active = $fieldid;
 $active_text = '';
 
-if($active) {
+if ($active) {
 	$active_text = DateTime::createFromFormat("Y-m-d", $active)->getTimestamp();
 	$active_text = trim(strftime($date_format, $active_text));
 	$active_text = mb_convert_case($active_text, MB_CASE_TITLE, 'UTF-8');

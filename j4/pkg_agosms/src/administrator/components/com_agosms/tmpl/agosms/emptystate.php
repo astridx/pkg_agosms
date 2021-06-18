@@ -21,8 +21,7 @@ $displayData = [
 
 $user = Factory::getApplication()->getIdentity();
 
-if ($user->authorise('core.create', 'com_agosms') || count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0)
-{
+if ($user->authorise('core.create', 'com_agosms') || count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0) {
 	$displayData['createURL'] = 'index.php?option=com_agosms&task=agosm.add';
 }
 

@@ -13,19 +13,18 @@
 defined('_JEXEC') or die;
 
 $field_params = json_decode($field->instance->fieldparams);
-if($field->instance->type == "integer") {
+if ($field->instance->type == "integer") {
 	$min = $field_params->first;
 	$max = $field_params->last;
 	$step = $field_params->step;
-}
-else {
+} else {
 	$values = $helper->getFieldValuesFromText($field->id, "int", $module->id);
 	$min = $values[0];
 	$max = $values[count($values) - 1];
 	$step = 1;
 }
 
-if($max > 1000000) {
+if ($max > 1000000) {
 	$step = 1000;
 }
 
@@ -92,7 +91,7 @@ $active_max_amount = number_format($active_max, 0, '', $delimiter);
 					tooltip: "hide",
 					step: <?php echo $step; ?>,
 				}).on("slide", function(ev) { //change by slide
-					<?php if($max > 1000000) { ?>
+					<?php if ($max > 1000000) { ?>
 						var value_min = ev.value[0];
 						if(value_min != <?php echo $min; ?>) {
 							value_min -= <?php echo $min; ?>;
@@ -110,7 +109,7 @@ $active_max_amount = number_format($active_max, 0, '', $delimiter);
 						$("input[name=<?php echo "field{$field->id}-to"; ?>]").val(ev.value[1]);
 					<?php } ?>
 				}).on("slideStop", function(ev) { //change by click on the line
-					<?php if($max > 1000000) { ?>
+					<?php if ($max > 1000000) { ?>
 						var value_min = ev.value[0];
 						if(value_min != <?php echo $min; ?>) {
 							value_min -= <?php echo $min; ?>;
