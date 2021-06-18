@@ -20,7 +20,7 @@
 		<folder>language</folder>
 		<folder>tmpl</folder>
 		<file>script.php</file>
-		<folder>Helper</folder>
+		<folder>src</folder>
 		<file module="mod_agosm">mod_agosm.php</file>
 	</files>
 	<!-- Media files -->

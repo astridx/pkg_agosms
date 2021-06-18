@@ -73,9 +73,8 @@
 			<folder>src</folder>
 		</files>
 	</api>
-	<changelogurl>https://raw.githubusercontent.com/astridx/boilerplate/tutorial/changelog.xml</changelogurl>
+	<changelogurl>https://raw.githubusercontent.com/astridx/pkg_agosms/master/changelog.xml</changelogurl>
 	<updateservers>
-		<server type="extension" name="Agosm Updates">https://raw.githubusercontent.com/astridx/boilerplate/tutorial/agosm_update.xml</server>
+		<server type="extension" name="Agosm Update Site">https://raw.githubusercontent.com/astridx/pkg_agosms/master/agosms-update.xml</server>
 	</updateservers>
-	<dlid prefix="dlid=" suffix="" />
 </extension>

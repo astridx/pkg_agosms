@@ -1,0 +1,18 @@
+<changelogs>
+	<changelog>
+		<element>com_agosmss</element>
+		<type>component</type>
+		<version>4.0.0</version>
+		<note>
+			<item>Initial Version</item>
+		</note>
+	</changelog>
+	<changelog>
+		<element>pkg_agosmss</element>
+		<type>package</type>
+		<version>4.0.0</version>
+		<note>
+			<item>Initial Version</item>
+		</note>
+	</changelog>
+</changelogs>

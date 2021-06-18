@@ -18,11 +18,12 @@
 		<!-- The id for each extension is the element stored in the DB -->
 		<file type="component" id="com_agosms">com_agosms.zip</file>
 		<file type="module" id="mod_agosm" client="site">mod_agosm.zip</file>
-		<file type="plugin" id="plg_webservices_agosms" group="webservices">plg_webservices_agosms.zip</file>
-		<file type="template" id="tpl_facile" client="site">tpl_facile.zip</file>
+		<file type="module" id="mod_agosms_search" client="site">mod_agosms_search.zip</file>
+		<file type="plugin" id="agosmssearch" group="system">plg_system_agosmssearch.zip</file>
+		<file type="plugin" id="agosmsmarker" group="fields">plg_fields_agosmsmarker.zip</file>
+		<file type="plugin" id="agosmsaddressmarker" group="fields">plg_fields_agosmsaddressmarker.zip</file>
 	</files>
 	<updateservers>
-		<server type="extension" name="Agosm Updates">https://raw.githubusercontent.com/astridx/boilerplate/tutorial/agosm_update.xml</server>
+		<server type="extension" name="Agosm Update Site">https://raw.githubusercontent.com/astridx/pkg_agosms/master/agosms-update.xml</server>
 	</updateservers>
-	<dlid prefix="dlid=" suffix="" />
 </extension>

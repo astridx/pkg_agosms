@@ -59,19 +59,19 @@
 			<menu link="option=com_categories&amp;extension=com_agosms" view="categories" img="class:agosms-cat" alt="Agosms/Categories">com_agosms_categories</menu>
 		</submenu>
 		<files folder="administrator/components/com_agosms">
-<folder>controllers</folder>
-<file>controller.php</file>
-<folder>models</folder>
-<folder>language</folder>
-<file>agosms.php</file>
-<file>access.xml</file>
-<folder>tables</folder>
+			<folder>controllers</folder>
+			<file>controller.php</file>
+			<folder>models</folder>
+			<folder>language</folder>
+			<file>agosms.php</file>
+			<file>access.xml</file>
+			<folder>tables</folder>
 
-<folder>helpers</folder>
-<folder>sql</folder>
-<file>config.xml</file>
+			<folder>helpers</folder>
+			<folder>sql</folder>
+			<file>config.xml</file>
 
-<folder>views</folder>
+			<folder>views</folder>
 		</files>
 	</administration>
 </extension>
