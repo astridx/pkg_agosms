@@ -24,7 +24,7 @@ class Pkg_AgosmsInstallerScript
 	 */
 	public function __construct()
 	{
-		$this->minimumJoomla = '3.10.0';
+		$this->minimumJoomla = '4.0.0';
 		$this->minimumPhp    = JOOMLA_MINIMUM_PHP;
 	}
 }
