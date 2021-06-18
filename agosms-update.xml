@@ -610,6 +610,6 @@
         </tags>
         <maintainer>Astrid Günther</maintainer>
         <maintainerurl>https://astrid-guenther.de</maintainerurl>
-        <targetplatform name="joomla" version="4.*"/>
+        <targetplatform name="joomla" version="3.10.*"/>
     </update>
 </updates>
