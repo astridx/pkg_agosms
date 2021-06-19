@@ -136,7 +136,7 @@ $unique = $module->id . '_' . uniqid();
 	<?php 
 		foreach($listcf as $marker) {
 			if(property_exists($marker, 'popuptext')){
-				echo '<li class="agmarkerlistli' . $marker->id . '"><a class="agmarkerlista' . $marker->id . '" href="#">' . $marker->popuptext . '</a>';
+				echo '<li class="agmarkerlistli' . $marker->id . '"><a class="agmarkerlista' . $marker->id . '" " href="#map' . $module->id .'">' . $marker->popuptext . '</a>';
 			}
 		}
 	?>
@@ -148,7 +148,7 @@ $unique = $module->id . '_' . uniqid();
 	<?php 
 		foreach($list as $marker) {
 			if(property_exists($marker, 'popuptext')){
-				echo '<li class="agmarkerlistli_component' . $marker->id . '">' . $marker->popuptext . '<a class="agmarkerlista_component' . $marker->id . '" href="#">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
+				echo '<li class="agmarkerlistli_component' . $marker->id . '">' . $marker->popuptext . '<a class="agmarkerlista_component' . $marker->id . '" " href="#map' . $module->id .'">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
 			}
 		}
 	?>
@@ -162,7 +162,7 @@ $unique = $module->id . '_' . uniqid();
 		foreach($params->get('specialpins', null) as $marker) {
 			$index++;
 			if(property_exists($marker, 'popuptext')){
-				echo '<li class="agmarkerlistli_specialpin' . $index . '">' . $marker->popuptext . '<a class="agmarkerlista_specialpin' . $index . '" href="#">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
+				echo '<li class="agmarkerlistli_specialpin' . $index . '">' . $marker->popuptext . '<a class="agmarkerlista_specialpin' . $index . '" " href="#map' . $module->id .'">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
 			}
 		}
 	?>
