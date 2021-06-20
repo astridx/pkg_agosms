@@ -38,7 +38,7 @@
         </tags>
         <maintainer>Astrid Günther</maintainer>
         <maintainerurl>https://astrid-guenther.de</maintainerurl>
-        <targetplatform name="joomla" version="4.0.1"/>
+        <targetplatform name="joomla" version="4.0.0"/>
         <sha256>f46518364412f63c6018297aedb647a39aa2c5b4a2daf1bf797adf08db64e900</sha256>
         <sha384>904a0486e1fe759868620d3152fa4a132a942d5ecd170806d220c1aa7f80e67e05186495653406af2c903646b0eeb17c</sha384>
     </update>
