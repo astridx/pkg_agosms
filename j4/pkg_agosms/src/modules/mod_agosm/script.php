@@ -3,7 +3,7 @@
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
  *
- * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
+ * @copyright   Copyright (C) 2019 Astrid Günther, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
@@ -56,7 +56,7 @@ class Mod_AgosmInstallerScript
 	 */
 	public function update($parent)
 	{
-		echo '<p>' . JText::sprintf('MOD_AGOSM_UPDATE', $parent->get('manifest')->version) . '</p>';
+		echo '<p>' . JText::_('MOD_AGOSM_UPDATE') . '</p>';
 	}
 
 	/**
