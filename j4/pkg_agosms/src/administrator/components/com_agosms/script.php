@@ -29,7 +29,7 @@ class Com_AgosmsInstallerScript extends InstallerScript
 	 * @var    string
 	 * @since  __BUMP_VERSION__
 	 */
-	private $minimumJoomlaVersion = '4.0.0';
+	private $minimumJoomlaVersion = '4.0.0-rc2';
 
 	/**
 	 * Minimum PHP version to check
