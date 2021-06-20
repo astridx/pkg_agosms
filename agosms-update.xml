@@ -594,25 +594,4 @@
         <maintainerurl>https://astrid-guenther.de</maintainerurl>
         <targetplatform name="joomla" version="3.[789]|10"/>
     </update>
-    <update>
-        <name>pkg_agosms</name>
-        <description>pkg_agosms</description>
-        <element>pkg_agosms</element>
-        <type>package</type>
-        <client>site</client>
-        <version>4.0.0</version>
-        <infourl title="agosms">https://github.com/astridx/pkg_agosms/blob/v4.0.0/README.md</infourl>
-        <downloads>
-            <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v4.0.0/pkg-agosms-4.0.0.zip</downloadurl>
-        </downloads>
-        <tags>
-            <tag>rc</tag>
-            <tag>stable</tag>
-        </tags>
-        <maintainer>Astrid Günther</maintainer>
-        <maintainerurl>https://astrid-guenther.de</maintainerurl>
-        <targetplatform name="joomla" version="4.0.0"/>
-        <sha256>6b59cfa633e7f90035b98374a17218dcaa18c4f015b8ae2042cf8f1a911e8377</sha256>
-        <sha384>dc03bfcff610126bffdbcd07156623bdb391f78d667b3a676b0369695f4abca3fe18782fc6698c8d16bac9852c00b373</sha384>
-    </update>
 </updates>

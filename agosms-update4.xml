@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<updates>
+    <update>
+        <name>pkg_agosms</name>
+        <description>pkg_agosms</description>
+        <element>pkg_agosms</element>
+        <type>package</type>
+        <client>site</client>
+        <version>4.0.0</version>
+        <infourl title="agosms">https://github.com/astridx/pkg_agosms/blob/v4.0.0/README.md</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v4.0.0/pkg-agosms-4.0.0.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>rc</tag>
+            <tag>stable</tag>
+        </tags>
+        <maintainer>Astrid Günther</maintainer>
+        <maintainerurl>https://astrid-guenther.de</maintainerurl>
+        <targetplatform name="joomla" version="4.0.0"/>
+        <sha256>69b38d3e79332dcce472aa1ba20222cebcdbe55b3b5b22905582189a0958e68c</sha256>
+        <sha384>264aedb96f1e1ea8878caf6a1a6c890c99cfd3e0c01470bd108234acc064659ee7b439efa3169e467bb587e096337695</sha384>
+    </update>
+    <update>
+        <name>pkg_agosms</name>
+        <description>pkg_agosms</description>
+        <element>pkg_agosms</element>
+        <type>package</type>
+        <client>site</client>
+        <version>4.0.1</version>
+        <infourl title="agosms">https://github.com/astridx/pkg_agosms/blob/v4.0.1/README.md</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v4.0.1/pkg-agosms-4.0.1.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>rc</tag>
+            <tag>stable</tag>
+        </tags>
+        <maintainer>Astrid Günther</maintainer>
+        <maintainerurl>https://astrid-guenther.de</maintainerurl>
+        <targetplatform name="joomla" version="4.0.1"/>
+        <sha256>37682ef1d5659cb4fe8255e0c864b477c2bda942cbba6b70b31216a78d1acd63</sha256>
+        <sha384>8c77e6a2eac8f98f29667daaad6bea34a22180bcb361200e0d40e46415da8eee8706a738f1c573a761546db70f5d17a0</sha384>
+    </update>
+</updates>

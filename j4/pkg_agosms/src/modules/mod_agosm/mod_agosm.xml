@@ -544,4 +544,5 @@
 
 		</fields>
 	</config>
+	<changelogurl>https://raw.githubusercontent.com/astridx/pkg_agosms/master/changelog.xml</changelogurl>
 </extension>

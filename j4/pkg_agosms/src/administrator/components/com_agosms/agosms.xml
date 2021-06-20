@@ -74,7 +74,4 @@
 		</files>
 	</api>
 	<changelogurl>https://raw.githubusercontent.com/astridx/pkg_agosms/master/changelog.xml</changelogurl>
-	<updateservers>
-		<server type="extension" name="Agosm Update Site">https://raw.githubusercontent.com/astridx/pkg_agosms/master/agosms-update.xml</server>
-	</updateservers>
 </extension>

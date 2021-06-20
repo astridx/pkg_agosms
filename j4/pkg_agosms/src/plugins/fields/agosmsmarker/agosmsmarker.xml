@@ -11,16 +11,12 @@
 	<description>PLG_FIELDS_AGOSMSMARKER_XML_DESCRIPTION</description>
 	<files>
 		<file>agosmsmarker.xml</file>
-
-<folder>tmpl</folder>
-<folder>language</folder>
-<folder>field</folder>
-
-<folder>layouts</folder>
-
-<file plugin="agosmsmarker">agosmsmarker.php</file>
-
-<folder>params</folder>
+		<folder>tmpl</folder>
+		<folder>language</folder>
+		<folder>field</folder>
+		<folder>layouts</folder>
+		<file plugin="agosmsmarker">agosmsmarker.php</file>
+		<folder>params</folder>
 	</files>
 
 	<config>
@@ -29,4 +25,5 @@
 			</fieldset>
 		</fields>
 	</config>
+	<changelogurl>https://raw.githubusercontent.com/astridx/pkg_agosms/master/changelog.xml</changelogurl>
 </extension>
