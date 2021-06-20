@@ -18,8 +18,8 @@
         <maintainer>Astrid Günther</maintainer>
         <maintainerurl>https://astrid-guenther.de</maintainerurl>
         <targetplatform name="joomla" version="4.0.0"/>
-        <sha256>a7a85060a30580c331ec54a809f966d05312be0b044b06cfd1bf13ccc7a89332</sha256>
-        <sha384>189e0145cad42594b38e137044a07f456b21977134d4d6f12d3ca55cc1cf7db0bb8c0e3541ba353fcd9e2d2732f0f551</sha384>
+        <sha256>b47d8e787871f763e538374daea5e78ef2bf46c1536b3265c0ed7e950c493d57</sha256>
+        <sha384>fa385c83ebab2c815f0942957d4e39947f894306cac0cb94e579ade4dcf45a237e462934d7b2cf4c50a097eb9d2e85f5</sha384>
     </update>
     <update>
         <name>pkg_agosms</name>
@@ -39,7 +39,7 @@
         <maintainer>Astrid Günther</maintainer>
         <maintainerurl>https://astrid-guenther.de</maintainerurl>
         <targetplatform name="joomla" version="4.0.0"/>
-        <sha256>f61a949a9c53d67d6665dbf1a9d93a520503a3eed206bb28ce3000cc0a3d0b15</sha256>
-        <sha384>97f68b5e4a46a1bc91853e4baa5ccb4655ec3a7f6b4238faa9d752df63f4133738f8aa70b0020f9ef7d7b5a431d4c691</sha384>
+        <sha256>e92e9887974a9f6dd61b1af88d61de2ec79d178d2fff67af66341b43525ae41f</sha256>
+        <sha384>21fc6a657c845de01e5871fcdb654568209239466db37f4bd29a412f75612d1c0bac7884274653eaad2aafaee9bf0f03</sha384>
     </update>
 </updates>
