@@ -1,5 +1,7 @@
 
-# pkg_agosm
+# pkg_agosm 
+
+The installation files are located in the [Releases section])(https://github.com/astridx/pkg_agosms/releases). There are independent versions for Joomla 3 and one for Joomla 4. The version for Joomla 4 cannot be used as an update for Joomla 3. 
 
 # Support and New Features
 
