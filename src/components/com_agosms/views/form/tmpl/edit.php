@@ -18,10 +18,8 @@ JHtml::_('behavior.modal', 'a.modal_jform_contenthistory');
 $captchaEnabled = false;
 $captchaSet = $this->params->get('captcha', JFactory::getApplication()->get('captcha', '0'));
 
-foreach (JPluginHelper::getPlugin('captcha') as $plugin)
-{
-	if ($captchaSet === $plugin->name)
-	{
+foreach (JPluginHelper::getPlugin('captcha') as $plugin) {
+	if ($captchaSet === $plugin->name) {
 		$captchaEnabled = true;
 		break;
 	}

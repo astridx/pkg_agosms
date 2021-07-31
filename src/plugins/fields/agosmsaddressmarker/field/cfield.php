@@ -36,7 +36,7 @@ class JFormFieldCfield extends JFormFieldList
 	 * @var    array
 	 * @since  1.0.40
 	 */
-	protected static $options = array();
+	protected static $options = [];
 
 	/**
 	 * Method to get the options to populate list
@@ -53,8 +53,7 @@ class JFormFieldCfield extends JFormFieldList
 		$app = JFactory::getApplication();
 		$context = $app->input->getCmd('context');
 
-		if (!isset(static::$options[$hash]))
-		{
+		if (!isset(static::$options[$hash])) {
 			static::$options[$hash] = parent::getOptions();
 
 			$db = Factory::getDbo();
@@ -73,8 +72,7 @@ class JFormFieldCfield extends JFormFieldList
 			$db->setQuery($query);
 
 			// Return the result
-			if ($options = $db->loadObjectList())
-			{
+			if ($options = $db->loadObjectList()) {
 				static::$options[$hash] = array_merge(static::$options[$hash], $options);
 			}
 		}

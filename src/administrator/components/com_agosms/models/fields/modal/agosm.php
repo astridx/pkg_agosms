@@ -48,26 +48,22 @@ class JFormFieldModal_Agosm extends JFormField
 
 		// Add the modal field script to the document head.
 		JHtml::_('jquery.framework');
-		JHtml::_('script', 'system/modal-fields.js', array('version' => 'auto', 'relative' => true));
+		JHtml::_('script', 'system/modal-fields.js', ['version' => 'auto', 'relative' => true]);
 
 		// Script to proxy the select modal function to the modal-fields.js file.
-		if ($allowSelect)
-		{
+		if ($allowSelect) {
 			static $scriptSelect = null;
 
-			if (is_null($scriptSelect))
-			{
-				$scriptSelect = array();
+			if (is_null($scriptSelect)) {
+				$scriptSelect = [];
 			}
 
-			if (!isset($scriptSelect[$this->id]))
-			{
+			if (!isset($scriptSelect[$this->id])) {
 				JFactory::getDocument()->addScriptDeclaration("
 				function jSelectAgosm_" . $this->id . "(id, title, catid, object, url, language) {
 					window.processModalSelect('Agosm', '" . $this->id . "', id, title, catid, object, url, language);
 				}
-				"
-				);
+				");
 				$scriptSelect[$this->id] = true;
 			}
 		}
@@ -77,8 +73,7 @@ class JFormFieldModal_Agosm extends JFormField
 		$linkAgosm  = 'index.php?option=com_agosms&amp;view=agosm&amp;layout=modal&amp;tmpl=component&amp;' . JSession::getFormToken() . '=1';
 		$modalTitle   = JText::_('COM_AGOSMS_CHANGE_AGOSM');
 
-		if (isset($this->element['language']))
-		{
+		if (isset($this->element['language'])) {
 			$linkAgosms .= '&amp;forcedLanguage=' . $this->element['language'];
 			$linkAgosm  .= '&amp;forcedLanguage=' . $this->element['language'];
 			$modalTitle   .= ' &#8212; ' . $this->element['label'];
@@ -88,8 +83,7 @@ class JFormFieldModal_Agosm extends JFormField
 		$urlEdit   = $linkAgosm . '&amp;task=agosm.edit&amp;id=\' + document.getElementById("' . $this->id . '_id").value + \'';
 		$urlNew    = $linkAgosm . '&amp;task=agosm.add';
 
-		if ($value)
-		{
+		if ($value) {
 			$db    = JFactory::getDbo();
 			$query = $db->getQuery(true)
 				->select($db->quoteName('title'))
@@ -97,12 +91,9 @@ class JFormFieldModal_Agosm extends JFormField
 				->where($db->quoteName('id') . ' = ' . (int) $value);
 			$db->setQuery($query);
 
-			try
-			{
+			try {
 				$title = $db->loadResult();
-			}
-			catch (RuntimeException $e)
-			{
+			} catch (RuntimeException $e) {
 				JError::raiseWarning(500, $e->getMessage());
 			}
 		}
@@ -114,8 +105,7 @@ class JFormFieldModal_Agosm extends JFormField
 		$html .= '<input class="input-medium" id="' . $this->id . '_name" type="text" value="' . $title . '" disabled="disabled" size="35" />';
 
 		// Select agosm button
-		if ($allowSelect)
-		{
+		if ($allowSelect) {
 			$html .= '<a'
 				. ' class="btn hasTooltip' . ($value ? ' hidden' : '') . '"'
 				. ' id="' . $this->id . '_select"'
@@ -128,8 +118,7 @@ class JFormFieldModal_Agosm extends JFormField
 		}
 
 		// New agosm button
-		if ($allowNew)
-		{
+		if ($allowNew) {
 			$html .= '<a'
 				. ' class="btn hasTooltip' . ($value ? ' hidden' : '') . '"'
 				. ' id="' . $this->id . '_new"'
@@ -142,8 +131,7 @@ class JFormFieldModal_Agosm extends JFormField
 		}
 
 		// Edit agosm button
-		if ($allowEdit)
-		{
+		if ($allowEdit) {
 			$html .= '<a'
 				. ' class="btn hasTooltip' . ($value ? '' : ' hidden') . '"'
 				. ' id="' . $this->id . '_edit"'
@@ -156,8 +144,7 @@ class JFormFieldModal_Agosm extends JFormField
 		}
 
 		// Clear agosm button
-		if ($allowClear)
-		{
+		if ($allowClear) {
 			$html .= '<a'
 				. ' class="btn' . ($value ? '' : ' hidden') . '"'
 				. ' id="' . $this->id . '_clear"'
@@ -170,12 +157,11 @@ class JFormFieldModal_Agosm extends JFormField
 		$html .= '</span>';
 
 		// Select agosm modal
-		if ($allowSelect)
-		{
+		if ($allowSelect) {
 			$html .= JHtml::_(
 				'bootstrap.renderModal',
 				'ModalSelect' . $modalId,
-				array(
+				[
 					'title'       => $modalTitle,
 					'url'         => $urlSelect,
 					'height'      => '400px',
@@ -183,17 +169,16 @@ class JFormFieldModal_Agosm extends JFormField
 					'bodyHeight'  => '70',
 					'modalWidth'  => '80',
 					'footer'      => '<a role="button" class="btn" data-dismiss="modal" aria-hidden="true">' . JText::_('JLIB_HTML_BEHAVIOR_CLOSE') . '</a>',
-				)
+				]
 			);
 		}
 
 		// New agosm modal
-		if ($allowNew)
-		{
+		if ($allowNew) {
 			$html .= JHtml::_(
 				'bootstrap.renderModal',
 				'ModalNew' . $modalId,
-				array(
+				[
 					'title'       => JText::_('COM_AGOSMS_NEW_AGOSM'),
 					'backdrop'    => 'static',
 					'keyboard'    => false,
@@ -212,17 +197,16 @@ class JFormFieldModal_Agosm extends JFormField
 							. '<a role="button" class="btn btn-success" aria-hidden="true"'
 							. ' onclick="window.processModalEdit(this, \'' . $this->id . '\', \'add\', \'agosm\', \'apply\', \'agosm-form\'); return false;">'
 							. JText::_('JAPPLY') . '</a>',
-				)
+				]
 			);
 		}
 
 		// Edit agosm modal
-		if ($allowEdit)
-		{
+		if ($allowEdit) {
 			$html .= JHtml::_(
 				'bootstrap.renderModal',
 				'ModalEdit' . $modalId,
-				array(
+				[
 					'title'       => JText::_('COM_AGOSMS_EDIT_AGOSM'),
 					'backdrop'    => 'static',
 					'keyboard'    => false,
@@ -241,7 +225,7 @@ class JFormFieldModal_Agosm extends JFormField
 							. '<a role="button" class="btn btn-success" aria-hidden="true"'
 							. ' onclick="window.processModalEdit(this, \'' . $this->id . '\', \'edit\', \'agosm\', \'apply\', \'agosm-form\'); return false;">'
 							. JText::_('JAPPLY') . '</a>',
-				)
+				]
 			);
 		}
 

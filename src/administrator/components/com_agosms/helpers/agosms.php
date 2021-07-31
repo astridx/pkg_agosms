@@ -40,8 +40,7 @@ class AgosmsHelper extends JHelperContent
 			$vName == 'categories'
 		);
 
-		if (JComponentHelper::isEnabled('com_fields') && JComponentHelper::getParams('com_agosms')->get('custom_fields_enable', '1'))
-		{
+		if (JComponentHelper::isEnabled('com_fields') && JComponentHelper::getParams('com_agosms')->get('custom_fields_enable', '1')) {
 			JHtmlSidebar::addEntry(
 				JText::_('JGLOBAL_FIELDS'),
 				'index.php?option=com_fields&context=com_agosms.agosm',
@@ -69,8 +68,7 @@ class AgosmsHelper extends JHelperContent
 	{
 		$db = JFactory::getDbo();
 
-		foreach ($items as $item)
-		{
+		foreach ($items as $item) {
 			$item->count_trashed     = 0;
 			$item->count_archived    = 0;
 			$item->count_unpublished = 0;
@@ -85,22 +83,14 @@ class AgosmsHelper extends JHelperContent
 			$db->setQuery($query);
 			$agosms = $db->loadObjectList();
 
-			foreach ($agosms as $agosm)
-			{
-				if ($agosm->state == 1)
-				{
+			foreach ($agosms as $agosm) {
+				if ($agosm->state == 1) {
 					$item->count_published = $agosm->count;
-				}
-				elseif ($agosm->state == 0)
-				{
+				} else if ($agosm->state == 0) {
 					$item->count_unpublished = $agosm->count;
-				}
-				elseif ($agosm->state == 2)
-				{
+				} else if ($agosm->state == 2) {
 					$item->count_archived = $agosm->count;
-				}
-				elseif ($agosm->state == -2)
-				{
+				} else if ($agosm->state == -2) {
 					$item->count_trashed = $agosm->count;
 				}
 			}
@@ -123,8 +113,7 @@ class AgosmsHelper extends JHelperContent
 	{
 		$db = JFactory::getDbo();
 
-		foreach ($items as $item)
-		{
+		foreach ($items as $item) {
 			$item->count_trashed = 0;
 			$item->count_archived = 0;
 			$item->count_unpublished = 0;
@@ -141,25 +130,20 @@ class AgosmsHelper extends JHelperContent
 			$db->setQuery($query);
 			$agosms = $db->loadObjectList();
 
-			foreach ($agosms as $agosm)
-			{
-				if ($agosm->state == 1)
-				{
+			foreach ($agosms as $agosm) {
+				if ($agosm->state == 1) {
 					$item->count_published = $agosm->count;
 				}
 
-				if ($agosm->state == 0)
-				{
+				if ($agosm->state == 0) {
 					$item->count_unpublished = $agosm->count;
 				}
 
-				if ($agosm->state == 2)
-				{
+				if ($agosm->state == 2) {
 					$item->count_archived = $agosm->count;
 				}
 
-				if ($agosm->state == -2)
-				{
+				if ($agosm->state == -2) {
 					$item->count_trashed = $agosm->count;
 				}
 			}

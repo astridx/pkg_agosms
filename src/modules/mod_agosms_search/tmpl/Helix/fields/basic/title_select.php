@@ -25,8 +25,10 @@ if (JFactory::getApplication()->input->get->get('keyword')) {
 	</h3>
 	<select class="inputbox" name="keyword" style="display: none;">
 		<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TITLE_SELECT'); ?></option>
-		<?php foreach($titles as $title) { ?>
-			<option <?php if($title == $active) { ?> selected="selected"<?php } ?>>
+		<?php foreach ($titles as $title) { ?>
+			<option <?php if ($title == $active) {
+				?> selected="selected"<?php
+					} ?>>
 				<?php echo $title; ?>
 			</option>
 		<?php } ?>

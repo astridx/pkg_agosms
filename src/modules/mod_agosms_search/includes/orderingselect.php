@@ -40,84 +40,67 @@ class JFormFieldOrderingSelect extends JFormField
 						ORDER BY g.id, f.label
 					";
 
-		try
-		{
+		try {
 			$fields = JFactory::getDBO()->setQuery($query)->loadObjectList();
-		}
-		catch (Exception $e)
-		{
+		} catch (Exception $e) {
 			$mitems[] = JHTML::_("select.option", "", "Custom Fields available from Joomla 3.8+");
 		}
 
-		if (count($fields))
-		{
+		if (count($fields)) {
 			$group = @$fields[0]->group_name;
 			array_splice($fields, 0, 0, $group);
 
-			for ($i = 1; $i < count($fields); $i++)
-			{
+			for ($i = 1; $i < count($fields); $i++) {
 				$new_group = $fields[$i]->group_name;
 
-				if ($new_group != $group)
-				{
+				if ($new_group != $group) {
 					array_splice($fields, $i, 0, $new_group);
 					$group = $new_group;
 				}
 			}
 
-			foreach ($fields as $field)
-			{
-				if (is_object($field))
-				{
+			foreach ($fields as $field) {
+				if (is_object($field)) {
 					$field->group_name ? $offset = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" : $offset = "&nbsp;&nbsp;&nbsp;";
 
-					if ($field->type == 'radicalmultifield')
-					{
+					if ($field->type == 'radicalmultifield') {
 						continue; // Do not use for ordering for now
 						$field_params = json_decode($field->fieldparams);
-						$sub_fields = array();
+						$sub_fields = [];
 
-						foreach ($field_params->listtype as $k => $sub_field)
-						{
+						foreach ($field_params->listtype as $k => $sub_field) {
 							$sub_fields[$k] = new stdClass;
 							$sub_fields[$k]->name = $sub_field->name;
 							$sub_fields[$k]->title = $sub_field->title;
 						}
 
 						$tmp = array_values($sub_fields);
-						$sub_fields = array();
+						$sub_fields = [];
 						$sub_fields['radicalmultifield_fields'] = $tmp;
 						$sub_fields = json_encode($sub_fields);
 
 						$mitems[] = JHTML::_("select.option", "field:{$field->id}:{$field->type}:{$sub_fields}", $offset . JText::_("{$field->label} [id: {$field->id}]"));
-					}
-					elseif ($field->type == 'repeatable')
-					{
+					} else if ($field->type == 'repeatable') {
 						continue; // Do not use for ordering for now
 						$field_params = json_decode($field->fieldparams);
-						$sub_fields = array();
+						$sub_fields = [];
 
-						foreach ($field_params->fields as $k => $sub_field)
-						{
+						foreach ($field_params->fields as $k => $sub_field) {
 							$sub_fields[$k] = new stdClass;
 							$sub_fields[$k]->name = $sub_field->fieldname;
 							$sub_fields[$k]->title = $sub_field->fieldname;
 						}
 
 						$tmp = array_values($sub_fields);
-						$sub_fields = array();
+						$sub_fields = [];
 						$sub_fields['repeatable_fields'] = $tmp;
 						$sub_fields = json_encode($sub_fields);
 
 						$mitems[] = JHTML::_("select.option", "field:{$field->id}:{$field->type}:{$sub_fields}", $offset . JText::_("{$field->label} [id: {$field->id}]"));
-					}
-					else
-					{
+					} else {
 						$mitems[] = JHTML::_("select.option", "field{$field->id}", $offset . JText::_("{$field->label} [id: {$field->id}]"));
 					}
-				}
-				else
-				{
+				} else {
 					$mitems[] = JHTML::_("select.option", "", "&nbsp;&nbsp;&nbsp;-- {$field} --");
 				}
 			}
@@ -126,5 +109,3 @@ class JFormFieldOrderingSelect extends JFormField
 			return JHTML::_('select.genericlist', $mitems, $name, 'class="inputbox"', 'value', 'text', $value, $control_name . $name);
 	}
 }
-
-

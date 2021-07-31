@@ -12,17 +12,16 @@
 defined('_JEXEC') or die;
 
 $customSorting = explode("\r\n", $model->module_params->ordering_fields);
-$sortingFields = array();
-foreach($customSorting as $field) {
+$sortingFields = [];
+foreach ($customSorting as $field) {
 	$tmp = new stdClass;
 	$aField = explode(":", $field);
 	try {
 		$tmp->id = $aField[1];
 	} catch (Exception $e) {
-		
 	}
 	$flt = explode('{', $field, 2);
-	if(!empty($flt[1]) && $flt[1] != '') {
+	if (!empty($flt[1]) && $flt[1] != '') {
 		$extra_params = json_decode('{' . $flt[1]);
 		$tmp->name = $extra_params->name;
 	}
@@ -36,16 +35,16 @@ foreach($customSorting as $field) {
 	<option value="title"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_TITLE'); ?></option>
 	<option value="publish_up"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_DATE_PUBLISHING'); ?></option>
 	<option value="category"><?php echo JText::_('MOD_AGOSMSSEARCHSORTING_CATEGORY'); ?></option>
-	<?php if(count($sortingFields)) { ?>
-		<?php foreach($sortingFields as $field) { ?>
-			<?php if(property_exists($field, "name") && property_exists($field, "id")) { ?>
+	<?php if (count($sortingFields)) { ?>
+		<?php foreach ($sortingFields as $field) { ?>
+			<?php if (property_exists($field, "name") && property_exists($field, "id")) { ?>
 				<option value="field<?php echo $field->id; ?>"><?php echo JText::_($field->name); ?></option>
 			<?php } ?>
 		<?php } ?>
 	<?php } ?>
 </select>
 <div class="ordering direction 
-<?php 
+<?php
 $orderto =  false;
 if (JFactory::getApplication()->input->post->get('orderto')) {
 	$orderto = JFactory::getApplication()->input->post->get('orderto');
@@ -60,7 +59,7 @@ echo ($orderto ? $orderto : $model->module_params->ordering_default_dir); ?>"></
 				orderby_active = orderby_active.split("&")[0];
 			$("select.ordering").val(orderby_active).trigger("liszt:updated");	
 		}
- 		
+		
 		$("select.ordering").on("change", function() {
 			var query = window.location.search;
 			if(query.indexOf("orderby") != -1) {

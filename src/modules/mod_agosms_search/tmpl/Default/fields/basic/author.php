@@ -12,7 +12,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-$active =  array();
+$active =  [];
 if (JFactory::getApplication()->input->get->get('author')) {
 	$active = JFactory::getApplication()->input->get->get('author');
 }
@@ -24,15 +24,15 @@ if (JFactory::getApplication()->input->get->get('author')) {
 	</h3>
 	<select class="inputbox" name="author[]" multiple="multiple" style="display: none;">
 		<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_AUTHOR'); ?></option>
-		<?php foreach($authors as $author) { ?>
+		<?php foreach ($authors as $author) { ?>
 			<option 
 				value="<?php echo $author->id; ?>"
-				<?php if(in_array($author->id, $active)) { ?> 
+				<?php if (in_array($author->id, $active)) { ?> 
 				selected="selected"
 				<?php } ?>
 			>
-				<?php 
-					echo $author->name; 
+				<?php
+					echo $author->name;
 				?>
 			</option>
 		<?php } ?>

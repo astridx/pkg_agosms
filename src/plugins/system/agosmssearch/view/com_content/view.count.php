@@ -21,5 +21,3 @@ class ArticlesViewAgSearch extends JViewCategory
 		die;
 	}
 }
-
-

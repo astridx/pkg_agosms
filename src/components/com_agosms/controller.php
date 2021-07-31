@@ -42,23 +42,21 @@ class AgosmsController extends JControllerLegacy
 		$vName = $this->input->get('view', 'categories');
 		$this->input->set('view', $vName);
 
-		if (JFactory::getUser()->id ||($this->input->getMethod() == 'POST' && $vName == 'categories'))
-		{
+		if (JFactory::getUser()->id ||($this->input->getMethod() == 'POST' && $vName == 'categories')) {
 			$cacheable = false;
 		}
 
-		$safeurlparams = array(
+		$safeurlparams = [
 			'id'               => 'INT',
 			'limit'            => 'UINT',
 			'limitstart'       => 'UINT',
 			'filter_order'     => 'CMD',
 			'filter_order_Dir' => 'CMD',
 			'lang'             => 'CMD'
-		);
+		];
 
 		// Check for edit form.
-		if ($vName == 'form' && !$this->checkEditId('com_agosms.edit.agosm', $id))
-		{
+		if ($vName == 'form' && !$this->checkEditId('com_agosms.edit.agosm', $id)) {
 			// Somehow the person just went to the form - we don't allow that.
 			return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
 		}

@@ -15,17 +15,16 @@ JHtml::_('bootstrap.tooltip');
 $class = ' class="first"';
 
 if (count($this->items[$this->parent->id]) > 0 && $this->maxLevelcat != 0) :
-?>
-	<?php foreach($this->items[$this->parent->id] as $id => $item) : ?>
+	?>
+	<?php foreach ($this->items[$this->parent->id] as $id => $item) : ?>
 		<?php
 		if ($this->params->get('show_empty_categories_cat') || $item->numitems || count($item->getChildren())) :
-		if (!isset($this->items[$this->parent->id][$id + 1]))
-		{
-			$class = ' class="last"';
-		}
-		?>
+			if (!isset($this->items[$this->parent->id][$id + 1])) {
+				$class = ' class="last"';
+			}
+			?>
 		<div <?php echo $class; ?> >
-		<?php $class = ''; ?>
+			<?php $class = ''; ?>
 			<h3 class="page-header item-title">
 				<a href="<?php echo JRoute::_(AgosmsHelperRoute::getCategoryRoute($item->id));?>">
 					<?php echo $this->escape($item->title); ?></a>
@@ -42,7 +41,7 @@ if (count($this->items[$this->parent->id]) > 0 && $this->maxLevelcat != 0) :
 				<?php if ($this->params->get('show_subcat_desc_cat') == 1) :?>
 					<?php if ($item->description) : ?>
 						<div class="category-desc">
-				<?php echo JHtml::_('content.prepare', $item->description, '', 'com_agosms.categories'); ?>
+						<?php echo JHtml::_('content.prepare', $item->description, '', 'com_agosms.categories'); ?>
 						</div>
 					<?php endif; ?>
 				<?php endif; ?>

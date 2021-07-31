@@ -42,16 +42,15 @@ class AgosmsModelCategory extends JModelList
 	 * @see     JControllerLegacy
 	 * @since   1.0.40
 	 */
-	public function __construct($config = array())
+	public function __construct($config = [])
 	{
-		if (empty($config['filter_fields']))
-		{
-			$config['filter_fields'] = array(
+		if (empty($config['filter_fields'])) {
+			$config['filter_fields'] = [
 				'id', 'a.id',
 				'title', 'a.title',
 				'hits', 'a.hits',
 				'ordering', 'a.ordering',
-			);
+			];
 		}
 
 		parent::__construct($config);
@@ -82,10 +81,8 @@ class AgosmsModelCategory extends JModelList
 		$items = parent::getItems();
 
 		// Convert the params field into an object, saving original in _params
-		foreach ($items as $item)
-		{
-			if (!isset($this->_params))
-			{
+		foreach ($items as $item) {
+			if (!isset($this->_params)) {
 				$params = new Registry;
 				$params->loadString($item->params);
 				$item->params = $params;
@@ -120,18 +117,14 @@ class AgosmsModelCategory extends JModelList
 			->where('a.access IN (' . $groups . ')');
 
 		// Filter by category.
-		if ($categoryId = $this->getState('category.id'))
-		{
+		if ($categoryId = $this->getState('category.id')) {
 			// Group by subcategory
-			if ($this->getState('category.group', 0))
-			{
+			if ($this->getState('category.group', 0)) {
 				$query->select('c.title AS category_title')
 					->where('c.parent_id = ' . (int) $categoryId)
 					->join('LEFT', '#__categories AS c ON c.id = a.catid')
 					->where('c.access IN (' . $groups . ')');
-			}
-			else
-			{
+			} else {
 				$query->where('a.catid = ' . (int) $categoryId)
 					->join('LEFT', '#__categories AS c ON c.id = a.catid')
 					->where('c.access IN (' . $groups . ')');
@@ -140,8 +133,7 @@ class AgosmsModelCategory extends JModelList
 			// Filter by published category
 			$cpublished = $this->getState('filter.c.published');
 
-			if (is_numeric($cpublished))
-			{
+			if (is_numeric($cpublished)) {
 				$query->where('c.published = ' . (int) $cpublished);
 			}
 		}
@@ -155,8 +147,7 @@ class AgosmsModelCategory extends JModelList
 		// Filter by state
 		$state = $this->getState('filter.state');
 
-		if (is_numeric($state))
-		{
+		if (is_numeric($state)) {
 			$query->where('a.state = ' . (int) $state);
 		}
 
@@ -167,30 +158,26 @@ class AgosmsModelCategory extends JModelList
 		$nullDate = $db->quote($db->getNullDate());
 		$nowDate  = $db->quote(JFactory::getDate()->toSql());
 
-		if ($this->getState('filter.publish_date'))
-		{
+		if ($this->getState('filter.publish_date')) {
 			$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')')
 				->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
 		}
 
 		// Filter by language
-		if ($this->getState('filter.language'))
-		{
+		if ($this->getState('filter.language')) {
 			$query->where('a.language in (' . $db->quote(JFactory::getLanguage()->getTag()) . ',' . $db->quote('*') . ')');
 		}
 
 		// Filter by search in title
 		$search = $this->getState('list.filter');
 
-		if (!empty($search))
-		{
+		if (!empty($search)) {
 			$search = $db->quote('%' . $db->escape($search, true) . '%');
 			$query->where('(a.title LIKE ' . $search . ')');
 		}
 
 		// If grouping by subcategory, add the subcategory list ordering clause.
-		if ($this->getState('category.group', 0))
-		{
+		if ($this->getState('category.group', 0)) {
 			$query->order(
 				$db->escape($this->getState('category.ordering', 'c.lft')) . ' ' .
 				$db->escape($this->getState('category.direction', 'ASC'))
@@ -235,8 +222,7 @@ class AgosmsModelCategory extends JModelList
 
 		$orderCol = $app->input->get('filter_order', 'ordering');
 
-		if (!in_array($orderCol, $this->filter_fields))
-		{
+		if (!in_array($orderCol, $this->filter_fields)) {
 			$orderCol = 'ordering';
 		}
 
@@ -244,8 +230,7 @@ class AgosmsModelCategory extends JModelList
 
 		$listOrder = $app->input->get('filter_order_Dir', 'ASC');
 
-		if (!in_array(strtoupper($listOrder), array('ASC', 'DESC', '')))
-		{
+		if (!in_array(strtoupper($listOrder), ['ASC', 'DESC', ''])) {
 			$listOrder = 'ASC';
 		}
 
@@ -256,8 +241,7 @@ class AgosmsModelCategory extends JModelList
 
 		$user = JFactory::getUser();
 
-		if ((!$user->authorise('core.edit.state', 'com_agosms')) && (!$user->authorise('core.edit', 'com_agosms')))
-		{
+		if ((!$user->authorise('core.edit.state', 'com_agosms')) && (!$user->authorise('core.edit', 'com_agosms'))) {
 			// Limit to published for people who can't edit or edit.state.
 			$this->setState('filter.state', 1);
 
@@ -280,40 +264,34 @@ class AgosmsModelCategory extends JModelList
 	 */
 	public function getCategory()
 	{
-		if (!is_object($this->_item))
-		{
+		if (!is_object($this->_item)) {
 			$app = JFactory::getApplication();
 			$menu = $app->getMenu();
 			$active = $menu->getActive();
 			$params = new Registry;
 
-			if ($active)
-			{
+			if ($active) {
 				$params->loadString($active->params);
 			}
 
-			$options = array();
+			$options = [];
 			$options['countItems'] = $params->get('show_cat_num_links_cat', 1)
 				|| $params->get('show_empty_categories', 0);
 
 			$categories = JCategories::getInstance('Agosms', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 
-			if (is_object($this->_item))
-			{
+			if (is_object($this->_item)) {
 				$this->_children = $this->_item->getChildren();
 				$this->_parent = false;
 
-				if ($this->_item->getParent())
-				{
+				if ($this->_item->getParent()) {
 					$this->_parent = $this->_item->getParent();
 				}
 
 				$this->_rightsibling = $this->_item->getSibling();
 				$this->_leftsibling = $this->_item->getSibling(false);
-			}
-			else
-			{
+			} else {
 				$this->_children = false;
 				$this->_parent = false;
 			}
@@ -329,8 +307,7 @@ class AgosmsModelCategory extends JModelList
 	 */
 	public function getParent()
 	{
-		if (!is_object($this->_item))
-		{
+		if (!is_object($this->_item)) {
 			$this->getCategory();
 		}
 
@@ -344,8 +321,7 @@ class AgosmsModelCategory extends JModelList
 	 */
 	public function &getLeftSibling()
 	{
-		if (!is_object($this->_item))
-		{
+		if (!is_object($this->_item)) {
 			$this->getCategory();
 		}
 
@@ -359,8 +335,7 @@ class AgosmsModelCategory extends JModelList
 	 */
 	public function &getRightSibling()
 	{
-		if (!is_object($this->_item))
-		{
+		if (!is_object($this->_item)) {
 			$this->getCategory();
 		}
 
@@ -374,8 +349,7 @@ class AgosmsModelCategory extends JModelList
 	 */
 	public function &getChildren()
 	{
-		if (!is_object($this->_item))
-		{
+		if (!is_object($this->_item)) {
 			$this->getCategory();
 		}
 
@@ -395,8 +369,7 @@ class AgosmsModelCategory extends JModelList
 	{
 		$hitcount = JFactory::getApplication()->input->getInt('hitcount', 1);
 
-		if ($hitcount)
-		{
+		if ($hitcount) {
 			$pk = (!empty($pk)) ? $pk : (int) $this->getState('category.id');
 			$table = JTable::getInstance('Category', 'JTable');
 			$table->load($pk);

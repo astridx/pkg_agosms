@@ -39,10 +39,8 @@ abstract class JHtmlAgosm
 		$associations = JLanguageAssociations::getAssociations('com_agosms', '#__agosms', 'com_agosms.item', $agosmid);
 
 		// Get the associations
-		if ($associations)
-		{
-			foreach ($associations as $tag => $associated)
-			{
+		if ($associations) {
+			foreach ($associations as $tag => $associated) {
 				$associations[$tag] = (int) $associated->id;
 			}
 
@@ -60,19 +58,14 @@ abstract class JHtmlAgosm
 				->select('l.title as language_title');
 			$db->setQuery($query);
 
-			try
-			{
+			try {
 				$items = $db->loadObjectList('id');
-			}
-			catch (RuntimeException $e)
-			{
+			} catch (RuntimeException $e) {
 				throw new Exception($e->getMessage(), 500, $e);
 			}
 
-			if ($items)
-			{
-				foreach ($items as &$item)
-				{
+			if ($items) {
+				foreach ($items as &$item) {
 					$text = strtoupper($item->lang_sef);
 					$url  = JRoute::_('index.php?option=com_agosms&task=agosm.edit&id=' . (int) $item->id);
 

@@ -17,19 +17,19 @@ $field_id_to   = 17;
 $curr_locale = JFactory::getLanguage()->getLocale();
 setlocale(LC_ALL, $curr_locale);
 
-$active =  array();
+$active =  [];
 if (JFactory::getApplication()->input->get->get('field-date-custom'.$field_id_from)) {
 	$active = JFactory::getApplication()->input->get->get('field-date-custom'.$field_id_from);
 }
 
 $parts = explode(":", $active);
 list($active_from, $active_to) = explode(",", $parts[1]);
-if($active_from) {
+if ($active_from) {
 	$active_from = DateTime::createFromFormat("Y-m-d", $active_from)->getTimestamp(); // custom format
 	$active_from = trim(strftime('%b %e %Y', $active_from));
 	$active_from = mb_convert_case($active_from, MB_CASE_TITLE, 'UTF-8');
 }
-if($active_to) {
+if ($active_to) {
 	$active_to = DateTime::createFromFormat("Y-m-d", $active_to)->getTimestamp(); // custom format
 	$active_to = trim(strftime('%b %e %Y', $active_to));
 	$active_to = mb_convert_case($active_to, MB_CASE_TITLE, 'UTF-8');
@@ -52,19 +52,19 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/js/
 		<input type="hidden" name="field-date-custom<?php echo $field_id_from; ?>" value="<?php echo $active; ?>" id="field-date-custom-<?php echo $field_id_from; ?>" />
 	</div>
 
-	<?php 
+	<?php
 	$lang = JFactory::getLanguage()->getTag();
 	$lang = explode("-", $lang)[0];
-	if($lang) {
+	if ($lang) {
 		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/datepicker/locales/bootstrap-datepicker' . $lang . '.min.js');
-	 } ?>
+	} ?>
 
 	<script>
 		jQuery(document).ready(function($) {
 			$(".gsearch-field-calendar-wrapper.custom").find(".datepicker").each(function(k, el) {
 				$(el).datepicker({
 					format: 'MM d yyyy', //custom format
-					<?php if($lang) { ?>
+					<?php if ($lang) { ?>
 					language: "<?php echo $lang; ?>",
 					<?php } ?>
 				}).on('changeDate', function(e) {

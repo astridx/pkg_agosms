@@ -52,8 +52,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 */
 	public function add()
 	{
-		if (!parent::add())
-		{
+		if (!parent::add()) {
 			// Redirect to the return page.
 			$this->setRedirect($this->getReturnPage());
 		}
@@ -68,19 +67,17 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @since   1.0.40
 	 */
-	protected function allowAdd($data = array())
+	protected function allowAdd($data = [])
 	{
 		$categoryId = ArrayHelper::getValue($data, 'catid', $this->input->getInt('id'), 'int');
 		$allow      = null;
 
-		if ($categoryId)
-		{
+		if ($categoryId) {
 			// If the category has been passed in the URL check it.
 			$allow = JFactory::getUser()->authorise('core.create', $this->option . '.category.' . $categoryId);
 		}
 
-		if ($allow !== null)
-		{
+		if ($allow !== null) {
 			return $allow;
 		}
 
@@ -98,18 +95,16 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @since   1.0.40
 	 */
-	protected function allowEdit($data = array(), $key = 'id')
+	protected function allowEdit($data = [], $key = 'id')
 	{
 		$recordId   = (int) isset($data[$key]) ? $data[$key] : 0;
 		$categoryId = 0;
 
-		if ($recordId)
-		{
+		if ($recordId) {
 			$categoryId = (int) $this->getModel()->getItem($recordId)->catid;
 		}
 
-		if ($categoryId)
-		{
+		if ($categoryId) {
 			// The category has been set. Check the category permissions.
 			return JFactory::getUser()->authorise('core.edit', $this->option . '.category.' . $categoryId);
 		}
@@ -163,7 +158,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @since   1.0.40
 	 */
-	public function getModel($name = 'form', $prefix = '', $config = array('ignore_request' => true))
+	public function getModel($name = 'form', $prefix = '', $config = ['ignore_request' => true])
 	{
 		return parent::getModel($name, $prefix, $config);
 	}
@@ -184,13 +179,11 @@ class AgosmsControllerAgosm extends JControllerForm
 		$itemId = $this->input->getInt('Itemid');
 		$return = $this->getReturnPage();
 
-		if ($itemId)
-		{
+		if ($itemId) {
 			$append .= '&Itemid=' . $itemId;
 		}
 
-		if ($return)
-		{
+		if ($return) {
 			$append .= '&return=' . base64_encode($return);
 		}
 
@@ -208,8 +201,7 @@ class AgosmsControllerAgosm extends JControllerForm
 	{
 		$return = $this->input->get('return', null, 'base64');
 
-		if (empty($return) || !JUri::isInternal(base64_decode($return)))
-		{
+		if (empty($return) || !JUri::isInternal(base64_decode($return))) {
 			return JUri::base();
 		}
 
@@ -232,15 +224,14 @@ class AgosmsControllerAgosm extends JControllerForm
 		$app = JFactory::getApplication();
 
 		// Get the data from POST
-		$data = $this->input->post->get('jform', array(), 'array');
+		$data = $this->input->post->get('jform', [], 'array');
 
 		// Save the data in the session.
 		$app->setUserState('com_agosms.edit.agosm.data', $data);
 		$result = parent::save($key, $urlVar);
 
 		// If ok, redirect to the return page.
-		if ($result)
-		{
+		if ($result) {
 			// Flush the data from the session
 			$app->setUserState('com_agosms.edit.agosm.data', null);
 			$this->setRedirect($this->getReturnPage());
@@ -262,49 +253,44 @@ class AgosmsControllerAgosm extends JControllerForm
 		$id = $this->input->getInt('id');
 
 		// Get the model, requiring published items
-		$modelLink = $this->getModel('Agosm', '', array('ignore_request' => true));
+		$modelLink = $this->getModel('Agosm', '', ['ignore_request' => true]);
 		$modelLink->setState('filter.published', 1);
 
 		// Get the item
 		$link = $modelLink->getItem($id);
 
 		// Make sure the item was found.
-		if (empty($link))
-		{
+		if (empty($link)) {
 			return JError::raiseWarning(404, JText::_('COM_AGOSMS_ERROR_AGOSM_NOT_FOUND'));
 		}
 
 		// Check whether item access level allows access.
 		$groups = JFactory::getUser()->getAuthorisedViewLevels();
 
-		if (!in_array($link->access, $groups))
-		{
+		if (!in_array($link->access, $groups)) {
 			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
 
 		// Check whether category access level allows access.
-		$modelCat = $this->getModel('Category', 'AgosmsModel', array('ignore_request' => true));
+		$modelCat = $this->getModel('Category', 'AgosmsModel', ['ignore_request' => true]);
 		$modelCat->setState('filter.published', 1);
 
 		// Get the category
 		$category = $modelCat->getCategory($link->catid);
 
 		// Make sure the category was found.
-		if (empty($category))
-		{
+		if (empty($category)) {
 			return JError::raiseWarning(404, JText::_('COM_AGOSMS_ERROR_AGOSM_NOT_FOUND'));
 		}
 
 		// Check whether item access level allows access.
-		if (!in_array($category->access, $groups))
-		{
+		if (!in_array($category->access, $groups)) {
 			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
 
 		// Redirect to the URL
 		// @todo: Probably should check for a valid http link
-		if ($link->url)
-		{
+		if ($link->url) {
 			$modelLink->hit($id);
 			JFactory::getApplication()->redirect($link->url, 301);
 		}

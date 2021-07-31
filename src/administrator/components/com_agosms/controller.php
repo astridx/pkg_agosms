@@ -37,8 +37,7 @@ class AgosmsController extends JControllerLegacy
 		$id     = $this->input->getInt('id');
 
 		// Check for edit form.
-		if ($view == 'agosm' && $layout == 'edit' && !$this->checkEditId('com_agosms.edit.agosm', $id))
-		{
+		if ($view == 'agosm' && $layout == 'edit' && !$this->checkEditId('com_agosms.edit.agosm', $id)) {
 			// Somehow the person just went to the form - we don't allow that.
 			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
 			$this->setMessage($this->getError(), 'error');

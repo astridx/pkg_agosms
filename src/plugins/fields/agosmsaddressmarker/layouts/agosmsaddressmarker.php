@@ -45,37 +45,34 @@ extract($displayData);
  */
 // Including fallback code for HTML5 non supported browsers.
 JHtml::_('jquery.framework');
-JHtml::_('script', 'system/html5fallback.js', array('version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9'));
+JHtml::_('script', 'system/html5fallback.js', ['version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9']);
 
 $showspecialicon = "display:none";
-if ($specialicon)
-{
+if ($specialicon) {
 	$showspecialicon = "";
 }
 
 $showpopup = "display:none";
-if ($popup)
-{
+if ($popup) {
 	$showpopup = "";
 }
 
 $document = JFactory::getDocument();
 $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
-JHtml::_('script', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js', array('version' => 'auto', 'relative' => true));
+JHtml::_('script', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js', ['version' => 'auto', 'relative' => true]);
 
-if ($specialicon)
-{
+if ($specialicon) {
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/css/font-awesome.min.css');
 }
 
-JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', array('version' => 'auto', 'relative' => true));
+JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', ['version' => 'auto', 'relative' => true]);
 
 JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR');
 JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE');
 JText::script('PLG_AGOSMSADDRESSMARKER_LAT_ERROR');
 JText::script('PLG_AGOSMSADDRESSMARKER_LON_ERROR');
 
-$attributes = array(
+$attributes = [
 	!empty($class) ? 'class="' . $class . '"' : '',
 	!empty($size) ? 'size="' . $size . '"' : '',
 	$disabled ? 'disabled' : '',
@@ -89,37 +86,33 @@ $attributes = array(
 	$spellcheck ? '' : 'spellcheck="false"',
 	!empty($inputmode) ? $inputmode : '',
 	!empty($pattern) ? 'pattern="' . $pattern . '"' : '',
-);
+];
 
 // Define defaults
 $app = JFactory::getApplication();
 $context = 'com_content.article';
 
 // Com_categorie
-if ($app->input->getCmd('option') === 'com_categories')
-{
+if ($app->input->getCmd('option') === 'com_categories') {
 	$context = $app->input->getCmd('extension') . '.categories';
 }
 
 // Com_users
-elseif ($app->input->getCmd('option') === 'com_users')
-{
+else if ($app->input->getCmd('option') === 'com_users') {
 	$context = 'com_users.user';
 }
 
 // Com_contact
-elseif ($app->input->getCmd('option') === 'com_contact')
-{
+else if ($app->input->getCmd('option') === 'com_contact') {
 	//JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_SUPPORTET'), 'message');
 	$context = 'com_contact.contact';
 }
 
 // Third Party
-elseif ($app->input->getCmd('option') !== 'com_users'
+else if ($app->input->getCmd('option') !== 'com_users'
 	&& $app->input->getCmd('option') !== 'com_content'
 	&& $app->input->getCmd('option') !== 'com_categories'
-	&& $app->input->getCmd('option') !== 'com_contact')
-{
+	&& $app->input->getCmd('option') !== 'com_contact') {
 	$context = $app->input->getCmd('option') . '.' . $app->input->getCmd('view');
 }
 
@@ -127,14 +120,12 @@ elseif ($app->input->getCmd('option') !== 'com_users'
 // Load fields with prepared values
 $fields = FieldsHelper::getFields($context);
 
-$addressfieldsvalues = array();
+$addressfieldsvalues = [];
 $addressfieldsArray = json_decode($addressfields);
 
-if (!empty($addressfieldsArray))
-{
+if (!empty($addressfieldsArray)) {
 	foreach ($addressfieldsArray as $a) {
-		if(property_exists($a, 'value'))
-		{
+		if (property_exists($a, 'value')) {
 			$addressfieldsvalues[] = $a->value;
 		}
 	}
@@ -142,14 +133,12 @@ if (!empty($addressfieldsArray))
 
 // Build the string with the field names from the selected fields
 $fieldnames = "";
-$fieldsNameArray = array();
+$fieldsNameArray = [];
 
-if (!empty($fields))
-{
+if (!empty($fields)) {
 	foreach ($fields as $field) {
 		// Save value to fieldnames, if field is in the options of this custom field
-		if (in_array($field->id, $addressfieldsvalues))
-		{
+		if (in_array($field->id, $addressfieldsvalues)) {
 			$fieldsNameArray[] = 'jform' . '_com_fields_' . str_replace('-', '_', $field->name);
 			$fieldnames .= $field->label . ', ';
 		}

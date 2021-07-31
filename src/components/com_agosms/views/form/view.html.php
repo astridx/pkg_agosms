@@ -42,29 +42,23 @@ class AgosmsViewForm extends JViewLegacy
 		$this->form        = $this->get('Form');
 		$this->return_page = $this->get('ReturnPage');
 
-		if (empty($this->item->id))
-		{
+		if (empty($this->item->id)) {
 			$authorised = ($user->authorise('core.create', 'com_agosms') || (count($user->getAuthorisedCategories('com_agosms', 'core.create'))));
-		}
-		else
-		{
+		} else {
 			$authorised = $user->authorise('core.edit', 'com_agosms.category.' . $this->item->catid);
 		}
 
-		if ($authorised !== true)
-		{
+		if ($authorised !== true) {
 			JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 
 			return false;
 		}
 
-		if (!empty($this->item))
-		{
+		if (!empty($this->item)) {
 			// Override the base agosm data with any data in the session.
-			$temp = (array) JFactory::getApplication()->getUserState('com_agosms.edit.agosm.data', array());
+			$temp = (array) JFactory::getApplication()->getUserState('com_agosms.edit.agosm.data', []);
 
-			foreach ($temp as $k => $v)
-			{
+			foreach ($temp as $k => $v) {
 				$this->item->$k = $v;
 			}
 
@@ -72,8 +66,7 @@ class AgosmsViewForm extends JViewLegacy
 		}
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
 
 			return false;
@@ -107,49 +100,37 @@ class AgosmsViewForm extends JViewLegacy
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
 
-		if (empty($this->item->id))
-		{
+		if (empty($this->item->id)) {
 			$head = JText::_('COM_AGOSMS_FORM_SUBMIT_AGOSM');
-		}
-		else
-		{
+		} else {
 			$head = JText::_('COM_AGOSMS_FORM_EDIT_AGOSM');
 		}
 
-		if ($menu)
-		{
+		if ($menu) {
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-		}
-		else
-		{
+		} else {
 			$this->params->def('page_heading', $head);
 		}
 
 		$title = $this->params->def('page_title', $head);
 
-		if ($app->get('sitename_pagetitles', 0) == 1)
-		{
+		if ($app->get('sitename_pagetitles', 0) == 1) {
 			$title = JText::sprintf('JPAGETITLE', $app->get('sitename'), $title);
-		}
-		elseif ($app->get('sitename_pagetitles', 0) == 2)
-		{
+		} else if ($app->get('sitename_pagetitles', 0) == 2) {
 			$title = JText::sprintf('JPAGETITLE', $title, $app->get('sitename'));
 		}
 
 		$this->document->setTitle($title);
 
-		if ($this->params->get('menu-meta_description'))
-		{
+		if ($this->params->get('menu-meta_description')) {
 			$this->document->setDescription($this->params->get('menu-meta_description'));
 		}
 
-		if ($this->params->get('menu-meta_keywords'))
-		{
+		if ($this->params->get('menu-meta_keywords')) {
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
 		}
 
-		if ($this->params->get('robots'))
-		{
+		if ($this->params->get('robots')) {
 			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}
 	}

@@ -37,16 +37,14 @@ class AgosmsViewAgosm extends JViewLegacy
 		$this->form  = $this->get('Form');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 
 			return false;
 		}
 
 		// If we are forcing a language in modal (used for associations).
-		if ($this->getLayout() === 'modal' && $forcedLanguage = JFactory::getApplication()->input->get('forcedLanguage', '', 'cmd'))
-		{
+		if ($this->getLayout() === 'modal' && $forcedLanguage = JFactory::getApplication()->input->get('forcedLanguage', '', 'cmd')) {
 			// Set the language field to the forcedLanguage and disable changing it.
 			$this->form->setValue('language', null, $forcedLanguage);
 			$this->form->setFieldAttribute('language', 'readonly', 'true');
@@ -84,31 +82,24 @@ class AgosmsViewAgosm extends JViewLegacy
 		JToolbarHelper::title($isNew ? JText::_('COM_AGOSMS_MANAGER_AGOSM_NEW') : JText::_('COM_AGOSMS_MANAGER_AGOSM_EDIT'), 'link agosms');
 
 		// If not checked out, can save the item.
-		if (!$checkedOut && ($canDo->get('core.edit')||(count($user->getAuthorisedCategories('com_agosms', 'core.create')))))
-		{
+		if (!$checkedOut && ($canDo->get('core.edit')||(count($user->getAuthorisedCategories('com_agosms', 'core.create'))))) {
 			JToolbarHelper::apply('agosm.apply');
 			JToolbarHelper::save('agosm.save');
 		}
 
-		if (!$checkedOut && (count($user->getAuthorisedCategories('com_agosms', 'core.create'))))
-		{
+		if (!$checkedOut && (count($user->getAuthorisedCategories('com_agosms', 'core.create')))) {
 			JToolbarHelper::save2new('agosm.save2new');
 		}
 
 		// If an existing item, can save to a copy.
-		if (!$isNew && (count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0))
-		{
+		if (!$isNew && (count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0)) {
 			JToolbarHelper::save2copy('agosm.save2copy');
 		}
 
-		if (empty($this->item->id))
-		{
+		if (empty($this->item->id)) {
 			JToolbarHelper::cancel('agosm.cancel');
-		}
-		else
-		{
-			if ($this->state->params->get('save_history', 0) && $user->authorise('core.edit'))
-			{
+		} else {
+			if ($this->state->params->get('save_history', 0) && $user->authorise('core.edit')) {
 				JToolbarHelper::versions('com_agosms.agosm', $this->item->id);
 			}
 

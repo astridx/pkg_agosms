@@ -64,8 +64,7 @@ class AgosmsModelForm extends AgosmsModelAgosm
 
 		$return = $app->input->get('return', null, 'base64');
 
-		if (!JUri::isInternal(base64_decode($return)))
-		{
+		if (!JUri::isInternal(base64_decode($return))) {
 			$return = null;
 		}
 
@@ -88,13 +87,12 @@ class AgosmsModelForm extends AgosmsModelAgosm
 	 *
 	 * @since   1.0.40
 	 */
-	public function getForm($data = array(), $loadData = true)
+	public function getForm($data = [], $loadData = true)
 	{
-		$form = $this->loadForm('com_agosms.form', 'agosm', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_agosms.form', 'agosm', ['control' => 'jform', 'load_data' => $loadData]);
 
 		// Disable the buttons and just allow editor none for not authenticated users
-		if (JFactory::getUser()->guest)
-		{
+		if (JFactory::getUser()->guest) {
 			$form->setFieldAttribute('description', 'editor', 'none');
 			$form->setFieldAttribute('description', 'buttons', 'no');
 		}

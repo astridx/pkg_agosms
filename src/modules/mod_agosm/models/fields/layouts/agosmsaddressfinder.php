@@ -17,12 +17,12 @@ $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.cs
 $document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js', true);
 $document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosmsaddressfinder.js', true);
 
-JHtml::_('stylesheet', 'mod_agosm/agomsaddressfinder.css', array('version' => 'auto', 'relative' => true));
+JHtml::_('stylesheet', 'mod_agosm/agomsaddressfinder.css', ['version' => 'auto', 'relative' => true]);
 
 JText::script('MOD_AGOSM_ADDRESSFINDER_ADDRESSE_ERROR');
 JText::script('MOD_AGOSM_ADDRESSFINDER_ADDRESSE_NOTICE');
 
-$attributes = array(
+$attributes = [
 	!empty($class) ? 'class="' . $class . '"' : '',
 	!empty($size) ? 'size="' . $size . '"' : '',
 	$disabled ? 'disabled' : '',
@@ -36,37 +36,33 @@ $attributes = array(
 	$spellcheck ? '' : 'spellcheck="false"',
 	!empty($inputmode) ? $inputmode : '',
 	!empty($pattern) ? 'pattern="' . $pattern . '"' : '',
-);
+];
 
 // Define defaults
 $app = JFactory::getApplication();
 $context = 'com_content.article';
 
 // Com_categorie
-if ($app->input->getCmd('option') === 'com_categories')
-{
+if ($app->input->getCmd('option') === 'com_categories') {
 	$context = $app->input->getCmd('extension') . '.categories';
 }
 
 // Com_users
-elseif ($app->input->getCmd('option') === 'com_users')
-{
+else if ($app->input->getCmd('option') === 'com_users') {
 	$context = 'com_users.user';
 }
 
 // Com_contact
-elseif ($app->input->getCmd('option') === 'com_contact')
-{
+else if ($app->input->getCmd('option') === 'com_contact') {
 	//JFactory::getApplication()->enqueueMessage(JText::_('MOD_AGOSM_ADDRESSFINDER_SUPPORTET'), 'message');
 	$context = 'com_contact.contact';
 }
 
 // Third Party
-elseif ($app->input->getCmd('option') !== 'com_users'
+else if ($app->input->getCmd('option') !== 'com_users'
 	&& $app->input->getCmd('option') !== 'com_content'
 	&& $app->input->getCmd('option') !== 'com_categories'
-	&& $app->input->getCmd('option') !== 'com_contact')
-{
+	&& $app->input->getCmd('option') !== 'com_contact') {
 	$context = $app->input->getCmd('option') . '.' . $app->input->getCmd('view');
 }
 

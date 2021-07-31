@@ -146,8 +146,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 */
 	public function __get($name)
 	{
-		switch ($name)
-		{
+		switch ($name) {
 			case 'latmin':
 			case 'latmax':
 			case 'lonmin':
@@ -186,8 +185,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	{
 		$result = parent::setup($element, $value, $group);
 
-		if ($result == true)
-		{
+		if ($result == true) {
 			$this->latmax = (int) $this->element['latmax'];
 			$this->latmin = (int) $this->element['latmin'];
 			$this->lonmax = (int) $this->element['lonmax'];
@@ -221,8 +219,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 */
 	public function __set($name, $value)
 	{
-		switch ($name)
-		{
+		switch ($name) {
 			case 'mapheight':
 				$this->mapheight = (int) $value;
 				break;
@@ -305,11 +302,11 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	{
 		$template = JFactory::getApplication()->getTemplate();
 
-		return array(
+		return [
 			JPATH_ADMINISTRATOR . '/templates/' . $template . '/html/layouts/plugins/fields/agosmsaddressmarker',
 			dirname(__DIR__) . '/layouts',
 			JPATH_SITE . '/layouts'
-		);
+		];
 	}
 
 	/**
@@ -340,7 +337,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 
 		$options = (array) $this->getOptions();
 
-		$extraData = array(
+		$extraData = [
 			'latmin' => $this->latmin,
 			'latmax' => $this->latmax,
 			'lonmin' => $this->lonmin,
@@ -358,7 +355,7 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			'popup' => $this->popup,
 			'showroutingcontrol' => $this->showroutingcontrol,
 			'options' => $options,
-		);
+		];
 
 		return array_merge($data, $extraData);
 	}
@@ -372,34 +369,28 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	protected function getOptions()
 	{
 		$fieldname = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname);
-		$options   = array();
+		$options   = [];
 
-		foreach ($this->element->xpath('option') as $option)
-		{
+		foreach ($this->element->xpath('option') as $option) {
 			// Filter requirements
-			if ($requires = explode(',', (string) $option['requires']))
-			{
+			if ($requires = explode(',', (string) $option['requires'])) {
 				// Requires multilanguage
-				if (in_array('multilanguage', $requires) && !JLanguageMultilang::isEnabled())
-				{
+				if (in_array('multilanguage', $requires) && !JLanguageMultilang::isEnabled()) {
 					continue;
 				}
 
 				// Requires associations
-				if (in_array('associations', $requires) && !JLanguageAssociations::isEnabled())
-				{
+				if (in_array('associations', $requires) && !JLanguageAssociations::isEnabled()) {
 					continue;
 				}
 
 				// Requires adminlanguage
-				if (in_array('adminlanguage', $requires) && !JModuleHelper::isAdminMultilang())
-				{
+				if (in_array('adminlanguage', $requires) && !JModuleHelper::isAdminMultilang()) {
 					continue;
 				}
 
 				// Requires vote plugin
-				if (in_array('vote', $requires) && !JPluginHelper::isEnabled('content', 'vote'))
-				{
+				if (in_array('vote', $requires) && !JPluginHelper::isEnabled('content', 'vote')) {
 					continue;
 				}
 			}
@@ -417,21 +408,20 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$selected = (string) $option['selected'];
 			$selected = ($selected == 'true' || $selected == 'selected' || $selected == '1');
 
-			$tmp = array(
+			$tmp = [
 					'value'    => $value,
 					'text'     => JText::alt($text, $fieldname),
 					'disable'  => $disabled,
 					'class'    => (string) $option['class'],
 					'selected' => ($checked || $selected),
 					'checked'  => ($checked || $selected),
-			);
+			];
 
 			// Set some event handler attributes. But really, should be using unobtrusive js.
 			$tmp['onclick']  = (string) $option['onclick'];
 			$tmp['onchange'] = (string) $option['onchange'];
 
-			if ((string) $option['showon'])
-			{
+			if ((string) $option['showon']) {
 				$tmp['optionattr'] = " data-showon='" .
 					json_encode(
 						JFormHelper::parseShowOnConditions((string) $option['showon'], $this->formControl, $this->group)
@@ -443,16 +433,14 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$options[] = (object) $tmp;
 		}
 
-		if ($this->element['useglobal'])
-		{
+		if ($this->element['useglobal']) {
 			$tmp        = new stdClass;
 			$tmp->value = '';
 			$tmp->text  = JText::_('JGLOBAL_USE_GLOBAL');
 			$component  = JFactory::getApplication()->input->getCmd('option');
 
 			// Get correct component for menu items
-			if ($component == 'com_menus')
-			{
+			if ($component == 'com_menus') {
 				$link      = $this->form->getData()->get('link');
 				$uri       = new JUri($link);
 				$component = $uri->getVar('option', 'com_menus');
@@ -462,25 +450,20 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 			$value  = $params->get($this->fieldname);
 
 			// Try with global configuration
-			if (is_null($value))
-			{
+			if (is_null($value)) {
 				$value = JFactory::getConfig()->get($this->fieldname);
 			}
 
 			// Try with menu configuration
-			if (is_null($value) && JFactory::getApplication()->input->getCmd('option') == 'com_menus')
-			{
+			if (is_null($value) && JFactory::getApplication()->input->getCmd('option') == 'com_menus') {
 				$value = JComponentHelper::getParams('com_menus')->get($this->fieldname);
 			}
 
-			if (!is_null($value))
-			{
+			if (!is_null($value)) {
 				$value = (string) $value;
 
-				foreach ($options as $option)
-				{
-					if ($option->value === $value)
-					{
+				foreach ($options as $option) {
+					if ($option->value === $value) {
 						$value = $option->text;
 
 						break;
@@ -508,14 +491,12 @@ class JFormFieldAgosmsaddressmarker extends JFormFieldText
 	 *
 	 * @since   1.0.40
 	 */
-	public function addOption($text, $attributes = array())
+	public function addOption($text, $attributes = [])
 	{
-		if ($text && $this->element instanceof SimpleXMLElement)
-		{
+		if ($text && $this->element instanceof SimpleXMLElement) {
 			$child = $this->element->addChild('option', $text);
 
-			foreach ($attributes as $name => $value)
-			{
+			foreach ($attributes as $name => $value) {
 				$child->addAttribute($name, $value);
 			}
 		}

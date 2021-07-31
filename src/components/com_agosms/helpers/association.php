@@ -37,16 +37,13 @@ abstract class AgosmsHelperAssociation extends CategoryHelperAssociation
 		$view   = is_null($view) ? $jinput->get('view') : $view;
 		$id     = empty($id) ? $jinput->getInt('id') : $id;
 
-		if ($view === 'agosm')
-		{
-			if ($id)
-			{
+		if ($view === 'agosm') {
+			if ($id) {
 				$associations = JLanguageAssociations::getAssociations('com_agosms', '#__agosms', 'com_agosms.item', $id);
 
-				$return = array();
+				$return = [];
 
-				foreach ($associations as $tag => $item)
-				{
+				foreach ($associations as $tag => $item) {
 					$return[$tag] = AgosmsHelperRoute::getAgosmRoute($item->id, (int) $item->catid, $item->language);
 				}
 
@@ -54,11 +51,10 @@ abstract class AgosmsHelperAssociation extends CategoryHelperAssociation
 			}
 		}
 
-		if ($view == 'category' || $view == 'categories')
-		{
+		if ($view == 'category' || $view == 'categories') {
 			return self::getCategoryAssociations($id, 'com_agosms');
 		}
 
-		return array();
+		return [];
 	}
 }

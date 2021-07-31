@@ -46,11 +46,11 @@ class JFormFieldAgosmsmarker extends JFormFieldText
 	{
 		$template = JFactory::getApplication()->getTemplate();
 
-		return array(
+		return [
 			JPATH_ADMINISTRATOR . '/templates/' . $template . '/html/layouts/plugins/fields/agosmsmarker',
 			dirname(__DIR__) . '/layouts',
 			JPATH_SITE . '/layouts'
-		);
+		];
 	}
 
 	/**
@@ -71,8 +71,7 @@ class JFormFieldAgosmsmarker extends JFormFieldText
 	{
 		$result = parent::setup($element, $value, $group);
 
-		if ($result == true)
-		{
+		if ($result == true) {
 			$inputmode = (string) $this->element['inputmode'];
 			$dirname = (string) $this->element['dirname'];
 
@@ -80,12 +79,10 @@ class JFormFieldAgosmsmarker extends JFormFieldText
 			$inputmode = preg_replace('/\s+/', ' ', trim($inputmode));
 			$inputmode = explode(' ', $inputmode);
 
-			if (!empty($inputmode))
-			{
+			if (!empty($inputmode)) {
 				$defaultInputmode = in_array('default', $inputmode) ? JText::_('JLIB_FORM_INPUTMODE') . ' ' : '';
 
-				foreach (array_keys($inputmode, 'default') as $key)
-				{
+				foreach (array_keys($inputmode, 'default') as $key) {
 					unset($inputmode[$key]);
 				}
 

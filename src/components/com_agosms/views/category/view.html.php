@@ -30,16 +30,12 @@ class AgosmsViewCategory extends JViewCategory
 
 		// Prepare the data.
 		// Compute the agosm slug & link url.
-		foreach ($this->items as $item)
-		{
+		foreach ($this->items as $item) {
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 
-			if ($item->params->get('count_clicks', $this->params->get('count_clicks', 1)) == 1)
-			{
+			if ($item->params->get('count_clicks', $this->params->get('count_clicks', 1)) == 1) {
 				$item->link = JRoute::_('index.php?option=com_agosms&task=agosm.go&id=' . $item->id);
-			}
-			else
-			{
+			} else {
 				$item->link = $item->url;
 			}
 
@@ -70,33 +66,27 @@ class AgosmsViewCategory extends JViewCategory
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
 
-		if ($menu)
-		{
+		if ($menu) {
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-		}
-		else
-		{
+		} else {
 			$this->params->def('page_heading', JText::_('COM_AGOSMS_DEFAULT_PAGE_TITLE'));
 		}
 
 		$id = (int) @$menu->query['id'];
 
-		if ($menu && ($menu->query['option'] != 'com_agosms' || $id != $this->category->id))
-		{
+		if ($menu && ($menu->query['option'] != 'com_agosms' || $id != $this->category->id)) {
 			$this->params->set('page_subheading', $this->category->title);
-			$path = array(array('title' => $this->category->title, 'link' => ''));
+			$path = [['title' => $this->category->title, 'link' => '']];
 			$category = $this->category->getParent();
 
-			while (($menu->query['option'] != 'com_agosms' || $id != $category->id) && $category->id > 1)
-			{
-				$path[] = array('title' => $category->title, 'link' => AgosmsHelperRoute::getCategoryRoute($category->id));
+			while (($menu->query['option'] != 'com_agosms' || $id != $category->id) && $category->id > 1) {
+				$path[] = ['title' => $category->title, 'link' => AgosmsHelperRoute::getCategoryRoute($category->id)];
 				$category = $category->getParent();
 			}
 
 			$path = array_reverse($path);
 
-			foreach ($path as $item)
-			{
+			foreach ($path as $item) {
 				$pathway->addItem($item['title'], $item['link']);
 			}
 		}

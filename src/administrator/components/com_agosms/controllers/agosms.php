@@ -28,7 +28,7 @@ class AgosmsControllerAgosms extends JControllerAdmin
 	 *
 	 * @since   1.0.40
 	 */
-	public function getModel($name = 'Agosm', $prefix = 'AgosmsModel', $config = array('ignore_request' => true))
+	public function getModel($name = 'Agosm', $prefix = 'AgosmsModel', $config = ['ignore_request' => true])
 	{
 		return parent::getModel($name, $prefix, $config);
 	}

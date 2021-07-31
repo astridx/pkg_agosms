@@ -13,25 +13,25 @@ defined('_JEXEC') or die;
 $fieldid =  '';
 if (JFactory::getApplication()->input->get->get("field" . $field->id)) {
 	$fieldid = JFactory::getApplication()->input->get->get("field" . $field->id);
-}		
+}
 $active = $fieldid;
 $field_params = json_decode($field->instance->fieldparams);
-$values = $field_params->options ? $field_params->options : array();
-if($field->instance->type == "integer") {
-	$values = Array();
+$values = $field_params->options ? $field_params->options : [];
+if ($field->instance->type == "integer") {
+	$values = [];
 	$range = range($field_params->first, $field_params->last, $field_params->step);
-	foreach($range as $val) {
+	foreach ($range as $val) {
 		$tmp = new stdClass;
 		$tmp->value = $val;
 		$tmp->name = $val;
 		$values[] = $tmp;
 	}
 }
-if(!$values) {
+if (!$values) {
 	//try to get a values from text (autofill)
-	$values = Array();
+	$values = [];
 	$text_values = $helper->getFieldValuesFromText($field->id, "text", $module->id);
-	foreach($text_values as $val) {
+	foreach ($text_values as $val) {
 		$tmp = new stdClass;
 		$tmp->value = $val;
 		$tmp->name = $val;
@@ -46,17 +46,19 @@ if(!$values) {
 	</h3>
 	<select class="inputbox" name="field<?php echo $field->id; ?>[]">
 		<option class="empty" value=""><?php echo JText::_("{$field->instance->label}"); ?></option>
-		<?php foreach($values as $val) { 
-				if($val->value == '') continue;
-		?>
+		<?php foreach ($values as $val) {
+			if ($val->value == '') {
+				continue;
+			}
+			?>
 			<option 
 				value="<?php echo $val->value; ?>"
-				<?php if($active && in_array($val->value, $active)) { ?> 
+				<?php if ($active && in_array($val->value, $active)) { ?> 
 				selected="selected"
 				<?php } ?>
 			>
-				<?php 
-					echo $val->name; 
+				<?php
+					echo $val->name;
 				?>
 			</option>
 		<?php } ?>

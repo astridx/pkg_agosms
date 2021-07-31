@@ -39,31 +39,25 @@ class AgosmsViewAgosms extends JViewLegacy
 		$this->activeFilters = $this->get('ActiveFilters');
 
 		// Modal layout doesn't need the submenu.
-		if ($this->getLayout() !== 'modal')
-		{
+		if ($this->getLayout() !== 'modal') {
 			AgosmsHelper::addSubmenu('agosms');
 		}
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 
 			return false;
 		}
 
 		// We don't need toolbar in the modal layout.
-		if ($this->getLayout() !== 'modal')
-		{
+		if ($this->getLayout() !== 'modal') {
 			$this->addToolbar();
 			$this->sidebar = JHtmlSidebar::render();
-		}
-		else
-		{
+		} else {
 			// In article associations modal we need to remove language filter if forcing a language.
 			// We also need to change the category filter to show show categories with All or the forced language.
-			if ($forcedLanguage = JFactory::getApplication()->input->get('forcedLanguage', '', 'CMD'))
-			{
+			if ($forcedLanguage = JFactory::getApplication()->input->get('forcedLanguage', '', 'CMD')) {
 				// If the language is forced we can't allow to select the language, so transform the language selector filter into an hidden field.
 				$languageXml = new SimpleXMLElement('<field name="language" type="hidden" default="' . $forcedLanguage . '" />');
 				$this->filterForm->setField($languageXml, 'filter', true);
@@ -99,18 +93,15 @@ class AgosmsViewAgosms extends JViewLegacy
 
 		JToolbarHelper::title(JText::_('COM_AGOSMS_MANAGER_AGOSMS'), 'link agosms');
 
-		if (count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0)
-		{
+		if (count($user->getAuthorisedCategories('com_agosms', 'core.create')) > 0) {
 			JToolbarHelper::addNew('agosm.add');
 		}
 
-		if ($canDo->get('core.edit') || $canDo->get('core.edit.own'))
-		{
+		if ($canDo->get('core.edit') || $canDo->get('core.edit.own')) {
 			JToolbarHelper::editList('agosm.edit');
 		}
 
-		if ($canDo->get('core.edit.state'))
-		{
+		if ($canDo->get('core.edit.state')) {
 			JToolbarHelper::publish('agosms.publish', 'JTOOLBAR_PUBLISH', true);
 			JToolbarHelper::unpublish('agosms.unpublish', 'JTOOLBAR_UNPUBLISH', true);
 
@@ -118,31 +109,26 @@ class AgosmsViewAgosms extends JViewLegacy
 			JToolbarHelper::checkin('agosms.checkin');
 		}
 
-		if ($state->get('filter.published') == -2 && $canDo->get('core.delete'))
-		{
+		if ($state->get('filter.published') == -2 && $canDo->get('core.delete')) {
 			JToolbarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'agosms.delete', 'JTOOLBAR_EMPTY_TRASH');
-		}
-		elseif ($canDo->get('core.edit.state'))
-		{
+		} else if ($canDo->get('core.edit.state')) {
 			JToolbarHelper::trash('agosms.trash');
 		}
 
 		// Add a batch button
 		if ($user->authorise('core.create', 'com_agosms') && $user->authorise('core.edit', 'com_agosms')
-			&& $user->authorise('core.edit.state', 'com_agosms'))
-		{
+			&& $user->authorise('core.edit.state', 'com_agosms')) {
 			JHtml::_('bootstrap.modal', 'collapseModal');
 			$title = JText::_('JTOOLBAR_BATCH');
 
 			// Instantiate a new JLayoutFile instance and render the batch button
 			$layout = new JLayoutFile('joomla.toolbar.batch');
 
-			$dhtml = $layout->render(array('title' => $title));
+			$dhtml = $layout->render(['title' => $title]);
 			$bar->appendButton('Custom', $dhtml, 'batch');
 		}
 
-		if ($user->authorise('core.admin', 'com_agosms') || $user->authorise('core.options', 'com_agosms'))
-		{
+		if ($user->authorise('core.admin', 'com_agosms') || $user->authorise('core.options', 'com_agosms')) {
 			JToolbarHelper::preferences('com_agosms');
 		}
 
@@ -158,7 +144,7 @@ class AgosmsViewAgosms extends JViewLegacy
 	 */
 	protected function getSortFields()
 	{
-		return array(
+		return [
 			'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
 			'a.state' => JText::_('JSTATUS'),
 			'a.title' => JText::_('JGLOBAL_TITLE'),
@@ -166,6 +152,6 @@ class AgosmsViewAgosms extends JViewLegacy
 			'a.hits' => JText::_('JGLOBAL_HITS'),
 			'a.language' => JText::_('JGRID_HEADING_LANGUAGE'),
 			'a.id' => JText::_('JGRID_HEADING_ID')
-		);
+		];
 	}
 }

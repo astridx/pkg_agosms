@@ -19,18 +19,15 @@ JHtml::_('behavior.modal');
 //JHtml::_('script', 'media/com_agosms/js/admin-agosms-button-default.js');
 
 // Tooltip for INPUT showing whole image path
-$options = array(
+$options = [
 	'onShow' => 'jMediaRefreshImgpathTip',
-);
+];
 
 JHtml::_('behavior.tooltip', '.hasTipImgpath', $options);
 
-if (!empty($class))
-{
+if (!empty($class)) {
 	$class .= ' hasTipImgpath';
-}
-else
-{
+} else {
 	$class = 'hasTipImgpath';
 }
 

@@ -37,7 +37,7 @@ class ModagosmHelper
 	public static function getCategory(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = JModelLegacy::getInstance('Category', 'AosmsModel', array('ignore_request' => true));
+		$model = JModelLegacy::getInstance('Category', 'AosmsModel', ['ignore_request' => true]);
 
 		// Set application parameters in model
 		$app = JFactory::getApplication();
@@ -73,7 +73,7 @@ class ModagosmHelper
 		$case_when1 .= $query->charLength('a.alias', '!=', '0');
 		$case_when1 .= ' THEN ';
 		$a_id = $query->castAsChar('a.id');
-		$case_when1 .= $query->concatenate(array($a_id, 'a.alias'), ':');
+		$case_when1 .= $query->concatenate([$a_id, 'a.alias'], ':');
 		$case_when1 .= ' ELSE ';
 		$case_when1 .= $a_id . ' END as slug';
 
@@ -81,12 +81,13 @@ class ModagosmHelper
 		$case_when2 .= $query->charLength('c.alias', '!=', '0');
 		$case_when2 .= ' THEN ';
 		$c_id = $query->castAsChar('c.id');
-		$case_when2 .= $query->concatenate(array($c_id, 'c.alias'), ':');
+		$case_when2 .= $query->concatenate([$c_id, 'c.alias'], ':');
 		$case_when2 .= ' ELSE ';
 		$case_when2 .= $c_id . ' END as catslug';
 
 		$model->setState(
-			'list.select', 'a.*, c.published AS c_published,' . $case_when1 . ',' . $case_when2 . ',' . 'DATE_FORMAT(a.created, "%Y-%m-%d") AS created'
+			'list.select',
+			'a.*, c.published AS c_published,' . $case_when1 . ',' . $case_when2 . ',' . 'DATE_FORMAT(a.created, "%Y-%m-%d") AS created'
 		);
 
 		$model->setState('filter.c.published', 1);
@@ -96,10 +97,8 @@ class ModagosmHelper
 
 		$items = $model->getItems();
 
-		if ($items)
-		{
-			foreach ($items as $item)
-			{
+		if ($items) {
+			foreach ($items as $item) {
 				$category = $model->getCategory($item->id);
 				break;
 			}
@@ -122,7 +121,7 @@ class ModagosmHelper
 	public static function getList(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = JModelLegacy::getInstance('Category', 'AgosmsModel', array('ignore_request' => true));
+		$model = JModelLegacy::getInstance('Category', 'AgosmsModel', ['ignore_request' => true]);
 
 		// Set application parameters in model
 		$app = JFactory::getApplication();
@@ -153,8 +152,7 @@ class ModagosmHelper
 		$query = $db->getQuery(true);
 		$items = $model->getItems();
 
-		if ($items)
-		{
+		if ($items) {
 			return $items;
 		}
 
@@ -173,13 +171,12 @@ class ModagosmHelper
 	public static function getListone(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = JModelLegacy::getInstance('Agosm', 'AgosmsModel', array('ignore_request' => true));
+		$model = JModelLegacy::getInstance('Agosm', 'AgosmsModel', ['ignore_request' => true]);
 		
 		$id = $params->get('showcomponentpinoneid', null);
 		$item = $model->getItem((int)$id);
 
-		if ($item)
-		{
+		if ($item) {
 			return $item;
 		}
 
@@ -198,11 +195,10 @@ class ModagosmHelper
 	public static function getListCustomField(&$params)
 	{
 		// Get an instance of the generic articles model
-		$model = JModelLegacy::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
+		$model = JModelLegacy::getInstance('Articles', 'ContentModel', ['ignore_request' => true]);
 
 		// Todo check if other compontent than com_content
-		if ($model)
-		{
+		if ($model) {
 			// Set application parameters in model
 			$app = JFactory::getApplication();
 			$appParams = $app->getParams();
@@ -228,19 +224,15 @@ class ModagosmHelper
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 			$items = $model->getItems();
-			$itemsfiltered = array();
+			$itemsfiltered = [];
 
-			if ($items)
-			{
-				foreach ($items as $key => $item)
-				{
-					if ($cat[0] != 0 && $item->catid != $cat[0])
-					{
+			if ($items) {
+				foreach ($items as $key => $item) {
+					if ($cat[0] != 0 && $item->catid != $cat[0]) {
 						continue;
 					}
 
-					if ($item->state !== "1")
-					{
+					if ($item->state !== "1") {
 						continue;
 					}
 
@@ -248,38 +240,32 @@ class ModagosmHelper
 					// (calling plugins events and loading layouts to get their HTML display)
 					$fields = FieldsHelper::getFields('com_content.article', $item, true);
 
-					foreach ($fields as $key => $field)
-					{
+					foreach ($fields as $key => $field) {
 						$itemfiltered = new stdClass;
 
-						if ($field->title == 'lat, lon')
-						{
+						if ($field->title == 'lat, lon') {
 							$itemfiltered->cords = $field->value;
 							$test = explode(",", $itemfiltered->cords);
 
-							if (is_numeric($test[0]) && is_numeric($test[1]))
-							{
+							if (is_numeric($test[0]) && is_numeric($test[1])) {
 								$itemfiltered->title = $item->title;
 								$itemfiltered->id = $item->id;
 								$itemfiltered->type = $field->type;
 							}
 						}
 
-						if ($field->type == 'agosmsmarker')
-						{
+						if ($field->type == 'agosmsmarker') {
 							$itemfiltered->cords = $field->value;
 							$test = explode(",", $itemfiltered->cords);
 
-							if (is_numeric($test[0]) && is_numeric($test[1]))
-							{
+							if (is_numeric($test[0]) && is_numeric($test[1])) {
 								$itemfiltered->title = $item->title;
 								$itemfiltered->id = $item->id;
 								$itemfiltered->type = $field->type;
 							}
 						}
 
-						if ($field->type == 'agosmsaddressmarker')
-						{
+						if ($field->type == 'agosmsaddressmarker') {
 							// Get plugin parameters
 							$popup = $field->fieldparams->get('popup', '0');
 							$specialicon = $field->fieldparams->get('specialicon', '0');
@@ -287,24 +273,22 @@ class ModagosmHelper
 							$itemfiltered->cords = $field->rawvalue;
 							$test = explode(",", $itemfiltered->cords);
 
-							if (sizeof($test) > 5 && is_numeric($test[0]) && is_numeric($test[1]))
-							{
+							if (sizeof($test) > 5 && is_numeric($test[0]) && is_numeric($test[1])) {
 								$itemfiltered->title = $item->title;
 								$itemfiltered->id = $item->id;
 								$itemfiltered->type = $field->type;
 								$itemfiltered->lat = $test[0];
 								$itemfiltered->lon = $test[1];
 
-								if ($specialicon)
-								{
+								if ($specialicon) {
 									$itemfiltered->iconcolor = $test[2];
 									$itemfiltered->markercolor = $test[3];
 									$itemfiltered->icon = $test[4];
 								}
 
-								if ($popup)
-								{
+								if ($popup) {
 									$itemfiltered->popuptext = $test[5];
+									$itemfiltered->doLinkToArticle = $field->fieldparams->get('doLinkToArticle', '1');
 								}
 							}
 						}
@@ -314,13 +298,12 @@ class ModagosmHelper
 				}
 			}
 
-			if ($itemsfiltered)
-			{
+			if ($itemsfiltered) {
 				return $itemsfiltered;
 			}
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -334,18 +317,18 @@ class ModagosmHelper
 	 * */
 	public static function getListExternaldb(&$params)
 	{
-		$options = array(
+		$options = [
 			'driver' => 'mysqli',
 			'host' => 'localhost',
 			'user' => 'root',
 			'password' => 'Schweden1!',
 			'database' => 'joomla_db'
-		);
+		];
 
 		$externalDb = JDatabaseDriver::getInstance($options);
 		$query = $externalDb->getQuery(true);
 
-		$query->select($externalDb->quoteName(array('*')));
+		$query->select($externalDb->quoteName(['*']));
 		$query->from($externalDb->quoteName('j3_agosms'));
 
 		// Reset the query using our newly populated query object.
@@ -356,5 +339,4 @@ class ModagosmHelper
 
 		return $results;
 	}
-
 }

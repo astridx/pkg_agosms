@@ -25,11 +25,10 @@ class AgosmsModelAgosms extends JModelList
 	 * @see     JControllerLegacy
 	 * @since   1.0.40
 	 */
-	public function __construct($config = array())
+	public function __construct($config = [])
 	{
-		if (empty($config['filter_fields']))
-		{
-			$config['filter_fields'] = array(
+		if (empty($config['filter_fields'])) {
+			$config['filter_fields'] = [
 				'id', 'a.id',
 				'title', 'a.title',
 				'alias', 'a.alias',
@@ -52,12 +51,11 @@ class AgosmsModelAgosms extends JModelList
 				'url', 'a.url',
 				'tag',
 				'level', 'c.level',
-			);
+			];
 
 			$assoc = JLanguageAssociations::isEnabled();
 
-			if ($assoc)
-			{
+			if ($assoc) {
 				$config['filter_fields'][] = 'association';
 			}
 		}
@@ -83,14 +81,12 @@ class AgosmsModelAgosms extends JModelList
 		$forcedLanguage = $app->input->get('forcedLanguage', '', 'cmd');
 
 		// Adjust the context to support modal layouts.
-		if ($layout = $app->input->get('layout'))
-		{
+		if ($layout = $app->input->get('layout')) {
 			$this->context .= '.' . $layout;
 		}
 
 		// Adjust the context to support forced languages.
-		if ($forcedLanguage)
-		{
+		if ($forcedLanguage) {
 			$this->context .= '.' . $forcedLanguage;
 		}
 
@@ -108,8 +104,7 @@ class AgosmsModelAgosms extends JModelList
 		$this->setState('params', $params);
 
 		// Force a language.
-		if (!empty($forcedLanguage))
-		{
+		if (!empty($forcedLanguage)) {
 			$this->setState('filter.language', $forcedLanguage);
 		}
 
@@ -188,8 +183,7 @@ class AgosmsModelAgosms extends JModelList
 		// Join over the associations.
 		$assoc = JLanguageAssociations::isEnabled();
 
-		if ($assoc)
-		{
+		if ($assoc) {
 			$query->select('COUNT(asso2.id)>1 AS association')
 				->join('LEFT', $db->quoteName('#__associations', 'asso') . ' ON asso.id = a.id AND asso.context = ' . $db->quote('com_agosms.item'))
 				->join('LEFT', $db->quoteName('#__associations', 'asso2') . ' ON asso2.key = asso.key')
@@ -197,14 +191,12 @@ class AgosmsModelAgosms extends JModelList
 		}
 
 		// Filter by access level.
-		if ($access = $this->getState('filter.access'))
-		{
+		if ($access = $this->getState('filter.access')) {
 			$query->where($db->quoteName('a.access') . ' = ' . (int) $access);
 		}
 
 		// Implement View Level Access
-		if (!$user->authorise('core.admin'))
-		{
+		if (!$user->authorise('core.admin')) {
 			$groups = implode(',', $user->getAuthorisedViewLevels());
 			$query->where($db->quoteName('a.access') . ' IN (' . $groups . ')');
 		}
@@ -212,59 +204,49 @@ class AgosmsModelAgosms extends JModelList
 		// Filter by published state
 		$published = $this->getState('filter.published');
 
-		if (is_numeric($published))
-		{
+		if (is_numeric($published)) {
 			$query->where($db->quoteName('a.state') . ' = ' . (int) $published);
-		}
-		elseif ($published === '')
-		{
+		} else if ($published === '') {
 			$query->where('(' . $db->quoteName('a.state') . ' IN (0, 1))');
 		}
 
 		// Filter by category.
 		$categoryId = $this->getState('filter.category_id');
 
-		if (is_numeric($categoryId))
-		{
+		if (is_numeric($categoryId)) {
 			$query->where($db->quoteName('a.catid') . ' = ' . (int) $categoryId);
 		}
 
 		// Filter on the level.
-		if ($level = $this->getState('filter.level'))
-		{
+		if ($level = $this->getState('filter.level')) {
 			$query->where($db->quoteName('c.level') . ' <= ' . (int) $level);
 		}
 
 		// Filter by search in title
 		$search = $this->getState('filter.search');
 
-		if (!empty($search))
-		{
-			if (stripos($search, 'id:') === 0)
-			{
+		if (!empty($search)) {
+			if (stripos($search, 'id:') === 0) {
 				$query->where($db->quoteName('a.id') . ' = ' . (int) substr($search, 3));
-			}
-			else
-			{
+			} else {
 				$search = $db->quote('%' . str_replace(' ', '%', $db->escape(trim($search), true) . '%'));
 				$query->where('(' . $db->quoteName('a.title') . ' LIKE ' . $search . ' OR ' . $db->quoteName('a.alias') . ' LIKE ' . $search . ')');
 			}
 		}
 
 		// Filter on the language.
-		if ($language = $this->getState('filter.language'))
-		{
+		if ($language = $this->getState('filter.language')) {
 			$query->where($db->quoteName('a.language') . ' = ' . $db->quote($language));
 		}
 
 		$tagId = $this->getState('filter.tag');
 
 		// Filter by a single tag.
-		if (is_numeric($tagId))
-		{
+		if (is_numeric($tagId)) {
 			$query->where($db->quoteName('tagmap.tag_id') . ' = ' . (int) $tagId)
 				->join(
-					'LEFT', $db->quoteName('#__contentitem_tag_map', 'tagmap')
+					'LEFT',
+					$db->quoteName('#__contentitem_tag_map', 'tagmap')
 					. ' ON ' . $db->quoteName('tagmap.content_item_id') . ' = ' . $db->quoteName('a.id')
 					. ' AND ' . $db->quoteName('tagmap.type_alias') . ' = ' . $db->quote('com_agosms.agosm')
 				);
@@ -274,8 +256,7 @@ class AgosmsModelAgosms extends JModelList
 		$orderCol  = $this->state->get('list.ordering', 'a.title');
 		$orderDirn = $this->state->get('list.direction', 'ASC');
 
-		if ($orderCol == 'a.ordering' || $orderCol == 'category_title')
-		{
+		if ($orderCol == 'a.ordering' || $orderCol == 'category_title') {
 			$orderCol = 'c.title ' . $orderDirn . ', a.ordering';
 		}
 

@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
 
-
 $lang = JFactory::getLanguage();
 $extension = 'mod_agosms_search';
 $base_dir = JPATH_SITE . '/modules/mod_agosms_search';
@@ -30,20 +29,16 @@ $document = JFactory::getDocument();
 
 $leafletIsLoaded = false;
 
-foreach ($document->_scripts as $key => $script)
-{
+foreach ($document->_scripts as $key => $script) {
 	$leafletPath = "leaflet/leaflet.js";
 
-	if (strpos($key, $leafletPath))
-	{
+	if (strpos($key, $leafletPath)) {
 		$leafletIsLoaded = true;
 	}
 }
 
-if ($module_params->get('show_map', "1") === "1")
-{
-	if (!$leafletIsLoaded)
-	{
+if ($module_params->get('show_map', "1") === "1") {
+	if (!$leafletIsLoaded) {
 		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.css');
 		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.js');
 	}
@@ -54,13 +49,11 @@ if ($module_params->get('show_map', "1") === "1")
 	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/js/agosm_search.js');
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/css/agosms_search.css');
 	
-	if ($module_params->get('showlocate', "1") == "1")
-	{
+	if ($module_params->get('showlocate', "1") == "1") {
 		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/locate/L.Control.Locate.css');
 		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/locate/font-awesome.min.css');
 		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/locate/L.Control.Locate.min.js');
 	}
-	
 }
 
 $model->limit = JFactory::getApplication()->input->get("limit", $module_params->get('items_limit', 10));
@@ -85,7 +78,7 @@ $itemsForMap = $model->getItemsForMap();
 	</div>
 
 <?php if ($module_params->get('show_map', "1") === "1") { ?>
-<?php $defaultArray = array(); ?>
+	<?php $defaultArray = []; ?>
 <div style="
 	width:auto;
 	height:<?php echo $module_params->get('height', '400'); ?><?php echo $module_params->get('heightunit', 'px'); ?>;"
@@ -96,30 +89,30 @@ $itemsForMap = $model->getItemsForMap();
 	data-baselayer="<?php echo $module_params->get('baselayer', 'mapnik'); ?>"
 	data-lonlat="<?php echo $module_params->get('lonlat', '50.281168, 7.276211'); ?>"
 	data-zoom="<?php echo $module_params->get('zoom', '10'); ?>"
-<?php if ($module_params->get('baselayer', 'mapbox')) : ?>
+	<?php if ($module_params->get('baselayer', 'mapbox')) : ?>
 	data-mapboxmaptype="<?php echo $module_params->get('mapboxmaptype', 'streets'); ?>"
 	data-mapboxkey="<?php echo $module_params->get('mapboxkey', ''); ?>"
-<?php endif; ?>
-<?php if ($module_params->get('baselayer', 'thunderforest')) : ?>
+	<?php endif; ?>
+	<?php if ($module_params->get('baselayer', 'thunderforest')) : ?>
 	data-thunderforestkey="<?php echo $module_params->get('thunderforestkey', ''); ?>"
 	data-thunderforestmaptype="<?php echo $module_params->get('thunderforestmaptype', 'cycle'); ?>"
-<?php endif; ?>
-<?php if ($module_params->get('baselayer', 'stamen')) : ?>
+	<?php endif; ?>
+	<?php if ($module_params->get('baselayer', 'stamen')) : ?>
 	data-stamenmaptype="<?php echo $module_params->get('stamenmaptype', 'watercolor'); ?>"
-<?php endif; ?>
-<?php if ($module_params->get('baselayer', 'google')) : ?>
+	<?php endif; ?>
+	<?php if ($module_params->get('baselayer', 'google')) : ?>
 	data-googlemapstype="<?php echo $module_params->get('googlemapstype', 'satellite'); ?>"
-<?php endif; ?>
-<?php if ($module_params->get('baselayer', 'custom')) : ?>
+	<?php endif; ?>
+	<?php if ($module_params->get('baselayer', 'custom')) : ?>
 	data-customBaselayer="<?php echo $module_params->get('customBaselayer', 'maxZoom: 18,'); ?>"
 	data-customBaselayerURL="<?php echo $module_params->get('customBaselayerURL', 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'); ?>"
-<?php endif; ?>
+	<?php endif; ?>
 	data-attr-module="<?php echo $module_params->get('attrModule', 1); ?>"
-<?php if ($module_params->get('scale') !== null) : ?>
+	<?php if ($module_params->get('scale') !== null) : ?>
 	data-scale="<?php echo count($module_params->get('scale')); ?>"
-<?php endif; ?>	
-	data-specialcustomfieldpins="<?php 
-	echo htmlspecialchars(json_encode($itemsForMap), ENT_QUOTES, 'UTF-8'); 
+	<?php endif; ?>	
+	data-specialcustomfieldpins="<?php
+	echo htmlspecialchars(json_encode($itemsForMap), ENT_QUOTES, 'UTF-8');
 	?>"
 	data-scale-metric="<?php echo in_array('metric', $module_params->get('scale', $defaultArray)); ?>"
 	data-scale-imperial="<?php echo in_array('imperial', $module_params->get('scale', $defaultArray)); ?>"
@@ -133,69 +126,54 @@ $itemsForMap = $model->getItemsForMap();
 
 
 <?php if ($module_params->get('show_resultlist', "1") === "1") { ?>
-
-<?php if (count($items)) { ?>
+	<?php if (count($items)) { ?>
 <div class="gsearch-toolbox" >
-	<?php
-	//if ($model->module_params->ordering_show)
-	if (false)
-	{
-	?>
+		<?php
+		//if ($model->module_params->ordering_show)
+		if (false) {
+			?>
 		<div class="gsearch-sorting">
 			<?php require dirname(__FILE__) . '/gsearch_sorting.php'; ?>
 		</div>
-	<?php 
-	} 
-	?>
+			<?php
+		}
+		?>
 </div>
-<?php } ?>
+	<?php } ?>
 	
 	
 	<div class="itemlist">
 	<?php
-	foreach ($items as $items_counter => $item)
-	{
-		if (!property_exists($item, "parent_alias"))
-		{
+	foreach ($items as $items_counter => $item) {
+		if (!property_exists($item, "parent_alias")) {
 			$item->parent_alias = false;
 		}
-		if (!property_exists($item, "alias"))
-		{
+		if (!property_exists($item, "alias")) {
 			$item->alias = false;
 		}
 		$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 		
 
-		if ($item->parent_alias == 'root' || !property_exists($item, "parent_id"))
-		{
+		if ($item->parent_alias == 'root' || !property_exists($item, "parent_id")) {
 			$item->parent_slug = null;
-		}
-		else
-		{
+		} else {
 			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
 		}
 
-		if (property_exists($item, "catslug"))
-		{
+		if (property_exists($item, "catslug")) {
 			$item->catslug = $item->category_alias ? ($item->catid . ':' . $item->category_alias) : $item->catid;
-		}
-		else 
-		{
+		} else {
 			$item->catslug = null;
 		}
 		?>
 		<?php
-		if ($model->module_params->results_template == "")
-		{
+		if ($model->module_params->results_template == "") {
 			$model->module_params->results_template = "standard";
 		}
 
-		if ($model->module_params->results_template == "standard")
-		{
+		if ($model->module_params->results_template == "standard") {
 			require dirname(__FILE__) . '/gsearch_blog_item.php';
-		}
-		else
-		{
+		} else {
 			require dirname(__FILE__) . "/gsearch_blog_item_{$model->module_params->results_template}.php";
 		}
 		?>
@@ -214,35 +192,24 @@ $itemsForMap = $model->getItemsForMap();
 			$PagesLinks = preg_replace('/\?page-start=.[0-9]*/', '', $PagesLinks);
 			$PagesLinks = preg_replace('/\?start=/', '?page-start=', $PagesLinks);
 
-		if (strpos($PagesLinks, "?") === false)
-		{
+		if (strpos($PagesLinks, "?") === false) {
 			$PagesLinks = preg_replace('/&amp;page-start=/', '?page-start=', $PagesLinks);
 		}
 
-		if (strpos($PagesLinks, "page-start") === false)
-		{
+		if (strpos($PagesLinks, "page-start") === false) {
 			$PagesLinks = preg_replace_callback(
 				'/(title="([^"]*)"[^>]*gsearch=1)/smix',
 				function ($matches) use ($model) {
-					if ((int) $matches[2] != 0)
-			{
+					if ((int) $matches[2] != 0) {
 						// Is page number
 						return $matches[1] . '&page-start=' . ($matches[2] - 1) * $model->limit;
-					}
-					elseif ($matches[2] == "Prev")
-			{
+					} else if ($matches[2] == "Prev") {
 						return $matches[1] . '&page-start=' . ($model->input->get("page-start") - $model->limit);
-					}
-					elseif ($matches[2] == "Next")
-			{
+					} else if ($matches[2] == "Next") {
 						return $matches[1] . '&page-start=' . ($model->input->get("page-start") + $model->limit);
-					}
-					elseif ($matches[2] == "End")
-			{
+					} else if ($matches[2] == "End") {
 						return $matches[1] . '&page-start=' . ($model->total_items - 1);
-					}
-					else
-			{
+					} else {
 						return $matches[0];
 					}
 				},
@@ -252,8 +219,8 @@ $itemsForMap = $model->getItemsForMap();
 
 			echo $PagesLinks;
 		?>
-		<?php 
-			echo $pagination->getPagesCounter(); 
+		<?php
+			echo $pagination->getPagesCounter();
 		?>
 	</div>
 <?php } ?>	

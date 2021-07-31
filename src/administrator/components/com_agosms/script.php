@@ -33,8 +33,7 @@ class Com_AgosmsInstallerScript
 		$category = JTable::getInstance('Category');
 
 		// Check if the Uncategorised category exists before adding it
-		if (!$category->load(array('extension' => 'com_agosms', 'title' => 'Uncategorised')))
-		{
+		if (!$category->load(['extension' => 'com_agosms', 'title' => 'Uncategorised'])) {
 			$category->extension = 'com_agosms';
 			$category->title = 'Uncategorised';
 			$category->description = '';
@@ -55,16 +54,14 @@ class Com_AgosmsInstallerScript
 			$category->setLocation(1, 'last-child');
 
 			// Check to make sure our data is valid
-			if (!$category->check())
-			{
+			if (!$category->check()) {
 				JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_AGOSMS_ERROR_INSTALL_CATEGORY', $category->getError()));
 
 				return;
 			}
 
 			// Now store the category
-			if (!$category->store(true))
-			{
+			if (!$category->store(true)) {
 				JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_AGOSMS_ERROR_INSTALL_CATEGORY', $category->getError()));
 
 				return;
@@ -90,8 +87,7 @@ class Com_AgosmsInstallerScript
 		// Only execute database changes on MySQL databases
 		$dbName = JFactory::getDbo()->name;
 
-		if (strpos($dbName, 'mysql') !== false)
-		{
+		if (strpos($dbName, 'mysql') !== false) {
 			// Add Missing Table Colums if needed
 			$this->addColumnsIfNeeded();
 
@@ -132,7 +128,7 @@ class Com_AgosmsInstallerScript
 		$categoryTypeId = $db->loadResult();
 
 		// Set the table columns to insert table to
-		$columnsArray = array(
+		$columnsArray = [
 			$db->quoteName('type_title'),
 			$db->quoteName('type_alias'),
 			$db->quoteName('table'),
@@ -140,11 +136,10 @@ class Com_AgosmsInstallerScript
 			$db->quoteName('field_mappings'),
 			$db->quoteName('router'),
 			$db->quoteName('content_history_options'),
-		);
+		];
 
 		// If we have no type id for com_agosms.agosm insert it
-		if (!$agosmTypeId)
-		{
+		if (!$agosmTypeId) {
 			// Insert the data.
 			$query->clear();
 			$query->insert($db->quoteName('#__content_types'));
@@ -182,8 +177,7 @@ class Com_AgosmsInstallerScript
 		}
 
 		// If we have no type id for com_agosms.category insert it
-		if (!$categoryTypeId)
-		{
+		if (!$categoryTypeId) {
 			// Insert the data.
 			$query->clear();
 			$query->insert($db->quoteName('#__content_types'));
@@ -193,8 +187,7 @@ class Com_AgosmsInstallerScript
 				. $db->quote('com_agosms.category') . ', '
 				. $db->quote('
 					{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},
-					"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}'
-				) . ', '
+					"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}') . ', '
 				. $db->quote('') . ', '
 				. $db->quote('
 					{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias",
@@ -203,8 +196,7 @@ class Com_AgosmsInstallerScript
 					"core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language",
 					"core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey",
 					"core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"},
-					"special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}'
-				) . ', '
+					"special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}') . ', '
 				. $db->quote('AgosmsHelperRoute::getCategoryRoute') . ', '
 				. $db->quote('
 					{"formFile":"administrator\\/components\\/com_categories\\/models\\/forms\\/category.xml",
@@ -215,8 +207,7 @@ class Com_AgosmsInstallerScript
 					"displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id",
 					"displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id",
 					"displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id",
-					"displayColumn":"title"}]}'
-				)
+					"displayColumn":"title"}]}')
 			);
 
 			$db->setQuery($query);
@@ -233,20 +224,19 @@ class Com_AgosmsInstallerScript
 	 */
 	private function dropColumnsIfNeeded()
 	{
-		$oldColumns = array(
+		$oldColumns = [
 			'sid',
 			'date',
 			'archived',
 			'approved',
-		);
+		];
 
 		$db    = JFactory::getDbo();
 		$table = $db->getTableColumns('#__agosms');
 
 		$columns = array_intersect($oldColumns, array_keys($table));
 
-		foreach ($columns as $column)
-		{
+		foreach ($columns as $column) {
 			$sql = 'ALTER TABLE ' . $db->quoteName('#__agosms') . ' DROP COLUMN ' . $db->quoteName($column);
 			$db->setQuery($sql);
 			$db->execute();
@@ -265,15 +255,13 @@ class Com_AgosmsInstallerScript
 		$db    = JFactory::getDbo();
 		$table = $db->getTableColumns('#__agosms');
 
-		if (!array_key_exists('version', $table))
-		{
+		if (!array_key_exists('version', $table)) {
 			$sql = 'ALTER TABLE ' . $db->quoteName('#__agosms') . ' ADD COLUMN ' . $db->quoteName('version') . " int(10) unsigned NOT NULL DEFAULT '1'";
 			$db->setQuery($sql);
 			$db->execute();
 		}
 
-		if (!array_key_exists('images', $table))
-		{
+		if (!array_key_exists('images', $table)) {
 			$sql = 'ALTER TABLE ' . $db->quoteName('#__agosms') . ' ADD COLUMN ' . $db->quoteName('images') . ' text NOT NULL';
 			$db->setQuery($sql);
 			$db->execute();

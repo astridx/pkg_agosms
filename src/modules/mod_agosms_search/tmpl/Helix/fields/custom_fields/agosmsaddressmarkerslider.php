@@ -23,13 +23,11 @@ $lat = 0;
 $address = '';
 $moduleParams = new JRegistry($module->params);
 
-if($field->instance->type == "agosmsaddressmarker") {
+if ($field->instance->type == "agosmsaddressmarker") {
 	$min = $moduleParams->get('first', 0);
 	$max = $moduleParams->get('last', 2000);
 	$step = $moduleParams->get('step', 10);
-}
-else
-{
+} else {
 	$values = $helper->getFieldValuesFromText($field->id, "int", $module->id);
 	$min = $values[0];
 	$max = $values[count($values) - 1];
@@ -95,7 +93,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_search/slider/agosmsa
 				
 /*	
  
- 				}).on("slideStop", function(ev) {
+				 }).on("slideStop", function(ev) {
 					$("input#amount-<?php echo "{$field->id}-{$module->id}"; ?>").val(ev.value[0] + ' - ' + ev.value[1]);
 					$("input[name=<?php echo "field_{$field->id}-from"; ?>]").val(ev.value[0]);
 					$("input[name=<?php echo "field_{$field->id}-to"; ?>]").val(ev.value[1]);

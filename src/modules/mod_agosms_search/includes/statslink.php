@@ -28,7 +28,4 @@ class JFormFieldStatsLink extends JFormField
 			<a style="position: absolute; margin-top: -20px; margin-left: -180px;" target="_blank" href="' . JURI::base() . '?gsearch=1&search_type=search_stats&search_mode=list">' . JText::_('MOD_AGOSMSSEARCHSEARCH_STATS_LINK') . '</a>
 		';
 	}
-
 }
-
-

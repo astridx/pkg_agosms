@@ -952,7 +952,12 @@ document.addEventListener('DOMContentLoaded', function () {
 						title = values[5];
 					}
 
-					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
+					let popuptext = title;
+
+					if (objcf.doLinkToArticle === "1") {
+						popuptext = "<a href=' " + url + " '> " + title + " </a>";
+					}
+					
 					tempMarkercf.bindPopup(popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 
 					var clickgmarkerlista = document.querySelector('.agmarkerlista' + objcf.id);

@@ -27,7 +27,7 @@ JText::script('COM_AGOSMS_BUTTON_DEFAULT_POPUP_PROMPT');
 <input
 	name="jform_paramsmodal_cords_map"
 	id="jform_paramsmodal_cords_map"
-    data-unique="<?php echo $uniqid; ?>"
+	data-unique="<?php echo $uniqid; ?>"
 	value=""
 	readonly="readonly"
 	title=""

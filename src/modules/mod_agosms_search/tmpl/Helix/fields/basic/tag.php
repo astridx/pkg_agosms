@@ -12,7 +12,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-$active =  array();
+$active =  [];
 if (JFactory::getApplication()->input->get->get('tag')) {
 	$active = JFactory::getApplication()->input->get->get('tag');
 }
@@ -25,10 +25,10 @@ if (JFactory::getApplication()->input->get->get('tag')) {
 	</h3>
 	<select class="inputbox" name="tag[]" multiple="multiple" style="display: none;">
 		<option value=""><?php echo JText::_('MOD_AGOSMSSEARCHFILTER_TYPE_TAG'); ?></option>
-		<?php foreach($tags as $tag) { ?>
+		<?php foreach ($tags as $tag) { ?>
 			<option 
 				value="<?php echo $tag->id; ?>"
-				<?php if(in_array($tag->id, $active)) { ?> 
+				<?php if (in_array($tag->id, $active)) { ?> 
 				selected="selected"
 				<?php } ?>
 			>

@@ -43,7 +43,7 @@ class JFormFieldFalist extends JFormField
 			}';
 		$document->addStyleDeclaration($style);
 
-		$html = array();
+		$html = [];
 		$attr = '';
 
 		// Initialize some field attributes.
@@ -55,8 +55,7 @@ class JFormFieldFalist extends JFormField
 		$attr .= ' style="font-family: \'FontAwesome\';" ';
 
 		// To avoid user's confusion, readonly="true" should imply disabled="true".
-		if ((string) $this->readonly == '1' || (string) $this->readonly == 'true' || (string) $this->disabled == '1' || (string) $this->disabled == 'true')
-		{
+		if ((string) $this->readonly == '1' || (string) $this->readonly == 'true' || (string) $this->disabled == '1' || (string) $this->disabled == 'true') {
 			$attr .= ' disabled="disabled"';
 		}
 
@@ -67,30 +66,22 @@ class JFormFieldFalist extends JFormField
 		$options = (array) $this->getOptions();
 
 		// Create a read-only list (no name) with hidden input(s) to store the value(s).
-		if ((string) $this->readonly == '1' || (string) $this->readonly == 'true')
-		{
+		if ((string) $this->readonly == '1' || (string) $this->readonly == 'true') {
 			$html[] = JHtml::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
 
 			// E.g. form field type tag sends $this->value as array
-			if ($this->multiple && is_array($this->value))
-			{
-				if (!count($this->value))
-				{
+			if ($this->multiple && is_array($this->value)) {
+				if (!count($this->value)) {
 					$this->value[] = '';
 				}
 
-				foreach ($this->value as $value)
-				{
+				foreach ($this->value as $value) {
 					$html[] = '<input type="hidden" name="' . $this->name . '" value="' . htmlspecialchars($value, ENT_COMPAT, 'UTF-8') . '"/>';
 				}
-			}
-			else
-			{
+			} else {
 				$html[] = '<input type="hidden" name="' . $this->name . '" value="' . htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8') . '"/>';
 			}
-		}
-		else
-		// Create a regular list.
+		} else // Create a regular list.
 		{
 			$html[] = JHtml::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $this->value, $this->id);
 		}
@@ -108,7 +99,7 @@ class JFormFieldFalist extends JFormField
 	protected function getOptions()
 	{
 		$fieldname = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname);
-		$options = array();
+		$options = [];
 
 		$fontawesome_icons = [
 			"" => "no icon",
@@ -905,16 +896,15 @@ class JFormFieldFalist extends JFormField
 			"youtube-square" => "&#xf166;",
 		];
 
-		foreach ($fontawesome_icons as $fontawesome_icon_key => $fontawesome_icon_value)
-		{
-			$tmp = array(
+		foreach ($fontawesome_icons as $fontawesome_icon_key => $fontawesome_icon_value) {
+			$tmp = [
 				'value' => $fontawesome_icon_key,
 				'text' => $fontawesome_icon_value,
 				'disable' => 0,
 				'class' => '',
 				'selected' => 0,
 				'checked' => 0,
-			);
+			];
 			$options[] = (object) $tmp;
 		}
 
@@ -932,8 +922,7 @@ class JFormFieldFalist extends JFormField
 	 */
 	public function __get($name)
 	{
-		if ($name == 'options')
-		{
+		if ($name == 'options') {
 			return $this->getOptions();
 		}
 
