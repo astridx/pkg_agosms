@@ -24,7 +24,7 @@ class AgosmsCategories extends JCategories
 	 *
 	 * @since   1.0.40
 	 */
-	public function __construct($options = array())
+	public function __construct($options = [])
 	{
 		$options['table'] = '#__agosms';
 		$options['extension'] = 'com_agosms';

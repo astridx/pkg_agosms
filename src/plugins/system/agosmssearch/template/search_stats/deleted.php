@@ -19,8 +19,7 @@ $file_path = __FILE__;
 
 if (JFile::exists($override)
 	&& strpos($file_path, "html") === false // Do not trigger in override file
-)
-{
+) {
 	ob_start();
 		require $override;
 		$return = ob_get_contents();
@@ -31,5 +30,3 @@ if (JFile::exists($override)
 }
 
 echo JText::_("Deleted");
-
-

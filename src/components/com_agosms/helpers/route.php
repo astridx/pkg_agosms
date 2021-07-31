@@ -19,7 +19,7 @@ abstract class AgosmsHelperRoute
 {
 	protected static $lookup;
 
-	protected static $lang_lookup = array();
+	protected static $lang_lookup = [];
 
 	/**
 	 * Get the route of the agosm
@@ -32,37 +32,32 @@ abstract class AgosmsHelperRoute
 	 */
 	public static function getAgosmRoute($id, $catid, $language = 0)
 	{
-		$needles = array('agosm'  => array((int) $id));
+		$needles = ['agosm'  => [(int) $id]];
 
 		// Create the link
 		$link = 'index.php?option=com_agosms&view=agosm&id=' . $id;
 
-		if ($catid > 1)
-		{
+		if ($catid > 1) {
 			$categories = JCategories::getInstance('Agosms');
 			$category = $categories->get($catid);
 
-			if ($category)
-			{
+			if ($category) {
 				$needles['category'] = array_reverse($category->getPath());
 				$needles['categories'] = $needles['category'];
 				$link .= '&catid=' . $catid;
 			}
 		}
 
-		if ($language && $language != "*" && JLanguageMultilang::isEnabled())
-		{
+		if ($language && $language != "*" && JLanguageMultilang::isEnabled()) {
 			self::buildLanguageLookup();
 
-			if (isset(self::$lang_lookup[$language]))
-			{
+			if (isset(self::$lang_lookup[$language])) {
 				$link .= '&lang=' . self::$lang_lookup[$language];
 				$needles['language'] = $language;
 			}
 		}
 
-		if ($item = self::_findItem($needles))
-		{
+		if ($item = self::_findItem($needles)) {
 			$link .= '&Itemid=' . $item;
 		}
 
@@ -80,17 +75,13 @@ abstract class AgosmsHelperRoute
 	public static function getFormRoute($id, $return = null)
 	{
 		// Create the link.
-		if ($id)
-		{
+		if ($id) {
 			$link = 'index.php?option=com_agosms&task=agosm.edit&w_id=' . $id;
-		}
-		else
-		{
+		} else {
 			$link = 'index.php?option=com_agosms&task=agosm.add&w_id=0';
 		}
 
-		if ($return)
-		{
+		if ($return) {
 			$link .= '&return=' . $return;
 		}
 
@@ -107,24 +98,18 @@ abstract class AgosmsHelperRoute
 	 */
 	public static function getCategoryRoute($catid, $language = 0)
 	{
-		if ($catid instanceof JCategoryNode)
-		{
+		if ($catid instanceof JCategoryNode) {
 			$id = $catid->id;
 			$category = $catid;
-		}
-		else
-		{
+		} else {
 			$id = (int) $catid;
 			$category = JCategories::getInstance('Agosms')->get($id);
 		}
 
-		if ($id < 1 || !($category instanceof JCategoryNode))
-		{
+		if ($id < 1 || !($category instanceof JCategoryNode)) {
 			$link = '';
-		}
-		else
-		{
-			$needles = array();
+		} else {
+			$needles = [];
 
 			// Create the link
 			$link = 'index.php?option=com_agosms&view=category&id=' . $id;
@@ -133,19 +118,16 @@ abstract class AgosmsHelperRoute
 			$needles['category'] = $catids;
 			$needles['categories'] = $catids;
 
-			if ($language && $language != "*" && JLanguageMultilang::isEnabled())
-			{
+			if ($language && $language != "*" && JLanguageMultilang::isEnabled()) {
 				self::buildLanguageLookup();
 
-				if (isset(self::$lang_lookup[$language]))
-				{
+				if (isset(self::$lang_lookup[$language])) {
 					$link .= '&lang=' . self::$lang_lookup[$language];
 					$needles['language'] = $language;
 				}
 			}
 
-			if ($item = self::_findItem($needles))
-			{
+			if ($item = self::_findItem($needles)) {
 				$link .= '&Itemid=' . $item;
 			}
 		}
@@ -160,8 +142,7 @@ abstract class AgosmsHelperRoute
 	 */
 	protected static function buildLanguageLookup()
 	{
-		if (count(self::$lang_lookup) == 0)
-		{
+		if (count(self::$lang_lookup) == 0) {
 			$db    = JFactory::getDbo();
 			$query = $db->getQuery(true)
 				->select('a.sef AS sef')
@@ -171,8 +152,7 @@ abstract class AgosmsHelperRoute
 			$db->setQuery($query);
 			$langs = $db->loadObjectList();
 
-			foreach ($langs as $lang)
-			{
+			foreach ($langs as $lang) {
 				self::$lang_lookup[$lang->lang_code] = $lang->sef;
 			}
 		}
@@ -192,45 +172,37 @@ abstract class AgosmsHelperRoute
 		$language = isset($needles['language']) ? $needles['language'] : '*';
 
 		// Prepare the reverse lookup array.
-		if (!isset(self::$lookup[$language]))
-		{
-			self::$lookup[$language] = array();
+		if (!isset(self::$lookup[$language])) {
+			self::$lookup[$language] = [];
 
 			$component = JComponentHelper::getComponent('com_agosms');
 
-			$attributes = array('component_id');
-			$values = array($component->id);
+			$attributes = ['component_id'];
+			$values = [$component->id];
 
-			if ($language != '*')
-			{
+			if ($language != '*') {
 				$attributes[] = 'language';
-				$values[] = array($needles['language'], '*');
+				$values[] = [$needles['language'], '*'];
 			}
 
 			$items = $menus->getItems($attributes, $values);
 
-			if ($items)
-			{
-				foreach ($items as $item)
-				{
-					if (isset($item->query) && isset($item->query['view']))
-					{
+			if ($items) {
+				foreach ($items as $item) {
+					if (isset($item->query) && isset($item->query['view'])) {
 						$view = $item->query['view'];
 
-						if (!isset(self::$lookup[$language][$view]))
-						{
-							self::$lookup[$language][$view] = array();
+						if (!isset(self::$lookup[$language][$view])) {
+							self::$lookup[$language][$view] = [];
 						}
 
-						if (isset($item->query['id']))
-						{
+						if (isset($item->query['id'])) {
 							/**
 							 * Here it will become a bit tricky
 							 * language != * can override existing entries
 							 * language == * cannot override existing entries
 							 */
-							if (!isset(self::$lookup[$language][$view][$item->query['id']]) || $item->language != '*')
-							{
+							if (!isset(self::$lookup[$language][$view][$item->query['id']]) || $item->language != '*') {
 								self::$lookup[$language][$view][$item->query['id']] = $item->id;
 							}
 						}
@@ -239,16 +211,11 @@ abstract class AgosmsHelperRoute
 			}
 		}
 
-		if ($needles)
-		{
-			foreach ($needles as $view => $ids)
-			{
-				if (isset(self::$lookup[$language][$view]))
-				{
-					foreach ($ids as $id)
-					{
-						if (isset(self::$lookup[$language][$view][(int) $id]))
-						{
+		if ($needles) {
+			foreach ($needles as $view => $ids) {
+				if (isset(self::$lookup[$language][$view])) {
+					foreach ($ids as $id) {
+						if (isset(self::$lookup[$language][$view][(int) $id])) {
 							return self::$lookup[$language][$view][(int) $id];
 						}
 					}
@@ -259,8 +226,7 @@ abstract class AgosmsHelperRoute
 		// Check if the active menuitem matches the requested language
 		$active = $menus->getActive();
 
-		if ($active && ($language == '*' || in_array($active->language, array('*', $language)) || !JLanguageMultilang::isEnabled()))
-		{
+		if ($active && ($language == '*' || in_array($active->language, ['*', $language]) || !JLanguageMultilang::isEnabled())) {
 			return $active->id;
 		}
 

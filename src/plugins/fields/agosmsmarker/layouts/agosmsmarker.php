@@ -47,19 +47,18 @@ extract($displayData);
 
 // Including fallback code for HTML5 non supported browsers.
 JHtml::_('jquery.framework');
-JHtml::_('script', 'system/html5fallback.js', array('version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9'));
+JHtml::_('script', 'system/html5fallback.js', ['version' => 'auto', 'relative' => true, 'conditional' => 'lt IE 9']);
 
 $list = '';
 
-if ($options)
-{
+if ($options) {
 	$list = 'list="' . $id . '_datalist"';
 }
 
 $autocomplete = !$autocomplete ? ' autocomplete="off"' : ' autocomplete="' . $autocomplete . '"';
 $autocomplete = $autocomplete === ' autocomplete="on"' ? '' : $autocomplete;
 
-$attributes = array(
+$attributes = [
 	!empty($class) ? 'class="' . $class . '"' : '',
 	!empty($size) ? 'size="' . $size . '"' : '',
 	$disabled ? 'disabled' : '',
@@ -74,7 +73,7 @@ $attributes = array(
 	$spellcheck ? '' : 'spellcheck="false"',
 	!empty($inputmode) ? $inputmode : '',
 	!empty($pattern) ? 'pattern="' . $pattern . '"' : '',
-);
+];
 
 
 
@@ -1006,7 +1005,7 @@ echo htmlspecialchars($value, ENT_COMPAT, 'UTF-8'); ?>" <?php echo implode(' ', 
 	<datalist id="<?php echo $id; ?>_datalist">
 		<?php foreach ($options as $option) : ?>
 			<?php if (!$option->value) : ?>
-			<?php continue; ?>
+				<?php continue; ?>
 			<?php endif; ?>
 			<option value="<?php echo $option->value; ?>"><?php
 			echo $option->text;

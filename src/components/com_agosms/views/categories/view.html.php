@@ -51,26 +51,23 @@ class AgosmsViewCategories extends JViewCategories
 		$parent		= $this->get('Parent');
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
 
 			return false;
 		}
 
-		if ($items === false)
-		{
+		if ($items === false) {
 			return JError::raiseError(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
 
-		if ($parent == false)
-		{
+		if ($parent == false) {
 			return JError::raiseError(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
 
 		$params = &$state->params;
 
-		$items = array($parent->id => $items);
+		$items = [$parent->id => $items];
 
 		// Escape strings for HTML output
 		$this->pageclass_sfx = htmlspecialchars($params->get('pageclass_sfx'));

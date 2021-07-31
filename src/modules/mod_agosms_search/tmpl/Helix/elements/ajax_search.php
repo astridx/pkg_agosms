@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -12,7 +12,7 @@
 defined('_JEXEC') or die;
 
 $ajax_container = $params->get("ajax_container");
-if($ajax_container == "div.ajax_container") {
+if ($ajax_container == "div.ajax_container") {
 	$ajax_container = "#ajax_container{$module->id}";
 	echo '<div id="ajax_container'.$module->id.'" class="ajax_container" style="margin: 40px 0;"></div>';
 }
@@ -52,10 +52,10 @@ if($ajax_container == "div.ajax_container") {
 
 		jQuery(document).ready(function() {
 			jQuery("#GSearch<?php echo $module->id; ?> input[type=submit]").on("click", function() {
-				<?php if($params->get("search_history")) { ?>	
+				<?php if ($params->get("search_history")) { ?>	
 				search_history<?php echo $module->id; ?>();
 				<?php } ?>				
-				<?php if($params->get("search_stats")) { ?>	
+				<?php if ($params->get("search_stats")) { ?>	
 				search_stats<?php echo $module->id; ?>();
 				<?php } ?>
 				ajax_results<?php echo $module->id; ?>();

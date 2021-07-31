@@ -45,17 +45,17 @@ class AgosmsViewAgosm extends JViewLegacy
 
 		$offset = $this->state->get('list.offset');
 
-		$dispatcher->trigger('onContentPrepare', array ('com_agosms.agosm', &$item, &$item->params, $offset));
+		$dispatcher->trigger('onContentPrepare', ['com_agosms.agosm', &$item, &$item->params, $offset]);
 
 		$item->event = new stdClass;
 
-		$results = $dispatcher->trigger('onContentAfterTitle', array('com_agosms.agosm', &$item, &$item->params, $offset));
+		$results = $dispatcher->trigger('onContentAfterTitle', ['com_agosms.agosm', &$item, &$item->params, $offset]);
 		$item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-		$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_agosms.agosm', &$item, &$item->params, $offset));
+		$results = $dispatcher->trigger('onContentBeforeDisplay', ['com_agosms.agosm', &$item, &$item->params, $offset]);
 		$item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-		$results = $dispatcher->trigger('onContentAfterDisplay', array('com_agosms.agosm', &$item, &$item->params, $offset));
+		$results = $dispatcher->trigger('onContentAfterDisplay', ['com_agosms.agosm', &$item, &$item->params, $offset]);
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
 
 		parent::display($tpl);

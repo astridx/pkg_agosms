@@ -18,21 +18,18 @@ $moduleclass_sfx = htmlspecialchars($params->get('moduleclass_sfx'));
 
 $filters = $params->get('filters');
 
-if (!JPluginHelper::isEnabled('system', 'agosmssearch'))
-{
+if (!JPluginHelper::isEnabled('system', 'agosmssearch')) {
 	echo JText::_('MOD_AGOSMS_PLUGIN_NOT_PUBLISHED');
 }
 
-if ($filters == "")
-{
+if ($filters == "") {
 	echo JText::_('MOD_AGOSMS_PLUGIN_NO_FIELDS');
 
 	return;
 }
 
-if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"))
-{
-	$skip = array(
+if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues")) {
+	$skip = [
 		"option",
 		"task",
 		"view",
@@ -40,12 +37,10 @@ if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"
 		"search_mode",
 		"field_id",
 		"field_type"
-	);
+	];
 
-	foreach (JFactory::getSession()->get("SaveSearchValues") as $key => $value)
-	{
-		if (in_array($key, $skip))
-		{
+	foreach (JFactory::getSession()->get("SaveSearchValues") as $key => $value) {
+		if (in_array($key, $skip)) {
 			continue;
 		}
 
@@ -54,20 +49,17 @@ if ($params->get('savesearch') && JFactory::getSession()->get("SaveSearchValues"
 }
 
 $filters_tmp = explode("\r\n", $filters);
-$filters = Array();
+$filters = [];
 
-foreach ($filters_tmp as $k => $filter)
-{
+foreach ($filters_tmp as $k => $filter) {
 	$filter = explode(":", $filter);
 	$filters[$k] = new stdClass;
 
-	if ($filter[0] == 'field')
-	{
+	if ($filter[0] == 'field') {
 		$instance = $helper->getCustomField($filter[1]);
 		$filters[$k]->id = $filter[1];
 
-		if ($filter[2] == "")
-		{
+		if ($filter[2] == "") {
 			$filter[2] = $instance->type;
 		}
 
@@ -77,13 +69,10 @@ foreach ($filters_tmp as $k => $filter)
 		// Added for compatibility with radical multifield
 		$flt = explode('{', $filters_tmp[$k], 2);
 
-		if (!empty($flt[1]) && $flt[1] != '')
-		{
+		if (!empty($flt[1]) && $flt[1] != '') {
 			$filters[$k]->extra_params = '{' . $flt[1];
 		}
-	}
-	else
-	{
+	} else {
 		$filters[$k]->id = '1000' . $k;
 		$filters[$k]->type = $filter[0];
 	}
@@ -97,26 +86,21 @@ $document = JFactory::getDocument();
 
 $leafletIsLoaded = false;
 
-foreach ($document->_scripts as $key => $script)
-{
+foreach ($document->_scripts as $key => $script) {
 	$leafletPath = "leaflet/leaflet.js";
 
-	if (strpos($key, $leafletPath))
-	{
+	if (strpos($key, $leafletPath)) {
 		$leafletIsLoaded = true;
 	}
 }
 
-if ($params->get('showlocate', "1") == "1")
-{
+if ($params->get('showlocate', "1") == "1") {
 	$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/locate/L.Control.Locate.css');
 	$document->addScript(JURI::root(true) . '/media/mod_agosms_search/locate/L.Control.Locate.min.js');
 }
 
-if ($params->get('show_map', "1") === "1")
-{
-	if (!$leafletIsLoaded)
-	{
+if ($params->get('show_map', "1") === "1") {
+	if (!$leafletIsLoaded) {
 		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.css');
 		$document->addScript(JURI::root(true) . '/media/mod_agosms_search/leaflet/leaflet.js');
 	}

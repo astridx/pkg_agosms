@@ -17,12 +17,12 @@ $active_to = JFactory::getApplication()->input->get("date-to");
 $active_from_text = '';
 $active_to_text = '';
 
-if($active_from) {
+if ($active_from) {
 	$active_from_text = DateTime::createFromFormat("Y-m-d", $active_from)->getTimestamp();
 	$active_from_text = trim(strftime($date_format, $active_from_text));
 	$active_from_text = mb_convert_case($active_from_text, MB_CASE_TITLE, 'UTF-8');
 }
-if($active_to) {
+if ($active_to) {
 	$active_to_text = DateTime::createFromFormat("Y-m-d", $active_to)->getTimestamp();
 	$active_to_text = trim(strftime($date_format, $active_to_text));
 	$active_to_text = mb_convert_case($active_to_text, MB_CASE_TITLE, 'UTF-8');

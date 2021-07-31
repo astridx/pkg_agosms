@@ -46,17 +46,15 @@ class JHtmlIcon
 	 *
 	 * @return  string
 	 */
-	public static function edit($agosm, $params, $attribs = array())
+	public static function edit($agosm, $params, $attribs = [])
 	{
 		$uri = JUri::getInstance();
 
-		if ($params && $params->get('popup'))
-		{
+		if ($params && $params->get('popup')) {
 			return;
 		}
 
-		if ($agosm->state < 0)
-		{
+		if ($agosm->state < 0) {
 			return;
 		}
 
@@ -66,12 +64,9 @@ class JHtmlIcon
 		$icon	= $agosm->state ? 'edit.png' : 'edit_unpublished.png';
 		$text	= JHtml::_('image', 'system/' . $icon, JText::_('JGLOBAL_EDIT'), null, true);
 
-		if ($agosm->state == 0)
-		{
+		if ($agosm->state == 0) {
 			$overlib = JText::_('JUNPUBLISHED');
-		}
-		else
-		{
+		} else {
 			$overlib = JText::_('JPUBLISHED');
 		}
 

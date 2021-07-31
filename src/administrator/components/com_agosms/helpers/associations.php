@@ -37,7 +37,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	 *
 	 * @since   1.0.40
 	 */
-	protected $itemTypes = array('agosm', 'category');
+	protected $itemTypes = ['agosm', 'category'];
 
 	/**
 	 * Has the extension association support
@@ -65,8 +65,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 		$context    = $this->extension . '.item';
 		$catidField = 'catid';
 
-		if ($typeName === 'category')
-		{
+		if ($typeName === 'category') {
 			$context    = 'com_categories.item';
 			$catidField = '';
 		}
@@ -97,15 +96,13 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	 */
 	public function getItem($typeName, $id)
 	{
-		if (empty($id))
-		{
+		if (empty($id)) {
 			return null;
 		}
 
 		$table = null;
 
-		switch ($typeName)
-		{
+		switch ($typeName) {
 			case 'agosm':
 				$table = JTable::getInstance('Agosm', 'AgosmsTable');
 				break;
@@ -115,8 +112,7 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 				break;
 		}
 
-		if (empty($table))
-		{
+		if (empty($table)) {
 			return null;
 		}
 
@@ -137,26 +133,23 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 	public function getType($typeName = '')
 	{
 		$fields  = $this->getFieldsTemplate();
-		$tables  = array();
-		$joins   = array();
+		$tables  = [];
+		$joins   = [];
 		$support = $this->getSupportTemplate();
 		$title   = '';
 
-		if (in_array($typeName, $this->itemTypes))
-		{
-			switch ($typeName)
-			{
+		if (in_array($typeName, $this->itemTypes)) {
+			switch ($typeName) {
 				case 'agosm':
-
 					$support['state'] = true;
 					$support['acl'] = true;
 					$support['checkout'] = true;
 					$support['category'] = true;
 					$support['save2copy'] = true;
 
-					$tables = array(
+					$tables = [
 						'a' => '#__agosms'
-					);
+					];
 
 					$title = 'agosm';
 					break;
@@ -173,21 +166,21 @@ class AgosmsAssociationsHelper extends JAssociationExtensionHelper
 					$support['checkout'] = true;
 					$support['level'] = true;
 
-					$tables = array(
+					$tables = [
 						'a' => '#__categories'
-					);
+					];
 
 					$title = 'category';
 					break;
 			}
 		}
 
-		return array(
+		return [
 			'fields'  => $fields,
 			'support' => $support,
 			'tables'  => $tables,
 			'joins'   => $joins,
 			'title'   => $title
-		);
+		];
 	}
 }

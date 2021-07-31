@@ -24,45 +24,38 @@ $document = JFactory::getDocument();
 
 $leafletIsLoaded = false;
 
-foreach ($document->_scripts as $key => $script)
-{
+foreach ($document->_scripts as $key => $script) {
 	$leafletPath = "leaflet/leaflet.js";
 
-	if (strpos($key, $leafletPath))
-	{
+	if (strpos($key, $leafletPath)) {
 		$leafletIsLoaded = true;
 	}
 }
 
-if (!$leafletIsLoaded)
-{
+if (!$leafletIsLoaded) {
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.css');
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/js/site-agosmsaddressmarker.js');
 }
 
-if ($fieldParams->get('showroutingcontrol', '0') == 1)
-{
+if ($fieldParams->get('showroutingcontrol', '0') == 1) {
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/leaflet-routing-machine/leaflet-routing-machine.css');
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/leaflet-routing-machine/leaflet-routing-machine.js');
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Routing/leaflet-routing-machine/Control.Geocoder.js');
 }
 
-if ($fieldParams->get('specialicon', '0') === "1")
-{
+if ($fieldParams->get('specialicon', '0') === "1") {
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/css/font-awesome.min.css');
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Leaflet.awesome-markers/leaflet.awesome-markers.css');
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/Leaflet.awesome-markers/leaflet.awesome-markers.js');
 }
 
-if ($fieldParams->get('scrollwheelzoom') === "2")
-{
+if ($fieldParams->get('scrollwheelzoom') === "2") {
 	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.min.css');
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleGestureHandling/leaflet-gesture-handling.min.js');
 }
 
-if ($fieldParams->get('maptype') === "google")
-{
+if ($fieldParams->get('maptype') === "google") {
 	$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/GoogleMutant/Leaflet.GoogleMutant.js');
 }
 
@@ -71,8 +64,7 @@ $document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/j
 // We need this for list views
 $unique = $field->id . '_' . uniqid();
 
-if ($value == '')
-{
+if ($value == '') {
 	return;
 }
 
@@ -89,8 +81,10 @@ $popuptext = $values[5];
 ?>
 <div>
 <div
-	<?php 
-	if ( $lat == 0 && $lon == 0) echo 'style="display:none"' 
+	<?php
+	if ($lat == 0 && $lon == 0) {
+		echo 'style="display:none"';
+	}
 	?>
 	id="map<?php echo $unique ?>"
 	class = 'agosmsaddressmarkerleafletmap' 
@@ -126,13 +120,17 @@ $popuptext = $values[5];
 </div>
 <?php if ($fieldParams->get('addprivacybox', '0')) : ?>
 	<p 
-		<?php 
-		if ( $lat == 0 && $lon == 0) echo 'style="display:none"' 
+		<?php
+		if ($lat == 0 && $lon == 0) {
+			echo 'style="display:none"';
+		}
 		?>
 		class="p<?php echo $unique ?>"></p>
 	<button 
-		<?php 
-		if ( $lat == 0 && $lon == 0) echo 'style="display:none"' 
+		<?php
+		if ($lat == 0 && $lon == 0) {
+			echo 'style="display:none"';
+		}
 		?>
 		class="btn btn-success b<?php echo $unique ?>" 
 		type="button">	

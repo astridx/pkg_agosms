@@ -31,20 +31,17 @@ class JFormFieldCategorySelect extends JFormField
 			$helper = new modAgosmsSearchHelper;
 			$categories = $helper->getCategories();
 
-		foreach ($categories as $category)
-		{
+		foreach ($categories as $category) {
 			$indent = "";
 
-			for ($i = 1; $i < $category->level;
-			$i++)
-			{
+			for ($i = 1; $i < $category->level; $i++) {
 				$indent .= " - ";
 			}
 
 			$mitems[] = JHTML::_('select.option', $category->id, $indent . $category->title);
 		}
 
-			$output = JHTML::_('select.genericlist',  $mitems, '', 'class="ValueSelect inputbox"', 'value', 'text', '0');
+			$output = JHTML::_('select.genericlist', $mitems, '', 'class="ValueSelect inputbox"', 'value', 'text', '0');
 			$output .= "<div class='clear'></div><ul class='sortableFields'></ul>";
 			$output .= "<div class='clear'></div>";
 			$output .= "<textarea style='display: none;' name='" . $name . "' class='ValueSelectVal'>" . $value . "</textarea>";
@@ -123,15 +120,11 @@ class JFormFieldCategorySelect extends JFormField
 
 	function addOptions(&$mitems, $category)
 	{
-		while ($category->subs)
-		{
-			foreach ($category->subs as $category)
-			{
+		while ($category->subs) {
+			foreach ($category->subs as $category) {
 				$indent = "";
 
-				for ($i = 0; $i < $category->level;
-				$i++)
-				{
+				for ($i = 0; $i < $category->level; $i++) {
 					$indent .= " - ";
 				}
 
@@ -141,5 +134,3 @@ class JFormFieldCategorySelect extends JFormField
 		}
 	}
 }
-
-

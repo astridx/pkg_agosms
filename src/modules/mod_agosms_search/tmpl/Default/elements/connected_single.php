@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @package     Joomla.Site
  * @subpackage  pkg_agosms
@@ -14,21 +14,20 @@ defined('_JEXEC') or die;
 //get connected fields from parameters
 $connected_fields = explode("\n", $params->get("field_connection"));
 
-foreach($connected_fields as $k=>$connected) {
-	if($connected != "") {
+foreach ($connected_fields as $k => $connected) {
+	if ($connected != "") {
 		$connected_fields[$k] = explode("->", $connected);
-	}
-	else {
+	} else {
 		unset($connected_fields[$k]);
 	}
 }
 
 //get connection instances for script
-$connected = Array();
+$connected = [];
 $result = '';
-foreach($connected_fields as $connection) {
-	$fields = Array();
-	foreach($connection as $field) {
+foreach ($connected_fields as $connection) {
+	$fields = [];
+	foreach ($connection as $field) {
 		$fields[] = '"'.trim(preg_replace('/\s\s+/iu', '', $field)).'"';
 	}
 	$connected[] = "[".implode(", ", $fields)."]";
@@ -61,7 +60,7 @@ jQuery(document).ready(function() {
 					&& prevSelectBox.find("option[hidden!=hidden]").not(".empty").length // skip if no any values exists
 				)
 			) {
-				<?php if(!$connected_show_all) { ?>
+				<?php if (!$connected_show_all) { ?>
 				selectBox.attr("disabled", "disabled").addClass("disabled");
 				selectBox.parents(".gsearch-cell").addClass("disabled");
 				if(selectBox.parent().hasClass("bootstrap-select")) {
@@ -127,13 +126,13 @@ jQuery(document).ready(function() {
 		var nextAll  = jQuery(this).parents('#GSearch<?php echo $module->id; ?>').find('select.connected:gt('+elemIndex+')');
 
 		nextAll.each(function(index, nextSelect) {
-			<?php if(!$connected_show_all) { ?>
+			<?php if (!$connected_show_all) { ?>
 			jQuery(nextSelect).attr("disabled", "disabled").addClass("disabled");
 			jQuery(nextSelect).parents(".gsearch-cell").addClass("disabled").removeClass("showed");
 			<?php } ?>
 			if(selectedVals.attr("class") == "empty" && jQuery(this).attr("multiple") != "multiple") {
 				jQuery(nextSelect).find("option.empty").prop("selected", "selected");
-				<?php if($connected_show_all) { ?>
+				<?php if ($connected_show_all) { ?>
 				jQuery(this).find("option").each(function(k) {
 					//show
 					if(jQuery(this).parent('span').length) {

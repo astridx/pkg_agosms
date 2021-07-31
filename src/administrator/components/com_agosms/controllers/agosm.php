@@ -28,19 +28,17 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @since   1.0.40
 	 */
-	protected function allowAdd($data = array())
+	protected function allowAdd($data = [])
 	{
 		$categoryId = ArrayHelper::getValue($data, 'catid', $this->input->getInt('filter_category_id'), 'int');
 		$allow = null;
 
-		if ($categoryId)
-		{
+		if ($categoryId) {
 			// If the category has been passed in the URL check it.
 			$allow = JFactory::getUser()->authorise('core.create', $this->option . '.category.' . $categoryId);
 		}
 
-		if ($allow !== null)
-		{
+		if ($allow !== null) {
 			return $allow;
 		}
 
@@ -58,13 +56,12 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @since   1.0.40
 	 */
-	protected function allowEdit($data = array(), $key = 'id')
+	protected function allowEdit($data = [], $key = 'id')
 	{
 		$recordId = (int) isset($data[$key]) ? $data[$key] : 0;
 
 		// Since there is no asset tracking, fallback to the component permissions.
-		if (!$recordId)
-		{
+		if (!$recordId) {
 			return parent::allowEdit($data, $key);
 		}
 
@@ -72,8 +69,7 @@ class AgosmsControllerAgosm extends JControllerForm
 		$item = $this->getModel()->getItem($recordId);
 
 		// Since there is no item, return false.
-		if (empty($item))
-		{
+		if (empty($item)) {
 			return false;
 		}
 
@@ -100,7 +96,7 @@ class AgosmsControllerAgosm extends JControllerForm
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Set the model
-		$model = $this->getModel('Agosm', '', array());
+		$model = $this->getModel('Agosm', '', []);
 
 		// Preset the redirect
 		$this->setRedirect(JRoute::_('index.php?option=com_agosms&view=agosms' . $this->getRedirectToListAppend(), false));
@@ -118,12 +114,11 @@ class AgosmsControllerAgosm extends JControllerForm
 	 *
 	 * @since   1.0.40
 	 */
-	protected function postSaveHook(JModelLegacy $model, $validData = array())
+	protected function postSaveHook(JModelLegacy $model, $validData = [])
 	{
 		$task = $this->getTask();
 
-		if ($task == 'save')
-		{
+		if ($task == 'save') {
 			$this->setRedirect(JRoute::_('index.php?option=com_agosms&view=agosms', false));
 		}
 	}

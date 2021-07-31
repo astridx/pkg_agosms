@@ -17,8 +17,8 @@ $sub_field_selected = $extra_params->selected;
 $field_params = json_decode($field->instance->fieldparams);
 $sub_field = new stdClass;
 $k = 0;
-foreach($field_params->fields as $tmp) {
-	if($tmp->fieldname == $sub_field_selected) {
+foreach ($field_params->fields as $tmp) {
+	if ($tmp->fieldname == $sub_field_selected) {
 		$sub_field = $tmp;
 		$sub_field_selected_number = $k;
 	}
@@ -34,7 +34,7 @@ if (JFactory::getApplication()->input->get->get($name)) {
 }
 $active_text_init = '';
 
-if($active) {
+if ($active) {
 	$active_text_init = DateTime::createFromFormat("Y-m-d", $active)->getTimestamp();
 	$active_text_format = trim(strftime($date_format, $active_text_init));
 	$active_text = mb_convert_case($active_text_format, MB_CASE_TITLE, 'UTF-8');

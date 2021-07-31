@@ -52,8 +52,7 @@ class AgosmsModelAgosm extends JModelItem
 
 		$user = JFactory::getUser();
 
-		if ((!$user->authorise('core.edit.state', 'com_agosms')) && (!$user->authorise('core.edit', 'com_agosms')))
-		{
+		if ((!$user->authorise('core.edit.state', 'com_agosms')) && (!$user->authorise('core.edit', 'com_agosms'))) {
 			$this->setState('filter.published', 1);
 			$this->setState('filter.archived', 2);
 		}
@@ -74,15 +73,12 @@ class AgosmsModelAgosm extends JModelItem
 
 		$pk = (!empty($pk)) ? $pk : (int) $this->getState('agosm.id');
 
-		if ($this->_item === null)
-		{
-			$this->_item = array();
+		if ($this->_item === null) {
+			$this->_item = [];
 		}
 
-		if (!isset($this->_item[$pk]))
-		{
-			try
-			{
+		if (!isset($this->_item[$pk])) {
+			try {
 				$db = $this->getDbo();
 				$query = $db->getQuery(true)
 					->select($this->getState('item.select', 'a.*'))
@@ -99,8 +95,7 @@ class AgosmsModelAgosm extends JModelItem
 					->join('LEFT', '#__users AS u on u.id = a.created_by');
 
 				// Filter by language
-				if ($this->getState('filter.language'))
-				{
+				if ($this->getState('filter.language')) {
 					$query->where('a.language in (' . $db->quote(JFactory::getLanguage()->getTag()) . ',' . $db->quote('*') . ')');
 				}
 
@@ -108,8 +103,7 @@ class AgosmsModelAgosm extends JModelItem
 				$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias')
 					->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
 
-				if ((!$user->authorise('core.edit.state', 'com_agosms')) && (!$user->authorise('core.edit', 'com_agosms')))
-				{
+				if ((!$user->authorise('core.edit.state', 'com_agosms')) && (!$user->authorise('core.edit', 'com_agosms'))) {
 					// Filter by start and end dates.
 					$nullDate = $db->quote($db->getNullDate());
 					$date = JFactory::getDate();
@@ -124,8 +118,7 @@ class AgosmsModelAgosm extends JModelItem
 				$published = $this->getState('filter.published');
 				$archived = $this->getState('filter.archived');
 
-				if (is_numeric($published))
-				{
+				if (is_numeric($published)) {
 					$query->where('(a.state = ' . (int) $published . ' OR a.state =' . (int) $archived . ')');
 				}
 
@@ -133,14 +126,12 @@ class AgosmsModelAgosm extends JModelItem
 
 				$data = $db->loadObject();
 
-				if (empty($data))
-				{
+				if (empty($data)) {
 					JError::raiseError(404, JText::_('COM_AGOSMS_ERROR_AGOSM_NOT_FOUND'));
 				}
 
 				// Check for published state if filter set.
-				if ((is_numeric($published) || is_numeric($archived)) && (($data->state != $published) && ($data->state != $archived)))
-				{
+				if ((is_numeric($published) || is_numeric($archived)) && (($data->state != $published) && ($data->state != $archived))) {
 					JError::raiseError(404, JText::_('COM_AGOSMS_ERROR_AGOSM_NOT_FOUND'));
 				}
 
@@ -149,22 +140,17 @@ class AgosmsModelAgosm extends JModelItem
 				$data->metadata = new Registry($data->metadata);
 
 				// Compute access permissions.
-				if ($access = $this->getState('filter.access'))
-				{
+				if ($access = $this->getState('filter.access')) {
 					// If the access filter has been set, we already know this user can view.
 					$data->params->set('access-view', true);
-				}
-				else
-				{
+				} else {
 					// If no access filter is set, the layout takes some responsibility for display of limited information.
 					$groups = $user->getAuthorisedViewLevels();
 					$data->params->set('access-view', in_array($data->access, $groups) && in_array($data->category_access, $groups));
 				}
 
 				$this->_item[$pk] = $data;
-			}
-			catch (Exception $e)
-			{
+			} catch (Exception $e) {
 				$this->setError($e);
 				$this->_item[$pk] = false;
 			}
@@ -184,7 +170,7 @@ class AgosmsModelAgosm extends JModelItem
 	 *
 	 * @since   1.0.40
 	 */
-	public function getTable($type = 'Agosm', $prefix = 'AgosmsTable', $config = array())
+	public function getTable($type = 'Agosm', $prefix = 'AgosmsTable', $config = [])
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -198,8 +184,7 @@ class AgosmsModelAgosm extends JModelItem
 	 */
 	public function hit($pk = null)
 	{
-		if (empty($pk))
-		{
+		if (empty($pk)) {
 			$pk = $this->getState('agosm.id');
 		}
 

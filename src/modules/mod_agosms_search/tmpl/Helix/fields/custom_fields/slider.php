@@ -13,12 +13,11 @@
 defined('_JEXEC') or die;
 
 $field_params = json_decode($field->instance->fieldparams);
-if($field->instance->type == "integer") {
+if ($field->instance->type == "integer") {
 	$min = $field_params->first;
 	$max = $field_params->last;
 	$step = $field_params->step;
-}
-else {
+} else {
 	$values = $helper->getFieldValuesFromText($field->id, "int", $module->id);
 	$min = $values[0];
 	$max = $values[count($values) - 1];

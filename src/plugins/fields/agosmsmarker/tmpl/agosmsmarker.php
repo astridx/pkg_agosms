@@ -12,13 +12,11 @@ defined('_JEXEC') or die;
 
 $value = $field->value;
 
-if ($value == '')
-{
+if ($value == '') {
 	return;
 }
 
-if (is_array($value))
-{
+if (is_array($value)) {
 	$value = implode(', ', $value);
 }
 

@@ -56,15 +56,12 @@ class AgosmsModelAgosm extends JModelAdmin
 	 */
 	protected function canDelete($record)
 	{
-		if (!empty($record->id))
-		{
-			if ($record->state != -2)
-			{
+		if (!empty($record->id)) {
+			if ($record->state != -2) {
 				return;
 			}
 
-			if ($record->catid)
-			{
+			if ($record->catid) {
 				return JFactory::getUser()->authorise('core.delete', 'com_agosms.category.' . (int) $record->catid);
 			}
 
@@ -83,8 +80,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 */
 	protected function canEditState($record)
 	{
-		if (!empty($record->catid))
-		{
+		if (!empty($record->catid)) {
 			return JFactory::getUser()->authorise('core.edit.state', 'com_agosms.category.' . (int) $record->catid);
 		}
 
@@ -102,7 +98,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @since   1.0.40
 	 */
-	public function getTable($type = 'Agosm', $prefix = 'AgosmsTable', $config = array())
+	public function getTable($type = 'Agosm', $prefix = 'AgosmsTable', $config = [])
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
@@ -117,31 +113,26 @@ class AgosmsModelAgosm extends JModelAdmin
 	 *
 	 * @since   1.0.40
 	 */
-	public function getForm($data = array(), $loadData = true)
+	public function getForm($data = [], $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_agosms.agosm', 'agosm', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_agosms.agosm', 'agosm', ['control' => 'jform', 'load_data' => $loadData]);
 
-		if (empty($form))
-		{
+		if (empty($form)) {
 			return false;
 		}
 
 		// Determine correct permissions to check.
-		if ($this->getState('agosm.id'))
-		{
+		if ($this->getState('agosm.id')) {
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
-		}
-		else
-		{
+		} else {
 			// New record. Can only create in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
 
 		// Modify the form based on access controls.
-		if (!$this->canEditState((object) $data))
-		{
+		if (!$this->canEditState((object) $data)) {
 			// Disable fields for display.
 			$form->setFieldAttribute('ordering', 'disabled', 'true');
 			$form->setFieldAttribute('state', 'disabled', 'true');
@@ -169,15 +160,13 @@ class AgosmsModelAgosm extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_agosms.edit.agosm.data', array());
+		$data = JFactory::getApplication()->getUserState('com_agosms.edit.agosm.data', []);
 
-		if (empty($data))
-		{
+		if (empty($data)) {
 			$data = $this->getItem();
 
 			// Prime some default values.
-			if ($this->getState('agosm.id') == 0)
-			{
+			if ($this->getState('agosm.id') == 0) {
 				$app = JFactory::getApplication();
 				$data->set('catid', $app->input->get('catid', $app->getUserState('com_agosms.agosms.filter.category_id'), 'int'));
 			}
@@ -199,8 +188,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 */
 	public function getItem($pk = null)
 	{
-		if ($item = parent::getItem($pk))
-		{
+		if ($item = parent::getItem($pk)) {
 			// Convert the metadata field to an array.
 			$registry = new Registry;
 			$registry->loadString($item->metadata);
@@ -214,23 +202,19 @@ class AgosmsModelAgosm extends JModelAdmin
 			// Load associated agosms items
 			$assoc = JLanguageAssociations::isEnabled();
 
-			if ($assoc)
-			{
-				$item->associations = array();
+			if ($assoc) {
+				$item->associations = [];
 
-				if ($item->id != null)
-				{
+				if ($item->id != null) {
 					$associations = JLanguageAssociations::getAssociations('com_agosms', '#__agosms', 'com_agosms.item', $item->id);
 
-					foreach ($associations as $tag => $association)
-					{
+					foreach ($associations as $tag => $association) {
 						$item->associations[$tag] = $association->id;
 					}
 				}
 			}
 
-			if (!empty($item->id))
-			{
+			if (!empty($item->id)) {
 				$item->tags = new JHelperTags;
 				$item->tags->getTagIds($item->id, 'com_agosms.agosm');
 				$item->metadata['tags'] = $item->tags;
@@ -257,18 +241,15 @@ class AgosmsModelAgosm extends JModelAdmin
 		$table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias = JApplicationHelper::stringURLSafe($table->alias);
 
-		if (empty($table->alias))
-		{
+		if (empty($table->alias)) {
 			$table->alias = JApplicationHelper::stringURLSafe($table->title);
 		}
 
-		if (empty($table->id))
-		{
+		if (empty($table->id)) {
 			// Set the values
 
 			// Set ordering to the last item if not set
-			if (empty($table->ordering))
-			{
+			if (empty($table->ordering)) {
 				$db = $this->getDbo();
 				$query = $db->getQuery(true)
 					->select('MAX(ordering)')
@@ -278,9 +259,7 @@ class AgosmsModelAgosm extends JModelAdmin
 				$max = $db->loadResult();
 
 				$table->ordering = $max + 1;
-			}
-			else
-			{
+			} else {
 				// Set the values
 				$table->modified    = $date->toSql();
 				$table->modified_by = $user->id;
@@ -302,7 +281,7 @@ class AgosmsModelAgosm extends JModelAdmin
 	 */
 	protected function getReorderConditions($table)
 	{
-		$condition = array();
+		$condition = [];
 		$condition[] = 'catid = ' . (int) $table->catid;
 
 		return $condition;
@@ -327,15 +306,13 @@ class AgosmsModelAgosm extends JModelAdmin
 		$catid = (int) $data['catid'];
 
 		// Check if New Category exists
-		if ($catid > 0)
-		{
+		if ($catid > 0) {
 			$catid = CategoriesHelper::validateCategoryId($data['catid'], 'com_agosms');
 		}
 
 		// Save New Category
-		if ($catid == 0 && $this->canCreateCategory())
-		{
-			$table = array();
+		if ($catid == 0 && $this->canCreateCategory()) {
+			$table = [];
 			$table['title'] = $data['catid'];
 			$table['parent_id'] = 1;
 			$table['extension'] = 'com_agosms';
@@ -347,8 +324,7 @@ class AgosmsModelAgosm extends JModelAdmin
 		}
 
 		// Alter the title for save as copy
-		if ($app->input->get('task') == 'save2copy')
-		{
+		if ($app->input->get('task') == 'save2copy') {
 			list($name, $alias) = $this->generateNewTitle($data['catid'], $data['alias'], $data['title']);
 			$data['title']	= $name;
 			$data['alias']	= $alias;
@@ -374,17 +350,15 @@ class AgosmsModelAgosm extends JModelAdmin
 		// Alter the title & alias
 		$table = $this->getTable();
 
-		while ($table->load(array('alias' => $alias, 'catid' => $category_id)))
-		{
-			if ($name == $table->title)
-			{
+		while ($table->load(['alias' => $alias, 'catid' => $category_id])) {
+			if ($name == $table->title) {
 				$name = JString::increment($name);
 			}
 
 			$alias = JString::increment($alias, 'dash');
 		}
 
-		return array($name, $alias);
+		return [$name, $alias];
 	}
 
 	/**
@@ -400,26 +374,22 @@ class AgosmsModelAgosm extends JModelAdmin
 	 */
 	protected function preprocessForm(JForm $form, $data, $group = 'content')
 	{
-		if ($this->canCreateCategory())
-		{
+		if ($this->canCreateCategory()) {
 			$form->setFieldAttribute('catid', 'allowAdd', 'true');
 		}
 
 		// Association agosms items
-		if (JLanguageAssociations::isEnabled())
-		{
+		if (JLanguageAssociations::isEnabled()) {
 			$languages = JLanguageHelper::getContentLanguages(false, true, null, 'ordering', 'asc');
 
-			if (count($languages) > 1)
-			{
+			if (count($languages) > 1) {
 				$addform = new SimpleXMLElement('<form />');
 				$fields = $addform->addChild('fields');
 				$fields->addAttribute('name', 'associations');
 				$fieldset = $fields->addChild('fieldset');
 				$fieldset->addAttribute('name', 'item_associations');
 
-				foreach ($languages as $language)
-				{
+				foreach ($languages as $language) {
 					$field = $fieldset->addChild('field');
 					$field->addAttribute('name', $language->lang_code);
 					$field->addAttribute('type', 'modal_agosm');

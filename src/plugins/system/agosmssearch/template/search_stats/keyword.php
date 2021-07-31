@@ -15,7 +15,7 @@ $mainframe = JFactory::getApplication();
 //check for template override
 $override = JPATH_SITE . "/templates/{$mainframe->getTemplate()}/html/com_content/search_stats/keyword.php";
 $file_path = __FILE__;
-if(JFile::exists($override)
+if (JFile::exists($override)
 	&& strpos($file_path, "html") === false //do not trigger in override file
 ) {
 	ob_start();
@@ -51,7 +51,7 @@ $items = $model->getStatsKeywordList();
 
 <div class="searchStatsList">
 	<div class="page-header" style="display: inline-block;">
-		<?php 
+		<?php
 			$keyword_id = JFactory::getApplication()->input->get("id");
 			$query = "SELECT keyword FROM #__content_search_stats WHERE id = {$keyword_id}";
 			$keyword = JFactory::getDBO()->setQuery($query)->loadResult();
@@ -66,25 +66,24 @@ $items = $model->getStatsKeywordList();
 			<div class="date"><a data-orderby="last_search_date" href="#"><?php echo JText::_("Last Search Date"); ?></a></div>
 			<div class="count"><a data-orderby="search_count" href="#"><?php echo JText::_("Count"); ?></a></div>
 		</div>
-		<?php foreach($items as $items_counter => $item) { ?>
+		<?php foreach ($items as $items_counter => $item) { ?>
 		<div class="item <?php echo $items_counter % 2 == 0 ? 'odd' : ''; ?>">
 			<div class="num"><?php echo JFactory::getApplication()->input->get("limitstart", 0) + $items_counter + 1; ?></div>
 			<div class="user">
-				<?php 
+				<?php
 					$uid = $item->user_id;
-					if((int)$uid == 0) {
-						$user = "Guest";
+				if ((int)$uid == 0) {
+					$user = "Guest";
+				} else {
+					$user_data = [];
+					if (!count($user_data)) {
+						$obj = JFactory::getUser($uid);
+						$user_data[] = JText::_('Name: ') . $obj->name;
+						$user_data[] = JText::_('Email: ') . $obj->email;
+						$user_data[] = JText::_('IP: ') . $item->ip_address;
 					}
-					else {
-						$user_data = array();
-						if(!count($user_data)) {
-							$obj = JFactory::getUser($uid);
-							$user_data[] = JText::_('Name: ') . $obj->name;
-							$user_data[] = JText::_('Email: ') . $obj->email;
-							$user_data[] = JText::_('IP: ') . $item->ip_address;
-						}
-						$user = implode(", ", $user_data);
-					}
+					$user = implode(", ", $user_data);
+				}
 				?>
 				<?php echo $user; ?>
 			</div>
@@ -98,9 +97,11 @@ $items = $model->getStatsKeywordList();
 	<!-- admin fix -->
 	<form name="adminForm" id="adminForm" method="get" action="">
 		<input name="limitstart" type="hidden" value="" />
-		<?php foreach($_GET as $param=>$value) { 
-			if(in_array($param, Array("id", "start", "option", "view", "task", "limit", "limitstart", "featured"))) continue;
-		?>
+		<?php foreach ($_GET as $param => $value) {
+			if (in_array($param, ["id", "start", "option", "view", "task", "limit", "limitstart", "featured"])) {
+				continue;
+			}
+			?>
 		<input name="<?php echo $param; ?>" value="<?php echo $value; ?>" type="hidden" />
 		<?php } ?>
 	</form>

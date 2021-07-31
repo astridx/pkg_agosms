@@ -18,8 +18,8 @@ $sub_field_selected = $extra_params->selected;
 $field_params = json_decode($field->instance->fieldparams);
 $sub_field = new stdClass;
 $k = 0;
-foreach($field_params->fields as $tmp) {
-	if($tmp->fieldname == $sub_field_selected) {
+foreach ($field_params->fields as $tmp) {
+	if ($tmp->fieldname == $sub_field_selected) {
 		$sub_field = $tmp;
 		$sub_field_selected_number = $k;
 	}

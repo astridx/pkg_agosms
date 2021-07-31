@@ -8,7 +8,7 @@
  * @link        astrid-guenther.de
  */
 defined('_JEXEC') or die;
-JHtml::_('bootstrap.tooltip', '.hasTooltip', array('placement' => 'bottom'));
+JHtml::_('bootstrap.tooltip', '.hasTooltip', ['placement' => 'bottom']);
 
 // @deprecated 4.0 the function parameter, the inline js and the buttons are not needed since 3.7.0.
 $function  = JFactory::getApplication()->input->getCmd('function', 'jEditAgosm_' . (int) $this->item->id);
