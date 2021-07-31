@@ -176,7 +176,7 @@
 			<field
 				name="doLinkToArticle"
 				type="list"
-				label="PLG_AGOSMSADDRESSMARKER_DOLINKTOARTIKEL"
+				label="Link to Article"
 				default="1"
 				showon="popup:1[OR]popup:2"
 			>
