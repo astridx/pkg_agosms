@@ -41,15 +41,11 @@ $tmpl = $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
 		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'details', empty($this->item->id) ? Text::_('COM_AGOSMS_NEW_AGOSM') : Text::_('COM_AGOSMS_EDIT_AGOSM')); ?>
 		<div class="row">
 			<div class="col-md-9">
-				<div class="row">
-					<div class="col-md-6">
-						<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_DESC'); ?>
-						<?php echo $this->getForm()->renderField('description'); ?>
-						<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_POPUP'); ?>
-						<?php echo $this->getForm()->renderField('popuptext'); ?>
-						<?php echo $this->getForm()->renderField('coordinates'); ?>
-					</div>
-				</div>
+				<?php echo $this->getForm()->renderField('coordinates'); ?>
+				<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_DESC'); ?>
+				<?php echo $this->getForm()->renderField('description'); ?>
+				<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_POPUP_DESC'); ?>
+				<?php echo $this->getForm()->renderField('popuptext'); ?>
 			</div>
 			<div class="col-lg-3">
 				<div class="card">

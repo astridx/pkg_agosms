@@ -42,19 +42,20 @@
 		<field
 			name="popuptext"
 			type="editor"
-			label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL"
+			label="COM_AGOSMS_FIELD_POPUP_LABEL"
 			filter="JComponentHelper::filterText"
 			buttons="true"
 		/>
 
 		<field
 			name="coordinates"
-			type="text"
+			type="agosmsaddressfinder"
 			validate="Coordinates"
 			class="validate-coordinates"
 			label="COM_AGOSMS_FIELD_COORDINATES_LABEL"
 			size="40"
 			default="50,7"
+			addfieldprefix="AgosmNamespace\Component\Agosms\Administrator\Field\Coordinates"
 			required="true"
 		 />
 

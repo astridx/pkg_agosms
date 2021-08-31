@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
 	document.formvalidator.setHandler('lat', function(value) {
+		if (value == 0) {
+			return true;
+		}
 		document.getElementById("addressmarker-alert-latlon").style.display = "none";
 		var test = false;
 		var latmax = document.getElementById("latmax").value;
@@ -18,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
 	document.formvalidator.setHandler('lon', function(value) {
+		if (value == 0) {
+			return true;
+		}
 		document.getElementById("addressmarker-alert-latlon").style.display = "none";
 		var test = false;
 		var lonmax = document.getElementById("lonmax").value;
@@ -29,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			Joomla.renderMessages({"error": [Joomla.JText._('PLG_AGOSMSADDRESSMARKER_LON_ERROR')]});
 			document.getElementById("addressmarker-alert-latlon").innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_LON_ERROR');
 			document.getElementById("addressmarker-alert-latlon").style.display = "block";
-}
+		}
 		return test;
 	});
 });

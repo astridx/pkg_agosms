@@ -88,7 +88,7 @@ $tmpl    = $isModal || $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=c
 			<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'associations', JText::_('JGLOBAL_FIELDSET_ASSOCIATIONS')); ?>
 			<?php echo $this->loadTemplate('associations'); ?>
 			<?php echo JHtml::_('bootstrap.endTab'); ?>
-		<?php else if ($isModal && $assoc) : ?>
+		<?php elseif ($isModal && $assoc) : ?>
 			<div class="hidden"><?php echo $this->loadTemplate('associations'); ?></div>
 		<?php endif; ?>
 

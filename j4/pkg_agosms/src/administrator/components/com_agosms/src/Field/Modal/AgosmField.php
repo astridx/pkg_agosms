@@ -3,8 +3,9 @@
  * @package     Joomla.Administrator
  * @subpackage  com_agosms
  *
- * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright   Copyright (C) 2021 Astrid Günther, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later;
+ * @link        astrid-guenther.de
  */
 
 namespace AgosmNamespace\Component\Agosms\Administrator\Field\Modal;

@@ -6,9 +6,15 @@
   "license": "GPL-2.0-or-later",
   "assets": [
     {
-      "name": "com_agosms.admin-agosms-letter",
+      "name": "com_agosms.leaflet",
+      "description": "The css file to be used in leaflet.js.",
+      "type": "style",
+      "uri": "com_agosms/leaflet.css"
+    },
+    {
+      "name": "com_agosms.agosmsaddressfinder",
       "type": "script",
-      "uri": "com_agosms/admin-agosms-letter.js",
+      "uri": "com_agosms/agosmsaddressfinder.js",
       "dependencies": [
         "core"
       ],
@@ -17,14 +23,36 @@
       }
     },
     {
-      "name": "com_agosms.admin-agosms-modal",
+      "name": "com_agosms.admin-agosms-letter",
       "type": "script",
-      "uri": "com_agosms/admin-agosms-modal.js",
+      "uri": "com_agosms/admin-agosms-letter.js",
       "dependencies": [
         "core"
       ],
       "attributes": {
-        "defer": true
+        "defer": false
+      }
+    },
+    {
+      "name": "com_agosms.leaflet",
+      "type": "script",
+      "uri": "com_agosms/leaflet.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "defer": false
+      }
+    },
+    {
+      "name": "com_agosms.maplibre-gl",
+      "type": "script",
+      "uri": "com_agosms/maplibre-gl.js",
+      "dependencies": [
+        "core"
+      ],
+      "attributes": {
+        "defer": false
       }
     }
   ]

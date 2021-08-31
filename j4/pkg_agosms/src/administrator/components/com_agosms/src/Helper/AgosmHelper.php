@@ -22,28 +22,4 @@ use Joomla\CMS\Language\Text;
  */
 class AgosmHelper extends ContentHelper
 {
-	/**
-	 * Configure the Linkbar.
-	 *
-	 * @param   string  $vName  The name of the active view.
-	 *
-	 * @return  void
-	 *
-	 * @since   __BUMP_VERSION__
-	 */
-	public static function addSubmenu($vName)
-	{
-		if (ComponentHelper::isEnabled('com_fields') && ComponentHelper::getParams('com_agosms')->get('custom_fields_enable', '1')) {
-			\JHtmlSidebar::addEntry(
-				Text::_('JGLOBAL_FIELDS'),
-				'index.php?option=com_fields&context=com_agosms.agosm',
-				$vName == 'fields.fields'
-			);
-			\JHtmlSidebar::addEntry(
-				Text::_('JGLOBAL_FIELD_GROUPS'),
-				'index.php?option=com_fields&view=groups&context=com_agosms.agosm',
-				$vName == 'fields.groups'
-			);
-		}
-	}
 }
