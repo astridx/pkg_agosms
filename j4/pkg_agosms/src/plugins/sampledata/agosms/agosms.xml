@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="sampledata" method="upgrade">
+	<name>plg_sampledata_agosms</name>
+	<author>Astrid Günther</author>
+	<creationDate>##DATE##</creationDate>
+	<copyright>(C) Astrid Günther. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>##VERSION##</version>
+	<description>PLG_SAMPLEDATA_AGOSMS_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="agosms">agosms.php</filename>
+		##FILES##
+	</files>
+	<config>
+		<fields name="params">
+		</fields>
+	</config>
+</extension>
