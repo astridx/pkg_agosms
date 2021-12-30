@@ -109,9 +109,9 @@ class AgosmsaddressfinderField extends FormField
 	{
 		$data = parent::getLayoutData();
 
-		$extraData = array(
+		$extraData = [
 			'mapheight' => $this->mapheight
-		);
+		];
 
 		return array_merge($data, $extraData);
 	}
