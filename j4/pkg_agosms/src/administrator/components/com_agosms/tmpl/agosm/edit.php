@@ -47,6 +47,14 @@ $tmpl = $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
 				<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_POPUP_DESC'); ?>
 				<?php echo $this->getForm()->renderField('showpopup'); ?>
 				<?php echo $this->getForm()->renderField('popuptext'); ?>
+				<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_POPUPICON_DESC'); ?>
+				<?php echo $this->getForm()->renderField('showdefaultpin'); ?>
+				<?php echo $this->getForm()->renderField('customPinPath'); ?>
+				<?php echo $this->getForm()->renderField('customPinSize'); ?>
+				<?php echo $this->getForm()->renderField('customPinShadowPath'); ?>
+				<?php echo $this->getForm()->renderField('customPinShadowSize'); ?>
+				<?php echo $this->getForm()->renderField('customPinOffset'); ?>
+				<?php echo $this->getForm()->renderField('customPinPopupOffset'); ?>
 			</div>
 			<div class="col-lg-3">
 				<div class="card">

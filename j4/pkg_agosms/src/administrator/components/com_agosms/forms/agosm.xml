@@ -59,6 +59,76 @@
 			showon="showpopup!:0"
 		/>
 
+
+
+
+
+		<field
+			type="list"
+			name="showdefaultpin"
+			default="1"
+			label="MOD_AGOSM_PIN"
+			description="MOD_AGOSM_PIN_DESC"
+		>
+			<option value="1">MOD_AGOSM_STANDARDPIN</option>
+			<option value="2">MOD_AGOSM_OWNPIN</option>
+		</field>
+
+		<field
+			type="media"
+			name="customPinPath"
+			label="MOD_AGOSM_PINPATH"
+			description="MOD_AGOSM_PINPATH_DESC"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="text"
+			name="customPinSize"
+			label="MOD_AGOSM_PINSIZE"
+			description="MOD_AGOSM_PINSIZE_DESC"
+			default="38, 95"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="media"
+			name="customPinShadowPath"
+			label="MOD_AGOSM_PINSHADOWPATH"
+			description="MOD_AGOSM_PINSHADOWPATH_DESC"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="text"
+			name="customPinShadowSize"
+			label="MOD_AGOSM_PINSHADOWSIZE"
+			description="MOD_AGOSM_PINSHADOWSIZE_DESC"
+			default="50, 64"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="text"
+			name="customPinOffset"
+			label="MOD_AGOSM_PINOFFSET"
+			description="MOD_AGOSM_PINOFFSET_DESC"
+			default="22, 94"
+			showon="showdefaultpin:2"
+		/>
+
+		<field
+			type="text"
+			name="customPinPopupOffset"
+			label="MOD_AGOSM_PINPOPUPOFFSET"
+			description="MOD_AGOSM_PINPOPUPOFFSET_DESC"
+			default="-3, -76"
+			showon="showdefaultpin:2"
+		/>
+
+
+
+
 		<field
 			name="coordinates"
 			type="agosmsaddressfinder"

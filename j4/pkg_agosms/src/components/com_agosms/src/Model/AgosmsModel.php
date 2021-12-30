@@ -84,6 +84,15 @@ class AgosmsModel extends ListModel
 						'a.id, a.name, a.catid' .
 						', a.popuptext' .
 						', a.showpopup' .
+
+						', a.showdefaultpin' .
+						', a.customPinPath' .
+						', a.customPinSize' .
+						', a.customPinShadowPath' .
+						', a.customPinShadowSize' .
+						', a.customPinOffset' .
+						', a.customPinPopupOffset' .
+
 						', a.description' .
 						', a.coordinates' .
 						', a.access' .

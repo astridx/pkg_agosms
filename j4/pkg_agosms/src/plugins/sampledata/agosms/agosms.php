@@ -148,6 +148,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/parks.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/parks.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -236,6 +243,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/camera.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/camera.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -289,7 +303,7 @@ class PlgSampledataAgosms extends CMSPlugin
 			'description' => '',
 			'language' => '*',
 			'params'       => [
-				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image'=> 'plugins/sampledata/agosms/images/grn-stars.png',
 				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_FNDGEBIET_ALT')
 			],
 		];
@@ -323,6 +337,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/grn-stars.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/grn-stars.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -376,7 +397,7 @@ class PlgSampledataAgosms extends CMSPlugin
 			'description' => '',
 			'language' => '*',
 			'params'       => [
-				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image'=> 'plugins/sampledata/agosms/images/open-diamond.png',
 				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_SONSTIGES_ALT')
 			],
 		];
@@ -410,6 +431,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/open-diamond.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/open-diamond.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -463,7 +491,7 @@ class PlgSampledataAgosms extends CMSPlugin
 			'description' => '',
 			'language' => '*',
 			'params'       => [
-				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image'=> 'plugins/sampledata/agosms/images/poi.png',
 				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_SEHENSWERT_ALT')
 			],
 		];
@@ -497,6 +525,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/poi.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/poi.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -550,7 +585,7 @@ class PlgSampledataAgosms extends CMSPlugin
 			'description' => '',
 			'language' => '*',
 			'params'       => [
-				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image'=> 'plugins/sampledata/agosms/images/triangle.png',
 				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_ORT_NP_ALT')
 			],
 		];
@@ -584,6 +619,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/triangle.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/triangle.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -637,7 +679,7 @@ class PlgSampledataAgosms extends CMSPlugin
 			'description' => '',
 			'language' => '*',
 			'params'       => [
-				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image'=> 'plugins/sampledata/agosms/images/placemark_circle.png',
 				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_GIPFEL_OHNE_PANO_ALT')
 			],
 		];
@@ -671,6 +713,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/placemark_circle.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/placemark_circle.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -724,7 +773,7 @@ class PlgSampledataAgosms extends CMSPlugin
 			'description' => '',
 			'language' => '*',
 			'params'       => [
-				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image'=> 'plugins/sampledata/agosms/images/target.png',
 				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_GIPFEL_MIT_PANO_ALT')
 			],
 		];
@@ -758,6 +807,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/target.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/target.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -810,7 +866,7 @@ class PlgSampledataAgosms extends CMSPlugin
 			'description' => '',
 			'language' => '*',
 			'params'       => [
-				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image'=> 'plugins/sampledata/agosms/images/ylw-stars.png',
 				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_FFHGEBIET_ALT')
 			],
 		];
@@ -844,6 +900,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/ylw-stars.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/ylw-stars.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -897,7 +960,7 @@ class PlgSampledataAgosms extends CMSPlugin
 			'description' => '',
 			'language' => '*',
 			'params'       => [
-				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image'=> 'plugins/sampledata/agosms/images/water.png',
 				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_GEWAESSER_ALT')
 			],
 		];
@@ -931,6 +994,13 @@ class PlgSampledataAgosms extends CMSPlugin
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
 				'showpopup' => 1,
+				'showdefaultpin' => 2,
+				'customPinSize' => '32,32',
+				'customPinPath' => 'plugins/sampledata/agosms/images/water.png',
+				'customPinShadowSize' => '32,32',
+				'customPinShadowPath' => 'plugins/sampledata/agosms/images/water.png',
+				'customPinOffset' => '16,16',
+				'customPinPopupOffset' => '-3,-76',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
