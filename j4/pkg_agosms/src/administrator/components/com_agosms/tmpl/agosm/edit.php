@@ -45,6 +45,7 @@ $tmpl = $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
 				<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_DESC'); ?>
 				<?php echo $this->getForm()->renderField('description'); ?>
 				<?php echo Text::_('COM_AGOSMS_NEW_AGOSM_POPUP_DESC'); ?>
+				<?php echo $this->getForm()->renderField('showpopup'); ?>
 				<?php echo $this->getForm()->renderField('popuptext'); ?>
 			</div>
 			<div class="col-lg-3">

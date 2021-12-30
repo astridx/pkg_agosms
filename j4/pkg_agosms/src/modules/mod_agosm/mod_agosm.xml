@@ -446,11 +446,11 @@
 					<option value="0">JNO</option>
 				</field>
 
-				<field name="catid" type="category" label="JCATEGORY" extension="com_agosms" multiple="false" filter="int_array" class="multipleCategories" showon="showcomponentpin:1">
+				<field name="catid" type="category" label="JCATEGORY" extension="com_agosms" multiple="true" filter="int_array" class="multipleCategories" showon="showcomponentpin:1">
 					<option value="0">JOPTION_SELECT_CATEGORY</option>
 				</field>
 			</fieldset>
-			<!-- One Marker from Component -->
+			<!-- One Marker from Component ONE -->
 			<fieldset name="pinConfigComponentOne" label="MOD_AGOSM_ONE_MARKER_FROM_COMPONENT" addfieldprefix="AgosmNamespace\Component\Agosms\Administrator\Field">
 				<field type="spacer" name="showcomponentpinonespacer" label="MOD_AGOSM_ONE_MARKER_FROM_COMPONENT_FIELDSETDESCRIPTION" class="text" />
 

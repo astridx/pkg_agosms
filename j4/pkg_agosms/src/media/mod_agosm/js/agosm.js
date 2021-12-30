@@ -656,6 +656,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				tempMarker.addTo(clustermarkers);
 
+				console.log(obj);
+
 				if (obj.showpopup === "1") {
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 				}

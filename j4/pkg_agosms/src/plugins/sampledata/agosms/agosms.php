@@ -147,6 +147,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
+				'showpopup' => 1,
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -159,7 +160,7 @@ class PlgSampledataAgosms extends CMSPlugin
 					$item['popuptext'] = '<p>Trockenmauern sind Mauern, die meist älter sind und aus Naturstein aufgebaut sind. Häufig sind sie nicht verfugt, weshalb sie verschiedenen Pflanzen und Tieren einen Lebensraum bieten. Besondere Pflanzenarten dieses Lebensraums sind der Mauer-Streifenfarn, der Braunstielige Streifenfarn, Scharfer Mauerpfeffer oder die Weiße Fetthenne. Auch verschiedene Flechten und Moose finden hier ein geeignetes Habitat.</p><a href="http://naturparkblicke.de/images/Bilder/biotop_lrt_trockenmauer.jpg" target="_blank" title="Trockenmauern">Trockenmauern</a>';
 					break;
 				case 2:
-					$item['coordinates'] = '14.693837,50.84585899999999';
+					$item['coordinates'] = '50.84585899999999,14.693837';
 					$item['name'] = 'Bergheide, Felsbandheide';
 					$item['alias'] = 'bergheide_felsbandheide';
 					$item['popuptext'] = 'Die Berg- und Felsheide ist ein Untertyp der Zwergstrauchheiden. Sie werden von Heidekrautgewächsen und Beerkrautheiden dominiert und kommen auf sauren Silikatstandorten vor.<br></br><a href="http://naturparkblicke.de/images/Bilder/biotop_lrt_felsbandheide.jpg" target="_blank" title="Bergheide, Felsbandheide">Bergheide, Felsbandheide</a>';
@@ -234,19 +235,20 @@ class PlgSampledataAgosms extends CMSPlugin
 				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
 				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
 				'published' => 1,
+				'showpopup' => 1,
 				'coordinates' => '',
 				'params'  => '{}'
 			];
 
 			switch ($i) {
 				case 1:
-					$item['coordinates'] = '14.74360525,50.83429623';
+					$item['coordinates'] = '50.83429623,14.74360525';
 					$item['name'] = 'Naturnaher basenarmer Silikatfels - Rosensteine mit Kelchstein';
 					$item['alias'] = 'naturnaher_basenarmer_silikatfels_-_osensteine_mit_kelchstein';
 					$item['popuptext'] = '<p>Die Rosensteine sind eine markante Felsgruppe im Zittauer Gebirge, die aus Sandstein aufgebaut ist. Besonders auffällig ist der Kelchstein. Im unteren Bereich ist der Kelchstein sehr schmal, was auf die unterschiedliche Härte verschieden alter Sandsteinschichten zurückzuführen ist.<br></br><a href="http://naturparkblicke.de/images/Bilder/allg_geolog_boeden_rosensteine_kelchstein.jpg" target="_blank" title="Naturnaher basenarmer Silikatfels - Rosensteine mit Kelchstein">Naturnaher basenarmer Silikatfels - Rosensteine mit Kelchstein</a>';
 					break;
 				case 2:
-					$item['coordinates'] = '14.69983,50.853134';
+					$item['coordinates'] = '50.853134,14.69983';
 					$item['name'] = 'Gesteinstafel Jonsdorf';
 					$item['alias'] = 'gesteinstafel_jonsdorf';
 					$item['popuptext'] = 'Wer einen Überblick über die Geologie des Zittauer Gebirges erhalten möchte, sollte sich die Gesteinstafel in Jonsdorf näher anschauen. Auf ihr werden anschaulich die unterschiedlich aufgebauten Gesteine dargestellt.<br></br><a href="http://www.naturparkblicke.de/images/Bilder/allg_sonstiges_gesteinstafel_jonsdorf.jpg" target="_blank" title="Gesteinstafel Jonsdorf">Gesteinstafel Jonsdorf</a>';
@@ -269,6 +271,702 @@ class PlgSampledataAgosms extends CMSPlugin
 		$this->app->setUserState('sampledata.agosms.items.catId_bilder_lb', $catId_bilder_lb);
 		// ENDE BILDER_LB
 
+
+
+		
+		// START FNDGEBIET
+		$category_FNDGebiet = [
+			'title' => 'FNDGebiet',
+			'parent_id' => 1,
+			'id' => 0,
+			'published' => 1,
+			'access' => 1,
+			'created_user_id' => $user->id,
+			'extension' => 'com_agosms',
+			'level' => 1,
+			'alias' => 'fndgebiet',
+			'associations' => [],
+			'description' => '',
+			'language' => '*',
+			'params'       => [
+				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_FNDGEBIET_ALT')
+			],
+		];
+
+		try {
+			if (!$categoryModel->save($category_FNDGebiet)) {
+				throw new Exception($categoryModel->getError());
+			}
+		} catch (Exception $e) {
+			$response = new stdClass;
+			$response->success = false;
+			$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+
+			return $response;
+		}
+
+		// Get ID from category we just added
+		$catId_fndgebiet = $categoryModel->getItem()->id;
+
+		$mvcFactory = $this->app->bootComponent('com_agosms')->getMVCFactory();
+		$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+		for ($i = 1; $i <= 2; $i++) {
+			$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+			$item = [
+				'name'  => '',
+				'alias'    => '',
+				'catid'    => $catId_fndgebiet,
+				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
+				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
+				'published' => 1,
+				'showpopup' => 1,
+				'coordinates' => '',
+				'params'  => '{}'
+			];
+
+			switch ($i) {
+				case 1:
+					$item['coordinates'] = '50.88482203,14.64417458';
+					$item['name'] = 'Allee an der Alten Landstraße';
+					$item['alias'] = 'allee_an_der_alten_landstraße';
+					$item['popuptext'] = 'Auf einer Länge von 320 Metern wurde an der Alten Landstraße in Größschönau ein Flächennaturdenkmal ausgewiesen, um die hier ehemals angelegte Allee zu schützen. Insgesamt weist das Flächennaturdenkmal eine Fläche von 0,4 Hektar auf.';
+					break;
+				case 2:
+					$item['coordinates'] = '50.849084,14.69866';
+					$item['name'] = 'Drei Tische';
+					$item['alias'] = 'drei_tische';
+					$item['popuptext'] = 'Die Drei Tische sind in den Jonsdorfer Mühlsteinbrüchen zu finden und bemerkenswert, da hier Eisenoxidausfällungen zu nierenförmigen Formen geführt haben.';
+					break;
+			}
+		
+			try {
+				if (!$agosmsModel->save($item)) {
+					throw new Exception($agosmsModel->getError());
+				}
+			} catch (Exception $e) {
+				$response = new stdClass;
+				$response->success = false;
+				$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+			
+				return $response;
+			}
+		}
+
+		$this->app->setUserState('sampledata.agosms.items.catId_fndgebiet', $catId_fndgebiet);
+		// ENDE FNDGEBIET
+		
+		
+
+
+		// START SONSTIGES
+		$category_Sonstiges = [
+			'title' => 'Sonstiges',
+			'parent_id' => 1,
+			'id' => 0,
+			'published' => 1,
+			'access' => 1,
+			'created_user_id' => $user->id,
+			'extension' => 'com_agosms',
+			'level' => 1,
+			'alias' => 'sonstiges',
+			'associations' => [],
+			'description' => '',
+			'language' => '*',
+			'params'       => [
+				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_SONSTIGES_ALT')
+			],
+		];
+
+		try {
+			if (!$categoryModel->save($category_Sonstiges)) {
+				throw new Exception($categoryModel->getError());
+			}
+		} catch (Exception $e) {
+			$response = new stdClass;
+			$response->success = false;
+			$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+
+			return $response;
+		}
+
+		// Get ID from category we just added
+		$catId_sonstiges = $categoryModel->getItem()->id;
+
+		$mvcFactory = $this->app->bootComponent('com_agosms')->getMVCFactory();
+		$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+		for ($i = 1; $i <= 2; $i++) {
+			$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+			$item = [
+				'name'  => '',
+				'alias'    => '',
+				'catid'    => $catId_sonstiges,
+				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
+				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
+				'published' => 1,
+				'showpopup' => 1,
+				'coordinates' => '',
+				'params'  => '{}'
+			];
+
+			switch ($i) {
+				case 1:
+					$item['coordinates'] = '50.83447314,14.72125826';
+					$item['name'] = 'Wiesenbeweidung mit Schafen bei Oybin, Hain';
+					$item['alias'] = 'wiesenbeweidung_mit_schafen_bei_oybin';
+					$item['popuptext'] = 'Die Beweidung von Wiesen mit Schafen stellt eine extensive Form der Bewirtschaftung dar, was zur Schonung der Artenvielfalt beiträgt. Auf den Einsatz schwerer Maschinen und großer Mengen Düngemittel wird verzichtet.<br></br><a href="Hain_Schafe_6.jpg" target="_blank" title="Wiesenbeweidung mit Schafen bei Oybin, Hain">Wiesenbeweidung mit Schafen bei Oybin, Hain</a>';
+					break;
+				case 2:
+					$item['coordinates'] = '50.92224424000001,14.6658897399902';
+					$item['name'] = 'Hofebusch';
+					$item['alias'] = 'hofebusch';
+					$item['popuptext'] = 'Als Hofebusch wird das große zusammenhängende Waldgebiet zwischen Spitzkunnersdorf, Hainewalde und Großschönau bezeichnet. Das Gebiet wird größtenteils von Fichtenforst eingenommen, der an manchen Stellen durchaus strukturreich ist. Auf dem Forstenberg kann jedoch auch ein Buchenwald vorgefunden werden.';
+					break;
+			}
+		
+			try {
+				if (!$agosmsModel->save($item)) {
+					throw new Exception($agosmsModel->getError());
+				}
+			} catch (Exception $e) {
+				$response = new stdClass;
+				$response->success = false;
+				$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+			
+				return $response;
+			}
+		}
+
+		$this->app->setUserState('sampledata.agosms.items.catId_sonstiges', $catId_sonstiges);
+		// ENDE SONSTIGES
+		
+		
+
+
+		// START SEHENSWERT
+		$category_Sehenswert = [
+			'title' => 'Sehenswert',
+			'parent_id' => 1,
+			'id' => 0,
+			'published' => 1,
+			'access' => 1,
+			'created_user_id' => $user->id,
+			'extension' => 'com_agosms',
+			'level' => 1,
+			'alias' => 'sehenswert',
+			'associations' => [],
+			'description' => '',
+			'language' => '*',
+			'params'       => [
+				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_SEHENSWERT_ALT')
+			],
+		];
+
+		try {
+			if (!$categoryModel->save($category_Sehenswert)) {
+				throw new Exception($categoryModel->getError());
+			}
+		} catch (Exception $e) {
+			$response = new stdClass;
+			$response->success = false;
+			$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+
+			return $response;
+		}
+
+		// Get ID from category we just added
+		$catId_sehenswert = $categoryModel->getItem()->id;
+
+		$mvcFactory = $this->app->bootComponent('com_agosms')->getMVCFactory();
+		$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+		for ($i = 1; $i <= 2; $i++) {
+			$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+			$item = [
+				'name'  => '',
+				'alias'    => '',
+				'catid'    => $catId_sehenswert,
+				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
+				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
+				'published' => 1,
+				'showpopup' => 1,
+				'coordinates' => '',
+				'params'  => '{}'
+			];
+
+			switch ($i) {
+				case 1:
+					$item['coordinates'] = '50.8658,14.64165';
+					$item['name'] = 'Sängerhöhe - offenes natürliche Felsbiotop - Vulkanschlot';
+					$item['alias'] = 'saengerhöhe';
+					$item['popuptext'] = 'An der Sängerhöhe befindet sich ein offenes natürliches Felsbiotop, das mitten im Wald aufragt. Dabei handelt es sich um Basaltsäulen, die zu einem Basaltgang gehören, der eine Länge von 100 m und eine Breite von 30 m hat. Einst lagerten hier auch vulkanische Tuffe, welche aber inzwischen verwittert sind.<br></br><a href="sonstiges_geotop_saengerhoehe.jpg" target="_blank" title="Sängerhöhe - offenes natürliche Felsbiotop > Vulkanschlot ">Sängerhöhe - offenes natürliche Felsbiotop > Vulkanschlot </a>';
+					break;
+				case 2:
+					$item['coordinates'] = '50.846578,14.696945';
+					$item['name'] = 'Steinbruchschmiede';
+					$item['alias'] = 'steinbruchschmiede';
+					$item['popuptext'] = 'Die Steinbruchschmiede ist eng mit der Tradition des Mühlsteinabbaus verbunden. Einst wurde die Schmiede genutzt um die Werkzeuge für den Abbau des harten Sandsteins zu bearbeiten. Zudem diente sie als zentraler Sammel- und Informationspunkt für die Bergarbeiter. Sie ist heute als Museum ausgebaut.';
+					break;
+			}
+		
+			try {
+				if (!$agosmsModel->save($item)) {
+					throw new Exception($agosmsModel->getError());
+				}
+			} catch (Exception $e) {
+				$response = new stdClass;
+				$response->success = false;
+				$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+			
+				return $response;
+			}
+		}
+
+		$this->app->setUserState('sampledata.agosms.items.catId_sehenswert', $catId_sehenswert);
+		// ENDE SEHENSWERT
+
+
+
+
+		// START ORT_NP
+		$category_Ort_NP = [
+			'title' => 'Ort_NP',
+			'parent_id' => 1,
+			'id' => 0,
+			'published' => 1,
+			'access' => 1,
+			'created_user_id' => $user->id,
+			'extension' => 'com_agosms',
+			'level' => 1,
+			'alias' => 'ort_np',
+			'associations' => [],
+			'description' => '',
+			'language' => '*',
+			'params'       => [
+				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_ORT_NP_ALT')
+			],
+		];
+
+		try {
+			if (!$categoryModel->save($category_Ort_NP)) {
+				throw new Exception($categoryModel->getError());
+			}
+		} catch (Exception $e) {
+			$response = new stdClass;
+			$response->success = false;
+			$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+
+			return $response;
+		}
+
+		// Get ID from category we just added
+		$catId_ort_np = $categoryModel->getItem()->id;
+
+		$mvcFactory = $this->app->bootComponent('com_agosms')->getMVCFactory();
+		$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+		for ($i = 1; $i <= 2; $i++) {
+			$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+			$item = [
+				'name'  => '',
+				'alias'    => '',
+				'catid'    => $catId_ort_np,
+				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
+				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
+				'published' => 1,
+				'showpopup' => 1,
+				'coordinates' => '',
+				'params'  => '{}'
+			];
+
+			switch ($i) {
+				case 1:
+					$item['coordinates'] = '50.8849294,14.7340034';
+					$item['name'] = 'Bertsdorf';
+					$item['alias'] = 'bertsdorf';
+					$item['popuptext'] = 'Die Gemeinde Bertsdorf wurde im 13. Jahrhundert als Waldhufendorf gegründet. Der Name des Dorfes deutet an, dass der Gründer den Namen Bertram trug. Zu den Sehenswürdigkeiten des Ortes zählen u. .a. das Schloss Althörnitz (heute ein Schlosshotel), die Barockkirche, zahlreiche Umgebindehäuser mit reich verzierten Sandsteintürstöcken und der Breiteberg.';
+					break;
+				case 2:
+					$item['coordinates'] = '50.8603334,14.79146';
+					$item['name'] = 'Eichgraben';
+					$item['alias'] = 'eichgraben';
+					$item['popuptext'] = 'Das im Quellbereich des Pfaffenbachs liegende Eichgraben ist ein Ortsteil Zittaus und wurde bereits im Jahr 1582 das erste Mal erwähnt. Bedeutend für die Entwicklung des Ortes war die Pestepidemie 1599, in Folge derer sich viele Einwohner dicht besiedelter Orte in Außenbereichen niederließen. Haupterwerbszweige waren Waldarbeit, Hausweberei und seit Mitte des 19. Jh. auch Bergbau. Zurzeit leben 765 Menschen in Eichgraben (03.2011).';
+					break;
+			}
+		
+			try {
+				if (!$agosmsModel->save($item)) {
+					throw new Exception($agosmsModel->getError());
+				}
+			} catch (Exception $e) {
+				$response = new stdClass;
+				$response->success = false;
+				$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+			
+				return $response;
+			}
+		}
+
+		$this->app->setUserState('sampledata.agosms.items.catId_ort_np', $catId_ort_np);
+		// ENDE ORT_NP
+		
+		
+
+
+		// START GIPFEL_OHNE_PANO
+		$category_Gipfel_ohne_Pano = [
+			'title' => 'Gipfel_ohne_Pano',
+			'parent_id' => 1,
+			'id' => 0,
+			'published' => 1,
+			'access' => 1,
+			'created_user_id' => $user->id,
+			'extension' => 'com_agosms',
+			'level' => 1,
+			'alias' => 'gipfel_ohne_pano',
+			'associations' => [],
+			'description' => '',
+			'language' => '*',
+			'params'       => [
+				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_GIPFEL_OHNE_PANO_ALT')
+			],
+		];
+
+		try {
+			if (!$categoryModel->save($category_Gipfel_ohne_Pano)) {
+				throw new Exception($categoryModel->getError());
+			}
+		} catch (Exception $e) {
+			$response = new stdClass;
+			$response->success = false;
+			$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+
+			return $response;
+		}
+
+		// Get ID from category we just added
+		$catId_gipfel_ohne_pano = $categoryModel->getItem()->id;
+
+		$mvcFactory = $this->app->bootComponent('com_agosms')->getMVCFactory();
+		$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+		for ($i = 1; $i <= 2; $i++) {
+			$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+			$item = [
+				'name'  => '',
+				'alias'    => '',
+				'catid'    => $catId_gipfel_ohne_pano,
+				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
+				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
+				'published' => 1,
+				'showpopup' => 1,
+				'coordinates' => '',
+				'params'  => '{}'
+			];
+
+			switch ($i) {
+				case 1:
+					$item['coordinates'] = '50.844664,14.675921';
+					$item['name'] = 'Falkenstein';
+					$item['alias'] = 'falkenstein';
+					$item['popuptext'] = 'Der Falkenstein liegt direkt an der Grenze zwischen Deutschland und der Tschechischen Republik südwestlich der Jonsdorfer Felsenstadt. Er ist wie einige andere Felsen in der Region ein beliebtes Ziel für Kletterer.';
+					break;
+				case 2:
+					$item['coordinates'] = '50.848958,14.76137';
+					$item['name'] = 'Felsgebilde Schildkröte';
+					$item['alias'] = 'felsgebilde_schildkroete';
+					$item['popuptext'] = 'Das Felsgebilde Schildkröte ist eines der markanten Gebilde auf dem Töpfer. Auf dem ersten Blick kann man erkennen, warum der Fels diesen Namen trägt. Sie wurde zum Naturdenkmal erklärt. Rund um die Schildkröte wächst Calluna-Heide auf Sandstein.';
+					break;
+			}
+		
+			try {
+				if (!$agosmsModel->save($item)) {
+					throw new Exception($agosmsModel->getError());
+				}
+			} catch (Exception $e) {
+				$response = new stdClass;
+				$response->success = false;
+				$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+			
+				return $response;
+			}
+		}
+
+		$this->app->setUserState('sampledata.agosms.items.catId_gipfel_ohne_pano', $catId_gipfel_ohne_pano);
+		// ENDE GIPFEL_OHNE_PANO
+		
+		
+
+
+		// START GIPFEL_MIT_PANO
+		$category_Gipfel_mit_Pano = [
+			'title' => 'Gipfel_mit_Pano',
+			'parent_id' => 1,
+			'id' => 0,
+			'published' => 1,
+			'access' => 1,
+			'created_user_id' => $user->id,
+			'extension' => 'com_agosms',
+			'level' => 1,
+			'alias' => 'gipfel_mit_pano',
+			'associations' => [],
+			'description' => '',
+			'language' => '*',
+			'params'       => [
+				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_GIPFEL_MIT_PANO_ALT')
+			],
+		];
+
+		try {
+			if (!$categoryModel->save($category_Gipfel_mit_Pano)) {
+				throw new Exception($categoryModel->getError());
+			}
+		} catch (Exception $e) {
+			$response = new stdClass;
+			$response->success = false;
+			$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+
+			return $response;
+		}
+
+		// Get ID from category we just added
+		$catId_gipfel_mit_pano = $categoryModel->getItem()->id;
+
+		$mvcFactory = $this->app->bootComponent('com_agosms')->getMVCFactory();
+		$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+		for ($i = 1; $i <= 2; $i++) {
+			$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+			$item = [
+				'name'  => '',
+				'alias'    => '',
+				'catid'    => $catId_gipfel_mit_pano,
+				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
+				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
+				'published' => 1,
+				'showpopup' => 1,
+				'coordinates' => '',
+				'params'  => '{}'
+			];
+
+			switch ($i) {
+				case 1:
+					$item['coordinates'] = '50.846428,14.740142';
+					$item['name'] = 'Berg Oybin';
+					$item['alias'] = 'berg_oybin';
+					$item['popuptext'] = 'Der Berg Oybin ist wegen seiner steilen Sandsteinwände einer der bekanntesten Berge im Zittauer Gebirge. Der 515 m hohe Berg überragt Oybin und wurde schon früh als  gut geeigneter Platz zum Bau einer Burg erkannt. Heute können der Berg und die Burg bequem von Oybin aus auf mehreren Wegen erreicht werden.<br></br><a href="http://naturparkblicke.de/images/Bilder/pano_standort_oybin.jpg" target="_blank" title="Berg Oybin ">Berg Oybin </a>';
+					break;
+				case 2:
+					$item['coordinates'] = '50.902045,14.688678';
+					$item['name'] = 'Breiteberg';
+					$item['alias'] = 'breiteberg';
+					$item['popuptext'] = '<br></br><a href="http://naturparkblicke.de/images/Bilder/pano_standort_carolafelsen.jpg" target="_blank" title="Breiteberg">Breiteberg</a>';
+					break;
+			}
+		
+			try {
+				if (!$agosmsModel->save($item)) {
+					throw new Exception($agosmsModel->getError());
+				}
+			} catch (Exception $e) {
+				$response = new stdClass;
+				$response->success = false;
+				$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+			
+				return $response;
+			}
+		}
+
+		$this->app->setUserState('sampledata.agosms.items.catId_gipfel_mit_pano', $catId_gipfel_mit_pano);
+		// ENDE GIPFEL_MIT_PANO
+		
+		
+
+		// START FFHGEBIET
+		$category_FFHGebiet = [
+			'title' => 'FFHGebiet',
+			'parent_id' => 1,
+			'id' => 0,
+			'published' => 1,
+			'access' => 1,
+			'created_user_id' => $user->id,
+			'extension' => 'com_agosms',
+			'level' => 1,
+			'alias' => 'ffhgebiet',
+			'associations' => [],
+			'description' => '',
+			'language' => '*',
+			'params'       => [
+				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_FFHGEBIET_ALT')
+			],
+		];
+
+		try {
+			if (!$categoryModel->save($category_FFHGebiet)) {
+				throw new Exception($categoryModel->getError());
+			}
+		} catch (Exception $e) {
+			$response = new stdClass;
+			$response->success = false;
+			$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+
+			return $response;
+		}
+
+		// Get ID from category we just added
+		$catId_ffhgebiet = $categoryModel->getItem()->id;
+
+		$mvcFactory = $this->app->bootComponent('com_agosms')->getMVCFactory();
+		$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+		for ($i = 1; $i <= 2; $i++) {
+			$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+			$item = [
+				'name'  => '',
+				'alias'    => '',
+				'catid'    => $catId_ffhgebiet,
+				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
+				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
+				'published' => 1,
+				'showpopup' => 1,
+				'coordinates' => '',
+				'params'  => '{}'
+			];
+
+			switch ($i) {
+				case 1:
+					$item['coordinates'] = '50.89141000000001,14.7033';
+					$item['name'] = 'FFH-Gebiet Basalt- und Phonolithkuppen der östlichen Oberlausitz "Breiteberg"';
+					$item['alias'] = 'breiteberg';
+					$item['popuptext'] = 'Der Breiteberg ist aus Basalt und Phonolith aufgebaut, was ein gutes Ausgangsgestein für nährstoffreiche Böden ist. Unter anderem wegen dieser Tatsache finden sich am Breiteberg verschiedenste Biotope und seltene Pflanzen: Nadelwald auf der Nordseite, auf der Südseite ein Laubmischwald mit Elementen des Labkraut-Eichen-Hainbuchenwalds und ein Silikattrockenrasen.<br></br><a href="http://naturparkblicke.de/images/Bilder/ffh_spa_breiteberg.jpg" target="_blank" title="FFH-Gebiet Basalt- und Phonolithkuppen der östlichen Oberlausitz  "Breiteberg"">FFH-Gebiet Basalt- und Phonolithkuppen der östlichen Oberlausitz  "Breiteberg"</a>';
+					break;
+				case 2:
+					$item['coordinates'] = '50.885682,14.714463';
+					$item['name'] = 'FFH-Gebiet Basalt- und Phonolithkuppen der östlichen Oberlausitz "Seidelsberg"';
+					$item['alias'] = 'seidelsberg';
+					$item['popuptext'] = 'Wie der Breitberg besteht der Seidelsberg aus einer Decke aus Phonolith. Hier wächst sowohl Nadelwald als auch ein Labkraut-Eichen-Hainbuchenwald mit abwechslungsreicher Krautschicht. <br></br><a href="http://naturparkblicke.de/images/Bilder/ffh_spa_seidelsberg.jpg" target="_blank" title="FFH-Gebiet Basalt- und Phonolithkuppen der östlichen Oberlausitz "Seidelsberg"">FFH-Gebiet Basalt- und Phonolithkuppen der östlichen Oberlausitz "Seidelsberg"</a>';
+					break;
+			}
+		
+			try {
+				if (!$agosmsModel->save($item)) {
+					throw new Exception($agosmsModel->getError());
+				}
+			} catch (Exception $e) {
+				$response = new stdClass;
+				$response->success = false;
+				$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+			
+				return $response;
+			}
+		}
+
+		$this->app->setUserState('sampledata.agosms.items.catId_ffhgebiet', $catId_ffhgebiet);
+		// ENDE FFHGEBIET
+
+
+
+
+		// START GEWAESSER
+		$category_Gewaesser = [
+			'title' => 'Gewaesser',
+			'parent_id' => 1,
+			'id' => 0,
+			'published' => 1,
+			'access' => 1,
+			'created_user_id' => $user->id,
+			'extension' => 'com_agosms',
+			'level' => 1,
+			'alias' => 'gewaesser',
+			'associations' => [],
+			'description' => '',
+			'language' => '*',
+			'params'       => [
+				'image'=> 'plugins/sampledata/agosms/images/camera.png',
+				'image_alt' => Text::_('PLG_SAMPLEDATA_AGOSMS_CATEGORY_GEWAESSER_ALT')
+			],
+		];
+
+		try {
+			if (!$categoryModel->save($category_Gewaesser)) {
+				throw new Exception($categoryModel->getError());
+			}
+		} catch (Exception $e) {
+			$response = new stdClass;
+			$response->success = false;
+			$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+
+			return $response;
+		}
+
+		// Get ID from category we just added
+		$catId_gewaesser = $categoryModel->getItem()->id;
+
+		$mvcFactory = $this->app->bootComponent('com_agosms')->getMVCFactory();
+		$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+		for ($i = 1; $i <= 2; $i++) {
+			$agosmsModel = $mvcFactory->createModel('Agosm', 'Administrator', ['ignore_request' => true]);
+
+			$item = [
+				'name'  => '',
+				'alias'    => '',
+				'catid'    => $catId_gewaesser,
+				'description' => Text::_('PLG_SAMPLEDATA_AGOSMS_DESCRIPTION'),
+				'popuptext' => Text::_('PLG_SAMPLEDATA_AGOSMS_POPUPTEXT'),
+				'published' => 1,
+				'showpopup' => 1,
+				'coordinates' => '',
+				'params'  => '{}'
+			];
+
+			switch ($i) {
+				case 1:
+					$item['coordinates'] = '50.88170158999999,14.67837811';
+					$item['name'] = 'Goldfabianteich';
+					$item['alias'] = 'goldfabianteich';
+					$item['popuptext'] = 'Der Goldfabiansteich ist ein naturnaher Teich, der von einer Mischung aus Sumpfgebüsch, Röhricht und seggen- und binsenreicher Feuchtwiese umgeben ist und sich malerisch in das Bergpanorama einfügt. Er wurde deshalb zum Flächennaturdenkmal erklärt.';
+					break;
+				case 2:
+					$item['coordinates'] = '50.87371339,14.71058607';
+					$item['name'] = 'Bertsdorfer Wasser';
+					$item['alias'] = 'bertsdorfer_wasser';
+					$item['popuptext'] = 'Das Bertsdorfer Wasser, welches auch als &quot;Bertse&quot; bezeichnet wird, entspringt auf der Nordostseite am Pocheberg unter Basalt. Es fließt auf einer Länge von 5,1 km durch Bertsdorf und mündet schließlich im Bertsdorfer Ortsteil Hörnitz in die Mandau.';
+					break;
+			}
+		
+			try {
+				if (!$agosmsModel->save($item)) {
+					throw new Exception($agosmsModel->getError());
+				}
+			} catch (Exception $e) {
+				$response = new stdClass;
+				$response->success = false;
+				$response->message = Text::sprintf('PLG_SAMPLEDATA_AGOSMS_STEP_FAILED', 1, $e->getMessage());
+			
+				return $response;
+			}
+		}
+
+		$this->app->setUserState('sampledata.agosms.items.catId_gewaesser', $catId_gewaesser);
+		// ENDE GEWAESSER
+		
+		
 
 
 		

@@ -83,6 +83,7 @@ class AgosmsModel extends ListModel
 						'list.select',
 						'a.id, a.name, a.catid' .
 						', a.popuptext' .
+						', a.showpopup' .
 						', a.description' .
 						', a.coordinates' .
 						', a.access' .
