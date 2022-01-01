@@ -154,7 +154,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/parks.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -417,7 +417,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/camera.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -547,7 +547,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/grn-stars.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -761,7 +761,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/open-diamond.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -895,7 +895,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/poi.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -1239,7 +1239,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/triangle.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -1432,7 +1432,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/placemark_circle.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -1550,7 +1550,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/target.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -1850,7 +1850,7 @@ class PlgSampledataAgosms extends CMSPlugin
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/ylw-stars.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
@@ -2051,7 +2051,7 @@ Mühlsteinbrüche"</a>';
 				'customPinShadowSize' => '32,32',
 				'customPinShadowPath' => 'plugins/sampledata/agosms/images/water.png',
 				'customPinOffset' => '16,16',
-				'customPinPopupOffset' => '-3,-76',
+				'customPinPopupOffset' => '-3,-32',
 				'coordinates' => '',
 				'params'  => '{}'
 			];
