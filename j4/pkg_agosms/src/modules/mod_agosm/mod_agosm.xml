@@ -462,6 +462,17 @@
 				<field name="showcomponentpinoneid" type="modal_agosm" label="COM_AGOSMS_FIELD_SELECT_AGOSM_LABEL" select="true" new="true" edit="true" clear="true" description="COM_AGOSMS_FIELD_SELECT_AGOSM_DESC" showon="showcomponentpinone:1" />
 			</fieldset>
 
+			<!-- Shape -->
+			<fieldset name="Shape" label="MOD_AGOSM_SHAPE">
+				<field type="spacer" name="showshape1" label="MOD_AGOSM_SHAPE_FIELDSETDESCRIPTION" class="text" />
+
+				<field type="list" name="showshape" default="0" label="MOD_AGOSM_CONFIG_CONTROL_SHOWSHAOE_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWSHAPE_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+				<field name="showshape_text" type="textarea" default="[[50.92393017612512,14.56193873783092],[50.82367857250812,14.72808927589372],[50.92393017612512,14.56193873783092]]" label="MOD_AGOSM_CONFIG_CONTROL_SHOWSHAPE_TEXT_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWSHAPE_TEXT_DESC" rows="10" cols="40" showon="showshape:1" />
+			</fieldset>
+
 			<!-- GeoJSON -->
 			<fieldset name="GeoJSON" label="MOD_AGOSM_GEOJSON">
 				<field type="spacer" name="showgeojson1" label="MOD_AGOSM_GEOJSON_FIELDSETDESCRIPTION" class="text" />
