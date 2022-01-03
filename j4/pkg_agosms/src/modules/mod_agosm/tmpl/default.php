@@ -148,7 +148,7 @@ $unique = $module->id . '_' . uniqid();
 	<?php
 	foreach ($list as $marker) {
 		if (property_exists($marker, 'popuptext')) {
-			echo '<li class="agmarkerlistli_component' . $marker->id . '">' . $marker->popuptext . '<a class="agmarkerlista_component' . $marker->id . '" " href="#map' . $module->id .'">' . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
+			echo '<hr><li class="agmarkerlistli_component' . $marker->id . '">' . $marker->popuptext . '<a class="agmarkerlista_component' . $marker->id . '" " href="#map' . $module->id .'">' . "<br><br>" . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
 		}
 	}
 	?>
