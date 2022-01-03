@@ -656,8 +656,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				tempMarker.addTo(clustermarkers);
 
-				console.log(obj);
-
 				if (obj.showpopup === "1") {
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 				}
@@ -1032,6 +1030,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Show GeoJson
 		if (geojson === '1') {
 
+			
+
 			// Get Style Start
 			function areaStyle(feature) {
 				return {
@@ -1046,14 +1046,14 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (feature.properties.fill) {
 					return feature.properties.fill;
 				} else {
-					return 'blue';
+					return 'green';
 				}
 			};
 			function getAreaStroke(feature) {
 				if (feature.properties.stroke) {
 					return feature.properties.stroke;
 				} else {
-					return 'blue';
+					return 'black';
 				}
 			};
 			function getAreaStrokeWidth(feature) {
@@ -1074,7 +1074,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (feature.properties["fill-opacity"]) {
 					return feature.properties["fill-opacity"];
 				} else {
-					return 0.7;
+					return 0.4;
 				}
 			};
 			// Get Style End
