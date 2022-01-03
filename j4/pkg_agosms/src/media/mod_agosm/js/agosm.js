@@ -39,17 +39,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		var showgeocoder = element.getAttribute('data-showgeocoder');
 		var useesri = element.getAttribute('data-useesri');
 		var esrireversegeocoding = element.getAttribute('data-esrireversegeocoding');
-		var geocodercollapsed = (element.getAttribute('data-geocodercollapsed') === "true");
+		var geocodercollapsed = (element.getAttribute('data-geocodercollapsed') == "true");
 		var geocoderposition = element.getAttribute('data-geocoderposition');
 		var expand = element.getAttribute('data-expand');
-		var dataEsrigeocoderopengetaddress = (element.getAttribute('data-esrigeocoderopengetaddress') === "true");
+		var dataEsrigeocoderopengetaddress = (element.getAttribute('data-esrigeocoderopengetaddress') == "true");
 		var showgeocoderesri = element.getAttribute('data-showgeocoderesri');
 		var positionesrigeocoder = element.getAttribute('data-positionesrigeocoder');
-		var esrigeocoderzoomToResult = (element.getAttribute('data-esrigeocoderzoomToResult') === "true");
-		var esrigeocoderuseMapBounds = (element.getAttribute('data-esrigeocoderuseMapBounds') === "true");
-		var esrigeocodercollapseAfterResult = (element.getAttribute('data-esrigeocodercollapseAfterResult') === "true");
-		var esrigeocoderexpanded = (element.getAttribute('data-esrigeocoderexpanded') === "true");
-		var esriallowMultipleResults = (element.getAttribute('data-esriallowMultipleResults') === "true");
+		var esrigeocoderzoomToResult = (element.getAttribute('data-esrigeocoderzoomToResult') == "true");
+		var esrigeocoderuseMapBounds = (element.getAttribute('data-esrigeocoderuseMapBounds') == "true");
+		var esrigeocodercollapseAfterResult = (element.getAttribute('data-esrigeocodercollapseAfterResult') == "true");
+		var esrigeocoderexpanded = (element.getAttribute('data-esrigeocoderexpanded') == "true");
+		var esriallowMultipleResults = (element.getAttribute('data-esriallowMultipleResults') == "true");
 		var showrouting_simple = element.getAttribute('data-showrouting-simple');
 
 		var addprivacybox = element.getAttribute('data-addprivacybox');
@@ -57,14 +57,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		var buttons = document.getElementsByClassName('b' + unique);
 		var privacyfields = document.getElementsByClassName('p' + unique);
 
-		if (showrouting_simple === '1') {
+		if (showrouting_simple == '1') {
 			var routesimpleposition = element.getAttribute('data-route-simple-position');
 			var routesimpletarget = element.getAttribute('data-route-simple-target');
 			var routesimplerouter = element.getAttribute('data-route-simple-router');
 			var routesimplerouterkey = element.getAttribute('data-route-simple-routerkey');
 		}
 		var showrouting = element.getAttribute('data-showrouting');
-		if (showrouting === '1') {
+		if (showrouting == '1') {
 			var routingstart = element.getAttribute('data-routingstart').split(",", 3);
 			var routingend = element.getAttribute('data-routingend').split(",", 3);
 			var mapboxkeyRouting = element.getAttribute('data-mapboxkey-routing');
@@ -74,20 +74,20 @@ document.addEventListener('DOMContentLoaded', function () {
 			var routewhiledragging = element.getAttribute('data-routewhiledragging');
 		}
 		var showpin = element.getAttribute('data-showpin');
-		if (showpin === '1') {
+		if (showpin == '1') {
 			var specialpins = JSON.parse(element.getAttribute('data-specialpins'));
 		}
 		var showcomponentpin = element.getAttribute('data-showcomponentpin');
-		if (showcomponentpin === '1') {
+		if (showcomponentpin == '1') {
 			var specialcomponentpins = JSON.parse(element.getAttribute('data-specialcomponentpins'));
 		}
 		var showcomponentpinone = element.getAttribute('data-showcomponentpinone');
-		if (showcomponentpinone === '1') {
+		if (showcomponentpinone == '1') {
 			var specialcomponentpinone = JSON.parse(element.getAttribute('data-specialcomponentpinone'));
 		}
 
 		var showcustomfieldpin = element.getAttribute('data-showcustomfieldpin');
-		if (showcustomfieldpin === '1') {
+		if (showcustomfieldpin == '1') {
 			var specialcustomfieldpins = JSON.parse(element.getAttribute('data-specialcustomfieldpins'));
 		}
 		var touch = element.getAttribute('data-touch');
@@ -96,26 +96,26 @@ document.addEventListener('DOMContentLoaded', function () {
 		var owngooglegesturetext = element.getAttribute('data-owngooglegesturetext');
 
 		// Fetch the States
-		if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1") {
+		if (JSON.parse(sessionStorage.getItem('mapState')) && savestate == "1") {
 			var mapState = JSON.parse(sessionStorage.getItem('mapState'));
 			zoom = mapState.zoom;
 			lonlat = mapState.center;
 		}
 
 		// Default: worldCopyJump: false && scrollWheelZoom: true
-		if (noWorldWarp === "1" && scrollwheelzoom === "0") {
+		if (noWorldWarp == "1" && scrollwheelzoom == "0") {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 				scrollWheelZoom: false,
 				worldCopyJump: false,
 				maxBounds: [[82, -180], [-82, 180]]
 			}).setView(lonlat, zoom);
-		} else if (noWorldWarp === "1" && scrollwheelzoom === "1") {
+		} else if (noWorldWarp == "1" && scrollwheelzoom == "1") {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 				worldCopyJump: false,
 				maxBounds: [[82, -180], [-82, 180]]
 			}).setView(lonlat, zoom);
-		} else if (noWorldWarp === "1" && scrollwheelzoom === "2") {
-			if (owngooglegesturetext === "1") {
+		} else if (noWorldWarp == "1" && scrollwheelzoom == "2") {
+			if (owngooglegesturetext == "1") {
 				window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 					worldCopyJump: false,
 					maxBounds: [[82, -180], [-82, 180]],
@@ -133,13 +133,13 @@ document.addEventListener('DOMContentLoaded', function () {
 					gestureHandling: true
 				}).setView(lonlat, zoom);
 			}
-		} else if (noWorldWarp === "0" && scrollwheelzoom === "0") {
+		} else if (noWorldWarp == "0" && scrollwheelzoom == "0") {
 			window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 				scrollWheelZoom: false,
 				worldCopyJump: true
 			}).setView(lonlat, zoom);
-		} else if (noWorldWarp === "0" && scrollwheelzoom === "2") {
-			if (owngooglegesturetext === "1") {
+		} else if (noWorldWarp == "0" && scrollwheelzoom == "2") {
+			if (owngooglegesturetext == "1") {
 				window['mymap' + moduleId] = new L.Map('map' + moduleId, {
 					worldCopyJump: true,
 					gestureHandling: true,
@@ -162,13 +162,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Privacy
-		if (localStorage.getItem("privacyState") === null) {
+		if (localStorage.getItem("privacyState") == null) {
 			localStorage.setItem("privacyState", '0')
 		}
 
 		var i;
 		for (i = 0; i < buttons.length; i++) {
-			if (localStorage.getItem("privacyState") === '0') {
+			if (localStorage.getItem("privacyState") == '0') {
 				buttons[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYBUTTON_SHOW_MAP');
 				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_SHOW_MAP');
 			} else {
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				privacyfields[i].innerHTML = Joomla.JText._('PLG_AGOSMSADDRESSMARKER_PRIVACYTEXT_HIDE_MAP');
 			}
 			buttons[i].onclick = function () {
-				if (localStorage.getItem("privacyState") === '0') {
+				if (localStorage.getItem("privacyState") == '0') {
 					document.getElementById('map' + moduleId).style.display = "block";
 					localStorage.setItem("privacyState", '1');
 				} else {
@@ -186,13 +186,13 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 
-		if (addprivacybox === '1' && (localStorage.getItem("privacyState") === '0')) {
+		if (addprivacybox == '1' && (localStorage.getItem("privacyState") == '0')) {
 			document.getElementById('map' + moduleId).style.display = "none";
 			return;
 		}
 
 		// Add Scrollwheele Listener, so that you can activate it on mouse click
-		if (scrollwheelzoom === "0") {
+		if (scrollwheelzoom == "0") {
 			window['mymap' + moduleId].on('click', function () {
 				if (window['mymap' + moduleId].scrollWheelZoom.enabled()) {
 					window['mymap' + moduleId].scrollWheelZoom.disable();
@@ -204,24 +204,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Baselayer
 		var nowarp = "noWrap: false, ";
-		if (noWorldWarp === "1") {
+		if (noWorldWarp == "1") {
 			nowarp = "noWrap: true, ";
 		}
 		var detectRetina = "detectRetina: false, ";
-		if (detectRetina === "1") {
+		if (detectRetina == "1") {
 			detectRetina = "detectRetina: true, ";
 		}
 
 		// Base layer url
 		var astrid = '';
-		if (attrModule === '1') {
+		if (attrModule == '1') {
 			astrid = ' ' + Joomla.JText._('MOD_AGOSM_MODULE_BY') + ' <a href="https://www.astrid-guenther.de">Astrid Günther</a>';
 		}
 		var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
 		});
-		if (baselayer === 'mapbox') {
+		if (baselayer == 'mapbox') {
 			tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 				attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>' + astrid,
 				tileSize: 512,
@@ -231,13 +231,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				accessToken: mapboxkey
 			});
 		}
-		if (baselayer === 'mapnikde') {
+		if (baselayer == 'mapnikde') {
 			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
 				maxZoom: 18,
 				attribution: '&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
 			});
 		}
-		if (baselayer === 'stamen') {
+		if (baselayer == 'stamen') {
 			tileLayer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/' + stamenmaptype + '/{z}/{x}/{y}.png', {
 				subdomains: 'abcd', minZoom: 1, maxZoom: 16,
 				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				id: ''
 			});
 		}
-		if (baselayer === 'opentopomap') {
+		if (baselayer == 'opentopomap') {
 			tileLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 				maxZoom: 16,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				id: ''
 			});
 		}
-		if (baselayer === 'humanitarian') {
+		if (baselayer == 'humanitarian') {
 			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 				maxZoom: 20,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
@@ -262,16 +262,16 @@ document.addEventListener('DOMContentLoaded', function () {
 				id: ''
 			});
 		}
-		if (baselayer === 'custom') {
+		if (baselayer == 'custom') {
 			//tileLayer = L.tileLayer(customBaselayerURL, {customBaselayer});
 		}
-		if (baselayer === 'google') {
+		if (baselayer == 'google') {
 			tileLayer = L.gridLayer.googleMutant({
 				type: googlemapstype,
 				attribution: astrid
 			});
 		}
-		if (baselayer === 'thunderforest') {
+		if (baselayer == 'thunderforest') {
 			tileLayer = L.tileLayer('https://{s}.tile.thunderforest.com/' + thunderforestmaptype + '/{z}/{x}/{y}.png?apikey={apikey}', {
 				maxZoom: 22,
 				apikey: thunderforestkey,
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Add Geocoder
-		if (showgeocoder === "1") {
+		if (showgeocoder == "1") {
 			var osmGeocoder = new L.Control.Geocoder({
 				collapsed: geocodercollapsed,
 				position: geocoderposition,
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Add ESRI Geocoder
-		if (useesri === "1") {
+		if (useesri == "1") {
 			if (dataEsrigeocoderopengetaddress) {
 				function getURLParameter(name) {
 					var value = decodeURIComponent((RegExp(name + '=' + '(.+?)(&|$)').exec(location.search) || [, ""])[1]);
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 
-			if (esrireversegeocoding === 'true') {
+			if (esrireversegeocoding == 'true') {
 				var r = L.marker();
 				window['mymap' + moduleId].on('click', function (e) {
 					L.esri.Geocoding.reverseGeocode()
@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				});
 			}
 
-			if (showgeocoderesri === '1') {
+			if (showgeocoderesri == '1') {
 				var esriGeocoder = L.esri.Geocoding.geosearch({
 					position: positionesrigeocoder,
 					zoomToResult: esrigeocoderzoomToResult,
@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Add Routing Simple
-		if (showrouting_simple === '1') {
+		if (showrouting_simple == '1') {
 			L.leafletControlRoutingtoaddress({
 				position: routesimpleposition,
 				router: routesimplerouter,
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Add Routing Mapbox
-		if (showrouting === '1') {
+		if (showrouting == '1') {
 			function button(label, container) {
 				var btn = L.DomUtil.create('button', '', container);
 				btn.setAttribute('type', 'button');
@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Special Pins
-		if (showpin === '1') {
+		if (showpin == '1') {
 			var index = 0;
 			for (var specialpin in specialpins) {
 				// skip loop if the property is from prototype
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				var obj = specialpins[specialpin];
 				let tempMarker = L.marker(obj.latlonpin.split(",", 3));
 
-				if (obj.pin === "2" && obj.customPinPath != "") {
+				if (obj.pin == "2" && obj.customPinPath != "") {
 					var LeafIcon = L.Icon.extend({
 						options: {
 							iconUrl: obj.customPinPath,
@@ -473,14 +473,14 @@ document.addEventListener('DOMContentLoaded', function () {
 					tempMarker.setIcon(new LeafIcon());
 				}
 
-				if (obj.pin === "3") {
+				if (obj.pin == "3") {
 					var AwesomeIcon = new L.AwesomeMarkers.icon(
 						{
 							icon: obj.awesomeicon_icon,
 							markerColor: obj.awesomeicon_markercolor,
 							iconColor: obj.awesomeicon_iconcolor,
 							prefix: 'fa',
-							spin: (obj.awesomeicon_spin === "true"),
+							spin: (obj.awesomeicon_spin == "true"),
 							extraClasses: obj.awesomeicon_extraclasses,
 						})
 					tempMarker.setIcon(AwesomeIcon);
@@ -488,15 +488,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				tempMarker.addTo(window['mymap' + moduleId]);
 
-				if (obj.popup === "1") {
+				if (obj.popup == "1") {
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 				}
 
-				if (obj.popup === "2") {
+				if (obj.popup == "2") {
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
 				}
 
-				if (obj.popup === "3") {
+				if (obj.popup == "3") {
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 					tempMarker.on('mouseover', function (e) {
 						this.openPopup();
@@ -551,7 +551,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Show Pins from component
-		if (showcomponentpin === '1') {
+		if (showcomponentpin == '1') {
 			var clustermarkers = L.markerClusterGroup({
 				maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
 				iconCreateFunction: null,
@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				var obj = specialcomponentpins[specialcomponentpin];
 				let tempMarker = L.marker(obj.coordinates.split(",", 3));
 
-				if (obj.showdefaultpin === "2" && obj.customPinPath != "") {
+				if (obj.showdefaultpin == "2" && obj.customPinPath != "") {
 
 					if (obj.customPinShadowPath != "") {
 						var LeafIcon = L.Icon.extend({
@@ -641,14 +641,14 @@ document.addEventListener('DOMContentLoaded', function () {
 					tempMarker.setIcon(new LeafIcon());
 				}
 
-				if (obj.showdefaultpin === "3") {
+				if (obj.showdefaultpin == "3") {
 					var AwesomeIcon = new L.AwesomeMarkers.icon(
 						{
 							icon: obj.awesomeicon_icon,
 							markerColor: obj.awesomeicon_markercolor,
 							iconColor: obj.awesomeicon_iconcolor,
 							prefix: 'fa',
-							spin: (obj.awesomeicon_spin === "true"),
+							spin: (obj.awesomeicon_spin == "true"),
 							extraClasses: obj.awesomeicon_extraclasses,
 						})
 					tempMarker.setIcon(AwesomeIcon);
@@ -656,15 +656,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				tempMarker.addTo(clustermarkers);
 
-				if (obj.showpopup === "1") {
+				if (obj.showpopup == "1") {
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 				}
 
-				if (obj.showpopup === "2") {
+				if (obj.showpopup == "2") {
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
 				}
 
-				if (obj.showpopup === "3") {
+				if (obj.showpopup == "3") {
 					tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 					tempMarker.on('mouseover', function (e) {
 						this.openPopup();
@@ -715,7 +715,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			}
 
-			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1") {
+			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate == "1") {
 				window['mymap' + moduleId].fitBounds(mapState.bounds);
 			} else {
 				window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
@@ -725,7 +725,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// One Pin from component
-		if (showcomponentpinone === '1') {
+		if (showcomponentpinone == '1') {
 			var clustermarkers = L.markerClusterGroup({
 				maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
 				iconCreateFunction: null,
@@ -770,7 +770,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			var obj = specialcomponentpinone;
 			let tempMarker = L.marker(obj.coordinates.split(",", 3));
 
-			if (obj.showdefaultpin === "2" && obj.customPinPath != "") {
+			if (obj.showdefaultpin == "2" && obj.customPinPath != "") {
 
 				if (obj.customPinShadowPath != "") {
 					var LeafIcon = L.Icon.extend({
@@ -810,14 +810,14 @@ document.addEventListener('DOMContentLoaded', function () {
 				tempMarker.setIcon(new LeafIcon());
 			}
 
-			if (obj.showdefaultpin === "3") {
+			if (obj.showdefaultpin == "3") {
 				var AwesomeIcon = new L.AwesomeMarkers.icon(
 					{
 						icon: obj.awesomeicon_icon,
 						markerColor: obj.awesomeicon_markercolor,
 						iconColor: obj.awesomeicon_iconcolor,
 						prefix: 'fa',
-						spin: (obj.awesomeicon_spin === "true"),
+						spin: (obj.awesomeicon_spin == "true"),
 						extraClasses: obj.awesomeicon_extraclasses,
 					})
 				tempMarker.setIcon(AwesomeIcon);
@@ -825,15 +825,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			tempMarker.addTo(clustermarkers);
 
-			if (obj.showpopup === "1") {
+			if (obj.showpopup == "1") {
 				tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 			}
 
-			if (obj.showpopup === "2") {
+			if (obj.showpopup == "2") {
 				tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images')).openPopup();
 			}
 
-			if (obj.showpopup === "3") {
+			if (obj.showpopup == "3") {
 				tempMarker.bindPopup(obj.popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 				tempMarker.on('mouseover', function (e) {
 					this.openPopup();
@@ -844,7 +844,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 
 
-			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1") {
+			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate == "1") {
 				window['mymap' + moduleId].fitBounds(mapState.bounds);
 			}
 			clustermarkers.addTo(window['mymap' + moduleId]);
@@ -855,11 +855,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (!String.prototype.startsWith) {
 			String.prototype.startsWith = function (searchString, position) {
 				position = position || 0;
-				return this.substr(position, searchString.length) === searchString;
+				return this.substr(position, searchString.length) == searchString;
 			};
 		}
 		// Show Pins from customfield
-		if (showcustomfieldpin === '1') {
+		if (showcustomfieldpin == '1') {
 			var clustermarkers = L.markerClusterGroup({
 				maxClusterRadius: 80, //A cluster will cover at most this many pixels from its center
 				iconCreateFunction: null,
@@ -909,7 +909,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				var objcf = specialcustomfieldpins[specialcustomfieldpin];
 
-				if (Object.keys(objcf).length === 0) {
+				if (Object.keys(objcf).length == 0) {
 					continue;
 				}
 
@@ -932,7 +932,7 @@ document.addEventListener('DOMContentLoaded', function () {
 						tempMarkercf.setIcon(AwesomeIcon);
 					}
 
-					if (objcf.type === 'agosmsaddressmarker' && objcf.iconcolor && objcf.markercolor && objcf.icon) {
+					if (objcf.type == 'agosmsaddressmarker' && objcf.iconcolor && objcf.markercolor && objcf.icon) {
 						var AwesomeIcon = new L.AwesomeMarkers.icon(
 							{
 								icon: objcf.icon,
@@ -998,7 +998,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					tempMarkercf.addTo(clustermarkers);
 				}
 			}
-			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate === "1") {
+			if (JSON.parse(sessionStorage.getItem('mapState')) && savestate == "1") {
 				window['mymap' + moduleId].fitBounds(mapState.bounds);
 			} else {
 				window['mymap' + moduleId].fitBounds(clustermarkers.getBounds());
@@ -1007,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Show locate
-		if (locate === '1') {
+		if (locate == '1') {
 			var lc = L.control.locate({
 				position: 'topright',
 				initialZoomLevel: 17,
@@ -1018,17 +1018,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Add Fullscreen
-		if (fullscreen === "1") {
+		if (fullscreen == "1") {
 			window['mymap' + moduleId].addControl(new L.Control.Fullscreen());
 		}
 
 		// Show mouseposition
-		if (mouseposition === '1') {
+		if (mouseposition == '1') {
 			L.control.mousePosition().addTo(window['mymap' + moduleId]);
 		}
 
 		// Show GeoJson
-		if (geojson === '1') {
+		if (geojson == '1') {
 
 			
 
@@ -1079,9 +1079,9 @@ document.addEventListener('DOMContentLoaded', function () {
 			};
 			// Get Style End
 
-			if (geojsonfile === '0') {
+			if (geojsonfile == '0') {
 				try {
-					if (geojsonTextRaw === '{}') {
+					if (geojsonTextRaw == '{}') {
 						console.log('No GeoJson Object');
 					} else {
 						L.geoJSON(geojsonText, { style: areaStyle }).addTo(window['mymap' + moduleId]);
@@ -1092,7 +1092,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			}
 
-			if (geojsonfile === '1') {
+			if (geojsonfile == '1') {
 				geojsonTextRaw = '{}';
 
 				async function postData() {
@@ -1105,7 +1105,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					geojsonTextRaw = response;
 
 					try {
-						if (geojsonTextRaw === '{}') {
+						if (geojsonTextRaw == '{}') {
 							console.log('No GeoJson Object');
 						} else {
 							L.geoJSON(geojsonTextRaw, { style: areaStyle }).addTo(window['mymap' + moduleId]);
@@ -1119,7 +1119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Save the state
-		if (savestate === "1") {
+		if (savestate == "1") {
 			window['mymap' + moduleId].on('zoom', function (ev) {
 				var center = window['mymap' + moduleId].getCenter();
 				var bounds = window['mymap' + moduleId].getBounds();
@@ -1135,7 +1135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 		}
 
-		if (savestate === "1") {
+		if (savestate == "1") {
 			window['mymap' + moduleId].on('move', function (ev) {
 				var center = window['mymap' + moduleId].getCenter();
 				var bounds = window['mymap' + moduleId].getBounds();
