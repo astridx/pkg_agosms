@@ -15,4 +15,12 @@
 			<item>Initial Version</item>
 		</note>
 	</changelog>
+	<changelog>
+		<element>pkg_agosmss</element>
+		<type>package</type>
+		<version>4.0.5</version>
+		<note>
+			<item>Add custom columns</item>
+		</note>
+	</changelog>
 </changelogs>

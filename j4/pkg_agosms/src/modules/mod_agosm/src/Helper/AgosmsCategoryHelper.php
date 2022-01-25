@@ -19,7 +19,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Router\Route;
-use Joomla\Component\Agsoms\Administrator\Extension\ContentComponent;
+use Joomla\Component\Agsoms\Administrator\Extension\AgosmsComponent;
 use Joomla\Component\Agosms\Site\Helper\RouteHelper;
 use Joomla\String\StringHelper;
 use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
@@ -48,6 +48,14 @@ abstract class AgosmsCategoryHelper
 		// Get an instance of the generic agosms model
 		$agosms = $factory->createModel('Agosms', 'Site', ['ignore_request' => true]);
 
+		$catids = $params->get('catid', array());
+		$agosms->setState('filter.category_id', $catids);
+
+		// Access filter
+		$access = !ComponentHelper::getParams('com_agsoms')->get('show_noauth');
+		$authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
+		$agosms->setState('filter.access', $access);
+
 		$items = $agosms->getItems();
 
 		return $items;
@@ -64,14 +72,14 @@ abstract class AgosmsCategoryHelper
 	public static function getListCustomField(&$params)
 	{
 
-		$app     = Factory::getApplication();
+		$app = Factory::getApplication();
 		$factory = $app->bootComponent('com_content')->getMVCFactory();
 
 		// Get an instance of the generic articles model
 		$articles = $factory->createModel('Articles', 'Site', ['ignore_request' => true]);
 
 		// Set application parameters in model
-		$input     = $app->input;
+		$input = $app->input;
 		$appParams = $app->getParams();
 		$articles->setState('params', $appParams);
 
@@ -83,7 +91,7 @@ abstract class AgosmsCategoryHelper
 		$articles->setState('load_tags', $params->get('show_tags', 0) || $params->get('article_grouping', 'none') === 'tags');
 
 		// Access filter
-		$access     = !ComponentHelper::getParams('com_content')->get('show_noauth');
+		$access = !ComponentHelper::getParams('com_content')->get('show_noauth');
 		$authorised = Access::getAuthorisedViewLevels(Factory::getUser()->get('id'));
 		$articles->setState('filter.access', $access);
 

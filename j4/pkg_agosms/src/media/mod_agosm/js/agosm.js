@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var showcomponentpin = element.getAttribute('data-showcomponentpin');
 		if (showcomponentpin == '1') {
 			var specialcomponentpins = JSON.parse(element.getAttribute('data-specialcomponentpins'));
+			console.log(specialcomponentpins);
 		}
 		var showcomponentpinone = element.getAttribute('data-showcomponentpinone');
 		if (showcomponentpinone == '1') {

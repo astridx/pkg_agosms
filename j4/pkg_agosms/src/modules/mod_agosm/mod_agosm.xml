@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="3.6" client="site" method="upgrade">
+<extension type="module" client="site" method="upgrade">
 	<name>mod_agosm</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
-	<copyright>(C) ##YEAR## Open Source Matters. All rights reserved.</copyright>
+	<copyright>(C) ##YEAR## Astrid Günther. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later;</license>
 	<authorEmail>info@astrid-guenther.de</authorEmail>
 	<authorUrl>www.astrid-guenther.de</authorUrl>

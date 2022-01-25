@@ -70,3 +70,25 @@ ALTER TABLE `#__agosms_details` ADD KEY `idx_checkout` (`checked_out`);
 ALTER TABLE `#__agosms_details` ADD COLUMN  `featured` tinyint(3) unsigned NOT NULL DEFAULT 0 COMMENT 'Set if agosm is featured.';
 
 ALTER TABLE `#__agosms_details` ADD KEY `idx_featured_catid` (`featured`,`catid`);
+
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm1` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm2` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm3` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm4` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm5` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm6` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm7` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm8` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm9` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm10` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm11` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm12` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm13` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm14` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm15` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm16` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm17` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm18` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm19` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+ALTER TABLE `#__agosms_details` ADD COLUMN  `cusotm20` char(255) NOT NULL DEFAULT '' AFTER `alias`;
+

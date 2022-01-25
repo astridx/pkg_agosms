@@ -109,7 +109,18 @@ class AgosmsModel extends ListModel
 			)
 		);
 
-		$query->from($db->quoteName('#__agosms_details', 'a'));
+
+
+		// Filter by a single or group of categories
+		$categoryId = $this->getState('filter.category_id');
+		$categoryId = ArrayHelper::toInteger($categoryId);
+
+
+
+		$query->from($db->quoteName('#__agosms_details', 'a'))
+		->join('LEFT', $db->quoteName('#__categories', 'c'), $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catid'));
+
+		$query->whereIn($db->quoteName('a.catid'), $categoryId);
 
 		return $query;
 	}
