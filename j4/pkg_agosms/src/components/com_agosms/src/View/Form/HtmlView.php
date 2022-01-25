@@ -25,37 +25,37 @@ use AgosmNamespace\Component\Agosms\Administrator\Helper\AgosmHelper;
 class HtmlView extends BaseHtmlView
 {
 	/**
-	 * @var    \Joomla\CMS\Form\Form
+	 * @var \Joomla\CMS\Form\Form
 	 * @since  __DEPLOY_VERSION__
 	 */
 	protected $form;
 
 	/**
-	 * @var    object
+	 * @var object
 	 * @since  __DEPLOY_VERSION__
 	 */
 	protected $item;
 
 	/**
-	 * @var    string
+	 * @var string
 	 * @since  __DEPLOY_VERSION__
 	 */
 	protected $return_page;
 
 	/**
-	 * @var    string
+	 * @var string
 	 * @since  __DEPLOY_VERSION__
 	 */
 	protected $pageclass_sfx;
 
 	/**
-	 * @var    \Joomla\Registry\Registry
+	 * @var \Joomla\Registry\Registry
 	 * @since  __DEPLOY_VERSION__
 	 */
 	protected $state;
 
 	/**
-	 * @var    \Joomla\Registry\Registry
+	 * @var \Joomla\Registry\Registry
 	 * @since  __DEPLOY_VERSION__
 	 */
 	protected $params;
