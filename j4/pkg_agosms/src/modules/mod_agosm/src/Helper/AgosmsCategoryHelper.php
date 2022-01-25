@@ -48,7 +48,7 @@ abstract class AgosmsCategoryHelper
 		// Get an instance of the generic agosms model
 		$agosms = $factory->createModel('Agosms', 'Site', ['ignore_request' => true]);
 
-		$catids = $params->get('catid', array());
+		$catids = $params->get('catid', []);
 		$agosms->setState('filter.category_id', $catids);
 
 		// Access filter

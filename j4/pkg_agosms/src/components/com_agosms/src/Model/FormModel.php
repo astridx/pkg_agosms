@@ -56,18 +56,16 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 	 *
 	 * @since   4.0.0
 	 */
-	public function getForm($data = array(), $loadData = true)
+	public function getForm($data = [], $loadData = true)
 	{
 		$form = parent::getForm($data, $loadData);
 
 		// Prevent messing with article language and category when editing existing agosms with associations
-		if ($id = $this->getState('agosm.id') && Associations::isEnabled())
-		{
+		if ($id = $this->getState('agosm.id') && Associations::isEnabled()) {
 			$associations = Associations::getAssociations('com_agosms', '#__agosms_details', 'com_agosms.item', $id);
 
 			// Make fields read only
-			if (!empty($associations))
-			{
+			if (!empty($associations)) {
 				$form->setFieldAttribute('language', 'readonly', 'true');
 				$form->setFieldAttribute('language', 'filter', 'unset');
 			}
@@ -95,15 +93,11 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 		$table = $this->getTable();
 
 		// Attempt to load the row.
-		try
-		{
-			if (!$table->load($itemId))
-			{
+		try {
+			if (!$table->load($itemId)) {
 				return false;
 			}
-		}
-		catch (Exception $e)
-		{
+		} catch (Exception $e) {
 			Factory::getApplication()->enqueueMessage($e->getMessage());
 
 			return false;
@@ -115,8 +109,7 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 		// Convert field to Registry.
 		$value->params = new Registry($value->params);
 
-		if ($itemId)
-		{
+		if ($itemId) {
 			$value->tags = new TagsHelper;
 			$value->tags->getTagIds($value->id, 'com_agosm.agosm');
 			$value->metadata['tags'] = $value->tags;
@@ -152,10 +145,8 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 	{
 		// Associations are not edited in frontend ATM so we have to inherit them
 		if (Associations::isEnabled() && !empty($data['id'])
-			&& $associations = Associations::getAssociations('com_agosms', '#__agosms_details', 'com_agosms.item', $data['id']))
-		{
-			foreach ($associations as $tag => $associated)
-			{
+			&& $associations = Associations::getAssociations('com_agosms', '#__agosms_details', 'com_agosms.item', $data['id'])) {
+			foreach ($associations as $tag => $associated) {
 				$associations[$tag] = (int) $associated->id;
 			}
 
@@ -209,8 +200,7 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 	 */
 	protected function preprocessForm(Form $form, $data, $group = 'agosms')
 	{
-		if (!Multilanguage::isEnabled())
-		{
+		if (!Multilanguage::isEnabled()) {
 			$form->setFieldAttribute('language', 'type', 'hidden');
 			$form->setFieldAttribute('language', 'default', '*');
 		}
@@ -231,7 +221,7 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 
 	 * @throws  Exception
 	 */
-	public function getTable($name = 'Agosm', $prefix = 'Administrator', $options = array())
+	public function getTable($name = 'Agosm', $prefix = 'Administrator', $options = [])
 	{
 		return parent::getTable($name, $prefix, $options);
 	}
