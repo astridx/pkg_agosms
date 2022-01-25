@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		var thunderforestmaptype = element.getAttribute('data-thunderforestmaptype');
 		var googlemapstype = element.getAttribute('data-googlemapstype');
 		var mapboxmaptype = element.getAttribute('data-mapboxmaptype');
-		var attrModule = element.getAttribute('data-attr-module');
 		var customBaselayer = element.getAttribute('data-customBaselayer');
 		var customBaselayerURL = element.getAttribute('data-customBaselayerURL');
 		var scale = element.getAttribute('data-scale');
@@ -214,17 +213,13 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Base layer url
-		var astrid = '';
-		if (attrModule == '1') {
-			astrid = ' ' + Joomla.JText._('MOD_AGOSM_MODULE_BY') + ' <a href="https://www.astrid-guenther.de">Astrid Günther</a>';
-		}
 		var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,
-			attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
+			attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>'
 		});
 		if (baselayer == 'mapbox') {
 			tileLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-				attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>' + astrid,
+				attribution: '© <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
 				tileSize: 512,
 				maxZoom: 18,
 				zoomOffset: -1,
@@ -232,10 +227,17 @@ document.addEventListener('DOMContentLoaded', function () {
 				accessToken: mapboxkey
 			});
 		}
+		if (baselayer == 'esri_worldImagery') {
+			tileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+				maxZoom: 16,
+				attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+				id: ''
+			});
+		}
 		if (baselayer == 'mapnikde') {
 			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
 				maxZoom: 18,
-				attribution: '&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid
+				attribution: '&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a>'
 			});
 		}
 		if (baselayer == 'stamen') {
@@ -243,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				subdomains: 'abcd', minZoom: 1, maxZoom: 16,
 				attribution: 'Map data &copy; <a href=\"https://openstreetmap.org\">OpenStreetMap</a> contributors, ' +
 					'<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-					'Imagery &copy; <a href=\"http://stamen.com\">Stamen Design</a>' + astrid,
+					'Imagery &copy; <a href=\"http://stamen.com\">Stamen Design</a>',
 				id: ''
 			});
 		}
@@ -251,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			tileLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 				maxZoom: 16,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-					'Imagery &copy; <a href=\"http://viewfinderpanoramas.org\">SRTM</a>' + astrid,
+					'Imagery &copy; <a href=\"http://viewfinderpanoramas.org\">SRTM</a>',
 				id: ''
 			});
 		}
@@ -259,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 				maxZoom: 20,
 				attribution: '<a href=\"https://creativecommons.org/licenses/by-sa/3.0/\">CC-BY 3.0</a>, ' +
-					'Imagery &copy; <a href=\"https://hotosm.org\">Humanitarian OpenStreetMap Team</a>' + astrid,
+					'Imagery &copy; <a href=\"https://hotosm.org\">Humanitarian OpenStreetMap Team</a>',
 				id: ''
 			});
 		}

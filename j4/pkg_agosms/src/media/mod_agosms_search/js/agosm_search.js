@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		var thunderforestmaptype = element.getAttribute('data-thunderforestmaptype');
 		var googlemapstype = element.getAttribute('data-googlemapstype');
 		var mapboxmaptype = element.getAttribute('data-mapboxmaptype');
-		var attrModule = element.getAttribute('data-attr-module');
 		var customBaselayer = element.getAttribute('data-customBaselayer');
 		var customBaselayerURL = element.getAttribute('data-customBaselayerURL');
 		var scale = element.getAttribute('data-scale');
@@ -170,11 +169,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		// Base layer url
-		var astrid = '';
-		if (attrModule === '1')
-		{
-			astrid = ' | Joomla-Module by <a href="https://www.astrid-guenther.de">Astrid Günther</a>';
-		}
 		var tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>' + astrid

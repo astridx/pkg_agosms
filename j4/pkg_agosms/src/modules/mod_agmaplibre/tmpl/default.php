@@ -47,7 +47,6 @@ $unique = $module->id . '_' . uniqid();
 	data-customBaselayer="<?php echo $params->get('customBaselayer', 'maxZoom: 18,'); ?>"
 	data-customBaselayerURL="<?php echo $params->get('customBaselayerURL', 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'); ?>"
 <?php endif; ?>
-	data-attr-module="<?php echo $params->get('attrModule', 1); ?>"
 <?php if ($params->get('scale') !== null) : ?>
 	data-scale="<?php echo count($params->get('scale')); ?>"
 <?php endif; ?>	
