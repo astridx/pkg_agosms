@@ -23,4 +23,12 @@
 			<item>Add custom columns</item>
 		</note>
 	</changelog>
+	<changelog>
+		<element>pkg_agosmss</element>
+		<type>package</type>
+		<version>4.0.6</version>
+		<note>
+			<item>Fix edit form.</item>
+		</note>
+	</changelog>
 </changelogs>

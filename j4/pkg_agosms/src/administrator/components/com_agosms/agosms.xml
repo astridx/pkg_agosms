@@ -30,6 +30,7 @@
     <media folder="media/com_agosms" destination="com_agosms">
 		<filename>joomla.asset.json</filename>
 		<folder>js</folder>
+		<folder>css</folder>
     </media>
 	<!-- Back-end files -->
 	<administration>

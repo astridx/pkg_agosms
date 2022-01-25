@@ -84,4 +84,25 @@
         <sha256>8f90ee33f414acee3c91861ac528f28d98d93e78c74c8d229687fe71b1f741dc</sha256>
         <sha384>8f0e7b2e34bf90eb30b343d79d20d710f9c91cbd3fefdfe3d066c985797f84c4b5d7ab3d5ce62852ba48937f95f4680b</sha384>
     </update>
+    <update>
+        <name>pkg_agosms</name>
+        <description>pkg_agosms</description>
+        <element>pkg_agosms</element>
+        <type>package</type>
+        <client>site</client>
+        <version>4.0.6</version>
+        <infourl title="agosms">https://github.com/astridx/pkg_agosms/blob/v4.0.6/README.md</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/astridx/pkg_agosms/releases/download/v4.0.6/pkg-agosms-4.0.6.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>rc</tag>
+            <tag>stable</tag>
+        </tags>
+        <maintainer>Astrid Günther</maintainer>
+        <maintainerurl>https://astrid-guenther.de</maintainerurl>
+        <targetplatform name="joomla" version="4.*"/>
+        <sha256>8f90ee33f414acee3c91861ac528f28d98d93e78c74c8d229687fe71b1f741dc</sha256>
+        <sha384>724b96149c47074f620c82307acc887e45062fadb1a5af4715daa46fd4c2bf83d464369be11dde41b344ddf521a5d888</sha384>
+    </update>
 </updates>
