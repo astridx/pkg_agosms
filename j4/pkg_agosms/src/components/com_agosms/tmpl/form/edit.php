@@ -29,6 +29,13 @@ $this->useCoreUI = true;
 	<fieldset>
 		<?php echo HTMLHelper::_('uitab.startTabSet', $this->tab_name, ['active' => 'details']); ?>
 		<?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'details', empty($this->item->id) ? Text::_('COM_AGOSMS_NEW_AGOSM') : Text::_('COM_AGOSMS_EDIT_AGOSM')); ?>
+
+
+
+		<?php echo $this->form->renderField('coordinates'); ?>
+		
+
+
 		<?php echo $this->form->renderField('name'); ?>
 
 		<?php if (is_null($this->item->id)) : ?>

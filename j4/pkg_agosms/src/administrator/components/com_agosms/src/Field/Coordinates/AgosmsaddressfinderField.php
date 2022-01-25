@@ -94,7 +94,6 @@ class AgosmsaddressfinderField extends FormField
 	 */
 	protected function getInput()
 	{
-
 		return $this->getRenderer($this->layout)->render($this->getLayoutData());
 	}
 
