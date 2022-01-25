@@ -55,6 +55,9 @@ $tmpl = $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
 				<?php echo $this->getForm()->renderField('customPinShadowSize'); ?>
 				<?php echo $this->getForm()->renderField('customPinOffset'); ?>
 				<?php echo $this->getForm()->renderField('customPinPopupOffset'); ?>
+
+				<?php //echo $this->getForm()->renderField('cusotm1'); ?>
+
 			</div>
 			<div class="col-lg-3">
 				<div class="card">

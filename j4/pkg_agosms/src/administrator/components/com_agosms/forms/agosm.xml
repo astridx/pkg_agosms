@@ -238,7 +238,147 @@
 			class="advancedSelect"
 			multiple="true"
 		/>
-	</fieldset>
+				<field
+					name="cusotm1"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE1_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm2"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE2_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm3"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE3_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm4"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE4_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm5"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE5_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm6"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE6_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm7"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE7_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm8"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE8_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm9"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm10"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE10_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm11"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE11_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm12"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE12_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm13"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE13_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm14"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE14_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm15"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE15_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm16"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE16_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm17"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE17_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm18"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE18_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm19"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE19_LABEL"
+				>
+				</field>
+
+				<field
+					name="cusotm20"
+					type="text"
+					label="COM_AGOSMS_FIELD_CUSTOM_VALUE20_LABEL"
+				>
+				</field>
+		</fieldset>
+	
 	<fields name="params" label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
 		<fieldset name="display" label="JGLOBAL_FIELDSET_DISPLAY_OPTIONS">
 			<field
