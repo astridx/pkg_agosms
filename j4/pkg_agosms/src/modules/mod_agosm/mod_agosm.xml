@@ -111,6 +111,7 @@
 					<option value="humanitarian">Humanitarian (HOT)</option>
 					<option value="thunderforest">Thunderforest</option>
 					<option value="google">Google</option>
+					<option value="esri_worldImagery">Esri_WorldImagery</option>
 					<option value="custom">custom</option>
 				</field>
 				<field name="mapboxkey" type="text" default="" label="MOD_AGOSM_MAPBOXKEY_LABEL" description="MOD_AGOSM_MAPBOXKEY_DESC" size="40" showon="baselayer:mapbox" />
