@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <extension type="component" method="upgrade">
 	<name>COM_AGOSMS</name>
-	<creationDate>[DATE]</creationDate>
-	<author>[AUTHOR]</author>
-	<authorEmail>[AUTHOR_EMAIL]</authorEmail>
-	<authorUrl>[AUTHOR_URL]</authorUrl>
-	<copyright>[COPYRIGHT]</copyright>
-	<license>GNU General Public License version 2 or later;</license>
-	<version>__BUMP_VERSION__</version>
+	<creationDate>##DATE##</creationDate>
+	<packager>Astrid Günther</packager>
+	<copyright>(C) ##YEAR## Astrid Günther. All rights reserved.</copyright>
+	<author>Astrid Günther</author>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>##VERSION##</version>
 	<description>COM_AGOSMS_XML_DESCRIPTION</description>
 	<namespace path="src">AgosmNamespace\Component\Agosms</namespace>
 	<scriptfile>script.php</scriptfile>
