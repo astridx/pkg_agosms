@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fieldset addruleprefix="AgosmNamespace\Component\Agosms\Administrator\Rule" addfieldprefix="AgosmNamespace\Component\Agosms\Administrator\Field">
+	<fieldset addruleprefix="AgosmNamespace\Component\Agosms\Site\Rule" addfieldprefix="AgosmNamespace\Component\Agosms\Administrator\Field">
 		<field name="id" type="number" label="JGLOBAL_FIELD_ID_LABEL" default="0" class="readonly" readonly="true" />
 
-		<field name="name" type="text" validate="Letter" class="validate-letter" label="COM_AGOSMS_FIELD_NAME_LABEL" size="40" required="true" />
+		<field name="name" type="text" label="COM_AGOSMS_FIELD_NAME_LABEL" size="40" required="true" />
 
 		<field name="alias" type="hidden" label="JFIELD_ALIAS_LABEL" size="45" hint="JFIELD_ALIAS_PLACEHOLDER" />
 
-		<field name="description" default="" type="editor" label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL" filter="JComponentHelper::filterText" buttons="true" hide="readmore,pagebreak,module,article,fields,menu,contact" />
+		<field name="description" validate="Wordintext" default="" type="editor" label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL" filter="JComponentHelper::filterText" buttons="true" hide="readmore,pagebreak,module,article,fields,menu,contact" />
 
 		<field type="list" name="showpopup" default="0" label="MOD_AGOSM_POPUP" description="MOD_AGOSM_POPUP_DESC">
 			<option value="1">MOD_AGOSM_KLICK</option>

@@ -125,11 +125,17 @@ class AgosmController extends FormController
 	 */
 	public function save($key = null, $urlVar = null)
 	{
-		$result = parent::save($key, $urlVar = null);
+		$result = parent::save($key, $urlVar);
+		$app= Factory::getApplication();
+		$agosmsId = $app->input->getInt('id');
 
-		$this->setMessage(Text::_('COM_AGPLEGES_AGOSMS_SAVE_SUCCESS'));
-
-		$this->setRedirect(Route::_($this->getReturnPage(), false));
+		if ($result) {
+			$this->setMessage(Text::_('COM_AGOSMS_SAVE_SUCCESS'));
+			$this->setRedirect(Route::_('index.php', false));
+		} else {
+			$this->setMessage(Text::_('COM_AGOSMS_SAVE_NO_SUCCESS'));
+			$this->setRedirect(Route::_('index.php', false));
+		}
 
 		return $result;
 	}
@@ -210,7 +216,8 @@ class AgosmController extends FormController
 	{
 		$return = $this->input->get('return', null, 'base64');
 
-		if (empty($return) || !Uri::isInternal(base64_decode($return))) {
+		if (empty($return) || !Uri::isInternal(base64_decode($return)))
+		{
 			return Uri::base();
 		}
 

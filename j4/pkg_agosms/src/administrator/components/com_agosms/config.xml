@@ -38,7 +38,7 @@
 		</field>
 
 		<field
-			name="banned_text"
+			name="agosms_b_text"
 			type="textarea"
 			label="COM_AGOSMS_FIELD_PARAMS_TEXT_LABEL"
 			description="COM_AGOSMS_FIELD_PARAMS_TEXT_DESC"
