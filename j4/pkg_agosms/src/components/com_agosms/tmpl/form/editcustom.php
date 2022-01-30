@@ -60,6 +60,7 @@ $this->useCoreUI = true;
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
 				
 		<div style="display:none">
+		<?php echo $this->form->renderField('popuptext'); ?>
 		<?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
 		</div  z>
 		<?php echo HTMLHelper::_('uitab.endTabSet'); ?>

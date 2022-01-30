@@ -16,6 +16,7 @@ use Joomla\CMS\MVC\Controller\FormController;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Utilities\ArrayHelper;
+use Joomla\CMS\Language\Text;
 
 /**
  * Controller for single agosm view
@@ -125,6 +126,8 @@ class AgosmController extends FormController
 	public function save($key = null, $urlVar = null)
 	{
 		$result = parent::save($key, $urlVar = null);
+
+		$this->setMessage(Text::_('COM_AGPLEGES_AGOSMS_SAVE_SUCCESS'));
 
 		$this->setRedirect(Route::_($this->getReturnPage(), false));
 

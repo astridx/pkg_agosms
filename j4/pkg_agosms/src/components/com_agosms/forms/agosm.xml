@@ -7,7 +7,7 @@
 
 		<field name="alias" type="hidden" label="JFIELD_ALIAS_LABEL" size="45" hint="JFIELD_ALIAS_PLACEHOLDER" />
 
-		<field name="description" type="editor" label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL" filter="JComponentHelper::filterText" buttons="true" hide="readmore,pagebreak,module,article,fields,menu,contact" />
+		<field name="description" default="" type="editor" label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL" filter="JComponentHelper::filterText" buttons="true" hide="readmore,pagebreak,module,article,fields,menu,contact" />
 
 		<field type="list" name="showpopup" default="0" label="MOD_AGOSM_POPUP" description="MOD_AGOSM_POPUP_DESC">
 			<option value="1">MOD_AGOSM_KLICK</option>
@@ -16,7 +16,7 @@
 			<option value="3">MOD_AGOSM_MOUSEOVER</option>
 		</field>
 
-		<field name="popuptext" type="editor" label="COM_AGOSMS_FIELD_POPUP_LABEL" filter="JComponentHelper::filterText" buttons="true" showon="showpopup!:0" />
+		<field name="popuptext" default="" type="editor" label="COM_AGOSMS_FIELD_POPUP_LABEL" filter="JComponentHelper::filterText" buttons="true" showon="showpopup!:0"  />
 
 		<field type="list" name="showdefaultpin" default="1" label="MOD_AGOSM_PIN" description="MOD_AGOSM_PIN_DESC">
 			<option value="1">MOD_AGOSM_STANDARDPIN</option>
@@ -57,7 +57,7 @@
 
 		<field name="publish_down" type="calendar" label="COM_AGOSMS_FIELD_PUBLISH_DOWN_LABEL" translateformat="true" showtime="true" size="22" filter="user_utc" />
 
-		<field name="catid" type="categoryedit" label="JCATEGORY" extension="com_agosms" addfieldprefix="Joomla\Component\Categories\Administrator\Field" required="true" default="" />
+		<field name="catid" type="categoryedit" label="JCATEGORY" extension="com_agosms" addfieldprefix="Joomla\Component\Categories\Administrator\Field" default="" />
 
 		<field name="access" type="accesslevel" label="JFIELD_ACCESS_LABEL" size="1" />
 
@@ -78,9 +78,7 @@
 			>
 			<option value="Albanian">Albanian</option>
 			<option value="Arabic">Arabic</option>
-			<option value="BosnianB">Bosnian-_Bosnian</option>
-			<option value="BosnianC">Bosnian_-_Croatian</option>
-			<option value="BosnianS">Bosnian_-_Serbian</option>
+			<option value="Bosnian">Bosnian</option>
 			<option value="Bulgarian">Bulgarian</option>
 			<option value="Croatian">Croatian</option>
 			<option value="Cypriot">Cypriot</option>
@@ -98,14 +96,13 @@
 			<option value="Lithuanian">Lithuanian</option>
 			<option value="Luxembourgish">Luxembourgish</option>
 			<option value="Macedonian">Macedonian</option>
-			<option value="Maltese">maltese</option>
+			<option value="Maltese">Maltese</option>
 			<option value="Montenegrin">Montenegrin</option>
 			<option value="Norwegian">Norwegian</option>
 			<option value="Polish">Polish</option>
 			<option value="Portuguese">Portuguese</option>
 			<option value="Romanian">Romanian</option>
-			<option value="SerbianC">Serbian (cyrillic)</option>
-			<option value="SerbianL">Serbian (latin)</option>
+			<option value="Serbian">Serbian</option>
 			<option value="Slovenian">Slovenian</option>
 			<option value="Spanish">Spanish</option>
 			<option value="Turkish">Turkish</option>		
