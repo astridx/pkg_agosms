@@ -36,6 +36,16 @@
 			<option value="0">JHIDE</option>
 			<option value="1">JSHOW</option>
 		</field>
+
+		<field
+			name="banned_text"
+			type="textarea"
+			label="COM_AGOSMS_FIELD_PARAMS_TEXT_LABEL"
+			description="COM_AGOSMS_FIELD_PARAMS_TEXT_DESC"
+			default=""
+			rows="3"
+			cols="30"
+		/>
 	</fieldset>
 	<fieldset
 		name="permissions"

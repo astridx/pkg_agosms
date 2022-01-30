@@ -69,119 +69,32 @@
 
 		<field name="tags" type="tag" label="JTAG" class="advancedSelect" multiple="true" />
 
-		<field
-			name="cusotm1"
-			type="list"
-			default="English"
-			id="agosmscusotm1"
-			label="JFIELD_LANGUAGE_LABEL"
-			>
-			<option value="Albanian">Albanian</option>
-			<option value="Arabic">Arabic</option>
-			<option value="BosnianB">Bosnian-_Bosnian</option>
-			<option value="BosnianC">Bosnian_-_Croatian</option>
-			<option value="BosnianS">Bosnian_-_Serbian</option>
-			<option value="Bulgarian">Bulgarian</option>
-			<option value="Croatian">Croatian</option>
-			<option value="Cypriot">Cypriot</option>
-			<option value="Czech">Czech</option>
-			<option value="Danish">Danish</option>
-			<option value="Dutch">Dutch</option>
-			<option value="English">English</option>
-			<option value="Estonian">Estonian</option>
-			<option value="Finnish">Finnish</option>
-			<option value="French">French</option>
-			<option value="German">German</option>
-			<option value="Hungarian">Hungarian</option>
-			<option value="Italian">Italian</option>
-			<option value="Latvian">Latvian</option>
-			<option value="Lithuanian">Lithuanian</option>
-			<option value="Luxembourgish">Luxembourgish</option>
-			<option value="Macedonian">Macedonian</option>
-			<option value="Maltese">maltese</option>
-			<option value="Montenegrin">Montenegrin</option>
-			<option value="Norwegian">Norwegian</option>
-			<option value="Polish">Polish</option>
-			<option value="Portuguese">Portuguese</option>
-			<option value="Romanian">Romanian</option>
-			<option value="SerbianC">Serbian (cyrillic)</option>
-			<option value="SerbianL">Serbian (latin)</option>
-			<option value="Slovenian">Slovenian</option>
-			<option value="Spanish">Spanish</option>
-			<option value="Turkish">Turkish</option>		
+		<field name="cusotm1" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE1_LABEL">
 		</field>
 
-		<field
-			name="cusotm2"
-			type="list"
-			default="Policecontrol"
-			id="agosmscusotm1"
-			label="COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL"
-			>
-			<option value="Conference">Conference</option>
-			<option value="EducationalEvent">Educational Event</option>
-			<option value="Exhibition">Exhibition / Guided Tour</option>
-			<option value="OnlineEvent">Online Event</option>
-			<option value="Policecontrol">Police control</option>
-			<option value="OpenAirEvent">Open Air Event</option>
-			<option value="Workshop">Workshop</option>
-
+		<field name="cusotm2" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE2_LABEL">
 		</field>
 
-		<field
-			name="cusotm3"
-			type="calendar"
-			label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL"
-			translateformat="true"
-			default="2022-09-22"
-			maxyear="2022"
-			minyear="2022"
-			showtime="true"
-			size="22"
-			filter="user_utc"
-		/>
-
-		<field name="cusotm4" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL">
+		<field name="cusotm3" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE3_LABEL">
 		</field>
 
-		<field
-			name="cusotm5"
-			type="url"
-			label="COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL"
-			size="30"
-			filter="url"
-			validate="url"
-		/>
+		<field name="cusotm4" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE4_LABEL">
+		</field>
 
-		<field
-			name="cusotm6"
-			type="email"
-			label="JGLOBAL_EMAIL"
-			validate="email"
-			size="30"
-		/>
+		<field name="cusotm5" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE5_LABEL">
+		</field>
 
-		<field
-			name="cusotm7"
-			type="text"
-			label="COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL"
-			size="30"
-		/>
+		<field name="cusotm6" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE6_LABEL">
+		</field>
 
-		<field
-			name="cusotm8"
-			type="textarea"
-			label="COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL"
-			rows="3"
-			cols="30"
-		/>
+		<field name="cusotm7" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE7_LABEL">
+		</field>
 
-		<field
-			name="cusotm9"
-			type="media"
-			label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL"
-			hide_none="1"
-		/>
+		<field name="cusotm8" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE8_LABEL">
+		</field>
+
+		<field name="cusotm9" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LABEL">
+		</field>
 
 		<field name="cusotm10" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE10_LABEL">
 		</field>
