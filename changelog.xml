@@ -31,4 +31,12 @@
 			<item>Fix edit form.</item>
 		</note>
 	</changelog>
+	<changelog>
+		<element>pkg_agosmss</element>
+		<type>package</type>
+		<version>4.0.7</version>
+		<note>
+			<item>Set z-index for leaflet map in field to 1, so that it is behind most sticky headers.</item>
+		</note>
+	</changelog>	
 </changelogs>

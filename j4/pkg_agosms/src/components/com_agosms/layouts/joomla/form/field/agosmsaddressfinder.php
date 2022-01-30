@@ -74,7 +74,7 @@ else if ($app->input->getCmd('option') !== 'com_users'
 <?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_OPTIONAL_HINT'); ?>	
 </p>	
 <hr>
-<div style="height:300px;width:auto" id="<?php echo $mapid; ?>"></div>
+<div style="z-index:1;height:300px;width:auto" id="<?php echo $mapid; ?>"></div>
 <hr>
 <div class="control-group">
 <label class="control-label"><?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_ADRESSE'); ?></label>	
