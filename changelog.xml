@@ -37,6 +37,9 @@
 		<version>4.0.7</version>
 		<note>
 			<item>Set z-index for leaflet map in field to 1, so that it is behind most sticky headers.</item>
+			<item>Add an example for an custom form in agosms component.</item>
+			<item>Add an database columns created_by and modified_by with dates.</item>
+			<item>Add uniqueid to alias, if alias already in use.</item>
 		</note>
 	</changelog>	
 </changelogs>
