@@ -16,7 +16,7 @@
 			<option value="3">MOD_AGOSM_MOUSEOVER</option>
 		</field>
 
-		<field name="popuptext" default="" type="editor" label="COM_AGOSMS_FIELD_POPUP_LABEL" filter="JComponentHelper::filterText" buttons="true" showon="showpopup!:0"  />
+		<field name="popuptext" default="" type="editor" label="COM_AGOSMS_FIELD_POPUP_LABEL" filter="JComponentHelper::filterText" buttons="true" showon="showpopup!:0" />
 
 		<field type="list" name="showdefaultpin" default="1" label="MOD_AGOSM_PIN" description="MOD_AGOSM_PIN_DESC">
 			<option value="1">MOD_AGOSM_STANDARDPIN</option>
@@ -41,51 +41,15 @@
 			<option value="*">JALL</option>
 		</field>
 
-		<field
-			name="created_by"
-			type="user"
-			label="JGLOBAL_FIELD_CREATED_BY_LABEL"
-			validate="UserId"
-		/>
+		<field name="created_by" type="user" label="JGLOBAL_FIELD_CREATED_BY_LABEL" validate="UserId" />
 
-		<field
-			name="created_by_alias"
-			type="text"
-			label="COM_CONTACT_FIELD_CREATED_BY_ALIAS_LABEL"
-			size="20"
-		/>
+		<field name="created_by_alias" type="text" label="COM_CONTACT_FIELD_CREATED_BY_ALIAS_LABEL" size="20" />
 
-		<field
-			name="created"
-			type="calendar"
-			label="COM_CONTACT_FIELD_CREATED_LABEL"
-			size="22"
-			translateformat="true"
-			showtime="true"
-			filter="user_utc"
-		/>
+		<field name="created" type="calendar" label="COM_CONTACT_FIELD_CREATED_LABEL" size="22" translateformat="true" showtime="true" filter="user_utc" />
 
-		<field
-			name="modified"
-			type="calendar"
-			label="JGLOBAL_FIELD_MODIFIED_LABEL"
-			class="readonly"
-			size="22"
-			readonly="true"
-			translateformat="true"
-			showtime="true"
-			filter="user_utc"
-		/>
+		<field name="modified" type="calendar" label="JGLOBAL_FIELD_MODIFIED_LABEL" class="readonly" size="22" readonly="true" translateformat="true" showtime="true" filter="user_utc" />
 
-		<field
-			name="modified_by"
-			type="user"
-			label="JGLOBAL_FIELD_MODIFIED_BY_LABEL"
-			class="readonly"
-			readonly="true"
-			filter="unset"
-			validate="UserId"
-		/>
+		<field name="modified_by" type="user" label="JGLOBAL_FIELD_MODIFIED_BY_LABEL" class="readonly" readonly="true" filter="unset" validate="UserId" />
 
 		<field name="featured" type="radio" layout="joomla.form.field.radio.switcher" label="JFEATURED" default="0">
 			<option value="0">JNO</option>
@@ -115,13 +79,7 @@
 
 		<field name="tags" type="tag" label="JTAG" class="advancedSelect" multiple="true" />
 
-		<field
-			name="cusotm1"
-			type="list"
-			default="English"
-			id="agosmscusotm1"
-			label="JFIELD_LANGUAGE_LABEL"
-			>
+		<field name="cusotm1" type="list" default="English" id="agosmscusotm1" label="JFIELD_LANGUAGE_LABEL">
 			<option value="Albanian">Albanian</option>
 			<option value="Arabic">Arabic</option>
 			<option value="Bosnian">Bosnian</option>
@@ -151,16 +109,10 @@
 			<option value="Serbian">Serbian</option>
 			<option value="Slovenian">Slovenian</option>
 			<option value="Spanish">Spanish</option>
-			<option value="Turkish">Turkish</option>		
+			<option value="Turkish">Turkish</option>
 		</field>
 
-		<field
-			name="cusotm2"
-			type="list"
-			default="Policecontrol"
-			id="agosmscusotm1"
-			label="COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL"
-			>
+		<field name="cusotm2" type="list" default="Policecontrol" id="agosmscusotm1" label="COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL">
 			<option value="Conference">Conference</option>
 			<option value="EducationalEvent">Educational Event</option>
 			<option value="Exhibition">Exhibition / Guided Tour</option>
@@ -171,60 +123,20 @@
 
 		</field>
 
-		<field
-			name="cusotm3"
-			type="calendar"
-			label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL"
-			translateformat="true"
-			default="2022-09-22"
-			maxyear="2022"
-			minyear="2022"
-			showtime="true"
-			size="22"
-			filter="user_utc"
-		/>
+		<field name="cusotm3" type="calendar" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL" translateformat="true" default="2022-09-22" maxyear="2022" minyear="2022" showtime="true" size="22" filter="user_utc" />
 
 		<field name="cusotm4" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL">
 		</field>
 
-		<field
-			name="cusotm5"
-			type="url"
-			label="COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL"
-			size="30"
-			filter="url"
-			validate="url"
-		/>
+		<field name="cusotm5" type="url" label="COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL" size="30" filter="url" validate="url" />
 
-		<field
-			name="cusotm6"
-			type="email"
-			label="JGLOBAL_EMAIL"
-			validate="email"
-			size="30"
-		/>
+		<field name="cusotm6" type="email" label="JGLOBAL_EMAIL" validate="email" size="30" />
 
-		<field
-			name="cusotm7"
-			type="text"
-			label="COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL"
-			size="30"
-		/>
+		<field name="cusotm7" type="text" label="COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL" size="30" />
 
-		<field
-			name="cusotm8"
-			type="textarea"
-			label="COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL"
-			rows="3"
-			cols="30"
-		/>
+		<field name="cusotm8" type="textarea" label="COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL" rows="3" cols="30" />
 
-		<field
-			name="cusotm9"
-			type="media"
-			label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL"
-			hide_none="1"
-		/>
+		<field name="cusotm9" type="media" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL" hide_none="1" />
 
 		<field name="cusotm10" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE10_LABEL">
 		</field>
