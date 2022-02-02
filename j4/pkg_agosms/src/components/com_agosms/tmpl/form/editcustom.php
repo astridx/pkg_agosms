@@ -51,7 +51,7 @@ $this->useCoreUI = true;
             <!-- Modal -->
             <div class="modal fade" id="cordsModal" tabindex="-1" aria-labelledby="cordsModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-agosm">
                         <div class="modal-header">
                             <h5 class="modal-title" id="cordsModalLabel">
                                 <?php echo Text::_('COM_AGOSMS_FIELDSET_COORDS'); ?></h5>
@@ -79,7 +79,7 @@ $this->useCoreUI = true;
             <!-- Modal -->
             <div class="modal fade" id="descModal" tabindex="-1" aria-labelledby="descModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-agosm">
                         <div class="modal-header">
                             <h5 class="modal-title" id="descModalLabel"><?php echo Text::_('COM_AGOSMS_DESC_AGOSM'); ?>
                             </h5>
@@ -107,7 +107,7 @@ $this->useCoreUI = true;
             <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-agosm">
                         <div class="modal-header">
                             <h5 class="modal-title" id="detailModalLabel">Further details on the event</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -157,6 +157,7 @@ $this->useCoreUI = true;
             </div>
             <div style="display:none">
                 <?php echo $this->form->renderField('catid'); ?>
+				<?php echo $this->form->renderField('published'); ?>
                 <?php echo $this->form->renderField('featured'); ?>
                 <?php echo $this->form->renderField('popuptext'); ?>
                 <?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
