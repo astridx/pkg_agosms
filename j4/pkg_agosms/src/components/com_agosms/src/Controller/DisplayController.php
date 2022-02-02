@@ -35,13 +35,12 @@ class DisplayController extends BaseController
 	 *
 	 * @since   __BUMP_VERSION__
 	 */
-	public function __construct($config = array(), MVCFactoryInterface $factory = null, $app = null, $input = null)
+	public function __construct($config = [], MVCFactoryInterface $factory = null, $app = null, $input = null)
 	{
 		// Agosms frontpage Editor contacts proxying.
 		$input = Factory::getApplication()->input;
 
-		if ($input->get('view') === 'agosms' && $input->get('layout') === 'modal')
-		{
+		if ($input->get('view') === 'agosms' && $input->get('layout') === 'modal') {
 			$config['base_path'] = JPATH_COMPONENT_ADMINISTRATOR;
 		}
 
@@ -60,23 +59,21 @@ class DisplayController extends BaseController
 	 */
 	public function display($cachable = false, $urlparams = [])
 	{
-		if (Factory::getApplication()->getUserState('com_agosms.agosm.data') === null)
-		{
+		if (Factory::getApplication()->getUserState('com_agosms.agosm.data') === null) {
 			$cachable = true;
 		}
 
 		$vName = $this->input->get('view', 'categories');
 		$this->input->set('view', $vName);
 
-		if ($this->app->getIdentity()->get('id'))
-		{
+		if ($this->app->getIdentity()->get('id')) {
 			$cachable = false;
 		}
 
-		$safeurlparams = array('catid' => 'INT', 'id' => 'INT', 'cid' => 'ARRAY', 'year' => 'INT', 'month' => 'INT',
+		$safeurlparams = ['catid' => 'INT', 'id' => 'INT', 'cid' => 'ARRAY', 'year' => 'INT', 'month' => 'INT',
 			'limit' => 'UINT', 'limitstart' => 'UINT', 'showall' => 'INT', 'return' => 'BASE64', 'filter' => 'STRING',
 			'filter_order' => 'CMD', 'filter_order_Dir' => 'CMD', 'filter-search' => 'STRING', 'print' => 'BOOLEAN',
-			'lang' => 'CMD');
+			'lang' => 'CMD'];
 
 		parent::display($cachable, $safeurlparams);
 

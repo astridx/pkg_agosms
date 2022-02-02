@@ -65,32 +65,25 @@ class AgosmTable extends Table implements TaggableTableInterface
 		$userId = Factory::getUser()->id;
 
 		// Set created date if not set.
-		if (!(int) $this->created)
-		{
+		if (!(int) $this->created) {
 			$this->created = $date;
 		}
 
-		if ($this->id)
-		{
+		if ($this->id) {
 			// Existing item
 			$this->modified_by = $userId;
 			$this->modified    = $date;
-		}
-		else
-		{
+		} else {
 			// Field created_by field can be set by the user, so we don't touch it if it's set.
-			if (empty($this->created_by))
-			{
+			if (empty($this->created_by)) {
 				$this->created_by = $userId;
 			}
 
-			if (!(int) $this->modified)
-			{
+			if (!(int) $this->modified) {
 				$this->modified = $date;
 			}
 
-			if (empty($this->modified_by))
-			{
+			if (empty($this->modified_by)) {
 				$this->modified_by = $userId;
 			}
 		}
@@ -102,10 +95,9 @@ class AgosmTable extends Table implements TaggableTableInterface
 		//$this->webpage = PunycodeHelper::urlToPunycode($this->webpage);
 
 		// Verify that the alias is unique
-		$table = Table::getInstance('AgosmTable', __NAMESPACE__ . '\\', array('dbo' => $this->getDbo()));
+		$table = Table::getInstance('AgosmTable', __NAMESPACE__ . '\\', ['dbo' => $this->getDbo()]);
 
-		if ($table->load(array('alias' => $this->alias, 'catid' => $this->catid)) && ($table->id != $this->id || $this->id == 0))
-		{
+		if ($table->load(['alias' => $this->alias, 'catid' => $this->catid]) && ($table->id != $this->id || $this->id == 0)) {
 			$this->alias = $this->alias . uniqid();
 		}
 

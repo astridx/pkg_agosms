@@ -53,9 +53,9 @@ class AgosmController extends FormController
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function getModel($name = 'form', $prefix = '', $config = array('ignore_request' => true))
+	public function getModel($name = 'form', $prefix = '', $config = ['ignore_request' => true])
 	{
-		return parent::getModel($name, $prefix, array('ignore_request' => false));
+		return parent::getModel($name, $prefix, ['ignore_request' => false]);
 	}
 
 	/**
@@ -144,27 +144,21 @@ class AgosmController extends FormController
 		$menuitem = (int) $params->get('redirect_menuitem');
 
 		// Check for redirection after submission when creating a new article only
-		if ($menuitem > 0 && $id == 0)
-		{
+		if ($menuitem > 0 && $id == 0) {
 			$lang = '';
 
-			if (Multilanguage::isEnabled())
-			{
+			if (Multilanguage::isEnabled()) {
 				$item = $app->getMenu()->getItem($menuitem);
 				$lang = !is_null($item) && $item->language != '*' ? '&lang=' . $item->language : '';
 			}
 
 			// If ok, redirect to the return page.
-			if ($result)
-			{
+			if ($result) {
 				$this->setRedirect(Route::_('index.php?Itemid=' . $menuitem . $lang, false));
 			}
-		}
-		else
-		{
+		} else {
 			// If ok, redirect to the return page.
-			if ($result)
-			{
+			if ($result) {
 				$this->setRedirect(Route::_($this->getReturnPage(), false));
 			}
 		}
@@ -197,48 +191,37 @@ class AgosmController extends FormController
 
 		$customCancelRedir = (bool) $params->get('custom_cancel_redirect');
 
-		if ($customCancelRedir)
-		{
+		if ($customCancelRedir) {
 			$cancelMenuitemId = (int) $params->get('cancel_redirect_menuitem');
 
-			if ($cancelMenuitemId > 0)
-			{
+			if ($cancelMenuitemId > 0) {
 				$item = $app->getMenu()->getItem($cancelMenuitemId);
 				$lang = '';
 
-				if (Multilanguage::isEnabled())
-				{
+				if (Multilanguage::isEnabled()) {
 					$lang = !is_null($item) && $item->language != '*' ? '&lang=' . $item->language : '';
 				}
 
 				// Redirect to the user specified return page.
 				$redirlink = $item->link . $lang . '&Itemid=' . $cancelMenuitemId;
-			}
-			else
-			{
+			} else {
 				// Redirect to the same article submission form (clean form).
 				$redirlink = $app->getMenu()->getActive()->link . '&Itemid=' . $app->getMenu()->getActive()->id;
 			}
-		}
-		else
-		{
+		} else {
 			$menuitemId = (int) $params->get('redirect_menuitem');
 
-			if ($menuitemId > 0)
-			{
+			if ($menuitemId > 0) {
 				$lang = '';
 				$item = $app->getMenu()->getItem($menuitemId);
 
-				if (Multilanguage::isEnabled())
-				{
+				if (Multilanguage::isEnabled()) {
 					$lang = !is_null($item) && $item->language != '*' ? '&lang=' . $item->language : '';
 				}
 
 				// Redirect to the general (redirect_menuitem) user specified return page.
 				$redirlink = $item->link . $lang . '&Itemid=' . $menuitemId;
-			}
-			else
-			{
+			} else {
 				// Redirect to the return page.
 				$redirlink = $this->getReturnPage();
 			}
@@ -267,8 +250,7 @@ class AgosmController extends FormController
 		$append = '';
 
 		// Setup redirect info.
-		if ($tmpl)
-		{
+		if ($tmpl) {
 			$append .= '&tmpl=' . $tmpl;
 		}
 
@@ -280,18 +262,15 @@ class AgosmController extends FormController
 		$return = $this->getReturnPage();
 		$catId  = $this->input->getInt('catid');
 
-		if ($itemId)
-		{
+		if ($itemId) {
 			$append .= '&Itemid=' . $itemId;
 		}
 
-		if ($catId)
-		{
+		if ($catId) {
 			$append .= '&catid=' . $catId;
 		}
 
-		if ($return)
-		{
+		if ($return) {
 			$append .= '&return=' . base64_encode($return);
 		}
 
@@ -311,8 +290,7 @@ class AgosmController extends FormController
 	{
 		$return = $this->input->get('return', null, 'base64');
 
-		if (empty($return) || !Uri::isInternal(base64_decode($return)))
-		{
+		if (empty($return) || !Uri::isInternal(base64_decode($return))) {
 			return Uri::base();
 		}
 

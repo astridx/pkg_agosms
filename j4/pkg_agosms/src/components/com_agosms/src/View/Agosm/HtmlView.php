@@ -74,54 +74,47 @@ class HtmlView extends BaseHtmlView
 			&& $active->component == 'com_agosms'
 			&& isset($active->query['view'], $active->query['id'])
 			&& $active->query['view'] == 'agosm'
-			&& $active->query['id'] == $item->id)
-		{
+			&& $active->query['id'] == $item->id) {
 			$this->menuItemMatchContact = true;
 
 			// Load layout from active query (in case it is an alternative menu item)
-			if (isset($active->query['layout']))
-			{
+			if (isset($active->query['layout'])) {
 				$this->setLayout($active->query['layout']);
 			}
 			// Check for alternative layout of agosm
-			elseif ($layout = $item->params->get('agosm_layout'))
-			{
+			else if ($layout = $item->params->get('agosm_layout')) {
 				$this->setLayout($layout);
 			}
 
 			$item->params->merge($temp);
-		}
-		else
-		{
+		} else {
 			// Merge so that agosm params take priority
 			$temp->merge($item->params);
 			$item->params = $temp;
 
-			if ($layout = $item->params->get('agosm_layout'))
-			{
+			if ($layout = $item->params->get('agosm_layout')) {
 				$this->setLayout($layout);
 			}
 		}
 
 		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
+		if (count($errors = $this->get('Errors'))) {
 			throw new GenericDataException(implode("\n", $errors), 500);
 		}
 
 
 		$offset = $state->get('list.offset');
-		$app->triggerEvent('onContentPrepare', array ('com_contact.contact', &$item, &$item->params, $offset));
+		$app->triggerEvent('onContentPrepare', ['com_contact.contact', &$item, &$item->params, $offset]);
 
 		// Store the events for later
 		$item->event = new \stdClass;
-		$results = $app->triggerEvent('onContentAfterTitle', array('com_contact.contact', &$item, &$item->params, $offset));
+		$results = $app->triggerEvent('onContentAfterTitle', ['com_contact.contact', &$item, &$item->params, $offset]);
 		$item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-		$results = $app->triggerEvent('onContentBeforeDisplay', array('com_contact.contact', &$item, &$item->params, $offset));
+		$results = $app->triggerEvent('onContentBeforeDisplay', ['com_contact.contact', &$item, &$item->params, $offset]);
 		$item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-		$results = $app->triggerEvent('onContentAfterDisplay', array('com_contact.contact', &$item, &$item->params, $offset));
+		$results = $app->triggerEvent('onContentAfterDisplay', ['com_contact.contact', &$item, &$item->params, $offset]);
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
 
 

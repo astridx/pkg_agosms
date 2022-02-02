@@ -42,12 +42,9 @@ class WordintextRule extends FormRule
 		$params = ComponentHelper::getParams('com_agosms');
 		$banned = $params->get('agosms_b_text');
 
-		if ($banned)
-		{
-			foreach (explode(';', $banned) as $item)
-			{
-				if ($item != '' && StringHelper::stristr($value, $item) !== false)
-				{
+		if ($banned) {
+			foreach (explode(';', $banned) as $item) {
+				if ($item != '' && StringHelper::stristr($value, $item) !== false) {
 					return false;
 				}
 			}

@@ -35,7 +35,7 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 	 *
 	 * @since  4.0.0
 	 */
-	public $typeAlias = 'com_agosms.agosm'; 
+	public $typeAlias = 'com_agosms.agosm';
 
 	/**
 	 * Name of the form
@@ -202,13 +202,11 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 	{
 		$params = $this->getState()->get('params');
 
-		if ($params && $params->get('enable_category') == 1 && $params->get('catid'))
-		{
+		if ($params && $params->get('enable_category') == 1 && $params->get('catid')) {
 			$form->setFieldAttribute('catid', 'default', $params->get('catid'));
 			$form->setFieldAttribute('catid', 'readonly', 'true');
 
-			if (Multilanguage::isEnabled())
-			{
+			if (Multilanguage::isEnabled()) {
 				$categoryId = (int) $params->get('catid');
 
 				$db    = $this->getDbo();
@@ -221,16 +219,14 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 
 				$result = $db->loadResult();
 
-				if ($result != '*')
-				{
+				if ($result != '*') {
 					$form->setFieldAttribute('language', 'readonly', 'true');
 					$form->setFieldAttribute('language', 'default', $result);
 				}
 			}
 		}
 
-		if (!Multilanguage::isEnabled())
-		{
+		if (!Multilanguage::isEnabled()) {
 			$form->setFieldAttribute('language', 'type', 'hidden');
 			$form->setFieldAttribute('language', 'default', '*');
 		}
