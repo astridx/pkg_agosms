@@ -160,6 +160,7 @@ $this->useCoreUI = true;
 				<?php echo $this->form->renderField('published'); ?>
                 <?php echo $this->form->renderField('featured'); ?>
                 <?php echo $this->form->renderField('popuptext'); ?>
+                <?php echo $this->form->renderField('showpopup'); ?>
                 <?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
             </div>
 

@@ -13,6 +13,7 @@ $unique = $module->id . '_' . uniqid();
 ?>
 
 <div style="
+	z-index:1;
 	width:auto;
 	height:<?php echo $params->get('height', '400'); ?><?php echo $params->get('heightunit', 'px'); ?>;"
 	data-module-id="<?php echo $module->id; ?>"

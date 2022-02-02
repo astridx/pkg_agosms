@@ -102,7 +102,7 @@ if (!$leafletIsLoaded) {
             }).addTo(map);
 
         var marker = L.marker([<?php echo $cords[0]; ?>, <?php echo $cords[1]; ?>])
-            .addTo<?php echo Text::_('JUNPUBLISHED'); ?>(map);
+            .addTo(map);
 
     }, false);
     </script>

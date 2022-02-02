@@ -40,7 +40,7 @@
 		<field
 			type="list"
 			name="showpopup"
-			default="0"
+			default="4"
 			label="MOD_AGOSM_POPUP"
 			description="MOD_AGOSM_POPUP_DESC"
 		>
@@ -48,6 +48,7 @@
 			<option value="2">MOD_AGOSM_ALWAYS</option>
 			<option value="0">MOD_AGOSM_NEVER</option>
 			<option value="3">MOD_AGOSM_MOUSEOVER</option>
+			<option value="4">MOD_AGOSM_KLICK_LINK</option>
 		</field>
 
 		<field

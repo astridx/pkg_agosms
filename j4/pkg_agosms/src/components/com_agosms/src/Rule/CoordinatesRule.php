@@ -25,7 +25,7 @@ class CoordinatesRule extends FormRule
 	 * @var    string
 	 * @since  __DEPLOY_VERSION__
 	 */
-	protected $regex = '^([0-9.]+[,][0-9.]+)$';
+	protected $regex = '^([-0-9.]+[,][-0-9.]+)$';
 
 	/**
 	 * The regular expression modifiers to use when testing a form field value.

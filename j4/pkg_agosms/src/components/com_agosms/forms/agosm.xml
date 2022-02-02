@@ -9,11 +9,12 @@
 
 		<field name="description" validate="Wordintext" default="" type="editor" label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL" filter="JComponentHelper::filterText" buttons="true" hide="readmore,pagebreak,module,article,fields,menu,contact" />
 
-		<field type="list" name="showpopup" default="0" label="MOD_AGOSM_POPUP" description="MOD_AGOSM_POPUP_DESC">
+		<field type="list" name="showpopup" default="4" label="MOD_AGOSM_POPUP" description="MOD_AGOSM_POPUP_DESC">
 			<option value="1">MOD_AGOSM_KLICK</option>
 			<option value="2">MOD_AGOSM_ALWAYS</option>
 			<option value="0">MOD_AGOSM_NEVER</option>
 			<option value="3">MOD_AGOSM_MOUSEOVER</option>
+			<option value="4">MOD_AGOSM_KLICK_LINK</option>
 		</field>
 
 		<field name="popuptext" default="" type="editor" label="COM_AGOSMS_FIELD_POPUP_LABEL" filter="JComponentHelper::filterText" buttons="true" showon="showpopup!:0" />
