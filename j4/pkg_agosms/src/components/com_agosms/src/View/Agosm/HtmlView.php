@@ -55,50 +55,87 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null)
 	{
-		$item = $this->item = $this->get('Item');
-
-		$state = $this->State = $this->get('State');
-		$params = $this->Params = $state->get('params');
-		$itemparams = new Registry(json_decode($item->params));
+		$app = Factory::getApplication();
+		$user = Factory::getUser();
+		$state = $this->get('State');
+		$item = $this->get('Item');
+		$this->form = $this->get('Form');
+		$params = $state->get('params');
 
 		$temp = clone $params;
 
-		/**
-		 * $item->params are the agosm params, $temp are the menu item params
-		 * Merge so that the menu item params take priority
-		 *
-		 * $itemparams->merge($temp);
-		 */
+		$active = $app->getMenu()->getActive();
 
-		// Merge so that agosm params take priority
-		$temp->merge($itemparams);
-		$item->params = $temp;
+		// If the current view is the active item and a agosm view for this agosm, then the menu item params take priority
+		if ($active
+			&& $active->component == 'com_agosms'
+			&& isset($active->query['view'], $active->query['id'])
+			&& $active->query['view'] == 'agosm'
+			&& $active->query['id'] == $item->id)
+		{
+			$this->menuItemMatchContact = true;
 
-		$active = Factory::getApplication()->getMenu()->getActive();
-
-		// Override the layout only if this is not the active menu item
-		// If it is the active menu item, then the view and item id will match
-		if ((!$active) || ((strpos($active->link, 'view=agosm') === false) || (strpos($active->link, '&id=' . (string) $this->item->id) === false))) {
-			if (($layout = $item->params->get('agosms_layout'))) {
+			// Load layout from active query (in case it is an alternative menu item)
+			if (isset($active->query['layout']))
+			{
+				$this->setLayout($active->query['layout']);
+			}
+			// Check for alternative layout of agosm
+			elseif ($layout = $item->params->get('agosm_layout'))
+			{
 				$this->setLayout($layout);
 			}
-		} else if (isset($active->query['layout'])) {
-			// We need to set the layout in case this is an alternative menu item (with an alternative layout)
-			$this->setLayout($active->query['layout']);
+
+			$item->params->merge($temp);
+		}
+		else
+		{
+			// Merge so that agosm params take priority
+			$temp->merge($item->params);
+			$item->params = $temp;
+
+			if ($layout = $item->params->get('agosm_layout'))
+			{
+				$this->setLayout($layout);
+			}
 		}
 
-		Factory::getApplication()->triggerEvent('onContentPrepare', ['com_agosms.agosm', &$item]);
+		// Check for errors.
+		if (count($errors = $this->get('Errors')))
+		{
+			throw new GenericDataException(implode("\n", $errors), 500);
+		}
+
+		// Check if access is not public
+		$groups = $user->getAuthorisedViewLevels();
+
+		if (!in_array($item->access, $groups) || !in_array($item->category_access, $groups))
+		{
+			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$app->setHeader('status', 403, true);
+
+			return false;
+		}
+
+
+
+
+
+
+
+		$app->triggerEvent('onContentPrepare', array ('com_contact.contact', &$item, &$item->params, $offset));
 
 		// Store the events for later
 		$item->event = new \stdClass;
-		$results = Factory::getApplication()->triggerEvent('onContentAfterTitle', ['com_agosms.agosm', &$item, &$item->params]);
+		$results = $app->triggerEvent('onContentAfterTitle', array('com_contact.contact', &$item, &$item->params, $offset));
 		$item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-		$results = Factory::getApplication()->triggerEvent('onContentBeforeDisplay', ['com_agosms.agosm', &$item, &$item->params]);
+		$results = $app->triggerEvent('onContentBeforeDisplay', array('com_contact.contact', &$item, &$item->params, $offset));
 		$item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-		$results = Factory::getApplication()->triggerEvent('onContentAfterDisplay', ['com_agosms.agosm', &$item, &$item->params]);
+		$results = $app->triggerEvent('onContentAfterDisplay', array('com_contact.contact', &$item, &$item->params, $offset));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
+
 
 		return parent::display($tpl);
 	}

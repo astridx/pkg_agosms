@@ -45,7 +45,7 @@ $this->useCoreUI = true;
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'cords', Text::_('COM_AGOSMS_FIELDSET_COORDS')); ?>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cordsModal">
-			<?php echo Text::_('COM_AGOSMS_HINTS_AGOSM'); ?>
+                <?php echo Text::_('COM_AGOSMS_HINTS_AGOSM'); ?>
             </button>
 
             <!-- Modal -->
@@ -69,7 +69,7 @@ $this->useCoreUI = true;
             <?php echo $this->form->renderField('coordinates'); ?>
             <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
-			
+
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'details', empty($this->item->id) ? Text::_('COM_AGOSMS_DESC_AGOSM') : Text::_('COM_AGOSMS_EDIT_AGOSM')); ?>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#descModal">
@@ -100,7 +100,7 @@ $this->useCoreUI = true;
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'custom', Text::_('COM_AGOSMS_FIELDSET_CUSTOM')); ?>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal">
-			<?php echo Text::_('COM_AGOSMS_HINTS_AGOSM'); ?>
+                <?php echo Text::_('COM_AGOSMS_HINTS_AGOSM'); ?>
             </button>
 
             <!-- Modal -->
@@ -156,6 +156,8 @@ $this->useCoreUI = true;
                 <?php endif; ?>
             </div>
             <div style="display:none">
+                <?php echo $this->form->renderField('catid'); ?>
+                <?php echo $this->form->renderField('featured'); ?>
                 <?php echo $this->form->renderField('popuptext'); ?>
                 <?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
             </div>
@@ -170,7 +172,8 @@ $this->useCoreUI = true;
             <?php echo HTMLHelper::_('form.token'); ?>
         </fieldset>
         <div class="mb-2">
-            <button type="button" class="btn btn-primary" onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
+            <button type="button" class="btn btn-primary"
+                onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
                 <span class="icon-check" aria-hidden="true"></span>
                 <?php echo Text::_('JSAVE'); ?>
             </button>
