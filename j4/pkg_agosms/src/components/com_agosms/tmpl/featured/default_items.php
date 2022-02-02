@@ -7,57 +7,193 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-\defined('_JEXEC') or die;
+defined('_JEXEC') or die;
 
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
+use AgosmNamespace\Component\Agosms\Site\Helper\RouteHelper;
+
+/** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
+//$wa = $this->document->getWebAssetManager();
+//$wa->useScript('com_agosm.agosms-list');
 
 HTMLHelper::_('behavior.core');
-
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 
 ?>
-
-<div class="com-agosms-featured__items">
-	<?php if (empty($this->items)) : ?>
-		<p class="com-agosms-featured__message"> <?php echo Text::_('COM_AGOSM_NO_AGOSMS'); ?>	 </p>
-	<?php else : ?>
+<div class="com-agosm-featured__items">
 	<form action="<?php echo htmlspecialchars(Uri::getInstance()->toString()); ?>" method="post" name="adminForm" id="adminForm">
-		<table class="com-agosms-featured__table table">
+		<?php if ($this->params->get('filter_field')) : ?>
+			<div class="com-agosm-featured__filter btn-group">
+				<label class="filter-search-lbl visually-hidden" for="filter-search">
+					<?php echo Text::_('COM_AGOSMS_FILTER_SEARCH_DESC'); ?>
+				</label>
+				<input
+					type="text"
+					name="filter-search"
+					id="filter-search"
+					value="<?php echo $this->escape($this->state->get('list.filter')); ?>"
+					class="inputbox" onchange="document.adminForm.submit();"
+					placeholder="<?php echo Text::_('COM_AGOSMS_FILTER_SEARCH_DESC'); ?>"
+				>
+				<button type="submit" name="filter_submit" class="btn btn-primary"><?php echo Text::_('JGLOBAL_FILTER_BUTTON'); ?></button>
+				<button type="reset" name="filter-clear-button" class="btn btn-secondary"><?php echo Text::_('JSEARCH_FILTER_CLEAR'); ?></button>
+			</div>
+		<?php endif; ?>
+
+		<?php if ($this->params->get('show_pagination_limit')) : ?>
+			<div class="com-agosm-featured__pagination btn-group float-end">
+				<label for="limit" class="visually-hidden">
+					<?php echo Text::_('JGLOBAL_DISPLAY_NUM'); ?>
+				</label>
+				<?php echo $this->pagination->getLimitBox(); ?>
+			</div>
+		<?php endif; ?>
+
+		<?php if (empty($this->items)) : ?>
+			<div class="alert alert-info">
+				<span class="icon-info-circle" aria-hidden="true"></span><span class="visually-hidden"><?php echo Text::_('INFO'); ?></span>
+					<?php echo Text::_('COM_AGOSMS_NO_AGOSMSS'); ?>
+			</div>
+		<?php else : ?>
+		<table class="com-agosm-featured__table table table-striped table-bordered table-hover">
+			<caption class="visually-hidden">
+				<?php echo Text::_('COM_AGOSMS_TABLE_CAPTION'); ?>,
+			</caption>
 			<?php if ($this->params->get('show_headings')) : ?>
-			<thead class="thead-default">
-				<tr>
-					<th class="item-num">
-						<?php echo Text::_('JGLOBAL_NUM'); ?>
-					</th>
+				<thead>
+					<tr>
+						<th scope="col" class="item-title">
+							<?php echo HTMLHelper::_('grid.sort', 'JGLOBAL_TITLE', 'a.name', $listDirn, $listOrder); ?>
+						</th>
 
-					<th class="item-title">
-						<?php echo HTMLHelper::_('grid.sort', 'COM_AGOSM_AGOSM_EMAIL_NAME_LABEL', 'a.name', $listDirn, $listOrder); ?>
-					</th>
-				</tr>
-			</thead>
+						<?php if ($this->params->get('show_position_headings')) : ?>
+						<th scope="col" class="item-position">
+							<?php echo HTMLHelper::_('grid.sort', 'COM_AGOSMS_POSITION', 'a.con_position', $listDirn, $listOrder); ?>
+						</th>
+						<?php endif; ?>
+
+						<?php if ($this->params->get('show_email_headings')) : ?>
+						<th scope="col" class="item-email">
+							<?php echo Text::_('JGLOBAL_EMAIL'); ?>
+						</th>
+						<?php endif; ?>
+
+						<?php if ($this->params->get('show_telephone_headings')) : ?>
+						<th scope="col" class="item-phone">
+							<?php echo Text::_('COM_AGOSMS_TELEPHONE'); ?>
+						</th>
+						<?php endif; ?>
+
+						<?php if ($this->params->get('show_mobile_headings')) : ?>
+						<th scope="col" class="item-phone">
+							<?php echo Text::_('COM_AGOSMS_MOBILE'); ?>
+						</th>
+						<?php endif; ?>
+
+						<?php if ($this->params->get('show_fax_headings')) : ?>
+						<th scope="col" class="item-phone">
+							<?php echo Text::_('COM_AGOSMS_FAX'); ?>
+						</th>
+						<?php endif; ?>
+
+						<?php if ($this->params->get('show_suburb_headings')) : ?>
+						<th scope="col" class="item-suburb">
+							<?php echo HTMLHelper::_('grid.sort', 'COM_AGOSMS_SUBURB', 'a.suburb', $listDirn, $listOrder); ?>
+						</th>
+						<?php endif; ?>
+
+						<?php if ($this->params->get('show_state_headings')) : ?>
+						<th scope="col" class="item-state">
+							<?php echo HTMLHelper::_('grid.sort', 'COM_AGOSMS_STATE', 'a.state', $listDirn, $listOrder); ?>
+						</th>
+						<?php endif; ?>
+
+						<?php if ($this->params->get('show_country_headings')) : ?>
+						<th scope="col" class="item-state">
+							<?php echo HTMLHelper::_('grid.sort', 'COM_AGOSMS_COUNTRY', 'a.country', $listDirn, $listOrder); ?>
+						</th>
+						<?php endif; ?>
+					</tr>
+				</thead>
 			<?php endif; ?>
-
 			<tbody>
 				<?php foreach ($this->items as $i => $item) : ?>
-					<tr class="<?php echo ($i % 2) ? 'odd' : 'even'; ?>" itemscope itemtype="https://schema.org/Person">
-						<td class="item-num">
-							<?php echo $i; ?>
-						</td>
+					<?php if ($this->items[$i]->published == 0) : ?>
+						<tr class="system-unpublished featured-list-row<?php echo $i % 2; ?>">
+					<?php else : ?>
+						<tr class="featured-list-row<?php echo $i % 2; ?>" itemscope itemtype="https://schema.org/Person">
+					<?php endif; ?>
+					<th scope="row" class="list-title">
+						<a href="<?php echo Route::_(RouteHelper::getAgosmRoute($item->slug, $item->catid, $item->language)); ?>" itemprop="url">
+							<span itemprop="name"><?php echo $this->escape($item->name); ?></span>
+						</a>
+						<?php if ($item->published == 0) : ?>
+							<div>
+								<span class="list-published badge bg-warning text-light">
+									<?php echo Text::_('JUNPUBLISHED'); ?>
+								</span>
+							</div>
+						<?php endif; ?>
+					</th>
 
-						<td class="item-title">
-							<?php if ($this->items[$i]->published == 0) : ?>
-								<span class="badge badge-warning"><?php echo Text::_('JUNPUBLISHED'); ?></span>
-							<?php endif; ?>
-								<span itemprop="name"><?php echo $item->name; ?></span>
+					<?php if ($this->params->get('show_position_headings')) : ?>
+						<td class="item-position" itemprop="jobTitle">
+							<?php echo $item->con_position; ?>
 						</td>
-					</tr>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_email_headings')) : ?>
+						<td class="item-email" itemprop="email">
+							<?php echo $item->email_to; ?>
+						</td>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_telephone_headings')) : ?>
+						<td class="item-phone" itemprop="telephone">
+							<?php echo $item->telephone; ?>
+						</td>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_mobile_headings')) : ?>
+						<td class="item-phone" itemprop="telephone">
+							<?php echo $item->mobile; ?>
+						</td>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_fax_headings')) : ?>
+						<td class="item-phone" itemprop="faxNumber">
+							<?php echo $item->fax; ?>
+						</td>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_suburb_headings')) : ?>
+						<td class="item-suburb" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+							<span itemprop="addressLocality"><?php echo $item->suburb; ?></span>
+						</td>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_state_headings')) : ?>
+						<td class="item-state" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+							<span itemprop="addressRegion"><?php echo $item->state; ?></span>
+						</td>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_country_headings')) : ?>
+						<td class="item-state" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+							<span itemprop="addressCountry"><?php echo $item->country; ?></span>
+						</td>
+					<?php endif; ?>
 				<?php endforeach; ?>
 			</tbody>
 		</table>
-
+		<?php endif; ?>
+		<div>
+			<input type="hidden" name="filter_order" value="<?php echo $this->escape($this->state->get('list.ordering')); ?>">
+			<input type="hidden" name="filter_order_Dir" value="<?php echo $this->escape($this->state->get('list.direction')); ?>">
+		</div>
 	</form>
-	<?php endif; ?>
 </div>

@@ -14,6 +14,7 @@ namespace AgosmNamespace\Component\Agosms\Site\View\Agosm;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Factory;
 use Joomla\Registry\Registry;
+use Joomla\CMS\Language\Text;
 
 /**
  * HTML Agosms View class for the Agosm component
@@ -58,9 +59,11 @@ class HtmlView extends BaseHtmlView
 		$app = Factory::getApplication();
 		$user = Factory::getUser();
 		$state = $this->get('State');
-		$item = $this->get('Item');
+		$this->item = $item = $this->get('Item');
 		$this->form = $this->get('Form');
 		$params = $state->get('params');
+		$item->params = new Registry(json_decode($item->params));
+
 
 		$temp = clone $params;
 
@@ -106,23 +109,8 @@ class HtmlView extends BaseHtmlView
 			throw new GenericDataException(implode("\n", $errors), 500);
 		}
 
-		// Check if access is not public
-		$groups = $user->getAuthorisedViewLevels();
 
-		if (!in_array($item->access, $groups) || !in_array($item->category_access, $groups))
-		{
-			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
-			$app->setHeader('status', 403, true);
-
-			return false;
-		}
-
-
-
-
-
-
-
+		$offset = $state->get('list.offset');
 		$app->triggerEvent('onContentPrepare', array ('com_contact.contact', &$item, &$item->params, $offset));
 
 		// Store the events for later

@@ -17,13 +17,6 @@ $canDo   = ContentHelper::getActions('com_agosms', 'category', $this->item->cati
 $canEdit = $canDo->get('core.edit') || ($canDo->get('core.edit.own') && $this->item->created_by == Factory::getUser()->id);
 $tparams = $this->item->params;
 
-if ($tparams->get('show_name')) {
-	if ($this->Params->get('show_agosm_name_label')) {
-		echo Text::_('COM_AGOSMS_NAME');
-	}
-
-	echo $this->item->name;
-}
 ?>
 
 <?php if ($canEdit) : ?>

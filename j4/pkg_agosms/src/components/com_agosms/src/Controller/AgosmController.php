@@ -272,7 +272,7 @@ class AgosmController extends FormController
 			$append .= '&tmpl=' . $tmpl;
 		}
 
-		$append .= '&layout=edit';
+		$append .= '&layout=editcustom';
 
 		$append .= '&' . $urlVar . '=' . (int) $recordId;
 
