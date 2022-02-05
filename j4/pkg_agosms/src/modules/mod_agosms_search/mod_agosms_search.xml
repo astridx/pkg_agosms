@@ -15,29 +15,14 @@
 	<!-- Front-end files -->
 	<files>
 		<file module="mod_agosms_search">mod_agosms_search.php</file>
-		<folder>tmpl</folder>
-		<folder>language</folder>
-		<file>script.php</file>
-		<file>helper.php</file>
-		<folder>includes</folder>
-		<file>mod_agosms_search.xml</file>
-		<file module="mod_agosms_search">mod_agosms_search.php</file>
+		##MODULE_FILES##
 	</files>
 	<languages folder="language">
 		##LANGUAGE_FILES##
 	</languages>
 	<!-- Media files -->
 	<media folder="media/mod_agosms_search" destination="mod_agosms_search">
-		<folder>locate</folder>
-		<folder>cluster</folder>
-		<folder>fonts</folder>
-		<folder>select</folder>
-		<folder>css</folder>
-		<folder>history</folder>
-		<folder>datepicker</folder>
-		<folder>js</folder>
-		<folder>leaflet</folder>
-		<folder>slider</folder>
+		##MEDIA_FILES##
 	</media>
 
 	<config>
@@ -133,7 +118,6 @@
 
 				<field name="results_template" type="list" class="btn-group" default="standard" label="MOD_AGOSMSSEARCHRESULTS_TEMPLATE">
 					<option value="standard">Standard</option>
-					<option value="helix">Helix</option>
 				</field>
 				<field name="include_featured" type="radio" class="btn-group" default="Yes" label="MOD_AGOSMSSEARCHRESULTS_FEATURED">
 					<option value="Yes">MOD_AGOSMSSEARCHYES</option>

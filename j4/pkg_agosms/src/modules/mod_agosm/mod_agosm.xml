@@ -15,28 +15,11 @@
 	<!-- Front-end files -->
 	<files>
 		<file module="mod_agosm">mod_agosm.php</file>
-		<file>mod_agosm.xml</file>
-		<folder>models</folder>
-		<folder>language</folder>
-		<folder>tmpl</folder>
-		<file>script.php</file>
-		<folder>src</folder>
-		<file module="mod_agosm">mod_agosm.php</file>
+		##MODULE_FILES##
 	</files>
 	<!-- Media files -->
 	<media folder="media/mod_agosm" destination="mod_agosm">
-		<folder>Leaflet.awesome-markers</folder>
-		<folder>locate</folder>
-		<folder>cluster</folder>
-		<folder>fonts</folder>
-		<folder>GoogleGestureHandling</folder>
-		<folder>css</folder>
-		<folder>fullscreen</folder>
-		<folder>leaflet-gpx</folder>
-		<folder>js</folder>
-		<folder>mouseposition</folder>
-		<folder>leaflet</folder>
-		<file>joomla.asset.json</file>
+		##MEDIA_FILES##
 	</media>
 
 	<!-- Configuration -->

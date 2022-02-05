@@ -15,7 +15,7 @@ require_once(JPATH_SITE . "/plugins/system/agosmssearch/models/com_content/model
 
 JHtml::_('bootstrap.framework');
 $document = JFactory::getDocument();
-$document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
+//$document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
 
 $date_format = explode("::", $params->get("date_format", "%e %b %Y::d M yyyy"))[0];
 $date_format_text = explode("::", $params->get("date_format"))[1];

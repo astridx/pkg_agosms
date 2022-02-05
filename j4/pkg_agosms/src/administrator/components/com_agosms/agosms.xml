@@ -23,14 +23,10 @@
 	</uninstall>
 	<!-- Frond-end files -->
 	<files folder="components/com_agosms">
-		<folder>language</folder>
-		<folder>src</folder>
-		<folder>tmpl</folder>
+		##FRONTEND_COMPONENT_FILES##
 	</files>
     <media folder="media/com_agosms" destination="com_agosms">
-		<filename>joomla.asset.json</filename>
-		<folder>js</folder>
-		<folder>css</folder>
+		##MEDIA_FILES##
     </media>
 	<!-- Back-end files -->
 	<administration>
@@ -54,21 +50,12 @@
 					<menu-quicktask-title>JCATEGORY</menu-quicktask-title>
 					<menu-quicktask>index.php?option=com_categories&amp;view=category&amp;layout=edit&amp;extension=com_agosms</menu-quicktask>
 				</params>
+			</menu>
 			<menu link="option=com_fields&amp;context=com_agosms.agosm">JGLOBAL_FIELDS</menu>
 			<menu link="option=com_fields&amp;view=groups&amp;context=com_agosms.agosm">JGLOBAL_FIELD_GROUPS</menu>				
-			</menu>
 		</submenu>
 		<files folder="administrator/components/com_agosms">
-			<filename>access.xml</filename>
-			<filename>agosms.xml</filename>
-			<filename>config.xml</filename>
-			<folder>forms</folder>
-			<folder>language</folder>
-			<folder>layouts</folder>
-			<folder>services</folder>
-			<folder>sql</folder>
-			<folder>src</folder>
-			<folder>tmpl</folder>
+			##BACKEND_COMPONENT_FILES##
 		</files>
 	</administration>
 	<api>
