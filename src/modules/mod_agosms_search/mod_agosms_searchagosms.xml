@@ -21,13 +21,13 @@
 		<file>helper.php</file>
 		<folder>includes</folder>
 		<file>mod_agosms_search.xml</file>
-		<file module="mod_agosms_search">mod_agosms_search.php</file>
+		<file module="mod_agosms_searchagosms">mod_agosms_searchagosms.php</file>
 	</files>
 	<languages folder="language">
 		##LANGUAGE_FILES##
 	</languages>
 	<!-- Media files -->
-	<media folder="media/mod_agosms_search" destination="mod_agosms_search">
+	<media folder="media/mod_agosms_searchagosms" destination="mod_agosms_searchagosms">
 		<folder>locate</folder>
 		<folder>cluster</folder>
 		<folder>fonts</folder>

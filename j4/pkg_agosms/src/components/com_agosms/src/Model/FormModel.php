@@ -58,7 +58,18 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 	 */
 	public function getForm($data = [], $loadData = true)
 	{
-		$form = parent::getForm($data, $loadData);
+
+		$app = Factory::getApplication();
+		$layout = $app->input->get('layout');
+
+
+
+		// Get the form.
+		$form = $this->loadForm($this->typeAlias, $layout, ['control' => 'jform', 'load_data' => $loadData]);
+
+		if (empty($form)) {
+			return false;
+		}
 
 		// Prevent messing with article language and category when editing existing agosms with associations
 		if ($id = $this->getState('agosm.id') && Associations::isEnabled()) {
@@ -104,7 +115,7 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 		}
 
 		$properties = $table->getProperties();
-		$value      = ArrayHelper::toObject($properties, \Joomla\CMS\Object\CMSObject::class);
+		$value = ArrayHelper::toObject($properties, \Joomla\CMS\Object\CMSObject::class);
 
 		// Convert field to Registry.
 		$value->params = new Registry($value->params);

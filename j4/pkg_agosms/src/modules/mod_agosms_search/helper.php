@@ -12,6 +12,8 @@
 // No direct access
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+
 class modAgosmsSearchHelper
 {
 	var $params;
@@ -77,8 +79,9 @@ class modAgosmsSearchHelper
 
 		foreach ($results as $category) {
 			$categories[] = $category;
+			$app = Factory::getApplication();
 
-			if (JFactory::getApplication()->isSite() && $params) {
+			if ($app->isClient('site') && $params) {
 				if ($params->get("restrict")) {
 					if ($params->get("restsub")) {
 						$subs = (array) $this->getCategories($category->id, $params);
