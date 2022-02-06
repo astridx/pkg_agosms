@@ -8,14 +8,20 @@
  * @link        astrid-guenther.de
  */
 
-// no direct access
 defined('_JEXEC') or die;
 
 require_once(JPATH_SITE . "/plugins/system/agosmssearchagosms/models/com_agosms/model.php");
 
-JHtml::_('bootstrap.framework');
 $document = JFactory::getDocument();
-//$document->addStyleSheet(JURI::root(true) . '/media/jui/css/icomoon.css');
+
+$document->addStyleSheet('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
+$document->addScript('https://code.jquery.com/jquery-3.3.1.slim.min.js');
+$document->addScript('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js');
+$document->addScript('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/js/bootstrap-select.min.js');
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_searchagosms/css/bootstrap-select.min.css');
+
+$wa = $document->getWebAssetManager();
 
 $date_format = explode("::", $params->get("date_format", "%e %b %Y::d M yyyy"))[0];
 $date_format_text = explode("::", $params->get("date_format"))[1];
@@ -25,6 +31,12 @@ $curr_locale = JFactory::getLanguage()->getLocale();
 setlocale(LC_ALL, $curr_locale);
 
 ?>
+
+
+
+
+
+
 
 <script type="text/javascript">
 
@@ -72,12 +84,7 @@ setlocale(LC_ALL, $curr_locale);
 
 </script>
 
-<?php
-// See https://developer.snapappointments.com/bootstrap-select/ and https://github.com/snapappointments/bootstrap-select
-$doc = JFactory::getDocument();
-$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_searchagosms/select/bootstrap-select.min.css');
-$document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/select/bootstrap-select.min.js');
-?>
+
 
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -86,9 +93,9 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/select/b
 				$(this).find("option:eq(0)").attr("disabled", "disabled");
 			}
 			$(this).selectpicker({
-				//actionsBox: true,
-				//selectAllText: "Select All",
-				//deselectAllText: "Clear",
+				actionsBox: true,
+				selectAllText: "Select All",
+				deselectAllText: "Clear",
 				title: $(this).find("option:eq(0)").text(),
 				liveSearch: "true",
 				iconBase: "icon",
@@ -150,7 +157,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/datepick
 	<p><?php echo $params->get('descr'); ?></p>
 	<?php endif; ?>
 	
-	<form action="#gsearch-results" name="GSearch<?php echo $module->id; ?>" method="get">		
+<form action="#gsearch-results" name="GSearch<?php echo $module->id; ?>" method="get">		
 	  <div class="gsearch-table">
 
 <?php for ($filters_counter = 0; $filters_counter < count($filters); $filters_counter++) {
@@ -161,30 +168,39 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/datepick
 		<?php
 		switch ($field->type) {
 			case 'keyword':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/keyword'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/basic/keyword'));
 				break;
 				
 			case 'title_select':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/title_select'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/basic/title_select'));
 				break;
 				
+			case 'cusotm1_select':
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/basic/cusotm1_select'));
+				break;
+
+			case 'cusotm2_select':
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/basic/cusotm2_select'));
+				break;
+	
+
 			case 'tag':
 				$tags = (array)$helper->getTags($params);
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/tag'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/basic/tag'));
 				break;
 				
 			case 'category':
 				$categories = (array)$helper->getCategories(null, $params);
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/category'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/basic/category'));
 				break;
 				
 			case 'author':
 				$authors = (array)$helper->getAuthors($params);
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/author'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/basic/author'));
 				break;
 				
 			case 'date':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/basic/date'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/basic/date'));
 				break;
 				
 			//custom fields
@@ -192,49 +208,49 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/datepick
 			case 'textarea':
 			case 'url':
 			case 'editor':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/text'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/text'));
 				break;
 				
 			case 'text_range':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/text_range'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/text_range'));
 				break;
 				
 			case 'select':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/select'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/select'));
 				break;
 				
 			case 'list':
 			case 'multi':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/multi'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/multi'));
 				break;
 				
 			case 'checkboxes':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/checkboxes'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/checkboxes'));
 				break;
 				
 			case 'radio':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/radio'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/radio'));
 				break;
 				
 			case 'agosmsaddressmarker':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/agosmsaddressmarkerslider'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/agosmsaddressmarkerslider'));
 				break;
 
 			case 'integer':
 			case 'slider-range':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/slider'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/slider'));
 				break;
 				
 			case 'calendar':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/calendar'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/calendar'));
 				break;
 				
 			case 'calendar_range':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/calendar_range'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/calendar_range'));
 				break;
 				
 			case 'custom_select':
-				require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/custom_select'));
+				require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/custom_select'));
 				break;
 				
 			//added for compatibility with radical multifield
@@ -246,7 +262,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/datepick
 					break;
 				}
 					$field_type = $extra_params->type ? $extra_params->type : "text";
-					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/radicalmultifield/'.$field_type));
+					require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/radicalmultifield/'.$field_type));
 				break;
 				
 			//added for compatibility with repeatable field
@@ -258,7 +274,7 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/datepick
 					break;
 				}
 					$field_type = $extra_params->type ? $extra_params->type : "text";
-					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/fields/custom_fields/repeatable/'.$field_type));
+					require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/fields/custom_fields/repeatable/'.$field_type));
 				break;
 		}
 		?>
@@ -268,15 +284,13 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/datepick
 ?>
 
 			<div class="gsearch-buttons">
-				<input style="float:right;padding:1% 10%;" type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHAGOSMSBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit " />	
+				<input type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHAGOSMSBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit " />	
 				<?php
 				if ($params->get("clear_btn_show", 1)) {
-					require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/clear_btn'));
+					require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/elements/clear_btn'));
 				}
 				?>
 			</div>
-		
-		   <div class="clear" style="clear: both;"></div>
 		</div><!--//gsearch-table-->
 	
 		<input type="hidden" name="gsearch" value="1" />
@@ -287,23 +301,23 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/datepick
 	</form>
 	
 	<?php if ($params->get("acounter")) { ?>
-		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/acounter')); ?>
+		<?php require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/elements/acounter')); ?>
 	<?php } ?>
 	
 	<?php if ($params->get("field_connection") != "" &&
 			 $params->get("field_connection") != "FieldLabel->FieldLabel2->FieldLabel3") { ?>
-		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/connected_single')); ?>
+		<?php require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/elements/connected_single')); ?>
 	<?php } ?>
 
 	<?php if ($params->get("search_history")) { ?>
-		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/search_history')); ?>
+		<?php require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/elements/search_history')); ?>
 	<?php } ?>
 	
 	<?php if ($params->get("search_stats")) { ?>
-		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/search_stats')); ?>
+		<?php require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/elements/search_stats')); ?>
 	<?php } ?>
 	
 	<?php if ($params->get("search_type") == "ajax") { ?>
-		<?php require(JModuleHelper::getLayoutPath('mod_agosms_search', $params->get('module_template', 'Default') . '/elements/ajax_search')); ?>
+		<?php require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/elements/ajax_search')); ?>
 	<?php } ?>
 </div><!--//gsearch-box-->

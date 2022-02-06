@@ -10,7 +10,7 @@
 
 defined('_JEXEC') or die;
 
-class JFormFieldFilters extends JFormField 
+class JFormFieldFilters extends JFormField
 {
 
 	function getInput()
@@ -30,6 +30,8 @@ class JFormFieldFilters extends JFormField
 
 			$mitems[] = JHTML::_('select.option', 'keyword', JText::_('MOD_AGOSMSSEARCHAGOSMSFILTER_TYPE_KEYWORD'));
 			$mitems[] = JHTML::_('select.option', 'title_select', JText::_('MOD_AGOSMSSEARCHAGOSMSFILTER_TYPE_TITLE_SELECT'));
+			$mitems[] = JHTML::_('select.option', 'cusotm1_select', JText::_('MOD_AGOSMSSEARCHAGOSMSFILTER_TYPE_CUSTOM1_SELECT'));
+			$mitems[] = JHTML::_('select.option', 'cusotm2_select', JText::_('MOD_AGOSMSSEARCHAGOSMSFILTER_TYPE_CUSTOM2_SELECT'));
 			$mitems[] = JHTML::_('select.option', 'tag', JText::_('MOD_AGOSMSSEARCHAGOSMSFILTER_TYPE_TAG'));
 			$mitems[] = JHTML::_('select.option', 'category', JText::_('MOD_AGOSMSSEARCHAGOSMSFILTER_TYPE_CATEGORY'));
 			$mitems[] = JHTML::_('select.option', 'author', JText::_('MOD_AGOSMSSEARCHAGOSMSFILTER_TYPE_AUTHOR'));

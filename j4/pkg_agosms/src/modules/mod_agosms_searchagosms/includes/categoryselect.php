@@ -27,8 +27,8 @@ class JFormFieldCategorySelect extends JFormField
 
 			$mitems[] = JHTML::_('select.option', '', '');
 
-			require_once JPATH_SITE . "/modules/mod_agosms_search/helper.php";
-			$helper = new modAgosmsSearchHelper;
+			require_once JPATH_SITE . "/modules/mod_agosms_searchagosms/helper.php";
+			$helper = new modAgosmsSearchagosmsHelper;
 			$categories = $helper->getCategories();
 
 		foreach ($categories as $category) {

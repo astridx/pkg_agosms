@@ -32,7 +32,7 @@ class JFormFieldModuletemplate extends JFormField
 	{
 		jimport('joomla.filesystem.folder');
 
-		$moduleTemplatesPath = JPATH_SITE . '/modules/mod_agosms_search/tmpl';
+		$moduleTemplatesPath = JPATH_SITE . '/modules/mod_agosms_searchagosms/tmpl';
 		$moduleTemplatesFolders = JFolder::folders($moduleTemplatesPath);
 
 		$db = JFactory::getDBO();
@@ -40,7 +40,7 @@ class JFormFieldModuletemplate extends JFormField
 
 		$db->setQuery($query);
 		$defaultemplate = $db->loadResult();
-		$templatePath = JPATH_SITE . '/templates/' . $defaultemplate . '/html/mod_agosms_search';
+		$templatePath = JPATH_SITE . '/templates/' . $defaultemplate . '/html/mod_agosms_searchagosms';
 
 		if (JFolder::exists($templatePath)) {
 			$templateFolders = JFolder::folders($templatePath);

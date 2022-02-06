@@ -76,8 +76,9 @@ $moduleclass_sfx = $params->get('moduleclass_sfx', '');
 <?php
 // See https://developer.snapappointments.com/bootstrap-select/ and https://github.com/snapappointments/bootstrap-select
 $doc = JFactory::getDocument();
-$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/select/bootstrap-select.min.css');
-$document->addScript(JURI::root(true) . '/media/mod_agosms_search/select/bootstrap-select.min.js');
+$document->addStyleSheet(JURI::root(true) . '/media/mod_agosms_search/select/bootstrap-select.css');
+$document->addScript(JURI::root(true) . '/media/mod_agosms_search/select/bootstrap-select.js');
+
 ?>
 
 <script type="text/javascript">

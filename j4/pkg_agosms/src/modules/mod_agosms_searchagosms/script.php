@@ -11,14 +11,14 @@
 defined('_JEXEC') or die('');
 
 /**
- * Script file for mod_agosms_search
+ * Script file for mod_agosms_searchagosms
  *
  * @since  1.0.40
  */
 class Mod_AgosmsearchInstallerScript
 {
 	/**
-	 * Method to install mod_agosms_search
+	 * Method to install mod_agosms_searchagosms
 	 *
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
 	 *
@@ -32,7 +32,7 @@ class Mod_AgosmsearchInstallerScript
 	}
 
 	/**
-	 * Method to uninstall mod_agosms_search
+	 * Method to uninstall mod_agosms_searchagosms
 	 *
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
 	 *
@@ -46,7 +46,7 @@ class Mod_AgosmsearchInstallerScript
 	}
 
 	/**
-	 * Method to update mod_agosms_search
+	 * Method to update mod_agosms_searchagosms
 	 *
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
 	 *
@@ -60,7 +60,7 @@ class Mod_AgosmsearchInstallerScript
 	}
 
 	/**
-	 * Method to preflight mod_agosms_search (before install and update)
+	 * Method to preflight mod_agosms_searchagosms (before install and update)
 	 *
 	 * @param   string                 $type    The type of change (install, update, discover_install)
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method
@@ -75,7 +75,7 @@ class Mod_AgosmsearchInstallerScript
 	}
 
 	/**
-	 * Method to postflight mod_agosms_search (after install or update)
+	 * Method to postflight mod_agosms_searchagosms (after install or update)
 	 *
 	 * @param   string                 $type    The type of change (install, update, discover_install)
 	 * @param   JInstallerAdapterFile  $parent  The class calling this method

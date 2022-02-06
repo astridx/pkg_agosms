@@ -266,8 +266,8 @@ class ArticlesModelAgSearchagosms extends JModelList
 			//$query .= " LEFT JOIN #__fields_values AS fv ON fv.item_id = i.id";
 		}
 
-	/*	$query .= " LEFT JOIN #__contentitem_tag_map AS tm 
-						ON tm.content_item_id = i.id 
+	/*  $query .= " LEFT JOIN #__contentitem_tag_map AS tm
+						ON tm.content_item_id = i.id
 							AND type_alias = 'com_agosms.agosm'
 				";*/
 
@@ -283,7 +283,18 @@ class ArticlesModelAgSearchagosms extends JModelList
 			}
 		}
 
-		$query .= " WHERE (i.state = 1 OR i.state = 0) ";
+		$query .= " WHERE (i.state = 1 OR i.published = 1) ";
+
+		if (JFactory::getApplication()->input->get("cusotm1")) {
+			$cusotm1 = JFactory::getApplication()->input->get("cusotm1");
+			$query .= " AND i.cusotm1 LIKE '%{$cusotm1}%'";
+		}
+
+		if (JFactory::getApplication()->input->get("cusotm2")) {
+			$cusotm2 = JFactory::getApplication()->input->get("cusotm2");
+			$query .= " AND i.cusotm2 LIKE '%{$cusotm2}%'";
+		}
+
 
 		//publish up/down
 		$timezone = new DateTimeZone(JFactory::getConfig()->get('offset'));

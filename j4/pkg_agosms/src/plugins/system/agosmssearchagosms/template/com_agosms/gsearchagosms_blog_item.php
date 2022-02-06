@@ -46,13 +46,13 @@ if ($image_type == "intro" || $ImagesTab) {
 if ($model->module_params->text_limit) {
 	preg_match('/(<img[^>]+>)/i', $item->introtext, $images_text);
 	$item->introtext = trim(strip_tags($item->introtext, '<h2><h3>'));
-	
+
 	if (extension_loaded('mbstring')) {
 		$item->introtext = mb_strimwidth($item->introtext, 0, $model->module_params->text_limit, '...', 'utf-8');
 	} else {
 		$item->introtext = strlen($item->introtext) > $model->module_params->text_limit ? substr($item->introtext, 0, $model->module_params->text_limit) . '...' : $item->introtext;
 	}
-	
+
 	if (count($images_text) &&
 		($image_type == "text" || ($image_type == "" && !$ImageIntro))
 	) {
@@ -75,7 +75,7 @@ if (isset($item->distance)) {
 <div class="item<?php echo $item->featured ? ' featured' : ''; ?>" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
 	<h3 itemprop="name" class="item-title">
 		<?php if (property_exists($item, "slug")) { ?>
-			<a href="<?php echo JRoute::_(  'index.php?option=com_agosms&view=agosm&id=' . $item->id  ); ?>" itemprop="url">
+			<a href="<?php echo JRoute::_('index.php?option=com_agosms&view=agosm&id=' . $item->id); ?>" itemprop="url">
 				<?php echo $item->name . ' ' . $distance; ?>
 
 			</a>

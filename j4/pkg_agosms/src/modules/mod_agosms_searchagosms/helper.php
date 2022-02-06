@@ -62,7 +62,7 @@ class modAgosmsSearchagosmsHelper
 				}
 			}
 
-			if ($params && count($categories_restriction)) {
+			if ($params && isset($categories_restriction)) {
 				$query = "SELECT id, title, level FROM #__categories WHERE extension = 'com_agosms' AND id IN (" . implode(",", $categories_restriction) . ") ORDER BY title ASC";
 			} else {
 				$query = "SELECT id, title, level FROM #__categories WHERE extension = 'com_agosms' AND level = 1 AND published = 1 ORDER BY title ASC";
@@ -74,14 +74,14 @@ class modAgosmsSearchagosmsHelper
 			$results = $db->loadObjectList();
 		} catch (Exception $e) {
 			echo $e->getMessage();
-			echo "<br /><br />" . $query;
+			echo $query;
 		}
 
 		foreach ($results as $category) {
 			$categories[] = $category;
 			$app = Factory::getApplication();
 
-			if ($app->isClient('site') && $params) {
+		/*	if ($app->isClient('site') && $params) {
 				if ($params->get("restrict")) {
 					if ($params->get("restsub")) {
 						$subs = (array) $this->getCategories($category->id, $params);
@@ -103,7 +103,7 @@ class modAgosmsSearchagosmsHelper
 				if (count($subs)) {
 					$categories = array_merge($categories, $subs);
 				}
-			}
+			}todo*/
 		}
 
 		return $categories;
@@ -170,7 +170,7 @@ class modAgosmsSearchagosmsHelper
 	{
 		$items = [];
 		$db = JFactory::getDbo();
-		$query = "SELECT id FROM #__content WHERE state = 1";
+		$query = "SELECT id FROM #__agosms_details WHERE (state = 1 or published = 1)";
 
 		if ($params->get("restrict")) {
 			$categories = $this->getCategories(0, $params);
@@ -214,7 +214,7 @@ class modAgosmsSearchagosmsHelper
 	{
 		$items = [];
 		$db = JFactory::getDbo();
-		$query = "SELECT created_by FROM #__content WHERE state = 1";
+		$query = "SELECT created_by FROM #__agosms_details WHERE (state = 1 or published = 1)";
 
 		if ($params->get("restrict")) {
 			$categories = $this->getCategoriesRestriction($params);
@@ -257,9 +257,9 @@ class modAgosmsSearchagosmsHelper
 	{
 		$db = JFactory::getDbo();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
-		$query .= " FROM #__content as i";
+		$query .= " FROM #__agosms_details as i";
 		$query .= " LEFT JOIN #__fields_values AS field{$field_id} ON field{$field_id}.item_id = i.id AND field{$field_id}.field_id = {$field_id}";
-		$query .= " WHERE state = 1";
+		$query .= " WHERE (state = 1 or published = 1)";
 
 		// Category restriction
 		$module_params = $this->getModuleParams($module_id, true);
@@ -313,9 +313,9 @@ class modAgosmsSearchagosmsHelper
 	{
 		$db = JFactory::getDbo();
 		$query = "SELECT i.id, i.catid, GROUP_CONCAT(DISTINCT field{$field_id}.value SEPARATOR '|') as value";
-		$query .= " FROM #__content as i";
+		$query .= " FROM #__agosms_details as i";
 		$query .= " LEFT JOIN #__fields_values AS field{$field_id} ON field{$field_id}.item_id = i.id AND field{$field_id}.field_id = {$field_id}";
-		$query .= " WHERE state = 1";
+		$query .= " WHERE (state = 1 or published = 1)";
 
 		// Category restriction
 		$module_params = $this->getModuleParams($module_id, true);
@@ -393,9 +393,9 @@ class modAgosmsSearchagosmsHelper
 	function getItemsTitles($params)
 	{
 		$db = JFactory::getDbo();
-		$query = "SELECT i.title";
-		$query .= " FROM #__content as i";
-		$query .= " WHERE state = 1";
+		$query = "SELECT i.name";
+		$query .= " FROM #__agosms_details as i";
+		$query .= " WHERE (state = 1 or published = 1)";
 
 		// Category restriction
 		if ($params->get('restrict')) {
@@ -421,5 +421,40 @@ class modAgosmsSearchagosmsHelper
 		$db->setQuery($query);
 
 		return $db->loadColumn();
+	}
+
+	function getItemsCusotm($params, $cusotmNumber)
+	{
+		$db = JFactory::getDbo();
+		$query = "SELECT distinct i.cusotm" . $cusotmNumber;
+		$query .= " FROM #__agosms_details as i";
+		$query .= " WHERE (state = 1 or published = 1)";
+
+		// Category restriction
+		if ($params->get('restrict')) {
+			$category_restriction = $this->getCategoriesRestriction($params);
+
+			if ($params->get('restsub')) {
+				$tmp = [];
+
+				foreach ($category_restriction as $catid) {
+					$cats = $this->getSubCategories($catid);
+					$cats[] = $catid;
+					$tmp = array_merge($tmp, $cats);
+				}
+
+				$category_restriction = $tmp;
+			}
+
+			if (count($category_restriction)) {
+				$query .= " AND i.catid IN (" . implode(",", $category_restriction) . ")";
+			}
+		}
+
+		$db->setQuery($query);
+
+		$result = $db->loadColumn();
+
+		return $result;
 	}
 }

@@ -118,7 +118,7 @@ if (!$leafletIsLoaded) {
 
 
 
-	<table class="table table table-striped">
+	<table class="table table table-striped table-sm table-bordered">
 		<tbody>
 			<tr>
 				<td><?php echo Text::_('JFIELD_LANGUAGE_LABEL'); ?></td>

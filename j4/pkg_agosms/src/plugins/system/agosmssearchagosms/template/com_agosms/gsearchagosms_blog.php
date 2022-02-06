@@ -12,6 +12,8 @@
 defined('_JEXEC') or die;
 
 use Joomla\Registry\Registry;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 
 $lang = JFactory::getLanguage();
 $extension = 'mod_agosms_searchagosms';
@@ -61,124 +63,145 @@ $model->limit = JFactory::getApplication()->input->get("limit", $module_params->
 $items = $model->getItems();
 ?>
 
-<div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
-	 itemscope itemtype="https://schema.org/Blog">
-	<div class="page-header">
-		<div class="new-search-buttons">
-			<a href="javascript:history.back()">
-				<input style="float:right;padding:1% 10%;" type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHBUTTON_NEW_SEARCH_TEXT'); ?>" class="btn btn-primary button submit <?php echo $moduleclass_sfx; ?>" />	
-			</a>
-		</div>
-		<h3>
-			<?php
-				echo (count($items) ? JText::_("MOD_AGOSMSSEARCHRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_("MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT"));
-			?>
-		</h3>
-	</div>
 
-<?php if ($module_params->get('show_map', "1") === "1") { ?>
-	<?php $defaultArray = []; ?>
-<div style="
-	width:auto;
-	height:<?php echo $module_params->get('height', '400'); ?><?php echo $module_params->get('heightunit', 'px'); ?>;"
-	data-module-id="<?php echo $model->module_id; ?>"
-	data-uriroot="<?php echo JUri::root(); ?>"
-	data-no-world-warp="<?php echo $module_params->get('noWorldWarp', 0); ?>"
-	data-detect-retina="<?php echo $module_params->get('detectRetina', 0); ?>"
-	data-baselayer="<?php echo $module_params->get('baselayer', 'mapnik'); ?>"
-	data-lonlat="<?php echo $module_params->get('lonlat', '50.281168, 7.276211'); ?>"
-	data-zoom="<?php echo $module_params->get('zoom', '10'); ?>"
-	<?php if ($module_params->get('baselayer', 'mapbox')) : ?>
-	data-mapboxmaptype="<?php echo $module_params->get('mapboxmaptype', 'streets'); ?>"
-	data-mapboxkey="<?php echo $module_params->get('mapboxkey', ''); ?>"
-	<?php endif; ?>
-	<?php if ($module_params->get('baselayer', 'thunderforest')) : ?>
-	data-thunderforestkey="<?php echo $module_params->get('thunderforestkey', ''); ?>"
-	data-thunderforestmaptype="<?php echo $module_params->get('thunderforestmaptype', 'cycle'); ?>"
-	<?php endif; ?>
-	<?php if ($module_params->get('baselayer', 'stamen')) : ?>
-	data-stamenmaptype="<?php echo $module_params->get('stamenmaptype', 'watercolor'); ?>"
-	<?php endif; ?>
-	<?php if ($module_params->get('baselayer', 'google')) : ?>
-	data-googlemapstype="<?php echo $module_params->get('googlemapstype', 'satellite'); ?>"
-	<?php endif; ?>
-	<?php if ($module_params->get('baselayer', 'custom')) : ?>
-	data-customBaselayer="<?php echo $module_params->get('customBaselayer', 'maxZoom: 18,'); ?>"
-	data-customBaselayerURL="<?php echo $module_params->get('customBaselayerURL', 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'); ?>"
-	<?php endif; ?>
-	data-attr-module="<?php echo $module_params->get('attrModule', 1); ?>"
-	<?php if ($module_params->get('scale') !== null) : ?>
-	data-scale="<?php echo count($module_params->get('scale')); ?>"
-	<?php endif; ?>	
-	data-markers="<?php
-	echo htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8');
-	?>"
-	data-scale-metric="<?php echo in_array('metric', $module_params->get('scale', $defaultArray)); ?>"
-	data-scale-imperial="<?php echo in_array('imperial', $module_params->get('scale', $defaultArray)); ?>"
-	data-showgeocoder="<?php echo $module_params->get('showgeocoder', '1'); ?>"
-	data-locate="<?php echo $module_params->get('showlocate', false); ?>"
-	class="leafletmapModSearch"
-	id="searchmap<?php echo $model->module_id; ?>">
-</div>
-<?php } ?>
+<style>
+.new-search-buttons {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding: 2%;
+}
 
+.new-search-button {
+	padding: 1% 2%;
+}
+</style>
 
+<div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>">
 
-<?php if ($module_params->get('show_resultlist', "1") === "1") { ?>
-	<?php if (count($items)) { ?>
-<div class="gsearch-toolbox" >
+	<h2>
 		<?php
-		//if ($model->module_params->ordering_show)
-		if (false) {
-			?>
-		<div class="gsearch-sorting">
-			<?php require dirname(__FILE__) . '/gsearch_sorting.php'; ?>
-		</div>
-			<?php
-		}
+			echo (count($items) ? JText::_("MOD_AGOSMSSEARCHAGOSMSRESULT_PHRASE_DEFAULT") . " ({$model->total_items})" : JText::_("MOD_AGOSMSSEARCHPHRASE_NO_RESULT_DEFAULT"));
 		?>
-</div>
+	</h2>
+
+	<h3>
+		<?php
+			echo JText::_("MOD_AGOSMSSEARCHAGOSMSRESULT_MAP");
+		?>
+	</h3>
+
+	<?php if ($module_params->get('show_map', "1") === "1") { ?>
+		<?php $defaultArray = []; ?>
+	<div style="
+	z-index:1;
+	width:100%;
+	height:<?php echo $module_params->get('height', '200'); ?><?php echo $module_params->get('heightunit', 'px'); ?>;"
+		data-module-id="<?php echo $model->module_id; ?>" data-uriroot="<?php echo JUri::root(); ?>"
+		data-no-world-warp="<?php echo $module_params->get('noWorldWarp', 0); ?>"
+		data-detect-retina="<?php echo $module_params->get('detectRetina', 0); ?>"
+		data-baselayer="<?php echo $module_params->get('baselayer', 'mapnik'); ?>"
+		data-lonlat="<?php echo $module_params->get('lonlat', '50.281168, 7.276211'); ?>"
+		data-zoom="<?php echo $module_params->get('zoom', '10'); ?>"
+		<?php if ($module_params->get('baselayer', 'mapbox')) : ?>
+		data-mapboxmaptype="<?php echo $module_params->get('mapboxmaptype', 'streets'); ?>"
+		data-mapboxkey="<?php echo $module_params->get('mapboxkey', ''); ?>" <?php
+		endif; ?>
+		<?php if ($module_params->get('baselayer', 'thunderforest')) : ?>
+		data-thunderforestkey="<?php echo $module_params->get('thunderforestkey', ''); ?>"
+		data-thunderforestmaptype="<?php echo $module_params->get('thunderforestmaptype', 'cycle'); ?>" <?php
+		endif; ?>
+		<?php if ($module_params->get('baselayer', 'stamen')) : ?>
+		data-stamenmaptype="<?php echo $module_params->get('stamenmaptype', 'watercolor'); ?>" <?php
+		endif; ?>
+		<?php if ($module_params->get('baselayer', 'google')) : ?>
+		data-googlemapstype="<?php echo $module_params->get('googlemapstype', 'satellite'); ?>" <?php
+		endif; ?>
+		<?php if ($module_params->get('baselayer', 'custom')) : ?>
+		data-customBaselayer="<?php echo $module_params->get('customBaselayer', 'maxZoom: 18,'); ?>"
+		data-customBaselayerURL="<?php echo $module_params->get('customBaselayerURL', 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'); ?>"
+		<?php endif; ?> data-attr-module="<?php echo $module_params->get('attrModule', 1); ?>"
+		<?php if ($module_params->get('scale') !== null) : ?>
+		data-scale="<?php echo count($module_params->get('scale')); ?>" <?php
+		endif; ?> data-markers="<?php
+		echo htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8');
+?>" data-scale-metric="<?php echo in_array('metric', $module_params->get('scale', $defaultArray)); ?>"
+		data-scale-imperial="<?php echo in_array('imperial', $module_params->get('scale', $defaultArray)); ?>"
+		data-showgeocoder="<?php echo $module_params->get('showgeocoder', '1'); ?>"
+		data-locate="<?php echo $module_params->get('showlocate', false); ?>" class="leafletmapModSearch"
+		id="searchmap<?php echo $model->module_id; ?>">
+	</div>
 	<?php } ?>
-	
-	
+
+
+	<h3>
+		<?php
+			echo JText::_("MOD_AGOSMSSEARCHAGOSMSRESULT_ITEM_LIST");
+		?>
+	</h3>
+
 	<div class="itemlist">
+
 	<?php
 	foreach ($items as $items_counter => $item) {
-		if (!property_exists($item, "parent_alias")) {
-			$item->parent_alias = false;
-		}
-		if (!property_exists($item, "alias")) {
-			$item->alias = false;
-		}
-		$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
-		
-
-		if ($item->parent_alias == 'root' || !property_exists($item, "parent_id")) {
-			$item->parent_slug = null;
-		} else {
-			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
-		}
-
-		if (property_exists($item, "catslug")) {
-			$item->catslug = $item->category_alias ? ($item->catid . ':' . $item->category_alias) : $item->catid;
-		} else {
-			$item->catslug = null;
-		}
+		$cords = explode(',', $item->coordinates);
 		?>
-		<?php
-		if ($model->module_params->results_template == "") {
-			$model->module_params->results_template = "standard";
-		}
+		<hr>
+		<h4><a href="index.php?option=com_agosms&view=agosm&id=<?php echo $item->id; ?>"><?php echo $item->name; ?></a></h4>
+		<br>
+		<small><?php echo 'Lat ' . $cords[0]; ?> , <?php echo 'Long ' . $cords[1]; ?></small>
+		<table class="table table-sm table-bordered">
+		<tbody>
+			<tr>
+				<td><?php echo Text::_('JFIELD_LANGUAGE_LABEL'); ?></td>
+				<td><?php echo $item->cusotm1; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL'); ?></td>
+				<td><?php echo $item->cusotm2; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL'); ?></td>
+				<td><?php echo $item->cusotm3; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL'); ?></td>
+				<td><?php echo $item->cusotm4; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL'); ?></td>
+				<td><?php echo $item->cusotm5; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('JGLOBAL_EMAIL'); ?></td>
+				<td><?php echo $item->cusotm6; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL'); ?></td>
+				<td><?php echo $item->cusotm7; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL'); ?></td>
+				<td><?php echo $item->cusotm8; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL'); ?></td>
+				<td> <?php echo LayoutHelper::render(
+					'joomla.html.image',
+					[
+							'src'      => $item->cusotm9,
+							'alt'      => "",
+							'itemprop' => 'image',
+						]
+                ); ?></td>
+			</tr>
+		</tbody>
+	</table>
 
-		if ($model->module_params->results_template == "standard") {
-			require dirname(__FILE__) . '/gsearchagosms_blog_item.php';
-		} else {
-			require dirname(__FILE__) . "/gsearchagosms_blog_item_{$model->module_params->results_template}.php";
-		}
-		?>
 	<?php } ?>
+	   
 	</div>
-	
+
 	<div class="pagination">
 		<?php
 			$pagination = $model->getPagination();
@@ -222,5 +245,5 @@ $items = $model->getItems();
 			echo $pagination->getPagesCounter();
 		?>
 	</div>
-<?php } ?>	
+	
 </div>

@@ -80,6 +80,7 @@ $itemsForMap = $model->getItemsForMap();
 <?php if ($module_params->get('show_map', "1") === "1") { ?>
 	<?php $defaultArray = []; ?>
 <div style="
+	z-index=1;
 	width:auto;
 	height:<?php echo $module_params->get('height', '400'); ?><?php echo $module_params->get('heightunit', 'px'); ?>;"
 	data-module-id="<?php echo $model->module_id; ?>"

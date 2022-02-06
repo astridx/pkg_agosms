@@ -137,7 +137,7 @@
 
 		<field name="cusotm8" type="textarea" label="COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL" rows="3" cols="30" />
 
-		<field name="cusotm9" type="media" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL" hide_none="1" />
+		<field name="cusotm9" type="media" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL" directory="2022/events/" hide_none="1" />
 
 		<field name="cusotm10" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE10_LABEL">
 		</field>

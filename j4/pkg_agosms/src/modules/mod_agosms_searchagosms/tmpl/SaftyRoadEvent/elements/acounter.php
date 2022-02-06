@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 
 <script type="text/javascript">
 function acounter<?php echo $module->id; ?>() {
-   
 	$ = jQuery.noConflict();
 	$("#GSearch<?php echo $module->id; ?> div.acounter .data").hide();
 	$("#GSearch<?php echo $module->id; ?> div.acounter .loader").show();
@@ -37,6 +36,7 @@ function acounter<?php echo $module->id; ?>() {
 	});
 }
 </script>
+
 <div class="acounter">
 	<div class="data"></div>
 	<div class="loader" style="display: none;">loading ...</div>

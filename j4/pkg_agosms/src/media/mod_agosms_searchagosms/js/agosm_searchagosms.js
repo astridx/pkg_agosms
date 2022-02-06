@@ -321,7 +321,6 @@ document.addEventListener(
 
         for (var marker in markers) {
           var obj = markers[marker];
-          console.log(obj);
 
           let tempMarker = null;
 
