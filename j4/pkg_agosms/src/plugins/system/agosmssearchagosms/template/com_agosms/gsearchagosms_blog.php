@@ -59,8 +59,6 @@ if ($module_params->get('show_map', "1") === "1") {
 $model->limit = JFactory::getApplication()->input->get("limit", $module_params->get('items_limit', 10));
 
 $items = $model->getItems();
-$itemsForMap = $model->getItemsForMap();
-print_r($itemsForMap);
 ?>
 
 <div id="gsearch-results" class="blog blog-gsearch gsearch-results-<?php echo $model->module_id; ?>" 
@@ -112,8 +110,8 @@ print_r($itemsForMap);
 	<?php if ($module_params->get('scale') !== null) : ?>
 	data-scale="<?php echo count($module_params->get('scale')); ?>"
 	<?php endif; ?>	
-	data-specialcustomfieldpins="<?php
-	echo htmlspecialchars(json_encode($itemsForMap), ENT_QUOTES, 'UTF-8');
+	data-markers="<?php
+	echo htmlspecialchars(json_encode($items), ENT_QUOTES, 'UTF-8');
 	?>"
 	data-scale-metric="<?php echo in_array('metric', $module_params->get('scale', $defaultArray)); ?>"
 	data-scale-imperial="<?php echo in_array('imperial', $module_params->get('scale', $defaultArray)); ?>"

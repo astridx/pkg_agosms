@@ -139,7 +139,7 @@ class ArticlesModelAgSearchagosms extends JModelList
 
 				// Get item's fields, also preparing their value property for manual display
 				// (calling plugins events and loading layouts to get their HTML display)
-				$fields = FieldsHelper::getFields('com_agosms.agosm', $item, true);
+/*todo				$fields = FieldsHelper::getFields('com_agosms.agosm', $item, true);
 
 				foreach ($fields as $key => $field) {
 					$itemfiltered = new stdClass;
@@ -203,7 +203,7 @@ class ArticlesModelAgSearchagosms extends JModelList
 					}
 
 					$itemsfiltered[] = $itemfiltered;
-				}
+				}*/
 			}
 		}
 
@@ -211,8 +211,7 @@ class ArticlesModelAgSearchagosms extends JModelList
 			return $itemsfiltered;
 		}
 
-
-		return [];
+		return $items;
 	}
 
 	function getItemsBeforGeo($total = false, $limitforpagination = true)
@@ -369,7 +368,6 @@ class ArticlesModelAgSearchagosms extends JModelList
 		}
 
 		if ($total) {
-			//print_r($query);
 			$db->setQuery($query);
 			$return = $db->loadResult();
 		} else {
