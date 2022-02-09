@@ -22,6 +22,13 @@ $this->tab_name  = 'com-agosms-form';
 $this->ignore_fieldsets = ['details', 'item_associations', 'language'];
 $this->useCoreUI = true;
 ?>
+
+<style>
+.modal-agosm{
+	background-color:#fefefe;
+}
+</style>
+
 <div class="edit item-page<?php echo $this->pageclass_sfx; ?>">
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<div class="page-header">

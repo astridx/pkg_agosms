@@ -50,7 +50,7 @@
 		<type>package</type>
 		<version>4.0.8</version>
 		<note>
-			<item>.</item>
+			<item>Add column text to support Plugin Shariff.</item>
 		</note>
 	</changelog>	
 </changelogs>

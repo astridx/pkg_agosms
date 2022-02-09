@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" version="3.6" client="site" method="upgrade">
+<extension type="module" client="site" method="upgrade">
 	<name>mod_agosms_search</name>
 	<author>Astrid Günther</author>
 	<creationDate>##DATE##</creationDate>
@@ -15,29 +15,14 @@
 	<!-- Front-end files -->
 	<files>
 		<file module="mod_agosms_search">mod_agosms_search.php</file>
-		<folder>tmpl</folder>
-		<folder>language</folder>
-		<file>script.php</file>
-		<file>helper.php</file>
-		<folder>includes</folder>
-		<file>mod_agosms_search.xml</file>
-		<file module="mod_agosms_searchagosms">mod_agosms_searchagosms.php</file>
+		##MODULE_FILES##
 	</files>
 	<languages folder="language">
 		##LANGUAGE_FILES##
 	</languages>
 	<!-- Media files -->
 	<media folder="media/mod_agosms_searchagosms" destination="mod_agosms_searchagosms">
-		<folder>locate</folder>
-		<folder>cluster</folder>
-		<folder>fonts</folder>
-		<folder>select</folder>
-		<folder>css</folder>
-		<folder>history</folder>
-		<folder>datepicker</folder>
-		<folder>js</folder>
-		<folder>leaflet</folder>
-		<folder>slider</folder>
+		##MEDIA_FILES##
 	</media>
 
 	<config>
