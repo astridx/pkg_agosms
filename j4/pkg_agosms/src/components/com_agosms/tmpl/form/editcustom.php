@@ -56,7 +56,7 @@ $this->useCoreUI = true;
 
             <?php echo $this->form->renderField('name'); ?>
 
-            <?php echo HTMLHelper::_('uitab.startTabSet', $this->tab_name, ['active' => 'details', 'recall' => true, 'breakpoint' => 768]); ?>
+            <?php echo HTMLHelper::_('uitab.startTabSet', $this->tab_name, ['active' => 'cords', 'recall' => true, 'breakpoint' => 768]); ?>
 
 
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'cords', Text::_('COM_AGOSMS_FIELDSET_COORDS')); ?>
