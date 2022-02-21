@@ -16,6 +16,8 @@ use Joomla\CMS\Language\Multilanguage;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use AgosmNamespace\Component\Agosms\Administrator\Helper\AgosmHelper;
+use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Toolbar\Toolbar;
 
 /**
  * HTML Agosm View class for the Agosm component
