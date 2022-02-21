@@ -15,6 +15,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
 
+
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->document->getWebAssetManager();
 $wa->useScript('keepalive')
@@ -98,6 +99,68 @@ $this->useCoreUI = true;
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'end', Text::_('COM_AGOSMS_FIELDSET_END')); ?>
 
             <div class="mb-2">
+				not ready yet!
+                <table class="table table table-striped table-sm table-bordered">
+                    <tbody>
+                        <tr>
+                            <td><?php echo Text::_('COM_AGOSMS_FIELD_NAME_LABEL'); ?></td>
+                            <td><?php echo $this->item->name; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('COM_AGOSMS_FIELD_DESCRIPTION_LABEL'); ?></td>
+                            <td><?php echo $this->item->description; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('JFIELD_LANGUAGE_LABEL'); ?></td>
+                            <td><?php echo $this->item->cusotm1; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL'); ?></td>
+                            <td><?php echo $this->item->cusotm2; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL'); ?></td>
+                            <td><?php echo $this->item->cusotm3; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL'); ?></td>
+                            <td><?php echo $this->item->cusotm4; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL'); ?></td>
+                            <td><?php echo $this->item->cusotm5; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('JGLOBAL_EMAIL'); ?></td>
+                            <td><?php echo $this->item->cusotm6; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL'); ?></td>
+                            <td><?php echo $this->item->cusotm7; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL'); ?></td>
+                            <td><?php echo $this->item->cusotm8; ?></td>
+                        </tr>
+                        <tr>
+                            <td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL'); ?></td>
+                            <td> <?php echo LayoutHelper::render(
+					'joomla.html.image',
+					[
+							'src'      => $this->item->cusotm9,
+							'alt'      => "",
+							'itemprop' => 'image',
+						]
+				); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+
+
                 <button type="button" class="btn btn-primary"
                     onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
                     <span class="icon-check" aria-hidden="true"></span>
