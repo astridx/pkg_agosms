@@ -73,7 +73,7 @@ class HtmlView extends BaseHtmlView
 	public function display($tpl = null)
 	{
 		$user = Factory::getUser();
-		$app  = Factory::getApplication();
+		$app = Factory::getApplication();
 
 		// Get model data.
 		$this->state = $this->get('State');
@@ -90,10 +90,7 @@ class HtmlView extends BaseHtmlView
 		}
 
 		if ($authorised !== true) {
-			$app->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
-			$app->setHeader('status', 403, true);
-
-			return false;
+			$app->redirect('index.php?option=com_users&view=login');
 		}
 
 		// Check for errors.

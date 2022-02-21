@@ -140,7 +140,7 @@ class AgosmController extends FormController
 		$id = $app->input->getInt('id');
 
 		// Load the parameters.
-		$params   = $app->getParams();
+		$params = $app->getParams();
 		$menuitem = (int) $params->get('redirect_menuitem');
 
 		// Check for redirection after submission when creating a new article only

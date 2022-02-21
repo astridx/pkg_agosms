@@ -76,15 +76,15 @@ class HtmlView extends BaseHtmlView
 	 */
 	public function display($tpl = null)
 	{
-		$app    = Factory::getApplication();
+		$app = Factory::getApplication();
 		$params = $app->getParams();
 
 		// Get some data from the models
-		$state      = $this->get('State');
-		$items      = $this->get('Items');
-		$category   = $this->get('Category');
-		$children   = $this->get('Children');
-		$parent     = $this->get('Parent');
+		$state = $this->get('State');
+		$items = $this->get('Items');
+		$category = $this->get('Category');
+		$children = $this->get('Children');
+		$parent = $this->get('Parent');
 		$pagination = $this->get('Pagination');
 
 		// Flag indicates to not add limitstart=0 to URL
@@ -98,9 +98,9 @@ class HtmlView extends BaseHtmlView
 		// Prepare the data.
 		// Compute the agosms slug.
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
-			$item       = &$items[$i];
+			$item = &$items[$i];
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
-			$temp       = $item->params;
+			$temp = $item->params;
 			$item->params = clone $params;
 			$item->params->merge($temp);
 
@@ -118,14 +118,14 @@ class HtmlView extends BaseHtmlView
 		// Escape strings for HTML output
 		$this->pageclass_sfx = htmlspecialchars($params->get('pageclass_sfx'), ENT_COMPAT, 'UTF-8');
 
-		$maxLevel         = $params->get('maxLevel', -1);
-		$this->maxLevel   = &$maxLevel;
-		$this->state      = &$state;
-		$this->items      = &$items;
-		$this->category   = &$category;
-		$this->children   = &$children;
-		$this->params     = &$params;
-		$this->parent     = &$parent;
+		$maxLevel = $params->get('maxLevel', -1);
+		$this->maxLevel = &$maxLevel;
+		$this->state = &$state;
+		$this->items = &$items;
+		$this->category = &$category;
+		$this->children = &$children;
+		$this->params = &$params;
+		$this->parent = &$parent;
 		$this->pagination = &$pagination;
 
 		$this->_prepareDocument();

@@ -15,7 +15,7 @@ defined('_JEXEC') or die('');
  *
  * @since  1.0.40
  */
-class Mod_AgosmsearchInstallerScript
+class Mod_AgosmsearchagosmsInstallerScript
 {
 	/**
 	 * Method to install mod_agosms_searchagosms
