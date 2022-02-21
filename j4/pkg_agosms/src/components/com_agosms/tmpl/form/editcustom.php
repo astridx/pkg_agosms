@@ -56,7 +56,7 @@ $this->useCoreUI = true;
 
             <?php echo $this->form->renderField('name'); ?>
 
-            <?php echo HTMLHelper::_('uitab.startTabSet', $this->tab_name, ['active' => 'cords', 'recall' => true, 'breakpoint' => 768]); ?>
+            <?php echo HTMLHelper::_('uitab.startTabSet', $this->tab_name, ['active' => 'cords', 'breakpoint' => 768]); ?>
 
 
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'cords', Text::_('COM_AGOSMS_FIELDSET_COORDS')); ?>
@@ -95,6 +95,22 @@ $this->useCoreUI = true;
                 <?php echo HTMLHelper::_('uitab.endTab'); ?>
             </div>
 
+            <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'end', Text::_('COM_AGOSMS_FIELDSET_END')); ?>
+
+            <div class="mb-2">
+                <button type="button" class="btn btn-primary"
+                    onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
+                    <span class="icon-check" aria-hidden="true"></span>
+                    <?php echo Text::_('JSAVE'); ?>
+                </button>
+                <button type="button" class="btn btn-danger" onclick="Joomla.submitbutton('agosm.cancel')">
+                    <span class="icon-times" aria-hidden="true"></span>
+                    <?php echo Text::_('JCANCEL'); ?>
+                </button>
+            </div>
+
+            <?php echo HTMLHelper::_('uitab.endTab'); ?>
+
             <div style="display:none">
                 <?php if (Multilanguage::isEnabled()) : ?>
                 <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'language', Text::_('JFIELD_LANGUAGE_LABEL')); ?>
@@ -122,16 +138,5 @@ $this->useCoreUI = true;
             <input type="hidden" name="return" value="<?php echo $this->return_page; ?>" />
             <?php echo HTMLHelper::_('form.token'); ?>
         </fieldset>
-        <div class="mb-2">
-            <button type="button" class="btn btn-primary"
-                onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
-                <span class="icon-check" aria-hidden="true"></span>
-                <?php echo Text::_('JSAVE'); ?>
-            </button>
-            <button type="button" class="btn btn-danger" onclick="Joomla.submitbutton('agosm.cancel')">
-                <span class="icon-times" aria-hidden="true"></span>
-                <?php echo Text::_('JCANCEL'); ?>
-            </button>
-        </div>
     </form>
 </div>
