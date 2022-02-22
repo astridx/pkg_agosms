@@ -164,7 +164,7 @@ $this->useCoreUI = true;
                 <button type="button" class="btn btn-primary"
                     onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
                     <span class="icon-check" aria-hidden="true"></span>
-                    <?php echo Text::_('JSAVE'); ?>
+                    <?php echo Text::_('JSUBMIT'); ?>
                 </button>
                 <button type="button" class="btn btn-danger" onclick="Joomla.submitbutton('agosm.cancel')">
                     <span class="icon-times" aria-hidden="true"></span>
