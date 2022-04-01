@@ -345,6 +345,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+		// Show RadiusZoom
+		if (show_radiusZoom == '1') {
+			L.leafletControlRadiuszoom({
+				position: "bottomright",
+			}).addTo(window['mymap' + moduleId]);
+		}
 
 		// Show locate
 		if (locate == '1') {

@@ -8,7 +8,7 @@
 		</note>
 	</changelog>
 	<changelog>
-		<element>pkg_agosmss</element>
+		<element>pkg_agosms</element>
 		<type>package</type>
 		<version>4.0.0</version>
 		<note>
@@ -16,7 +16,7 @@
 		</note>
 	</changelog>
 	<changelog>
-		<element>pkg_agosmss</element>
+		<element>pkg_agosms</element>
 		<type>package</type>
 		<version>4.0.5</version>
 		<note>
@@ -24,7 +24,7 @@
 		</note>
 	</changelog>
 	<changelog>
-		<element>pkg_agosmss</element>
+		<element>pkg_agosms</element>
 		<type>package</type>
 		<version>4.0.6</version>
 		<note>
@@ -32,7 +32,7 @@
 		</note>
 	</changelog>
 	<changelog>
-		<element>pkg_agosmss</element>
+		<element>pkg_agosms</element>
 		<type>package</type>
 		<version>4.0.7</version>
 		<note>
@@ -46,11 +46,27 @@
 		</note>
 	</changelog>	
 	<changelog>
-		<element>pkg_agosmss</element>
+		<element>pkg_agosms</element>
 		<type>package</type>
 		<version>4.0.8</version>
 		<note>
 			<item>Add column text to support Plugin Shariff.</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.11</version>
+		<note>
+			<item>Add functions for search</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.12</version>
+		<note>
+			<item>Add mod_agosmsmt.</item>
 		</note>
 	</changelog>	
 </changelogs>
