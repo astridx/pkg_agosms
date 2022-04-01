@@ -1,0 +1,7 @@
+.github
+.travis.yml
+.vscode
+bower.json
+examples
+test
+test-types

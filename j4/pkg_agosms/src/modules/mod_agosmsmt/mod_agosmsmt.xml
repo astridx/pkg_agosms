@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>mod_agosmsmt</name>
+	<author>Astrid Günther</author>
+	<creationDate>##DATE##</creationDate>
+	<copyright>(C) ##YEAR## Astrid Günther. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later;</license>
+	<authorEmail>info@astrid-guenther.de</authorEmail>
+	<authorUrl>www.astrid-guenther.de</authorUrl>
+	<version>##VERSION##</version>
+	<description>MOD_AGOSMSMT_XML_DESCRIPTION</description>
+	<namespace path="src">AG\Module\Agosmsmt</namespace>
+	<scriptfile>script.php</scriptfile>
+
+	<!-- Front-end files -->
+	<files>
+		<file module="mod_agosmsmt">mod_agosmsmt.php</file>
+		##MODULE_FILES##
+	</files>
+	<!-- Media files -->
+	<media folder="media/mod_agosmsmt" destination="mod_agosmsmt">
+		##MEDIA_FILES##
+	</media>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/administrator/components/com_mtree/elements">
+
+				<field type="spacer" name="spacerPosStart" label="MOD_AGOSMSMT_QUICKSTART" description="1. Für jede Mosets Tree Kategorie die als Marker angegeben ist, muss ein unter images/marker/KATEGOREINAME.png abgelegt sein." class="text" />
+				<field name="count" type="number" label="MOD_MT_MAP_NUM_OF_LISTINGS_LABEL" default="50" filter="integer" />
+				<field name="type" type="list" default="1" label="MOD_MT_MAP_SORT_BY_LABEL" description="">
+					<option value="listnew">MOD_MT_MAP_VALUE_NEW_LISTING</option>
+					<option value="listupdated">MOD_MT_MAP_VALUE_RECENTLY_UPDATED_LISTING</option>
+					<option value="listfeatured">MOD_MT_MAP_VALUE_FEATURED_LISTING</option>
+					<option value="listpopular">MOD_MT_MAP_VALUE_POPULAR_LISTING</option>
+					<option value="listmostrated">MOD_MT_MAP_VALUE_MOST_RATED_LISTING</option>
+					<option value="listtoprated">MOD_MT_MAP_VALUE_TOP_RATED_LISTING</option>
+					<option value="listmostreview">MOD_MT_MAP_VALUE_MOST_REVIEWED_LISTING</option>
+					<option value="listalpha">MOD_MT_MAP_VALUE_ALPHABETICALLY_ORDERED_LISTING</option>
+					<option value="listrandom">MOD_MT_MAP_VALUE_RANDOM_LISTING</option>
+				</field>
+				<field name="show_from_cat_id" type="number" default="0" label="MOD_MT_MAP_SHOWLISTINGFROMTHISCAT_LABEL" description="MOD_MT_MAP_SHOWLISTINGFROMTHISCAT_DESC" />
+				<field name="map_cluster_height" type="number" label="MOD_MT_MAP_MAP_CLUSTER_HEIGHT_LABEL" default="400" filter="integer" />
+			</fieldset>
+			<fieldset name="assignment">
+				<field name="categories_assignment" type="categoriesassignment" label="MOD_MT_MAP_FIELD_CATEGORIES_ASSIGNMENT_LABEL" description="MOD_MT_MAP_FIELD_CATEGORIES_ASSIGNMENT_DESC" />
+				<field name="pages_assignment" type="mtpagesassignment" label="MOD_MT_MAP_FIELD_PAGES_ASSIGNMENT_LABEL" description="MOD_MT_MAP_FIELD_PAGES_ASSIGNMENT_DESC" />
+			</fieldset>
+			<fieldset name="mapConfig" label="MOD_AGOSM_H_MAP">
+				<field type="integer" name="height" label="MOD_AGOSM_HEIGHT" description="MOD_AGOSM_HEIGHT_DESC" default="400" first="10" last="1000" step="10" />
+
+				<field name="addprivacybox" type="list" label="MOD_AGOSM_ADDPRIVACYBOX" default="0" description="MOD_AGOSM_ADDPRIVACYBOX_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field type="list" name="heightunit" label="MOD_AGOSM_HEIGHTUNIT" description="MOD_AGOSM_HEIGHTUNIT_DESC" default="px">
+					<option value="px">px (Pixel)</option>
+					<option value="vh">vh (Viewport Height)</option>
+				</field>
+
+				<field type="list" name="zoom" default="7" label="MOD_AGOSM_ZOOM" description="MOD_AGOSM_ZOOM_DESC">
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+				</field>
+
+				<field type="list" name="baselayer" default="mapnik" label="MOD_AGOSM_BASELAYER" description="MOD_AGOSM_BASELAYER_DESC">
+					<option value="mapbox">Mapbox</option>
+					<option value="mapnik">OpenStreetMap</option>
+					<option value="mapnikde">OpenStreetMap DE</option>
+					<option value="carto">Carto</option>
+					<option value="stamen">Stamen</option>
+					<option value="opentopomap">OpenTopoMap</option>
+					<option value="humanitarian">Humanitarian (HOT)</option>
+					<option value="thunderforest">Thunderforest</option>
+					<option value="google">Google</option>
+					<option value="esri_worldImagery">Esri_WorldImagery</option>
+					<option value="custom">custom</option>
+				</field>
+				<field name="mapboxkey" type="text" default="" label="MOD_AGOSM_MAPBOXKEY_LABEL" description="MOD_AGOSM_MAPBOXKEY_DESC" size="40" showon="baselayer:mapbox" />
+
+				<field type="list" name="mapboxmaptype" default="streets" label="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_LABEL" description="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_DESC" showon="baselayer:mapbox">
+					<option value="mapbox/streets-v11">streets-v11</option>
+					<option value="mapbox/light-v10">light-v10</option>
+					<option value="mapbox/dark-v10">dark-v10</option>
+					<option value="mapbox/satellite-v9">satellite-v9</option>
+					<option value="mapbox/outdoors-v11">outdoors-v11</option>
+				</field>
+
+				<field name="googlekey" type="text" default="" label="MOD_AGOSM_GOOGLEKEY_LABEL" description="MOD_AGOSM_GOOGLEKEY_DESC" size="40" showon="baselayer:google" />
+
+				<field name="thunderforestkey" type="text" default="" label="MOD_AGOSM_THUNDERKEY_LABEL" description="MOD_AGOSM_THUNDERKEY_DESC" size="40" showon="baselayer:thunderforest" />
+
+				<field type="list" name="stamenmaptype" default="watercolor" label="MOD_AGOSM_CONTROL_STAMENMAPTYPE_LABEL" description="MOD_AGOSM_CONTROL_STAMENMAPTYPE_DESC" showon="baselayer:stamen">
+					<option value="toner">toner</option>
+					<option value="terrain">terrain</option>
+					<option value="watercolor">watercolor</option>
+				</field>
+
+				<field type="list" name="thunderforestmaptype" default="cycle" label="MOD_AGOSM_CONTROL_THUNDERFORESTMAPTYPE_LABEL" description="MOD_AGOSM_CONTROL_THUNDERFORESTMAPTYPE_DESC" showon="baselayer:thunderforest">
+					<option value="cycle">cycle</option>
+					<option value="transport">transport</option>
+					<option value="landscape">landscape</option>
+					<option value="outdoors">outdoors</option>
+					<option value="transport-dark">transport-dark</option>
+					<option value="spinal-map">spinal-map</option>
+					<option value="pioneer">pioneer</option>
+					<option value="mobile-atlas">mobile-atlas</option>
+					<option value="neighbourhood">neighbourhood</option>
+				</field>
+
+				<field type="list" name="googlemapstype" default="satellite" label="MOD_AGOSM_CONTROL_GOOGLETYPE_LABEL" description="MOD_AGOSM_CONTROL_GOOGLETYPE_DESC" showon="baselayer:google">
+					<option value="satellite">satellite</option>
+					<option value="roadmap">roadmap</option>
+					<option value="terrain">terrain</option>
+					<option value="hybrid">hybrid</option>
+				</field>
+
+				<field type="checkboxes" name="scale" label="MOD_AGOSM_SCALE" description="MOD_AGOSM_SCALE_DESC">
+					<option value="metric">MOD_AGOSM_METRIC</option>
+					<option value="imperial">MOD_AGOSM_IMPERIAL</option>
+				</field>
+
+				<field type="list" name="detectRetina" default="0" label="MOD_AGOSM_DETECTRETINA" description="MOD_AGOSM_DETECTRETINA_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field type="list" name="noWorldWarp" default="1" label="MOD_AGOSM_NOWORLDWARP" description="MOD_AGOSM_NOWORLDWARP_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field type="spacer" name="spacerPos0y" hr="true" />
+
+				<field name="scrollwheelzoom" type="radio" label="MOD_AGOSM_SCROLLWHEELZOOM_LABEL" description="MOD_AGOSM_NOWORLDWARP_SCROLLWHEELZOOM_DESC" default="1">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+					<option value="2">Google Gesture Handling</option>
+				</field>
+
+				<field name="owngooglegesturetext" type="radio" label="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT" description="PLG_AGOSMSADDRESSMARKER_OWNGOOGLEGESTURETEXT_DESC" default="1" showon="scrollwheelzoom:2">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+
+				<field type="spacer" name="spacerPos" label="MOD_AGOSM_POSITION" class="text" />
+
+				<field name="lonlat" type="agosmsaddressfinder" default="51.3,9.3" label="MOD_AGOSM_LONLAT" description="MOD_AGOSM_LONLAT_DESC" />
+
+				<field type="spacer" name="spacerlocate" hr="true" />
+
+				<field type="list" name="showlocate" default="0" label="MOD_AGOSM_SHOWLOCATE" description="MOD_AGOSM_SHOWLOCATE_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field type="spacer" name="spacermouseposition" hr="true" />
+
+				<field type="list" name="showmouseposition" default="0" label="MOD_AGOSM_MOUSEPOSITION" description="MOD_AGOSM_MOUSEPOSITION_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field type="spacer" name="spacerfullscreen" hr="true" />
+
+				<field type="list" name="showfullscreen" default="0" label="MOD_AGOSM_FULLSCREEN" description="MOD_AGOSM_FULLSCREEN_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+
+			<!-- MT -->
+			<fieldset name="agosmControlMosetTree" label="MOD_AGOSM_MOSETTREE_SPECIAL_CONTROL_FIELDSETLABEL">
+				<field type="spacer" name="mosetTree" label="MOD_AGOSM_MOSET_TREE_FIELDSETDESCRIPTION" class="text" />
+
+				<field type="list" name="use_own_marker_image" default="0" label="MOD_AGOSM_CONFIG_OWNMARKERIMAGE_LABEL" description="MOD_AGOSM_CONFIG_OWNMARKERIMAGE_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field type="list" name="show_radiusZoom" default="0" label="MOD_AGOSM_CONFIG_CONTROL_SHOWRADIUSSEARCH_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWRADIUSSEARCH_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field type="list" name="showfullscreenlink" default="0" label="MOD_AGOSM_FULLSCREENLINK" description="MOD_AGOSM_FULLSCREENLINK_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
+				<field name="fullscreenlink" type="text" default="https://regional-optimal.de/anbieter/hoflaeden/eier-und-gefluegelhof-fuhrmann" label="MOD_AGOSM_FULLSCREENLINKLINK" description="MOD_AGOSM_FULLSCREENLINKLINK_DESC" size="40" showon="showfullscreenlink:1" />
+
+				<field type="list" name="move_form" default="0" label="MOD_AGOSM_CONFIG_CONTROL_MOVEFORM_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_MOVEFORM_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+			</fieldset>
+
+			<!-- advanced -->
+			<fieldset name="advanced">
+				<field name="layout" type="modulelayout" label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+
+				<field name="moduleclass_sfx" type="textarea" rows="3" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+
+				<field name="cache" type="list" default="1" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC">
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+
+				<field name="cache_time" type="text" default="900" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" />
+
+				<field name="cachemode" type="hidden" default="static" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "mod_agosms",
+  "version": "4.0.0",
+  "description": "Mod Agsosmsmt",
+  "license": "GPL-2.0-or-later",
+  "assets": [
+  ]
+}
