@@ -23,10 +23,10 @@ require(JPATH_BASE . '/components/com_mtree/init.php');
 require_once(JPATH_SITE.'/components/com_mtree/listlisting.php');
 
 $savant = new Savant2([
-    'template_path' => JPATH_SITE.'/components/com_mtree/templates/'.$mtconf->get('template').'/',
-    'template_path_default' => JPATH_SITE.'/components/com_mtree/Savant2/default/',
-    'plugin_path' => JPATH_SITE.'/components/com_mtree/Savant2/',
-    'filter_path' => JPATH_SITE.'/components/com_mtree/Savant2/'
+	'template_path' => JPATH_SITE.'/components/com_mtree/templates/'.$mtconf->get('template').'/',
+	'template_path_default' => JPATH_SITE.'/components/com_mtree/Savant2/default/',
+	'plugin_path' => JPATH_SITE.'/components/com_mtree/Savant2/',
+	'filter_path' => JPATH_SITE.'/components/com_mtree/Savant2/'
 ]);
 
 $count = $params->get('count', 50);
@@ -40,9 +40,9 @@ $listListing->hasLatlng();
 $listListing->setLimit($count);
 $links = $listListing->getListings();
 
-if(empty($links)) {
-    require ModuleHelper::getLayoutPath('mod_mt_map', '_emptystate');
-    return;
+if (empty($links)) {
+	require ModuleHelper::getLayoutPath('mod_mt_map', '_emptystate');
+	return;
 }
 
 $map = Map::assign($savant)->withListings($links)->withConfig($mtconf);
@@ -51,50 +51,45 @@ $map = Map::assign($savant)->withListings($links)->withConfig($mtconf);
 
 // AGOSM
 
-$arrCats = array();
+$arrCats = [];
 
-if( !empty($links) )
-{
-    foreach ($links AS $link)
-    {
-        if(!in_array($link->cat_name, $arrCats, true)){
-            array_push($arrCats, $link->cat_name);
-        }            
-    }
+if (!empty($links)) {
+	foreach ($links as $link) {
+		if (!in_array($link->cat_name, $arrCats, true)) {
+			array_push($arrCats, $link->cat_name);
+		}
+	}
 }
 
-$geojson = array(
-    'type'      => 'FeatureCollection',
-    'features'  => array()
-);
+$geojson = [
+	'type'      => 'FeatureCollection',
+	'features'  => []
+];
 
-if( !empty($links) )
-{
-    $Itemid = \MTModuleHelper::getItemid();
+if (!empty($links)) {
+	$Itemid = \MTModuleHelper::getItemid();
 
-    foreach ($links AS $link)
-    {
-        if( $link->lng != 0 && $link->lat != 0 )
-        {
-            $feature = array(
-                'id' => $link->link_id,
-                'type' => 'Feature', 
-                'geometry' => array(
-                    'type' => 'Point',
-                    'coordinates' => array($link->lng, $link->lat)
-                ),
+	foreach ($links as $link) {
+		if ($link->lng != 0 && $link->lat != 0) {
+			$feature = [
+				'id' => $link->link_id,
+				'type' => 'Feature',
+				'geometry' => [
+					'type' => 'Point',
+					'coordinates' => [$link->lng, $link->lat]
+				],
 
-                'properties' => array(
-                    'link_name' => json_encode($link->link_name),
-                    'link_desc' => json_encode($link->link_desc),
-                    'route' => '\'' . Route::_('index.php?option=com_mtree&task=viewlink&link_id='.$link->link_id.'&Itemid='.$Itemid) . '\'',
-                    'cat_name' => json_encode($link->cat_name),
-                    'cat_id' => json_encode($link->cat_id)
-                    )
-                );
-            array_push($geojson['features'], $feature);
-        }
-    }
+				'properties' => [
+					'link_name' => json_encode($link->link_name),
+					'link_desc' => json_encode($link->link_desc),
+					'route' => '\'' . Route::_('index.php?option=com_mtree&task=viewlink&link_id='.$link->link_id.'&Itemid='.$Itemid) . '\'',
+					'cat_name' => json_encode($link->cat_name),
+					'cat_id' => json_encode($link->cat_id)
+					]
+				];
+			array_push($geojson['features'], $feature);
+		}
+	}
 }
 
 
