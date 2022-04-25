@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset
+			addfieldpath="/plugins/fields/agosmsaddressmarker/fields"
+	>
+		<field
+			name="value"
+			type="cfield"
+			label="PLG_AGOSMSADDRESSMARKER_CFIELD"
+			description="PLG_AGOSMSADDRESSMARKER_CFIELD_DESC"
+			>
+		</field>
+	</fieldset>
+</form>

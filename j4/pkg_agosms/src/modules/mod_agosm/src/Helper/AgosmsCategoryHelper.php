@@ -153,18 +153,31 @@ abstract class AgosmsCategoryHelper
 							if ($popup) {
 								$itemfiltered->popuptext = $test[5];
 							}
+
+							// Check if special popup text in separat custom field
+							$specialpopuptext = null;
+							if ($field->fieldparams->get('showspecialpopuptext')) {
+								foreach ($fields as $pkey => $pfield) {
+									if ($pfield->id == $field->fieldparams->get('popuptextfields')->value) {
+										if (strlen($pfield->value) > 0) {
+											$itemfiltered->specialpopuptext = $pfield->value;
+										}
+									}
+								}
+							}
 						}
 					}
 
 					$itemsfiltered[] = $itemfiltered;
 				}
-				if ($itemsfiltered) {
-					return $itemsfiltered;
-				}
 			}
 		}
 
-		return [];
+		if ($itemsfiltered) {
+			return $itemsfiltered;
+		} else {
+			return [];
+		}
 	}
 
 	/**

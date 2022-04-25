@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		var moduleId = element.getAttribute('data-module-id');
 		var detectRetina = element.getAttribute('data-detect-retina');
 		var baselayer = element.getAttribute('data-baselayer');
+		var layertree = element.getAttribute('data-layertree');
+
 		var lonlat = element.getAttribute('data-lonlat').split(",", 3);
 		var zoom = element.getAttribute('data-zoom');
 		var disableClusteringAtZoom = element.getAttribute('data-disable-clustering-at-zoom');
@@ -282,6 +284,19 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		tileLayer.addTo(window['mymap' + moduleId]);
+
+		if (layertree == '1') {
+			var tileLayer2 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+				maxZoom: 16,
+				attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+				id: ''
+			});
+			var baseMaps = {
+				"Map": tileLayer,
+				"Satellit": tileLayer2
+			};
+			L.control.layers(baseMaps).addTo(window['mymap' + moduleId]);
+		}
 
 		// SCALE CONTROL
 		if ((scale) !== '0') {
@@ -964,6 +979,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					}
 
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
+
+					if (objcf.specialpopuptext) {
+						popuptext = objcf.specialpopuptext;
+					}
+					
 					tempMarkercf.bindPopup(popuptext.replace(/<img src="images/g, '<img src="' + uriroot + 'images'));
 
 					var clickgmarkerlista = document.querySelector('.agmarkerlista' + objcf.id);

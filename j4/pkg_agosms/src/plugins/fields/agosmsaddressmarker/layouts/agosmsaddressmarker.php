@@ -10,10 +10,10 @@
 defined('JPATH_BASE') or die;
 
 use Joomla\Component\Fields\Administrator\Helper\FieldsHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
 
 extract($displayData);
-
-//JHtml::_('jquery.framework');
 
 $showspecialicon = "display:none";
 if ($specialicon) {
@@ -25,15 +25,18 @@ if ($popup) {
 	$showpopup = "";
 }
 
-$document = JFactory::getDocument();
-$document->addScript(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
-JHtml::_('script', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js', ['version' => 'auto', 'relative' => true]);
+$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+
+$wa->registerAndUseScript('agosmsaddressmarker', 'plg_fields_agosmsaddressmarker/admin-agosmsaddressmarker.js', [], [], []);
+// We need leaflet for calculation the address
+$document = Factory::getApplication()->getDocument();
+$document->addScript(URI::root(true) . '/media/plg_fields_agosmsaddressmarker/leaflet/leaflet.js');
 
 if ($specialicon) {
-	$document->addStyleSheet(JURI::root(true) . '/media/plg_fields_agosmsaddressmarker/css/font-awesome.min.css');
+	$wa->registerAndUseStyle('fontawesome', 'plg_fields_agosmsaddressmarker/font-awesome.min.css', [], [], []);
 }
 
-JHtml::_('stylesheet', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', ['version' => 'auto', 'relative' => true]);
+$wa->registerAndUseStyle('agosmsaddressmarker', 'plg_fields_agosmsaddressmarker/agosmsaddressmarker.css', [], [], []);
 
 JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR');
 JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_NOTICE');
@@ -72,7 +75,6 @@ else if ($app->input->getCmd('option') === 'com_users') {
 
 // Com_contact
 else if ($app->input->getCmd('option') === 'com_contact') {
-	//JFactory::getApplication()->enqueueMessage(JText::_('PLG_AGOSMSADDRESSMARKER_SUPPORTET'), 'message');
 	$context = 'com_contact.contact';
 }
 
@@ -204,23 +206,22 @@ class="agosmsaddressmarkericon">
 	<option value="">noicon</option>
 	<option value="home">home &#xf015;</option>
 	<option value="star">star &#xf005;</option>
-	<option value="500px">&#xf26e;</option>
-	<option value="address-book">&#xf2b9;</option>
-	<option value="address-book">&#xf2b9;</option>
-	<option value="address-book-o">&#xf2ba;</option>
-	<option value="address-card">&#xf2bb;</option>
-	<option value="address-card-o">&#xf2bc;</option>
-	<option value="adjust">&#xf042;</option>
-	<option value="adn">&#xf170;</option>
-	<option value="align-center">&#xf037;</option>
-	<option value="align-justify">&#xf039;</option>
+	<option value="500px">500px &#xf26e;</option>
+	<option value="address-book">address-book &#xf2b9;</option>
+	<option value="address-book-o">address-book-o &#xf2ba;</option>
+	<option value="address-card">address-card &#xf2bb;</option>
+	<option value="address-card-o">address-card-o &#xf2bc;</option>
+	<option value="adjust">adjust &#xf042;</option>
+	<option value="adn">adn &#xf170;</option>
+	<option value="align-center">align-center &#xf037;</option>
+	<option value="align-justify">align-justify &#xf039;</option>
 	<option value="align-left">&#xf036;</option>
 	<option value="align-right">&#xf038;</option>
 	<option value="amazon">&#xf270;</option>
 	<option value="ambulance">&#xf0f9;</option>
 	<option value="american-sign-language-interpreting">&#xf2a3;</option>
-	<option value="anchor">&#xf13d;</option>
-	<option value="android">&#xf17b;</option>
+	<option value="anchor"> &#xf13d;</option>
+	<option value="android">android &#xf17b;</option>
 	<option value="angellist">&#xf209;</option>
 	<option value="angle-double-down">&#xf103;</option>
 	<option value="angle-double-left">&#xf100;</option>
@@ -558,7 +559,7 @@ class="agosmsaddressmarkericon">
 	<option value="hdd-o">&#xf0a0;</option>
 	<option value="header">&#xf1dc;</option>
 	<option value="headphones">&#xf025;</option>
-	<option value="heart">&#xf004;</option>
+	<option value="heart">heart &#xf004;</option>
 	<option value="heart-o">&#xf08a;</option>
 	<option value="heartbeat">&#xf21e;</option>
 	<option value="history">&#xf1da;</option>
@@ -597,14 +598,14 @@ class="agosmsaddressmarkericon">
 	<option value="joomla">&#xf1aa;</option>
 	<option value="jpy">&#xf157;</option>
 	<option value="jsfiddle">&#xf1cc;</option>
-	<option value="key">&#xf084;</option>
+	<option value="key">key &#xf084;</option>
 	<option value="keyboard-o">&#xf11c;</option>
 	<option value="krw">&#xf159;</option>
 	<option value="language">&#xf1ab;</option>
 	<option value="laptop">&#xf109;</option>
 	<option value="lastfm">&#xf202;</option>
 	<option value="lastfm-square">&#xf203;</option>
-	<option value="leaf">&#xf06c;</option>
+	<option value="leaf">leaf &#xf06c;</option>
 	<option value="leanpub">&#xf212;</option>
 	<option value="legal">&#xf0e3;</option>
 	<option value="lemon-o">&#xf094;</option>
@@ -712,13 +713,13 @@ class="agosmsaddressmarkericon">
 	<option value="pinterest">&#xf0d2;</option>
 	<option value="pinterest-p">&#xf231;</option>
 	<option value="pinterest-square">&#xf0d3;</option>
-	<option value="plane">&#xf072;</option>
-	<option value="play">&#xf04b;</option>
+	<option value="plane">plane &#xf072;</option>
+	<option value="play">play &#xf04b;</option>
 	<option value="play-circle">&#xf144;</option>
 	<option value="play-circle-o">&#xf01d;</option>
-	<option value="plug">&#xf1e6;</option>
-	<option value="plus">&#xf067;</option>
-	<option value="plus-circle">&#xf055;</option>
+	<option value="plug">plug &#xf1e6;</option>
+	<option value="plus">plus &#xf067;</option>
+	<option value="plus-circle">plus-circle &#xf055;</option>
 	<option value="plus-square">&#xf0fe;</option>
 	<option value="plus-square-o">&#xf196;</option>
 	<option value="podcast">&#xf2ce;</option>
@@ -752,19 +753,19 @@ class="agosmsaddressmarkericon">
 	<option value="reply-all">&#xf122;</option>
 	<option value="resistance">&#xf1d0;</option>
 	<option value="retweet">&#xf079;</option>
-	<option value="rmb">&#xf157;</option>
-	<option value="road">&#xf018;</option>
+	<option value="rmb">rmb &#xf157;</option>
+	<option value="road">road &#xf018;</option>
 	<option value="rocket">&#xf135;</option>
 	<option value="rotate-left">&#xf0e2;</option>
 	<option value="rotate-right">&#xf01e;</option>
 	<option value="rouble">&#xf158;</option>
-	<option value="rss">&#xf09e;</option>
+	<option value="rss">rss &#xf09e;</option>
 	<option value="rss-square">&#xf143;</option>
 	<option value="rub">&#xf158;</option>
 	<option value="ruble">&#xf158;</option>
 	<option value="rupee">&#xf156;</option>
 	<option value="s15">&#xf2cd;</option>
-	<option value="safari">&#xf267;</option>
+	<option value="safari">safari &#xf267;</option>
 	<option value="save">&#xf0c7;</option>
 	<option value="scissors">&#xf0c4;</option>
 	<option value="scribd">&#xf28a;</option>
@@ -781,16 +782,16 @@ class="agosmsaddressmarkericon">
 	<option value="share-square">&#xf14d;</option>
 	<option value="share-square-o">&#xf045;</option>
 	<option value="shekel">&#xf20b;</option>
-	<option value="sheqel">&#xf20b;</option>
+	<option value="sheqel">sheqel &#xf20b;</option>
 	<option value="shield">&#xf132;</option>
-	<option value="ship">&#xf21a;</option>
+	<option value="ship">ship &#xf21a;</option>
 	<option value="shirtsinbulk">&#xf214;</option>
 	<option value="shopping-bag">&#xf290;</option>
 	<option value="shopping-basket">&#xf291;</option>
 	<option value="shopping-cart">&#xf07a;</option>
-	<option value="shower">&#xf2cc;</option>
-	<option value="sign-in">&#xf090;</option>
-	<option value="sign-language">&#xf2a7;</option>
+	<option value="shower">shower &#xf2cc;</option>
+	<option value="sign-in">sign-in &#xf090;</option>
+	<option value="sign-language">sign-language &#xf2a7;</option>
 	<option value="sign-out">&#xf08b;</option>
 	<option value="signal">&#xf012;</option>
 	<option value="signing">&#xf2a7;</option>
@@ -840,9 +841,9 @@ class="agosmsaddressmarkericon">
 	<option value="stethoscope">&#xf0f1;</option>
 	<option value="sticky-note">&#xf249;</option>
 	<option value="sticky-note-o">&#xf24a;</option>
-	<option value="stop">&#xf04d;</option>
+	<option value="stop">stop &#xf04d;</option>
 	<option value="stop-circle">&#xf28d;</option>
-	<option value="stop-circle-o">&#xf28e;</option>
+	<option value="stop-circle-o">stop-circle-o &#xf28e;</option>
 	<option value="street-view">&#xf21d;</option>
 	<option value="strikethrough">&#xf0cc;</option>
 	<option value="stumbleupon">&#xf1a4;</option>
@@ -850,8 +851,8 @@ class="agosmsaddressmarkericon">
 	<option value="subscript">&#xf12c;</option>
 	<option value="subway">&#xf239;</option>
 	<option value="suitcase">&#xf0f2;</option>
-	<option value="sun-o">&#xf185;</option>
-	<option value="superpowers">&#xf2dd;</option>
+	<option value="sun-o">sun-o &#xf185;</option>
+	<option value="superpowers">superpowers &#xf2dd;</option>
 	<option value="superscript">&#xf12b;</option>
 	<option value="support">&#xf1cd;</option>
 	<option value="table">&#xf0ce;</option>
@@ -911,12 +912,12 @@ class="agosmsaddressmarkericon">
 	<option value="tripadvisor">&#xf262;</option>
 	<option value="trophy">&#xf091;</option>
 	<option value="truck">&#xf0d1;</option>
-	<option value="try">&#xf195;</option>
+	<option value="try">try &#xf195;</option>
 	<option value="tty">&#xf1e4;</option>
 	<option value="tumblr">&#xf173;</option>
 	<option value="tumblr-square">&#xf174;</option>
 	<option value="turkish-lira">&#xf195;</option>
-	<option value="tv">&#xf26c;</option>
+	<option value="tv">tv &#xf26c;</option>
 	<option value="twitch">&#xf1e8;</option>
 	<option value="twitter">&#xf099;</option>
 	<option value="twitter-square">&#xf081;</option>
@@ -925,8 +926,8 @@ class="agosmsaddressmarkericon">
 	<option value="undo">&#xf0e2;</option>
 	<option value="universal-access">&#xf29a;</option>
 	<option value="university">&#xf19c;</option>
-	<option value="unlink">&#xf127;</option>
-	<option value="unlock">&#xf09c;</option>
+	<option value="unlink">unlink &#xf127;</option>
+	<option value="unlock">unlock &#xf09c;</option>
 	<option value="unlock-alt">&#xf13e;</option>
 	<option value="unsorted">&#xf0dc;</option>
 	<option value="upload">&#xf093;</option>
@@ -962,11 +963,11 @@ class="agosmsaddressmarkericon">
 	<option value="warning">&#xf071;</option>
 	<option value="wechat">&#xf1d7;</option>
 	<option value="weibo">&#xf18a;</option>
-	<option value="weixin">&#xf1d7;</option>
-	<option value="whatsapp">&#xf232;</option>
+	<option value="weixin">weixin &#xf1d7;</option>
+	<option value="whatsapp">whatsapp &#xf232;</option>
 	<option value="wheelchair">&#xf193;</option>
 	<option value="wheelchair-alt">&#xf29b;</option>
-	<option value="wifi">&#xf1eb;</option>
+	<option value="wifi">wifi &#xf1eb;</option>
 	<option value="wikipedia-w">&#xf266;</option>
 	<option value="window-close">&#xf2d3;</option>
 	<option value="window-close-o">&#xf2d4;</option>
@@ -985,14 +986,14 @@ class="agosmsaddressmarkericon">
 	<option value="y-combinator">&#xf23b;</option>
 	<option value="y-combinator-square">&#xf1d4;</option>
 	<option value="yahoo">&#xf19e;</option>
-	<option value="yc">&#xf23b;</option>
-	<option value="yc-square">&#xf1d4;</option>
-	<option value="yelp">&#xf1e9;</option>
-	<option value="yen">&#xf157;</option>
-	<option value="yoast">&#xf2b1;</option>
-	<option value="youtube">&#xf167;</option>
-	<option value="youtube-play">&#xf16a;</option>
-	<option value="youtube-square">&#xf166;</option>
+	<option value="yc">yc &#xf23b;</option>
+	<option value="yc-square">yc-square&#xf1d4;</option>
+	<option value="yelp">yelp &#xf1e9;</option>
+	<option value="yen">yen &#xf157;</option>
+	<option value="yoast">yoast &#xf2b1;</option>
+	<option value="youtube">youtube &#xf167;</option>
+	<option value="youtube-play">youtube-play &#xf16a;</option>
+	<option value="youtube-square">youtube-square &#xf166;</option>
 </select>
 </div>
 </div>

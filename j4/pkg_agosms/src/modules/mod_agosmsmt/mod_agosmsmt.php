@@ -80,9 +80,9 @@ if (!empty($links)) {
 				],
 
 				'properties' => [
-					'link_name' => json_encode($link->link_name),
-					'link_desc' => json_encode($link->link_desc),
-					'route' => '\'' . Route::_('index.php?option=com_mtree&task=viewlink&link_id='.$link->link_id.'&Itemid='.$Itemid) . '\'',
+					'link_name' => $link->link_name,
+					'link_desc' => $link->link_desc,
+					'route' => Route::_('index.php?option=com_mtree&task=viewlink&link_id='.$link->link_id.'&Itemid='.$Itemid),
 					'cat_name' => json_encode($link->cat_name),
 					'cat_id' => json_encode($link->cat_id)
 					]

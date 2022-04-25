@@ -69,4 +69,38 @@
 			<item>Add mod_agosmsmt.</item>
 		</note>
 	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.13</version>
+		<note>
+			<item>Fixes and improvments in mod_agosmsmt.</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.14</version>
+		<note>
+			<item>Add Layer Tree (for satellite) in module agosms.</item>
+			<item>Make separators more visible in the backend</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.15</version>
+		<note>
+			<item>Agosmsaddressmarker Field: Make the separators more visible in the backend.</item>
+			<item>Agosmsaddressmarker Field: Change the maximum default values for lat and lon to the largest possible values.</item>
+			<item>Agosmsaddressmarker Field: Add possibility to add a field for popup text.</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.16</version>
+		<note>
+		</note>
+	</changelog>	
 </changelogs>

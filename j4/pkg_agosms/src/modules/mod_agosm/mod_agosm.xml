@@ -97,6 +97,12 @@
 					<option value="esri_worldImagery">Esri_WorldImagery</option>
 					<option value="custom">custom</option>
 				</field>
+
+				<field type="list" name="addlayertree" default="0" label="MOD_AGOSM_ADDLAYERTREE" description="MOD_AGOSM_ADDLAYERTREE_DESC">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+
 				<field name="mapboxkey" type="text" default="" label="MOD_AGOSM_MAPBOXKEY_LABEL" description="MOD_AGOSM_MAPBOXKEY_DESC" size="40" showon="baselayer:mapbox" />
 
 				<field type="list" name="mapboxmaptype" default="streets" label="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_LABEL" description="MOD_AGOSM_CONTROL_MAPBOXMAPTYPE_DESC" showon="baselayer:mapbox">
@@ -155,9 +161,9 @@
 					<option value="0">JNO</option>
 				</field>
 
-				<field type="spacer" name="spacerPos0y" hr="true" />
+				<field type="spacer" name="spacerPos0y" hr="true" class="p-2 m-2" />
 
-				<field name="scrollwheelzoom" type="radio" label="MOD_AGOSM_SCROLLWHEELZOOM_LABEL" description="MOD_AGOSM_NOWORLDWARP_SCROLLWHEELZOOM_DESC" default="1">
+				<field name="scrollwheelzoom" type="radio"  label="MOD_AGOSM_SCROLLWHEELZOOM_LABEL" description="MOD_AGOSM_NOWORLDWARP_SCROLLWHEELZOOM_DESC" default="1">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 					<option value="2">Google Gesture Handling</option>
@@ -168,39 +174,41 @@
 					<option value="1">JYES</option>
 				</field>
 
+				<field type="spacer" name="spacerPoshr" hr="true" class="p-2 m-2" />
+
 				<field type="spacer" name="spacerPos" label="MOD_AGOSM_POSITION" class="text" />
 
 				<field name="lonlat" type="agosmsaddressfinder" default="" label="MOD_AGOSM_LONLAT" description="MOD_AGOSM_LONLAT_DESC" />
 
-				<field type="spacer" name="spacerlocate" hr="true" />
+				<field type="spacer" name="spacerlocate" hr="true" class="p-2 m-2" />
 
 				<field type="list" name="showlocate" default="0" label="MOD_AGOSM_SHOWLOCATE" description="MOD_AGOSM_SHOWLOCATE_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 
-				<field type="spacer" name="spacermouseposition" hr="true" />
+				<field type="spacer" name="spacermouseposition" hr="true" class="p-2 m-2" />
 
 				<field type="list" name="showmouseposition" default="0" label="MOD_AGOSM_MOUSEPOSITION" description="MOD_AGOSM_MOUSEPOSITION_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 
-				<field type="spacer" name="spacerfullscreen" hr="true" />
+				<field type="spacer" name="spacerfullscreen" hr="true" class="p-2 m-2" />
 
 				<field type="list" name="showfullscreen" default="0" label="MOD_AGOSM_FULLSCREEN" description="MOD_AGOSM_FULLSCREEN_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 
-				<field type="spacer" name="saveStatetoSession" hr="true" />
+				<field type="spacer" name="saveStatetoSession" hr="true" class="p-2 m-2" />
 
 				<field type="list" name="savestate" default="0" label="MOD_AGOSM_SAVESTATE" description="MOD_AGOSM_SAVESTATE_DESC">
 					<option value="1">JYES</option>
 					<option value="0">JNO</option>
 				</field>
 
-				<field type="spacer" name="savemarkerlist" hr="true" />
+				<field type="spacer" name="savemarkerlist" hr="true" class="p-2 m-2" />
 
 				<field name="agmarkerlist" type="list" label="MOD_AGOSM_MARKERLIST" default="0" description="MOD_AGOSM_MARKERLIST_DESC">
 					<option value="0">JNO</option>
@@ -293,7 +301,7 @@
 					<option value="0">JNO</option>
 				</field>
 
-				<field type="spacer" name="spacerPos0" hr="true" />
+				<field type="spacer" name="spacerPos0" hr="true" class="p-2 m-2" />
 
 				<field type="spacer" name="spacerPos" label="MOD_AGOSM_CONTROL_HEADLINE" class="text" showon="showgeocoder:1" />
 
@@ -323,7 +331,7 @@
 					<option value="0">JNO</option>
 				</field>
 
-				<field type="spacer" name="spacerESRI1" hr="true" showon="useesri:1" />
+				<field type="spacer" name="spacerESRI1" hr="true" class="p-2 m-2" showon="useesri:1" />
 
 				<field type="list" name="showgeocoderesri" default="0" label="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODERESRI_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_SHOWGEOCODERESRI_DESC" showon="useesri:1">
 					<option value="1">JYES</option>
@@ -362,14 +370,14 @@
 					<option value="false">JNO</option>
 				</field>
 
-				<field type="spacer" name="spacerESRI2" hr="true" showon="useesri:1" />
+				<field type="spacer" name="spacerESRI2" hr="true" class="p-2 m-2" showon="useesri:1" />
 
 				<field type="list" name="esrigeocoderopengetaddress" default="false" label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_OPENGETADDRESS_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_OPENGETADDRESS_DESC" showon="useesri:1">
 					<option value="true">JYES</option>
 					<option value="false">JNO</option>
 				</field>
 
-				<field type="spacer" name="spacerESRI3" hr="true" showon="useesri:1" />
+				<field type="spacer" name="spacerESRI3" hr="true" class="p-2 m-2" showon="useesri:1" />
 
 				<field type="list" name="esrireversegeocoding" default="false" label="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_REVERSE_LABEL" description="MOD_AGOSM_CONFIG_CONTROL_ESRIGEOGODER_REVERSE_DESC" showon="useesri:1">
 					<option value="true">JYES</option>

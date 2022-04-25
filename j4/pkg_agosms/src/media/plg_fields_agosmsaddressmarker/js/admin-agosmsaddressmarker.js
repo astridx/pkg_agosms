@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-	document.formvalidator.setHandler('lat', function(value) {
+/*	document.formvalidator.setHandler('lat', function(value) {
 		if (value == 0) {
 			return true;
 		}
@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', function () {
 			document.getElementById("addressmarker-alert-latlon").style.display = "block";
 		}
 		return test;
-	});
+	});*/
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-	document.formvalidator.setHandler('lon', function(value) {
+/*	document.formvalidator.setHandler('lon', function(value) {
 		if (value == 0) {
 			return true;
 		}
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			document.getElementById("addressmarker-alert-latlon").style.display = "block";
 		}
 		return test;
-	});
+	});*/
 });
 
 
@@ -69,13 +69,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 
 		var selects = element.getElementsByTagName('select');
+
 		var iconcolor = selects[0];
 		var markercolor = selects[1];
 		var icon = selects[2];
-		var iconcolorSpan = iconcolor.parentNode.getElementsByTagName('span')[0];
-		var markercolorSpan = markercolor.parentNode.getElementsByTagName('span')[0];
-		var iconSpan = icon.parentNode.getElementsByTagName('span')[0];
 
+		var iconcolorSpan = iconcolor.parentNode.getElementsByTagName('option')[0];
+		var markercolorSpan = markercolor.parentNode.getElementsByTagName('option')[0];
+		var iconSpan = icon.parentNode.getElementsByTagName('option')[0];
+
+		console.log(markercolor);
+		console.log(markercolorSpan);
 
 		// Write the value to the fields
 		if (hiddenfield.value.split(',').length !== 6) {

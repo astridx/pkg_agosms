@@ -12,12 +12,36 @@
 				multiple="true"
 				formsource="plugins/fields/agosmsaddressmarker/models/forms/address_data.xml"
 			/>
-			<field type="spacer" name="myspacer1" hr="true" />
+
+			<field type="spacer" name="myspacer1" hr="true" class="p-2 m-2" />
+
+			<field
+				name="showspecialpopuptext"
+				type="list"
+				label="PLG_AGOSMSADDRESSMARKER_SHOWSPECIALPOPUPTEXT"
+				default="false"
+				validate="options"
+			>
+				<option value="true">JYES</option>
+				<option value="false">JNO</option>
+			</field>
+
+			<field
+				name="popuptextfields"
+				type="subform"
+				label="PLG_AGOSMSADDRESSMARKER_POPUPTEXTFIELDS"
+				layout="joomla.form.field.subform.repeatable-table"
+				multiple="false"
+				showon="showspecialpopuptext:true"
+				formsource="plugins/fields/agosmsaddressmarker/models/forms/popup_data.xml"
+			/>
+			
+			<field type="spacer" name="myspacer11" hr="true" class="p-2 m-2" />
 
 			<field
 				name="latmax"
 				type="number"
-				default="75"
+				default="90"
 				label="PLG_AGOSMSADDRESSMARKER_LATMAX"
 				min="-90"
 				max="90"
@@ -27,7 +51,7 @@
 			<field
 				name="latmin"
 				type="number"
-				default="30"
+				default="-90"
 				label="PLG_AGOSMSADDRESSMARKER_LATMIN"
 				min="-90"
 				max="90"
@@ -37,7 +61,7 @@
 			<field
 				name="lonmax"
 				type="number"
-				default="60"
+				default="180"
 				label="PLG_AGOSMSADDRESSMARKER_LONMAX"
 				min="-180"
 				max="180"
@@ -47,14 +71,14 @@
 			<field
 				name="lonmin"
 				type="number"
-				default="-30"
+				default="-180"
 				label="PLG_AGOSMSADDRESSMARKER_LONMIN"
 				min="-180"
 				max="180"
 				step="1"
 			/>
 
-			<field type="spacer" name="myspacer2" hr="true" />
+			<field type="spacer" name="myspacer2" hr="true" class="p-2 m-2" />
 
 			<field
 				name="mapheight"
@@ -76,7 +100,7 @@
 				<option value="vh">vh (Viewport Height)</option>
 			</field>
 
-			<field type="spacer" name="myspacer2" hr="true" />
+			<field type="spacer" name="myspacer2" hr="true" class="p-2 m-2" />
 
 			<field
 				name="maptype"
@@ -120,7 +144,7 @@
 				showon="maptype:mapbox[OR]geocoder:mapbox[OR]routing_router:mapbox"
 			/>
 
-			<field type="spacer" name="myspacer3" hr="true" />
+			<field type="spacer" name="myspacer3" hr="true" class="p-2 m-2" />
 
 			<field
 				name="scrollwheelzoom"
@@ -163,7 +187,7 @@
 				showon="owngooglegesturetext:1[AND]scrollwheelzoom:2"
 			/>
 
-			<field type="spacer" name="myspacer4" hr="true" />
+			<field type="spacer" name="myspacer4" hr="true" class="p-2 m-2" />
 
 			<field
 				name="popup"
@@ -176,7 +200,7 @@
 				<option value="2">JYES (open)</option>
 			</field>
 
-			<field type="spacer" name="myspacer5" hr="true" />
+			<field type="spacer" name="myspacer5" hr="true" class="p-2 m-2" />
 
 			<field
 				name="specialicon"
@@ -189,7 +213,7 @@
 				<option value="1">JYES</option>
 			</field>
 
-			<field type="spacer" name="myspacer6" hr="true" />
+			<field type="spacer" name="myspacer6" hr="true" class="p-2 m-2" />
 
 			<field
 				name="showroutingcontrol"
@@ -353,7 +377,7 @@
 				showon="showroutingcontrol:1"
 			/>
 
-			<field type="spacer" name="myspacer7" hr="true" />
+			<field type="spacer" name="myspacer7" hr="true" class="p-2 m-2" />
 
 			<field
 				name="addprivacybox"
@@ -366,7 +390,7 @@
 				<option value="1">JYES</option>
 			</field>			
 
-			<field type="spacer" name="myspacer8" hr="true" />
+			<field type="spacer" name="myspacer8" hr="true" class="p-2 m-2" />
 		</fieldset>
 	</fields>
 </form>

@@ -22,6 +22,7 @@ $unique = $module->id . '_' . uniqid();
 	data-no-world-warp="<?php echo $params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $params->get('detectRetina', 0); ?>"
 	data-baselayer="<?php echo $params->get('baselayer', 'mapnik'); ?>"
+	data-layertree="<?php echo $params->get('addlayertree', '0'); ?>"
 	data-lonlat="<?php echo $params->get('lonlat', '50.281168, 7.276211'); ?>"
 	data-savestate="<?php echo $params->get('savestate', false); ?>"
 	data-zoom="<?php echo $params->get('zoom', '10'); ?>"

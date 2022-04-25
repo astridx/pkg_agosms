@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var fullscreen = element.getAttribute('data-fullscreen');
 		var locate = element.getAttribute('data-locate');
 		var mouseposition = element.getAttribute('data-mouseposition');
-
+ 
 		var uriroot = element.getAttribute('data-uriroot');
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
 		var noWorldWarp = element.getAttribute('data-no-world-warp');
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		//
 		var baseMaps = {
 			"Karte": tileLayer,
-			"Sattelit": tileLayer2
+			"Satellit": tileLayer2
 		};
 		L.control.layers(baseMaps).addTo(window['mymap' + moduleId]);
 
@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
 									L.popup({
 										className: 'popup-fixed',
 										autoPan: false,
-									}).setContent(feature.properties.link_desc)
+									}).setContent('<a href="' + feature.properties.route + '">' + feature.properties.link_name + '</a>' + feature.properties.link_desc)
 								)
 								.addTo(catOverlays[arrCat]);
 
@@ -384,19 +384,31 @@ document.addEventListener('DOMContentLoaded', function () {
 			L.control.mousePosition().addTo(window['mymap' + moduleId]);
 		}
 
-
-
-
 		if (moveForm == "1") {
 
 			// Suche in rechte Seitenleiste verschieben
 			var thismap = document.querySelector('#map' + moduleId);
+
 			var agosmsMtFormLayer = document.getElementById("agosms-mt-form-layer" + moduleId);
 			var agosmsMtFormRadius = document.getElementById("agosms-mt-form-radius" + moduleId);
+			var agosmsMtLocate = document.getElementById("agosms-mt-locate" + moduleId);
+			var agosmsMtLocateText = document.getElementById("agosms-mt-locate-text" + moduleId);
+
 			var clayer = thismap.querySelector(".leaflet-control-layers-expanded");
 			var cradius = thismap.querySelector(".leaflet-control-radiuszoom");
-			setParent(clayer, agosmsMtFormLayer);
-			setParent(cradius, agosmsMtFormRadius);
+			var clocate = thismap.querySelector(".leaflet-control-locate");
+
+			if (clocate && agosmsMtLocate && agosmsMtLocateText) {
+				agosmsMtLocateText.innerHTML = "Wo bin ich? ";
+				setParent(clocate, agosmsMtLocate);
+			}
+			if (clayer && agosmsMtFormLayer) {
+				setParent(clayer, agosmsMtFormLayer);
+			}
+			if (cradius && agosmsMtFormRadius) {
+				setParent(cradius, agosmsMtFormRadius);
+			}
+
 			function setParent(el, newParent) {
 				if (el)
 					newParent.appendChild(el);

@@ -113,6 +113,11 @@ if ($params->get('spacermouseposition', '1') == 1) {
 	$document->addScript(JURI::root(true) . '/media/mod_agosm/mouseposition/L.Control.MousePosition.js');
 }
 
+if ($params->get('addlayertree', '0') == 1) {
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/layerstree/L.Control.Layers.Tree.js');
+	$document->addScript(JURI::root(true) . '/media/mod_agosm/layerstree/L.Control.Layers.Tree.css');
+}
+
 $document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/agosms.css');
 
 require ModuleHelper::getLayoutPath('mod_agosm', $params->get('layout', 'default'));
