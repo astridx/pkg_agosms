@@ -7,8 +7,13 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
+namespace AG\Module\Agosm\Site\Field;
 
 defined('JPATH_PLATFORM') or die;
+
+use Joomla\CMS\Form\FormField;
+use Joomla\CMS\Factory;
+use Joomla\CMS\HTML\HTMLHelper;
 
 /**
  * Form Field class for the Joomla Platform.
@@ -16,7 +21,7 @@ defined('JPATH_PLATFORM') or die;
  *
  * @since  1.0.40
  */
-class JFormFieldFalist extends JFormField
+class FalistField extends FormField
 {
 	/**
 	 * The form field type.
@@ -36,8 +41,9 @@ class JFormFieldFalist extends JFormField
 	 */
 	protected function getInput()
 	{
-		$document = JFactory::getDocument();
-		$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/css/font-awesome.min.css');
+		$document = Factory::getDocument();
+		echo HTMLHelper::_('stylesheet', '/media/mod_agosm/css/font-awesome.min.css', ['version' => '1.0.1', 'relative' => false]);
+
 		$style = '.chzn-container {
 			font-family: \'FontAwesome\';
 			}';
@@ -67,7 +73,7 @@ class JFormFieldFalist extends JFormField
 
 		// Create a read-only list (no name) with hidden input(s) to store the value(s).
 		if ((string) $this->readonly == '1' || (string) $this->readonly == 'true') {
-			$html[] = JHtml::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
+			$html[] = HTMLHelper::_('select.genericlist', $options, '', trim($attr), 'value', 'text', $this->value, $this->id);
 
 			// E.g. form field type tag sends $this->value as array
 			if ($this->multiple && is_array($this->value)) {
@@ -83,7 +89,7 @@ class JFormFieldFalist extends JFormField
 			}
 		} else // Create a regular list.
 		{
-			$html[] = JHtml::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $this->value, $this->id);
+			$html[] = HTMLHelper::_('select.genericlist', $options, $this->name, trim($attr), 'value', 'text', $this->value, $this->id);
 		}
 
 		return implode($html);

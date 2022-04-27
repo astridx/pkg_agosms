@@ -7,6 +7,7 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
+namespace AG\Module\Agosm\Site\Field;
 
 defined('JPATH_PLATFORM') or die;
 
@@ -16,7 +17,7 @@ jimport('joomla.form.fields.media');
  *
  * @since  1.0.40
  */
-class JFormFieldAgosm extends JFormFieldMedia
+class AgosmField extends JFormFieldMedia
 {
 	/**
 	 * The form field type.

@@ -24,7 +24,7 @@
 
 	<!-- Configuration -->
 	<config>
-		<fields name="params" addfieldpath="modules/mod_agmaplibre/models/fields/field">
+		<fields name="params" addfieldprefix="AG\Module\Agosm\Site\Field">
 			<!-- Map Configuration -->
 			<fieldset name="mapConfig" label="MOD_AGOSM_H_MAP">
 				<field type="integer" name="height" label="MOD_AGOSM_HEIGHT" description="MOD_AGOSM_HEIGHT_DESC" default="400" first="10" last="1000" step="10" />
@@ -384,7 +384,7 @@
 
 				<field type="spacer" name="specialPin" label="MOD_AGOSM_H_PINCF_SPECIALPIN" class="text" showon="showpin:1" />
 
-				<field name="specialpins" type="subform" formsource="modules/mod_agmaplibre/models/forms/custombuttons.xml" multiple="true" label="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_LABEL" min= "1" max= "1000" description="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_DESC" layout="joomla.form.field.subform.repeatable" showon="showpin:1" />
+				<field name="specialpins" type="subform" formsource="modules/mod_agosm/forms/custombuttons.xml" multiple="true" label="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_LABEL" min= "1" max= "1000" description="MOD_AGOSM_CONFIG_CONTROL_SUBFORM_DESC" layout="joomla.form.field.subform.repeatable" showon="showpin:1" />
 			</fieldset>
 
 			<!-- Show Pins from Custom Field -->

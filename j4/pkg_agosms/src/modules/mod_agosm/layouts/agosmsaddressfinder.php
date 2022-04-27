@@ -9,15 +9,20 @@
  */
 defined('JPATH_BASE') or die;
 
+use Joomla\CMS\HTML\HTMLHelper;
+
 extract($displayData);
 
 $mapid = "map" . uniqid();
-$document = JFactory::getDocument();
-$document->addStyleSheet(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.css');
-$document->addScript(JURI::root(true) . '/media/mod_agosm/leaflet/leaflet.js', true);
-$document->addScript(JURI::root(true) . '/media/mod_agosm/js/agosmsaddressfinder.js', true);
 
-JHtml::_('stylesheet', 'mod_agosm/agomsaddressfinder.css', ['version' => 'auto', 'relative' => true]);
+// Stylesheet
+echo HTMLHelper::_('stylesheet', 'media/mod_agosm/leaflet/leaflet.css', ['version' => '1.0.1', 'relative' => false]);
+echo HTMLHelper::_('stylesheet', 'mod_agosm/agomsaddressfinder.css', ['version' => 'auto', 'relative' => false]);
+
+// Script
+echo HTMLHelper::_('script', 'media/mod_agosm/leaflet/leaflet.js', ['version' => '1.0.1', 'relative' => false], ['defer' => true]);
+echo HTMLHelper::_('script', 'media/mod_agosm/js/agosmsaddressfinder.js', ['version' => 'auto', 'relative' => false], ['defer' => true]);
+
 
 JText::script('MOD_AGOSM_ADDRESSFINDER_ADDRESSE_ERROR');
 JText::script('MOD_AGOSM_ADDRESSFINDER_ADDRESSE_NOTICE');

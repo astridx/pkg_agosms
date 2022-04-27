@@ -7,18 +7,19 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-namespace AG\Module\Agosms;
+namespace AG\Module\Agosm\Site\Field;
 
  \defined('JPATH_PLATFORM') or die;
 
  use Joomla\CMS\Form\Field\TextField;
+ use Joomla\CMS\Factory;
 
 /**
  * Provides a mechanism for calculating geographic coordinates
  *
  * @since  1.0.40
  */
-class JFormFieldAgosmsaddressfinder extends TextField
+class AgosmsaddressfinderField extends TextField
 {
 	/**
 	 * The form field type.
@@ -111,24 +112,6 @@ class JFormFieldAgosmsaddressfinder extends TextField
 	}
 
 	/**
-	 * Get the layout paths
-	 *
-	 * @return  array
-	 *
-	 * @since   1.0.40
-	 */
-	protected function getLayoutPaths()
-	{
-		$template = JFactory::getApplication()->getTemplate();
-
-		return [
-			JPATH_ADMINISTRATOR . '/templates/' . $template . '/html/layouts/modules/agosmsaddressfinder',
-			dirname(__DIR__) . '/layouts',
-			JPATH_SITE . '/layouts'
-		];
-	}
-
-	/**
 	 * Method to get the field input markup.
 	 *
 	 * @return  string  The field input markup.
@@ -137,7 +120,6 @@ class JFormFieldAgosmsaddressfinder extends TextField
 	 */
 	protected function getInput()
 	{
-
 		return $this->getRenderer($this->layout)->render($this->getLayoutData());
 	}
 
@@ -163,6 +145,24 @@ class JFormFieldAgosmsaddressfinder extends TextField
 
 		return array_merge($data, $extraData);
 	}
+
+	/**
+	 * Allow to override renderer include paths in child fields
+	 *
+	 * @return  array
+	 *
+	 * @since   3.5
+	 */
+	protected function getLayoutPaths()
+	{
+		$paths = parent::getLayoutPaths();
+		$paths[] = JPATH_SITE . '/modules/mod_agosm/layouts';
+
+
+		return $paths;
+	}
+
+
 	/**
 	 * Method to get the field options.
 	 *

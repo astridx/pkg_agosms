@@ -101,6 +101,7 @@
 		<type>package</type>
 		<version>4.0.16</version>
 		<note>
+		<item>Fix agosmsaddressfinderfield in module.</item>
 		</note>
 	</changelog>	
 </changelogs>
