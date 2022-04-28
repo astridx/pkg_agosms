@@ -144,22 +144,24 @@ class AgosmController extends FormController
 		$menuitem = (int) $params->get('redirect_menuitem');
 
 		// Check for redirection after submission when creating a new article only
-		if ($menuitem > 0 && $id == 0) {
-			$lang = '';
+		if ($params->get('custom_redirect')) {
+			if ($menuitem > 0 && $id == 0) {
+				$lang = '';
 
-			if (Multilanguage::isEnabled()) {
-				$item = $app->getMenu()->getItem($menuitem);
-				$lang = !is_null($item) && $item->language != '*' ? '&lang=' . $item->language : '';
-			}
+				if (Multilanguage::isEnabled()) {
+					$item = $app->getMenu()->getItem($menuitem);
+					$lang = !is_null($item) && $item->language != '*' ? '&lang=' . $item->language : '';
+				}
 
 			// If ok, redirect to the return page.
-			if ($result) {
-				$this->setRedirect(Route::_('index.php?Itemid=' . $menuitem . $lang, false));
-			}
-		} else {
-			// If ok, redirect to the return page.
-			if ($result) {
-				$this->setRedirect(Route::_($this->getReturnPage(), false));
+				if ($result) {
+					$this->setRedirect(Route::_('index.php?Itemid=' . $menuitem . $lang, false));
+				}
+			} else {
+				// If ok, redirect to the return page.
+				if ($result) {
+					$this->setRedirect(Route::_($this->getReturnPage(), false));
+				}
 			}
 		}
 
@@ -295,5 +297,24 @@ class AgosmController extends FormController
 		}
 
 		return base64_decode($return);
+	}
+
+	/**
+	 * Function that allows child controller access to model data after the data has been saved.
+	 *
+	 * @param   \Joomla\CMS\MVC\Model\BaseDatabaseModel  $model      The data model object.
+	 * @param   array                                    $validData  The validated data.
+	 *
+	 * @return  integer
+	 *
+	 * @since   3.1
+	 */
+	protected function postSaveHook(\Joomla\CMS\MVC\Model\BaseDatabaseModel $model, $validData = [])
+	{
+		$id = $model->getState($model->getName() . '.id');
+
+		$this->setRedirect(Route::_('index.php?option=com_agosms&view=agosm&id=' . $id, false));
+
+		return $id;
 	}
 }
