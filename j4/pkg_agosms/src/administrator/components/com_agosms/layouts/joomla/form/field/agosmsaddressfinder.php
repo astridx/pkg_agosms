@@ -85,7 +85,7 @@ else if ($app->input->getCmd('option') !== 'com_users'
 	
 <button 
 		data-mapid="<?php echo $mapid; ?>"
-		class="btn btn-success agomsaddressfinderbutton_address" 
+		class="btn btn-primary agomsaddressfinderbutton_address" 
 		type="button">
 <?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_CALCULATE_CORDS_FROM_ADDRESS'); ?>
 </button>

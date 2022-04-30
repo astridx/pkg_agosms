@@ -95,10 +95,23 @@ $this->useCoreUI = true;
 				<?php echo HTMLHelper::_('uitab.endTab'); ?>
 			</div>
 
-			<?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'end', Text::_('COM_AGOSMS_FIELDSET_END')); ?>
-
+			<?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'end', '<span onclick="showCurrent()">' . Text::_('COM_AGOSMS_FIELDSET_END') . '</span>'); ?>
+			<script>
+				function showCurrent(){
+					document.getElementById("agosmsdescription").innerHTML = document.getElementById("jform_description").value;
+					document.getElementById("agosmscusotm1").innerHTML = document.getElementById("jform_agosmscusotm1").value;
+					document.getElementById("agosmscusotm2").innerHTML = document.getElementById("jform_agosmscusotm2").value;
+					document.getElementById("agosmscusotm3").innerHTML = document.getElementById("jform_agosmscusotm3").value;
+					document.getElementById("agosmscusotm4").innerHTML = document.getElementById("jform_agosmscusotm4").value;
+					document.getElementById("agosmscusotm5").innerHTML = document.getElementById("jform_agosmscusotm5").value;
+					document.getElementById("agosmscusotm6").innerHTML = document.getElementById("jform_agosmscusotm6").value;
+					document.getElementById("agosmscusotm7").innerHTML = document.getElementById("jform_agosmscusotm7").value;
+					document.getElementById("agosmscusotm8").innerHTML = document.getElementById("jform_agosmscusotm8").value;
+					document.getElementById("agosmscusotm9").innerHTML = '<img src="' + document.getElementById("jform_agosmscusotm9").value + '"\>';
+				};				
+				
+			</script>
 			<div class="mb-2">
-				not ready yet!
 				<table class="table table table-striped table-sm table-bordered">
 					<tbody>
 						<tr>
@@ -107,50 +120,43 @@ $this->useCoreUI = true;
 						</tr>
 						<tr>
 							<td><?php echo Text::_('COM_AGOSMS_FIELD_DESCRIPTION_LABEL'); ?></td>
-							<td><?php echo $this->item->description; ?></td>
+							<td><span id="agosmsdescription"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('JFIELD_LANGUAGE_LABEL'); ?></td>
-							<td><?php echo $this->item->cusotm1; ?></td>
+							<td><span id="agosmscusotm1"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL'); ?></td>
-							<td><?php echo $this->item->cusotm2; ?></td>
+							<td><span id="agosmscusotm2"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL'); ?></td>
-							<td><?php echo $this->item->cusotm3; ?></td>
+							<td><span id="agosmscusotm3"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL'); ?></td>
-							<td><?php echo $this->item->cusotm4; ?></td>
+							<td><span id="agosmscusotm4"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL'); ?></td>
-							<td><?php echo $this->item->cusotm5; ?></td>
+							<td><span id="agosmscusotm5"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('JGLOBAL_EMAIL'); ?></td>
-							<td><?php echo $this->item->cusotm6; ?></td>
+							<td><span id="agosmscusotm6"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL'); ?></td>
-							<td><?php echo $this->item->cusotm7; ?></td>
+							<td><span id="agosmscusotm7"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL'); ?></td>
-							<td><?php echo $this->item->cusotm8; ?></td>
+							<td><span id="agosmscusotm8"></span></td>
 						</tr>
 						<tr>
 							<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL'); ?></td>
-							<td> <?php echo LayoutHelper::render(
-								'joomla.html.image',
-								[
-								'src'      => $this->item->cusotm9,
-								'alt'      => "",
-								'itemprop' => 'image',
-								]
-							); ?></td>
+							<td><span id="agosmscusotm9"></span></td>
 						</tr>
 					</tbody>
 				</table>

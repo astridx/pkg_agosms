@@ -112,4 +112,12 @@
 		<item>Redirect to created item after creation https://joomla.stackexchange.com/questions/32016/forwarding-to-the-item-page-after-the-creation-of-the-item-via-front-end-editing/32026#32026.</item>
 		</note>
 	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.18</version>
+		<note>
+		<item>Wip on Custom layout.</item>
+		</note>
+	</changelog>	
 </changelogs>
