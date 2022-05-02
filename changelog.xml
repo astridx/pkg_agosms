@@ -119,5 +119,13 @@
 		<note>
 		<item>Wip on Custom layout.</item>
 		</note>
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.19</version>
+		<note>
+			<item></item>
+			<item></item>
+		</note>
 	</changelog>	
 </changelogs>

@@ -66,7 +66,7 @@ JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR');
 			<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 
-			<?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'details', empty($this->item->id) ? Text::_('COM_AGOSMS_DESC_AGOSM') : Text::_('COM_AGOSMS_DESC_AGOSM')); ?>
+			<?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'details', empty($this->item->id) ? Text::_('COM_AGOSMS_DESC_AGOSM') : Text::_('COM_AGOSMS_EDIT_AGOSM')); ?>
 			<?php echo $this->form->renderField('description'); ?>
 			<?php echo HTMLHelper::_('uitab.endTab'); ?>
 
@@ -81,6 +81,7 @@ JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR');
 			<?php echo $this->form->renderField('cusotm7'); ?>
 			<?php echo $this->form->renderField('cusotm8'); ?>
 			<?php echo $this->form->renderField('cusotm9'); ?>
+
 			<button type="button" class="btn btn-primary"
 					onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
 					<span class="icon-check" aria-hidden="true"></span>
