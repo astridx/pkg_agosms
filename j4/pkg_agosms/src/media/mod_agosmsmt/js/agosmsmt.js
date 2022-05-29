@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var fullscreen = element.getAttribute('data-fullscreen');
 		var locate = element.getAttribute('data-locate');
 		var mouseposition = element.getAttribute('data-mouseposition');
- 
+
 		var uriroot = element.getAttribute('data-uriroot');
 		var scrollwheelzoom = element.getAttribute('data-scrollwheelzoom');
 		var noWorldWarp = element.getAttribute('data-no-world-warp');
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		var scaleMetric = element.getAttribute('data-scale-metric');
 		var scaleImperial = element.getAttribute('data-scale-imperial');
 
-		var showrouting_simple = element.getAttribute('data-showrouting-simple');
+		var disableClusteringAtZoom = element.getAttribute('data-disable-clustering-at-zoom');
 
 		var addprivacybox = element.getAttribute('data-addprivacybox');
 		var unique = element.getAttribute('data-unique');
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		//
 		var baseMaps = {
 			"Karte": tileLayer,
-			"Satellit": tileLayer2
+			"Sattelit": tileLayer2
 		};
 		L.control.layers(baseMaps).addTo(window['mymap' + moduleId]);
 
@@ -256,11 +256,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-		/* MARKER */
+		/* MARKER */ 
 		var clusterOptions = {
 			spiderfyOnMaxZoom: false,
 			showCoverageOnHover: false,
 			zoomToBoundsOnClick: true,
+			disableClusteringAtZoom: disableClusteringAtZoom,
 		};
 		var mtMarkerCluster = L.markerClusterGroup.layerSupport(clusterOptions);
 
@@ -391,17 +392,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			var agosmsMtFormLayer = document.getElementById("agosms-mt-form-layer" + moduleId);
 			var agosmsMtFormRadius = document.getElementById("agosms-mt-form-radius" + moduleId);
-			var agosmsMtLocate = document.getElementById("agosms-mt-locate" + moduleId);
-			var agosmsMtLocateText = document.getElementById("agosms-mt-locate-text" + moduleId);
 
 			var clayer = thismap.querySelector(".leaflet-control-layers-expanded");
 			var cradius = thismap.querySelector(".leaflet-control-radiuszoom");
-			var clocate = thismap.querySelector(".leaflet-control-locate");
 
-			if (clocate && agosmsMtLocate && agosmsMtLocateText) {
-				agosmsMtLocateText.innerHTML = "Wo bin ich? ";
-				setParent(clocate, agosmsMtLocate);
-			}
 			if (clayer && agosmsMtFormLayer) {
 				setParent(clayer, agosmsMtFormLayer);
 			}

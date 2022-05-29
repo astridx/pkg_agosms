@@ -193,7 +193,7 @@ $items = $model->getItems();
 							'alt'      => "",
 							'itemprop' => 'image',
 						]
-                ); ?></td>
+					 ); ?></td>
 			</tr>
 		</tbody>
 	</table>
