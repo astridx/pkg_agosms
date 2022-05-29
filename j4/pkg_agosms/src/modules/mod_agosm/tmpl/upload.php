@@ -11,10 +11,10 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
-use AG\Module\Agosms\Site\Helper\EasyFileUploaderHelper;
+use AG\Module\Agosm\Site\Helper\AgosmsEasyFileUploaderHelper;
 
 if (isset($_FILES[$params->get('ag_variable')])) {
-	$result = EasyFileUploaderHelper::getFileToUpload($params);
+	$result = AgosmsEasyFileUploaderHelper::getFileToUpload($params);
 }
 
 $defaultArray = [];

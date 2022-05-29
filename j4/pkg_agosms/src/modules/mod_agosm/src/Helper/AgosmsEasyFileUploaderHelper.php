@@ -7,9 +7,9 @@
  * @license     GNU General Public License version 2 or later;
  * @link        astrid-guenther.de
  */
-namespace AG\Module\Agosms\Site\Helper;
+namespace AG\Module\Agosm\Site\Helper;
 
-defined('_JEXEC') or die;
+\defined('_JEXEC') or die;
 
 // No direct access
 defined('_JEXEC') or die;
@@ -26,7 +26,7 @@ use Joomla\CMS\Factory;
  *
  * @since  1.0.40
  */
-class EasyFileUploaderHelper
+class AgosmsEasyFileUploaderHelper
 {
 
 	/**
