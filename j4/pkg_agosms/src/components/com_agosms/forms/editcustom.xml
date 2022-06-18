@@ -10,7 +10,11 @@
 
 		<field name="alias" type="hidden" label="JFIELD_ALIAS_LABEL" size="45" hint="JFIELD_ALIAS_PLACEHOLDER" />
 
-		<field name="description" validate="Wordintext" default="" type="editor" label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL" description="COM_AGOSMS_FIELD_DESCRIPTION_DESC" filter="JComponentHelper::filterText" buttons="true" hide="readmore,pagebreak,module,article,fields,menu,contact,media" />
+		<field name="description" validate="Wordintext" default="" type="editor" label="COM_AGOSMS_FIELD_DESCRIPTION_LABEL" 
+		description="COM_AGOSMS_FIELD_DESCRIPTION_DESC" filter="JComponentHelper::filterText" 
+		buttons="true" 
+		hide="readmore,fields" 
+		/>
 
 		<field type="list" name="showpopup" default="4" label="MOD_AGOSM_POPUP" description="MOD_AGOSM_POPUP_DESC">
 			<option value="1">MOD_AGOSM_KLICK</option>
@@ -126,7 +130,7 @@
 			<option value="Workshop">Workshop</option>
 		</field>
 
-		<field name="cusotm3" id="agosmscusotm3" type="calendar" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL" description="COM_CONTACT_FIELD_INFORMATION_DATE_DESC" translateformat="true" default="2022-09-22" maxyear="2022" minyear="2022" showtime="true" size="22" filter="user_utc" />
+		<field name="cusotm3" id="agosmscusotm3" type="calendar" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL" description="COM_CONTACT_FIELD_INFORMATION_DATE_DESC" translateformat="true" default="2022-09-22" maxyear="2022" minyear="2022" showtime="false" size="22" filter="user_utc" />
 
 		<field name="cusotm4" id="agosmscusotm4" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL" description="COM_CONTACT_FIELD_INFORMATION_ORGANISATION_DESC">
 		</field>

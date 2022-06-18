@@ -62,10 +62,7 @@ class FormModel extends \AgosmNamespace\Component\Agosms\Administrator\Model\Ago
 		$app = Factory::getApplication();
 		
 		$layout = $app->input->get('layout');
-		if ($layout === null) {
-			$layout = "editcustom";
-		}
-
+		$layout = "editcustom";
 
 		// Get the form.
 		$form = $this->loadForm($this->typeAlias, $layout, ['control' => 'jform', 'load_data' => $loadData]);

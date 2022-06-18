@@ -92,7 +92,8 @@ class HtmlView extends BaseHtmlView
 		}
 
 		if ($authorised !== true) {
-			$app->redirect('index.php?option=com_users&view=login');
+			$uri = 'index.php?option=com_agosms&view=form&layout=editcustom';
+			$app->redirect('index.php?option=com_users&view=login&return=' . base64_encode($uri));
 		}
 
 		// Check for errors.
