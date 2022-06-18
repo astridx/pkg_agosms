@@ -101,7 +101,9 @@ class AgosmTable extends Table implements TaggableTableInterface
 			$this->alias = $this->alias . uniqid();
 		}
 
-		return parent::store($updateNulls);
+		$success = parent::store($updateNulls);
+
+		return $success;
 	}
 
 	/**

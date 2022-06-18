@@ -56,7 +56,27 @@ $tmpl = $input->get('tmpl', '', 'cmd') === 'component' ? '&tmpl=component' : '';
 				<?php echo $this->getForm()->renderField('customPinOffset'); ?>
 				<?php echo $this->getForm()->renderField('customPinPopupOffset'); ?>
 
-				<?php //echo $this->getForm()->renderField('cusotm1'); ?>
+				<?php echo $this->getForm()->renderField('cusotm1'); ?>
+				<?php echo $this->getForm()->renderField('cusotm2'); ?>
+				<?php echo $this->getForm()->renderField('cusotm3'); ?>
+				<?php echo $this->getForm()->renderField('cusotm4'); ?>
+				<?php echo $this->getForm()->renderField('cusotm5'); ?>
+				<?php echo $this->getForm()->renderField('cusotm6'); ?>
+				<?php echo $this->getForm()->renderField('cusotm7'); ?>
+				<?php echo $this->getForm()->renderField('cusotm8'); ?>
+				<?php echo $this->getForm()->renderField('cusotm9'); ?>
+				<?php echo $this->getForm()->renderField('cusotm10'); ?>
+				<?php echo $this->getForm()->renderField('cusotm11'); ?>
+				<?php echo $this->getForm()->renderField('cusotm12'); ?>
+				<?php echo $this->getForm()->renderField('cusotm13'); ?>
+				<?php echo $this->getForm()->renderField('cusotm14'); ?>
+				<?php echo $this->getForm()->renderField('cusotm15'); ?>
+				<?php echo $this->getForm()->renderField('cusotm16'); ?>
+				<?php echo $this->getForm()->renderField('cusotm17'); ?>
+				<?php echo $this->getForm()->renderField('cusotm18'); ?>
+				<?php echo $this->getForm()->renderField('cusotm19'); ?>
+				<?php echo $this->getForm()->renderField('cusotm20'); ?>
+
 
 			</div>
 			<div class="col-lg-3">
