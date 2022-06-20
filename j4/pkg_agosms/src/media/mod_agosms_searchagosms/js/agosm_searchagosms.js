@@ -326,7 +326,7 @@ document.addEventListener(
 
           tempMarker = L.marker(obj.coordinates.split(",").slice(0, 2));
 
-          let url = "index.php?option=com_agosms&view=agosm&id=" + obj.id;
+          let url = uriroot + "index.php?option=com_agosms&view=agosm&id=" + obj.id;
           let title = obj.name;
 
           let popuptext = "<a href=' " + url + " '> " + title + " </a>";
