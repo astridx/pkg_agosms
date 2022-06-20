@@ -692,12 +692,10 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 
 				if (obj.showpopup == "4") {
-					console.log("tempMarker");
-					let url = "index.php?option=com_agosms&view=agosm&id=" + obj.id;
+					let url = uriroot + "index.php?option=com_agosms&view=agosm&id=" + obj.id;
 					let title = obj.name;
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
 					tempMarker.bindPopup(popuptext);
-					console.log(tempMarker);
 				}
 
 				var clickgmarkerlista = document.querySelector('.agmarkerlista_component' + obj.id);
