@@ -24,8 +24,8 @@ document.addEventListener(
                     o.setMaxZoom(18);
                     o.setMinZoom(4);
                     o.setMaxBounds([
-                        [70,35],
-                        [33,-10],
+                        [-90, -180],
+                        [90,180],
                       ]);
                     o.fitBounds([
                         [70,35],
@@ -62,7 +62,10 @@ document.addEventListener(
                                     Joomla.renderMessages({ error: [Joomla.JText._("PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR") + e + " (Nominatim)"] });
                                 }
                             },
-                            r = { q: e, limit: 1, format: "json", addressdetails: 1, viewbox: "34,72,-12,33", bounded:1 };
+                            r = { q: e, limit: 1, format: "json", addressdetails: 1, viewbox: "-180,-90,180,90", bounded:1 };
+                            // https://nominatim.org/release-docs/latest/api/Search/
+                            // viewbox=<x1>,<y1>,<x2>,<y2> Europa: viewbox: "34,72,-12,33"
+                            // bbox = links, unten, rechts, oben
                         getJSON("https://nominatim.openstreetmap.org/", r, a);
                     };
                     function l() {
