@@ -44,7 +44,7 @@ class WordintextRule extends FormRule
 
 		if ($banned) {
 			foreach (explode(';', $banned) as $item) {
-				if ($item != '' && StringHelper::stristr($value, $item) !== false) {
+				if ($item != '' && StringHelper::stristr(trim($value), trim($item)) !== false) {
 					return false;
 				}
 			}
