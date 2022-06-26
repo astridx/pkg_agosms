@@ -76,7 +76,7 @@ class Router extends RouterView
 	public function __construct(SiteApplication $app, AbstractMenu $menu, CategoryFactoryInterface $categoryFactory, DatabaseInterface $db)
 	{
 		$this->categoryFactory = $categoryFactory;
-		$this->db              = $db;
+		$this->db = $db;
 
 		$params = ComponentHelper::getParams('com_agosms');
 		$this->noIDs = (bool) $params->get('sef_ids');
@@ -93,6 +93,14 @@ class Router extends RouterView
 		$form = new RouterViewConfiguration('form');
 		$form->setKey('id');
 		$this->registerView($form);
+
+		$formcustom = new RouterViewConfiguration('formcustom');
+		$formcustom->setKey('a_id');
+		$this->registerView($formcustom);
+
+		$formcustomusermarker = new RouterViewConfiguration('formcustomusermarker');
+		$formcustomusermarker->setKey('a_id');
+		$this->registerView($formcustomusermarker);
 
 		parent::__construct($app, $menu);
 

@@ -24,7 +24,7 @@ use Joomla\CMS\Language\Multilanguage;
  *
  * @since  __DEPLOY_VERSION__
  */
-class AgosmController extends FormController
+class AgosmcustomusermarkerController extends FormController
 {
 	/**
 	 * The URL view item variable.
@@ -165,6 +165,12 @@ class AgosmController extends FormController
 			}
 		}
 
+		if ($result) {
+			$this->setMessage(Text::_('COM_AGOSMS_CUSTOMUSERMARKER_SAVE_SUCCESS'));
+		} else {
+			$this->setMessage(Text::_('COM_AGOSMS_CUSTOMUSERMARKER_SAVE_NO_SUCCESS'));
+		}
+
 		return $result;
 	}
 
@@ -250,7 +256,7 @@ class AgosmController extends FormController
 			$append .= '&tmpl=' . $tmpl;
 		}
 
-		$append .= '&layout=edit';
+		$append .= '&layout=editcustom';
 
 		$append .= '&' . $urlVar . '=' . (int) $recordId;
 
@@ -307,7 +313,7 @@ class AgosmController extends FormController
 	{
 		$id = $model->getState($model->getName() . '.id');
 
-		$this->setRedirect(Route::_('index.php?option=com_agosms&view=agosm&id=' . $id, false));
+		$this->setRedirect(Route::_('index.php?option=com_agosms&view=agosmcustomusermarker&id=' . $id, false));
 
 		return $id;
 	}

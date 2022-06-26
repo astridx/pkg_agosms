@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <?php echo Text::_('JINLINEHELP') ?>
             </button>
         </div>
-
+        <div>custommarkeruserx</div>
         <fieldset>
 
             <?php echo $this->form->renderField('name'); ?>
@@ -75,23 +75,11 @@ document.addEventListener("DOMContentLoaded", function() {
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'cords', Text::_('COM_AGOSMS_FIELDSET_COORDS')); ?>
             <?php echo $this->form->renderField('coordinates'); ?>
 
-            <div style="padding-top:100px;text-align:right"><button class="mb-2 btn btn-primary"
-                    style="display: inline-block;" onclick="function do1(){
-					var details = document.querySelector('#com-agosms-form');
-					details.activateTab(1);
-				};do1()" type="button">Next
-                </button></div>
             <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'details', empty($this->item->id) ? Text::_('COM_AGOSMS_DESC_AGOSM') : Text::_('COM_AGOSMS_DESC_AGOSM')); ?>
             <?php echo $this->form->renderField('description'); ?>
-            <div style="padding-top:100px;text-align:right"><button class="mb-2 btn btn-primary"
-                    style="display: inline-block;" onclick="function do2(){
-						var details = document.querySelector('#com-agosms-form');
-						details.activateTab(2);
-					};do2()" type="button">Next
-                </button></div>
             <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 
@@ -109,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <?php echo $this->form->renderField('cusotm9'); ?>
             <div style="padding-top:100px;text-align:right">
                 <button type="button" class="btn btn-primary" style="float:right"
-                    onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
+                    onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosmcustomusermarker.save')">
                     <span class="icon-check" aria-hidden="true"></span>
                     <?php echo Text::_('JSUBMIT'); ?>
                 </button>

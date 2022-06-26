@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace AgosmNamespace\Component\Agosms\Site\View\Form;
+namespace AgosmNamespace\Component\Agosms\Site\View\Formcustom;
 
 \defined('_JEXEC') or die;
 
@@ -92,7 +92,7 @@ class HtmlView extends BaseHtmlView
 		}
 
 		if ($authorised !== true) {
-			$uri = 'index.php?option=com_agosms&view=form&layout=edit';
+			$uri = 'index.php?option=com_agosms&view=formcustom&layout=editcustom';
 			$app->redirect('index.php?option=com_users&view=login&return=' . base64_encode($uri));
 		}
 

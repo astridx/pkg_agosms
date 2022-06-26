@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <?php echo $this->form->renderField('cusotm9'); ?>
             <div style="padding-top:100px;text-align:right">
                 <button type="button" class="btn btn-primary" style="float:right"
-                    onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosm.save')">
+                    onclick="window.scrollTo(0, 0);Joomla.submitbutton('agosmcustom.save')">
                     <span class="icon-check" aria-hidden="true"></span>
                     <?php echo Text::_('JSUBMIT'); ?>
                 </button>
