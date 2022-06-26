@@ -144,13 +144,22 @@
 			<item>Work on custom layouts</item>
 			<item></item>
 		</note>
+	</changelog>	
 	<changelog>
 		<element>pkg_agosms</element>
 		<type>package</type>
 		<version>4.0.22</version>
 		<note>
 			<item>Fix error in popup of marker if sef urls</item>
-#		</note>
+		</note>
 	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.23</version>
+		<note>
+			<item>Work on custom layouts II</item>
+			<item>Fix error in Maplibre install script</item>
+		</note>
 	</changelog>	
 </changelogs>
