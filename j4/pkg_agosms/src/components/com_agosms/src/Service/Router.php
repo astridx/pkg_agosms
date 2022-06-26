@@ -91,13 +91,13 @@ class Router extends RouterView
 		$agosm->setKey('id')->setParent($category, 'catid');
 		$this->registerView($agosm);
 
-		$agosmcustom = new RouterViewConfiguration('agosmcustom');
+/*		$agosmcustom = new RouterViewConfiguration('agosmcustom');
 		$agosmcustom->setKey('id')->setParent($category, 'catid');
 		$this->registerView($agosmcustom);
 
 		$agosmcustomusermarker = new RouterViewConfiguration('agosmcustomusermarker');
 		$agosmcustomusermarker->setKey('id')->setParent($category, 'catid');
-		$this->registerView($agosmcustomusermarker);
+		$this->registerView($agosmcustomusermarker);*/
 
 
 		$this->registerView(new RouterViewConfiguration('featured'));
@@ -106,13 +106,13 @@ class Router extends RouterView
 		$form->setKey('id');
 		$this->registerView($form);
 
-		$formcustom = new RouterViewConfiguration('formcustom');
+/*		$formcustom = new RouterViewConfiguration('formcustom');
 		$formcustom->setKey('id');
 		$this->registerView($formcustom);
 
 		$formcustomusermarker = new RouterViewConfiguration('formcustomusermarker');
 		$formcustomusermarker->setKey('id');
-		$this->registerView($formcustomusermarker);
+		$this->registerView($formcustomusermarker);*/
 
 		parent::__construct($app, $menu);
 

@@ -21,6 +21,8 @@ use Joomla\CMS\Extension\MVCComponent;
 use Joomla\CMS\HTML\HTMLRegistryAwareTrait;
 use AgosmNamespace\Component\Agosms\Administrator\Service\HTML\AdministratorService;
 use AgosmNamespace\Component\Agosms\Administrator\Service\HTML\Icon;
+use AgosmNamespace\Component\Agosms\Administrator\Service\HTML\Iconcustom;
+use AgosmNamespace\Component\Agosms\Administrator\Service\HTML\Iconcustomusermarker;
 use Psr\Container\ContainerInterface;
 use Joomla\CMS\Helper\ContentHelper;
 use Joomla\CMS\Component\Router\RouterServiceInterface;
@@ -55,6 +57,8 @@ class AgosmsComponent extends MVCComponent implements BootableExtensionInterface
 	{
 		$this->getRegistry()->register('agosmsadministrator', new AdministratorService);
 		$this->getRegistry()->register('agosmicon', new Icon($container->get(SiteApplication::class)));
+		$this->getRegistry()->register('agosmiconcustom', new Iconcustom($container->get(SiteApplication::class)));
+		$this->getRegistry()->register('agosmiconcustomusermarker', new Iconcustomusermarker($container->get(SiteApplication::class)));
 	}
 
 	/**

@@ -165,6 +165,12 @@ class AgosmController extends FormController
 			}
 		}
 
+		if ($result) {
+			$this->setMessage(Text::_('COM_AGOSMS_SAVE_SUCCESS'));
+		} else {
+			$this->setMessage(Text::_('COM_AGOSMS_SAVE_NO_SUCCESS'));
+		}
+
 		return $result;
 	}
 

@@ -166,9 +166,9 @@ class AgosmcustomController extends FormController
 		}
 
 		if ($result) {
-			$this->setMessage(Text::_('COM_AGOSMS_CUSTOM_SAVE_SUCCESS'));
+			$this->setMessage(Text::_('COM_AGOSMS_SAVE_SUCCESS'));
 		} else {
-			$this->setMessage(Text::_('COM_AGOSMS_CUSTOM_SAVE_NO_SUCCESS'));
+			$this->setMessage(Text::_('COM_AGOSMS_SAVE_NO_SUCCESS'));
 		}
 
 		return $result;

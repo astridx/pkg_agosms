@@ -26,7 +26,7 @@ use Joomla\Registry\Registry;
  *
  * @since  __DEPLOY_VERSION__
  */
-class Icon
+class Iconcustom
 {
 	/**
 	 * The application

@@ -67,7 +67,7 @@ if (!$leafletIsLoaded) {
 	<div class="icons">
 		<div class="float-end">
 			<div>
-				<?php echo HTMLHelper::_('agosmicon.edit', $this->item, $tparams); ?>
+				<?php echo HTMLHelper::_('agosmiconcustomusermarker.edit', $this->item, $tparams); ?>
 			</div>
 		</div>
 	</div>
