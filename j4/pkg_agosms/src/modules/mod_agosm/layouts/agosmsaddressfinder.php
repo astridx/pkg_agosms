@@ -60,7 +60,7 @@ else if ($app->input->getCmd('option') === 'com_users') {
 // Com_contact
 else if ($app->input->getCmd('option') === 'com_contact') {
 	//JFactory::getApplication()->enqueueMessage(JText::_('MOD_AGOSM_ADDRESSFINDER_SUPPORTET'), 'message');
-	$context = 'com_contact.contact';
+	$context = 'com_agosms.agosm';
 }
 
 // Third Party

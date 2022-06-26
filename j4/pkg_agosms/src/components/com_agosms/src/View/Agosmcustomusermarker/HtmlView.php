@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace AgosmNamespace\Component\Agosms\Site\View\Agosm;
+namespace AgosmNamespace\Component\Agosms\Site\View\Agosmcustomusermarker;
 
 \defined('_JEXEC') or die;
 
@@ -73,7 +73,7 @@ class HtmlView extends BaseHtmlView
 		if ($active
 			&& $active->component == 'com_agosms'
 			&& isset($active->query['view'], $active->query['id'])
-			&& $active->query['view'] == 'agosm'
+			&& $active->query['view'] == 'agosmcustomusermarker'
 			&& $active->query['id'] == $item->id) {
 			$this->menuItemMatchContact = true;
 

@@ -8,7 +8,7 @@
 
 namespace AgosmNamespace\Component\Agosms\Administrator\Rule;
 
-\defined('_JEXEC') or die; 
+\defined('_JEXEC') or die;
 
 use Joomla\CMS\Form\FormRule;
 

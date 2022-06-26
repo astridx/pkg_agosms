@@ -32,7 +32,7 @@ class AgosmcustomController extends FormController
 	 * @var    string
 	 * @since  __DEPLOY_VERSION__
 	 */
-	protected $view_item = 'form';
+	protected $view_item = 'formcustom';
 
 	/**
 	 * The URL view list variable.
@@ -53,7 +53,7 @@ class AgosmcustomController extends FormController
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function getModel($name = 'form', $prefix = '', $config = ['ignore_request' => true])
+	public function getModel($name = 'formcustom', $prefix = '', $config = ['ignore_request' => true])
 	{
 		return parent::getModel($name, $prefix, ['ignore_request' => false]);
 	}

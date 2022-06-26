@@ -75,7 +75,7 @@ else if ($app->input->getCmd('option') === 'com_users') {
 
 // Com_contact
 else if ($app->input->getCmd('option') === 'com_contact') {
-	$context = 'com_contact.contact';
+	$context = 'com_agosms.agosm';
 }
 
 // Third Party

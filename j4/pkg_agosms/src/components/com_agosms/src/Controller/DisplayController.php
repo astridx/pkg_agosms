@@ -37,7 +37,6 @@ class DisplayController extends BaseController
 	 */
 	public function __construct($config = [], MVCFactoryInterface $factory = null, $app = null, $input = null)
 	{
-		// Agosms frontpage Editor contacts proxying.
 		$input = Factory::getApplication()->input;
 
 		if ($input->get('view') === 'agosms' && $input->get('layout') === 'modal') {

@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-namespace AgosmNamespace\Component\Agosms\Site\View\Agosm;
+namespace AgosmNamespace\Component\Agosms\Site\View\Agosmcustom;
 
 \defined('_JEXEC') or die;
 
@@ -73,7 +73,7 @@ class HtmlView extends BaseHtmlView
 		if ($active
 			&& $active->component == 'com_agosms'
 			&& isset($active->query['view'], $active->query['id'])
-			&& $active->query['view'] == 'agosm'
+			&& $active->query['view'] == 'agosmcustom'
 			&& $active->query['id'] == $item->id) {
 			$this->menuItemMatchContact = true;
 
@@ -104,17 +104,17 @@ class HtmlView extends BaseHtmlView
 
 
 		$offset = $state->get('list.offset');
-		$app->triggerEvent('onContentPrepare', ['com_agosms.agosm', &$item, &$item->params, $offset]);
+		$app->triggerEvent('onContentPrepare', ['com_agosms.agosmcustom', &$item, &$item->params, $offset]);
 
 		// Store the events for later
 		$item->event = new \stdClass;
-		$results = $app->triggerEvent('onContentAfterTitle', ['com_agosms.agosm', &$item, &$item->params, $offset]);
+		$results = $app->triggerEvent('onContentAfterTitle', ['com_agosms.agosmcustom', &$item, &$item->params, $offset]);
 		$item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-		$results = $app->triggerEvent('onContentBeforeDisplay', ['com_agosms.agosm', &$item, &$item->params, $offset]);
+		$results = $app->triggerEvent('onContentBeforeDisplay', ['com_agosms.agosmcustom', &$item, &$item->params, $offset]);
 		$item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-		$results = $app->triggerEvent('onContentAfterDisplay', ['com_agosms.agosm', &$item, &$item->params, $offset]);
+		$results = $app->triggerEvent('onContentAfterDisplay', ['com_agosms.agosmcustom', &$item, &$item->params, $offset]);
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
 
 

@@ -18,6 +18,7 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use AgosmNamespace\Component\Agosms\Administrator\Helper\AgosmHelper;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Toolbar\Toolbar;
+use Joomla\CMS\Uri\Uri;
 
 /**
  * HTML Agosm View class for the Agosm component
@@ -92,7 +93,7 @@ class HtmlView extends BaseHtmlView
 		}
 
 		if ($authorised !== true) {
-			$uri = 'index.php?option=com_agosms&view=formcustom&layout=editcustom';
+			$uri = Uri::base() . 'index.php?option=com_agosms&view=formcustom&layout=editcustom';
 			$app->redirect('index.php?option=com_users&view=login&return=' . base64_encode($uri));
 		}
 

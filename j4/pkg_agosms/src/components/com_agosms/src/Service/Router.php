@@ -86,20 +86,32 @@ class Router extends RouterView
 		$category = new RouterViewConfiguration('category');
 		$category->setKey('id')->setParent($categories, 'catid')->setNestable();
 		$this->registerView($category);
+
 		$agosm = new RouterViewConfiguration('agosm');
 		$agosm->setKey('id')->setParent($category, 'catid');
 		$this->registerView($agosm);
+
+		$agosmcustom = new RouterViewConfiguration('agosmcustom');
+		$agosmcustom->setKey('id')->setParent($category, 'catid');
+		$this->registerView($agosmcustom);
+
+		$agosmcustomusermarker = new RouterViewConfiguration('agosmcustomusermarker');
+		$agosmcustomusermarker->setKey('id')->setParent($category, 'catid');
+		$this->registerView($agosmcustomusermarker);
+
+
 		$this->registerView(new RouterViewConfiguration('featured'));
+
 		$form = new RouterViewConfiguration('form');
 		$form->setKey('id');
 		$this->registerView($form);
 
 		$formcustom = new RouterViewConfiguration('formcustom');
-		$formcustom->setKey('a_id');
+		$formcustom->setKey('id');
 		$this->registerView($formcustom);
 
 		$formcustomusermarker = new RouterViewConfiguration('formcustomusermarker');
-		$formcustomusermarker->setKey('a_id');
+		$formcustomusermarker->setKey('id');
 		$this->registerView($formcustomusermarker);
 
 		parent::__construct($app, $menu);
