@@ -130,7 +130,7 @@ if (!$leafletIsLoaded) {
 			</tr>
 			<tr>
 				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm3; ?></td>
+				<td><?php echo HTMLHelper::_('date', $this->item->cusotm3, Text::_('DATE_FORMAT_LC')); ?><td>
 			</tr>
 			<tr>
 				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL'); ?></td>
