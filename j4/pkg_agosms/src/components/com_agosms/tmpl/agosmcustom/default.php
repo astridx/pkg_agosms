@@ -121,47 +121,84 @@ if (!$leafletIsLoaded) {
 	<table class="table table table-striped table-sm table-bordered">
 		<tbody>
 			<tr>
-				<td><?php echo Text::_('JFIELD_LANGUAGE_LABEL'); ?></td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE1_LABEL'); ?></td>
 				<td><?php echo $this->item->cusotm1; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL'); ?></td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE2_LABEL'); ?></td>
 				<td><?php echo $this->item->cusotm2; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL'); ?></td>
-				<td><?php echo HTMLHelper::_('date', $this->item->cusotm3, Text::_('DATE_FORMAT_LC')); ?><td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE3_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm4; ?></td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE4_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm5; ?></td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE5_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo Text::_('JGLOBAL_EMAIL'); ?></td>
-				<td><?php echo $this->item->cusotm6; ?></td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE6_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm7; ?></td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE7_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm8; ?></td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE8_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
 			</tr>
 			<tr>
-				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL'); ?></td>
-				<td> <?php echo LayoutHelper::render(
-					'joomla.html.image',
-					[
-							'src'      => $this->item->cusotm9,
-							'alt'      => "",
-							'itemprop' => 'image',
-						]
-				); ?></td>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE10_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE11_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE12_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE13_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE14_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE15_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE16_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE17_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE18_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE19_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm1; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE20_LABEL'); ?></td>
+				<td><?php echo $this->item->cusotm2; ?></td>
 			</tr>
 		</tbody>
 	</table>

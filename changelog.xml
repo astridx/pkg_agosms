@@ -183,7 +183,7 @@
 		<type>package</type>
 		<version>4.0.26</version>
 		<note>
-			<item>Work on cusotm layouts</item>
+			<item>Work on custom layouts for rsd</item>
 		</note>
 	</changelog>	
 	<changelog>
@@ -192,6 +192,7 @@
 		<version>4.0.27</version>
 		<note>
 			<item>fix errors in cusotm field addressmarker for j4.</item>
+			<item>custom layout for default view.</item>
 		</note>
 	</changelog>	
 	<changelog>

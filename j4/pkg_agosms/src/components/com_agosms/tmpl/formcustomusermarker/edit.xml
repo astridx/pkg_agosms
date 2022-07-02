@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="Create User Marker">
+	<layout title="COM_AGOSMS_FORM_VIEW_CUSTOM_USERMARKER_LABEL">
 		<help
 			key="JHELP_MENUS_MENU_ITEM_AGOSM_CREATE"
 		/>

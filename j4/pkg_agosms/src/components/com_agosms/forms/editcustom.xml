@@ -87,63 +87,34 @@
 
 		<field name="tags" type="tag" label="JTAG" class="advancedSelect" multiple="true" />
 
-		<field name="cusotm1" type="list" default="English" id="agosmscusotm1" label="JFIELD_LANGUAGE_LABEL" description="JFIELD_LANGUAGE_DESC">
-			<option value="Albanian">Albanian</option>
-			<option value="Arabic">Arabic</option>
-			<option value="Bosnian">Bosnian</option>
-			<option value="Bulgarian">Bulgarian</option>
-			<option value="Croatian">Croatian</option>
-			<option value="Cypriot">Cypriot (Greek)</option>
-			<option value="Czech">Czech</option>
-			<option value="Danish">Danish</option>
-			<option value="Dutch">Dutch</option>
-			<option value="English">English</option>
-			<option value="Estonian">Estonian</option>
-			<option value="Finnish">Finnish</option>
-			<option value="French">French</option>
-			<option value="German">German</option>
-			<option value="Hungarian">Hungarian</option>
-			<option value="Italian">Italian</option>
-			<option value="Latvian">Latvian</option>
-			<option value="Lithuanian">Lithuanian</option>
-			<option value="Luxembourgish">Luxembourgish</option>
-			<option value="Macedonian">Macedonian</option>
-			<option value="Maltese">Maltese</option>
-			<option value="Montenegrin">Montenegrin</option>
-			<option value="Norwegian">Norwegian</option>
-			<option value="Polish">Polish</option>
-			<option value="Portuguese">Portuguese</option>
-			<option value="Romanian">Romanian</option>
-			<option value="Serbian">Serbian</option>
-			<option value="Slovenian">Slovenian</option>
-			<option value="Spanish">Spanish</option>
-			<option value="Turkish">Turkish</option>
+
+		<field name="cusotm1" id="agosmscusotm1" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE1_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE1_DESC">
 		</field>
 
-		<field name="cusotm2" type="list" default="Policecontrol" id="agosmscusotm2" label="COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_DESC">
-			<option value="Conference">Conference</option>
-			<option value="EducationalEvent">Educational Event</option>
-			<option value="Exhibition">Exhibition / Guided Tour</option>
-			<option value="OnlineEvent">Online Event</option>
-			<option value="Policecontrol">Police control</option>
-			<option value="OpenAirEvent">Open Air Event</option>
-			<option value="Workshop">Workshop</option>
+		<field name="cusotm2" id="agosmscusotm2" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE2_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE2_DESC">
 		</field>
 
-		<field name="cusotm3" id="agosmscusotm3" class="validate-roadsaftydate" type="calendar" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL" description="COM_CONTACT_FIELD_INFORMATION_DATE_DESC" translateformat="true" default="2022-09-22" maxyear="2022" minyear="2022" showtime="false" size="22" filter="user_utc" />
-
-		<field name="cusotm4" id="agosmscusotm4" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL" description="COM_CONTACT_FIELD_INFORMATION_ORGANISATION_DESC">
+		<field name="cusotm3" id="agosmscusotm3" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE3_LABEL"  description="COM_AGOSMS_FIELD_CUSTOM_VALUE3_DESC">
 		</field>
 
-		<field name="cusotm5" id="agosmscusotm5" type="url" label="COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL" description="COM_CONTACT_FIELD_INFORMATION_WEBSITE_DESC" size="30" filter="url" validate="url" />
+		<field name="cusotm4" id="agosmscusotm4" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE4_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE4_DESC">
+		</field>
 
-		<field name="cusotm6" id="agosmscusotm6" type="email" label="JGLOBAL_EMAIL" description="COM_CONTACT_FIELD_INFORMATION_EMAIL_DESC" validate="email" size="30" />
+		<field name="cusotm5" id="agosmscusotm5" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE5_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE5_DESC">
+		</field>
 
-		<field name="cusotm7" id="agosmscusotm7" type="text" label="COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL" description="COM_CONTACT_FIELD_INFORMATION_TELEPHONE_DESC" size="30" />
+		<field name="cusotm6" id="agosmscusotm6" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE6_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE6_DESC">
+		</field>
 
-		<field name="cusotm8" id="agosmscusotm8" type="textarea" label="COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL" description="COM_CONTACT_FIELD_INFORMATION_ADDRESS_DESC" rows="3" cols="30" />
+		<field name="cusotm7" id="agosmscusotm7" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE7_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE7_DESC">
+		</field>
 
-		<field name="cusotm9" id="agosmscusotm9" type="media" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL" directory="2022/events/" hide_none="1"  description="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_DESC"/>
+		<field name="cusotm8" id="agosmscusotm8" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE8_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE8_DESC">
+		</field>
+
+		<field name="cusotm9" id="agosmscusotm9" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE9_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE9_DESC">
+		</field>
+
 
 		<field name="cusotm10" id="agosmscusotm10" type="text" label="COM_AGOSMS_FIELD_CUSTOM_VALUE10_LABEL" description="COM_AGOSMS_FIELD_CUSTOM_VALUE10_DESC">
 		</field>

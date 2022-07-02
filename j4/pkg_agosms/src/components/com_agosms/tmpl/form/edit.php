@@ -150,7 +150,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				<?php echo $this->form->renderField('featured'); ?>
 				<?php echo $this->form->renderField('popuptext'); ?>
 				<?php echo $this->form->renderField('showpopup'); ?>
-				<?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
 			</div>
 
 			<div style="display:none">
