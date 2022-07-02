@@ -183,6 +183,22 @@
 		<type>package</type>
 		<version>4.0.26</version>
 		<note>
+			<item>Work on cusotm layouts</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.27</version>
+		<note>
+			<item>fix errors in cusotm field addressmarker for j4.</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.28</version>
+		<note>
 			<item></item>
 		</note>
 	</changelog>	
