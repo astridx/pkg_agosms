@@ -162,4 +162,28 @@
 			<item>Fix error in Maplibre install script</item>
 		</note>
 	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.24</version>
+		<note>
+			<item>Work on custom layouts III</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.25</version>
+		<note>
+			<item>Work on custom layouts IV - Mainly: changes in Router Service and date format</item>
+		</note>
+	</changelog>	
+	<changelog>
+		<element>pkg_agosms</element>
+		<type>package</type>
+		<version>4.0.26</version>
+		<note>
+			<item></item>
+		</note>
+	</changelog>	
 </changelogs>
