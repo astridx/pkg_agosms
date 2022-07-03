@@ -19,6 +19,7 @@ $unique = $module->id . '_' . uniqid();
 	data-module-id="<?php echo $module->id; ?>"
 	data-addprivacybox="<?php echo $params->get('addprivacybox', '0') ?>"
 	data-unique='<?php echo $unique ?>'
+	data-layoutfordisplaylinkinmarker='<?php echo $params->get('layoutfordisplaylinkinmarker', 'agosm'); ?>'
 	data-no-world-warp="<?php echo $params->get('noWorldWarp', 0); ?>"
 	data-detect-retina="<?php echo $params->get('detectRetina', 0); ?>"
 	data-baselayer="<?php echo $params->get('baselayer', 'mapnik'); ?>"
@@ -148,8 +149,11 @@ $unique = $module->id . '_' . uniqid();
 	<?php echo JText::_('MOD_AGOSM_MARKERLISTCOMONENT_HEADING') . '<ul class="agmarkerlistul">'; ?>
 	<?php
 	foreach ($list as $marker) {
-		if (property_exists($marker, 'popuptext')) {
-			echo '<hr><li class="agmarkerlistli_component' . $marker->id . '">' . $marker->popuptext . '<a class="agmarkerlista_component' . $marker->id . '" " href="#map' . $module->id .'">' . "<br><br>" . JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
+		if (property_exists($marker, 'popuptext') && strlen($marker->popuptext) > 0) {
+			echo '<hr><li class="agmarkerlistli_component' . $marker->id . '">' . $marker->popuptext . '<a class="agmarkerlista_component' . $marker->id . '" " href="#map' . $module->id .'">' .  JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
+		}
+		if (property_exists($marker, 'name') && strlen($marker->popuptext) <= 0 && strlen($marker->name) > 0) {
+			echo '<li class="agmarkerlistli_component' . $marker->id . '">' . $marker->name . '<a class="agmarkerlista_component' . $marker->id . '" " href="#map' . $module->id .'">' .  JText::_('MOD_AGOSM_MARKERLIST_OPEN') . '</a>';
 		}
 	}
 	?>

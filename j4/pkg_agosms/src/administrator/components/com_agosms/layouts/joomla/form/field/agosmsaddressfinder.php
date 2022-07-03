@@ -54,28 +54,23 @@ else if ($app->input->getCmd('option') !== 'com_users'
 
 ?>
 
-<hr>
+
 <div class="agomsaddressfindersurroundingdiv form-horizontal">
 
-<div class="control-group">
+<div style="display:none" class="control-group">
 <label class="control-label"><?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_LAT'); ?></label>	
 <div class="controls">
 	<input type="text" class="agomsaddressfinderlat" >
 </div>
 </div>
 
-<div class="control-group">
+<div style="display:none" class="control-group">
 <label class="control-label"><?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_LON'); ?></label>	
 <div class="controls">	
 <input type="text" class="agomsaddressfinderlon" >
 </div>
 </div>
-<p>
-<?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_OPTIONAL_HINT'); ?>	
-</p>	
-<hr>
-<div style="height:300px;width:auto;z-index:1" id="<?php echo $mapid; ?>"></div>
-<hr>
+	
 <div class="control-group">
 <label class="control-label"><?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_ADRESSE'); ?></label>	
 <div class="controls">	
@@ -85,10 +80,17 @@ else if ($app->input->getCmd('option') !== 'com_users'
 	
 <button 
 		data-mapid="<?php echo $mapid; ?>"
-		class="btn btn-primary agomsaddressfinderbutton_address" 
+		class="mb-2 btn btn-primary agomsaddressfinderbutton_address" 
 		type="button">
 <?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_CALCULATE_CORDS_FROM_ADDRESS'); ?>
 </button>
+
+<div 
+class="adressfindermap"
+style="z-index:1;height:<?php echo $displayData["height"]; ?><?php echo $displayData["heightunit"]; ?>;width:auto" 
+data-restriced-cords="<?php echo $displayData["restricedCords"]?>"
+id="<?php echo $mapid; ?>">
+</div>
 	
 <input 
 	class="agomsaddressfinderhiddenfield" 
@@ -98,4 +100,3 @@ else if ($app->input->getCmd('option') !== 'com_users'
 />
 
 </div>
-<hr>

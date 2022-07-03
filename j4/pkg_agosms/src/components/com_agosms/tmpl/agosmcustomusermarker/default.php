@@ -77,12 +77,7 @@ if (!$leafletIsLoaded) {
 
 	<?php echo $this->item->event->beforeDisplayContent; ?>
 
-
-
 	<?php echo $this->item->description; ?>
-
-
-
 
 	<script>
 	document.addEventListener('DOMContentLoaded', function() {
@@ -109,63 +104,6 @@ if (!$leafletIsLoaded) {
 	<small><?php echo 'Lat ' . $cords[0]; ?> , <?php echo 'Long ' . $cords[1]; ?></small>
 	<div style="height: 180px;z-index:1" class="leafletmapComp" id="map<?php echo $this->item->id; ?>">
 	</div>
-
-
-
-
-
-
-
-
-
-	<table class="table table table-striped table-sm table-bordered">
-		<tbody>
-			<tr>
-				<td><?php echo Text::_('JFIELD_LANGUAGE_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm1; ?></td>
-			</tr>
-			<tr>
-				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_TYPEPFEVENT_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm2; ?></td>
-			</tr>
-			<tr>
-				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_DATE_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm3; ?></td>
-			</tr>
-			<tr>
-				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_ORGANISATION_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm4; ?></td>
-			</tr>
-			<tr>
-				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_WEBPAGE_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm5; ?></td>
-			</tr>
-			<tr>
-				<td><?php echo Text::_('JGLOBAL_EMAIL'); ?></td>
-				<td><?php echo $this->item->cusotm6; ?></td>
-			</tr>
-			<tr>
-				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_TELEPHONE_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm7; ?></td>
-			</tr>
-			<tr>
-				<td><?php echo Text::_('COM_CONTACT_FIELD_INFORMATION_ADDRESS_LABEL'); ?></td>
-				<td><?php echo $this->item->cusotm8; ?></td>
-			</tr>
-			<tr>
-				<td><?php echo Text::_('COM_AGOSMS_FIELD_CUSTOM_VALUE9_LOGO_LABEL'); ?></td>
-				<td> <?php echo LayoutHelper::render(
-					'joomla.html.image',
-					[
-							'src'      => $this->item->cusotm9,
-							'alt'      => "",
-							'itemprop' => 'image',
-						]
-				); ?></td>
-			</tr>
-		</tbody>
-	</table>
-
 
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>

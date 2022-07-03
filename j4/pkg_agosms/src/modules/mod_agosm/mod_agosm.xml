@@ -214,6 +214,14 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
+
+				<field type="spacer" name="layoutformarkerlink" hr="true" class="p-2 m-2" />
+
+				<field name="layoutfordisplaylinkinmarker" type="list" label="MOD_AGOSM_LAYOUT" default="agosm" description="MOD_AGOSM_LAYOUT_DESC">
+					<option value="agosmcustom">agosmcustom</option>
+					<option value="agosm">agosm</option>
+					<option value="agosmcustomusermarker">agosmcustomusermarker</option>
+				</field>
 			</fieldset>
 
 			<!-- Routing Simple-->

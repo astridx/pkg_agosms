@@ -28,41 +28,49 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic" addfieldpath="/modules/mod_agosms_searchagosms/includes/">
-				<field name="note1" type="note" label="MOD_AGOSMSSEARCHAGOSMSMAIN_PARAMS_HEADER" description="MOD_AGOSMSSEARCHAGOSMSMAIN_PARAMS_HEADER_DESC"   />
+				<field name="note1" type="note" label="MOD_AGOSMSSEARCHAGOSMSMAIN_PARAMS_HEADER" description="MOD_AGOSMSSEARCHAGOSMSMAIN_PARAMS_HEADER_DESC" />
 
 				<field name="module_template" type="moduletemplate" modulename="mod_agosms_searchagosms" default="Default" label="MOD_AGOSMSSEARCHAGOSMSMODULE_TEMPLATE" />
 
 				<field name="descr" type="textarea" default="" label="MOD_AGOSMSSEARCHAGOSMSFORM_DESC" description="MOD_AGOSMSSEARCHAGOSMSFORM_DESC_DESC" rows="5" cols="27" filter="raw" />
 
-				<field name="clear_btn_show" type="list"  default="0" label="MOD_AGOSMSSEARCHAGOSMSCLEAR_BTN_SHOW">
+				<field name="clear_btn_show" type="list" default="0" label="MOD_AGOSMSSEARCHAGOSMSCLEAR_BTN_SHOW">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
 
-				<field name="note2" type="note" label="MOD_AGOSMSSEARCHAGOSMSCATEGORY_REST_HEADER" description="MOD_AGOSMSSEARCHAGOSMSCATEGORY_REST_HEADER_DESC"   />
+				<field name="note2" type="note" label="MOD_AGOSMSSEARCHAGOSMSCATEGORY_REST_HEADER" description="MOD_AGOSMSSEARCHAGOSMSCATEGORY_REST_HEADER_DESC" />
 
-				<field name="restrict" type="list"  default="0" label="MOD_AGOSMSSEARCHAGOSMSRESTRICT_CAT" description="MOD_AGOSMSSEARCHAGOSMSRESTRICT_CAT_DESC">
+				<field name="restrict" type="list" default="0" label="MOD_AGOSMSSEARCHAGOSMSRESTRICT_CAT" description="MOD_AGOSMSSEARCHAGOSMSRESTRICT_CAT_DESC">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 				</field>
 
-				<field name="restmode" type="list"  default="0" label="MOD_AGOSMSSEARCHAGOSMSRESTRICTION_MODE" description="MOD_AGOSMSSEARCHAGOSMSRESTRICTION_MODE_DESC" showon="restrict:1">
-					<option value="0">MOD_AGOSMSSEARCHAGOSMSRESTRICTION_MODE_CATID</option>
-					<option value="1">MOD_AGOSMSSEARCHAGOSMSRESTRICTION_MODE_AUTO</option>
-				</field>
+				<field
+					name="catid"
+					type="category"
+					label="JCATEGORY"
+					extension="com_content"
+					multiple="true"
+					filter="intarray"
+					class="multipleCategories"
+					layout="joomla.form.field.list-fancy-select"
+					showon="restrict:1"
+				/>
+
 
 				<field name="restcat" type="categoryselect" default="" label="MOD_AGOSMSSEARCHRESTRICTION_CAT_ID" showon="restrict:1[AND]restmode:0" />
 
-				<field name="restsub" type="list"  default="1" label="MOD_AGOSMSSEARCHAGOSMSRESTRICTION_CAT_SUB" description="MOD_AGOSMSSEARCHAGOSMSRESTRICTION_CAT_SUB_DESC" showon="restrict:1">
+				<field name="restsub" type="list" default="1" label="MOD_AGOSMSSEARCHAGOSMSRESTRICTION_CAT_SUB" description="MOD_AGOSMSSEARCHAGOSMSRESTRICTION_CAT_SUB_DESC" showon="restrict:1">
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
 
-				<field name="note25" type="note" label="MOD_AGOSMSSEARCHAGOSMSCATEGORY_GEOREST_HEADER" description="MOD_AGOSMSSEARCHAGOSMSCATEGORY_GEOREST_HEADER_DESC"   />
-				<field name="georestrict" type="list"  default="0" label="MOD_AGOSMSSEARCHAGOSMS_GEORESTRICT_CAT" description="MOD_AGOSMSSEARCHAGOSMS_GEORESTRICT_CAT_DESC">
+				<field name="note25" type="note" label="MOD_AGOSMSSEARCHAGOSMSCATEGORY_GEOREST_HEADER" description="MOD_AGOSMSSEARCHAGOSMSCATEGORY_GEOREST_HEADER_DESC" />
+				<field name="georestrict" type="list" default="0" label="MOD_AGOSMSSEARCHAGOSMS_GEORESTRICT_CAT" description="MOD_AGOSMSSEARCHAGOSMS_GEORESTRICT_CAT_DESC">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 				</field>
-				<field name="geounit" type="list"  default="K" label="MOD_AGOSMSSEARCHAGOSMS_GEO_UNIT" showon="georestrict:1">
+				<field name="geounit" type="list" default="K" label="MOD_AGOSMSSEARCHAGOSMS_GEO_UNIT" showon="georestrict:1">
 					<option value="K">MOD_AGOSMSSEARCHAGOSMS_KILOMETER</option>
 					<option value="M">MOD_AGOSMSSEARCHAGOSMS_METER</option>
 					<option value="N">MOD_AGOSMSSEARCHAGOSMS_NAUTICALMILE</option>
@@ -72,13 +80,13 @@
 				<field name="last" type="number" label="MOD_AGOSMSSEARCHAGOSMSFILTER_PARAMS_LAST_LABEL" filter="integer" size="5" default="2000" showon="georestrict:1" />
 				<field name="step" type="number" label="MOD_AGOSMSSEARCHAGOSMSFILTER_PARAMS_STEP_LABEL" filter="integer" size="5" default="10" min="1" max="50" step="1" showon="georestrict:1" />
 
-				<field name="georestricttext" type="note" label="MOD_AGOSMSSEARCHAGOSMS_USESEARCHINFO" description="MOD_AGOSMSSEARCHAGOSMS_USESEARCHINFO_DESC"   showon="georestrict:1" />
+				<field name="georestricttext" type="note" label="MOD_AGOSMSSEARCHAGOSMS_USESEARCHINFO" description="MOD_AGOSMSSEARCHAGOSMS_USESEARCHINFO_DESC" showon="georestrict:1" />
 
-				<field name="note3" type="note" label="MOD_AGOSMSSEARCHAGOSMSFILTER_PARAMS_HEADER" description="MOD_AGOSMSSEARCHAGOSMSFILTER_PARAMS_HEADER_DESC"   />
+				<field name="note3" type="note" label="MOD_AGOSMSSEARCHAGOSMSFILTER_PARAMS_HEADER" description="MOD_AGOSMSSEARCHAGOSMSFILTER_PARAMS_HEADER_DESC" />
 
 				<field name="filters" type="filters" label="MOD_AGOSMSSEARCHAGOSMSSELECT_FIELDS" description="MOD_AGOSMSSEARCHAGOSMSSELECT_FIELDS_DESC" default="" />
 
-				<field name="searchagosms_type" type="hidden"  default="standard" label="MOD_AGOSMSSEARCHAGOSMSSEARCH_TYPE">
+				<field name="searchagosms_type" type="hidden" default="standard" label="MOD_AGOSMSSEARCHAGOSMSSEARCH_TYPE">
 					<option value="standard">MOD_AGOSMSSEARCHAGOSMSSEARCH_TYPE_STANDARD</option>
 				</field>
 
@@ -90,31 +98,31 @@
 					<option value="%B %e %Y::MM d yyyy">January 1 2012</option>
 				</field>
 
-				<field name="note4" type="hidden" label="MOD_AGOSMSSEARCHAGOSMSFEATURES_HEADER" description="MOD_AGOSMSSEARCHAGOSMSFEATURES_HEADER_DESC"   />
-				<field name="acounter" type="hidden"  default="1" label="MOD_AGOSMSSEARCHAGOSMSACOUNTER">
+				<field name="note4" type="hidden" label="MOD_AGOSMSSEARCHAGOSMSFEATURES_HEADER" description="MOD_AGOSMSSEARCHAGOSMSFEATURES_HEADER_DESC" />
+				<field name="acounter" type="hidden" default="1" label="MOD_AGOSMSSEARCHAGOSMSACOUNTER">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
-				<field name="savesearchagosms" type="hidden"  default="0" label="MOD_AGOSMSSEARCHAGOSMSSAVE_VALUES_SESSION">
+				<field name="savesearchagosms" type="hidden" default="0" label="MOD_AGOSMSSEARCHAGOSMSSAVE_VALUES_SESSION">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
-				<field name="searchagosms_history" type="hidden"  default="0" label="MOD_AGOSMSSEARCHAGOSMSSEARCH_HISTORY">
+				<field name="searchagosms_history" type="hidden" default="0" label="MOD_AGOSMSSEARCHAGOSMSSEARCH_HISTORY">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
-				<field name="searchagosms_stats" type="hidden"  default="0" label="MOD_AGOSMSSEARCHAGOSMSSEARCH_STATS" description="MOD_AGOSMSSEARCHAGOSMSSEARCH_STATS_DESC">
+				<field name="searchagosms_stats" type="hidden" default="0" label="MOD_AGOSMSSEARCHAGOSMSSEARCH_STATS" description="MOD_AGOSMSSEARCHAGOSMSSEARCH_STATS_DESC">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
 				<field name="" hidden="1" type="statslink" label="" />
 
-				<field name="note5" type="hidden" label="MOD_AGOSMSSEARCHAGOSMSFIELD_CONNECTION_HEADER" description="MOD_AGOSMSSEARCHAGOSMSFIELD_CONNECTION_HEADER_DESC"   />
+				<field name="note5" type="hidden" label="MOD_AGOSMSSEARCHAGOSMSFIELD_CONNECTION_HEADER" description="MOD_AGOSMSSEARCHAGOSMSFIELD_CONNECTION_HEADER_DESC" />
 				<!-- textarea-->
 				<field name="field_connection" type="hidden" default="FieldLabel->FieldLabel2->FieldLabel3" label="MOD_AGOSMSSEARCHAGOSMSFIELD_CONNECTION" description="MOD_AGOSMSSEARCHAGOSMSFIELD_CONNECTION_DESC" rows="5" cols="35" />
 
-				<field name="note6" type="note" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_TEMPLATE_HEADER" description="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_TEMPLATE_HEADER_DESC"   />
+				<field name="note6" type="note" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_TEMPLATE_HEADER" description="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_TEMPLATE_HEADER_DESC" />
 
-				<field name="results_template" type="list"  default="standard" label="MOD_AGOSMSSEARCHAGOSMSRESULTS_TEMPLATE">
+				<field name="results_template" type="list" default="standard" label="MOD_AGOSMSSEARCHAGOSMSRESULTS_TEMPLATE">
 					<option value="standard">Standard</option>
 				</field>
-				<field name="include_featured" type="list"  default="Yes" label="MOD_AGOSMSSEARCHAGOSMSRESULTS_FEATURED">
+				<field name="include_featured" type="list" default="Yes" label="MOD_AGOSMSSEARCHAGOSMSRESULTS_FEATURED">
 					<option value="Yes">MOD_AGOSMSSEARCHAGOSMSYES</option>
 					<option value="First">MOD_AGOSMSSEARCHAGOSMSRESULTS_FEATURED_FIRST</option>
 					<option value="Only">MOD_AGOSMSSEARCHAGOSMSRESULTS_FEATURED_ONLY</option>
@@ -124,7 +132,7 @@
 				<field type="spacer" name="myspacero1u" hr="true" />
 				<field type="spacer" name="myspacerm1" label="MOD_AGOSMSSEARCHAGOSMSCLEAR_MAP_SHOW_HEADING" hr="false" />
 				<field type="spacer" name="myspacero1o" hr="true" />
-				<field name="show_map" type="list"  default="1" label="MOD_AGOSMSSEARCHAGOSMSCLEAR_MAP_SHOW">
+				<field name="show_map" type="list" default="1" label="MOD_AGOSMSSEARCHAGOSMSCLEAR_MAP_SHOW">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 				</field>
@@ -139,40 +147,40 @@
 				<field type="spacer" name="myspacero111o" hr="true" />
 				<field type="spacer" name="myspacerrl11" label="MOD_AGOSMSSEARCHAGOSMSCLEAR_RESULTLIST_SHOW_HEADING" hr="false" />
 				<field type="spacer" name="myspacero111u" hr="true" />
-				<field name="show_resultlist" type="list"  default="1" label="MOD_AGOSMSSEARCHAGOSMSCLEAR_RESULTLIST_SHOW">
+				<field name="show_resultlist" type="list" default="1" label="MOD_AGOSMSSEARCHAGOSMSCLEAR_RESULTLIST_SHOW">
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 				</field>
 				<!--
 				<field type="spacer" name="myspacero1" hr="true" showon="show_resultlist:1"/>
-				<field name="ordering_show" type="list"  default="1" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_ORDERING_SHOW" showon="show_resultlist:1">
+				<field name="ordering_show" type="list" default="1" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_ORDERING_SHOW" showon="show_resultlist:1">
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
 				<field name="ordering_default" type="orderingselect" default="created" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_ORDERING_DEFAULT" showon="show_resultlist:1[AND]ordering_show:1" />
-				<field name="ordering_default_dir" type="list"  default="desc" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_ORDERING_DEFAULT_DIRECTION" showon="show_resultlist:1[AND]ordering_show:1">
+				<field name="ordering_default_dir" type="list" default="desc" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_ORDERING_DEFAULT_DIRECTION" showon="show_resultlist:1[AND]ordering_show:1">
 					<option value="asc">MOD_AGOSMSSEARCHAGOSMSSORTING_ASC</option>
 					<option value="desc">MOD_AGOSMSSEARCHAGOSMSSORTING_DESC</option>
 				</field>
 				<field name="ordering_fields" type="fieldselect" default="" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_ORDERING_FIELDS" showon="show_resultlist:1[AND]ordering_show:1" />
 				<field type="spacer" name="myspacero2" hr="true" showon="show_resultlist:1"/>
 				-->
-				<field name="show_introtext" type="list"  default="1" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_SHOW_INTROTEXT" showon="show_resultlist:1">
+				<field name="show_introtext" type="list" default="1" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_SHOW_INTROTEXT" showon="show_resultlist:1">
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
-				<field name="show_info" type="list"  default="1" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_SHOW_INFO" showon="show_resultlist:1">
+				<field name="show_info" type="list" default="1" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_SHOW_INFO" showon="show_resultlist:1">
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
-				<field name="show_readmore" type="list"  default="1" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_SHOW_READMORE" showon="show_resultlist:1">
+				<field name="show_readmore" type="list" default="1" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_SHOW_READMORE" showon="show_resultlist:1">
 					<option value="1">MOD_AGOSMSSEARCHAGOSMSYES</option>
 					<option value="0">MOD_AGOSMSSEARCHAGOSMSNO</option>
 				</field>
 				<field name="items_limit" type="text" default="10" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_ITEMS_LIMIT" showon="show_resultlist:1" />
 				<field name="text_limit" type="text" default="200" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_TEMPLATE_TEXT_LIMIT" showon="show_resultlist:1" />
 				<field name="image_width" type="text" default="auto" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_TEMPLATE_IMAGE_WIDTH" showon="show_resultlist:1" />
-				<field name="image_type" type="list"  default="" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_IMAGE_TYPE" showon="show_resultlist:1">
+				<field name="image_type" type="list" default="" label="MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_IMAGE_TYPE" showon="show_resultlist:1">
 					<option value="">MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_IMAGE_TYPE_DEFAULT</option>
 					<option value="intro">MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_IMAGE_TYPE_INTRO</option>
 					<option value="text">MOD_AGOSMSSEARCHAGOSMSFILTER_RESULTS_IMAGE_TYPE_TEXT</option>

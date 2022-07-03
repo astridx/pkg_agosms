@@ -5,6 +5,7 @@ document.addEventListener(
         [].forEach.call(
             e,
             function (e) {
+
                 setTimeout(function () {
                     var g = e.getElementsByTagName("button"),
                         s = g[0],
@@ -48,6 +49,21 @@ document.addEventListener(
                     n.onchange = function () {
                         l();
                     };
+                    
+                    // -180,-90,180,90
+                    // falsch 46.830134,4.702148,55.128649,15.908203
+                    //4,46,15,55
+                    //34,72,-12,33
+                    // 
+                    let restricedCords='"-180,-90,180,90"';
+                    if (e.querySelector('.adressfindermap')) {
+                        const cordsAttribIsThere = e.querySelector('.adressfindermap').hasAttribute('data-restriced-cords');
+                        if (cordsAttribIsThere) {
+                            restricedCords='"' + e.querySelector('.adressfindermap').getAttribute('data-restriced-cords') + '"';
+                        }
+                    }
+                    console.log(e.querySelector('.adressfindermap').hasAttribute('data-restriced-cords'));
+
                     s.onclick = function () {
                         var e = v.value,
                             a = function (a, r) {
@@ -62,10 +78,7 @@ document.addEventListener(
                                     Joomla.renderMessages({ error: [Joomla.JText._("PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR") + e + " (Nominatim)"] });
                                 }
                             },
-                            r = { q: e, limit: 1, format: "json", addressdetails: 1, viewbox: "-180,-90,180,90", bounded:1 };
-                            // https://nominatim.org/release-docs/latest/api/Search/
-                            // viewbox=<x1>,<y1>,<x2>,<y2> Europa: viewbox: "34,72,-12,33"
-                            // bbox = links, unten, rechts, oben
+                            r = { q: e, limit: 1, format: "json", addressdetails: 1, viewbox: restricedCords, bounded:1 };
                         getJSON("https://nominatim.openstreetmap.org/", r, a);
                     };
                     function l() {

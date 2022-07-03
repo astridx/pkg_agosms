@@ -85,7 +85,12 @@ else if ($app->input->getCmd('option') !== 'com_users'
 <?php echo JText::_('COM_AGOSMS_ADDRESSFINDER_CALCULATE_CORDS_FROM_ADDRESS'); ?>
 </button>
 
-<div style="z-index:1;height:300px;width:auto" id="<?php echo $mapid; ?>"></div>
+<div 
+class="adressfindermap"
+style="z-index:1;height:<?php echo $displayData["height"]; ?><?php echo $displayData["heightunit"]; ?>;width:auto" 
+data-restriced-cords="<?php echo $displayData["restricedCords"]?>"
+id="<?php echo $mapid; ?>">
+</div>
 	
 <input 
 	class="agomsaddressfinderhiddenfield" 

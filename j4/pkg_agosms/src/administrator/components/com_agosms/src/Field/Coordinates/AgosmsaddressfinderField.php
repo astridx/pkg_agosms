@@ -12,6 +12,7 @@ namespace AgosmNamespace\Component\Agosms\Administrator\Field\Coordinates;
 \defined('JPATH_BASE') or die;
 
 use Joomla\CMS\Form\FormField;
+use Joomla\CMS\Component\ComponentHelper;
 
 /**
  * Provides a mechanism for calculating geographic coordinates
@@ -42,7 +43,7 @@ class AgosmsaddressfinderField extends FormField
 	 * @var    integer
 	 * @since  __DEPLOY_VERSION__
 	 */
-	protected $mapheight;
+	protected $test;
 
 	/**
 	 * Method to get certain otherwise inaccessible properties from the form field object.
@@ -56,7 +57,7 @@ class AgosmsaddressfinderField extends FormField
 	public function __get($name)
 	{
 		switch ($name) {
-			case 'mapheight':
+			case 'test':
 				return $this->$name;
 		}
 
@@ -76,8 +77,8 @@ class AgosmsaddressfinderField extends FormField
 	public function __set($name, $value)
 	{
 		switch ($name) {
-			case 'mapheight':
-				$this->mapheight = (int) $value;
+			case 'test':
+				$this->test = (int) $value;
 				break;
 
 			default:
@@ -108,8 +109,13 @@ class AgosmsaddressfinderField extends FormField
 	{
 		$data = parent::getLayoutData();
 
+		$params = ComponentHelper::getParams('com_agosms');
+
 		$extraData = [
-			'mapheight' => $this->mapheight
+			'test' => $this->test,
+			'height' => $params->get('height', '400'),
+			'heightunit' => $params->get('heightunit', 'px'),
+			'restricedCords' => $params->get('restricedCords', '4,46,15,55')
 		];
 
 		return array_merge($data, $extraData);

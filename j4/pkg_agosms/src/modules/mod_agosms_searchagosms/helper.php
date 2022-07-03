@@ -112,38 +112,7 @@ class modAgosmsSearchagosmsHelper
 	function getCategoriesRestriction($params, $module_id = null)
 	{
 		$categories = [];
-
-		switch ($params->get("restmode")) {
-			case 0: // Selected
-				if ($params->get("restcat") == "") {
-					return [];
-				}
-
-				$categories = explode("\r\n", $params->get("restcat"));
-				break;
-
-			case 1: // Auto
-				$view = '';
-
-				if (JFactory::getApplication()->input->get->get('view')) {
-					$active = JFactory::getApplication()->input->get->get('view');
-				}
-
-				$requestid = 0;
-
-				if (JFactory::getApplication()->input->get->get('id')) {
-					$active = JFactory::getApplication()->input->get->get('id');
-				}
-
-				if (in_array($view, ["featured", "category"])) {
-					$categories[] = $requestid;
-				}
-
-				if (!count($categories)) {
-					$categories[] = 1;
-				}
-				break;
-		}
+		$categories = explode("\r\n", $params->get("restcat"));
 
 		return $categories;
 	}

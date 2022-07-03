@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	[].forEach.call(leafletmapsMod, function (element) {
 
+		var layoutfordisplaylinkinmarker = element.getAttribute('data-layoutfordisplaylinkinmarker');
+
 		var savestate = element.getAttribute('data-savestate');
 		var fullscreen = element.getAttribute('data-fullscreen');
 		var locate = element.getAttribute('data-locate');
@@ -528,7 +530,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (clickmarkerlista) {
 					clickmarkerlista.addEventListener('click', function () {
-						window['mymap' + moduleId].setView(tempMarker.getLatLng());
+						window['mymap' + moduleId].setView(tempMarker.getLatLng(), Math.max(15, disableClusteringAtZoom));
 						tempMarker.openPopup();
 					});
 				}
@@ -692,7 +694,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 
 				if (obj.showpopup == "4") {
-					let url = uriroot + "index.php?option=com_agosms&view=agosm&id=" + obj.id;
+					let url = uriroot + "index.php?option=com_agosms&view=" + layoutfordisplaylinkinmarker + "&id=" + obj.id;
 					let title = obj.name;
 					let popuptext = "<a href=' " + url + " '> " + title + " </a>";
 					tempMarker.bindPopup(popuptext);
@@ -702,7 +704,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				if (clickgmarkerlista) {
 					clickgmarkerlista.addEventListener('click', function () {
-						window['mymap' + moduleId].setView(tempMarker.getLatLng());
+						window['mymap' + moduleId].setView(tempMarker.getLatLng(), Math.max(15, disableClusteringAtZoom));
 						tempMarker.openPopup();
 					});
 				}
@@ -988,7 +990,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 					if (clickgmarkerlista) {
 						clickgmarkerlista.addEventListener('click', function () {
-							window['mymap' + moduleId].setView(tempMarkercf.getLatLng());
+							window['mymap' + moduleId].setView(tempMarkercf.getLatLng(), Math.max(15, disableClusteringAtZoom));
 							tempMarkercf.openPopup();
 						});
 					}

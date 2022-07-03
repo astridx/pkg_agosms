@@ -30,6 +30,10 @@ JText::script('PLG_AGOSMSADDRESSMARKER_ADDRESSE_ERROR');
 ?>
 
 <style>
+/* Tab dispay */
+#com-agosms-form > div:nth-child(1) > button:nth-child(3) {
+    display:none;
+}
 .modal-agosm {
     background-color: #fefefe;
 }
@@ -64,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <?php echo Text::_('JINLINEHELP') ?>
             </button>
         </div>
-        <div>custommarkeruserx</div>
+        
         <fieldset>
 
             <?php echo $this->form->renderField('name'); ?>
@@ -91,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <?php echo HTMLHelper::_('uitab.endTab'); ?>
 
 
-
+<div style="display:none">
             <?php echo HTMLHelper::_('uitab.addTab', $this->tab_name, 'misc', Text::_('COM_AGOSMS_FIELDSET_MISCELLANEOUS')); ?>
             <?php echo $this->form->getInput('misc'); ?>
 
@@ -110,8 +114,10 @@ document.addEventListener("DOMContentLoaded", function() {
             <?php echo $this->form->renderField('showpopup'); ?>
 
             <?php echo HTMLHelper::_('uitab.endTab'); ?>
+</div>
 
             <?php echo LayoutHelper::render('joomla.edit.params', $this); ?>
+
 
             <?php echo HTMLHelper::_('uitab.endTabSet'); ?>
 

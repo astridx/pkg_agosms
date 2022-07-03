@@ -1,91 +1,118 @@
 <?php
 /**
- * @package     Joomla.Site
- * @subpackage  pkg_agosms
+ * @package     Joomla.Administrator
+ * @subpackage  com_agosmsserachagosmss
  *
- * @copyright   Copyright (C) 2005 - 2019 Astrid Günther, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later;
- * @link        astrid-guenther.de
+ * @copyright   Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('_JEXEC') or die('');
+// No direct access to this file
+\defined('_JEXEC') or die;
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Log\Log;
 
 /**
- * Script file for mod_agosms_searchagosms
- *
- * @since  1.0.40
+ * Script file of Agosmsserachagosms module
  */
-class Mod_AgosmsearchagosmsInstallerScript
+class mod_agosmsserachagosmsInstallerScript
 {
+
 	/**
-	 * Method to install mod_agosms_searchagosms
-	 *
-	 * @param   JInstallerAdapterFile  $parent  The class calling this method
-	 *
-	 * @since  1.0.40
+	 * Extension script constructor.
 	 *
 	 * @return  void
 	 */
-	public function install($parent)
+	public function __construct()
 	{
-		$parent->getParent()->setRedirectURL('index.php?option=com_modules');
+		$this->minimumJoomla = '4.0';
+		$this->minimumPhp = JOOMLA_MINIMUM_PHP;
 	}
 
 	/**
-	 * Method to uninstall mod_agosms_searchagosms
+	 * Method to install the extension
 	 *
-	 * @param   JInstallerAdapterFile  $parent  The class calling this method
+	 * @param   InstallerAdapter  $parent  The class calling this method
 	 *
-	 * @since  1.0.40
-	 *
-	 * @return  void
+	 * @return  boolean  True on success
 	 */
-	public function uninstall($parent)
+	function install($parent)
 	{
-		echo '<p>' . JText::_('MOD_AGOSMSSEARCHAGOSMS_UNINSTALL') . '</p>';
+		echo Text::_('MOD_AGOSMSSEARCHAGOSMS_INSTALLERSCRIPT_INSTALL');
+
+		return true;
 	}
 
 	/**
-	 * Method to update mod_agosms_searchagosms
+	 * Method to uninstall the extension
 	 *
-	 * @param   JInstallerAdapterFile  $parent  The class calling this method
+	 * @param   InstallerAdapter  $parent  The class calling this method
 	 *
-	 * @since  1.0.40
-	 *
-	 * @return  void
+	 * @return  boolean  True on success
 	 */
-	public function update($parent)
+	function uninstall($parent)
 	{
-		echo '<p>' . JText::sprintf('MOD_AGOSMSSEARCHAGOSMS_UPDATE', $parent->get('manifest')->version) . '</p>';
+		echo Text::_('MOD_AGOSMSSEARCHAGOSMS_INSTALLERSCRIPT_UNINSTALL');
+
+		return true;
 	}
 
 	/**
-	 * Method to preflight mod_agosms_searchagosms (before install and update)
+	 * Method to update the extension
 	 *
-	 * @param   string                 $type    The type of change (install, update, discover_install)
-	 * @param   JInstallerAdapterFile  $parent  The class calling this method
+	 * @param   InstallerAdapter  $parent  The class calling this method
 	 *
-	 * @since  1.0.40
-	 *
-	 * @return  void
+	 * @return  boolean  True on success
 	 */
-	public function preflight($type, $parent)
+	function update($parent)
 	{
-		echo '<p>' . JText::_('MOD_AGOSMSSEARCHAGOSMS_PREFLIGHT') . '</p>';
+		echo Text::_('MOD_AGOSMSSEARCHAGOSMS_INSTALLERSCRIPT_UPDATE');
+
+		return true;
 	}
 
 	/**
-	 * Method to postflight mod_agosms_searchagosms (after install or update)
+	 * Function called before extension installation/update/removal procedure commences
 	 *
-	 * @param   string                 $type    The type of change (install, update, discover_install)
-	 * @param   JInstallerAdapterFile  $parent  The class calling this method
+	 * @param   string            $type    The type of change (install, update or discover_install, not uninstall)
+	 * @param   InstallerAdapter  $parent  The class calling this method
 	 *
-	 * @since  1.0.40
-	 *
-	 * @return  void
+	 * @return  boolean  True on success
 	 */
-	public function postflight($type, $parent)
+	function preflight($type, $parent)
 	{
-		echo '<p>' . JText::_('MOD_AGOSMSSEARCHAGOSMS_POSTFLIGHT') . '</p>';
+		// Check for the minimum PHP version before continuing
+		if (!empty($this->minimumPhp) && version_compare(PHP_VERSION, $this->minimumPhp, '<')) {
+			Log::add(Text::sprintf('JLIB_INSTALLER_MINIMUM_PHP', $this->minimumPhp), Log::WARNING, 'jerror');
+
+			return false;
+		}
+
+		// Check for the minimum Joomla version before continuing
+		if (!empty($this->minimumJoomla) && version_compare(JVERSION, $this->minimumJoomla, '<')) {
+			Log::add(Text::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', $this->minimumJoomla), Log::WARNING, 'jerror');
+
+			return false;
+		}
+
+		echo Text::_('MOD_AGOSMSSEARCHAGOSMS_INSTALLERSCRIPT_PREFLIGHT');
+
+		return true;
+	}
+
+	/**
+	 * Function called after extension installation/update/removal procedure commences
+	 *
+	 * @param   string            $type    The type of change (install, update or discover_install, not uninstall)
+	 * @param   InstallerAdapter  $parent  The class calling this method
+	 *
+	 * @return  boolean  True on success
+	 */
+	function postflight($type, $parent)
+	{
+		echo Text::_('MOD_AGOSMSSEARCHAGOSMS_INSTALLERSCRIPT_POSTFLIGHT');
+
+		return true;
 	}
 }

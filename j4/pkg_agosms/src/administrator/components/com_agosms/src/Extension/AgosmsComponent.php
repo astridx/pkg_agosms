@@ -27,13 +27,16 @@ use Psr\Container\ContainerInterface;
 use Joomla\CMS\Helper\ContentHelper;
 use Joomla\CMS\Component\Router\RouterServiceInterface;
 use Joomla\CMS\Component\Router\RouterServiceTrait;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Fields\FieldsServiceInterface;
+use Joomla\CMS\Factory;
 
 /**
  * Component class for com_agosms
  *
  * @since  __BUMP_VERSION__
  */
-class AgosmsComponent extends MVCComponent implements BootableExtensionInterface, CategoryServiceInterface, AssociationServiceInterface, RouterServiceInterface
+class AgosmsComponent extends MVCComponent implements FieldsServiceInterface, BootableExtensionInterface, CategoryServiceInterface, AssociationServiceInterface, RouterServiceInterface
 {
 	use CategoryServiceTrait;
 	use AssociationServiceTrait;
@@ -114,4 +117,51 @@ class AgosmsComponent extends MVCComponent implements BootableExtensionInterface
 	{
 		return 'published';
 	}
+
+	/**
+	 * Returns a valid section for the given section. If it is not valid then null
+	 * is returned.
+	 *
+	 * @param   string  $section  The section to get the mapping for
+	 * @param   object  $item     The item
+	 *
+	 * @return  string|null  The new section
+	 *
+	 * @since   4.0.0
+	 */
+	public function validateSection($section, $item = null)
+	{
+		if (Factory::getApplication()->isClient('site') && ($section === 'category' || $section === 'form'))
+		{
+			// The agosm form needs to be the mail section
+			$section = 'agosm';
+		}
+
+		if ($section !== 'agosm')
+		{
+			// We don't know other sections
+			$section = 'agosm';
+		}
+
+		return $section;
+	}
+
+	/**
+	 * Returns valid contexts
+	 *
+	 * @return  array
+	 *
+	 * @since   4.0.0
+	 */
+	public function getContexts(): array
+	{
+		Factory::getLanguage()->load('com_agosms', JPATH_ADMINISTRATOR);
+
+		$contexts = array(
+			'com_agosms.agosm'    => Text::_('COM_AGOSMS_FIELDS_CONTEXT_AGOSM'),
+			'com_agosms.categories' => Text::_('JCATEGORY')
+		);
+
+		return $contexts;
+	}	
 }

@@ -189,16 +189,19 @@
 	<changelog>
 		<element>pkg_agosms</element>
 		<type>package</type>
-		<version>4.0.27</version>
+		<version>5.0.0</version>
 		<note>
 			<item>fix errors in cusotm field addressmarker for j4.</item>
 			<item>custom layout for default view.</item>
+			<item>set section for custom fields for frontendediting in component extension class</item>
+			<item>make it possible to restriced cors for nominatim search</item>
+			<item>changes in database for mysql 8.0.13</item>
 		</note>
 	</changelog>	
 	<changelog>
 		<element>pkg_agosms</element>
 		<type>package</type>
-		<version>4.0.28</version>
+		<version>5.0.1</version>
 		<note>
 			<item></item>
 		</note>

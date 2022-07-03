@@ -29,7 +29,7 @@ class Com_AgosmsInstallerScript extends InstallerScript
 	 * @var    string
 	 * @since  __BUMP_VERSION__
 	 */
-	private $minimumJoomlaVersion = 'J4.0.0-rc2';
+	private $minimumJoomlaVersion = 'J4.0.0';
 
 	/**
 	 * Minimum PHP version to check
@@ -89,9 +89,9 @@ class Com_AgosmsInstallerScript extends InstallerScript
 		}
 
 		// Store the category.
-		if (!$category->store(true)) {
+		/*if (!$category->store(true)) {
 			return false;
-		}
+		}*/
 
 		$this->addDashboardMenu('agosms', 'agosms');
 
