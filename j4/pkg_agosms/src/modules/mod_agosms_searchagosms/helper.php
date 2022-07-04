@@ -236,18 +236,6 @@ class modAgosmsSearchagosmsHelper
 		if ($module_params->get('restrict')) {
 			$category_restriction = $this->getCategoriesRestriction($module_params);
 
-			if ($module_params->get('restsub')) {
-				$tmp = [];
-
-				foreach ($category_restriction as $catid) {
-					$cats = $this->getSubCategories($catid);
-					$cats[] = $catid;
-					$tmp = array_merge($tmp, $cats);
-				}
-
-				$category_restriction = $tmp;
-			}
-
 			if (count($category_restriction)) {
 				$query .= " AND i.catid IN (" . implode(",", $category_restriction) . ")";
 			}
@@ -291,18 +279,6 @@ class modAgosmsSearchagosmsHelper
 
 		if ($module_params->get('restrict')) {
 			$category_restriction = $this->getCategoriesRestriction($module_params);
-
-			if ($module_params->get('restsub')) {
-				$tmp = [];
-
-				foreach ($category_restriction as $catid) {
-					$cats = $this->getSubCategories($catid);
-					$cats[] = $catid;
-					$tmp = array_merge($tmp, $cats);
-				}
-
-				$category_restriction = $tmp;
-			}
 
 			if (count($category_restriction)) {
 				$query .= " AND i.catid IN (" . implode(",", $category_restriction) . ")";
@@ -370,18 +346,6 @@ class modAgosmsSearchagosmsHelper
 		if ($params->get('restrict')) {
 			$category_restriction = $this->getCategoriesRestriction($params);
 
-			if ($params->get('restsub')) {
-				$tmp = [];
-
-				foreach ($category_restriction as $catid) {
-					$cats = $this->getSubCategories($catid);
-					$cats[] = $catid;
-					$tmp = array_merge($tmp, $cats);
-				}
-
-				$category_restriction = $tmp;
-			}
-
 			if (count($category_restriction)) {
 				$query .= " AND i.catid IN (" . implode(",", $category_restriction) . ")";
 			}
@@ -402,18 +366,6 @@ class modAgosmsSearchagosmsHelper
 		// Category restriction
 		if ($params->get('restrict')) {
 			$category_restriction = $this->getCategoriesRestriction($params);
-
-			if ($params->get('restsub')) {
-				$tmp = [];
-
-				foreach ($category_restriction as $catid) {
-					$cats = $this->getSubCategories($catid);
-					$cats[] = $catid;
-					$tmp = array_merge($tmp, $cats);
-				}
-
-				$category_restriction = $tmp;
-			}
 
 			if (count($category_restriction)) {
 				$query .= " AND i.catid IN (" . implode(",", $category_restriction) . ")";

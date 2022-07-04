@@ -285,11 +285,6 @@ $document->addScript(JURI::root(true) . '/media/mod_agosms_searchagosms/datepick
 
 			<div class="gsearch-buttons">
 				<input type="submit" value="<?php echo JText::_('MOD_AGOSMSSEARCHAGOSMSBUTTON_SEARCH_TEXT'); ?>" class="btn btn-primary button submit " />	
-				<?php
-				if ($params->get("clear_btn_show", 1)) {
-					require(JModuleHelper::getLayoutPath('mod_agosms_searchagosms', $params->get('module_template', 'Default') . '/elements/clear_btn'));
-				}
-				?>
 			</div>
 		</div><!--//gsearch-table-->
 	

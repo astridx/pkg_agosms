@@ -11,6 +11,7 @@
 
 // No direct access
 defined('_JEXEC') or die('');
+use Joomla\CMS\Factory;
 
 class PlgSystemAgosmssearch extends JPlugin
 {
@@ -96,7 +97,9 @@ class PlgSystemAgosmssearch extends JPlugin
 		$init_parameter = JFactory::getApplication()->input->get("gsearch");
 
 		if ($init_parameter) {
-			if ($app->isAdmin()) {
+			$app = Factory::getApplication();
+					
+			if ($app->isClient('administrator')) {
 				return;
 			}
 

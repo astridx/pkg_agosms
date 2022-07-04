@@ -244,13 +244,13 @@
 
 		<field
 			name="catid"
-			type="categoryedit"
+			type="category"
 			label="JCATEGORY"
 			extension="com_agosms"
-			addfieldprefix="Joomla\Component\Categories\Administrator\Field"
-			required="true"
 			default=""
-		/>
+			filter="integer"
+			>
+		</field>
 
 		<field
 			name="access"
